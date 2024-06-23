@@ -2,12 +2,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
 <link rel="icon" href="https://lh3.googleusercontent.com/d/1DAQTJ24ELr3yMXmH3ZVpusFeXq0STWqh" type="image/x-icon">
-    <title>Mozart Studio</title>
+    <title>Taller de Piano</title>
   
 <link href="https://code.ionicframework.com/1.3.3/css/ionic.min.css" rel="stylesheet">
   <script src="https://code.ionicframework.com/1.3.3/js/ionic.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.3/paper-full.min.js">
-</script>
+ 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -62,19 +61,20 @@ body {
   box-sizing: border-box;
 }
 
+.backRight {
+  position: absolute;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background: #03A9F4;
+}
+
 .backLeft {
   position: absolute;
   left: 0;
   width: 50%;
   height: 100%;
   background: #0c1e35;
-}
-
-@media  (min-width: 768px){
-  .backLeft{
-    background: #0c1e35 url('https://lh3.googleusercontent.com/d/1DAQTJ24ELr3yMXmH3ZVpusFeXq0STWqh') center/contain no-repeat;
-   background-size: 40%;
-  }
 }
 
 #back {
@@ -125,7 +125,32 @@ input {
   margin-top: 0.1em;
 }
 
-
+.left {
+  width: 50%;
+  height: 100%;
+  overflow: scroll;
+  background: #2C3034;
+  left: 0;
+  position: absolute;
+}
+.left label {
+  color: #e3e3e3;
+}
+.left input {
+  border-bottom: 1px solid #e3e3e3;
+  color: #e3e3e3;
+}
+.left input:focus, .left input:active {
+  border-color: #03A9F4;
+  color: #03A9F4;
+}
+.left input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px #2C3034 inset;
+  -webkit-text-fill-color: #e3e3e3;
+}
+.left a {
+  color: #03A9F4;
+}
 
 .right {
   width: 50%;
@@ -165,7 +190,9 @@ input {
   margin: 0.2em 0 0.1em;
 }
 
-
+.left .content h2 {
+  color: #03A9F4;
+}
 
 .right .content h2 {
   color: #0c1e35;
@@ -198,36 +225,45 @@ button {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
   border: 0;
   outline: 0;
+  cursor: pointer;
   transition: all 0.25s;
 }
-
+button.signup {
+  background: #03A9F4;
+}
 button.login {
   background: #0c1e35;
-  cursor: pointer;
 }
 button.off {
   background: none;
   box-shadow: none;
   margin: 0;
 }
-
+button.off.signup {
+  color: #03A9F4;
+}
 button.off.login {
-  color: #192686
+  color: #192686;
 }
 
 button:focus, button:active, button:hover {
   box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
 }
-
+button:focus.signup, button:active.signup, button:hover.signup {
+  background: #0288D1;
+}
 button:focus.login, button:active.login, button:hover.login {
-  background: black;
+  background: #1B3A62;
 }
 button:focus.off, button:active.off, button:hover.off {
   box-shadow: none;
 }
-
+button:focus.off.signup, button:active.off.signup, button:hover.off.signup {
+  color: #03A9F4;
+  background: #212121;
+}
 button:focus.off.login, button:active.off.login, button:hover.off.login {
-  color: #512DA8;
+  color: #1B3A62;
   background: #e3e3e3;
 }
 
@@ -237,7 +273,7 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
     margin-left: 20%;
   }
 
-   .login-info {
+  .signup-info, .login-info {
     display: none;
   }
 }
@@ -369,42 +405,212 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
         }
 
 
+
+
+
+
+     
+.documents {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  grid-auto-rows: 214px;
+  grid-gap: 12px;
+  height: auto;
+  background-color: #FFF;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 12px;
+}
+
+.document {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0 0;
+  flex-direction: column;
+}
+.document__img {
+  width: 105px;
+  height: 136px;
+
+  background-size: cover;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.document__img:hover {
+  transform: translateY(-4px);
+}
+.document__title {
+  margin: 8px 0 2px;
+  color: #777;
+}
+.document__date {
+  font-size: 10px;
+}
+
+   #drive{
+    height: 450px;
+    width: 100%;
+  }
+  
+  .modal-container {
+    position: fixed;
+    display: table;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    transform: scale(0);
+    z-index: 1;
+  }
+
+  .modal-container.four {
+    z-index: 0;
+    transform: scale(1);
+  }
+
+  .modal-container.four .modal-background .modalDoc {
+    animation: blowUpModal 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+  .modal-container.four + body {
+    z-index: 1;
+    animation: blowUpContent 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+  .modal-container.four.out .modal-background .modalDoc {
+    animation: blowUpModalTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+  .modal-container.four.out + body {
+    animation: blowUpContentTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+
+  .modal-container .modal-background {
+    display: table-cell;
+    background: rgba(0, 0, 0, 0.8);
+    text-align: center;
+    vertical-align: middle;
+  }
+  .modal-container .modal-background .modalDoc {
+    padding: 50px;
+    display: inline-block;
+    border-radius: 3px;
+    font-weight: 300;
+    position: relative;
+  }
+
+.close-modal {
+    display: block;
+    position: absolute;
+  top: 40px;
+    right: 20px;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+}
+
+  @keyframes blowUpContent {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    99.9% {
+      transform: scale(2);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+  @keyframes blowUpContentTwo {
+    0% {
+      transform: scale(2);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes blowUpModal {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes blowUpModalTwo {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(0);
+      opacity: 0;
+    }
+  }
+  
 </style>
 
 <body>
 
 <section class="loginSection"  style="display: none;">
- <div id="back">
-  <canvas id="canvas" class="canvas-back"></canvas>
-  <div class="backLeft">
+  <div id="back">
+    <canvas id="canvas" class="canvas-back"></canvas>
+    <div class="backRight">    
+    </div>
+    <div class="backLeft">
+    </div>
   </div>
-</div>
 
- <div id="slideBox">
-  <div class="topLayer">
-    <div class="right">
-      <div class="content">
-        <h2>Inicio de sesión</h2>
-        <form id="form-login" method="post" onsubmit="return false;">
-          <div class="form-element form-stack">
-            <label for="email-login" class="form-label">Email</label>
-            <input id="email-login" type="email" name="email-login">
+  <div id="slideBox">
+    <div class="topLayer">
+      <div class="left">
+        <div class="content">
+          <h2>Recuperar contraseña</h2>
+      
+          <form id="form-signup" method="post" onsubmit="return false;">
+            <div class="form-element form-stack">
+              <label for="recover" class="form-label">Email</label>
+              <input id="recover" type="email" name="recover">
+            </div>
+            <div class="form-element form-stack">
+              <label for="recover2" class="form-label">Confirmar Email</label>
+              <input id="recover2" type="email" name="recover2">
+            </div>
+            <div class="form-element form-submit">
+              <button id="signUp" class="signup" type="submit" name="signup">Enviar correo</button>
+              <button id="goLeft" class="signup off" style="font-size: 13px; margin-top: 10px;">Iniciar sesión</button> 
+            </div>
+          </form>
+            <div style="color: gainsboro; font-weight: 400; font-size: 13px; margin-top: 15px;"> Recibiras un email con los pasos a seguir para que puedas recuperar tu cuenta </div>
+        </div>
+      </div>
+    
+      <div class="right">
+        <div class="content">
+          <h2>Inicio de sesión</h2>
+          <div id="form-login">
+            <div class="form-element form-stack">
+              <label for="email-login" class="form-label">Email</label>
+              <input id="email-login" type="email" name="email-login">
+            </div>
+            
+            
+            <div class="form-element form-stack">
+              <label for="password-login" class="form-label">Password</label>
+              <input id="password-login" type="password" name="password-login">
+            </div>
+      
+            <div class="form-element form-submit">
+              <button id="logIn" class="login" onclick="login(this)" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Cargando...">Iniciar sesión</button>
+              <button id="goRight" class="login off" name="signup" style="font-size: 13px; margin-top: 10px;">Recuperar contraseña</button>
+            </div>
           </div>
-          
-          
-          <div class="form-element form-stack">
-            <label for="password-login" class="form-label">Password</label>
-            <input id="password-login" type="password" name="password-login">
-          </div>
-     
-          <div class="form-element form-submit">
-           <button id="logIn" class="login" onclick="login(this)" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Cargando...">Iniciar sesión</button>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </section>
 
   <section class="mainSection" style="display: none;">
@@ -433,8 +639,8 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
           <ul class="list">
             <a href="#/menu/tab/profile" class="item" ng-class="(activeMenuClr=='profile')?'menuSelectedColor':''" ng-click="activeMenuClr = 'profile'" menu-toggle="right" ><i class="ri-home-2-fill"></i>&nbsp&nbspInicio</a>
                <a href="#/menu/lessons" class="item" ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" ng-click="activeMenuClr = 'lessons'" menu-toggle="right"><i class="ri-presentation-fill"></i>&nbsp&nbspLecciones</a>
-                  <a href="#/menu/resources" class="item" ng-class="(activeMenuClr=='resources')?'menuSelectedColor':''" ng-click="activeMenuClr = 'resources'" menu-toggle="right"><i class="ri-dashboard-fill"></i>&nbsp&nbspRecursos</a>
-             
+                       <a href="#/menu/comunity" class="item" ng-class="(activeMenuClr=='comunity')?'menuSelectedColor':''" ng-click="activeMenuClr = 'comunity'"  menu-toggle="right"><i class="ri-award-fill"></i>&nbsp&nbspReel de logros</a>
+                 <a href="#/menu/resources" class="item" ng-class="(activeMenuClr=='resources')?'menuSelectedColor':''" ng-click="activeMenuClr = 'resources'" menu-toggle="right"><i class="ri-dashboard-fill"></i>&nbsp&nbspRecursos</a>
              <a href="#/menu/about" class="item" ng-class="(activeMenuClr=='about')?'menuSelectedColor':''" ng-click="activeMenuClr = 'about'" menu-toggle="right"><i class="ri-book-marked-fill"></i>&nbsp&nbspLineamientos</a>
           </ul>
         </ion-content>
@@ -452,50 +658,45 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
   </script>    
     
   <script id="tabs.html" type="text/ng-template">
-    <ion-nav-bar class="bar-stable" >
-            
+
+      <ion-nav-bar class="bar-stable" >    
         <ion-nav-buttons side="right">
           <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
         </ion-nav-buttons>      
-    </ion-nav-bar>
-        
+    </ion-nav-bar>   
 
-    <ion-tabs class="tabs-icon-top tabs-stable"  >
-      <ion-tab title="Comunidad" icon="ion-ios-people" href="#/menu/tab/comunity">
-        <ion-nav-view name="comunity-tab"></ion-nav-view>
+       <ion-tabs class="tabs-icon-top tabs-stable"  >
+      <ion-tab title="Tutor" icon="ion-chatboxes" href="#/menu/tab/chat">
+        <ion-nav-view name="chat-tab"></ion-nav-view>
       </ion-tab>
      <ion-tab title="Perfil" icon="ion-ios-contact-outline" href="#/menu/tab/profile">
         <ion-nav-view name="profile-tab"></ion-nav-view>
+      </ion-tab>     
+       <ion-tab title="Agenda" icon="ion-android-calendar" href="#/menu/tab/agenda" >
+        <ion-nav-view name="agenda-tab"></ion-nav-view>
       </ion-tab>
-     
-       <ion-tab title="Agenda" icon="ion-android-calendar" href="#/menu/tab/record" >
-        <ion-nav-view name="record-tab"></ion-nav-view>
-      </ion-tab>
-     
-    
-   
-     
     </ion-tabs>
 
   </script>
 
-  <script id="comunity.html" type="text/ng-template">
-    <ion-view title="Comunidad">
+
+       <script id="chat.html" type="text/ng-template">
+    <ion-view title="Asesoría">
       <ion-content >
        
-        <div class="iframe-container"><iframe src="https://app.mozart.studio/comunity" frameborder="0" allowfullscreen ></iframe></div> 
+        <div class="iframe-container"><iframe src="https://app.mozart.studio/chat" frameborder="0" allowfullscreen ></iframe></div> 
     
       </ion-content>
     </ion-view>
   </script>
 
-  <script id="record.html" type="text/ng-template">
+  <script id="agenda.html" type="text/ng-template">
     <ion-view title="Agenda">
       <ion-content>
        
    
 
-       <div class="iframe-container"><iframe src="https://app.mozart.studio/agenda" frameborder="0" allowfullscreen></iframe></div>
+       <div class="iframe-container"><iframe id="agendaFrame" src="https://app.mozart.studio/agenda" frameborder="0" allowfullscreen></iframe></div>
     
       </ion-content>
     </ion-view>
@@ -505,7 +706,7 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
     <ion-view title="Perfil">
       <ion-content >
  
-        <div class="iframe-container"><iframe id="profileFrame" src="https://cubiculociencias.github.io/tallerdepiano/profile" frameborder="0" allowfullscreen></iframe></div> 
+        <div class="iframe-container"><iframe id="profileFrame" src="https://app.mozart.studio/profile" frameborder="0" allowfullscreen></iframe></div> 
 
       </ion-content>
     </ion-view>
@@ -615,10 +816,10 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
      <p> metronome beats </p>
           </a>
           
-          <a class="item item-avatar" href="#/menu/documents">
-            <img src="https://play-lh.googleusercontent.com/MCS3HJVIDgTZp6oCMmTwYfItUXncCNCXtVDDRV1rT8QdWr7Lqp_kfcRl-ls4l20pmKDl=s96-rw">
-           <h2> Documentos </h2>
-     <p> Tus actividades finalizadas</p>
+         <a class="item item-avatar" href="#/menu/documents">
+            <img src="https://play-lh.googleusercontent.com/u5zjxp6IbaDoGpWOk24q5L5Ej0jiwLjS3-h7PAHy0xbawRLfO37f010C23gcD9GL1gh4=w480-h960-rw">
+           <h2> Biblioteca </h2>
+     <p> Tus partituras finalizadas</p>
           </a>
      
       <div class="item item-divider">
@@ -626,28 +827,23 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
           </div>  
      
      
-      <a class="item item-avatar" href="#/menu/notereader">
-            <img src="">
+     <a class="item item-avatar" href="#/menu/notereader">
+            <img src="https://play-lh.googleusercontent.com/NzG7u3_0xrBfYdx-_ddIZn9x8VFv5oBtOuMsgpWIZJ8vqB8pWUIUeIMcl-9saY8-N0o=w480-h960-rw">
            <h2> Lectura de notas </h2>
      <p> Entrenamiento melódico</p>
           </a>
      
-      <a class="item item-avatar" href="#/menu/rhythmreader">
-            <img src="">
-           <h2> Dictado ritmico </h2>
-     <p> Entrenamiento rítmico</p>
-          </a>
-     
-       <a class="item item-avatar" href="#/menu/chords">
-            <img src="">
-           <h2> Chord Master </h2>
-     <p> Entrenamiento armónico</p>
-          </a>
 
       <a class="item item-avatar" href="#/menu/circlefifths">
-            <img src="">
-           <h2> Circulo de quintas </h2>
+            <img src="https://lh3.googleusercontent.com/d/16w1B_HGaZPCaG5uhMjTA824i_uTFcnTF">
+           <h2> Círculo de quintas </h2>
      <p> Entrenamiento armónico</p>
+          </a>
+        
+ <a class="item item-avatar" href="#/menu/chords">
+            <img src="https://images.sftcdn.net/images/t_app-icon-m/p/60922fc3-0163-4dbf-8c3d-52d560c712d7/4009110695/chrome-music-lab-Chrome%20Music%20Lab-icon.png">
+           <h2> Chords </h2>
+     <p> Google Chrome Labs</p>
           </a>
         
 
@@ -679,56 +875,72 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
           <ion-back-button></ion-back-button>
 
  <div class="list">
-         <a class="item" href="#/menu/manuals">
+          <a class="item" href="#/menu/manuals">
             Manuales
           </a>
-          <a class="item" href="#/menu/pieces">
-           Piezas
-          </a>
-
-          <div class="item item-divider">
-           Avanzado
-          </div>  
-
           <a class="item" href="#/menu/repertoire">
            Repertorio
           </a>
-          <a class="item" href="#/menu/sightreading">
-           Lecura a primer vista
-          </a>
-          <a class="item" href="#/menu/scales">
-           Escalas y arpegios
-          </a>            
+          <a class="item" href="#/menu/books">
+           Libros
+          </a>           
 </div>
        
       </ion-content>
     </ion-view>
   </script>
     
-     <script id="manuals.html" type="text/ng-template">   
+   <script id="manuals.html" type="text/ng-template">   
        <ion-view>
       <ion-content >
 
           <ion-back-button></ion-back-button>
 
-              <div class="iframe-container"><iframe src="https://git.tallerdepiano.app//lessons" frameborder="0" allowfullscreen></iframe></div>
+        <div class="documents">
+      <div class="document" ng-repeat="manual in manuals" ng-click="showModal($index)">
+        <div class="document__img" ng-style="{'background-image': 'url(' + manual.background + ')'}"></div>
+          <div class="document__title">{{manual.title}}</div>
+         </div>
+     </div>
+  
+
+    <div id="modalPDF" class="modal-container">
+        <div class="modal-background" ng-click="hideModal()">
+            <div class="modalDoc">
+        
+                      <a 
+         href="" 
+         class="close-modal" 
+        >
+         <!-- X close video icon -->
+          <svg 
+            version="1.1" 
+            xmlns="http://www.w3.org/2000/svg" 
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0"
+            y="0"
+            viewBox="0 0 32 32" 
+            style="enable-background:new 0 0 32 32;" 
+            xml:space="preserve" 
+            width="24" 
+            height="24" 
+          >
+                <path fill="#ffffff" d="M30.3448276,31.4576271 C29.9059965,31.4572473 29.4852797,31.2855701 29.1751724,30.980339 L0.485517241,2.77694915 C-0.122171278,2.13584324 -0.104240278,1.13679247 0.52607603,0.517159487 C1.15639234,-0.102473494 2.17266813,-0.120100579 2.82482759,0.477288136 L31.5144828,28.680678 C31.9872448,29.1460053 32.1285698,29.8453523 31.8726333,30.4529866 C31.6166968,31.0606209 31.0138299,31.4570487 30.3448276,31.4576271 Z" id="Shape"></path>
+                <path fill="#ffffff" d="M1.65517241,31.4576271 C0.986170142,31.4570487 0.383303157,31.0606209 0.127366673,30.4529866 C-0.12856981,29.8453523 0.0127551942,29.1460053 0.485517241,28.680678 L29.1751724,0.477288136 C29.8273319,-0.120100579 30.8436077,-0.102473494 31.473924,0.517159487 C32.1042403,1.13679247 32.1221713,2.13584324 31.5144828,2.77694915 L2.82482759,30.980339 C2.51472031,31.2855701 2.09400353,31.4572473 1.65517241,31.4576271 Z" id="Shape"></path>
+          </svg>
+        </a>
+       
+                <iframe id="drive" ng-src="{{trustAsResourceUrl(selectedManualUrl)}}" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
        
       </ion-content>
     </ion-view>
   </script>
 
 
-    <script id="pieces.html" type="text/ng-template">   
-       <ion-view>
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
-              <div class="iframe-container"><iframe src="https://git.tallerdepiano.app//lessons" frameborder="0" allowfullscreen></iframe></div>
-       
-      </ion-content>
-    </ion-view>
-  </script>
+  
     
     
      <script id="repertoire.html" type="text/ng-template">   
@@ -744,7 +956,7 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
   </script>
 
 
-    <script id="sightreading.html" type="text/ng-template">   
+    <script id="books.html" type="text/ng-template">   
        <ion-view>
       <ion-content >
 
@@ -757,17 +969,7 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
   </script>
 
 
-  <script id="scales.html" type="text/ng-template">   
-       <ion-view>
-      <ion-content >
 
-          <ion-back-button></ion-back-button>
-
-              <div class="iframe-container"><iframe src="https://git.tallerdepiano.app//lessons" frameborder="0" allowfullscreen></iframe></div>
-       
-      </ion-content>
-    </ion-view>
-  </script>
     
 
  <script id="notereader.html" type="text/ng-template">   
@@ -782,30 +984,21 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
     </ion-view>
   </script>
 
- <script id="rhythmreader.html" type="text/ng-template">   
+
+
+
+ <script id="chords.html" type="text/ng-template">   
        <ion-view>
       <ion-content >
 
           <ion-back-button></ion-back-button>
 
-        <h2>Lectura ritmica</h2>
+        <div class="iframe-container"><iframe src="https://musiclab.chromeexperiments.com/Chords/" frameborder="0" allowfullscreen ></iframe></div> 
        
       </ion-content>
     </ion-view>
   </script>
 
-
-   <script id="chords.html" type="text/ng-template">   
-       <ion-view>
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
-        <h2>Acordes</h2>
-       
-      </ion-content>
-    </ion-view>
-  </script>
 
 
      <script id="circlefifths.html" type="text/ng-template">   
@@ -821,7 +1014,23 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
   </script>
 
 
+ <script id="comunity.html" type="text/ng-template">
+    <ion-view title="Comunidad">
 
+      <ion-nav-bar class="bar-positive">
+        <ion-nav-buttons side="right">
+          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
+        </ion-nav-buttons>      
+    </ion-nav-bar>
+
+     <ion-content>
+       
+  <div class="iframe-container"><iframe src="https://app.mozart.studio/comunity" frameborder="0" allowfullscreen ></iframe></div> 
+
+      </ion-content>
+
+    </ion-view>
+  </script>  
 
 
 <script id="about.html" type="text/ng-template">
@@ -952,7 +1161,7 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
 
   var app = angular.module('ionicApp', ['ionic']);
 app
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
    $stateProvider
     .state('menu', {
@@ -969,19 +1178,19 @@ app
         }
       }
     })
-    .state('menu.tabs.comunity', {
-      url: "/comunity",
+    .state('menu.tabs.chat', {
+      url: "/chat",
       views: {
-        'comunity-tab': {
-          templateUrl: "comunity.html"
+        'chat-tab': {
+          templateUrl: "chat.html"
         }
       }
     })
-    .state('menu.tabs.record', {
-      url: "/record",
+    .state('menu.tabs.agenda', {
+      url: "/agenda",
       views: {
-        'record-tab': {
-          templateUrl: "record.html"
+        'agenda-tab': {
+          templateUrl: "agenda.html"
         }
       }
     })
@@ -1004,16 +1213,7 @@ app
         }
       }
     }) 
-/*
-  .state('menu.detail', {
-      url: "/detail/:id",
-      views: {
-        'menuContent': {
-          templateUrl: "detail.html",
-      controller: 'NewsDetailController'
-        }
-      }
-    })*/
+
     .state('menu.resources', {
       url: "/resources",
       views: {
@@ -1043,18 +1243,12 @@ app
       url: "/manuals",
       views: {
         'menuContent': {
-          templateUrl: "manuals.html"
+          templateUrl: "manuals.html",
+          controller: "manualsCtrl"
         }
       }
     })
-  .state('menu.pieces', {
-      url: "/pieces",
-      views: {
-        'menuContent': {
-          templateUrl: "pieces.html"
-        }
-      }
-    })
+
    .state('menu.repertoire', {
       url: "/repertoire",
       views: {
@@ -1063,19 +1257,12 @@ app
         }
       }
     })
-     .state('menu.sightreading', {
-      url: "/sightreading",
+
+     .state('menu.books', {
+      url: "/books",
       views: {
         'menuContent': {
-          templateUrl: "sightreading.html"
-        }
-      }
-    })
-     .state('menu.scales', {
-      url: "/scales",
-      views: {
-        'menuContent': {
-          templateUrl: "scales.html"
+          templateUrl: "books.html"
         }
       }
     })
@@ -1088,14 +1275,7 @@ app
         }
       }
     })
-  .state('menu.rhythmreader', {
-      url: "/rhythmreader",
-      views: {
-        'menuContent': {
-          templateUrl: "rhythmreader.html"
-        }
-      }
-    })
+
   .state('menu.chords', {
       url: "/chords",
       views: {
@@ -1136,6 +1316,14 @@ app
         }
       }
     })
+ .state('menu.comunity', {
+      url: "/comunity",
+      views: {
+        'menuContent': {
+          templateUrl: "comunity.html"
+        }
+      }
+    })
 
     .state('menu.about', {
       url: "/about",
@@ -1166,14 +1354,13 @@ app
     ;
 
   $urlRouterProvider.otherwise("menu/tab/profile");
-   
-
+  $ionicConfigProvider.tabs.position('bottom'); 
 })
 
  .controller('AppCtrl', function() {
   ionic.Platform.ready(function() {
   });
- })          
+ })       
 
 .controller('MenuCtrl', ['$http', '$scope', '$ionicSideMenuDelegate', '$ionicModal', function($http, $scope, $ionicSideMenuDelegate, $ionicModal) {
   $scope.toggleRight = function() {
@@ -1195,7 +1382,7 @@ app
       followRedirects: true
     };
 
-    $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData, config)
+    $http.post('https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec', requestData, config)
       .then(function(response) {
         if (response.data.status === "success") {
           localStorage.removeItem('MStoken');
@@ -1239,6 +1426,39 @@ app
       { text: "IONIC", src: "https://ionicframework.com/img/ionic-logo-blog.png" }
     ];
 })
+    .controller('manualsCtrl', ['$http', '$scope', '$sce', function($http, $scope, $sce){
+    $scope.trustAsResourceUrl = function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+    
+     $scope.selectedManualUrl = '';
+
+    $scope.showModal = function(index) {
+      $scope.selectedManualUrl = 'https://drive.google.com/file/d/' + $scope.manuals[index].id + '/preview';
+        document.getElementById('modalPDF').classList.add('four');
+    };
+
+    $scope.hideModal = function(index) {
+        const modal = document.getElementById('modalPDF');
+        modal.classList.add('out');
+        setTimeout(() => {
+            modal.classList.remove('four', 'out');
+        }, 400);
+    };
+
+    
+ $scope.manuals = [ 
+      {'title': 'Bloque 1 - Nivel 2','background': 'https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy', 'id': '1zs8OzO57s1b0MTavriKWjMohnLjr39-d'},
+      {'title': 'Bloque 3 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1VuxMiv3W89OBAzxXaz6kzBkEyRxonnJB'},
+      {'title': 'Bloque 2 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '10Q34O2uDPaj5ZG7bpYpx8BGHZ4Q18ZLB'},
+      {'title': 'Bloque 1 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1Kghxri_BvRE0Ho4c2vMfrdBGp8HTmrGJ'},
+      {'title': 'Bloque 3 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu'},
+      {'title': 'Bloque 2 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1nxK06XODrHt2J6lScQz4JjthmPoc16Ec'},
+      {'title': 'Bloque 1 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa'}
+    ];
+    
+    
+}])
   .controller('AccordianCtrl', function($scope){
     $scope.groups = [{
         "heading": "Matrícula",
@@ -1312,7 +1532,7 @@ app
 $(window).on('load', function() { 
   var storedToken = localStorage.getItem('MStoken');
   if (storedToken) {
-    var api = "https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec";
+    var api = "https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec";
 
     var validationData = {
       redirect: "follow",
@@ -1334,6 +1554,11 @@ $(window).on('load', function() {
       $('.preloader').css({'display':'none'})  
       $('.loginSection').css({'display':'none'})  
       $('.mainSection').fadeIn('slow')
+      var url = window.location.href;
+        if(url == "https://app.mozart.studio/#/menu/tab/record"){
+          var iframe = document.getElementById('agendaFrame');
+        iframe.src = 'https://app.mozart.studio/agenda';
+        }
       //loadData(api, storedToken, "si");    
     } else {
       localStorage.removeItem('MStoken');
@@ -1359,7 +1584,7 @@ $(window).on('load', function() {
   var email = document.getElementById('email-login').value;
   var password = document.getElementById('password-login').value;
 
-  var api = "https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec";
+  var api = "https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec";
 
   var validationData = {
     redirect: "follow",
@@ -1381,7 +1606,7 @@ $(window).on('load', function() {
       if (validation.status == "success") {
         localStorage.setItem('MStoken', validation.token);            
         var iframe = document.getElementById('profileFrame');
-        iframe.src = 'https://cubiculociencias.github.io/tallerdepiano/profile';
+        iframe.src = 'https://app.mozart.studio/profile';
         $('.preloader').css({'display':'none'})  
         $('.loginSection').css({'display':'none'})  
         $('.mainSection').fadeIn('slow')
@@ -1425,6 +1650,35 @@ function loadData(api, mail, encryption) {
   }*/
 
 
+
+function loadForm(){
+$(document).ready(function(){
+  $('#goRight').on('click', function(){
+    $('#slideBox').animate({
+      'marginLeft' : '0'
+    });
+    $('.topLayer').animate({
+      'marginLeft' : '100%'
+    });
+  });
+  $('#goLeft').on('click', function(){
+    if (window.innerWidth > 769){
+      $('#slideBox').animate({
+        'marginLeft' : '50%'
+      });
+    }
+    else {
+      $('#slideBox').animate({
+        'marginLeft' : '20%'
+      });
+    }
+    $('.topLayer').animate({
+      'marginLeft': '0'
+    });
+  });
+});
+
+};
 
 
 </script>
