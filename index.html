@@ -1515,9 +1515,9 @@ $(window).on('load', function() {
       $('.loginSection').css({'display':'none'})  
       $('.mainSection').fadeIn('slow')
       var url = window.location.href;
-        if(url == "https://app.mozart.studio/#/menu/tab/record"){
+        if(url == "https://app.mozart.studio/#/menu/tab/agenda"){
           var iframe = document.getElementById('agendaFrame');
-        iframe.src = 'https://app.mozart.studio/agenda';
+        iframe.src = 'https://cubiculociencias.github.io/tallerdepiano/calendar';
         }
       //loadData(api, storedToken, "si");    
     } else {
@@ -1569,7 +1569,7 @@ $(window).on('load', function() {
       if (validation.status == "success") {
         localStorage.setItem('MStoken', validation.token);            
         var iframe = document.getElementById('profileFrame');
-        iframe.src = 'https://app.mozart.studio/profile';
+        iframe.src = 'https://cubiculociencias.github.io/tallerdepiano/profile';
         $('.preloader').css({'display':'none'})  
         $('.loginSection').css({'display':'none'})  
         $('.mainSection').fadeIn('slow')
