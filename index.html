@@ -1591,6 +1591,10 @@ $(window).on('load', function() {
   var email = document.getElementById('email-login').value;
   var password = document.getElementById('password-login').value;
 
+  if(email === "" && password === "" ){
+    alert("Información de ingreso inválida")
+  }else{
+
   var api = "https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec";
 
   var validationData = {
@@ -1626,6 +1630,7 @@ $(window).on('load', function() {
         $button.button('reset');
       }
     })
+  }
 }
 
 
