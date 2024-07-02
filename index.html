@@ -575,8 +575,6 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
       <div class="left">
         <div class="content">
           <h2>Registro</h2>
-      
-          <form id="form-signup" method="post" onsubmit="return false;">
             <div class="form-element form-stack">
               <label for="recover" class="form-label">Email</label>
               <input id="recover" type="email" name="recover">
@@ -586,10 +584,9 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
               <input id="recover2" type="email" name="recover2">
             </div>
             <div class="form-element form-submit">
-              <button id="signUp" class="signup" type="submit" name="signup">Registrarse</button>
-              <button id="goLeft" class="signup off" style="font-size: 13px; margin-top: 10px;">Iniciar sesión</button> 
+              <button id="signin" class="signin" onclick="signin(this)" data-loading-text="<i class='fa fa-spinner fa-spin '></i> type="submit" name="signup">Registrarse</button>
+              <button id="goLeft" class="signin off" style="font-size: 13px; margin-top: 10px;">Iniciar sesión</button> 
             </div>
-          </form>
             <div style="color: gainsboro; font-weight: 400; font-size: 13px; margin-top: 15px;"> Recibiras un email con los pasos a seguir para que puedas iniciar sesión </div>
         </div>
       </div>
@@ -1633,32 +1630,46 @@ $(window).on('load', function() {
 }
 
 
-/*
-function loadData(api, mail, encryption) {
-  var userData = {
+ function signin(button) {
+  var $button = $(button);
+  $button.button('loading');
+  var mail = document.getElementById('recover').value;
+  var mail2 = document.getElementById('recover2').value;
+
+  if(mail != mail2){
+    alert("Los correos no coinciden. Por favor, verifique la información y vuelva a intentarlo.")
+  }else if(mail === ""){
+    alert("Por favor, ingrese su correo electrónico.")
+  }else{
+
+  var api = "https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec";
+  var validationData = {
     redirect: "follow",
     method: "POST",
     headers: {
       "Content-Type": "text/plain;charset=utf-8"
     },
     body: JSON.stringify({
-      action: "getData",
-      email: mail,
-      encryption: encryption
+      action: "signinUser",
+      email: mail
     })
   };
 
-  fetch(api, userData)
-    .then(answer => answer.text())
-    .then(ans => {
-      //var content = JSON.parse(ans);
-      app.controller('Controller1', ['$http', '$scope', function($http, $scope) {
-        $scope.userData = JSON.parse(ans) || {};          
-      }]);
-      angular.bootstrap(document, ['studentsApp']);
-      showMain(); 
-    });
-  }*/
+  fetch(api, validationData)
+    .then(response => response.text())
+    .then(res => {
+      var validation = JSON.parse(res);
+      document.getElementById('recover').value = ''; 
+      document.getElementById('recover2').value = '';
+      $button.button('reset');  
+      if (validation.status) {
+        alert("¡Exito! Tu contraseña ha sido enviada a tu correo.")
+      }else{
+        alert("Error. Tu correo no se encuentra en nuestra base de datos. Contacta a soporte.")
+      } 
+    })
+  }
+}
 
 
 
