@@ -1637,6 +1637,8 @@ $(window).on('load', function() {
 
   if(mail != mail2){
     alert("Los correos no coinciden. Por favor, verifique la información y vuelva a intentarlo.")
+      document.getElementById('recover').value = ''; 
+      document.getElementById('recover2').value = '';
   }else if(mail === ""){
     alert("Por favor, ingrese su correo electrónico.")
   }else{
