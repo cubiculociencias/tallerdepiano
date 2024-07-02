@@ -617,8 +617,8 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
   </div>
 </section>
 
+
   <section class="mainSection" style="display: none;">
-    
       
  <div ng-app="ionicApp">
   <div ng-controller="AppCtrl">
@@ -643,9 +643,9 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
           <ul class="list">
             <a href="#/menu/tab/profile" class="item" ng-class="(activeMenuClr=='profile')?'menuSelectedColor':''" ng-click="activeMenuClr = 'profile'" menu-toggle="right" ><i class="ri-home-2-fill"></i>&nbsp&nbspInicio</a>
                <a href="#/menu/lessons" class="item" ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" ng-click="activeMenuClr = 'lessons'" menu-toggle="right"><i class="ri-presentation-fill"></i>&nbsp&nbspLecciones</a>
-                       <a href="#/menu/comunity" class="item" ng-class="(activeMenuClr=='comunity')?'menuSelectedColor':''" ng-click="activeMenuClr = 'comunity'"  menu-toggle="right"><i class="ri-award-fill"></i>&nbsp&nbspReel de logros</a>
+                       <a href="#/menu/chat" class="item" ng-class="(activeMenuClr=='chat')?'menuSelectedColor':''" ng-click="activeMenuClr = 'chat'"  menu-toggle="right"><i class="ri-question-answer-fill"></i>&nbsp&nbspTutor</a>
+                           <a href="#/menu/library" class="item" ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" ng-click="activeMenuClr = 'library'" menu-toggle="right"><i class="ri-git-repository-fill"></i>&nbsp&nbspBiblioteca</a>
                  <a href="#/menu/resources" class="item" ng-class="(activeMenuClr=='resources')?'menuSelectedColor':''" ng-click="activeMenuClr = 'resources'" menu-toggle="right"><i class="ri-dashboard-fill"></i>&nbsp&nbspRecursos</a>
-             <a href="#/menu/about" class="item" ng-class="(activeMenuClr=='about')?'menuSelectedColor':''" ng-click="activeMenuClr = 'about'" menu-toggle="right"><i class="ri-book-marked-fill"></i>&nbsp&nbspLineamientos</a>
           </ul>
         </ion-content>
     <ion-footer-bar>
@@ -670,8 +670,8 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
     </ion-nav-bar>   
 
        <ion-tabs class="tabs-icon-top tabs-stable"  >
-      <ion-tab title="Tutor" icon="ion-chatboxes" href="#/menu/tab/chat">
-        <ion-nav-view name="chat-tab"></ion-nav-view>
+      <ion-tab title="Reel de logros" icon="ion-ribbon-b" href="#/menu/tab/reel">
+        <ion-nav-view name="reel-tab"></ion-nav-view>
       </ion-tab>
      <ion-tab title="Perfil" icon="ion-ios-contact-outline" href="#/menu/tab/profile">
         <ion-nav-view name="profile-tab"></ion-nav-view>
@@ -684,11 +684,11 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
   </script>
 
 
-       <script id="chat.html" type="text/ng-template">
-    <ion-view title="Asesoría">
+       <script id="reel.html" type="text/ng-template">
+    <ion-view title="Reel de logros">
       <ion-content >
        
-        <div class="iframe-container"><iframe src="https://app.mozart.studio/chat" frameborder="0" allowfullscreen ></iframe></div> 
+        <div class="iframe-container"><iframe src="https://app.mozart.studio/comunity" frameborder="0" allowfullscreen ></iframe></div> 
     
       </ion-content>
     </ion-view>
@@ -793,7 +793,20 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
   </script>
 
     
+        <script id="chat.html" type="text/ng-template">
+    <ion-view title="Asesoría">
+
+     <ion-nav-bar class="bar-stable">
+        <ion-nav-buttons side="right">
+          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
+        </ion-nav-buttons>      
+    </ion-nav-bar>
     
+      <ion-content>
+        <div class="iframe-container"><iframe src="https://app.mozart.studio/chat" frameborder="0" allowfullscreen ></iframe></div> 
+      </ion-content>
+    </ion-view>
+  </script>
 
 
    <script id="resources.html" type="text/ng-template">
@@ -820,16 +833,7 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
      <p> metronome beats </p>
           </a>
           
-         <a class="item item-avatar" href="#/menu/documents">
-            <img src="https://play-lh.googleusercontent.com/u5zjxp6IbaDoGpWOk24q5L5Ej0jiwLjS3-h7PAHy0xbawRLfO37f010C23gcD9GL1gh4=w480-h960-rw">
-           <h2> Biblioteca </h2>
-     <p> Tus partituras finalizadas</p>
-          </a>
-     
-      <div class="item item-divider">
-           Apps complementarias
-          </div>  
-     
+
      
      <a class="item item-avatar" href="#/menu/notereader">
             <img src="https://play-lh.googleusercontent.com/NzG7u3_0xrBfYdx-_ddIZn9x8VFv5oBtOuMsgpWIZJ8vqB8pWUIUeIMcl-9saY8-N0o=w480-h960-rw">
@@ -839,7 +843,7 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
      
 
       <a class="item item-avatar" href="#/menu/circlefifths">
-            <img src="https://lh3.googleusercontent.com/d/16w1B_HGaZPCaG5uhMjTA824i_uTFcnTF">
+            <img src="https://lh3.googleusercontent.com/d/16w1B_HGaZPCaG5uhMjTA824i_uTFcnTF=s100-p">
            <h2> Círculo de quintas </h2>
      <p> Entrenamiento armónico</p>
           </a>
@@ -872,27 +876,51 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
     </ion-view>
   </script>
 
-   <script id="documents.html" type="text/ng-template">   
-       <ion-view>
-      <ion-content >
 
-          <ion-back-button></ion-back-button>
+    
+   <script id="library.html" type="text/ng-template">
+    <ion-view title="Biblioteca de partituras">
 
- <div class="list">
-          <a class="item" href="#/menu/manuals">
-            Manuales
-          </a>
-          <a class="item" href="#/menu/repertoire">
-           Repertorio
-          </a>
-          <a class="item" href="#/menu/books">
-           Libros
-          </a>           
-</div>
+      <ion-nav-bar class="bar-stable">
+        <ion-nav-buttons side="right">
+          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
+        </ion-nav-buttons>      
+    </ion-nav-bar>
+
+
+     <ion-content>
        
+    <div class="list">
+  
+      <a class="item item-avatar" href="#/menu/manuals">
+        <img src="https://lh3.googleusercontent.com/d/13txkyvCE8uBCGu5LJ_-8gA4pRdsmOAAZ=s100-p">
+           <h2> Manuales</h2>
+     <p> Recopilación de tus lecciones </p>
+          </a>
+          
+         <a class="item item-avatar" href="#/menu/repertoire">
+            <img src="https://lh3.googleusercontent.com/d/1mrInm_ro0rby01RhGHFWzTKPTgZ8Xh2Z=s100-p">
+           <h2> Repertorio </h2>
+     <p> Tus piezas finalizadas</p>
+          </a>
+     
+       <a class="item item-avatar" href="#/menu/books">
+            <img src="https://lh3.googleusercontent.com/d/1lMqhDdRYiBKn3yvWXAY-lKGrvbAvwn2o=s100-p">
+           <h2> Métodos </h2>
+     <p> Libros complementarios</p>
+          </a>
+        
+
+     
       </ion-content>
+      
+     
     </ion-view>
-  </script>
+  </script>   
+
+
+  
+
     
    <script id="manuals.html" type="text/ng-template">   
        <ion-view>
@@ -934,7 +962,7 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
           </svg>
         </a>
        
-                <iframe id="drive" ng-src="{{trustAsResourceUrl(selectedManualUrl)}}" frameborder="0"></iframe>
+                <iframe class="drive" ng-src="{{trustAsResourceUrl(selectedManualUrl)}}" frameborder="0"></iframe>
             </div>
         </div>
     </div>
@@ -953,7 +981,44 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
 
           <ion-back-button></ion-back-button>
 
-              <div class="iframe-container"><iframe src="https://git.tallerdepiano.app//lessons" frameborder="0" allowfullscreen></iframe></div>
+           <div class="documents">
+      <div class="document" ng-repeat="manual in manuals" ng-click="showModal($index)">
+        <div class="document__img" ng-style="{'background-image': 'url(' + manual.background + ')'}"></div>
+          <div class="document__title">{{manual.title}}</div>
+         </div>
+     </div>
+  
+
+    <div id="modalPDF2" class="modal-container">
+        <div class="modal-background" ng-click="hideModal()">
+            <div class="modalDoc">
+        
+                      <a 
+         href="" 
+         class="close-modal" 
+        >
+         <!-- X close video icon -->
+          <svg 
+            version="1.1" 
+            xmlns="http://www.w3.org/2000/svg" 
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0"
+            y="0"
+            viewBox="0 0 32 32" 
+            style="enable-background:new 0 0 32 32;" 
+            xml:space="preserve" 
+            width="24" 
+            height="24" 
+          >
+                <path fill="#ffffff" d="M30.3448276,31.4576271 C29.9059965,31.4572473 29.4852797,31.2855701 29.1751724,30.980339 L0.485517241,2.77694915 C-0.122171278,2.13584324 -0.104240278,1.13679247 0.52607603,0.517159487 C1.15639234,-0.102473494 2.17266813,-0.120100579 2.82482759,0.477288136 L31.5144828,28.680678 C31.9872448,29.1460053 32.1285698,29.8453523 31.8726333,30.4529866 C31.6166968,31.0606209 31.0138299,31.4570487 30.3448276,31.4576271 Z" id="Shape"></path>
+                <path fill="#ffffff" d="M1.65517241,31.4576271 C0.986170142,31.4570487 0.383303157,31.0606209 0.127366673,30.4529866 C-0.12856981,29.8453523 0.0127551942,29.1460053 0.485517241,28.680678 L29.1751724,0.477288136 C29.8273319,-0.120100579 30.8436077,-0.102473494 31.473924,0.517159487 C32.1042403,1.13679247 32.1221713,2.13584324 31.5144828,2.77694915 L2.82482759,30.980339 C2.51472031,31.2855701 2.09400353,31.4572473 1.65517241,31.4576271 Z" id="Shape"></path>
+          </svg>
+        </a>
+       
+                <iframe class="drive" ng-src="{{trustAsResourceUrl(selectedManualUrl)}}" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
        
       </ion-content>
     </ion-view>
@@ -966,12 +1031,48 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
 
           <ion-back-button></ion-back-button>
 
-              <div class="iframe-container"><iframe src="https://git.tallerdepiano.app//lessons" frameborder="0" allowfullscreen></iframe></div>
+           <div class="documents">
+      <div class="document" ng-repeat="manual in manuals" ng-click="showModal($index)">
+        <div class="document__img" ng-style="{'background-image': 'url(' + manual.background + ')'}"></div>
+          <div class="document__title">{{manual.title}}</div>
+         </div>
+     </div>
+  
+
+    <div id="modalPDF3" class="modal-container">
+        <div class="modal-background" ng-click="hideModal()">
+            <div class="modalDoc">
+        
+                      <a 
+         href="" 
+         class="close-modal" 
+        >
+         <!-- X close video icon -->
+          <svg 
+            version="1.1" 
+            xmlns="http://www.w3.org/2000/svg" 
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0"
+            y="0"
+            viewBox="0 0 32 32" 
+            style="enable-background:new 0 0 32 32;" 
+            xml:space="preserve" 
+            width="24" 
+            height="24" 
+          >
+                <path fill="#ffffff" d="M30.3448276,31.4576271 C29.9059965,31.4572473 29.4852797,31.2855701 29.1751724,30.980339 L0.485517241,2.77694915 C-0.122171278,2.13584324 -0.104240278,1.13679247 0.52607603,0.517159487 C1.15639234,-0.102473494 2.17266813,-0.120100579 2.82482759,0.477288136 L31.5144828,28.680678 C31.9872448,29.1460053 32.1285698,29.8453523 31.8726333,30.4529866 C31.6166968,31.0606209 31.0138299,31.4570487 30.3448276,31.4576271 Z" id="Shape"></path>
+                <path fill="#ffffff" d="M1.65517241,31.4576271 C0.986170142,31.4570487 0.383303157,31.0606209 0.127366673,30.4529866 C-0.12856981,29.8453523 0.0127551942,29.1460053 0.485517241,28.680678 L29.1751724,0.477288136 C29.8273319,-0.120100579 30.8436077,-0.102473494 31.473924,0.517159487 C32.1042403,1.13679247 32.1221713,2.13584324 31.5144828,2.77694915 L2.82482759,30.980339 C2.51472031,31.2855701 2.09400353,31.4572473 1.65517241,31.4576271 Z" id="Shape"></path>
+          </svg>
+        </a>
+       
+                <iframe class="drive" ng-src="{{trustAsResourceUrl(selectedManualUrl)}}" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
        
       </ion-content>
     </ion-view>
   </script>
-
 
 
     
@@ -982,7 +1083,7 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
 
           <ion-back-button></ion-back-button>
 
-        <h2>Lectura de notas</h2>
+    <div class="iframe-container"><iframe src="https://dashboard.mozart.studio/notereader" frameborder="0" allowfullscreen></iframe></div>
        
       </ion-content>
     </ion-view>
@@ -1011,118 +1112,11 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
 
           <ion-back-button></ion-back-button>
 
-        <h2>Circulo de quintas</h2>
+   <div class="iframe-container"><iframe src="https://dashboard.mozart.studio/circleoffifths" frameborder="0" allowfullscreen></iframe></div>
        
       </ion-content>
     </ion-view>
   </script>
-
-
- <script id="comunity.html" type="text/ng-template">
-    <ion-view title="Comunidad">
-
-      <ion-nav-bar class="bar-positive">
-        <ion-nav-buttons side="right">
-          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
-        </ion-nav-buttons>      
-    </ion-nav-bar>
-
-     <ion-content>
-       
-  <div class="iframe-container"><iframe src="https://app.mozart.studio/comunity" frameborder="0" allowfullscreen ></iframe></div> 
-
-      </ion-content>
-
-    </ion-view>
-  </script>  
-
-
-<script id="about.html" type="text/ng-template">
- 
-   <ion-view title="Lineamientos">
-
-      <ion-nav-bar class="bar-stable">
-        <ion-nav-buttons side="right">
-          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
-        </ion-nav-buttons>      
-    </ion-nav-bar>
-
-     <ion-content>
-    <div class="list">
-          <a class="item" href="#/menu/regulation">
-            Reglamento
-          </a>
-
-
-          <a class="item" href="#/menu/aboutus">
-           Acerca de
-          </a>
-</div>
-      </ion-content>
-    </ion-view>
-  </script>   
-
-
-
-  <script id="regulation.html" type="text/ng-template">   
-    <ion-view>
-        <ion-content>
-            <ion-back-button></ion-back-button>
-
-            <ion-list>
-                <div ng-repeat="group in groups">
-                    <ion-item class="item-stable item-icon-right" ng-click="toggleGroup(group)" ng-class="{active: isGroupShown(group)}">
-                        <i class="icon" ng-class="isGroupShown(group) ? 'ion-chevron-up' : 'ion-chevron-down'" style="font-size:20px;"></i>
-                        &nbsp;
-                       {{group.heading}}
-                    </ion-item>
-                    <div class="item-accordion" ng-show="isGroupShown(group)">
-                        <div class="list">
-                            <div ng-repeat="bodyitem in group.body">
-                                <a class="item" ng-click="toggleDetail(bodyitem)">
-                  {{ bodyitem.no }}  {{bodyitem.name}}
-                                </a>
-                                <div ng-show="isDetailShown(bodyitem)">
-                                <div class="list card card-4" style="height: 100%;">
-        <div class="item item-body">
-     <p> {{ bodyitem.text }}</p>
-         </div> </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ion-list>
-        </ion-content>
-    </ion-view>
-</script>
-
-    
-   
-    
-  
-    
-
-
-
-
-   <script id="aboutus.html" type="text/ng-template">   
-       <ion-view>
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
-        <h2>Acerca de</h2>
-     
-
-       
-      </ion-content>
-    </ion-view>
-  </script>
-
-
-
-
 
 
 
@@ -1152,7 +1146,7 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
 </div>
 
   </section>
-
+    
   <section class="preloader" >
     <div id="loading">&nbsp;</div>
     <div id="loading-text">Cargando</div>
@@ -1182,11 +1176,11 @@ app
         }
       }
     })
-    .state('menu.tabs.chat', {
-      url: "/chat",
+   .state('menu.tabs.reel', {
+      url: "/reel",
       views: {
-        'chat-tab': {
-          templateUrl: "chat.html"
+        'reel-tab': {
+          templateUrl: "reel.html"
         }
       }
     })
@@ -1217,85 +1211,6 @@ app
         }
       }
     }) 
-
-    .state('menu.resources', {
-      url: "/resources",
-      views: {
-        'menuContent': {
-          templateUrl: "resources.html",
-          controller: "listViewCtrl"
-        }
-      }
-    })
-   .state('menu.metronome', {
-      url: "/metronome",
-      views: {
-        'menuContent': {
-          templateUrl: "metronome.html"
-        }
-      }
-    })
-   .state('menu.documents', {
-      url: "/documents",
-      views: {
-        'menuContent': {
-          templateUrl: "documents.html"
-        }
-      }
-    })
-   .state('menu.manuals', {
-      url: "/manuals",
-      views: {
-        'menuContent': {
-          templateUrl: "manuals.html",
-          controller: "manualsCtrl"
-        }
-      }
-    })
-
-   .state('menu.repertoire', {
-      url: "/repertoire",
-      views: {
-        'menuContent': {
-          templateUrl: "repertoire.html"
-        }
-      }
-    })
-
-     .state('menu.books', {
-      url: "/books",
-      views: {
-        'menuContent': {
-          templateUrl: "books.html"
-        }
-      }
-    })
-  
-    .state('menu.notereader', {
-      url: "/notereader",
-      views: {
-        'menuContent': {
-          templateUrl: "notereader.html"
-        }
-      }
-    })
-
-  .state('menu.chords', {
-      url: "/chords",
-      views: {
-        'menuContent': {
-          templateUrl: "chords.html"
-        }
-      }
-    })
-  .state('menu.circlefifths', {
-      url: "/circlefifths",
-      views: {
-        'menuContent': {
-          templateUrl: "circlefifths.html"
-        }
-      }
-    })
    .state('menu.nivelprincipiante', {
       url: "/nivelprincipiante",
       views: {
@@ -1320,38 +1235,90 @@ app
         }
       }
     })
- .state('menu.comunity', {
-      url: "/comunity",
+ .state('menu.chat', {
+      url: "/chat",
       views: {
         'menuContent': {
-          templateUrl: "comunity.html"
+          templateUrl: "chat.html"
+        }
+      }
+    })
+    .state('menu.resources', {
+      url: "/resources",
+      views: {
+        'menuContent': {
+          templateUrl: "resources.html"
+        }
+      }
+    })
+   .state('menu.metronome', {
+      url: "/metronome",
+      views: {
+        'menuContent': {
+          templateUrl: "metronome.html"
+        }
+      }
+    })
+   .state('menu.notereader', {
+      url: "/notereader",
+      views: {
+        'menuContent': {
+          templateUrl: "notereader.html"
         }
       }
     })
 
-    .state('menu.about', {
-      url: "/about",
+  .state('menu.chords', {
+      url: "/chords",
       views: {
         'menuContent': {
-          templateUrl: "about.html"
+          templateUrl: "chords.html"
         }
       }
     })
-  .state('menu.regulation', {
-      url: "/regulation",
+  .state('menu.circlefifths', {
+      url: "/circlefifths",
       views: {
         'menuContent': {
-          templateUrl: "regulation.html",
-          controller: "AccordianCtrl"
+          templateUrl: "circlefifths.html"
+        }
+      }
+    })
+   .state('menu.library', {
+      url: "/library",
+      views: {
+        'menuContent': {
+          templateUrl: "library.html"
+        }
+      }
+    })
+ 
+   .state('menu.manuals', {
+      url: "/manuals",
+      views: {
+        'menuContent': {
+          templateUrl: "manuals.html",
+          controller: "booksCtrl1"
         }
       }
     })
 
-  .state('menu.aboutus', {
-      url: "/aboutus",
+   .state('menu.repertoire', {
+      url: "/repertoire",
       views: {
         'menuContent': {
-          templateUrl: "aboutus.html"
+          templateUrl: "repertoire.html",
+          controller: "booksCtrl2"
+        }
+      }
+    })
+
+     .state('menu.books', {
+      url: "/books",
+      views: {
+        'menuContent': {
+          templateUrl: "books.html",
+          controller: "booksCtrl3"
         }
       }
     })
@@ -1422,15 +1389,7 @@ app
       
     })
 
-.controller('listViewCtrl', function($scope, $ionicPopup){
-    $scope.items = ["HTML5", "AngularJS", "IONIC"];
-    $scope.avataritems = [
-      { text: "HTML5", src: "http://www.w3.org/html/logo/img/mark-word-icon.png" },
-      { text: "AngularJS", src: "http://www.ocpsoft.org/wp-content/uploads/2013/01/angularjs.png" },
-      { text: "IONIC", src: "https://ionicframework.com/img/ionic-logo-blog.png" }
-    ];
-})
-    .controller('manualsCtrl', ['$http', '$scope', '$sce', function($http, $scope, $sce){
+       .controller('booksCtrl1', ['$http', '$scope', '$sce', function($http, $scope, $sce){
     $scope.trustAsResourceUrl = function(url) {
         return $sce.trustAsResourceUrl(url);
     };
@@ -1463,66 +1422,64 @@ app
     
     
 }])
-  .controller('AccordianCtrl', function($scope){
-    $scope.groups = [{
-        "heading": "Matrícula",
-        "body": [
-            {"no":1, "name":"Asignación de horario", "text":"El alumno elegirá un horario de clase dentro de los disponibles en la academia, es posible elegirlo para comenzar a la media (por ejemplo de 2:30 a 3:30) siempre y cuando se acuerde con la administración. "},
-            {"no":2, "name":"Cambio de horario", "text":"Para tramitar un cambio de horario o plan de pago, se deberá realizar al término de la mensualidad vigente. "}
-        ]
-    },{
-        "heading": "Asistencias",
-        "body": [
-           {"no":1, "name":"raj", "text":"25"},
-            {"no":2, "name":"kumar", "text":"24"},
-            {"no":3, "name":"kumar", "text":"24"}
-        ]
-    }, {
-        "heading": "Inasistencias",
-        "body": [
-            {"sno":10, "name":"John", "age":"25", "sex":"M", "status":"Pass"},
-            {"sno":20, "name":"Ravi", "age":"24", "sex":"M", "status":"fail"},
-            {"sno":30, "name":"Priya", "age":"26", "sex":"F", "status":"Fail"}
-        ]
-    }, {
-        "heading": "Retardos",
-        "body": [
-            {"sno":10, "name":"John", "age":"25", "sex":"M", "status":"Pass"},
-            {"sno":20, "name":"Ravi", "age":"24", "sex":"M", "status":"fail"},
-            {"sno":30, "name":"Priya", "age":"26", "sex":"F", "status":"Fail"}
-        ]
-    }
-                    
-                    ]; 
+    .controller('booksCtrl2', ['$http', '$scope', '$sce', function($http, $scope, $sce){
+    $scope.trustAsResourceUrl = function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+    
+     $scope.selectedManualUrl = '';
 
-    /*
-    * if given group is the selected group, deselect it
-    * else, select the given group
-    */
-    $scope.toggleGroup = function(group) {
-        if ($scope.isGroupShown(group)) {
-            $scope.shownGroup = null;
-        } else {
-            $scope.shownGroup = group;
-        }
+    $scope.showModal = function(index) {
+      $scope.selectedManualUrl = 'https://drive.google.com/file/d/' + $scope.manuals[index].id + '/preview';
+        document.getElementById('modalPDF2').classList.add('four');
     };
 
-    $scope.isGroupShown = function(group) {
-        return $scope.shownGroup === group;
+    $scope.hideModal = function(index) {
+        const modal = document.getElementById('modalPDF2');
+        modal.classList.add('out');
+        setTimeout(() => {
+            modal.classList.remove('four', 'out');
+        }, 400);
     };
 
-    $scope.isDetailShown = function(bodyitem) {
-        return $scope.shownDetail === bodyitem;
+    
+ $scope.manuals = [ 
+      {'title': 'Bloque 3 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu'},
+      {'title': 'Bloque 2 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1nxK06XODrHt2J6lScQz4JjthmPoc16Ec'},
+      {'title': 'Bloque 1 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa'}
+    ];
+    
+    
+}])
+    .controller('booksCtrl3', ['$http', '$scope', '$sce', function($http, $scope, $sce){
+    $scope.trustAsResourceUrl = function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+    
+     $scope.selectedManualUrl = '';
+
+    $scope.showModal = function(index) {
+      $scope.selectedManualUrl = 'https://drive.google.com/file/d/' + $scope.manuals[index].id + '/preview';
+        document.getElementById('modalPDF3').classList.add('four');
     };
 
-    $scope.toggleDetail = function(bodyitem) {
-        if ($scope.isDetailShown(bodyitem)) {
-            $scope.shownDetail = null;
-        } else {
-            $scope.shownDetail = bodyitem;
-        }
+    $scope.hideModal = function(index) {
+        const modal = document.getElementById('modalPDF3');
+        modal.classList.add('out');
+        setTimeout(() => {
+            modal.classList.remove('four', 'out');
+        }, 400);
     };
-});
+
+    
+ $scope.manuals = [ 
+      {'title': 'Bloque 3 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu'},
+      {'title': 'Bloque 2 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1nxK06XODrHt2J6lScQz4JjthmPoc16Ec'},
+      {'title': 'Bloque 1 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa'}
+    ];
+    
+    
+}])
 
     </script>
 
