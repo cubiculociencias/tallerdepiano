@@ -583,7 +583,6 @@
         }, 500); 
       };
     $scope.picture = $scope.userData.photo
-    $scope.history = JSON.parse($scope.userData.history)
 
     
      angular.element(document).ready(function() {
@@ -595,6 +594,7 @@
       angular.element(".file-upload").click();
     });
       });
+         $scope.history = JSON.parse($scope.userData.history)
     
     
     })
