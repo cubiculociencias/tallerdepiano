@@ -561,7 +561,7 @@
 
   var requestData = {
     action: "getProfileData",
-    token: localStorage.getItem('MStoken')
+    token: localStorage.getItem('TPtoken')
   };
 
   var config = {
@@ -662,7 +662,7 @@ $scope.manuals = [
      $scope.uploadImage = function(data){
        var requestData = {
     action: "postImage",
-    token: localStorage.getItem('MStoken'),
+    token: localStorage.getItem('TPtoken'),
     blob: data
   };
 
