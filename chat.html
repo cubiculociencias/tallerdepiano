@@ -1779,7 +1779,7 @@ alertsApp
   function getData(){
 var requestData = {
     action: "getBasicData",
-    token: "U2FsdGVkX1/nUuDQw51xvgUc1SJbNB7ovqirHxEhFI0Mq6tuxq5e/7jiW0KqEp3D"
+    token: localStorage.getItem('TPtoken')
   };
 
   var config = {
@@ -1789,7 +1789,7 @@ var requestData = {
     followRedirects: true, 
   }; 
 
- $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData, config)
+ $http.post('https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec', requestData, config)
     .then(function(response) {
     $scope.userData = response.data;
     $scope.messages = JSON.parse($scope.userData.messages)
@@ -1815,7 +1815,7 @@ var requestData = {
      
     var requestData = {
     action: "postAudio",
-    token: localStorage.getItem('MStoken'),
+    token: localStorage.getItem('TPtoken'),
     blob: base64Audio
   };
 
@@ -1825,7 +1825,7 @@ var requestData = {
     },
     followRedirects: true, 
   }; 
-   $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData, config)
+   $http.post('https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec', requestData, config)
     .then(function(response) {
      getData();
       //$scope.userData = response.data;
@@ -1856,7 +1856,7 @@ if(plan.split(" ")[0] == "Premium" || plan.split(" ")[0] == "Hibrido"){
 }else{
   var autoresponse =  {
     "sender": "admin",
-    "name": "Mozart Studio", 
+    "name": "Taller de Piano", 
     "type": "text",
     "content": "Esta función esta solo disponible para el plan Híbrido y el plan PREMIUM. Actualiza tu plan para recibir este beneficio",
     "timestamp": ""
@@ -1873,7 +1873,7 @@ if(plan.split(" ")[0] == "Premium" || plan.split(" ")[0] == "Hibrido"){
     $scope.sendMsgtoserver = function(message){
  var requestData = {
         action: "newMsgChat",
-        token: localStorage.getItem('MStoken'),
+        token: localStorage.getItem('TPtoken'),
         msg: message
     };
 
@@ -1883,7 +1883,7 @@ if(plan.split(" ")[0] == "Premium" || plan.split(" ")[0] == "Hibrido"){
         }
     };
 
-    $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData, config)
+    $http.post('https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec', requestData, config)
     .then(function(response) {
     });
 }
