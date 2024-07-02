@@ -1342,7 +1342,7 @@ app
 
     var requestData = {
       action: "removeToken",
-      token: localStorage.getItem('MStoken')
+      token: localStorage.getItem('TPtoken')
     };
 
     var config = {
@@ -1355,7 +1355,7 @@ app
     $http.post('https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec', requestData, config)
       .then(function(response) {
         if (response.data.status === "success") {
-          localStorage.removeItem('MStoken');
+          localStorage.removeItem('TPtoken');
           $('.preloader').css({ 'display': 'none' });
           $('.loginSection').fadeIn('slow');
           $('.mainSection').css({ 'display': 'none' });
@@ -1490,7 +1490,7 @@ app
 
 <script>
 $(window).on('load', function() { 
-  var storedToken = localStorage.getItem('MStoken');
+  var storedToken = localStorage.getItem('TPtoken');
   if (storedToken) {
     var api = "https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec";
 
@@ -1521,7 +1521,7 @@ $(window).on('load', function() {
         }
       //loadData(api, storedToken, "si");    
     } else {
-      localStorage.removeItem('MStoken');
+      localStorage.removeItem('TPtoken');
       $('.preloader').css({'display':'none'});
       $('.loginSection').fadeIn('slow') 
       $('.mainSection').css({'display':'none'});
@@ -1567,7 +1567,7 @@ $(window).on('load', function() {
     .then(res => {
       var validation = JSON.parse(res);
       if (validation.status == "success") {
-        localStorage.setItem('MStoken', validation.token);            
+        localStorage.setItem('TPtoken', validation.token);            
         var iframe = document.getElementById('profileFrame');
         iframe.src = 'https://cubiculociencias.github.io/tallerdepiano/profile';
         $('.preloader').css({'display':'none'})  
