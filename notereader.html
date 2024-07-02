@@ -1,0 +1,1545 @@
+<style>
+
+a {
+  color: blue; /* Set the color of the link to blue */
+  text-decoration: none; /* Remove the underline */
+  font-weight: bold; /* Make the link bold */
+}
+
+
+body {
+  /*background: linear-gradient(to top, #99ccff, #cc99ff); */
+  
+}
+#myReply {
+  color: white;
+ 
+  font-size: 20px;
+  line-height: 35px;
+  background-color: blue;
+  font-family: Avenir;
+  height: 35px;
+  text-align: center;
+}
+
+#myStaff {
+  margin: 0 auto;
+  
+  width: 380px;
+height: 575px;
+}
+
+svg {
+  
+  height: 250px;
+  width: 400px; 
+}
+
+#container {
+width: 400px;
+  height: 180px;
+ position: absolute;
+  visibility: hidden;
+
+  display: grid;
+}
+
+.buttonGrid {
+  display: grid; 
+  margin: auto; 
+  grid-template-columns: repeat(7, 50px); 
+  grid-template-rows: repeat(3, 50px);"
+}
+
+.tc-buttons {
+  height: 48px;
+  /*border-radius: 50%; */
+  width: 48px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0px 1px 0px 1px;
+  background: linear-gradient(to top, #006699, #3399cc);
+}
+
+.halfUpbutton {
+  width: 48px;
+  height: 48px;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+
+  /*clip-path: polygon(50% 0%, 0% 100%, 100% 100%); */
+  /* other styles for the button */
+  font-size: 18px;
+  color: white;
+  background: linear-gradient(to top, #3399cc, #6699cc);
+  font-family: Noto Music;
+}
+
+.halfDownbutton {
+  width: 48px;
+  height: 48px;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  /* other styles for the button */
+  font-size: 24px;
+  color: white;
+  background: linear-gradient(to top, #000033, #009999);
+}
+
+#container2 {
+  text-align; center;
+  height: 275px;
+  
+  position: relative;
+  z-index: 10;
+}
+.grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(1, 1fr);
+      background: blue;
+    }
+
+.grid-cell {
+  display: flex;
+  align-items: center; /* center the radio button and label vertically */
+}
+
+select {
+  font-size: 20px;
+}
+
+label { 
+  color: white;
+  padding: 5px;
+  font-family: Arial;
+  font-size: 12px;
+}
+
+input[type="radio"] {
+  /* Set the height and width of the radio button */
+  height: 25px;
+  width: 25px;
+  vertical-align: middle;  
+}
+
+
+
+#clefRadios {
+  margin-bottom: 15px;
+}
+
+#mystart-button-div {
+
+  margin-top: 15px;
+  z-index: 1;
+  position: absolute;
+  
+  
+}
+
+#difficultyLevel {
+  position: relative;
+  margin-top: 15px;
+  background: blue;
+}
+
+.start-button {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  color: white;
+  background: blue;
+  font-size: 24px;
+  margin-top: 20px;
+  margin-left: 40px;
+  margin-right: 60px;
+  margin-bottom: 20px;
+  float: right;
+display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sharps {
+  visibility: hidden;
+  position: absolute;
+  font-family: Noto Music;
+}
+
+.flats {
+  visibility: hidden;
+  position: absolute;
+  font-family: Noto Music;
+}
+
+.wrong1 {
+  color: red;
+  font-size: 200;
+  font-family: Arial;
+}
+
+#keyQuestion {
+  fill: blue;
+  font-size: 18px;
+  font-family: Avenir;
+  visibility: hidden;
+}
+
+
+.myabout-button {
+  
+  user-select: none;
+}
+</style>
+
+
+<body>
+ 
+
+  <div id="myStaff">
+    <div id="myReply" onclick="doJump()">Remember to choose the correct clef! </div>
+    <svg id="allStaffItems">
+      <!-- begin high ledger lines -->
+
+      <line id="G6" x1="195" y1="20" x2="225" y2="20" style="stroke:black;stroke-width:2" />
+      <line id="E6" x1="195" y1="40" x2="225" y2="40" style="stroke:black;stroke-width:2" />
+      <line id="C6" x1="195" y1="60" x2="225" y2="60" style="stroke:black;stroke-width:2" />
+      <line id="A5" x1="195" y1="80" x2="225" y2="80" style="stroke:black;stroke-width:2" />
+      <!--end ledger high ledger lines -->
+
+      <line id="F5" x1="0" y1="100" x2="380" y2="100" style="stroke:black;stroke-width:2" />
+      <line id="D5" x1="0" y1="120" x2="380" y2="120" style="stroke:black;stroke-width:2" />
+      <line id="B4" x1="0" y1="140" x2="380" y2="140" style="stroke:black;stroke-width:2" />
+      <line id="G4" x1="0" y1="160" x2="380" y2="160" style="stroke:black;stroke-width:2" />
+      <line id="E4" x1="0" y1="180" x2="380" y2="180" style="stroke:black;stroke-width:2" />
+
+      <!-- begin low ledger lines -->
+      <line id="C4" x1="195" y1="200" x2="225" y2="200" style="stroke:black;stroke-width:2" />
+      <line id="A3" x1="195" y1="220" x2="225" y2="220" style="stroke:black;stroke-width:2" />
+      <line id="F3" x1="195" y1="240" x2="225" y2="240" style="stroke:black;stroke-width:2" />
+      <line id="D3" x1="195" y1="260" x2="225" y2="260" style="stroke:black;stroke-width:2" />
+
+      <!-- here are the clef symbols from the noto font -->
+      <text id="g-clef" x="0" y="200" visibility="hidden" font-size="200">&#x1D11E;</text>
+      <text id="b-clef" x="0" y="170" visibility="hidden" font-size="110">&#x1D122;</text>
+      <text id="a-clef" x="0" y="180" visibility="hidden" font-size="120">&#x1D121;</text>
+      <text id="o-clef" x="0" y="160" visibility="hidden" font-size="120">&#x1D121;</text>
+
+      <text class="sharps" id="F#" x="60" y="110" font-size="75">&#x266F;</text>
+      <text class="sharps" id="C#" x="75" y="140" font-size="75">&#x266F;</text>
+      <text class="sharps" id="G#" x="90" y="100" font-size="75">&#x266F;</text>
+      <text class="sharps" id="D#" x="105" y="130" font-size="75">&#x266F;</text>
+      <text class="sharps" id="A#" x="120" y="160" font-size="75">&#x266F;</text>
+      <text class="sharps" id="E#" x="135" y="120" font-size="75">&#x266F;</text>
+      <text class="sharps" id="B#" x="150" y="150" font-size="75">&#x266F;</text>
+
+      <text class="flats" id="Bb" x="60" y="150" font-size="75">&#x266D;</text>
+      <text class="flats" id="Eb" x="75" y="120" font-size="75">&#x266D;</text>
+      <text class="flats" id="Ab" x="90" y="160" font-size="75">&#x266D;</text>
+      <text class="flats" id="Db" x="105" y="130" font-size="75">&#x266D;</text>
+      <text class="flats" id="Gb" x="120" y="170" font-size="75">&#x266D;</text>
+      <text class="flats" id="Cb" x="135" y="140" font-size="75">&#x266D;</text>
+      <text class="flats" id="Fb" x="150" y="180" font-size="75">&#x266D;</text>
+
+      <text id="natural-sign" x="90" y="160" visibility="hidden" font-size="75">&#9838;</text>
+      <text id="question" x="10" y="180" font-size="120">?</text>
+      <text id="wrong" x="135" y="200" visibility="hidden" style="font-size: 200px; fill: #FF0000;">X</text>
+      <text id="rabbit" x="325" y="50" visibility="hidden" style="font-size: 40px;">&#x1F407</text>
+      <text id="keyQuestion" x="210" y="139" visibility="hidden">&#x2190 Which major key?</text>
+
+      <text id="MyThree" visibility="hidden" align="center" x="165" y="180" style="font-size: 150px; fill: blue; text-align: center;"></text>
+
+      <text id="myLogo" visibility="visible" align="center" x="35" y=55 style="font-size: 60px; fill: blue; font-family: Avenir; text-align: center;">NoteNames</text>
+
+      <!--
+      <text id="o-clef" x="10" y="160" font-size="30">&#x266D;</text>
+      <text id="o-clef" x="10" y="160" font-size="30">&#x266F;</text>
+
+-->
+      <circle id="note" cx="210" cy="100" r="10" fill="black" visibility="hidden" />
+    </svg>
+
+    <div id="container">
+      <div id="myGrid" class="buttonGrid">
+        <div><button class="halfUpbutton" onclick="checkAnswer('A#')">&#x0023</button></div>
+        <div><button class="halfUpbutton" onclick="checkAnswer('B#')">&#x0023</button></div>
+        <div><button class="halfUpbutton" onclick="checkAnswer('C#')">&#x0023</button></div>
+        <div><button class="halfUpbutton" onclick="checkAnswer('D#')">&#x0023</button></div>
+        <div><button class="halfUpbutton" onclick="checkAnswer('E#')">&#x0023</button></div>
+        <div><button class="halfUpbutton" onclick="checkAnswer('F#')">&#x0023</button></div>
+        <div><button class="halfUpbutton" onclick="checkAnswer('G#')">&#x0023</button></div>
+        <div><button class="tc-buttons" onclick="checkAnswer('A')">A</button></div>
+        <div><button class="tc-buttons" onclick="checkAnswer('B')">B</button></div>
+        <div><button class="tc-buttons" onclick="checkAnswer('C')">C</button></div>
+        <div><button class="tc-buttons" onclick="checkAnswer('D')">D</button></div>
+        <div><button class="tc-buttons" onclick="checkAnswer('E')">E</button></div>
+        <div><button class="tc-buttons" onclick="checkAnswer('F')">F</button></div>
+        <div><button class="tc-buttons" onclick="checkAnswer('G')">G</button></div>
+        <div><button class="halfDownbutton" onclick="checkAnswer('Ab')">&#x266D</button></div>
+        <div><button class="halfDownbutton" onclick="checkAnswer('Bb')">&#x266D</button></div>
+        <div><button class="halfDownbutton" onclick="checkAnswer('Cb')">&#x266D</button></div>
+        <div><button class="halfDownbutton" onclick="checkAnswer('Db')">&#x266D</button></div>
+        <div><button class="halfDownbutton" onclick="checkAnswer('Eb')">&#x266D</button></div>
+        <div><button class="halfDownbutton" onclick="checkAnswer('Fb')">&#x266D</button></div>
+        <div><button class="halfDownbutton" onclick="checkAnswer('Gb')">&#x266D</button></div>
+      </div>
+    </div>
+    <div id="container2">
+
+     
+
+      <div id="clefRadios" class="grid">
+        <label><input type="radio" id="g-radio-clef" name="myClefs" value="1" />Treble</label>
+        <label><input type="radio" id="b-radio-clef" name="myClefs" value="2" />Bass</label>
+       
+      </div>
+
+      <div id="difficultyLevel" class="grid">
+        <label><input type="radio" id="beginner" name="myDiff" value="Novice" />Novice</label>
+        <label><input type="radio" id="intermediate" name="myDiff" value="Competent" />Competent</label>
+        <label><input type="radio" id="advanced" name="myDiff" value="Advanced" />Advanced</label>
+        <label><input type="radio" id="expert" name="myDiff" value="Expert" />Expert</label>
+      </div>
+      <div id="mystart-button-div">
+        <button id="mystart-button" class="start-button" onclick="makeNewRound()">Start Game!</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+
+
+
+<script>
+  //Level list: Restricted staff 2. Restricted high 3. Restricted low 4. Full range 5. Restricted range with flat signs 6. Restricted range with sharp signs 7. Name major flat keys 8. Name major sharp keys 9. Name all major keys
+
+var tLow;
+var tHigh;
+var score = 0;
+var round = 0;
+var tOldNumber;
+var lineNumber;
+var masterClef;
+var sInstrument = "Violin";
+var startTime;
+var correctAnswer;
+var masterDiff = 2;
+var masterLevel = 1;
+let tPreviousKey = [];
+
+let originalYValuesFlats = [];
+let originalYValuesSharps = [];
+
+// A function to store the original y values of the text elements
+function storeOriginalYValuesFlats() {
+  // Get an array of references to the text elements in the SVG
+  let textElements = Array.from(document.getElementsByClassName("flats"));
+
+  // Store the original y values of the text elements in the originalYValues array
+  for (let i = 0; i < textElements.length; i++) {
+    originalYValuesFlats.push(textElements[i].getAttribute("y"));
+  }
+}
+
+function storeOriginalYValuesSharps() {
+  // Get an array of references to the text elements in the SVG
+  let textElements = Array.from(document.getElementsByClassName("sharps"));
+
+  // Store the original y values of the text elements in the originalYValues array
+  for (let i = 0; i < textElements.length; i++) {
+    originalYValuesSharps.push(textElements[i].getAttribute("y"));
+  }
+}
+
+// A function to restore the original y values of the text elements
+function restoreOriginalYValuesFlats() {
+  // Get an array of references to the text elements in the SVG
+  let textElements = Array.from(document.getElementsByClassName("flats"));
+
+  // Set the y values of the text elements back to their original positions
+  for (let i = 0; i < textElements.length; i++) {
+    textElements[i].setAttribute("y", originalYValuesFlats[i]);
+  }
+}
+
+function restoreOriginalYValuesSharps() {
+  // Get an array of references to the text elements in the SVG
+  let textElements = Array.from(document.getElementsByClassName("sharps"));
+
+  // Set the y values of the text elements back to their original positions
+  for (let i = 0; i < textElements.length; i++) {
+    textElements[i].setAttribute("y", originalYValuesSharps[i]);
+  }
+}
+
+
+
+
+var radioButton = document.getElementById("g-radio-clef");
+radioButton.addEventListener("click", function () {
+  checkRadioButtons();
+});
+
+var radioButton = document.getElementById("b-radio-clef");
+radioButton.addEventListener("click", function () {
+  checkRadioButtons();
+});
+
+//difficulty buttons
+var radioButton = document.getElementById("beginner");
+radioButton.addEventListener("click", function () {
+  checkDifficulty();
+});
+
+var radioButton = document.getElementById("advanced");
+radioButton.addEventListener("click", function () {
+  checkDifficulty();
+});
+
+var radioButton = document.getElementById("intermediate");
+radioButton.addEventListener("click", function () {
+  checkDifficulty();
+});
+
+var radioButton = document.getElementById("expert");
+radioButton.addEventListener("click", function () {
+  checkDifficulty();
+});
+
+//var button = document.getElementById("mystart-button");
+//button.addEventListener("click", function () {
+//this.style.visibility = "hidden";
+//});
+
+function doJump() {
+  let response = prompt("Hi sneaky, jump to which level?");
+
+  // Check if the user entered a response
+  if (response !== null) {
+    // Output the response to the console
+    //make sure the user response is an integer
+    let numberResponse = parseInt(response);
+    masterLevel = numberResponse;
+    document.getElementById("rabbit").style.visibility = "visible";
+    if (isNaN(numberResponse)) {
+      alert("The input is not a valid number");
+    } else {
+      // console.log("The input is a valid number:", numberResponse);
+    }
+  } else {
+    // Output a message to the console
+    //user cancelled
+    document.getElementById("rabbit").style.visibility = "hidden";
+  }
+}
+
+window.onload = function () {
+  //hideSharpsAndFlats();
+  hideLedgers();
+  storeOriginalYValuesFlats();
+  storeOriginalYValuesSharps();
+  //document.getElementById("rabbit").style.visibility = "hidden";
+  //document.getElementById("keyQuestion").style.visibility = "hidden";
+  //document.getElementById("note").style.visibility = "hidden";
+  //document.getElementById("myGrid").style.visibility = "hidden";
+  //document.getElementById("container").style.visibility = "hidden";
+  //document.getElementById("container2").style.visibility = "visible";
+
+  //these are the clef symbols
+  //document.getElementById("a-clef").style.visibility = "hidden";
+  //document.getElementById("b-clef").style.visibility = "hidden";
+  //document.getElementById("o-clef").style.visibility = "hidden";
+  //document.getElementById("g-clef").style.visibility = "hidden";
+  //document.getElementById("wrong").style.visibility = "hidden";
+  //document.getElementById("MyThree").style.visibility = "hidden";
+  //document.getElementById("natural-sign").style.visibility = "hidden";
+};
+
+//document.getElementById("myDiv").classList.remove("invisible");
+
+function makeNewRound() {
+  hideSharpsAndFlats();
+  document.getElementById("myLogo").style.visibility = "hidden";
+
+  document.getElementById("keyQuestion").style.visibility = "hidden";
+  //make sure key sigs get shifted according to user's clef DO ONCE
+  checkRadioButtons();
+
+  //make sure student selected an instrument
+  if (
+    sInstrument === "Choose Instrument" ||
+    sInstrument === 0 ||
+    masterClef === 0
+  ) {
+    return;
+  }
+  //make sure student selected a clef
+  if (masterClef === 0) {
+    return;
+  }
+
+  startCountdown();
+
+  setTimeout(function () {
+    // Code to be executed after one second
+    document.getElementById("container2").style.visibility = "hidden";
+
+    showClefButtons();
+    document.getElementById("myGrid").style.visibility = "visible";
+    round = 0;
+    score = 0;
+    hideLedgers();
+    startTime = new Date();
+    randomizeNote();
+  }, 3000);
+}
+
+function randomizeNote() {
+  if (masterLevel > 6) {
+    //once we're in level 7 no need to show a note
+    document.getElementById("note").style.visibility = "hidden";
+    //show the "what major key?"
+    document.getElementById("keyQuestion").style.visibility = "visible";
+    pickMajorKey();
+    return;
+  }
+
+  //staff plus one note above and below is 7,17
+  getTheRange();
+  while (lineNumber === tOldNumber) {
+    lineNumber = randomNumberFromRange(tLow, tHigh);
+  }
+  tOldNumber = lineNumber;
+  // Get a reference to the SVG circle element
+  var note = document.getElementById("note");
+  // Set the vertical position of the circle to the y-coordinate of the line or space it will be placed on
+  note.setAttribute("cy", lineNumber * 10 + 20);
+  highLedgerLines(lineNumber);
+
+  // Set the "correctAnswer" variable to the name of the note on the line or space where the circle is placed
+  if (
+    lineNumber === 0 ||
+    lineNumber === 7 ||
+    lineNumber === 14 ||
+    lineNumber === 21
+  ) {
+    correctAnswer = "G";
+  } else if (
+    lineNumber === 1 ||
+    lineNumber === 8 ||
+    lineNumber === 15 ||
+    lineNumber === 22
+  ) {
+    correctAnswer = "F";
+  } else if (
+    lineNumber === 2 ||
+    lineNumber === 9 ||
+    lineNumber === 16 ||
+    lineNumber === 23
+  ) {
+    correctAnswer = "E";
+  } else if (
+    lineNumber === 3 ||
+    lineNumber === 10 ||
+    lineNumber === 17 ||
+    lineNumber === 24
+  ) {
+    correctAnswer = "D";
+  } else if (
+    lineNumber === 4 ||
+    lineNumber === 11 ||
+    lineNumber === 18 ||
+    lineNumber === 25
+  ) {
+    correctAnswer = "C";
+  } else if (lineNumber === 5 || lineNumber === 12 || lineNumber === 19) {
+    correctAnswer = "B";
+  } else if (lineNumber === 6 || lineNumber === 13 || lineNumber === 20) {
+    correctAnswer = "A";
+  }
+  //not sure this is necessary to say <9 because function already returned if >6
+  if (masterLevel < 7) {
+    changeAnswerByClef();
+  }
+  drawKeySig();
+
+  document.getElementById("note").style.visibility = "visible";
+}
+//THIS FUNCTION DETERMINES WHICH BUTTON ROWS SHOW
+function showClefButtons() {
+  switch (masterLevel) {
+    case 6: //key sig sharp only
+      showSharpRow();
+      hideFlatRow();
+      break;
+    case 5: //key sigs flats only
+      showFlatRow();
+      hideSharpRow();
+
+      break;
+    case 7:
+      hideSharpRow();
+      showFlatRow();
+      break;
+    case 8:
+      showSharpRow();
+      hideFlatRow();
+      break;
+    case 9:
+      showSharpRow();
+      showFlatRow();
+      break;
+    case 10:
+      showSharpRow();
+      showFlatRow();
+      break;
+
+    default:
+      hideSharpRow();
+      hideFlatRow();
+      break;
+  }
+}
+
+
+
+
+function hideLedgers() {
+  document.getElementById("G6").style.display = "none";
+  document.getElementById("E6").style.display = "none";
+  document.getElementById("C6").style.display = "none";
+  document.getElementById("A5").style.display = "none";
+  document.getElementById("C4").style.display = "none";
+  document.getElementById("A3").style.display = "none";
+  document.getElementById("F3").style.display = "none";
+  document.getElementById("D3").style.display = "none";
+}
+
+function highLedgerLines(lineNumber) {
+  switch (lineNumber) {
+    case 0:
+      //do something
+      document.getElementById("G6").style.display = "block";
+      document.getElementById("E6").style.display = "block";
+      document.getElementById("C6").style.display = "block";
+      document.getElementById("A5").style.display = "block";
+      break;
+    case 1:
+      //do something
+
+      document.getElementById("E6").style.display = "block";
+      document.getElementById("C6").style.display = "block";
+      document.getElementById("A5").style.display = "block";
+      break;
+    case 2:
+      // do something
+      document.getElementById("E6").style.display = "block";
+      document.getElementById("C6").style.display = "block";
+      document.getElementById("A5").style.display = "block";
+      break;
+    case 3:
+      //do something
+      document.getElementById("C6").style.display = "block";
+      document.getElementById("A5").style.display = "block";
+      break;
+    case 4:
+      //do something
+      document.getElementById("C6").style.display = "block";
+      document.getElementById("A5").style.display = "block";
+      break;
+    case 5:
+      //do something
+      document.getElementById("A5").style.display = "block";
+      break;
+    case 6:
+      //do something
+      document.getElementById("A5").style.display = "block";
+      break;
+    case 18:
+      //do something
+      document.getElementById("C4").style.display = "block";
+      break;
+    case 19:
+      //do something
+      document.getElementById("C4").style.display = "block";
+      break;
+    case 20:
+      //do something
+      document.getElementById("C4").style.display = "block";
+      document.getElementById("A3").style.display = "block";
+      break;
+    case 21:
+      //do something
+      document.getElementById("C4").style.display = "block";
+      document.getElementById("A3").style.display = "block";
+      break;
+    case 22:
+      //do something
+      document.getElementById("C4").style.display = "block";
+      document.getElementById("A3").style.display = "block";
+      document.getElementById("F3").style.display = "block";
+      break;
+    case 23:
+      //do something
+      document.getElementById("C4").style.display = "block";
+      document.getElementById("A3").style.display = "block";
+      document.getElementById("F3").style.display = "block";
+      break;
+    case 24:
+      //do something
+      document.getElementById("C4").style.display = "block";
+      document.getElementById("A3").style.display = "block";
+      document.getElementById("F3").style.display = "block";
+      document.getElementById("D3").style.display = "block";
+      break;
+    case 25:
+      //do something
+      document.getElementById("C4").style.display = "block";
+      document.getElementById("A3").style.display = "block";
+      document.getElementById("F3").style.display = "block";
+      document.getElementById("D3").style.display = "block";
+      break;
+    default:
+      //do nothing?
+      break;
+  }
+}
+
+function showSharpRow() {
+  var elements = document.getElementsByClassName("halfUpbutton");
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].style.visibility = "visible";
+  }
+}
+
+function hideSharpRow() {
+  console.log("trying to hide sharps");
+  var elements = document.getElementsByClassName("halfUpbutton");
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].style.visibility = "hidden";
+  }
+}
+
+function showFlatRow() {
+  var elements = document.getElementsByClassName("halfDownbutton");
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].style.visibility = "visible";
+  }
+}
+
+function hideFlatRow() {
+  var elements = document.getElementsByClassName("halfDownbutton");
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].style.visibility = "hidden";
+  }
+}
+
+function checkDifficulty() {
+  // Get all radio buttons with the name "myClefs"
+  var radios = document.getElementsByName("myDiff");
+  // Loop through the radio buttons
+  for (var i = 0; i < radios.length; i++) {
+    // If the current radio button is checked
+    if (radios[i].checked) {
+      // Alert the user with the value of the checked radio button
+      masterDiff = radios[i].value;
+    }
+  }
+}
+//makes sure proper clef symbol is visible, and alters location of flats/sharps
+function checkRadioButtons() {
+  //reset the location of all flats/sharps
+  restoreOriginalYValuesFlats();
+  restoreOriginalYValuesSharps();
+  // Get all radio buttons with the name "myClefs"
+  var radios = document.getElementsByName("myClefs");
+  // Loop through the radio buttons
+  for (var i = 0; i < radios.length; i++) {
+    // If the current radio button is checked
+    if (radios[i].checked) {
+      // Alert the user with the value of the checked radio button
+      var whichClef = radios[i].value;
+      switch (whichClef) {
+        case "1":
+          masterClef = "TC";
+
+          document.getElementById("b-clef").style.visibility = "hidden";
+          document.getElementById("o-clef").style.visibility = "hidden";
+          document.getElementById("g-clef").style.visibility = "visible";
+          document.getElementById("a-clef").style.visibility = "hidden";
+          document.getElementById("question").style.visibility = "hidden";
+
+          break;
+        case "2":
+          masterClef = "BC";
+
+          document.getElementById("g-clef").style.visibility = "hidden";
+          document.getElementById("b-clef").style.visibility = "visible";
+          document.getElementById("o-clef").style.visibility = "hidden";
+          document.getElementById("question").style.visibility = "hidden";
+          adjustTextPositionFlats("flats", 20);
+          adjustTextPositionSharps("sharps", 20);
+
+          break;
+        case "3":
+          masterClef = "AC";
+          document.getElementById("a-clef").style.visibility = "visible";
+          document.getElementById("g-clef").style.visibility = "hidden";
+          document.getElementById("b-clef").style.visibility = "hidden";
+          document.getElementById("question").style.visibility = "hidden";
+          adjustTextPositionFlats("flats", 10);
+          adjustTextPositionSharps("sharps", 10);
+
+          break;
+        case "4":
+          masterClef = "OC";
+
+          document.getElementById("o-clef").style.visibility = "visible";
+          document.getElementById("g-clef").style.visibility = "hidden";
+          document.getElementById("b-clef").style.visibility = "hidden";
+          document.getElementById("question").style.visibility = "hidden";
+          adjustTextPositionFlats("flats", -10);
+          adjustTextPositionSharps("sharps", -10);
+          //F# has to be moved down an octave
+          document.getElementById("F#").setAttribute("y", 170);
+          document.getElementById("G#").setAttribute("y", 150);
+
+          break;
+      }
+      if (whichClef === undefined) {
+        masterClef = 0;
+      }
+    }
+  }
+}
+//changes button names of bass/alto/tenor so they will match the answer
+function changeAnswerByClef() {
+  var str = correctAnswer;
+
+  switch (masterClef) {
+    case "AC":
+      switch (correctAnswer) {
+        case "A":
+          correctAnswer = "B" + str.substring(1);
+          break;
+        case "B":
+          correctAnswer = "C" + str.substring(1);
+          break;
+        case "C":
+          correctAnswer = "D" + str.substring(1);
+          break;
+        case "D":
+          correctAnswer = "E" + str.substring(1);
+          break;
+        case "E":
+          correctAnswer = "F" + str.substring(1);
+          break;
+        case "F":
+          correctAnswer = "G" + str.substring(1);
+          break;
+        case "G":
+          correctAnswer = "A" + str.substring(1);
+          break;
+      }
+      break;
+    case "BC":
+      switch (correctAnswer) {
+        case "A":
+          correctAnswer = "C" + str.substring(1);
+          break;
+        case "B":
+          correctAnswer = "D" + str.substring(1);
+          break;
+        case "C":
+          correctAnswer = "E" + str.substring(1);
+          break;
+        case "D":
+          correctAnswer = "F" + str.substring(1);
+          break;
+        case "E":
+          correctAnswer = "G" + str.substring(1);
+          break;
+        case "F":
+          correctAnswer = "A" + str.substring(1);
+          break;
+        case "G":
+          correctAnswer = "B" + str.substring(1);
+          break;
+      }
+      break;
+    case "OC":
+      switch (correctAnswer) {
+        case "A":
+          correctAnswer = "G" + str.substring(1);
+          break;
+        case "B":
+          correctAnswer = "A" + str.substring(1);
+          break;
+        case "C":
+          correctAnswer = "B" + str.substring(1);
+          break;
+        case "D":
+          correctAnswer = "C" + str.substring(1);
+          break;
+        case "E":
+          correctAnswer = "D" + str.substring(1);
+          break;
+        case "F":
+          correctAnswer = "E" + str.substring(1);
+          break;
+        case "G":
+          correctAnswer = "F" + str.substring(1);
+          break;
+      }
+  }
+}
+
+function checkAnswer(answer) {
+  //alter the button answer based on clef played
+  hideSharpsAndFlats();
+  hideLedgers();
+
+  document.getElementById("note").style.visibility = "hidden";
+
+  if (answer === correctAnswer) {
+    // Get the circle element
+
+    round++;
+    score++;
+    if (round > 9) {
+      doTheSummary();
+      return;
+    } else {
+      randomizeNote();
+      return;
+    }
+    //alert('Correct!');
+  } else {
+    //if (answer !== correctAnswer) {
+    document.getElementById("wrong").style.visibility = "visible";
+
+    setTimeout(clearMessage, 1000);
+    //document.getElementById("myReply").innerHTML = "Incorrect";
+
+    round++;
+
+    if (round > 9) {
+      document.getElementById("myGrid").style.visibility = "hidden";
+      doTheSummary();
+      return;
+    } else {
+      setTimeout(function () {
+        // Code to be executed after one second
+        randomizeNote();
+      }, 1000);
+    }
+  }
+}
+
+function clearMessage() {
+  //document.getElementById("myReply").innerHTML = "";
+  document.getElementById("wrong").style.visibility = "hidden";
+}
+
+function updateScore() {
+  // Increase the score by one
+  score++;
+  // Update the score on the page
+  //document.getElementById("score").innerHTML = score;
+}
+
+function updateRound() {
+  // Increase the number by one
+  round++;
+  //document.getElementById("round").innerHTML = round;
+  if (round > 9) {
+    hideLedgers();
+    //document.getElementById("note").style.visibility = "hidden";
+
+    doTheSummary();
+    //clearScore();
+    //clearRound();
+  }
+}
+
+function dockPoints() {
+  // Decrease the score by one
+  //score--;
+  // Update the score on the page
+  //document.getElementById("score").innerHTML = score;
+}
+
+function doTheSummary() {
+  document.getElementById("note").style.visibility = "hidden";
+  document.getElementById("wrong").style.visibility = "hidden";
+  document.getElementById("myGrid").style.visibility = "hidden";
+  hideSharpRow();
+  hideFlatRow();
+  var currentTime = new Date();
+  var elapsedTime = currentTime - startTime;
+  roundedTime = elapsedTime / 1000 / 10;
+  roundedTime = roundedTime - 0.25;
+  roundedTime = roundedTime.toFixed(2);
+  hideLedgers();
+  //next level unlocked?
+  var levelUp;
+  switch (masterDiff) {
+    case "Novice":
+      levelUp = 4;
+      break;
+    case "Competent":
+      levelUp = 2;
+      break;
+    case "Advanced":
+      levelUp = 1.5;
+      break;
+    case "Expert":
+      levelUp = 1;
+      break;
+  }
+
+  if (score === 10 && roundedTime < levelUp) {
+    alert(
+      roundedTime +
+        " average seconds per note and " +
+        score +
+        " out of 10. Next Level UNLOCKED."
+    );
+    var goingUp = masterLevel;
+    masterLevel = goingUp + 1;
+    if (masterLevel < 10) {
+      makeNewRound();
+      return;
+    } else {
+      alert("That's all the levels for now");
+      return;
+    }
+  }
+  //remain in same level
+  if (score === 10) {
+    alert(
+      roundedTime +
+        " average seconds per note and " +
+        score +
+        " out of 10. Keep at it!"
+    );
+    makeNewRound();
+    return;
+  }
+
+  alert(roundedTime + " average seconds per note and " + score + " out of 10");
+
+  if (masterLevel > 1) {
+    var goingDown;
+    goingDown = masterLevel;
+    masterLevel = goingDown - 1;
+    makeNewRound();
+    return;
+  }
+  makeNewRound();
+}
+
+function randomNumberFromRange(min, max) {
+  // Generate a random decimal number between the minimum and maximum values
+  var randomNumber = Math.random() * (max - min) + min;
+
+  // Round the number down to the nearest integer
+  return Math.floor(randomNumber);
+}
+
+function getTheRange() {
+
+
+  if (masterLevel === 1 || masterLevel === 5) {
+    tLow = 7;
+    tHigh = 18;
+    return;
+  }
+  if (masterLevel === 2) {
+    //high notes only
+    tLow = 2;
+    tHigh = 9;
+    return;
+  }
+  if (masterLevel === 3) {
+    //low notes only
+    tLow = 16;
+    tHigh = 23;
+    return;
+  }
+
+}
+
+function startCountdown() {
+  countdown(3);
+}
+
+function countdown(i) {
+  // Get a reference to the text element where the countdown will be displayed
+  let output = document.getElementById("MyThree");
+  document.getElementById("MyThree").style.visibility = "visible";
+  // Convert the value of i to a number
+  i = Number(i);
+  document.getElementById("MyThree").innerHTML = i;
+
+  // Check if we have reached the end of the countdown
+  if (i <= 0) {
+    document.getElementById("MyThree").style.visibility = "hidden";
+    //document.getElementById("note").style.visibility = "visible";
+    document.getElementById("myReply").innerHTML =
+      "LEVEL " + masterLevel + " " + masterDiff;
+
+    //output.innerText = "GO!";
+    //document.getElementById("MyThree").innerHTML = "GO";
+    return;
+  }
+
+  // Wait one second before continuing the countdown
+  setTimeout(() => {
+    // Set the text of the element to the current number
+    output.innerText = i;
+
+    countdown(i - 1);
+  }, 1000); // increased delay time to two seconds
+}
+
+function chooseKeySig() {
+  // Generate a random number between 1 and 7
+  let num1 = Math.floor(Math.random() * 7) + 1;
+
+  // Generate a random number between 1 and 2
+  let num2 = Math.floor(Math.random() * 2) + 1;
+  if (num2 === 1) {
+    num2 = "sharps";
+  }
+  if (num2 === 2) {
+    num2 = "flats";
+  }
+
+  // restrict if level 5 or 6
+
+  if (masterLevel === 5) {
+    num2 = "flats";
+  } else {
+    if (masterLevel === 6) {
+      num2 = "sharps";
+    }
+  }
+  // Return the two random numbers as an array
+  return [num1, num2];
+}
+
+function drawKeySig() {
+  //no key sig if first two levels
+  if (masterLevel < 5) {
+    return;
+  }
+
+  let [num1, num2] = chooseKeySig();
+
+  if (num2 === "sharps") {
+    switch (num1) {
+      case 1:
+        document.getElementById("F#").style.visibility = "visible";
+        if (correctAnswer === "F") {
+          correctAnswer = correctAnswer + "#";
+        }
+        break;
+      case 2:
+        document.getElementById("F#").style.visibility = "visible";
+        document.getElementById("C#").style.visibility = "visible";
+        if (correctAnswer === "F" || correctAnswer === "C") {
+          correctAnswer = correctAnswer + "#";
+        }
+
+        break;
+      case 3:
+        document.getElementById("F#").style.visibility = "visible";
+        document.getElementById("C#").style.visibility = "visible";
+        document.getElementById("G#").style.visibility = "visible";
+        if (
+          correctAnswer === "F" ||
+          correctAnswer === "C" ||
+          correctAnswer === "G"
+        ) {
+          correctAnswer = correctAnswer + "#";
+        }
+
+        break;
+      case 4:
+        document.getElementById("F#").style.visibility = "visible";
+        document.getElementById("C#").style.visibility = "visible";
+        document.getElementById("G#").style.visibility = "visible";
+        document.getElementById("D#").style.visibility = "visible";
+        if (
+          correctAnswer === "F" ||
+          correctAnswer === "C" ||
+          correctAnswer === "G" ||
+          correctAnswer === "D"
+        ) {
+          correctAnswer = correctAnswer + "#";
+        }
+        break;
+      case 5:
+        document.getElementById("F#").style.visibility = "visible";
+        document.getElementById("C#").style.visibility = "visible";
+        document.getElementById("G#").style.visibility = "visible";
+        document.getElementById("D#").style.visibility = "visible";
+        document.getElementById("A#").style.visibility = "visible";
+        if (
+          correctAnswer === "F" ||
+          correctAnswer === "C" ||
+          correctAnswer === "G" ||
+          correctAnswer === "D" ||
+          correctAnswer === "A"
+        ) {
+          correctAnswer = correctAnswer + "#";
+        }
+        break;
+      case 6:
+        document.getElementById("F#").style.visibility = "visible";
+        document.getElementById("C#").style.visibility = "visible";
+        document.getElementById("G#").style.visibility = "visible";
+        document.getElementById("D#").style.visibility = "visible";
+        document.getElementById("A#").style.visibility = "visible";
+        document.getElementById("E#").style.visibility = "visible";
+        if (
+          correctAnswer === "F" ||
+          correctAnswer === "C" ||
+          correctAnswer === "G" ||
+          correctAnswer === "D" ||
+          correctAnswer === "A" ||
+          correctAnswer === "E"
+        ) {
+          correctAnswer = correctAnswer + "#";
+        }
+        break;
+      case 7:
+        document.getElementById("F#").style.visibility = "visible";
+        document.getElementById("C#").style.visibility = "visible";
+        document.getElementById("G#").style.visibility = "visible";
+        document.getElementById("D#").style.visibility = "visible";
+        document.getElementById("A#").style.visibility = "visible";
+        document.getElementById("E#").style.visibility = "visible";
+        document.getElementById("B#").style.visibility = "visible";
+        if (
+          correctAnswer === "F" ||
+          correctAnswer === "C" ||
+          correctAnswer === "G" ||
+          correctAnswer === "D" ||
+          correctAnswer === "A" ||
+          correctAnswer === "E" ||
+          correctAnswer === "B"
+        ) {
+          correctAnswer = correctAnswer + "#";
+        }
+        break;
+    }
+  }
+  if (num2 === "flats") {
+    //alert(num1);
+    switch (num1) {
+      case 1:
+        document.getElementById("Bb").style.visibility = "visible";
+        if (correctAnswer === "B") {
+          correctAnswer = correctAnswer + "b";
+        }
+        break;
+      case 2:
+        document.getElementById("Bb").style.visibility = "visible";
+        document.getElementById("Eb").style.visibility = "visible";
+        if (correctAnswer === "B" || correctAnswer === "E") {
+          correctAnswer = correctAnswer + "b";
+        }
+
+        break;
+      case 3:
+        document.getElementById("Bb").style.visibility = "visible";
+        document.getElementById("Eb").style.visibility = "visible";
+        document.getElementById("Ab").style.visibility = "visible";
+        if (
+          correctAnswer === "B" ||
+          correctAnswer === "E" ||
+          correctAnswer === "A"
+        ) {
+          correctAnswer = correctAnswer + "b";
+        }
+
+        break;
+      case 4:
+        document.getElementById("Bb").style.visibility = "visible";
+        document.getElementById("Eb").style.visibility = "visible";
+        document.getElementById("Ab").style.visibility = "visible";
+        document.getElementById("Db").style.visibility = "visible";
+        if (
+          correctAnswer === "B" ||
+          correctAnswer === "E" ||
+          correctAnswer === "A" ||
+          correctAnswer === "D"
+        ) {
+          correctAnswer = correctAnswer + "b";
+        }
+        break;
+      case 5:
+        document.getElementById("Bb").style.visibility = "visible";
+        document.getElementById("Eb").style.visibility = "visible";
+        document.getElementById("Ab").style.visibility = "visible";
+        document.getElementById("Db").style.visibility = "visible";
+        document.getElementById("Gb").style.visibility = "visible";
+        if (
+          correctAnswer === "B" ||
+          correctAnswer === "E" ||
+          correctAnswer === "A" ||
+          correctAnswer === "D" ||
+          correctAnswer === "G"
+        ) {
+          correctAnswer = correctAnswer + "b";
+        }
+        break;
+      case 6:
+        document.getElementById("Bb").style.visibility = "visible";
+        document.getElementById("Eb").style.visibility = "visible";
+        document.getElementById("Ab").style.visibility = "visible";
+        document.getElementById("Db").style.visibility = "visible";
+        document.getElementById("Gb").style.visibility = "visible";
+        document.getElementById("Cb").style.visibility = "visible";
+        if (
+          correctAnswer === "B" ||
+          correctAnswer === "E" ||
+          correctAnswer === "A" ||
+          correctAnswer === "D" ||
+          correctAnswer === "G" ||
+          correctAnswer === "C"
+        ) {
+          correctAnswer = correctAnswer + "b";
+        }
+        break;
+      case 7:
+        document.getElementById("Bb").style.visibility = "visible";
+        document.getElementById("Eb").style.visibility = "visible";
+        document.getElementById("Ab").style.visibility = "visible";
+        document.getElementById("Db").style.visibility = "visible";
+        document.getElementById("Gb").style.visibility = "visible";
+        document.getElementById("Cb").style.visibility = "visible";
+        document.getElementById("Fb").style.visibility = "visible";
+        if (
+          correctAnswer === "B" ||
+          correctAnswer === "E" ||
+          correctAnswer === "A" ||
+          correctAnswer === "D" ||
+          correctAnswer === "G" ||
+          correctAnswer === "C" ||
+          correctAnswer === "F"
+        ) {
+          correctAnswer = correctAnswer + "b";
+        }
+        break;
+    }
+  }
+}
+
+//offset the flats for different clefs
+function adjustTextPositionFlats(tClass, tOffset) {
+  var elements = document.querySelectorAll("svg text"); // select all text elements in the SVG
+
+  for (var i = 0; i < elements.length; i++) {
+    var element = elements[i];
+    if (element.classList.contains(tClass)) {
+      // check if the element has the "flats" class
+      var y = element.getAttribute("y"); // get the y attribute for the current element
+      y = parseInt(y); // convert the y value to an integer (if necessary)
+      y += tOffset; // add offset to the y value
+      element.setAttribute("y", y); // update the y attribute of the element
+    }
+  }
+}
+
+function adjustTextPositionSharps(tClass, tOffset) {
+  var elements = document.querySelectorAll("svg text"); // select all text elements in the SVG
+
+  for (var i = 0; i < elements.length; i++) {
+    var element = elements[i];
+    if (element.classList.contains(tClass)) {
+      // check if the element has the "flats" class
+      var y = element.getAttribute("y"); // get the y attribute for the current element
+      y = parseInt(y); // convert the y value to an integer (if necessary)
+      y += tOffset; // add 40 to the y value
+      element.setAttribute("y", y); // update the y attribute of the element
+    }
+  }
+}
+
+function hideSharpsAndFlats() {
+  document.getElementById("F#").style.visibility = "hidden";
+  document.getElementById("C#").style.visibility = "hidden";
+  document.getElementById("G#").style.visibility = "hidden";
+  document.getElementById("D#").style.visibility = "hidden";
+  document.getElementById("A#").style.visibility = "hidden";
+  document.getElementById("E#").style.visibility = "hidden";
+  document.getElementById("B#").style.visibility = "hidden";
+
+  document.getElementById("Bb").style.visibility = "hidden";
+  document.getElementById("Eb").style.visibility = "hidden";
+  document.getElementById("Ab").style.visibility = "hidden";
+  document.getElementById("Db").style.visibility = "hidden";
+  document.getElementById("Gb").style.visibility = "hidden";
+  document.getElementById("Cb").style.visibility = "hidden";
+  document.getElementById("Fb").style.visibility = "hidden";
+}
+
+function pickMajorKey() {
+  hideElements(
+    ["F#", "C#", "G#", "D#", "A#", "E#", "B#"],
+    ["Bb", "Eb", "Ab", "Db", "Gb", "Cb", "Fb"]
+  );
+}
+
+function getRandomOrderedItems(items) {
+  // Generate a random number between 1 and the length of the list
+  const numItems = Math.floor(Math.random() * items.length) + 1;
+
+  // Return the first `num_items` items from the list
+  return items.slice(0, numItems);
+}
+
+function chooseAndGetRandomOrderedItems(string1, string2) {
+  //if 7 choose only flat keys
+  if (masterLevel === 7) {
+    var choosingFlats = string2;
+    // Choose one of the two strings at random
+    //const chosenString = Math.random() < 0.5 ? string1 : string2;
+    // Use the getRandomOrderedItems function to get a random number of items from the chosen string
+    return getRandomOrderedItems(choosingFlats);
+    return;
+  }
+  //if 8 choose only sharp keys
+  if (masterLevel === 8) {
+    var choosingSharps = string1;
+    // Choose one of the two strings at random
+    //const chosenString = Math.random() < 0.5 ? string1 : string2;
+    // Use the getRandomOrderedItems function to get a random number of items from the chosen string
+    return getRandomOrderedItems(choosingSharps);
+    return;
+  }
+
+  // Choose one of the two strings at random
+  const chosenString = Math.random() < 0.5 ? string1 : string2;
+
+  // Use the getRandomOrderedItems function to get a random number of items from the chosen string
+  return getRandomOrderedItems(chosenString);
+}
+
+function hideElements(string1, string2) {
+  // Choose one of the two strings at random and get a random number of items from it
+  const ids = chooseAndGetRandomOrderedItems(string1, string2);
+  //this is where i should check to see if we just had this string
+
+  if (ids.toString() === tPreviousKey.toString()) {
+    //alert('The arrays are identical');
+    //console.log("repeat key, doing over");
+    hideElements(string1, string2);
+    return;
+  } else {
+    //console.log("Former key: " + tPreviousKey);
+    tPreviousKey = ids;
+    //console.log('The arrays are not identical');
+  }
+
+  //console.log(ids,tPreviousKey);
+  nameTheKey(ids);
+  // Loop through the resulting items and hide the corresponding elements
+  for (const id of ids) {
+    const element = document.getElementById(id);
+    if (element) {
+      element.style.visibility = "visible";
+    }
+  }
+}
+
+function nameTheKey(ids) {
+  //console.log(ids);
+  //if F# is in the string, it must be a sharp key duh
+  var hasHash = ids.includes("F#");
+  switch (hasHash) {
+    case false:
+      //no F# therefore it's a flat key
+      var countFlats = ids.length;
+      determineFlatKey(countFlats);
+
+      break;
+
+    case true:
+      var countSharps = ids.length;
+      determineSharpKey(countSharps);
+      break;
+  }
+}
+
+function determineFlatKey(countFlats) {
+  switch (countFlats) {
+    case 1:
+      correctAnswer = "F";
+      break;
+
+    case 2:
+      correctAnswer = "Bb";
+      break;
+
+    case 3:
+      correctAnswer = "Eb";
+      break;
+
+    case 4:
+      correctAnswer = "Ab";
+      break;
+
+    case 5:
+      correctAnswer = "Db";
+      break;
+
+    case 6:
+      correctAnswer = "Gb";
+      break;
+
+    case 7:
+      correctAnswer = "Cb";
+      break;
+  }
+}
+
+function determineSharpKey(countSharps) {
+  switch (countSharps) {
+    case 1:
+      correctAnswer = "G";
+      break;
+
+    case 2:
+      correctAnswer = "D";
+      break;
+
+    case 3:
+      correctAnswer = "A";
+      break;
+
+    case 4:
+      correctAnswer = "E";
+      break;
+
+    case 5:
+      correctAnswer = "B";
+      break;
+
+    case 6:
+      correctAnswer = "F#";
+      break;
+
+    case 7:
+      correctAnswer = "C#";
+      break;
+  }
+}
+
+</script>
