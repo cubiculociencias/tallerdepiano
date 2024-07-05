@@ -618,6 +618,9 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
 </section>
 
 
+
+
+
   <section class="mainSection" style="display: none;">
       
  <div ng-app="ionicApp">
@@ -642,7 +645,7 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
         <ion-content>
           <ul class="list">
             <a href="#/menu/tab/profile" class="item" ng-class="(activeMenuClr=='profile')?'menuSelectedColor':''" ng-click="activeMenuClr = 'profile'" menu-toggle="right" ><i class="ri-home-2-fill"></i>&nbsp&nbspInicio</a>
-               <a href="#/menu/lessons" class="item" ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" ng-click="activeMenuClr = 'lessons'" menu-toggle="right"><i class="ri-presentation-fill"></i>&nbsp&nbspLecciones</a>
+               <a href="#/menu/agenda" class="item" ng-class="(activeMenuClr=='agenda')?'menuSelectedColor':''" ng-click="activeMenuClr = 'agenda'" menu-toggle="right"><i class="ri-calendar-schedule-fill"></i>&nbsp&nbspAgenda</a>
                        <a href="#/menu/reel" class="item" ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" ng-click="activeMenuClr = 'reel'"  menu-toggle="right"><i class="ri-award-fill"></i>&nbsp&nbspReel de logros</a>
                            <a href="#/menu/library" class="item" ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" ng-click="activeMenuClr = 'library'" menu-toggle="right"><i class="ri-git-repository-fill"></i>&nbsp&nbspBiblioteca</a>
                  <a href="#/menu/resources" class="item" ng-class="(activeMenuClr=='resources')?'menuSelectedColor':''" ng-click="activeMenuClr = 'resources'" menu-toggle="right"><i class="ri-dashboard-fill"></i>&nbsp&nbspRecursos</a>
@@ -673,12 +676,13 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
       <ion-tab title="Tutor" icon="ion-chatboxes" href="#/menu/tab/chat">
         <ion-nav-view name="chat-tab"></ion-nav-view>
       </ion-tab>
-     <ion-tab title="Perfil" icon="ion-ios-contact-outline" href="#/menu/tab/profile">
-        <ion-nav-view name="profile-tab"></ion-nav-view>
-      </ion-tab>     
-       <ion-tab title="Agenda" icon="ion-android-calendar" href="#/menu/tab/agenda" >
-        <ion-nav-view name="agenda-tab"></ion-nav-view>
+       
+       <ion-tab title="Lecciones" icon="fa fa-graduation-cap" href="#/menu/tab/lessons" >
+        <ion-nav-view name="lessons-tab"></ion-nav-view>
       </ion-tab>
+    <ion-tab title="Perfil" icon="ion-ios-contact-outline" href="#/menu/tab/profile">
+        <ion-nav-view name="profile-tab"></ion-nav-view>
+      </ion-tab>   
     </ion-tabs>
 
   </script>
@@ -693,15 +697,17 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
     </ion-view>
   </script>
 
-  <script id="agenda.html" type="text/ng-template">
-    <ion-view title="Agenda">
-      <ion-content>
+     <script id="lessons.html" type="text/ng-template">
+    <ion-view title="Actividades">
+
+     <ion-content>
        
-       <div class="iframe-container"><iframe id="agendaFrame" src="https://cubiculociencias.github.io/tallerdepiano/calendar" frameborder="0" allowfullscreen></iframe></div>
-    
+ <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/lessons" frameborder="0" allowfullscreen ></iframe></div> 
+
       </ion-content>
+
     </ion-view>
-  </script>
+  </script>   
     
     <script id="profile.html" type="text/ng-template">
     <ion-view title="Perfil">
@@ -715,8 +721,12 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
 
  
     
-     <script id="lessons.html" type="text/ng-template">
-    <ion-view title="Actividades">
+
+    
+ 
+    
+  <script id="agenda.html" type="text/ng-template">
+    <ion-view title="Agenda">
 
       <ion-nav-bar class="bar-calm">
         <ion-nav-buttons side="right">
@@ -724,73 +734,13 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
         </ion-nav-buttons>      
     </ion-nav-bar>
 
-     <ion-content>
+      <ion-content>
        
-    <div class="list">
-        
-             <a class="card card-3" href="#/menu/nivelprincipiante" style="text-decoration: none; ">
-          <h3>Nivel Principiante</h3>
-          </a>
-        
+       <div class="iframe-container"><iframe id="agendaFrame" src="https://cubiculociencias.github.io/tallerdepiano/calendar" frameborder="0" allowfullscreen></iframe></div>
     
-    <a class="card card-1" href="#/menu/nivelintermedio" style="text-decoration: none; ">
-            <h3>Nivel Intermedio</h3>
-          </a>
-    
-     <a class="card card-2" href="#/menu/nivelavanzado" style="text-decoration: none; ">
-            <h3>Nivel Avanzado</h3>
-          </a>
-
-    </div> 
-
-      </ion-content>
-
-    </ion-view>
-  </script>   
-    
-    
-     <script id="nivelprincipiante.html" type="text/ng-template">
-     <ion-view>
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
-            <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/lessons1" frameborder="0" allowfullscreen></iframe></div>
-       
       </ion-content>
     </ion-view>
   </script>
-    
-    
-    
-     <script id="nivelintermedio.html" type="text/ng-template">
-     <ion-view>
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
-            <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/lessons2" frameborder="0" allowfullscreen></iframe></div>
-       
-      </ion-content>
-    </ion-view>
-  </script>
-    
-    
-    
-     <script id="nivelavanzado.html" type="text/ng-template">   
-       <ion-view>
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
-              <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/lessons3" frameborder="0" allowfullscreen></iframe></div>
-       
-      </ion-content>
-    </ion-view>
-  </script>
-
-    
-
       
        <script id="reel.html" type="text/ng-template">
     <ion-view title="Reel de logros">
@@ -1183,14 +1133,14 @@ app
         }
       }
     })
-    .state('menu.tabs.agenda', {
-      url: "/agenda",
+    .state('menu.tabs.lessons', {
+      url: "/lessons",
       views: {
-        'agenda-tab': {
-          templateUrl: "agenda.html"
+        'lessons-tab': {
+          templateUrl: "lessons.html"
         }
       }
-    })
+    }) 
   .state('menu.tabs.profile', {
       url: "/profile",
       views: {
@@ -1201,39 +1151,14 @@ app
     })
 
 
-    .state('menu.lessons', {
-      url: "/lessons",
+     .state('menu.agenda', {
+      url: "/agenda",
       views: {
         'menuContent': {
-          templateUrl: "lessons.html",
-          controller: 'NewsListController'
+          templateUrl: "agenda.html"
         }
       }
     }) 
-   .state('menu.nivelprincipiante', {
-      url: "/nivelprincipiante",
-      views: {
-        'menuContent': {
-          templateUrl: "nivelprincipiante.html"
-        }
-      }
-    })
-  .state('menu.nivelintermedio', {
-      url: "/nivelintermedio",
-      views: {
-        'menuContent': {
-          templateUrl: "nivelintermedio.html"
-        }
-      }
-    })
-  .state('menu.nivelavanzado', {
-      url: "/nivelavanzado",
-      views: {
-        'menuContent': {
-          templateUrl: "nivelavanzado.html"
-        }
-      }
-    })
  .state('menu.reel', {
       url: "/reel",
       views: {
@@ -1368,25 +1293,7 @@ app
         $('.preloader').css({ 'display': 'none' });
       });
   };
-
-
  }])
-
-
-.controller('NewsListController', function ($scope, $location) {
-      
-      $scope.news = [
- { id: 1, name: 'Nivel Principiante', material: "Material de trabajo preparatorio" },
-   { id: 2, name: 'Nivel Intermedio', material: "Material de nivel 1" },
-   { id: 3, name: 'Nivel Avanzado', material: "Material de nivel 2" }
-        ];
-      
-      $scope.onSelectNews = function(n) {
-        //$state.go('menu.detail', { NewsId: n.id });
-        $location.url('/menu/detail/' + n.name);
-      }
-      
-    })
 
        .controller('booksCtrl1', ['$http', '$scope', '$sce', function($http, $scope, $sce){
     $scope.trustAsResourceUrl = function(url) {
