@@ -1,0 +1,3687 @@
+
+<head>
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
+<link rel="icon" href="https://lh3.googleusercontent.com/d/1L1kLwLAt2KksPG2tN4tT1bRle4RqveWo" type="image/x-icon">
+    <title>Mozart Studio | Academia de Piano</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.1/angular-materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css"></link>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.7.0/fonts/remixicon.css" rel="stylesheet"/>
+</head>
+
+
+<style>
+  .collection {
+  border: none;
+}
+
+.levelp a {
+  color: #F44336 !important;
+}
+
+.levelp i {
+  color: #F44336 !important;
+}
+
+.level1 a {
+  color: #9024dc !important;
+}
+
+.level1 i {
+  color: #9024dc;
+}
+
+.level2 a {
+  color: #1894cc !important;
+}
+
+.level2 i {
+  color: #1894cc;
+}
+
+
+.level3 a {
+  color: #489454 !important;
+}
+
+.level3 i {
+  color: #489454;
+}
+
+.level4 a {
+  color: #f0ac14 !important;
+}
+
+.level4 i {
+  color: #f0ac14;
+}
+
+.level5 a {
+  color: #485cb4 !important;
+}
+
+.level5 i {
+  color: #485cb4;
+}
+
+.level6 a {
+  color: #08949c !important;
+}
+
+.level6 i {
+  color: #08949c;
+}
+
+.level7 a {
+  color: #e09c74 !important;
+}
+
+.level7 i {
+  color: #e09c74;
+}
+
+
+
+.indicator {
+  background-color: #9e9e9e !important;
+}
+
+.modal-content {
+  padding: 24px !important;
+  overflow: visible !important;
+  height: 550px !important;
+}
+
+.linehorizontal{
+  border-bottom: 1px solid lightgray; 
+  margin-bottom: 15px;
+  margin-left: -30px;
+  width: 125%;
+}
+
+
+.collapsible-header{
+  margin-left: -35px;
+   margin-right: -25px;
+}
+
+.collapsible {
+    
+    
+    transition: max-height 0.3s ease-out; /* Define la transición de altura máxima */
+}
+
+.text-inside{
+  text-transform: none;
+  cursor: pointer;
+}
+
+.inside{
+  margin-top: 15px;
+  transform: translate(-3px, 5px);
+  cursor: pointer;
+}
+
+
+
+
+
+
+  #drive{
+    height: 400px;
+
+  }
+  
+  .modal-container {
+    position: fixed;
+    display: table;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    transform: scale(0);
+    z-index: 1;
+  }
+
+  .modal-container.four {
+    z-index: 0;
+    transform: scale(1);
+  }
+
+  .modal-container.four .modal-background .modal-doc {
+    animation: blowUpModal 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+  .modal-container.four + body {
+    z-index: 1;
+    animation: blowUpContent 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+  .modal-container.four.out .modal-background .modal-doc {
+    animation: blowUpModalTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+  .modal-container.four.out + body {
+    animation: blowUpContentTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+
+  .modal-container .modal-background {
+    display: table-cell;
+    background: rgba(0, 0, 0, 0.8);
+    text-align: center;
+    vertical-align: middle;
+  }
+  .modal-container .modal-background .modal-doc {
+    padding: 50px;
+    display: inline-block;
+    border-radius: 3px;
+    font-weight: 300;
+    position: relative;
+  }
+
+.close-modal {
+    display: block;
+    position: absolute;
+  top: 0;
+    right: 0;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+}
+
+  @keyframes blowUpContent {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    99.9% {
+      transform: scale(2);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+  @keyframes blowUpContentTwo {
+    0% {
+      transform: scale(2);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes blowUpModal {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes blowUpModalTwo {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(0);
+      opacity: 0;
+    }
+  }
+  
+  
+
+@media screen and (min-width:576px){
+   #drive{
+    height: 500px;
+    width: 450px;
+ margin-top: -30px;
+  }
+   
+}
+
+
+@media screen and (max-width:575px) {
+     #drive{
+    height: 420px;
+    width: 120%;
+    margin-left: -25px;
+    margin-top: -40px;   
+  }
+}
+  
+
+
+
+.video-modal,
+.video-modal .overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 3000;
+}
+.video-modal {
+  overflow: hidden;
+  position: fixed;
+  opacity: 0.0;
+
+  -webkit-transform: translate(500%,0%);
+  transform: translate(500%,0%);
+
+  -webkit-transition: -webkit-transform 0s linear 0s;
+  transition: transform 0s linear 0s;
+
+
+  /* using flexbox for vertical centering */
+
+  /* Flexbox display */
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+
+  /* Vertical alignment */
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+.video-modal .overlay {
+  z-index: 0;
+  background: rgba(118,181,197,0.82);
+  opacity: 0.0;
+
+  -webkit-transition: opacity 0.2s ease-out 0.05s;
+  transition: opacity 0.2s ease-out 0.05s;
+}
+
+
+.video-modal-content {
+  position: relative;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  z-index: 1;
+  
+  margin: 0 auto;
+
+  overflow-y: visible;
+
+  background: #000;
+  
+  width: calc(100% - 12em);
+  height: 0;
+  padding-top: calc((100% - 12em) * 0.5625); /* 16:9 calc */
+}
+
+/* Scaling to fit within the current Viewport size:
+   When viewport aspect ratio is greater than 16:9
+   work off the height instead of the width for calc */
+ @media (min-aspect-ratio: 16/9) {
+  .video-modal-content {
+    width: 0;
+    height: calc(100vh - 10em);
+    padding-top: 0;
+    padding-left: calc((100vh - 10em) * 1.7778); /* 16:9 calc */
+  }
+}
+
+/* Mobile Layout Tweaks - side margins reduced */
+@media (max-width: 640px) {
+  .video-modal-content {
+    width: calc(100% - 1em);
+    padding-top: calc((100% - 1em) * 0.5625); /* 16:9 calc */
+  }
+}
+
+/* modal close button */
+.close-video-modal {
+  display: block;
+    position: absolute;
+    left: 0;
+    top: -40px;
+
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* set the iframe element to stretch to fit its parent element */
+iframe#youtube {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+
+  background: #000;
+  box-shadow: 0px 2px 16px rgba(0,0,0,0.5);
+}
+
+
+iframe#quiz {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+
+  background: #000;
+  box-shadow: 0px 2px 16px rgba(0,0,0,0.5);
+}
+
+/* show the modal: 
+   add class to the body to reveal */
+.show-video-modal .video-modal {
+  opacity: 1.0;
+
+  transform: translate(0%,0%);
+  -webkit-transform: translate(0%,0%);
+}
+.show-video-modal .video-modal .overlay {
+  opacity: 1.0;
+}
+.show-video-modal .video-modal-content {
+  transform: translate(0%,0%);
+  -webkit-transform: translate(0%,0%);
+}
+</style>
+
+
+<body ng-app="materializeApp" >
+
+  <!-- End Header -->
+  <!-- Tabs Nav Start -->
+  <div class="row">
+    <div class="col s12" >
+      <ul class="tabs"> 
+        <li class="tab col s9 levelp"><a href="#test1"><span>Preparatorio</span></a></li>
+        <li class="tab col s9 level1" ><a href="#test2"><span>&nbsp&nbsp&nbsp&nbsp Grado 1 &nbsp&nbsp&nbsp&nbsp</span></a></li>
+        <li class="tab col s9 level2" ><a href="#test3"><span>&nbsp&nbsp&nbsp&nbsp Grado 2 &nbsp&nbsp&nbsp&nbsp</span></a></li>
+          <li class="tab col s9 level3"><a href="#test4"><span>&nbsp&nbsp&nbsp&nbsp Grado 3 &nbsp&nbsp&nbsp&nbsp</span></a></li>
+    <li class="tab col s9 level4"><a href="#test5"><span>&nbsp&nbsp&nbsp&nbsp Grado 4 &nbsp&nbsp&nbsp&nbsp</span></a></li>
+      <li class="tab col s9 level5"><a href="#test6"><span>&nbsp&nbsp&nbsp&nbsp Grado 5 &nbsp&nbsp&nbsp&nbsp</span></a></li>
+        <li class="tab col s9 level6"><a href="#test7"><span>&nbsp&nbsp&nbsp&nbsp Grado 6 &nbsp&nbsp&nbsp&nbsp</span></a></li>
+        <li class="tab col s9 level7"><a href="#test8"><span>&nbsp&nbsp&nbsp&nbsp Grado 7 </span></a></li>
+      </ul>
+    </div>
+    <!-- Tabs Nav End -->
+
+    
+    
+    <div id="test1" class="col s12" ng-controller="levelP">
+  <!-- CSS Course Start -->
+  <ul class="collection with-header levelp" ng-repeat="data in allData">
+    <li class="collection-header">
+      <h4 class="grey-text">{{data.block}}</h4>
+    </li>
+    <li class="collection-item" ng-repeat="lesson in data.lessons">
+      <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton"> 
+        <div>{{lesson.name}}<span class="secondary-content"><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id == num+lesson.material.length-1">schedule</i><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id > num+lesson.material.length-1">lock</i></span></div>
+      </a> 
+      
+      <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
+     <div class="linehorizontal" ></div>
+        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lesson.material[0].id <= num">
+          <div class="collapsible-header">
+      <i class="material-icons" ng-if="material.id < num">{{material.icon}}</i>
+<i class="material-icons" ng-if="material.id >= num">pending_actions</i>
+            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="material.id < num">check</i></span></div>
+          <div class="collapsible-body">
+            
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+          <li ng-repeat="activity in material.activity" class="tab col">
+    <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+<span class="text-inside js-trigger-video-modal"  onclick="toggle_video_modal(this)" data-youtube-id="{{activity.url}}" ng-if="activity.media == 'video'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+  </li>
+      </ul>
+    </div>
+     </div>
+          </div>
+        </li>
+      </ul>
+    </li>
+  </ul>
+      
+    
+        
+</div>
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<div id="test2" class="col s12" ng-controller="level1">
+    <!-- CSS Course Start -->
+      <ul class="collection with-header level1" ng-repeat="data in allData">
+    <li class="collection-header">
+      <h4 class="grey-text">{{data.block}}</h4>
+    </li>
+    <li class="collection-item" ng-repeat="lesson in data.lessons">
+      <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
+        <div>{{lesson.name}}<span class="secondary-content"><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id == num+lesson.material.length-1">schedule</i><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id > num+lesson.material.length-1">lock</i></span></div>
+      </a>
+      
+      <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
+     <div class="linehorizontal" ></div>
+        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lesson.material[0].id <= num">
+          <div class="collapsible-header">
+      <i class="material-icons" ng-if="material.id < num">{{material.icon}}</i>
+<i class="material-icons" ng-if="material.id >= num">pending_actions</i>
+            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="material.id < num">check</i></span></div>
+          <div class="collapsible-body">
+            
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+          <li ng-repeat="activity in material.activity" class="tab col">
+    <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+<span class="text-inside js-trigger-video-modal"  onclick="toggle_video_modal(this)" data-youtube-id="{{activity.url}}" ng-if="activity.media == 'video'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+  </li>
+      </ul>
+    </div>
+     </div>
+          </div>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+
+
+
+
+    <div id="test3" class="col s12" ng-controller="level2">
+      <!-- JAVASCRIPT Course Start -->
+      <ul class="collection with-header level2" ng-repeat="data in allData">
+    <li class="collection-header">
+      <h4 class="grey-text">{{data.block}}</h4>
+    </li>
+    <li class="collection-item" ng-repeat="lesson in data.lessons">
+      <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
+        <div>{{lesson.name}}<span class="secondary-content"><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id == num+lesson.material.length-1">schedule</i><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id > num+lesson.material.length-1">lock</i></span></div>
+      </a>
+      
+      <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
+     <div class="linehorizontal" ></div>
+        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lesson.material[0].id <= num">
+          <div class="collapsible-header">
+      <i class="material-icons" ng-if="material.id < num">{{material.icon}}</i>
+<i class="material-icons" ng-if="material.id >= num">pending_actions</i>
+            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="material.id < num">check</i></span></div>
+          <div class="collapsible-body">
+            
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+          <li ng-repeat="activity in material.activity" class="tab col">
+    <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+<span class="text-inside js-trigger-video-modal"  onclick="toggle_video_modal(this)" data-youtube-id="{{activity.url}}" ng-if="activity.media == 'video'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+  </li>
+      </ul>
+    </div>
+     </div>
+          </div>
+        </li>
+      </ul>
+    </li>
+  </ul>
+      <!-- JAVASCRIPT Course End -->
+    </div>
+    
+    
+    
+    
+    <div id="test4" class="col s12" ng-controller="level3">
+      <ul class="collection with-header level3" ng-repeat="data in allData">
+    <li class="collection-header">
+      <h4 class="grey-text">{{data.block}}</h4>
+    </li>
+    <li class="collection-item" ng-repeat="lesson in data.lessons">
+      <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
+        <div>{{lesson.name}}<span class="secondary-content"><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id == num+lesson.material.length-1">schedule</i><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id > num+lesson.material.length-1">lock</i></span></div>
+      </a>
+      
+      <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
+     <div class="linehorizontal" ></div>
+        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lesson.material[0].id <= num">
+          <div class="collapsible-header">
+      <i class="material-icons" ng-if="material.id < num">{{material.icon}}</i>
+<i class="material-icons" ng-if="material.id >= num">pending_actions</i>
+            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="material.id < num">check</i></span></div>
+          <div class="collapsible-body">
+            
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+          <li ng-repeat="activity in material.activity" class="tab col">
+    <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+<span class="text-inside js-trigger-video-modal"  onclick="toggle_video_modal(this)" data-youtube-id="{{activity.url}}" ng-if="activity.media == 'video'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+  </li>
+      </ul>
+    </div>
+     </div>
+          </div>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+
+
+<div id="test5" class="col s12" ng-controller="level4">
+      <ul class="collection with-header level4" ng-repeat="data in allData">
+    <li class="collection-header">
+      <h4 class="grey-text">{{data.block}}</h4>
+    </li>
+    <li class="collection-item" ng-repeat="lesson in data.lessons">
+      <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
+        <div>{{lesson.name}}<span class="secondary-content"><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id == num+lesson.material.length-1">schedule</i><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id > num+lesson.material.length-1">lock</i></span></div>
+      </a>
+      
+      <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
+     <div class="linehorizontal" ></div>
+        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lesson.material[0].id <= num">
+          <div class="collapsible-header">
+      <i class="material-icons" ng-if="material.id < num">{{material.icon}}</i>
+<i class="material-icons" ng-if="material.id >= num">pending_actions</i>
+            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="material.id < num">check</i></span></div>
+          <div class="collapsible-body">
+            
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+          <li ng-repeat="activity in material.activity" class="tab col">
+    <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+<span class="text-inside js-trigger-video-modal"  onclick="toggle_video_modal(this)" data-youtube-id="{{activity.url}}" ng-if="activity.media == 'video'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+  </li>
+      </ul>
+    </div>
+     </div>
+          </div>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+
+<div id="test6" class="col s12" ng-controller="level5">
+      <ul class="collection with-header level5" ng-repeat="data in allData">
+    <li class="collection-header">
+      <h4 class="grey-text">{{data.block}}</h4>
+    </li>
+    <li class="collection-item" ng-repeat="lesson in data.lessons">
+      <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
+        <div>{{lesson.name}}<span class="secondary-content"><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id == num+lesson.material.length-1">schedule</i><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id > num+lesson.material.length-1">lock</i></span></div>
+      </a>
+      
+      <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
+     <div class="linehorizontal" ></div>
+        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lesson.material[0].id <= num">
+          <div class="collapsible-header">
+      <i class="material-icons" ng-if="material.id < num">{{material.icon}}</i>
+<i class="material-icons" ng-if="material.id >= num">pending_actions</i>
+            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="material.id < num">check</i></span></div>
+          <div class="collapsible-body">
+            
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+          <li ng-repeat="activity in material.activity" class="tab col">
+    <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+<span class="text-inside js-trigger-video-modal"  onclick="toggle_video_modal(this)" data-youtube-id="{{activity.url}}" ng-if="activity.media == 'video'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+  </li>
+      </ul>
+    </div>
+     </div>
+          </div>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+
+
+<div id="test7" class="col s12" ng-controller="level6">
+      <ul class="collection with-header level6" ng-repeat="data in allData">
+    <li class="collection-header">
+      <h4 class="grey-text">{{data.block}}</h4>
+    </li>
+    <li class="collection-item" ng-repeat="lesson in data.lessons">
+      <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
+        <div>{{lesson.name}}<span class="secondary-content"><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id == num+lesson.material.length-1">schedule</i><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id > num+lesson.material.length-1">lock</i></span></div>
+      </a>
+      
+      <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
+     <div class="linehorizontal" ></div>
+        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lesson.material[0].id <= num">
+          <div class="collapsible-header">
+      <i class="material-icons" ng-if="material.id < num">{{material.icon}}</i>
+<i class="material-icons" ng-if="material.id >= num">pending_actions</i>
+            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="material.id < num">check</i></span></div>
+          <div class="collapsible-body">
+            
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+          <li ng-repeat="activity in material.activity" class="tab col">
+    <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+<span class="text-inside js-trigger-video-modal"  onclick="toggle_video_modal(this)" data-youtube-id="{{activity.url}}" ng-if="activity.media == 'video'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+  </li>
+      </ul>
+    </div>
+     </div>
+          </div>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+
+
+<div id="test8" class="col s12" ng-controller="level7">
+      <ul class="collection with-header level7" ng-repeat="data in allData">
+    <li class="collection-header">
+      <h4 class="grey-text">{{data.block}}</h4>
+    </li>
+    <li class="collection-item" ng-repeat="lesson in data.lessons">
+      <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
+        <div>{{lesson.name}}<span class="secondary-content"><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id == num+lesson.material.length-1">schedule</i><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id > num+lesson.material.length-1">lock</i></span></div>
+      </a>
+      
+      <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
+     <div class="linehorizontal" ></div>
+        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lesson.material[0].id <= num">
+          <div class="collapsible-header">
+      <i class="material-icons" ng-if="material.id < num">{{material.icon}}</i>
+<i class="material-icons" ng-if="material.id >= num">pending_actions</i>
+            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="material.id < num">check</i></span></div>
+          <div class="collapsible-body">
+            
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+          <li ng-repeat="activity in material.activity" class="tab col">
+    <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+<span class="text-inside js-trigger-video-modal"  onclick="toggle_video_modal(this)" data-youtube-id="{{activity.url}}" ng-if="activity.media == 'video'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+  </li>
+      </ul>
+    </div>
+     </div>
+          </div>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+
+
+
+   
+   
+    
+  </div> 
+  
+  
+  
+   <div class="video-modal">
+    <div id="video-modal-content" class="video-modal-content">
+       <iframe 
+          id="youtube" 
+          width="100%" 
+          height="100%" 
+          frameborder="0" 
+          allow="autoplay" 
+          allowfullscreen 
+          src=
+        ></iframe>
+
+        <a 
+          href="#" 
+          class="close-video-modal" 
+        >
+          <!-- X close video icon -->
+          <svg 
+            version="1.1" 
+            xmlns="http://www.w3.org/2000/svg" 
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0"
+            y="0"
+            viewBox="0 0 32 32" 
+            style="enable-background:new 0 0 32 32;" 
+            xml:space="preserve" 
+            width="24" 
+            height="24" 
+          >
+            <g id="icon-x-close">
+                <path fill="#ffffff" d="M30.3448276,31.4576271 C29.9059965,31.4572473 29.4852797,31.2855701 29.1751724,30.980339 L0.485517241,2.77694915 C-0.122171278,2.13584324 -0.104240278,1.13679247 0.52607603,0.517159487 C1.15639234,-0.102473494 2.17266813,-0.120100579 2.82482759,0.477288136 L31.5144828,28.680678 C31.9872448,29.1460053 32.1285698,29.8453523 31.8726333,30.4529866 C31.6166968,31.0606209 31.0138299,31.4570487 30.3448276,31.4576271 Z" id="Shape"></path>
+                <path fill="#ffffff" d="M1.65517241,31.4576271 C0.986170142,31.4570487 0.383303157,31.0606209 0.127366673,30.4529866 C-0.12856981,29.8453523 0.0127551942,29.1460053 0.485517241,28.680678 L29.1751724,0.477288136 C29.8273319,-0.120100579 30.8436077,-0.102473494 31.473924,0.517159487 C32.1042403,1.13679247 32.1221713,2.13584324 31.5144828,2.77694915 L2.82482759,30.980339 C2.51472031,31.2855701 2.09400353,31.4572473 1.65517241,31.4576271 Z" id="Shape"></path>
+            </g>
+          </svg>
+        </a>
+    </div>
+    <div class="overlay"></div>
+</div>
+  
+
+<div id="modalPDF" class="modal-container">
+        <div class="modal-background">
+            <div class="modal-doc">
+     <iframe id="drive" src="https://drive.google.com/file/d/1Dom_0ZjNoslBKZpUa3IUDN8XMzcxZ1Jd/preview" frameborder="0"></iframe>     
+                <a 
+          href="#" 
+          class="close-modal" onclick="closemodal()" 
+        >
+          <!-- X close video icon -->
+          <svg 
+            version="1.1" 
+            xmlns="http://www.w3.org/2000/svg" 
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0"
+            y="0"
+            viewBox="0 0 32 32" 
+            style="enable-background:new 0 0 32 32;" 
+            xml:space="preserve" 
+            width="24" 
+            height="24" 
+          >
+                <path fill="#ffffff" d="M30.3448276,31.4576271 C29.9059965,31.4572473 29.4852797,31.2855701 29.1751724,30.980339 L0.485517241,2.77694915 C-0.122171278,2.13584324 -0.104240278,1.13679247 0.52607603,0.517159487 C1.15639234,-0.102473494 2.17266813,-0.120100579 2.82482759,0.477288136 L31.5144828,28.680678 C31.9872448,29.1460053 32.1285698,29.8453523 31.8726333,30.4529866 C31.6166968,31.0606209 31.0138299,31.4570487 30.3448276,31.4576271 Z" id="Shape"></path>
+                <path fill="#ffffff" d="M1.65517241,31.4576271 C0.986170142,31.4570487 0.383303157,31.0606209 0.127366673,30.4529866 C-0.12856981,29.8453523 0.0127551942,29.1460053 0.485517241,28.680678 L29.1751724,0.477288136 C29.8273319,-0.120100579 30.8436077,-0.102473494 31.473924,0.517159487 C32.1042403,1.13679247 32.1221713,2.13584324 31.5144828,2.77694915 L2.82482759,30.980339 C2.51472031,31.2855701 2.09400353,31.4572473 1.65517241,31.4576271 Z" id="Shape"></path>
+          </svg>
+        </a>
+              
+                
+            
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+
+<script>
+  $(document).ready(function() {
+  $('ul.tabs').tabs();
+});
+
+
+
+
+  //Angular Materialize
+var app = angular.module('materializeApp', ['ui.materialize']);
+app.factory('SharedState', function() {
+  return {
+    num: 3 
+  };
+});
+
+
+  app
+.controller('levelP', ["$scope", "SharedState", function($scope, SharedState) {
+     $scope.num = SharedState.num
+    $scope.allData = [
+     {
+          block: "Bloque 1",
+          lessons: [
+            {
+              name: 'Lección 1: Introducción',
+              material:[{
+                id: 1,
+                title: 'Ritmo y métrica',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/qh-4OyTcuJw'
+                  },{
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d/1FI1eaRN-JowdgRRFEF_peZktBd-VY3Ke/preview'
+                  }
+                ]
+              },
+              {
+                id: 2,
+                title: 'Posición de Do',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/3wn33KNLy5M'
+                  },{
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d/1WqVnSwujAS7Rps02XNfqueu7PtiNVG7D/preview'
+                  },{
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d/1s5bZw8XCq5cHPcDgOniZSqwpmc6xcKYG/preview'
+                  }
+                ]
+              },
+              {
+                id: 3,
+                title: 'Pieza: Ode to Joy - var 2',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/bVWXlV8Neic'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d/1frOQ8O1QNfFf8GUKFYH2-lEYvWhSG6RS/preview'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+              name: 'Lección 2: Grand Staff',
+              material:[
+              {
+                id: 4,
+                title: 'El Pentagrama y el Grand Staff',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  },{
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 5,
+                title: 'Pieza: Ode to Joy - var 3',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ]
+          },
+
+          {
+              name: 'Lección 3: Intervalos',
+              material:[{
+                id: 6,
+                title: 'Intervalos de 2da y 3era',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },
+                  {
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  },
+                  {
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 7,
+                title: 'Pieza: Mountain Climbing',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ]
+          },
+
+          {
+              name: 'Lección 4: Intervalos (2da parte)',
+              material:[{
+                id: 8,
+                title: 'Intervalos de 4ta y 5ta',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },
+                  {
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  },
+                  {
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 9,
+                title: 'Pieza: Jingle Bells',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ]
+          }
+
+        ]
+      },
+
+
+//BLOQUE 2
+     {
+          block: "Bloque 2",
+          lessons: [
+            {
+              name: 'Lección 5: Frases',
+              material:[{
+                id: 10,
+                title: 'Construcción de frases',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },
+                  {
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  },
+
+                  {
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 11,
+                title: 'Pieza: Run Away River',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+              name: 'Lección 6: Acordes',
+              material:[{
+                id: 12,
+                title: 'Construcción de acordes',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 13,
+                title: 'Acorde C y G7',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },
+                  {
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  },
+                  {
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 14,
+                title: 'Pieza: Trumpet Voluntary',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/k7ZlQezPHPk'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ]
+          },
+            {
+              name: 'Lección 7: Corcheas y Staccato',
+              material:[{
+                id: 15,
+                title: 'Definición',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Corcheas',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },
+                   {
+                  icon: 'smart_display',
+                  type: 'Staccato',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },
+                  {
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                 
+                ]
+              },
+              {
+                id: 16,
+                title: 'Ejercicios',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Explicación adicional',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },
+                  {
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 17,
+                title: 'Pieza: Old German Dance',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+              name: 'Lección 8: Ejercicios de coordinación',
+              material:[{
+                id: 18,
+                title: 'Transposición',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },
+                  {
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                 
+                ]
+              },
+              {
+                id: 19,
+                title: 'Pieza: Allegro',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ]
+          }
+
+        ]
+      },
+
+//BLOQUE 3
+       {
+          block: "Bloque 3",
+          lessons: [
+            {
+              name: 'Lección 9: Marcas de expresión',
+              material:[{
+                id: 20,
+                title: 'Posición de Do II',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },
+                  {
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 21,
+                title: 'Marcas de Tempo y Dinámicas',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },
+                   {
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 22,
+                title: 'Pieza: Waltz',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+              name: 'Lección 10: Escala de Do Mayor',
+              material:[{
+                id: 23,
+                title: 'Definición y ejercicios',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+
+              {
+                id: 24,
+                title: 'Pieza: Little Playmates',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ]
+          },
+
+           {
+              name: 'Lección 11: Posición de Sol',
+              material:[{
+                id: 25,
+                title: 'Definición y ejercicios',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },
+                  {
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  },
+                  {
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                 
+                ]
+              },
+              {
+                id: 26,
+                title: 'Pieza: Bagpipe',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+              name: 'Lección 12: Ligadura de prolongación',
+              material:[{
+                id: 27,
+                title: 'Definición y ejercicios',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },
+                  {
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }                 
+                ]
+              },
+              {
+                id: 28,
+                title: 'Pieza: Sonatina',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ]
+          }
+
+        ]
+      }
+
+
+
+
+
+      
+]
+  
+  
+  
+  }])
+
+.controller('level1', ["$scope", "SharedState", function($scope, SharedState) {
+   $scope.num = SharedState.num
+ $scope.allData = [
+     {
+          block: "Bloque 1",
+          lessons: [
+            {
+              name: 'Lección 1: Posición de Sol (2da parte)',
+              material:[{
+                id: 29,
+                title: 'Solfeo I',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 30,
+                title: 'Posición de Sol (parte 2)',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Ejercicio',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  },{
+                  icon: 'description',
+                  type: 'Marcha',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 31,
+                title: 'Pieza: Lyrical Piece',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+              name: 'Lección 2: Posición combinada',
+              material:[
+              {
+                id: 32,
+                title: 'Solfeo II',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 33,
+                title: 'Posición combinada',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Ejercicio',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  },{
+                  icon: 'description',
+                  type: 'Marcha',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 34,
+                title: 'Pieza: Minuet, Reinagle',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ] 
+          },
+
+          {
+              name: 'Lección 3: Alteraciones',
+              material:[{
+                id: 35,
+                title: 'Solfeo III',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 36,
+                title: 'Alteraciones',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'auto_stories',
+                  type: 'El Sostenido',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  },
+                  {
+                  icon: 'auto_stories',
+                  type: 'El Bemol',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 37,
+                title: 'La armadura',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 38,
+                title: 'Pieza: Promenade',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+             
+            ]
+          },
+
+         
+
+        ]
+      },
+   
+   //BLOQUE 2
+    {
+          block: "Bloque 2",
+          lessons: [
+            {
+              name: 'Lección 4: Cambio de posición',
+              material:[{
+                id: 39,
+                title: 'Solfeo IV',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },
+                  {
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 40,
+                title: 'Definición',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },
+                  {
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 41,
+                title: 'Pieza: Dance',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+              name: 'Lección 5: Intervalos de 6ta',
+              material:[
+              {
+                id: 42,
+                title: 'Solfeo V',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 43,
+                title: 'Intervalos de 6ta',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  },{
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 44,
+                title: 'DC al Fine',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },
+                  {
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 45,
+                title: 'Pieza: Sonatina, Gurlitt',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ]
+          },
+
+          {
+              name: 'Lección 6: Posición de Fa',
+              material:[{
+                id: 46,
+                title: 'Solfeo VI',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 47,
+                title: 'Definición',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  },
+                  {
+                  icon: 'description',
+                  type: 'Marcha en Fa',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 48,
+                title: 'Pieza: Relay Race',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+
+   //BLOQUE 3
+
+{
+          block: "Bloque 3",
+          lessons: [
+            {
+              name: 'Lección 7: Escalas de C, G y F',
+              material:[
+              {
+                id: 49,
+                title: 'Escalas C, G y F',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  },{
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 50,
+                title: 'Pieza: First Etude',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+              name: 'Lección 8: Más Notación Musical',
+              material:[
+              {
+                id: 51,
+                title: '8va y Natural',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 52,
+                title: 'Cambio de clave, RH LH y Fermatta',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 53,
+                title: 'Pieza: Jinx',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ]
+          },
+
+          {
+              name: 'Lección 9: Síncopas',
+              material:[{
+                id: 54,
+                title: 'Definición',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  },{
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 55,
+                title: 'Pieza: Minuet and Trío',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ]
+          },
+
+        ]
+      },
+   
+   
+   
+ {
+          block: "Pieza Final",
+          lessons: [
+            {
+              name: 'Elección de Pieza Final',
+              material:[{
+                id: 56,
+                title: 'Definición',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+                },
+              ]
+          }
+        ]
+
+  }
+   
+   ]
+    
+}])
+
+
+ 
+.controller('level2', ["$scope", "SharedState", function($scope, SharedState) {
+    $scope.num = SharedState.num
+  
+   $scope.allData = [
+     {
+          block: "Bloque 1",
+          lessons: [
+            {
+              name: 'Lección 1: Cambio de Posición II',
+              material:[{
+                id: 57,
+                title: 'Solfeo VII',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 58,
+                title: 'Cambio de posición (parte 2)',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Definición',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 59,
+                title: 'Pieza: Allemande',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+              name: 'Lección 2: Contrapunto',
+              material:[
+              {
+                id: 60,
+                title: 'Solfeo VIII',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 61,
+                title: 'Definición',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 62,
+                title: 'Pieza: Andante, Beyer',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ] 
+          },
+
+          {
+              name: 'Lección 3: Intervalos de 7ma y 8va',
+              material:[{
+                id: 63,
+                title: 'Solfeo IX',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 64,
+                title: 'Definición',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Intervalos de 7ma',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  },
+                  {
+                  icon: 'description',
+                  type: 'Intervalos de 8va',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 65,
+                title: 'Pieza: Minuet, Leopold Mozart',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+             
+            ]
+          },
+
+         
+
+        ]
+      },
+
+
+//BLOQUE 2
+       {
+          block: "Bloque 2",
+          lessons: [
+            {
+              name: 'Lección 4: Series Armónicas',
+              material:[{
+                id: 66,
+                title: 'Definición',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 67,
+                title: 'Pieza: Aria in F',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ]
+          },
+           {
+              name: 'Lección 6: Triadas',
+              material:[
+              {
+                id: 68,
+                title: 'Construcción de triadas',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  },{
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 69,
+                title: 'Triadas mayores y menores',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  },{
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 70,
+                title: 'Pieza: Waltz, Kabalevsky',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ]
+          },
+            {
+              name: 'Lección 5: Escalas',
+              material:[
+              {
+                id: 71,
+                title: 'Escalas',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Grupo 1',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  },{
+                  icon: 'description',
+                  type: 'Grupo 2',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              
+              {
+                id: 72,
+                title: 'Elección de Pieza Final 1',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            ]
+          },
+         
+
+        ]
+      },
+
+
+//BLOQUE 3
+    {
+          block: "Bloque 3",
+          lessons: [
+             {
+              name: 'Lección 6: Arpegios',
+              material:[{
+                id: 73,
+                title: 'Definición',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  },{
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 74,
+                title: 'Pieza: Melody, Kohler',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ]
+          },
+            {
+              name: 'Lección 8: Tresillos',
+              material:[
+              {
+                id: 75,
+                title: 'Tresillos',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },
+                  {
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 76,
+                title: 'Pieza: ',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ]
+          },
+            {
+              name: 'Lección 9: Métricas compuestas',
+              material:[
+              {
+                id: 77,
+                title: 'Definición',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },
+                  {
+                  icon: 'description',
+                  type: 'Ejercicios',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              },
+              {
+                id: 78,
+                title: 'Pieza: Melody, Le Couppey',
+                icon: 'audio_file',
+                activity:[{
+                  icon: 'piano',
+                  type: 'Ejemplo',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+              }
+            ]
+          },
+
+        ]
+      },
+
+
+ {
+          block: "Pieza Final",
+          lessons: [
+            {
+              name: 'Elección de Pieza Final',
+              material:[{
+                id: 79,
+                title: 'Definición',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+                },
+              ]
+          }
+        ]
+
+  }
+     
+      
+]
+
+    
+}])
+
+
+
+.controller('level3', ["$scope", "SharedState", function($scope, SharedState) {
+     $scope.num = SharedState.num
+    $scope.allData = [
+     {
+          block: "Bloque 1",
+          lessons: [
+            {
+              name: 'Lección 1: Semicorcheas',
+              material:[{
+                id: 200,
+                title: 'Solfeo I',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+              name: 'Lección 2: Organización melódica',
+              material:[
+              {
+                id: 200,
+                title: 'Solfeo II',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            ] 
+          },
+
+          {
+              name: 'Lección 3: Contrapunto II',
+              material:[{
+                id: 200,
+                title: 'Solfeo III',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+             
+            ]
+          } 
+
+        ]
+      },
+
+
+//BLOQUE 2
+    {
+          block: "Bloque 2",
+          lessons: [
+            {
+              name: 'Lección 4: Intervalos',
+              material:[{
+                id: 200,
+                title: 'Solfeo IV',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+              name: 'Lección 5: Triadas fundamentales',
+              material:[
+              {
+                id: 200,
+                title: 'Solfeo V',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              } 
+            ]
+          },
+
+          {
+              name: 'Lección 6: Inversión de Triadas',
+              material:[{
+                id: 200,
+                title: 'Solfeo VI',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+              
+            ]
+          },
+
+         
+
+        ]
+      },
+
+//BLOQUE 3
+      {
+          block: "Bloque 3",
+          lessons: [
+            {
+              name: 'Lección 7: Circulo de Quintas',
+              material:[
+              {
+                id: 200,
+                title: 'Escalas C, G y F',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+              
+            ]
+          },
+          {
+              name: 'Lección 8: Progresión de acordes',
+              material:[
+              {
+                id: 200,
+                title: '8va y Natural',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            
+             
+            ]
+          },
+          {
+              name: 'Lección 9: Grupo 1 (C, G, F)',
+              material:[{
+                id: 200,
+                title: 'Definición',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            ]
+          }
+
+        ]
+      },
+
+//Pieza Final
+    
+
+ {
+          block: "Pieza Final",
+          lessons: [
+            {
+              name: 'Elección de Pieza Final',
+              material:[{
+                id: 200,
+                title: 'Definición',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+                },
+              ]
+          }
+        ]
+
+  }
+
+
+
+]
+     
+}])
+
+
+
+
+.controller('level4', ["$scope", "SharedState", function($scope, SharedState) {
+     $scope.num = SharedState.num
+    $scope.allData = [
+     {
+          block: "Bloque 1",
+          lessons: [
+            {
+              name: 'Lección 1: Acordes de Séptima',
+              material:[{
+                id: 200,
+                title: 'Solfeo I',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+              name: 'Lección 2: Inversión de Séptimas',
+              material:[
+              {
+                id: 200,
+                title: 'Solfeo II',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            ] 
+          },
+
+          {
+              name: 'Lección 3: Cadencias',
+              material:[{
+                id: 200,
+                title: 'Solfeo III',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+             
+            ]
+          } 
+
+        ]
+      },
+
+
+//BLOQUE 2
+    {
+          block: "Bloque 2",
+          lessons: [
+            {
+              name: 'Lección 4: Acompañamiento y Pedal',
+              material:[{
+                id: 200,
+                title: 'Solfeo IV',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+              name: 'Lección 5: Ornamentos',  //Mordente, trinos, apoyaturas
+              material:[
+              {
+                id: 200,
+                title: 'Solfeo V',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              } 
+            ]
+          },
+
+          {
+              name: 'Lección 6: Figuras Rítmicas',
+              material:[{
+                id: 200,
+                title: 'Solfeo VI',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+              
+            ]
+          },
+
+         
+
+        ]
+      },
+
+//BLOQUE 3
+      {
+          block: "Bloque 3",
+          lessons: [
+            {
+              name: 'Lección 7: Escalas modales',
+              material:[
+              {
+                id: 200,
+                title: 'Escalas C, G y F',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+              
+            ]
+          },
+          {
+              name: 'Lección 8: Escalas menores',
+              material:[
+              {
+                id: 200,
+                title: '8va y Natural',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            
+             
+            ]
+          },
+          {
+              name: 'Lección 9: Grupo 2 (D, A, E)',
+              material:[{
+                id: 200,
+                title: 'Definición',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            ]
+          }
+
+        ]
+      },
+
+//Pieza Final
+    
+
+ {
+          block: "Pieza Final",
+          lessons: [
+            {
+              name: 'Elección de Pieza Final',
+              material:[{
+                id: 200,
+                title: 'Definición',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+                },
+              ]
+          }
+        ]
+
+  }
+
+
+
+]
+     
+}])
+
+
+.controller('level5', ["$scope", "SharedState", function($scope, SharedState) {
+     $scope.num = SharedState.num
+    $scope.allData = [
+     {
+          block: "Bloque 1",
+          lessons: [
+            {
+              name: 'Lección 1: Progresión de Acordes II',
+              material:[{
+                id: 200,
+                title: 'Solfeo I',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+              name: 'Lección 2: Cadencias II',
+              material:[
+              {
+                id: 200,
+                title: 'Solfeo II',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            ] 
+          },
+
+          {
+              name: 'Lección 3: Lectura a Primer Vista',
+              material:[{
+                id: 200,
+                title: 'Solfeo III',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+             
+            ]
+          } 
+
+        ]
+      },
+
+
+//BLOQUE 2
+    {
+          block: "Bloque 2",
+          lessons: [
+            {
+              name: 'Lección 4: Triadas Aug y Dim',
+              material:[{
+                id: 200,
+                title: 'Solfeo IV',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+              name: 'Lección 5: Modulaciones',  //Mordente, trinos, apoyaturas
+              material:[
+              {
+                id: 200,
+                title: 'Solfeo V',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              } 
+            ]
+          },
+
+          {
+              name: 'Lección 6: Sustituciones',
+              material:[{
+                id: 200,
+                title: 'Solfeo VI',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+              
+            ]
+          },
+
+         
+
+        ]
+      },
+
+//BLOQUE 3
+      {
+          block: "Bloque 3",
+          lessons: [
+            {
+              name: 'Lección 7: Sus2 y Sus4',
+              material:[
+              {
+                id: 200,
+                title: 'Escalas C, G y F',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+              
+            ]
+          },
+          {
+              name: 'Lección 8: Grupo 3 (Bb, Eb, Ab)',
+              material:[
+              {
+                id: 200,
+                title: '8va y Natural',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            
+             
+            ]
+          },
+          {
+              name: 'Lección 9: Grupo 4 (Db, Gb, B)',
+              material:[{
+                id: 200,
+                title: 'Definición',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            ]
+          }
+
+        ]
+      },
+
+//Pieza Final
+    
+
+ {
+          block: "Pieza Final",
+          lessons: [
+            {
+              name: 'Elección de Pieza Final',
+              material:[{
+                id: 200,
+                title: 'Definición',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+                },
+              ]
+          }
+        ]
+
+  }
+
+
+
+]
+     
+}])
+
+
+
+.controller('level6', ["$scope", "SharedState", function($scope, SharedState) {
+      $scope.num = SharedState.num
+    $scope.allData = [
+     {
+          block: "Bloque 1",
+          lessons: [
+            {
+              name: 'Lección 1: Extensiones',
+              material:[{
+                id: 200,
+                title: 'Solfeo I',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+              name: 'Lección 2: 6tas Napolitanas', //6tas aumentadas
+              material:[
+              {
+                id: 200,
+                title: 'Solfeo II',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            ] 
+          },
+
+          {
+              name: 'Lección 3: 6tas Aumentadas',
+              material:[{
+                id: 200,
+                title: 'Solfeo III',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+             
+            ]
+          } 
+
+        ]
+      },
+
+
+//BLOQUE 2
+    {
+          block: "Bloque 2",
+          lessons: [
+            {
+              name: 'Lección 4: Coda y Segno',
+              material:[{
+                id: 200,
+                title: 'Solfeo IV',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+              name: 'Lección 5: Figuras rítmicas',  //Mordente, trinos, apoyaturas
+              material:[
+              {
+                id: 200,
+                title: 'Solfeo V',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              } 
+            ]
+          },
+
+          {
+              name: 'Lección 6: Estructura Binaria y Terciaria',
+              material:[{
+                id: 200,
+                title: 'Solfeo VI',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+              
+            ]
+          },
+
+         
+
+        ]
+      },
+
+//BLOQUE 3
+      {
+          block: "Bloque 3",
+          lessons: [
+            {
+              name: 'Lección 7: Mediantes Cromaticas',
+              material:[
+              {
+                id: 200,
+                title: 'Escalas C, G y F',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+              
+            ]
+          },
+          {
+              name: 'Lección 8: Dominantes Alteradas',
+              material:[
+              {
+                id: 200,
+                title: '8va y Natural',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            
+             
+            ]
+          },
+          {
+              name: 'Lección 9: Escalas y Arpegios',
+              material:[{
+                id: 200,
+                title: 'Definición',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            ]
+          }
+
+        ]
+      },
+
+//Pieza Final
+    
+
+ {
+          block: "Pieza Final",
+          lessons: [
+            {
+              name: 'Elección de Pieza Final',
+              material:[{
+                id: 200,
+                title: 'Definición',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'auto_stories',
+                  type: 'Teoría',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
+                  }
+                ]
+                },
+              ]
+          }
+        ]
+
+  }
+
+
+
+]
+     
+}])
+
+
+
+
+.controller('level7', ["$scope", "SharedState", function($scope, SharedState) {
+      $scope.num = SharedState.num
+    $scope.allData = [
+     {
+          block: "Periodo Barroco",
+          lessons: [
+            {
+              name: 'Contrapunto a 2 voces',
+              material:[{
+                id: 200,
+                title: 'Solfeo I',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+              name: 'Fugas',
+              material:[
+              {
+                id: 200,
+                title: 'Solfeo II',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            ] 
+          },
+ 
+
+        ]
+      },
+
+
+//BLOQUE 2
+    {
+          block: "Periodo Clásico",
+          lessons: [
+            {
+              name: 'Sonata',
+              material:[{
+                id: 200,
+                title: 'Solfeo IV',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+              name: 'Rondo',  //Mordente, trinos, apoyaturas
+              material:[
+              {
+                id: 200,
+                title: 'Rondo',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              } 
+            ]
+          }
+
+
+        ]
+      },
+
+
+
+//BLOQUE 3
+       {
+          block: "Siglo XIX",
+          lessons: [
+            {
+              name: 'Periodo Romántico',
+              material:[{
+                id: 200,
+                title: 'Solfeo IV',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+              name: 'Periodo Post-Romántico', 
+              material:[
+              {
+                id: 200,
+                title: 'Periodo Post-Romántico',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              } 
+            ]
+          },
+          {
+              name: 'Impresionismo',
+              material:[{
+                id: 200,
+                title: 'Solfeo IV',
+                icon: 'music_note',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Descripción',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/'
+                  }
+                ]
+              }
+            ]
+          }
+
+
+        ]
+      }
+
+
+
+
+]
+     
+}])
+
+
+
+
+
+
+
+
+
+function toggle_video_modal(element) {
+     var url = element.getAttribute('data-youtube-id');
+          $("#youtube").attr('src', url);        
+          $("body").addClass("show-video-modal noscroll");   
+}
+
+      // Close and Reset the Video Modal
+      function close_video_modal() {
+        
+        event.preventDefault();
+        $("body").removeClass("show-video-modal noscroll");
+        $("#youtube").attr('src', '');
+        
+      }
+      $('body').on('click', '.close-video-modal, .video-modal .overlay', function(event) {
+          close_video_modal();
+      });
+ 
+
+
+function showModal(element) {
+     var url = element.getAttribute('data-pdf-id');
+          $("#drive").attr('src', url);        
+        document.getElementById('modalPDF').classList.add('four');
+}
+ 
+      function closemodal() {
+        event.preventDefault();
+       const modal = document.getElementById('modalPDF');
+        modal.classList.add('out');
+        setTimeout(() => {
+            modal.classList.remove('four', 'out');
+        }, 300);
+        $("#drive").attr('src', '');
+        
+      }
+
+</script>
