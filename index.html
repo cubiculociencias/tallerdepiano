@@ -703,7 +703,7 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
 
      <ion-content>
        
- <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/lessons" frameborder="0" allowfullscreen ></iframe></div> 
+ <div class="iframe-container"><iframe id="lessonsFrame" src="https://cubiculociencias.github.io/tallerdepiano/lessons" frameborder="0" allowfullscreen ></iframe></div> 
 
       </ion-content>
 
@@ -714,7 +714,7 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
     <ion-view title="Perfil">
       <ion-content >
  
-        <div class="iframe-container"><iframe id="profileFrame" src="https://cubiculociencias.github.io/tallerdepiano/profile" frameborder="0" allowfullscreen></iframe></div> 
+        <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/profile" frameborder="0" allowfullscreen></iframe></div> 
 
       </ion-content>
     </ion-view>
@@ -1415,11 +1415,6 @@ $(window).on('load', function() {
       $('.preloader').css({'display':'none'})  
       $('.loginSection').css({'display':'none'})  
       $('.mainSection').fadeIn('slow')
-      var url = window.location.href;
-        if(url == "https://app.mozart.studio/#/menu/tab/agenda"){
-          var iframe = document.getElementById('agendaFrame');
-        iframe.src = 'https://cubiculociencias.github.io/tallerdepiano/calendar';
-        }
       //loadData(api, storedToken, "si");    
     } else {
       localStorage.removeItem('TPtoken');
@@ -1469,8 +1464,8 @@ $(window).on('load', function() {
       var validation = JSON.parse(res);
       if (validation.status == "success") {
         localStorage.setItem('TPtoken', validation.token);            
-        var iframe = document.getElementById('profileFrame');
-        iframe.src = 'https://cubiculociencias.github.io/tallerdepiano/profile';
+        var iframe = document.getElementById('lessonsFrame');
+        iframe.src = 'https://cubiculociencias.github.io/tallerdepiano/lessons';
         $('.preloader').css({'display':'none'})  
         $('.loginSection').css({'display':'none'})  
         $('.mainSection').fadeIn('slow')
