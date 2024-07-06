@@ -1514,7 +1514,7 @@ $(window).on('load', function() {
       document.getElementById('recover').value = ''; 
       document.getElementById('recover2').value = '';
       $button.button('reset');  
-      if (res) {
+      if (res == "success") {
         alert("¡Exito! Tu contraseña ha sido enviada a tu correo.")
       }else{
         alert("Error. Tu correo no se encuentra en nuestra base de datos. Contacta a soporte.")
