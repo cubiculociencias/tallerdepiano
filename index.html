@@ -1511,11 +1511,10 @@ $(window).on('load', function() {
   fetch(api, validationData)
     .then(response => response.text())
     .then(res => {
-      var validation = res;
       document.getElementById('recover').value = ''; 
       document.getElementById('recover2').value = '';
       $button.button('reset');  
-      if (validation) {
+      if (res == true) {
         alert("¡Exito! Tu contraseña ha sido enviada a tu correo.")
       }else{
         alert("Error. Tu correo no se encuentra en nuestra base de datos. Contacta a soporte.")
