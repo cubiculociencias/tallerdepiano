@@ -643,13 +643,11 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
           <h1 class="title">Menu</h1>
         </ion-header-bar>
         <ion-content>
-          <ul class="list">
+         <ul class="list">
             <a href="#/menu/tab/profile" class="item" ng-class="(activeMenuClr=='profile')?'menuSelectedColor':''" ng-click="activeMenuClr = 'profile'" menu-toggle="right" ><i class="ri-home-2-fill"></i>&nbsp&nbspInicio</a>
-        <a href="#/menu/library" class="item" ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" ng-click="activeMenuClr = 'library'" menu-toggle="right"><i class="ri-git-repository-fill"></i>&nbsp&nbspBiblioteca</a>
-                 <a href="#/menu/resources" class="item" ng-class="(activeMenuClr=='resources')?'menuSelectedColor':''" ng-click="activeMenuClr = 'resources'" menu-toggle="right"><i class="ri-dashboard-fill"></i>&nbsp&nbspRecursos</a>
-               <a href="#/menu/agenda" class="item" ng-class="(activeMenuClr=='agenda')?'menuSelectedColor':''" ng-click="activeMenuClr = 'agenda'" menu-toggle="right"><i class="ri-calendar-schedule-fill"></i>&nbsp&nbspAgenda</a>
-      <a href="#/menu/reel" class="item" ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" ng-click="activeMenuClr = 'reel'"  menu-toggle="right"><i class="ri-award-fill"></i>&nbsp&nbspReel de logros</a>
-     
+               <a href="#/menu/lessons" class="item" ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" ng-click="activeMenuClr = 'lessons'" menu-toggle="right"><i class="ri-presentation-fill"></i>&nbsp&nbspLecciones</a>
+                      <a href="#/menu/library" class="item" ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" ng-click="activeMenuClr = 'library'" menu-toggle="right"><i class="ri-git-repository-fill"></i>&nbsp&nbspBiblioteca</a>
+       <a href="#/menu/resources" class="item" ng-class="(activeMenuClr=='resources')?'menuSelectedColor':''" ng-click="activeMenuClr = 'resources'" menu-toggle="right"><i class="ri-dashboard-fill"></i>&nbsp&nbspRecursos</a>
           </ul>
         </ion-content>
     <ion-footer-bar>
@@ -673,17 +671,16 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
         </ion-nav-buttons>      
     </ion-nav-bar>   
 
-       <ion-tabs class="tabs-icon-top tabs-stable"  >
-      <ion-tab title="Tutor" icon="ion-chatboxes" href="#/menu/tab/chat">
-        <ion-nav-view name="chat-tab"></ion-nav-view>
+     <ion-tabs class="tabs-icon-top tabs-stable"  >
+      <ion-tab title="Reel de logros" icon="ion-ribbon-b" href="#/menu/tab/reel">
+        <ion-nav-view name="reel-tab"></ion-nav-view>
       </ion-tab>
-       
-       <ion-tab title="Lecciones" icon="fa fa-graduation-cap" href="#/menu/tab/lessons" >
-        <ion-nav-view name="lessons-tab"></ion-nav-view>
-      </ion-tab>
-    <ion-tab title="Perfil" icon="ion-ios-contact-outline" href="#/menu/tab/profile">
+     <ion-tab title="Perfil" icon="ion-ios-contact-outline" href="#/menu/tab/profile">
         <ion-nav-view name="profile-tab"></ion-nav-view>
-      </ion-tab>   
+      </ion-tab>     
+       <ion-tab title="Agenda" icon="ion-android-calendar" href="#/menu/tab/agenda" >
+        <ion-nav-view name="agenda-tab"></ion-nav-view>
+      </ion-tab>
     </ion-tabs>
 
   </script>
@@ -698,17 +695,7 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
     </ion-view>
   </script>
 
-     <script id="lessons.html" type="text/ng-template">
-    <ion-view title="Actividades">
 
-     <ion-content>
-       
- <div class="iframe-container"><iframe id="lessonsFrame" src="https://cubiculociencias.github.io/tallerdepiano/lessons" frameborder="0" allowfullscreen ></iframe></div> 
-
-      </ion-content>
-
-    </ion-view>
-  </script>   
     
     <script id="profile.html" type="text/ng-template">
     <ion-view title="Perfil">
@@ -720,20 +707,9 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
     </ion-view>
   </script>
 
- 
     
-
-    
- 
-    
-  <script id="agenda.html" type="text/ng-template">
+ <script id="agenda.html" type="text/ng-template">
     <ion-view title="Agenda">
-
-      <ion-nav-bar class="bar-calm">
-        <ion-nav-buttons side="right">
-          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
-        </ion-nav-buttons>      
-    </ion-nav-bar>
 
       <ion-content>
        
@@ -745,20 +721,29 @@ button:focus.off.login, button:active.off.login, button:hover.off.login {
       
        <script id="reel.html" type="text/ng-template">
     <ion-view title="Reel de logros">
-           
-           <ion-nav-bar class="bar-positive">
-        <ion-nav-buttons side="right">
-          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
-        </ion-nav-buttons>      
-    </ion-nav-bar>
-           
       <ion-content >  
         <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/comunity" frameborder="0" allowfullscreen ></iframe></div> 
       </ion-content>
     </ion-view>
   </script>
 
+ <script id="lessons.html" type="text/ng-template">
+    <ion-view title="Lecciones">
 
+      <ion-nav-bar class="bar-stable">
+        <ion-nav-buttons side="right">
+          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
+        </ion-nav-buttons>      
+    </ion-nav-bar>
+
+     <ion-content>
+       
+   <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/lessons" frameborder="0" allowfullscreen></iframe></div>
+
+      </ion-content>
+
+    </ion-view>
+  </script>        
    <script id="resources.html" type="text/ng-template">
     <ion-view title="Recursos didácticos">
 
@@ -1126,23 +1111,7 @@ app
         }
       }
     })
-   .state('menu.tabs.chat', {
-      url: "/chat",
-      views: {
-        'chat-tab': {
-          templateUrl: "chat.html"
-        }
-      }
-    })
-    .state('menu.tabs.lessons', {
-      url: "/lessons",
-      views: {
-        'lessons-tab': {
-          templateUrl: "lessons.html"
-        }
-      }
-    }) 
-  .state('menu.tabs.profile', {
+ .state('menu.tabs.profile', {
       url: "/profile",
       views: {
         'profile-tab': {
@@ -1150,21 +1119,35 @@ app
         }
       }
     })
-
-
-     .state('menu.agenda', {
+     .state('menu.tabs.agenda', {
       url: "/agenda",
       views: {
-        'menuContent': {
+        'agenda-tab': {
           templateUrl: "agenda.html"
         }
       }
     }) 
- .state('menu.reel', {
+ .state('menu.tabs.reel', {
       url: "/reel",
       views: {
-        'menuContent': {
+        'reel-tab': {
           templateUrl: "reel.html"
+        }
+      }
+    })
+       .state('menu.lessons', {
+      url: "/lessons",
+      views: {
+        'menuContent': {
+          templateUrl: "lessons.html"
+        }
+      }
+    }) 
+       .state('menu.chat', {
+      url: "/chat",
+      views: {
+        'menuContent': {
+          templateUrl: "chat.html"
         }
       }
     })
@@ -1249,7 +1232,7 @@ app
     })
     ;
 
-  $urlRouterProvider.otherwise("menu/tab/lessons");
+  $urlRouterProvider.otherwise("menu/tab/profile");
   $ionicConfigProvider.tabs.position('bottom'); 
 })
 
