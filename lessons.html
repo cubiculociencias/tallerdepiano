@@ -1502,8 +1502,9 @@ app.factory('SharedState', function($http, $q) {
   }])
 
 .controller('level1', ["$scope", "SharedState", function($scope, SharedState) {
-   $scope.num = SharedState.num
-
+   SharedState.getNum().then(function(num) {
+    $scope.num = num;
+  })
    $scope.allData = [
      {
           block: "Bloque 1",
@@ -2111,8 +2112,9 @@ app.factory('SharedState', function($http, $q) {
 
  
 .controller('level2', ["$scope", "SharedState", function($scope, SharedState) {
-    $scope.num = SharedState.num
-  
+    SharedState.getNum().then(function(num) {
+    $scope.num = num;
+  })
    $scope.allData = [
      {
           block: "Bloque 1",
