@@ -838,17 +838,44 @@ iframe#quiz {
 
 
   //Angular Materialize
+
+  //Angular Materialize
 var app = angular.module('materializeApp', ['ui.materialize']);
-app.factory('SharedState', function() {
+app.factory('SharedState', function($http, $q) {
+  var requestData = {
+    action: "getBasicData",
+    token: localStorage.getItem('TPtoken')
+  };
+
+  var config = {
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    }
+  };
+
+  var getNum = function() {
+    var deferred = $q.defer();
+
+    $http.post('https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec', requestData, config)
+      .then(function(response) {
+        deferred.resolve(response.data.id);
+      }, function(error) {
+        deferred.reject(error);
+      });
+
+    return deferred.promise;
+  };
+
   return {
-    num: 3 
+    getNum: getNum
   };
 });
-
-
+ 
   app
 .controller('levelP', ["$scope", "SharedState", function($scope, SharedState) {
-     $scope.num = SharedState.num
+     SharedState.getNum().then(function(num) {
+    $scope.num = num;
+  })
     $scope.allData = [
      {
           block: "Bloque 1",
