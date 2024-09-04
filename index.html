@@ -695,8 +695,8 @@ document.getElementById('signupform').style.display = 'none';
     .then(res => {
       var validation = JSON.parse(res);
       if (validation.status == "success") {
-        localStorage.setItem('MStoken', validation.token);  
-       window.location.href = 'https://app.mozartacademy.mx/main'; 
+        localStorage.setItem('TPtoken', validation.token);  
+       window.location.href = 'https://cubiculociencias.github.io/tallerdepiano/main'; 
       } else {
         alert('Error, intenta otro método de inicio de sesión');
       }
@@ -752,8 +752,8 @@ function Maillogin(button) {
     .then(res => {
       var validation = JSON.parse(res);
       if (validation.status == "success") {
-        localStorage.setItem('MStoken', validation.token); 
-        window.location.href = 'https://app.mozartacademy.mx/main'; 
+        localStorage.setItem('TPtoken', validation.token); 
+        window.location.href = 'https://cubiculociencias.github.io/tallerdepiano/main'; 
       } else {
         document.getElementById('Mail-error').style.display = 'block';    
       }
@@ -843,7 +843,7 @@ function registration(button) {
 
 
 $(window).on('load', function() { 
-  var storedToken = localStorage.getItem('MStoken');
+  var storedToken = localStorage.getItem('TPtoken');
   if (storedToken) {
     window.location.href = 'https://cubiculociencias.github.io/tallerdepiano/main'
   } 
