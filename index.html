@@ -1,1432 +1,738 @@
-<head>
-
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
-<link rel="icon" href="https://lh3.googleusercontent.com/d/1DAQTJ24ELr3yMXmH3ZVpusFeXq0STWqh" type="image/x-icon">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
+<link rel="icon" href="https://lh3.googleusercontent.com/d/1k9LA88h-FVVn9EeryBRVBrtc5tPl92CK" type="image/x-icon">
     <title>Taller de Piano</title>
-  
-<link href="https://code.ionicframework.com/1.3.3/css/ionic.min.css" rel="stylesheet">
-  <script src="https://code.ionicframework.com/1.3.3/js/ionic.bundle.min.js"></script>
+   
+    <meta name="google-signin-client_id" content="613538890545-o4p4ft7oji6uhimgh0inqn5l5cgv1gnm.apps.googleusercontent.com">
+   <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
  
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
- <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> 
+   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 </head>
 
- <style>
 
-
-.loadInfo{
-  z-index: 4;
-  position: absolute; 
-  top: 50%; 
-  left: 50%; 
-  transform: translate(-50%, -50%); 
-  color: white;
-  font-weight: 700;
-  font-size: 20px;
-}
-
-
-@media only screen and (min-width: 990px) {
-  .col-md-2{
-    margin-top: 130px;
-    margin-left: -20px;
-  }  
-}
-
-
-
-@keyframes beat-fade {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(2.4);
-  }
-  
-  50% {
-    opacity: 0.5;
-    transform: scale(4);
-  }
-}
-
-
-
-
-body {
-  margin: 0;
-  height: 100%;
-  width: 100% !important;
-  box-sizing: border-box;
-}
-
-.backRight {
-  position: absolute;
-  right: 0;
-  width: 50%;
-  height: 100%;
-  background: #03A9F4;
-}
-
-.backLeft {
-  position: absolute;
-  left: 0;
-  width: 50%;
-  height: 100%;
-  background: #0c1e35;
-}
-
-@media  (min-width: 768px){
-  .backLeft{
-    background: #0c1e35 url('https://lh3.googleusercontent.com/d/1DAQTJ24ELr3yMXmH3ZVpusFeXq0STWqh') center/contain no-repeat;
-   background-size: 40%;
-  }
-}
-
-#back {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  z-index: -999;
-}
-
-.canvas-back {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 10;
-}
-
-#slideBox {
-  width: 50%;
-  max-height: 100%;
-  height: 100%;
-  overflow: hidden;
-  margin-left: 50%;
-  position: absolute;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-}
-
-.topLayer {
-  width: 200%;
-  height: 100%;
-  position: relative;
-  left: 0;
-  left: -100%;
-}
-
-label {
-  font-size: 0.8em;
-  text-transform: uppercase;
-}
-
-input {
-  background-color: transparent;
-  border: 0;
-  outline: 0;
-  font-size: 1em;
-  padding: 8px 1px;
-  margin-top: 0.1em;
-}
-
-.left {
-  width: 50%;
-  height: 100%;
-  overflow: scroll;
-  background: #2C3034;
-  left: 0;
-  position: absolute;
-}
-.left label {
-  color: #e3e3e3;
-}
-.left input {
-  border-bottom: 1px solid #e3e3e3;
-  color: #e3e3e3;
-}
-.left input:focus, .left input:active {
-  border-color: #03A9F4;
-  color: #03A9F4;
-}
-.left input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 30px #2C3034 inset;
-  -webkit-text-fill-color: #e3e3e3;
-}
-.left a {
-  color: #03A9F4;
-}
-
-.right {
-  width: 50%;
-  height: 100%;
-  overflow: scroll;
-  background: #f9f9f9;
-  right: 0;
-  position: absolute;
-}
-.right label {
-  color: #212121;
-}
-.right input {
-  border-bottom: 1px solid #212121;
-}
-.right input:focus, .right input:active {
-  border-color: #673AB7;
-}
-.right input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 30px #f9f9f9 inset;
-  -webkit-text-fill-color: #212121;
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 100%;
-  width: 80%;
-  margin: 0 auto;
-  position: relative;
-}
-
-.content h2 {
-  font-weight: 300;
-  font-size: 2.6em;
-  margin: 0.2em 0 0.1em;
-}
-
-.left .content h2 {
-  color: #03A9F4;
-}
-
-.right .content h2 {
-  color: #0c1e35;
-}
-
-.form-element {
-  margin: 1.6em 0;
-}
-.form-element.form-submit {
-  margin: 1.6em 0 0;
-}
-
-.form-stack {
-  display: flex;
-  flex-direction: column;
-}
-
-
-button {
-  padding: 0.8em 1.2em;
-  margin: 0 10px 0 0;
-  width: auto;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 1em;
-  color: #fff;
-  line-height: 1em;
-  letter-spacing: 0.6px;
-  border-radius: 3px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
-  border: 0;
-  outline: 0;
-  cursor: pointer;
-  transition: all 0.25s;
-}
-button.signup {
-  background: #03A9F4;
-}
-button.login {
-  background: #0c1e35;
-}
-button.off {
-  background: none;
-  box-shadow: none;
-  margin: 0;
-}
-button.off.signup {
-  color: #03A9F4;
-}
-button.off.login {
-  color: #0c1e35;
-}
-
-button:focus, button:active, button:hover {
-  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
-}
-button:focus.signup, button:active.signup, button:hover.signup {
-  background: #0288D1;
-}
-button:focus.login, button:active.login, button:hover.login {
-  background: #1B3A62;
-}
-button:focus.off, button:active.off, button:hover.off {
-  box-shadow: none;
-}
-button:focus.off.signup, button:active.off.signup, button:hover.off.signup {
-  color: #03A9F4;
-  background: #212121;
-}
-button:focus.off.login, button:active.off.login, button:hover.off.login {
-  color: #1B3A62;
-  background: #e3e3e3;
-}
-
-@media only screen and (max-width: 768px) {
-  #slideBox {
-    width: 80%;
-    margin-left: 20%;
-  }
-
-  .signup-info, .login-info {
-    display: none;
-  }
-}
-
-
-
-.preloader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+<style>
+    body {
   background-color: #fff;
-  z-index: 99;
+  font-family: 'Karla', sans-serif; }
+
+
+h1 {
+    letter-spacing: -1px;
 }
-#loading {
-  width: 200px;
-  height: 200px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  background-image: url(https://raw.githubusercontent.com/niklausgerber/PreLoadMe/master/img/status.gif);
-  /* path to your loading animation */
+
+.strong-shadow {
+  color: white;
+  text-shadow: 1px 2px 3px black, 0px 8px 13px black, 0px 18px 23px black!important;  
+}
+
+.strong-white {
+  color: white;
+  text-shadow: 1px 2px 3px silver, 0px 8px 13px silver, 0px 18px 23px silver!important;  
+}
+
+
+.intro-section {
+  background-image: url(https://lh3.googleusercontent.com/d/17I7Hj3GVuvid8OnM_KTt8FrwrqUDFDYv);
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  margin: -100px 0 0 -100px;
-}
-
-#loading-text {
-  position: absolute;
-  left: 50%;
-  top: calc(50% + 50px);
-  transform: translateX(-50%);
-  text-align: center;
-}
-
-.menuSelectedColor {    
-  border-left: solid 7px #311B92 !important;
-    background-color: #E8E9EE !important;
-  color: #311B92 !important;
-  font-weight:bold;
-}
-
-
-.card{
-  font-family: 'Nunito', sans-serif;
-    border-radius: 4px;
-    background: #fff;
-    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
-      transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
-  padding: 14px 80px 18px 36px;
-  cursor: pointer;
-  height: 120px;
-  align-items: center; 
-   display: flex; 
-  text-decoration: none; 
-}
-
-
-.card:hover{
-     transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
-}
-
-.list .card h3{
-  font-weight: 600;
-  font-size: 1.7rem;
-  
-}
-
-.card img{
-  position: absolute;
-  top: 20px;
-  right: 15px;
-  max-height: 120px;
-}
-
-.card-1{
-  background-image: url(https://ionicframework.com/img/getting-started/ionic-native-card.png);
-      background-repeat: no-repeat;
-    background-position: right;
-    background-size: 80px;
-}
-
-.card-2{
-   background-image: url(https://ionicframework.com/img/getting-started/components-card.png);
-      background-repeat: no-repeat;
-    background-position: right;
-    background-size: 80px;
-}
-
-.card-3{
-   background-image: url(https://ionicframework.com/img/getting-started/theming-card.png);
-      background-repeat: no-repeat;
-    background-position: right;
-    background-size: 80px;
-}
-
-.card-4{
-   background-image: url(https://i.ibb.co/gFPnF2Y/Captura-de-Pantalla-2024-04-27-a-la-s-23-35-42.png);
-      background-repeat: no-repeat;
-    background-position: right;
-    background-size: 80px;
-}
-
-@media(max-width: 990px){
-  .card{
-    margin: 20px;
-  }
-} 
-
-
- .iframe-container {
-   overflow: hidden;
-            position: relative;
-            overflow: hidden;
-            max-width: 100%;
-            height:  88vh;
-        }
-
-
-        .iframe-container iframe {
-          position: absolute;
-          top: 0;
-        left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-
-
-
-
-
-     
-.documents {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-  grid-auto-rows: 214px;
-  grid-gap: 12px;
-  height: auto;
-  background-color: #FFF;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 12px;
-}
-
-.document {
+  padding: 75px 95px;
+  min-height: 100vh;
+  height: 100vh;
+  display: -webkit-box;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
+  color: #ffffff; }
+  @media (max-width: 991px) {
+    .intro-section {
+      padding-left: 50px;
+      padding-rigth: 50px; } }
+  @media (max-width: 767px) {
+    .intro-section {
+      padding: 28px; } }
+  @media (max-width: 575px) {
+    .intro-section {
+      min-height: auto; display:none;}    
+}
+
+
+.brand-wrapper .logo {
+  height: 35px; }
+
+@media (min-width: 767px) {
+  .brand-wrapper {
+    margin-top: -35px; } }
+
+.intro-content-wrapper {
+  width: 410px;
+  max-width: 100%;
+  margin-top: 200px;
+  margin-bottom: auto; }
+  .intro-content-wrapper .intro-title {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 17px; }
+  .intro-content-wrapper .intro-text {
+    font-size: 19px;
+    line-height: 1.37; }
+  .intro-content-wrapper .btn-read-more {
+    background-color: #fff;
+    padding: 7px 30px;
+    border-radius: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #000; }
+    .intro-content-wrapper .btn-read-more:hover {
+      background-color: transparent;
+      border: 1px solid #fff;
+      color: #fff; }
+
+
+.intro-section-footer .footer-nav a {
+  font-size: 20px;
+  font-weight: bold;
+  color: inherit; }
+  @media (max-width: 767px) {
+    .intro-section-footer .footer-nav a {
+      font-size: 14px; } }
+  .intro-section-footer .footer-nav a + a {
+    margin-left: 30px; }
+
+.form-section {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center; }
+  @media (max-width: 767px) {
+    .form-section {
+      padding: 35px; } }
+
+.login-wrapper {
+  width: 300px;
+  max-width: 100%; }
+  @media (max-width: 575px) {
+    .login-wrapper {
+      width: 100%; } }
+  .login-wrapper .form-control {
+    border: 0;
+    border-bottom: 1px solid #e7e7e7;
+    border-radius: 0;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 15px 10px;
+    margin-bottom: 7px; }
+    .login-wrapper .form-control::-webkit-input-placeholder {
+      color: #b0adad; }
+    .login-wrapper .form-control::-moz-placeholder {
+      color: #b0adad; }
+    .login-wrapper .form-control:-ms-input-placeholder {
+      color: #b0adad; }
+    .login-wrapper .form-control::-ms-input-placeholder {
+      color: #b0adad; }
+    .login-wrapper .form-control::placeholder {
+      color: #b0adad; }
+
+.login-title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 30px; }
+
+.login-btn {
+  padding: 13px 30px;
+  background-color: #000;
+  border-radius: 0;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff; }
+  .login-btn:hover {
+    border: 1px solid #000;
+    background-color: transparent;
+    color: #000; }
+
+.forgot-password-link {
+  font-size: 14px;
+  color: #080808;
+  text-decoration: underline; }
+
+.social-login-title {
+  font-size: 15px;
+  color: #919aa3;
+  display: -webkit-box;
+  display: flex;
+  margin-bottom: 23px; }
+  .social-login-title::before, .social-login-title::after {
+    content: "";
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#f4f4f4), to(#f4f4f4));
+    background-image: linear-gradient(#f4f4f4, #f4f4f4);
+    -webkit-box-flex: 1;
+            flex-grow: 1;
+    background-size: calc(100% - 20px) 1px;
+    background-repeat: no-repeat; }
+  .social-login-title::before {
+    background-position: center left; }
+  .social-login-title::after {
+    background-position: center right; }
+
+.social-login-links {
+  text-align: center;
+  margin-bottom: 32px; }
+
+.social-login-link img {
+  width: 40px;
+  height: 40px;
+  -o-object-fit: contain;
+     object-fit: contain; }
+
+.social-login-link + .socia-login-link {
+  margin-left: 16px; }
+
+.login-wrapper-footer-text {
+  font-size: 14px;
+  text-align: center; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+.flex-flex {
+    display: flex;
+}
+.align-center {
+  align-items: center; 
+}
+.center-center {
   align-items: center;
   justify-content: center;
-  margin: 15px 0 0;
-  flex-direction: column;
-}
-.document__img {
-  width: 105px;
-  height: 136px;
-
-  background-size: cover;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-.document__img:hover {
-  transform: translateY(-4px);
-}
-.document__title {
-  margin: 8px 0 2px;
-  color: #777;
-}
-.document__date {
-  font-size: 10px;
 }
 
-   #drive{
-    height: 450px;
-    width: 100%;
-  }
-  
-  .modal-container {
-    position: fixed;
-    display: table;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    transform: scale(0);
-    z-index: 1;
-  }
+.flex-direction--column {
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
 
-  .modal-container.four {
-    z-index: 0;
-    transform: scale(1);
-  }
 
-  .modal-container.four .modal-background .modalDoc {
-    animation: blowUpModal 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-  }
-  .modal-container.four + body {
-    z-index: 1;
-    animation: blowUpContent 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-  }
-  .modal-container.four.out .modal-background .modalDoc {
-    animation: blowUpModalTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-  }
-  .modal-container.four.out + body {
-    animation: blowUpContentTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-  }
+.padding-top--64 {
+  padding-top: 64px;
+}
+.padding-top--24 {
+  padding-top: 24px;
+}
 
-  .modal-container .modal-background {
-    display: table-cell;
-    background: rgba(0, 0, 0, 0.8);
+.padding-bottom--24 {
+  padding-bottom: 24px;
+}
+.padding-horizontal--48 {
+  padding: 48px;
+}
+ 
+/* @media (max-width: 575px) {
+    .padding-horizontal--48 {
+  padding: 1px;
+} }*/
+.padding-bottom--15 {
+  padding-bottom: 15px;
+}
+
+
+.flex-justifyContent--center {
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+
+
+
+.footer-link span {
+  margin-top: 140px;
+    font-size: 14px;
     text-align: center;
-    vertical-align: middle;
-  }
-  .modal-container .modal-background .modalDoc {
-    padding: 50px;
-    display: inline-block;
-    border-radius: 3px;
-    font-weight: 300;
-    position: relative;
-  }
-
-.close-modal {
-    display: block;
-    position: absolute;
-  top: 40px;
-    right: 20px;
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: bold;
-    color: #fff;
+}
+.listing a {
+    color: #697386;
+    font-weight: 600;
+    margin: 0 10px;
 }
 
-  @keyframes blowUpContent {
-    0% {
-      transform: scale(1);
-      opacity: 1;
-    }
-    99.9% {
-      transform: scale(2);
-      opacity: 0;
-    }
-    100% {
-      transform: scale(0);
-    }
+
+
+
+ .login-container {
+            text-align: center;
+            max-width: 400px;
+   height: 60vh; 
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+     
+   
+        }
+
+.logo-img {
+    max-width: 130px; 
+    height: auto; 
+    display: block; 
+  border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+        .login-btn, .back-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+.login-btn-icon{
+  margin-right: 5px; 
+  margin-top: -7px;
+  font-size: 22px;
+  float: left;
+}
+     
+       .login-btn-email, .g_id_signin {
+    /*width: 83%;*/
+    height: 40px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #3c4043;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    margin-top: 12px;
+}
+
+.login-btn-email:hover {
+    background-color: #f7f8f8;
+}
+
+.login-btn-email:focus {
+    outline: none;
+    box-shadow: 0 0 3px 2px rgba(66, 133, 244, 0.3);
+}
+      
+
+        .signup-link {
+
+           margin-top: 10px;
+
+        }
+
+        .signup-link a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+      #whatsapp-login {
+            margin-top: 30px;
+            display: none;
+        }
+
+        #maillogin, #signupform {
+            margin-top: 20px;
+            display: none;
+        }
+
+        #login-options {
+            display: block;
+        }
+
+        .back-btn {
+            background-color: #f2f2f2;
+            color: #555;
+        }
+
+        .back-btn:hover {
+            background-color: #e0e0e0;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+.showbox {
+  display: flex;
+    justify-content: center;
+    align-items: center;
+ 
+}
+
+
+.loader {
+  position: relative;
+  margin: 0px auto;
+  width: 100px;
+}
+.loader:before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+
+.circular {
+  -webkit-animation: rotate 2s linear infinite;
+          animation: rotate 2s linear infinite;
+  height: 100%;
+  transform-origin: center center;
+  width: 100px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.path {
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  -webkit-animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+          animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  stroke-linecap: round;
+}
+
+@-webkit-keyframes rotate {
+  100% {
+    transform: rotate(360deg);
   }
-  @keyframes blowUpContentTwo {
-    0% {
-      transform: scale(2);
-      opacity: 0;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
   }
-  @keyframes blowUpModal {
-    0% {
-      transform: scale(0);
-    }
-    100% {
-      transform: scale(1);
-    }
+}
+@-webkit-keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
   }
-  @keyframes blowUpModalTwo {
-    0% {
-      transform: scale(1);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(0);
-      opacity: 0;
-    }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
   }
-  
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
+@-webkit-keyframes color {
+  100%, 0% {
+    stroke: #d62d20;
+  }
+  40% {
+    stroke: #0057e7;
+  }
+  66% {
+    stroke: #008744;
+  }
+  80%, 90% {
+    stroke: #ffa700;
+  }
+}
+@keyframes color {
+  100%, 0% {
+    stroke: #d62d20;
+  }
+  40% {
+    stroke: #0057e7;
+  }
+  66% {
+    stroke: #008744;
+  }
+  80%, 90% {
+    stroke: #ffa700;
+  }
+}
 </style>
 
-<body>
 
-<section class="loginSection"  style="display: none;">
-  <div id="back">
-    <canvas id="canvas" class="canvas-back"></canvas>
-    <div class="backRight">    
-    </div>
-    <div class="backLeft">
-    </div>
-  </div>
-
-  <div id="slideBox">
-    <div class="topLayer">
-      <div class="left">
-        <div class="content">
-          <h2>Registro</h2>
-            <div class="form-element form-stack">
-              <label for="recover" class="form-label">Email</label>
-              <input id="recover" type="email" name="recover">
-            </div>
-            <div class="form-element form-stack">
-              <label for="recover2" class="form-label">Confirmar Email</label>
-              <input id="recover2" type="email" name="recover2">
-            </div>
-            <div class="form-element form-submit">
-              <button id="signUp" class="signup" onclick="signin(this)" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Cargando..." name="signup">Registrarse</button>
-              <button id="goLeft" class="signup off" style="font-size: 13px; margin-top: 10px;">Iniciar sesión</button> 
-            </div>
-            <div style="color: gainsboro; font-weight: 400; font-size: 13px; margin-top: 15px;"> Recibiras un email con los pasos a seguir para que puedas iniciar sesión </div>
+<div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6 col-md-7 intro-section">
+          <div class="brand-wrapper strong-shadow" >
+            <h1>Taller de Piano</h1>
+          </div>
+          <div class="intro-content-wrapper">
+        <br><br>
+            <h1 class="intro-title strong-shadow">Bienvenido al mundo del Piano!</h1>
+            <p class="intro-text strong-shadow">En Mozart Academy, te ofrecemos clases adaptadas a tus necesidades y horarios, ya seas principiante o avanzado.</p>
+          
+          </div>
+        <!--  <div class="intro-section-footer" style="margin-top: 40px;">
+            <na class="footer-nav strong-white">
+      <a href="https://www.facebook.com/mozartstudio.academy">Facebook</a> 
+<a href="https://www.instagram.com/mozart.academy_/" >Instagram</a> 
+<a href="https://www.youtube.com/@TallerdePiano" >YouTube</a> 
+            </na>
+          </div> -->
         </div>
-      </div>
-    
-      <div class="right">
-        <div class="content">
-          <h2>Inicio de sesión</h2>
-          <div id="form-login">
-            <div class="form-element form-stack">
-              <label for="email-login" class="form-label">Email</label>
-              <input id="email-login" type="email" name="email-login">
-            </div>
-            
-            
-            <div class="form-element form-stack">
-              <label for="password-login" class="form-label">Password</label>
-              <input id="password-login" type="password" name="password-login">
-            </div>
+        
+        
+        
+        
+         <div class="col-sm-6 col-md-5 box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9; ">
+       
+           
+           
+          
+           
+          
+        <div class="formbg-outer" >
+          <div class="formbg">
       
-            <div class="form-element form-submit">
-              <button id="logIn" class="login" onclick="login(this)" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Cargando...">Iniciar sesión</button>
-              <button id="goRight" class="login off" name="signup" style="font-size: 13px; margin-top: 10px;">Registrarse</button>
-            </div>
+              <div class="login-container d-flex flex-column justify-content-between min-vh-100">
+                
+              
+                 
+       <div id="login-options">
+           <img src="https://lh3.googleusercontent.com/d/12G4AuBpDZcg1LAiVq6gfNWShiB-2eXLB"  class="logo-img my-3">
+    <h4 class="mt-3">Inicia sesión</h4>
+        
+<br><br><br>
+    <div class="flex-grow-1 d-flex flex-column justify-content-center align-items-center">
+      
+      
+      <div class="preloader showbox" style="display: none">
+    <div class="loader">
+        <svg class="circular" viewbox="25 25 50 50">
+          <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
+        </svg>
+     
+      </div>
+  </div> 
+      
+      
+      
+   <div class="buttons-container" >     
+        <div id="g_id_onload"
+            data-client_id="613538890545-o4p4ft7oji6uhimgh0inqn5l5cgv1gnm.apps.googleusercontent.com"
+            data-context="signup"
+            data-ux_mode="popup"
+            data-callback="handleCredentialResponse"
+            data-auto_prompt="false">
+        </div>
+
+        <div id="sign" class="g_id_signin"
+            data-type="standard"
+            data-shape="rectangular"
+           data-theme="filled_blue"
+            data-text="signin_with"
+            data-size="large"
+            data-logo_alignment="left" onclick="showLoader()">
+        </div>
+
+ 
+    
+  <button class="login-btn login-btn-email" onclick="showMailLogin()" style="margin-top: 15px;"><i class="ri-mail-line login-btn-icon" ></i> Acceder con email</button>   
+
+         </div>
+    </div>
+
+  
+</div>
+                
+
+
+
+        <section id="maillogin">
+            <h3>Acceder con email</h3>
+          
+           <div id="Mail-error" class="alert alert-danger" style="display: none;">
+          Cuenta no registrada.
+        </div>
+           <div id="Mail-success" class="alert alert-success" style="display: none;">
+          Registro exitoso. Revisa tu correo para obtener tu password y acceder a tu cuenta.
+        </div>
+          <br><br>
+         
+            <input type="email" id="email-login" placeholder="Ingresa tu email" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
+            <input type="password" id="password-login" placeholder="Ingresa tu password" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
+     <!--       <div class="signup-link mb-4">
+        <p>¿No tienes cuenta? <a href="#" onclick="showSignupForm()">Regístrate</a></p>
+    </div> -->
+            <button class="login-btn" onclick="Maillogin(this)">Iniciar sesión</button>
+            <button class="back-btn" onclick="showLoginOptions()">Atrás</button>
+        </section>
+
+        <section id="signupform">
+            <h3>Registro</h3>
+          <div id="User-error" class="alert alert-danger" style="display: none">
+          Tu correo ya está registrado.
+        </div>         
+          <br>
+            <input type="text" id="name-register" placeholder="Ingresa tu nombre completo" style="width: 100%; padding: 10px; margin-bottom: 10px; margin-top: 20px; border-radius: 5px; border: 1px solid #ccc;">
+            <input type="email" id="mail-register" placeholder="Ingresa tu email" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
+            <div class="input-group" style="width: 100%;  margin-bottom: 25px; border-radius: 5px; border: 1px solid #ccc;">
+    <div class="input-group-prepend" >
+      <select id="country-code" class="custom-select">
+       <option value="+52">🇲🇽 +52</option>
+      <option value="+1">🇺🇸 +1</option>
+      <option value="+1">🇨🇦 +1</option>
+      <option value="+57">🇨🇴 +57</option>
+      <option value="+54">🇦🇷 +54</option>
+      </select>
+    </div>
+    <input type="text" id="phone-register" inputmode="numeric" maxlength="10" pattern="[0-9]*" class="form-control" autocomplete="off" placeholder="Número de teléfono" >
+  </div>
+     
+           <button class="login-btn" onclick="registration(this)">Registrarse</button>
+            <button class="back-btn" onclick="showLoginOptions()">Atrás</button>
+        </section>
+                
+    </div>
+      
           </div>
         </div>
+      </div>   
       </div>
     </div>
-  </div>
-</section>
-
-
-
-
-
-  <section class="mainSection" style="display: none;">
-      
- <div ng-app="ionicApp">
-  <div ng-controller="AppCtrl">
-
-<ion-nav-bar class="nav-title-slide-ios bar-stable">
-    <ion-nav-back-button icon="caret-back" style="color: black">regresar
-    </ion-nav-back-button>
-  </ion-nav-bar>
-
-  <ion-nav-view animation="slide-right"></ion-nav-view>
-
-    
-  <script id="menu.html" type="text/ng-template">
-    <ion-side-menus >
-    
-
-      <ion-side-menu side="right" expose-aside-when="large">
-        <ion-header-bar class="bar-stable">
-          <h1 class="title">Menu</h1>
-        </ion-header-bar>
-        <ion-content>
-         <ul class="list">
-            <a href="#/menu/tab/profile" class="item" ng-class="(activeMenuClr=='profile')?'menuSelectedColor':''" ng-click="activeMenuClr = 'profile'" menu-toggle="right" ><i class="ri-home-2-fill"></i>&nbsp&nbspInicio</a>
-               <a href="#/menu/lessons" class="item" ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" ng-click="activeMenuClr = 'lessons'" menu-toggle="right"><i class="ri-presentation-fill"></i>&nbsp&nbspLecciones</a>
-                      <a href="#/menu/library" class="item" ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" ng-click="activeMenuClr = 'library'" menu-toggle="right"><i class="ri-git-repository-fill"></i>&nbsp&nbspBiblioteca</a>
-       <a href="#/menu/resources" class="item" ng-class="(activeMenuClr=='resources')?'menuSelectedColor':''" ng-click="activeMenuClr = 'resources'" menu-toggle="right"><i class="ri-dashboard-fill"></i>&nbsp&nbspRecursos</a>
-          </ul>
-        </ion-content>
-    <ion-footer-bar>
- 
-  <button class="button pull-right" ng-click="logout()"><i class="icon ri-logout-box-r-line"></i>Salir</button>
-</ion-footer-bar>
-      </ion-side-menu>
-
-      <ion-side-menu-content >        
-        <ion-nav-view name="menuContent"></ion-nav-view>
-      </ion-side-menu-content>
-
-    </ion-side-menus>
-  </script>    
-    
-  <script id="tabs.html" type="text/ng-template">
-
-      <ion-nav-bar class="bar-stable" >    
-        <ion-nav-buttons side="right">
-          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
-        </ion-nav-buttons>      
-    </ion-nav-bar>   
-
-     <ion-tabs class="tabs-icon-top tabs-stable"  >
-      <ion-tab title="Reel de logros" icon="ion-ribbon-b" href="#/menu/tab/reel">
-        <ion-nav-view name="reel-tab"></ion-nav-view>
-      </ion-tab>
-     <ion-tab title="Perfil" icon="ion-ios-contact-outline" href="#/menu/tab/profile">
-        <ion-nav-view name="profile-tab"></ion-nav-view>
-      </ion-tab>     
-       <ion-tab title="Agenda" icon="ion-android-calendar" href="#/menu/tab/agenda" >
-        <ion-nav-view name="agenda-tab"></ion-nav-view>
-      </ion-tab>
-    </ion-tabs>
-
-  </script>
-
-
-            <script id="chat.html" type="text/ng-template">
-    <ion-view title="Tutoría">
-    
-      <ion-content>
-        <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/chat" frameborder="0" allowfullscreen ></iframe></div> 
-      </ion-content>
-    </ion-view>
-  </script>
-
-
-    
-    <script id="profile.html" type="text/ng-template">
-    <ion-view title="Perfil">
-      <ion-content >
- 
-        <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/profile" frameborder="0" allowfullscreen></iframe></div> 
-
-      </ion-content>
-    </ion-view>
-  </script>
-
-    
- <script id="agenda.html" type="text/ng-template">
-    <ion-view title="Agenda">
-
-      <ion-content>
-       
-       <div class="iframe-container"><iframe id="agendaFrame" src="https://cubiculociencias.github.io/tallerdepiano/calendar" frameborder="0" allowfullscreen></iframe></div>
-    
-      </ion-content>
-    </ion-view>
-  </script>
-      
-       <script id="reel.html" type="text/ng-template">
-    <ion-view title="Reel de logros">
-      <ion-content >  
-        <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/comunity" frameborder="0" allowfullscreen ></iframe></div> 
-      </ion-content>
-    </ion-view>
-  </script>
-
- <script id="lessons.html" type="text/ng-template">
-    <ion-view title="Lecciones">
-
-      <ion-nav-bar class="bar-stable">
-        <ion-nav-buttons side="right">
-          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
-        </ion-nav-buttons>      
-    </ion-nav-bar>
-
-     <ion-content>
-       
-   <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/lessons" frameborder="0" allowfullscreen></iframe></div>
-
-      </ion-content>
-
-    </ion-view>
-  </script>        
-   <script id="resources.html" type="text/ng-template">
-    <ion-view title="Recursos didácticos">
-
-      <ion-nav-bar class="bar-stable">
-        <ion-nav-buttons side="right">
-          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
-        </ion-nav-buttons>      
-    </ion-nav-bar>
-
-
-     <ion-content>
-       
-    <div class="list">
-          <div class="item item-divider">
-            Herramientas
-          </div>  
-
-     
-      <a class="item item-avatar" href="#/menu/metronome">
-        <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/42/1e/07/421e07cc-b33b-e384-1995-06183618693a/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/460x0w.webp">
-           <h2> Metrónomo</h2>
-     <p> metronome beats </p>
-          </a>
-          
-
-     
-     <a class="item item-avatar" href="#/menu/notereader">
-            <img src="https://play-lh.googleusercontent.com/NzG7u3_0xrBfYdx-_ddIZn9x8VFv5oBtOuMsgpWIZJ8vqB8pWUIUeIMcl-9saY8-N0o=w480-h960-rw">
-           <h2> Lectura de notas </h2>
-     <p> Entrenamiento melódico</p>
-          </a>
-     
-
-      <a class="item item-avatar" href="#/menu/circlefifths">
-            <img src="https://lh3.googleusercontent.com/d/16w1B_HGaZPCaG5uhMjTA824i_uTFcnTF=s100-p">
-           <h2> Círculo de quintas </h2>
-     <p> Entrenamiento armónico</p>
-          </a>
-        
- <a class="item item-avatar" href="#/menu/chords">
-            <img src="https://images.sftcdn.net/images/t_app-icon-m/p/60922fc3-0163-4dbf-8c3d-52d560c712d7/4009110695/chrome-music-lab-Chrome%20Music%20Lab-icon.png">
-           <h2> Chords </h2>
-     <p> Google Chrome Labs</p>
-          </a>
-        
-
-     
-      </ion-content>
-      
-     
-    </ion-view>
-  </script>   
-
-
-    
-     <script id="metronome.html" type="text/ng-template">   
-       <ion-view>
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
-       <div class="iframe-container"><iframe src="https://embed.metronome.app/" frameborder="0" allowfullscreen></iframe></div>
-       
-      </ion-content>
-    </ion-view>
-  </script>
-
-
-    
-   <script id="library.html" type="text/ng-template">
-    <ion-view title="Biblioteca de partituras">
-
-      <ion-nav-bar class="bar-stable">
-        <ion-nav-buttons side="right">
-          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
-        </ion-nav-buttons>      
-    </ion-nav-bar>
-
-
-     <ion-content>
-       
-    <div class="list">
-  
-      <a class="item item-avatar" href="#/menu/manuals">
-        <img src="https://lh3.googleusercontent.com/d/13txkyvCE8uBCGu5LJ_-8gA4pRdsmOAAZ=s100-p">
-           <h2> Manuales</h2>
-     <p> Recopilación de tus lecciones </p>
-          </a>
-          
-         <a class="item item-avatar" href="#/menu/repertoire">
-            <img src="https://lh3.googleusercontent.com/d/1mrInm_ro0rby01RhGHFWzTKPTgZ8Xh2Z=s100-p">
-           <h2> Repertorio </h2>
-     <p> Tus piezas finalizadas</p>
-          </a>
-     
-       <a class="item item-avatar" href="#/menu/books">
-            <img src="https://lh3.googleusercontent.com/d/1lMqhDdRYiBKn3yvWXAY-lKGrvbAvwn2o=s100-p">
-           <h2> Métodos </h2>
-     <p> Libros complementarios</p>
-          </a>
-        
-
-     
-      </ion-content>
-      
-     
-    </ion-view>
-  </script>   
-
-
-  
-
-    
-   <script id="manuals.html" type="text/ng-template">   
-       <ion-view>
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
-        <div class="documents">
-      <div class="document" ng-repeat="manual in manuals" ng-click="showModal($index)">
-        <div class="document__img" ng-style="{'background-image': 'url(' + manual.background + ')'}"></div>
-          <div class="document__title">{{manual.title}}</div>
-         </div>
-     </div>
-  
-
-    <div id="modalPDF" class="modal-container">
-        <div class="modal-background" ng-click="hideModal()">
-            <div class="modalDoc">
-        
-                      <a 
-         href="" 
-         class="close-modal" 
-        >
-         <!-- X close video icon -->
-          <svg 
-            version="1.1" 
-            xmlns="http://www.w3.org/2000/svg" 
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            x="0"
-            y="0"
-            viewBox="0 0 32 32" 
-            style="enable-background:new 0 0 32 32;" 
-            xml:space="preserve" 
-            width="24" 
-            height="24" 
-          >
-                <path fill="#ffffff" d="M30.3448276,31.4576271 C29.9059965,31.4572473 29.4852797,31.2855701 29.1751724,30.980339 L0.485517241,2.77694915 C-0.122171278,2.13584324 -0.104240278,1.13679247 0.52607603,0.517159487 C1.15639234,-0.102473494 2.17266813,-0.120100579 2.82482759,0.477288136 L31.5144828,28.680678 C31.9872448,29.1460053 32.1285698,29.8453523 31.8726333,30.4529866 C31.6166968,31.0606209 31.0138299,31.4570487 30.3448276,31.4576271 Z" id="Shape"></path>
-                <path fill="#ffffff" d="M1.65517241,31.4576271 C0.986170142,31.4570487 0.383303157,31.0606209 0.127366673,30.4529866 C-0.12856981,29.8453523 0.0127551942,29.1460053 0.485517241,28.680678 L29.1751724,0.477288136 C29.8273319,-0.120100579 30.8436077,-0.102473494 31.473924,0.517159487 C32.1042403,1.13679247 32.1221713,2.13584324 31.5144828,2.77694915 L2.82482759,30.980339 C2.51472031,31.2855701 2.09400353,31.4572473 1.65517241,31.4576271 Z" id="Shape"></path>
-          </svg>
-        </a>
-       
-                <iframe class="drive" ng-src="{{trustAsResourceUrl(selectedManualUrl)}}" frameborder="0"></iframe>
-            </div>
-        </div>
-    </div>
-       
-      </ion-content>
-    </ion-view>
-  </script>
-
-
-  
-    
-    
-     <script id="repertoire.html" type="text/ng-template">   
-       <ion-view>
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
-           <div class="documents">
-      <div class="document" ng-repeat="manual in manuals" ng-click="showModal($index)">
-        <div class="document__img" ng-style="{'background-image': 'url(' + manual.background + ')'}"></div>
-          <div class="document__title">{{manual.title}}</div>
-         </div>
-     </div>
-  
-
-    <div id="modalPDF2" class="modal-container">
-        <div class="modal-background" ng-click="hideModal()">
-            <div class="modalDoc">
-        
-                      <a 
-         href="" 
-         class="close-modal" 
-        >
-         <!-- X close video icon -->
-          <svg 
-            version="1.1" 
-            xmlns="http://www.w3.org/2000/svg" 
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            x="0"
-            y="0"
-            viewBox="0 0 32 32" 
-            style="enable-background:new 0 0 32 32;" 
-            xml:space="preserve" 
-            width="24" 
-            height="24" 
-          >
-                <path fill="#ffffff" d="M30.3448276,31.4576271 C29.9059965,31.4572473 29.4852797,31.2855701 29.1751724,30.980339 L0.485517241,2.77694915 C-0.122171278,2.13584324 -0.104240278,1.13679247 0.52607603,0.517159487 C1.15639234,-0.102473494 2.17266813,-0.120100579 2.82482759,0.477288136 L31.5144828,28.680678 C31.9872448,29.1460053 32.1285698,29.8453523 31.8726333,30.4529866 C31.6166968,31.0606209 31.0138299,31.4570487 30.3448276,31.4576271 Z" id="Shape"></path>
-                <path fill="#ffffff" d="M1.65517241,31.4576271 C0.986170142,31.4570487 0.383303157,31.0606209 0.127366673,30.4529866 C-0.12856981,29.8453523 0.0127551942,29.1460053 0.485517241,28.680678 L29.1751724,0.477288136 C29.8273319,-0.120100579 30.8436077,-0.102473494 31.473924,0.517159487 C32.1042403,1.13679247 32.1221713,2.13584324 31.5144828,2.77694915 L2.82482759,30.980339 C2.51472031,31.2855701 2.09400353,31.4572473 1.65517241,31.4576271 Z" id="Shape"></path>
-          </svg>
-        </a>
-       
-                <iframe class="drive" ng-src="{{trustAsResourceUrl(selectedManualUrl)}}" frameborder="0"></iframe>
-            </div>
-        </div>
-    </div>
-       
-      </ion-content>
-    </ion-view>
-  </script>
-
-
-    <script id="books.html" type="text/ng-template">   
-       <ion-view>
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
-           <div class="documents">
-      <div class="document" ng-repeat="manual in manuals" ng-click="showModal($index)">
-        <div class="document__img" ng-style="{'background-image': 'url(' + manual.background + ')'}"></div>
-          <div class="document__title">{{manual.title}}</div>
-         </div>
-     </div>
-  
-
-    <div id="modalPDF3" class="modal-container">
-        <div class="modal-background" ng-click="hideModal()">
-            <div class="modalDoc">
-        
-                      <a 
-         href="" 
-         class="close-modal" 
-        >
-         <!-- X close video icon -->
-          <svg 
-            version="1.1" 
-            xmlns="http://www.w3.org/2000/svg" 
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            x="0"
-            y="0"
-            viewBox="0 0 32 32" 
-            style="enable-background:new 0 0 32 32;" 
-            xml:space="preserve" 
-            width="24" 
-            height="24" 
-          >
-                <path fill="#ffffff" d="M30.3448276,31.4576271 C29.9059965,31.4572473 29.4852797,31.2855701 29.1751724,30.980339 L0.485517241,2.77694915 C-0.122171278,2.13584324 -0.104240278,1.13679247 0.52607603,0.517159487 C1.15639234,-0.102473494 2.17266813,-0.120100579 2.82482759,0.477288136 L31.5144828,28.680678 C31.9872448,29.1460053 32.1285698,29.8453523 31.8726333,30.4529866 C31.6166968,31.0606209 31.0138299,31.4570487 30.3448276,31.4576271 Z" id="Shape"></path>
-                <path fill="#ffffff" d="M1.65517241,31.4576271 C0.986170142,31.4570487 0.383303157,31.0606209 0.127366673,30.4529866 C-0.12856981,29.8453523 0.0127551942,29.1460053 0.485517241,28.680678 L29.1751724,0.477288136 C29.8273319,-0.120100579 30.8436077,-0.102473494 31.473924,0.517159487 C32.1042403,1.13679247 32.1221713,2.13584324 31.5144828,2.77694915 L2.82482759,30.980339 C2.51472031,31.2855701 2.09400353,31.4572473 1.65517241,31.4576271 Z" id="Shape"></path>
-          </svg>
-        </a>
-       
-                <iframe class="drive" ng-src="{{trustAsResourceUrl(selectedManualUrl)}}" frameborder="0"></iframe>
-            </div>
-        </div>
-    </div>
-       
-      </ion-content>
-    </ion-view>
-  </script>
-
-
-    
-
- <script id="notereader.html" type="text/ng-template">   
-       <ion-view>
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
-    <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/notereader" frameborder="0" allowfullscreen></iframe></div>
-       
-      </ion-content>
-    </ion-view>
-  </script>
-
-
-
-
- <script id="chords.html" type="text/ng-template">   
-       <ion-view>
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
-        <div class="iframe-container"><iframe src="https://musiclab.chromeexperiments.com/Chords/" frameborder="0" allowfullscreen ></iframe></div> 
-       
-      </ion-content>
-    </ion-view>
-  </script>
-
-
-
-     <script id="circlefifths.html" type="text/ng-template">   
-       <ion-view>
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
-   <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/circleoffifths" frameborder="0" allowfullscreen></iframe></div>
-       
-      </ion-content>
-    </ion-view>
-  </script>
-
-
-
-  <script id="modal.html" type="text/ng-template">
-    <div class="modal">
-      <ion-header-bar class="bar bar-header bar-positive">
-        <h1 class="title">Modal</h1>
-        <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
-      </ion-header-bar>
-      
-      <ion-content class="padding">
-        <div class="list">
-          <label class="item item-input">
-            <span class="input-label">To</span>
-            <input type="text">
-          </label>
-          <label class="item item-input">
-            <span class="input-label">Message</span>
-            <textarea rows="4"></textarea>
-          </label>
-        </div>
-        <button class="button icon icon-right ion-arrow-right-c button-balanced button-block">Send</button>
-      </ion-content>
-    </div>
-  </script>  
-  </div>
-</div>
-
-  </section>
-    
-  <section class="preloader" >
-    <div id="loading">&nbsp;</div>
-    <div id="loading-text">Cargando</div>
-  </section> 
-
-</body>
-
-
-<script>
-
-  var app = angular.module('ionicApp', ['ionic']);
-app
-.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
-
-   $stateProvider
-    .state('menu', {
-      url: "/menu",
-      abstract: true,
-      templateUrl: "menu.html",
-      controller: 'MenuCtrl'
-    })
-    .state('menu.tabs', {
-      url: "/tab",
-      views: {
-        'menuContent' :{
-          templateUrl: "tabs.html"
-        }
-      }
-    })
- .state('menu.tabs.profile', {
-      url: "/profile",
-      views: {
-        'profile-tab': {
-          templateUrl: "profile.html"
-        }
-      }
-    })
-     .state('menu.tabs.agenda', {
-      url: "/agenda",
-      views: {
-        'agenda-tab': {
-          templateUrl: "agenda.html"
-        }
-      }
-    }) 
- .state('menu.tabs.reel', {
-      url: "/reel",
-      views: {
-        'reel-tab': {
-          templateUrl: "reel.html"
-        }
-      }
-    })
-       .state('menu.lessons', {
-      url: "/lessons",
-      views: {
-        'menuContent': {
-          templateUrl: "lessons.html"
-        }
-      }
-    }) 
-       .state('menu.chat', {
-      url: "/chat",
-      views: {
-        'menuContent': {
-          templateUrl: "chat.html"
-        }
-      }
-    })
-    .state('menu.resources', {
-      url: "/resources",
-      views: {
-        'menuContent': {
-          templateUrl: "resources.html"
-        }
-      }
-    })
-   .state('menu.metronome', {
-      url: "/metronome",
-      views: {
-        'menuContent': {
-          templateUrl: "metronome.html"
-        }
-      }
-    })
-   .state('menu.notereader', {
-      url: "/notereader",
-      views: {
-        'menuContent': {
-          templateUrl: "notereader.html"
-        }
-      }
-    })
-
-  .state('menu.chords', {
-      url: "/chords",
-      views: {
-        'menuContent': {
-          templateUrl: "chords.html"
-        }
-      }
-    })
-  .state('menu.circlefifths', {
-      url: "/circlefifths",
-      views: {
-        'menuContent': {
-          templateUrl: "circlefifths.html"
-        }
-      }
-    })
-   .state('menu.library', {
-      url: "/library",
-      views: {
-        'menuContent': {
-          templateUrl: "library.html"
-        }
-      }
-    })
- 
-   .state('menu.manuals', {
-      url: "/manuals",
-      views: {
-        'menuContent': {
-          templateUrl: "manuals.html",
-          controller: "booksCtrl1"
-        }
-      }
-    })
-
-   .state('menu.repertoire', {
-      url: "/repertoire",
-      views: {
-        'menuContent': {
-          templateUrl: "repertoire.html",
-          controller: "booksCtrl2"
-        }
-      }
-    })
-
-     .state('menu.books', {
-      url: "/books",
-      views: {
-        'menuContent': {
-          templateUrl: "books.html",
-          controller: "booksCtrl3"
-        }
-      }
-    })
-    ;
-
-  $urlRouterProvider.otherwise("menu/tab/profile");
-  $ionicConfigProvider.tabs.position('bottom'); 
-})
-
- .controller('AppCtrl', function() {
-  ionic.Platform.ready(function() {
-  });
- })       
-
-.controller('MenuCtrl', ['$http', '$scope', '$ionicSideMenuDelegate', '$ionicModal', function($http, $scope, $ionicSideMenuDelegate, $ionicModal) {
-  $scope.toggleRight = function() {
-    $ionicSideMenuDelegate.toggleRight();
-  };
-
-  $scope.logout = function() {
-    $('.preloader').fadeIn('slow');
-
-    var requestData = {
-      action: "removeToken",
-      token: localStorage.getItem('TPtoken')
-    };
-
-    var config = {
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8"
-      },
-      followRedirects: true
-    };
-
-    $http.post('https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec', requestData, config)
-      .then(function(response) {
-        if (response.data.status === "success") {
-          localStorage.removeItem('TPtoken');
-          $('.preloader').css({ 'display': 'none' });
-          $('.loginSection').fadeIn('slow');
-          $('.mainSection').css({ 'display': 'none' });
-          loadForm();
-        }
-      })
-      .catch(function(error) {
-        console.error('Error during logout:', error);
-        // Ocultar preloader en caso de error
-        $('.preloader').css({ 'display': 'none' });
-      });
-  };
- }])
-
-       .controller('booksCtrl1', ['$http', '$scope', '$sce', function($http, $scope, $sce){
-    $scope.trustAsResourceUrl = function(url) {
-        return $sce.trustAsResourceUrl(url);
-    };
-    
-     $scope.selectedManualUrl = '';
-
-    $scope.showModal = function(index) {
-      $scope.selectedManualUrl = 'https://drive.google.com/file/d/' + $scope.manuals[index].id + '/preview';
-        document.getElementById('modalPDF').classList.add('four');
-    };
-
-    $scope.hideModal = function(index) {
-        const modal = document.getElementById('modalPDF');
-        modal.classList.add('out');
-        setTimeout(() => {
-            modal.classList.remove('four', 'out');
-        }, 400);
-    };
-
-    
- $scope.manuals = [ 
-
-      {'title': 'Bloque 1 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa'}
-    ];
-    
-    
-}])
-    .controller('booksCtrl2', ['$http', '$scope', '$sce', function($http, $scope, $sce){
-    $scope.trustAsResourceUrl = function(url) {
-        return $sce.trustAsResourceUrl(url);
-    };
-    
-     $scope.selectedManualUrl = '';
-
-    $scope.showModal = function(index) {
-      $scope.selectedManualUrl = 'https://drive.google.com/file/d/' + $scope.manuals[index].id + '/preview';
-        document.getElementById('modalPDF2').classList.add('four');
-    };
-
-    $scope.hideModal = function(index) {
-        const modal = document.getElementById('modalPDF2');
-        modal.classList.add('out');
-        setTimeout(() => {
-            modal.classList.remove('four', 'out');
-        }, 400);
-    };
-
-    
- $scope.manuals = [ 
-    
-      {'title': 'Bloque 1 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa'}
-    ];
-    
-    
-}])
-    .controller('booksCtrl3', ['$http', '$scope', '$sce', function($http, $scope, $sce){
-    $scope.trustAsResourceUrl = function(url) {
-        return $sce.trustAsResourceUrl(url);
-    };
-    
-     $scope.selectedManualUrl = '';
-
-    $scope.showModal = function(index) {
-      $scope.selectedManualUrl = 'https://drive.google.com/file/d/' + $scope.manuals[index].id + '/preview';
-        document.getElementById('modalPDF3').classList.add('four');
-    };
-
-    $scope.hideModal = function(index) {
-        const modal = document.getElementById('modalPDF3');
-        modal.classList.add('out');
-        setTimeout(() => {
-            modal.classList.remove('four', 'out');
-        }, 400);
-    };
-
-    
- $scope.manuals = [ 
-
-      {'title': 'Bloque 1 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa'}
-    ];
-    
-    
-}])
-
-    </script>
-
-
 
 
 
 
 
 <script>
-$(window).on('load', function() { 
-  var storedToken = localStorage.getItem('TPtoken');
-  if (storedToken) {
-    var api = "https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec";
 
-    var validationData = {
-      redirect: "follow",
-      method: "POST",
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8"
-      },
-      body: JSON.stringify({
-        action: "validateToken",
-        token: storedToken
-      })
-    };
+
+function showMailLogin() {
+            document.getElementById('login-options').style.display = 'none';
+            document.getElementById('maillogin').style.display = 'block';
+            document.getElementById('signupform').style.display = 'none';
+        }
+
+        function showSignupForm() {
+            document.getElementById('login-options').style.display = 'none';
+            document.getElementById('signupform').style.display = 'block';
+            document.getElementById('maillogin').style.display = 'none';
+        }
+
+        function showLoginOptions() {
+            document.getElementById('maillogin').style.display = 'none';
+document.getElementById('signupform').style.display = 'none';
+            document.getElementById('login-options').style.display = 'block';
+          
+   document.getElementById('Mail-error').style.display = 'none';
+   document.getElementById('User-error').style.display = 'none';
+     
+        }
+
+
+  function handleCredentialResponse(response) {
+  const responsePayload = decodeJwtResponse(response.credential);
+
+    var name = responsePayload.name
+    var photo = responsePayload.picture
+    var email = responsePayload.email
+    showLoader();
+    var api = "https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec";
+
+  var validationData = {
+    redirect: "follow",
+    method: "POST",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    },
+    body: JSON.stringify({
+      action: "validateGoogleUser",
+      name: name,
+      email: email,
+      photo: photo,
+    })
+  };
 
   fetch(api, validationData)
-  .then(response => response.text())
-  .then(res => {
-    var validation = JSON.parse(res);
-    if (validation.status == "success") {
-      $('.preloader').css({'display':'none'})  
-      $('.loginSection').css({'display':'none'})  
-      $('.mainSection').fadeIn('slow')
-      //loadData(api, storedToken, "si");    
-    } else {
-      localStorage.removeItem('TPtoken');
-      $('.preloader').css({'display':'none'});
-      $('.loginSection').fadeIn('slow') 
-      $('.mainSection').css({'display':'none'});
-      loadForm();
-    }
-  })
-  } else {
-    $('.preloader').css({'display':'none'})  
-    $('.loginSection').fadeIn('slow') 
-    $('.mainSection').css({'display':'none'});
-    loadForm();
-  }
-});
+    .then(response => response.text())
+    .then(res => {
+      var validation = JSON.parse(res);
+      if (validation.status == "success") {
+        localStorage.setItem('MStoken', validation.token);  
+       window.location.href = 'https://app.mozartacademy.mx/main'; 
+      } else {
+        alert('Error, intenta otro método de inicio de sesión');
+      }
+    })
+}
 
-  
-  
- function login(button) {
-  var $button = $(button);
+
+
+function decodeJwtResponse(data) {
+  let tokens = data.split(".");
+  return JSON.parse(atob(tokens[1]))
+}
+
+
+function showLoader() {
+  $('.preloader').css({'display': 'block'});  
+  $('.buttons-container').css({'display': 'none'});  
+
+  setTimeout(function() {
+    $('.preloader').css({'display': 'none'});  
+    $('.buttons-container').css({'display': 'block'});  
+  }, 7000); // 10000 milisegundos = 10 segundos
+}
+
+
+
+
+function Maillogin(button) {
   var email = document.getElementById('email-login').value;
   var password = document.getElementById('password-login').value;
+  var $button = $(button);
+  
+  if(email != "" && password != "" ){
+  $button.html("<i class='fa fa-spinner fa-spin'></i> Cargando...");
 
-  if(email === "" && password === "" ){
-    alert("Información de ingreso inválida")
-  }else{
-  $button.button('loading');
-  var api = "https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec";
+  var api = "https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec";
 
   var validationData = {
     redirect: "follow",
@@ -1446,39 +752,33 @@ $(window).on('load', function() {
     .then(res => {
       var validation = JSON.parse(res);
       if (validation.status == "success") {
-        localStorage.setItem('TPtoken', validation.token);            
-        var iframe = document.getElementById('lessonsFrame');
-        iframe.src = 'https://cubiculociencias.github.io/tallerdepiano/lessons';
-        $('.preloader').css({'display':'none'})  
-        $('.loginSection').css({'display':'none'})  
-        $('.mainSection').fadeIn('slow')
-        document.getElementById('email-login').value = ''; 
-        document.getElementById('password-login').value = '';
-        $button.button('reset');
-        //loadData(api, email, "no");    
+        localStorage.setItem('MStoken', validation.token); 
+        window.location.href = 'https://app.mozartacademy.mx/main'; 
       } else {
-        alert('Información de ingreso inválida');
-        $button.button('reset');
+        document.getElementById('Mail-error').style.display = 'block';    
       }
-    })
+    document.getElementById('email-login').value = "";  
+    document.getElementById('password-login').value = "";
+    $button.html("Iniciar sesión");
+    })  
+  }else{
+    alert("Ingresa tus datos de acceso")
   }
 }
 
 
- function signin(button) {
-  var $button = $(button); 
-  var mail = document.getElementById('recover').value;
-  var mail2 = document.getElementById('recover2').value;
 
-  if(mail != mail2){
-    alert("Los correos no coinciden. Por favor, verifique la información y vuelva a intentarlo.")
-      document.getElementById('recover').value = ''; 
-      document.getElementById('recover2').value = '';
-  }else if(mail === ""){
-    alert("Por favor, ingrese su correo electrónico.")
-  }else{
-  $button.button('loading');
-  var api = "https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec";
+function registration(button) {
+  var name = document.getElementById('name-register').value;
+  var email = document.getElementById('mail-register').value;
+  var phone = document.getElementById('phone-register').value;
+  var $button = $(button);
+  
+  if(name != "" && email != "" && phone != "" ){
+  $button.html("<i class='fa fa-spinner fa-spin'></i> Cargando...");
+
+  var api = "https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec";
+
   var validationData = {
     redirect: "follow",
     method: "POST",
@@ -1486,8 +786,10 @@ $(window).on('load', function() {
       "Content-Type": "text/plain;charset=utf-8"
     },
     body: JSON.stringify({
-      action: "signinUser",
-      email: mail
+      action: "registration",
+      name: name,
+      email: email,
+      phone: phone
     })
   };
 
@@ -1495,48 +797,56 @@ $(window).on('load', function() {
     .then(response => response.text())
     .then(res => {
       var validation = JSON.parse(res);
-      document.getElementById('recover').value = ''; 
-      document.getElementById('recover2').value = '';
-      $button.button('reset');  
+      document.getElementById('name-register').value = "";
+      document.getElementById('mail-register').value = "";
+      document.getElementById('phone-register').value = "";
       if (validation.status == "success") {
-        alert("¡Exito! Tu contraseña ha sido enviada a tu correo.")
+        showMailLogin()
+        document.getElementById('Mail-success').style.display = 'block'; 
+        setTimeout(function() {
+          document.getElementById('Mail-success').style.display = 'none';  
+        }, 4000);
+      } else if (validation.status == "registered") {
+        document.getElementById('User-error').style.display = 'block';       
       }else{
-        alert("Error. Tu correo no se encuentra en nuestra base de datos. Contacta a soporte.")
-      } 
-    })
+        alert("Ocurrio un error, contacta soporte")
+      }
+      document.getElementById('name-register').value = "";
+      document.getElementById('mail-register').value = "";
+      document.getElementById('phone-register').value = "";
+      $button.html("Registrarse");
+    })    
+  }else{
+    alert("Rellena todos los campos")
   }
 }
 
 
 
-function loadForm(){
-$(document).ready(function(){
-  $('#goRight').on('click', function(){
-    $('#slideBox').animate({
-      'marginLeft' : '0'
+
+
+ window.addEventListener('load', function() {
+      var googleButton = document.querySelector('.g_id_signin');
+      var otherButtons = document.querySelectorAll('.login-btn-email');
+
+      if (googleButton) {
+        var googleButtonWidth = googleButton.offsetWidth + 2;
+
+        otherButtons.forEach(function(button) {
+          button.style.width = googleButtonWidth + 'px';
+        });
+      }
     });
-    $('.topLayer').animate({
-      'marginLeft' : '100%'
-    });
-  });
-  $('#goLeft').on('click', function(){
-    if (window.innerWidth > 769){
-      $('#slideBox').animate({
-        'marginLeft' : '50%'
-      });
-    }
-    else {
-      $('#slideBox').animate({
-        'marginLeft' : '20%'
-      });
-    }
-    $('.topLayer').animate({
-      'marginLeft': '0'
-    });
-  });
+
+
+
+
+
+$(window).on('load', function() { 
+  var storedToken = localStorage.getItem('MStoken');
+  if (storedToken) {
+    window.location.href = 'https://admin.mozartacademy.mx/main'
+  } 
 });
-
-};
-
 
 </script>
