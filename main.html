@@ -2201,7 +2201,7 @@ $scope.manuals = [
 
 <script>
 $(window).on('load', function() { 
-  var storedToken = localStorage.getItem('MStoken');
+  var storedToken = localStorage.getItem('TPtoken');
   if (storedToken) {
     var api = "https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec";
 
@@ -2231,12 +2231,12 @@ $(window).on('load', function() {
         }*/
       //loadData(api, storedToken, "si");    
     } else {
-      localStorage.removeItem('MStoken');
-      window.location.href = 'https://app.mozartacademy.mx/';
+      localStorage.removeItem('TPtoken');
+      window.location.href = 'https://cubiculociencias.github.io/tallerdepiano/';
     }
   })
   } else {
-    window.location.href = 'https://app.mozartacademy.mx/';
+    window.location.href = 'https://cubiculociencias.github.io/tallerdepiano/';
   }
 });
 
