@@ -1,0 +1,2292 @@
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
+<link rel="icon" href="https://lh3.googleusercontent.com/d/1k9LA88h-FVVn9EeryBRVBrtc5tPl92CK" type="image/x-icon">
+    <title>Mozart Studio</title>
+  
+<link href="https://code.ionicframework.com/1.3.3/css/ionic.min.css" rel="stylesheet">
+  <script src="https://code.ionicframework.com/1.3.3/js/ionic.bundle.min.js"></script>
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+ <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+ <link rel="manifest" href="/manifest.json">
+</head>
+
+ <style>
+
+ .itemDividerforitem {
+      border-color: #111;
+      background-color: #444444;
+      color: #fff;
+    }
+
+
+	 
+.loadInfo{
+  z-index: 4;
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  color: white;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+
+@media only screen and (min-width: 990px) {
+  .col-md-2{
+    margin-top: 130px;
+    margin-left: -20px;
+  }  
+}
+
+
+
+@keyframes beat-fade {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(2.4);
+  }
+  
+  50% {
+    opacity: 0.5;
+    transform: scale(4);
+  }
+}
+
+
+
+
+body {
+  margin: 0;
+  height: 100%;
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+
+
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  z-index: 99;
+}
+#loading {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-image: url(https://raw.githubusercontent.com/niklausgerber/PreLoadMe/master/img/status.gif);
+  /* path to your loading animation */
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: -100px 0 0 -100px;
+}
+
+#loading-text {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + 50px);
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.menuSelectedColor {    
+  border-left: solid 7px #311B92 !important;
+    background-color: #E8E9EE !important;
+  color: #311B92 !important;
+  font-weight:bold;
+}
+
+
+.card{
+  font-family: 'Nunito', sans-serif;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+      transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  padding: 14px 80px 18px 36px;
+  cursor: pointer;
+  height: 120px;
+  align-items: center; 
+   display: flex; 
+  text-decoration: none; 
+}
+
+
+.card:hover{
+     transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+.list .card h3{
+  font-weight: 600;
+  font-size: 1.7rem;
+  
+}
+
+.card img{
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  max-height: 120px;
+}
+
+
+
+
+ .iframe-container {
+   overflow: hidden;
+            position: relative;
+            overflow: hidden;
+            max-width: 100%;
+            height:  88vh;
+        }
+
+
+        .iframe-container iframe {
+          position: absolute;
+          top: 0;
+        left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+
+
+
+
+
+     
+.documents {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  grid-auto-rows: 214px;
+  grid-gap: 12px;
+  height: auto;
+  background-color: #FFF;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 12px;
+}
+
+.document {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0 0;
+  flex-direction: column;
+}
+.document__img {
+  width: 105px;
+  height: 136px;
+
+  background-size: cover;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.document__img:hover {
+  transform: translateY(-4px);
+}
+.document__title {
+  margin: 8px 0 2px;
+  color: #777;
+}
+.document__date {
+  font-size: 10px;
+}
+
+   .drive{
+    height: 450px;
+    width: 100%;
+  }
+  
+  .modal-container {
+    position: fixed;
+    display: table;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    transform: scale(0);
+    z-index: 1;
+  }
+
+  .modal-container.four {
+    z-index: 0;
+    transform: scale(1);
+  }
+
+  .modal-container.four .modal-background .modalDoc {
+    animation: blowUpModal 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+  .modal-container.four + body {
+    z-index: 1;
+    animation: blowUpContent 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+  .modal-container.four.out .modal-background .modalDoc {
+    animation: blowUpModalTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+  .modal-container.four.out + body {
+    animation: blowUpContentTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+
+  .modal-container .modal-background {
+    display: table-cell;
+    background: rgba(0, 0, 0, 0.8);
+    text-align: center;
+    vertical-align: middle;
+  }
+  .modal-container .modal-background .modalDoc {
+    padding: 50px;
+    display: inline-block;
+    border-radius: 3px;
+    font-weight: 300;
+    position: relative;
+  }
+
+.close-modal {
+    display: block;
+    position: absolute;
+  top: 40px;
+    right: 20px;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+}
+
+  @keyframes blowUpContent {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    99.9% {
+      transform: scale(2);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+  @keyframes blowUpContentTwo {
+    0% {
+      transform: scale(2);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes blowUpModal {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes blowUpModalTwo {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(0);
+      opacity: 0;
+    }
+  }
+
+
+
+
+
+
+     
+      .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding-top: 60px;
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 300px;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .add-to-btn {
+      background-color: #E02D44;
+      color: white;
+      border: none;
+      outline: none;
+      font-weight: bold;
+      width: 100%;
+      height: 50px;
+    }
+ 
+#myModal {
+    display: block; 
+  }
+
+	 
+.ionic-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.2);
+  border-top: 4px solid #333;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+</style>
+
+<body>
+
+
+    
+  <section class="mainSection" style="display: none;">
+
+
+ <div ng-app="ionicApp">
+  <div ng-controller="AppCtrl">
+
+<ion-nav-bar class="nav-title-slide-ios bar-stable">
+    <ion-nav-back-button icon="caret-back" style="color: black">regresar
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+  <ion-nav-view animation="slide-right"></ion-nav-view>
+
+    
+  <script id="menu.html" type="text/ng-template">
+    <ion-side-menus >
+    
+
+      <ion-side-menu side="right">
+        <ion-header-bar class="bar-stable">
+          <h1 class="title">Menu</h1>
+        </ion-header-bar>
+        <ion-content>
+          <ul class="list">
+            <a href="#/menu/tab/profile" class="item" ng-class="(activeMenuClr=='profile')?'menuSelectedColor':''" ng-click="activeMenuClr = 'profile'" menu-toggle="right" ><i class="ri-shield-user-fill"></i>&nbsp&nbspPerfil</a>
+               <a href="#/menu/lessons" class="item" ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" ng-click="activeMenuClr = 'lessons'" menu-toggle="right"><i class="ri-presentation-fill"></i>&nbsp&nbspLecciones</a>
+                           <a href="#/menu/library" class="item" ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" ng-click="activeMenuClr = 'library'" menu-toggle="right"><i class="ri-git-repository-fill"></i>&nbsp&nbspBiblioteca</a>
+       <a href="#/menu/reel" class="item" ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" ng-click="activeMenuClr = 'reel'" menu-toggle="right"><i class="ri-award-fill"></i>&nbsp&nbspReel de logros</a>   
+	<!--   <a href="#/menu/resources" class="item" ng-class="(activeMenuClr=='resources')?'menuSelectedColor':''" ng-click="activeMenuClr = 'resources'" menu-toggle="right"><i class="ri-dashboard-fill"></i>&nbsp&nbspRecursos</a>
+	  <a href="#/menu/chat" class="item" ng-class="(activeMenuClr=='chat')?'menuSelectedColor':''" ng-click="activeMenuClr = 'chat'"  menu-toggle="right"><i class="ri-question-answer-fill"></i>&nbsp&nbspTutor</a>     
+             <a href="#/menu/about" class="item" ng-class="(activeMenuClr=='about')?'menuSelectedColor':''" ng-click="activeMenuClr = 'about'" menu-toggle="right"><i class="ri-file-paper-2-fill"></i>&nbsp&nbspLineamientos</a> -->
+          </ul>
+        </ion-content>
+    <ion-footer-bar>
+ 
+  <button class="button pull-right" ng-click="logout()"><i class="icon ri-logout-box-r-line"></i>Salir</button>
+</ion-footer-bar>
+      </ion-side-menu>
+
+      <ion-side-menu-content >        
+        <ion-nav-view name="menuContent"></ion-nav-view>
+      </ion-side-menu-content>
+
+    </ion-side-menus>
+  </script>    
+    
+  <script id="tabs.html" type="text/ng-template">
+
+      <ion-nav-bar class="bar-stable" >    
+        <ion-nav-buttons side="right">
+          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
+        </ion-nav-buttons>      
+    </ion-nav-bar>   
+
+       <ion-tabs class="tabs-icon-top tabs-stable"  >
+       <ion-tab title="Agenda" icon="ion-android-calendar" href="#/menu/tab/agenda" >
+        <ion-nav-view name="agenda-tab"></ion-nav-view>
+      </ion-tab>     
+     <ion-tab title="Perfil" icon="ion-ios-contact-outline" href="#/menu/tab/profile">
+        <ion-nav-view name="profile-tab"></ion-nav-view>
+      </ion-tab>  
+       <ion-tab title="Status" icon="ion-android-clipboard" href="#/menu/tab/status">
+        <ion-nav-view name="status-tab"></ion-nav-view>
+      </ion-tab>
+      
+    </ion-tabs>
+
+  </script>
+
+
+
+  <script id="agenda.html" type="text/ng-template">
+    <ion-view title="Agenda">
+      <ion-content>
+       
+   
+
+       <div class="iframe-container"><iframe id="agendaFrame" src="https://app.mozartacademy.mx/agenda" frameborder="0" allowfullscreen></iframe></div>
+    
+      </ion-content>
+    </ion-view>
+  </script>
+    
+    <script id="profile.html" type="text/ng-template">
+    <ion-view title="Perfil">
+      <ion-content >
+ 
+        <div class="iframe-container"><iframe id="profileFrame" src="https://app.mozartacademy.mx/profile" frameborder="0" allowfullscreen></iframe></div> 
+
+          <div id="myModal" class="modal" ng-show="isModalVisible" ng-click="checkCloseModal($event)">
+    <div class="modal-content">
+      <span class="close" ng-click="closeModal()">&times;</span>
+      <button class="add-to-btn" ng-click="addToHomeScreen()">Agregar a pantalla de inicio</button>
+    </div>
+  </div>
+        
+      </ion-content>
+    </ion-view>
+  </script>
+
+
+       <script id="status.html" type="text/ng-template">
+    <ion-view title="Status">
+      <ion-content >
+       <div class="list">
+				<a class="item item-avatar" href="" >
+          
+				  <img data-ng-src="{{userData.photo}}">
+             <span class="item-note">{{userData.status}}</span>
+				  <h2>{{userData.name}}</h2>       
+				  <p>{{userData.mail}}</p>         
+				</a>
+				
+				<div class="item item-divider itemDividerforitem">Status académico</div>
+       
+				<a class="item">
+					Próximo pago
+			<p>{{userData.nextpay}}</p>   
+				</a>
+         <a class="item"> 
+					Horario de clase
+           <span class="item-note"  style=" margin-top: 3px;">{{userData.plan}}</span>
+			<p>{{userData.classtime[0]}}</p>   
+         	<p>{{userData.classtime[1]}}</p>   
+				</a>
+         <div class="item item-divider itemDividerforitem">Asistencias</div>
+         
+				 <div class="item item-icon-left item-button-right">
+           <i class="icon ri-calendar-check-fill"></i> Asistencias
+					<button class="button button-balanced" style=" margin-top: 10px;">
+						{{userData.classCounter}}
+					</button>
+          <p style="font-size: 10px;">El contador indica cuantas clases te quedan</p> 
+				</div>
+         
+         <div class="item item-icon-left item-button-right">
+           <i class="icon ri-calendar-schedule-fill"></i> Reposiciones
+					<button class="button button-calm"  style=" margin-top: 10px;">
+					{{userData.repositions}}
+					</button>
+         <p style="font-size: 10px;">El contador indica cuantas reposiciones te quedan</p>  
+				</div>
+         
+         <div class="item item-icon-left item-button-right">
+           <i class="icon ri-calendar-event-fill"></i> Extensión de pago
+					<button class="button button-stable" style="transform: scale(.8); margin-right: -20px; margin-top: 10px;">
+						solicitar         
+					</button>
+         <p style="font-size: 10px;">Puedes solicitar 2 por semestre</p>  
+				</div>
+         
+         <div class="item item-icon-left item-button-right">
+           <i class="icon ri-calendar-close-fill"></i> Baja temporal
+					<button class="button button-assertive" style="transform: scale(.8); margin-right: -20px; margin-top: 10px;" ng-click="modal.show()">
+						solicitar         
+					</button>
+         <p style="font-size: 10px;">Puedes solicitar 2 por año</p>  
+				</div>
+         
+          <div class="item item-divider itemDividerforitem">Social feed</div>
+         <a class="item" ng-click="showPopup()">
+					Nombre de usuario
+			<p>{{userData.username}}</p>   
+				</a>
+          
+         
+         </div>
+      </ion-content>
+    </ion-view>
+  </script>
+    
+     <script id="lessons.html" type="text/ng-template">
+    <ion-view title="Lecciones">
+
+      <ion-nav-bar class="bar-stable">
+        <ion-nav-buttons side="right">
+          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
+        </ion-nav-buttons>      
+    </ion-nav-bar>
+
+     <ion-content>
+       
+   <div class="iframe-container"><iframe src="https://app.mozartacademy.mx/lessons" frameborder="0" allowfullscreen></iframe></div>
+
+      </ion-content>
+
+    </ion-view>
+  </script>   
+    
+      <script id="reel.html" type="text/ng-template">
+    <ion-view title="Reel de logros">
+	       <ion-nav-bar class="bar-stable">
+        <ion-nav-buttons side="right">
+          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
+        </ion-nav-buttons>      
+    </ion-nav-bar>
+	      
+      <ion-content >
+       
+        <div class="iframe-container"><iframe src="https://app.mozartacademy.mx/comunity" frameborder="0" allowfullscreen ></iframe></div> 
+    
+      </ion-content>
+    </ion-view>
+  </script>
+
+    
+        <script id="chat.html" type="text/ng-template">
+    <ion-view title="Asesoría">
+
+     <ion-nav-bar class="bar-stable">
+        <ion-nav-buttons side="right">
+          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
+        </ion-nav-buttons>      
+    </ion-nav-bar>
+    
+      <ion-content>
+        <div class="iframe-container"><iframe src="https://app.mozartacademy.mx/chat" frameborder="0" allowfullscreen ></iframe></div> 
+      </ion-content>
+    </ion-view>
+  </script>
+
+
+   
+    
+   <script id="library.html" type="text/ng-template">
+    <ion-view title="Biblioteca">
+
+      <ion-nav-bar class="bar-stable">
+        <ion-nav-buttons side="right">
+          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
+        </ion-nav-buttons>      
+    </ion-nav-bar>
+
+
+     <ion-content>
+       
+    <div class="list">
+  
+      <div class="item item-divider itemDividerforitem">Partituras</div>
+       <a class="item item-icon-left item-button-right" href="#/menu/manuals">
+           <i class="icon ri-book-2-fill"></i> Manuales
+          <p style="font-size: 10px;">Recopilación de los manuales que has completado</p> 
+        </a>
+     
+     <a class="item item-icon-left item-button-right" href="#/menu/repertoire">
+           <i class="icon ri-folder-music-fill"></i> Repertorio
+         <p style="font-size: 10px;">Recopilación de las piezas que has completado</p>  
+        </a>
+
+        <a class="item item-icon-left item-button-right" href="#/menu/books">
+           <i class="icon ri-aed-fill"></i> Entrenamiento
+         <p style="font-size: 10px;">Ejercicios complementarios para reforzar la lectura</p>  
+        </a>
+     
+     
+  <div class="item item-divider itemDividerforitem">Historial</div>
+       <a class="item item-icon-left item-button-right" href="#/menu/diplomas">
+           <i class="icon ri-award-fill"></i> Diplomas
+          <p style="font-size: 10px;">Reconocimientos por terminar cada nivel</p> 
+        </a>
+      <a class="item item-icon-left item-button-right" href="#/menu/statistics">
+           <i class="icon ri-pie-chart-box-fill"></i> Estadísticas
+          <p style="font-size: 10px;">Métricas de tu desempeño</p> 
+        </a>	   
+   </div>
+      </ion-content>
+      
+     
+    </ion-view>
+  </script>   
+
+
+  
+
+    
+   <script id="manuals.html" type="text/ng-template">   
+       <ion-view>
+      <ion-content >
+
+          <ion-back-button></ion-back-button>
+
+<div ng-if="isLoading" style="display: flex; justify-content: center; align-items: center; height: 80vh;">
+  <div class="alert alert-info" style="text-align: center; width: 250px; ">
+	   <div class="ionic-spinner"> </div>
+   Cargando...
+  </div>
+</div>
+ 
+        <div class="documents">
+      <div class="document" ng-repeat="manual in manuals" ng-click="showModal($index)" ng-if="lvl > manual.lvl || (manual.lvl == lvl && manual.blq <= blq)">
+        <div class="document__img" ng-style="{'background-image': 'url(' + manual.background + ')'}"></div>
+          <div class="document__title">{{manual.title}}</div>
+         </div>
+     </div>
+  
+
+    <div id="modalPDF" class="modal-container">
+        <div class="modal-background" ng-click="hideModal()">
+            <div class="modalDoc">
+        
+                      <a 
+         href="" 
+         class="close-modal" 
+        >
+         <!-- X close video icon -->
+          <svg 
+            version="1.1" 
+            xmlns="http://www.w3.org/2000/svg" 
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0"
+            y="0"
+            viewBox="0 0 32 32" 
+            style="enable-background:new 0 0 32 32;" 
+            xml:space="preserve" 
+            width="24" 
+            height="24" 
+          >
+                <path fill="#ffffff" d="M30.3448276,31.4576271 C29.9059965,31.4572473 29.4852797,31.2855701 29.1751724,30.980339 L0.485517241,2.77694915 C-0.122171278,2.13584324 -0.104240278,1.13679247 0.52607603,0.517159487 C1.15639234,-0.102473494 2.17266813,-0.120100579 2.82482759,0.477288136 L31.5144828,28.680678 C31.9872448,29.1460053 32.1285698,29.8453523 31.8726333,30.4529866 C31.6166968,31.0606209 31.0138299,31.4570487 30.3448276,31.4576271 Z" id="Shape"></path>
+                <path fill="#ffffff" d="M1.65517241,31.4576271 C0.986170142,31.4570487 0.383303157,31.0606209 0.127366673,30.4529866 C-0.12856981,29.8453523 0.0127551942,29.1460053 0.485517241,28.680678 L29.1751724,0.477288136 C29.8273319,-0.120100579 30.8436077,-0.102473494 31.473924,0.517159487 C32.1042403,1.13679247 32.1221713,2.13584324 31.5144828,2.77694915 L2.82482759,30.980339 C2.51472031,31.2855701 2.09400353,31.4572473 1.65517241,31.4576271 Z" id="Shape"></path>
+          </svg>
+        </a>
+       
+                <iframe class="drive" ng-src="{{trustAsResourceUrl(selectedManualUrl)}}" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+       
+      </ion-content>
+    </ion-view>
+  </script>
+
+
+  
+    
+    
+     <script id="repertoire.html" type="text/ng-template">   
+       <ion-view title="Repertorio">
+      <ion-content >
+
+          <ion-back-button></ion-back-button>
+	     
+       <div class="list">
+  
+	      <a class="item item-icon-right" href="#/menu/repertoire/basic">
+      Básico   <i class="icon ri-walk-fill"></i>
+          <p style="font-size: 10px;">Piezas de Grado Preparatorio</p> 
+        </a>
+	    
+        <a class="item item-icon-right" href="#/menu/repertoire/beginner">
+      Principiante   <i class="icon ri-run-fill"></i>
+          <p style="font-size: 10px;">Piezas de Grado 1 y 2</p> 
+        </a>
+       <a class="item item-icon-right" href="#/menu/repertoire/intermediate">
+      Intermedio <i class="icon ri-riding-fill"></i>
+          <p style="font-size: 10px;">Piezas de Grado 3, 4 y 5</p> 
+        </a>
+       <a class="item item-icon-right" href="#/menu/repertoire/advanced">
+    Avanzado   <i class="icon ri-flight-takeoff-fill"></i>
+          <p style="font-size: 10px;">Piezas de Grado 6, 7 y 8</p> 
+        </a>
+    </div>  
+       
+      </ion-content>
+    </ion-view>
+  </script>
+
+
+
+	     <script id="basic.html" type="text/ng-template">   
+       <ion-view title="Repertorio básico">
+      <ion-content >
+
+          <ion-back-button></ion-back-button>
+
+<div ng-if="isLoading" style="display: flex; justify-content: center; align-items: center; height: 80vh;">
+  <div class="alert alert-info" style="text-align: center; width: 250px; ">
+	   <div class="ionic-spinner"> </div>
+   Cargando...
+  </div>
+</div>
+ 
+        <div class="documents">
+      <div class="document" ng-repeat="manual in manuals" ng-click="showModal($index)" ng-if="lvl > manual.lvl || (manual.lvl == lvl && manual.blq <= blq)">
+        <div class="document__img" ng-style="{'background-image': 'url(' + manual.background + ')'}"></div>
+          <div class="document__title">{{manual.title}}</div>
+         </div>
+     </div>
+  
+
+    <div id="modalBasic" class="modal-container">
+        <div class="modal-background" ng-click="hideModal()">
+            <div class="modalDoc">
+        
+                      <a 
+         href="" 
+         class="close-modal" 
+        >
+         <!-- X close video icon -->
+          <svg 
+            version="1.1" 
+            xmlns="http://www.w3.org/2000/svg" 
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0"
+            y="0"
+            viewBox="0 0 32 32" 
+            style="enable-background:new 0 0 32 32;" 
+            xml:space="preserve" 
+            width="24" 
+            height="24" 
+          >
+                <path fill="#ffffff" d="M30.3448276,31.4576271 C29.9059965,31.4572473 29.4852797,31.2855701 29.1751724,30.980339 L0.485517241,2.77694915 C-0.122171278,2.13584324 -0.104240278,1.13679247 0.52607603,0.517159487 C1.15639234,-0.102473494 2.17266813,-0.120100579 2.82482759,0.477288136 L31.5144828,28.680678 C31.9872448,29.1460053 32.1285698,29.8453523 31.8726333,30.4529866 C31.6166968,31.0606209 31.0138299,31.4570487 30.3448276,31.4576271 Z" id="Shape"></path>
+                <path fill="#ffffff" d="M1.65517241,31.4576271 C0.986170142,31.4570487 0.383303157,31.0606209 0.127366673,30.4529866 C-0.12856981,29.8453523 0.0127551942,29.1460053 0.485517241,28.680678 L29.1751724,0.477288136 C29.8273319,-0.120100579 30.8436077,-0.102473494 31.473924,0.517159487 C32.1042403,1.13679247 32.1221713,2.13584324 31.5144828,2.77694915 L2.82482759,30.980339 C2.51472031,31.2855701 2.09400353,31.4572473 1.65517241,31.4576271 Z" id="Shape"></path>
+          </svg>
+        </a>
+       
+                <iframe class="drive" ng-src="{{trustAsResourceUrl(selectedManualUrl)}}" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+       
+      </ion-content>
+    </ion-view>
+  </script>
+
+
+	  
+	     <script id="beginner.html" type="text/ng-template">   
+       <ion-view title="Repertorio principiante">
+      <ion-content >
+
+          <ion-back-button></ion-back-button>
+
+<div ng-if="isLoading" style="display: flex; justify-content: center; align-items: center; height: 80vh;">
+  <div class="alert alert-info" style="text-align: center; width: 250px; ">
+	   <div class="ionic-spinner"> </div>
+   Cargando...
+  </div>
+</div>
+ 
+        <div class="documents">
+      <div class="document" ng-repeat="manual in manuals" ng-click="showModal($index)" ng-if="lvl > manual.lvl || (manual.lvl == lvl && manual.blq <= blq)">
+        <div class="document__img" ng-style="{'background-image': 'url(' + manual.background + ')'}"></div>
+          <div class="document__title">{{manual.title}}</div>
+         </div>
+     </div>
+  
+
+    <div id="modalBeginner" class="modal-container">
+        <div class="modal-background" ng-click="hideModal()">
+            <div class="modalDoc">
+        
+                      <a 
+         href="" 
+         class="close-modal" 
+        >
+         <!-- X close video icon -->
+          <svg 
+            version="1.1" 
+            xmlns="http://www.w3.org/2000/svg" 
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0"
+            y="0"
+            viewBox="0 0 32 32" 
+            style="enable-background:new 0 0 32 32;" 
+            xml:space="preserve" 
+            width="24" 
+            height="24" 
+          >
+                <path fill="#ffffff" d="M30.3448276,31.4576271 C29.9059965,31.4572473 29.4852797,31.2855701 29.1751724,30.980339 L0.485517241,2.77694915 C-0.122171278,2.13584324 -0.104240278,1.13679247 0.52607603,0.517159487 C1.15639234,-0.102473494 2.17266813,-0.120100579 2.82482759,0.477288136 L31.5144828,28.680678 C31.9872448,29.1460053 32.1285698,29.8453523 31.8726333,30.4529866 C31.6166968,31.0606209 31.0138299,31.4570487 30.3448276,31.4576271 Z" id="Shape"></path>
+                <path fill="#ffffff" d="M1.65517241,31.4576271 C0.986170142,31.4570487 0.383303157,31.0606209 0.127366673,30.4529866 C-0.12856981,29.8453523 0.0127551942,29.1460053 0.485517241,28.680678 L29.1751724,0.477288136 C29.8273319,-0.120100579 30.8436077,-0.102473494 31.473924,0.517159487 C32.1042403,1.13679247 32.1221713,2.13584324 31.5144828,2.77694915 L2.82482759,30.980339 C2.51472031,31.2855701 2.09400353,31.4572473 1.65517241,31.4576271 Z" id="Shape"></path>
+          </svg>
+        </a>
+       
+                <iframe class="drive" ng-src="{{trustAsResourceUrl(selectedManualUrl)}}" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+       
+      </ion-content>
+    </ion-view>
+  </script>
+
+
+
+
+	  
+	     <script id="intermediate.html" type="text/ng-template">   
+       <ion-view title="Repertorio intermedio">
+      <ion-content >
+
+          <ion-back-button></ion-back-button>
+
+<div ng-if="isLoading" style="display: flex; justify-content: center; align-items: center; height: 80vh;">
+  <div class="alert alert-info" style="text-align: center; width: 250px; ">
+	   <div class="ionic-spinner"> </div>
+   Cargando...
+  </div>
+</div>
+ 
+        <div class="documents">
+      <div class="document" ng-repeat="manual in manuals" ng-click="showModal($index)" ng-if="lvl > manual.lvl || (manual.lvl == lvl && manual.blq <= blq)">
+        <div class="document__img" ng-style="{'background-image': 'url(' + manual.background + ')'}"></div>
+          <div class="document__title">{{manual.title}}</div>
+         </div>
+     </div>
+  
+
+    <div id="modalIntermediate" class="modal-container">
+        <div class="modal-background" ng-click="hideModal()">
+            <div class="modalDoc">
+        
+                      <a 
+         href="" 
+         class="close-modal" 
+        >
+         <!-- X close video icon -->
+          <svg 
+            version="1.1" 
+            xmlns="http://www.w3.org/2000/svg" 
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0"
+            y="0"
+            viewBox="0 0 32 32" 
+            style="enable-background:new 0 0 32 32;" 
+            xml:space="preserve" 
+            width="24" 
+            height="24" 
+          >
+                <path fill="#ffffff" d="M30.3448276,31.4576271 C29.9059965,31.4572473 29.4852797,31.2855701 29.1751724,30.980339 L0.485517241,2.77694915 C-0.122171278,2.13584324 -0.104240278,1.13679247 0.52607603,0.517159487 C1.15639234,-0.102473494 2.17266813,-0.120100579 2.82482759,0.477288136 L31.5144828,28.680678 C31.9872448,29.1460053 32.1285698,29.8453523 31.8726333,30.4529866 C31.6166968,31.0606209 31.0138299,31.4570487 30.3448276,31.4576271 Z" id="Shape"></path>
+                <path fill="#ffffff" d="M1.65517241,31.4576271 C0.986170142,31.4570487 0.383303157,31.0606209 0.127366673,30.4529866 C-0.12856981,29.8453523 0.0127551942,29.1460053 0.485517241,28.680678 L29.1751724,0.477288136 C29.8273319,-0.120100579 30.8436077,-0.102473494 31.473924,0.517159487 C32.1042403,1.13679247 32.1221713,2.13584324 31.5144828,2.77694915 L2.82482759,30.980339 C2.51472031,31.2855701 2.09400353,31.4572473 1.65517241,31.4576271 Z" id="Shape"></path>
+          </svg>
+        </a>
+       
+                <iframe class="drive" ng-src="{{trustAsResourceUrl(selectedManualUrl)}}" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+       
+      </ion-content>
+    </ion-view>
+  </script>
+
+
+
+	  
+	     <script id="advanced.html" type="text/ng-template">   
+       <ion-view title="Repertorio avanzado">
+      <ion-content >
+
+          <ion-back-button></ion-back-button>
+
+<div ng-if="isLoading" style="display: flex; justify-content: center; align-items: center; height: 80vh;">
+  <div class="alert alert-info" style="text-align: center; width: 250px; ">
+	   <div class="ionic-spinner"> </div>
+   Cargando...
+  </div>
+</div>
+ 
+        <div class="documents">
+      <div class="document" ng-repeat="manual in manuals" ng-click="showModal($index)" ng-if="lvl > manual.lvl || (manual.lvl == lvl && manual.blq <= blq)">
+        <div class="document__img" ng-style="{'background-image': 'url(' + manual.background + ')'}"></div>
+          <div class="document__title">{{manual.title}}</div>
+         </div>
+     </div>
+  
+
+    <div id="modalAdvanced" class="modal-container">
+        <div class="modal-background" ng-click="hideModal()">
+            <div class="modalDoc">
+        
+                      <a 
+         href="" 
+         class="close-modal" 
+        >
+         <!-- X close video icon -->
+          <svg 
+            version="1.1" 
+            xmlns="http://www.w3.org/2000/svg" 
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0"
+            y="0"
+            viewBox="0 0 32 32" 
+            style="enable-background:new 0 0 32 32;" 
+            xml:space="preserve" 
+            width="24" 
+            height="24" 
+          >
+                <path fill="#ffffff" d="M30.3448276,31.4576271 C29.9059965,31.4572473 29.4852797,31.2855701 29.1751724,30.980339 L0.485517241,2.77694915 C-0.122171278,2.13584324 -0.104240278,1.13679247 0.52607603,0.517159487 C1.15639234,-0.102473494 2.17266813,-0.120100579 2.82482759,0.477288136 L31.5144828,28.680678 C31.9872448,29.1460053 32.1285698,29.8453523 31.8726333,30.4529866 C31.6166968,31.0606209 31.0138299,31.4570487 30.3448276,31.4576271 Z" id="Shape"></path>
+                <path fill="#ffffff" d="M1.65517241,31.4576271 C0.986170142,31.4570487 0.383303157,31.0606209 0.127366673,30.4529866 C-0.12856981,29.8453523 0.0127551942,29.1460053 0.485517241,28.680678 L29.1751724,0.477288136 C29.8273319,-0.120100579 30.8436077,-0.102473494 31.473924,0.517159487 C32.1042403,1.13679247 32.1221713,2.13584324 31.5144828,2.77694915 L2.82482759,30.980339 C2.51472031,31.2855701 2.09400353,31.4572473 1.65517241,31.4576271 Z" id="Shape"></path>
+          </svg>
+        </a>
+       
+                <iframe class="drive" ng-src="{{trustAsResourceUrl(selectedManualUrl)}}" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+       
+      </ion-content>
+    </ion-view>
+  </script>
+
+    <script id="books.html" type="text/ng-template">   
+       <ion-view>
+      <ion-content >
+
+          <ion-back-button></ion-back-button>
+
+ <div class="list">
+   <div class="item item-divider itemDividerforitem">Métodos</div>
+	      <a class="item item-icon-left" href="#/menu/books/solfiege">
+      Solfeo   <i class="icon ri-voiceprint-line"></i>
+          <p style="font-size: 10px;">Entrenamiento para identificar notas</p> 
+        </a>
+	    
+        <a class="item item-icon-left" href="#/menu/books/scales">
+      Escalas y Arpegios  <i class="icon ri-arrow-up-down-fill"></i>
+          <p style="font-size: 10px;">Ejercicios técnicos para mejorar la destreza.</p> 
+        </a>
+       <a class="item item-icon-left" href="#/menu/books/sightread">
+      Lectura a primer vista   <i class="icon ri-book-open-line"></i>
+          <p style="font-size: 10px;"> Habilidad para interpretar música al instante.</p> 
+        </a>
+
+	     <div class="item item-divider itemDividerforitem">Apps musicales</div>
+	 <a class="item item-avatar" href="#/menu/metronome">
+        <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/42/1e/07/421e07cc-b33b-e384-1995-06183618693a/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/460x0w.webp">
+           <h2> Metrónomo</h2>
+     <p> metronome beats </p>
+          </a>
+     <a class="item item-avatar" href="#/menu/notereader">
+            <img src="https://play-lh.googleusercontent.com/NzG7u3_0xrBfYdx-_ddIZn9x8VFv5oBtOuMsgpWIZJ8vqB8pWUIUeIMcl-9saY8-N0o=w480-h960-rw">
+           <h2> Lectura de notas </h2>
+     <p> Entrenamiento melódico</p>
+          </a>
+      <a class="item item-avatar" href="#/menu/circlefifths">
+            <img src="https://lh3.googleusercontent.com/d/16w1B_HGaZPCaG5uhMjTA824i_uTFcnTF=s100-p">
+           <h2> Círculo de quintas </h2>
+     <p> Entrenamiento armónico</p>
+          </a>
+	    
+    </div>  
+
+       
+      </ion-content>
+    </ion-view>
+  </script>
+
+
+
+	       <script id="solfiege.html" type="text/ng-template">   
+       <ion-view title="Solfeo">
+      <ion-content >
+
+          <ion-back-button></ion-back-button>
+
+<div ng-if="isLoading" style="display: flex; justify-content: center; align-items: center; height: 80vh;">
+  <div class="alert alert-info" style="text-align: center; width: 250px; ">
+	   <div class="ionic-spinner"> </div>
+   Cargando...
+  </div>
+</div>
+ 
+        <div class="documents">
+      <div class="document" ng-repeat="manual in manuals" ng-click="showModal($index)" ng-if="lvl > manual.lvl || (manual.lvl == lvl && manual.blq <= blq)">
+        <div class="document__img" ng-style="{'background-image': 'url(' + manual.background + ')'}"></div>
+          <div class="document__title">{{manual.title}}</div>
+         </div>
+     </div>
+  
+
+    <div id="modalSofiege" class="modal-container">
+        <div class="modal-background" ng-click="hideModal()">
+            <div class="modalDoc">
+        
+                      <a 
+         href="" 
+         class="close-modal" 
+        >
+         <!-- X close video icon -->
+          <svg 
+            version="1.1" 
+            xmlns="http://www.w3.org/2000/svg" 
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0"
+            y="0"
+            viewBox="0 0 32 32" 
+            style="enable-background:new 0 0 32 32;" 
+            xml:space="preserve" 
+            width="24" 
+            height="24" 
+          >
+                <path fill="#ffffff" d="M30.3448276,31.4576271 C29.9059965,31.4572473 29.4852797,31.2855701 29.1751724,30.980339 L0.485517241,2.77694915 C-0.122171278,2.13584324 -0.104240278,1.13679247 0.52607603,0.517159487 C1.15639234,-0.102473494 2.17266813,-0.120100579 2.82482759,0.477288136 L31.5144828,28.680678 C31.9872448,29.1460053 32.1285698,29.8453523 31.8726333,30.4529866 C31.6166968,31.0606209 31.0138299,31.4570487 30.3448276,31.4576271 Z" id="Shape"></path>
+                <path fill="#ffffff" d="M1.65517241,31.4576271 C0.986170142,31.4570487 0.383303157,31.0606209 0.127366673,30.4529866 C-0.12856981,29.8453523 0.0127551942,29.1460053 0.485517241,28.680678 L29.1751724,0.477288136 C29.8273319,-0.120100579 30.8436077,-0.102473494 31.473924,0.517159487 C32.1042403,1.13679247 32.1221713,2.13584324 31.5144828,2.77694915 L2.82482759,30.980339 C2.51472031,31.2855701 2.09400353,31.4572473 1.65517241,31.4576271 Z" id="Shape"></path>
+          </svg>
+        </a>
+       
+                <iframe class="drive" ng-src="{{trustAsResourceUrl(selectedManualUrl)}}" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+       
+      </ion-content>
+    </ion-view>
+  </script>
+
+
+	       <script id="scales.html" type="text/ng-template">   
+       <ion-view title="Escalas y Arpegios">
+      <ion-content >
+
+          <ion-back-button></ion-back-button>
+
+<div ng-if="isLoading" style="display: flex; justify-content: center; align-items: center; height: 80vh;">
+  <div class="alert alert-info" style="text-align: center; width: 250px; ">
+	   <div class="ionic-spinner"> </div>
+   Cargando...
+  </div>
+</div>
+ 
+        <div class="documents">
+      <div class="document" ng-repeat="manual in manuals" ng-click="showModal($index)" ng-if="lvl > manual.lvl || (manual.lvl == lvl && manual.blq <= blq)">
+        <div class="document__img" ng-style="{'background-image': 'url(' + manual.background + ')'}"></div>
+          <div class="document__title">{{manual.title}}</div>
+         </div>
+     </div>
+  
+
+    <div id="modalScales" class="modal-container">
+        <div class="modal-background" ng-click="hideModal()">
+            <div class="modalDoc">
+        
+                      <a 
+         href="" 
+         class="close-modal" 
+        >
+         <!-- X close video icon -->
+          <svg 
+            version="1.1" 
+            xmlns="http://www.w3.org/2000/svg" 
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0"
+            y="0"
+            viewBox="0 0 32 32" 
+            style="enable-background:new 0 0 32 32;" 
+            xml:space="preserve" 
+            width="24" 
+            height="24" 
+          >
+                <path fill="#ffffff" d="M30.3448276,31.4576271 C29.9059965,31.4572473 29.4852797,31.2855701 29.1751724,30.980339 L0.485517241,2.77694915 C-0.122171278,2.13584324 -0.104240278,1.13679247 0.52607603,0.517159487 C1.15639234,-0.102473494 2.17266813,-0.120100579 2.82482759,0.477288136 L31.5144828,28.680678 C31.9872448,29.1460053 32.1285698,29.8453523 31.8726333,30.4529866 C31.6166968,31.0606209 31.0138299,31.4570487 30.3448276,31.4576271 Z" id="Shape"></path>
+                <path fill="#ffffff" d="M1.65517241,31.4576271 C0.986170142,31.4570487 0.383303157,31.0606209 0.127366673,30.4529866 C-0.12856981,29.8453523 0.0127551942,29.1460053 0.485517241,28.680678 L29.1751724,0.477288136 C29.8273319,-0.120100579 30.8436077,-0.102473494 31.473924,0.517159487 C32.1042403,1.13679247 32.1221713,2.13584324 31.5144828,2.77694915 L2.82482759,30.980339 C2.51472031,31.2855701 2.09400353,31.4572473 1.65517241,31.4576271 Z" id="Shape"></path>
+          </svg>
+        </a>
+       
+                <iframe class="drive" ng-src="{{trustAsResourceUrl(selectedManualUrl)}}" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+       
+      </ion-content>
+    </ion-view>
+  </script>
+
+
+	       <script id="sightread.html" type="text/ng-template">   
+       <ion-view title="Lectura a primer vista">
+      <ion-content >
+
+          <ion-back-button></ion-back-button>
+
+<div ng-if="isLoading" style="display: flex; justify-content: center; align-items: center; height: 80vh;">
+  <div class="alert alert-info" style="text-align: center; width: 250px; ">
+	   <div class="ionic-spinner"> </div>
+   Cargando...
+  </div>
+</div>
+ 
+        <div class="documents">
+      <div class="document" ng-repeat="manual in manuals" ng-click="showModal($index)" ng-if="lvl > manual.lvl || (manual.lvl == lvl && manual.blq <= blq)">
+        <div class="document__img" ng-style="{'background-image': 'url(' + manual.background + ')'}"></div>
+          <div class="document__title">{{manual.title}}</div>
+         </div>
+     </div>
+  
+
+    <div id="modalSightread" class="modal-container">
+        <div class="modal-background" ng-click="hideModal()">
+            <div class="modalDoc">
+        
+                      <a 
+         href="" 
+         class="close-modal" 
+        >
+         <!-- X close video icon -->
+          <svg 
+            version="1.1" 
+            xmlns="http://www.w3.org/2000/svg" 
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0"
+            y="0"
+            viewBox="0 0 32 32" 
+            style="enable-background:new 0 0 32 32;" 
+            xml:space="preserve" 
+            width="24" 
+            height="24" 
+          >
+                <path fill="#ffffff" d="M30.3448276,31.4576271 C29.9059965,31.4572473 29.4852797,31.2855701 29.1751724,30.980339 L0.485517241,2.77694915 C-0.122171278,2.13584324 -0.104240278,1.13679247 0.52607603,0.517159487 C1.15639234,-0.102473494 2.17266813,-0.120100579 2.82482759,0.477288136 L31.5144828,28.680678 C31.9872448,29.1460053 32.1285698,29.8453523 31.8726333,30.4529866 C31.6166968,31.0606209 31.0138299,31.4570487 30.3448276,31.4576271 Z" id="Shape"></path>
+                <path fill="#ffffff" d="M1.65517241,31.4576271 C0.986170142,31.4570487 0.383303157,31.0606209 0.127366673,30.4529866 C-0.12856981,29.8453523 0.0127551942,29.1460053 0.485517241,28.680678 L29.1751724,0.477288136 C29.8273319,-0.120100579 30.8436077,-0.102473494 31.473924,0.517159487 C32.1042403,1.13679247 32.1221713,2.13584324 31.5144828,2.77694915 L2.82482759,30.980339 C2.51472031,31.2855701 2.09400353,31.4572473 1.65517241,31.4576271 Z" id="Shape"></path>
+          </svg>
+        </a>
+       
+                <iframe class="drive" ng-src="{{trustAsResourceUrl(selectedManualUrl)}}" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+       
+      </ion-content>
+    </ion-view>
+  </script>
+
+
+      <script id="diplomas.html" type="text/ng-template">   
+       <ion-view>
+      <ion-content >
+
+          <ion-back-button></ion-back-button>
+
+   <div style="display: flex; justify-content: center; align-items: center; height: 80vh;">
+  <div class="alert alert-danger" style="text-align: center; width: 250px; padding: 15px;">
+    Sin elementos para mostrar aún
+  </div>
+</div>
+ 
+      </ion-content>
+    </ion-view>
+  </script>
+
+
+	  
+ <script id="statistics.html" type="text/ng-template">
+<ion-view>
+     <ion-content>
+         <ion-back-button></ion-back-button>
+
+<div style="display: flex; justify-content: center; align-items: center; height: 80vh;">
+  <div class="alert alert-danger" style="text-align: center; width: 250px; padding: 15px;">
+    Sin elementos para mostrar aún
+  </div>
+</div>
+	 
+      </ion-content>
+    </ion-view>
+  </script>  
+
+
+ <script id="metronome.html" type="text/ng-template">   
+       <ion-view>
+      <ion-content >
+
+          <ion-back-button></ion-back-button>
+
+       <div class="iframe-container"><iframe src="https://embed.metronome.app/" frameborder="0" allowfullscreen></iframe></div>
+       
+      </ion-content>
+    </ion-view>
+  </script>
+	  
+
+ <script id="notereader.html" type="text/ng-template">   
+       <ion-view>
+      <ion-content >
+
+          <ion-back-button></ion-back-button>
+
+    <div class="iframe-container"><iframe src="https://dashboard.mozart.studio/notereader" frameborder="0" allowfullscreen></iframe></div>
+       
+      </ion-content>
+    </ion-view>
+  </script>
+
+
+     <script id="circlefifths.html" type="text/ng-template">   
+       <ion-view>
+      <ion-content >
+
+          <ion-back-button></ion-back-button>
+
+   <div class="iframe-container"><iframe src="https://dashboard.mozart.studio/circleoffifths" frameborder="0" allowfullscreen></iframe></div>
+       
+      </ion-content>
+    </ion-view>
+  </script>
+
+
+
+
+
+<script id="about.html" type="text/ng-template">
+ 
+   <ion-view title="Lineamientos">
+
+      <ion-nav-bar class="bar-stable">
+        <ion-nav-buttons side="right">
+          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
+        </ion-nav-buttons>      
+    </ion-nav-bar>
+
+     <ion-content>
+    <div class="list">
+          <a class="item" href="#/menu/regulation">
+            Reglamento
+          </a>
+
+
+          <a class="item" href="#/menu/aboutus">
+           Acerca de
+          </a>
+</div>
+      </ion-content>
+    </ion-view>
+  </script>   
+
+
+
+  <script id="regulation.html" type="text/ng-template">   
+    <ion-view>
+        <ion-content>
+            <ion-back-button></ion-back-button>
+
+            <ion-list>
+                <div ng-repeat="group in groups">
+                    <ion-item class="item-stable item-icon-right" ng-click="toggleGroup(group)" ng-class="{active: isGroupShown(group)}">
+                        <i class="icon" ng-class="isGroupShown(group) ? 'ion-chevron-up' : 'ion-chevron-down'" style="font-size:20px;"></i>
+                        &nbsp;
+                       {{group.heading}}
+                    </ion-item>
+                    <div class="item-accordion" ng-show="isGroupShown(group)">
+                        <div class="list">
+                            <div ng-repeat="bodyitem in group.body">
+                                <a class="item" ng-click="toggleDetail(bodyitem)">
+                  {{ bodyitem.no }}  {{bodyitem.name}}
+                                </a>
+                                <div ng-show="isDetailShown(bodyitem)">
+                                <div class="list card card-4" style="height: 100%;">
+        <div class="item item-body">
+     <p> {{ bodyitem.text }}</p>
+         </div> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ion-list>
+        </ion-content>
+    </ion-view>
+</script>
+
+
+
+   <script id="aboutus.html" type="text/ng-template">   
+       <ion-view>
+      <ion-content >
+
+          <ion-back-button></ion-back-button>
+
+        <h2>Acerca de</h2>
+ 
+      </ion-content>
+    </ion-view>
+  </script>
+
+
+
+
+
+
+
+  <script id="modal.html" type="text/ng-template">
+    <ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-positive">
+          <h1 class="title">New Contact</h1>
+          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+        </ion-header-bar>
+        <ion-content class="padding">
+          <div class="list">
+            <label class="item item-input">
+              <span class="input-label">First Name</span>
+              <input ng-model="newUser.firstName" type="text">
+            </label>
+            <label class="item item-input">
+              <span class="input-label">Last Name</span>
+              <input ng-model="newUser.lastName" type="text">
+            </label>
+            <label class="item item-input">
+              <span class="input-label">Email</span>
+              <input ng-model="newUser.email" type="text">
+            </label>
+            <button class="button button-full button-positive" ng-click="createContact(newUser)">Create</button>
+          </div>
+        </ion-content>
+      </ion-modal-view>
+  </script>  
+  </div>
+</div>
+
+  </section>
+
+ <section class="preloader" >
+    <div id="loading">&nbsp;</div>
+    <div id="loading-text">Cargando</div>
+  </section> 
+
+</body>
+
+
+<script>
+
+  var app = angular.module('ionicApp', ['ionic']);
+app
+.service('loadingService', function() {
+  var hasLoaded = false;
+  this.getHasLoaded = function() {
+    return hasLoaded;
+  };
+  this.setHasLoaded = function(value) {
+    hasLoaded = value;
+  };
+})
+.factory('SharedState', function($http, $q) {
+  var requestData = {
+    action: "getBasicData",
+    token: localStorage.getItem('MStoken')
+  };
+
+  var config = {
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    }
+  };
+
+  var getNum = function() {
+    var deferred = $q.defer();
+
+    $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData, config)
+      .then(function(response) {
+        deferred.resolve({
+          lvl: response.data.lvl,
+          blq: response.data.blq,
+	  lsn: response.data.lsn	
+        });
+      }, function(error) {
+        deferred.reject(error);
+      });
+
+    return deferred.promise;
+  };
+
+  return {
+    getNum: getNum
+  };
+})
+.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+
+   $stateProvider
+    .state('menu', {
+      url: "/menu",
+      abstract: true,
+      templateUrl: "menu.html",
+      controller: 'MenuCtrl'
+    })
+    .state('menu.tabs', {
+      url: "/tab",
+      views: {
+        'menuContent' :{
+          templateUrl: "tabs.html"
+        }
+      }
+    })
+   .state('menu.tabs.status', {
+      url: "/status",
+      views: {
+        'status-tab': {
+          templateUrl: "status.html",
+          controller: 'StatusCtrl',
+	  resolve: {
+            userData: function($http, $ionicLoading, loadingService) {
+	     if (!loadingService.getHasLoaded()) {
+	        $ionicLoading.show({
+	          template: 'Cargando...'
+	        });
+	      }
+              var requestData = {
+                action: "getProfileData",
+                token: localStorage.getItem('MStoken')
+              };
+
+              var config = {
+                headers: {
+                  "Content-Type": "text/plain;charset=utf-8"
+                },
+                followRedirects: true
+              };
+ 
+              return $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData, config)
+                .then(function(response) {
+                loadingService.setHasLoaded(true);
+                $ionicLoading.hide();
+                  return response.data;
+                });
+            }
+          }	
+        }
+      }
+    })
+    .state('menu.tabs.agenda', {
+      url: "/agenda",
+      views: {
+        'agenda-tab': {
+          templateUrl: "agenda.html"
+        }
+      }
+    })
+  .state('menu.tabs.profile', {
+      url: "/profile",
+      views: {
+        'profile-tab': {
+          templateUrl: "profile.html",
+          controller: "profileCtrl"
+        }
+      }
+    })
+    .state('menu.lessons', {
+      url: "/lessons",
+      views: {
+        'menuContent': {
+          templateUrl: "lessons.html"
+        }
+      }
+    }) 
+ .state('menu.chat', {
+      url: "/chat",
+      views: {
+        'menuContent': {
+          templateUrl: "chat.html"
+        }
+      }
+    })
+
+   .state('menu.metronome', {
+      url: "/metronome",
+      views: {
+        'menuContent': {
+          templateUrl: "metronome.html"
+        }
+      }
+    })
+   .state('menu.notereader', {
+      url: "/notereader",
+      views: {
+        'menuContent': {
+          templateUrl: "notereader.html"
+        }
+      }
+    })
+
+  .state('menu.circlefifths', {
+      url: "/circlefifths",
+      views: {
+        'menuContent': {
+          templateUrl: "circlefifths.html"
+        }
+      }
+    })
+   .state('menu.library', {
+      url: "/library",
+      views: {
+        'menuContent': {
+          templateUrl: "library.html"
+        }
+      }
+    })
+ 
+   .state('menu.manuals', {
+      url: "/manuals",
+      views: {
+        'menuContent': {
+          templateUrl: "manuals.html",
+          controller: "manualsCtrl"
+        }
+      }
+    })
+
+   .state('menu.repertoire', {
+      url: "/repertoire",
+      views: {
+        'menuContent': {
+          templateUrl: "repertoire.html"
+        }
+      }
+    })
+  .state('menu.repertoire.basic', {
+      url: "/basic",
+      views: {
+        'menuContent@menu': {
+          templateUrl: "basic.html",
+	  controller: "repCtrl1"	
+        }
+      }
+    })
+	    .state('menu.repertoire.beginner', {
+      url: "/beginner",
+      views: {
+        'menuContent@menu': {
+          templateUrl: "beginner.html",
+	  controller: "repCtrl2"	
+        }
+      }
+    })
+	    .state('menu.repertoire.intermediate', {
+      url: "/intermediate",
+      views: {
+        'menuContent@menu': {
+          templateUrl: "intermediate.html",
+	  controller: "repCtrl3"	
+        }
+      }
+    })
+	    .state('menu.repertoire.advanced', {
+      url: "/advanced",
+      views: {
+        'menuContent@menu': {
+          templateUrl: "advanced.html",
+	  controller: "repCtrl4"	
+        }
+      }
+    })
+	
+
+     .state('menu.books', {
+      url: "/books",
+      views: {
+        'menuContent': {
+          templateUrl: "books.html"
+        }
+      }
+    })
+.state('menu.books.solfiege', {
+      url: "/solfiege",
+      views: {
+        'menuContent@menu': {
+          templateUrl: "solfiege.html",
+	  controller: "booksCtrl1"	
+        }
+      }
+    })
+	          .state('menu.books.scales', {
+      url: "/scales",
+      views: {
+        'menuContent@menu': {
+          templateUrl: "scales.html",
+	  controller: "booksCtrl2"	
+        }
+      }
+    })
+	          .state('menu.books.sightread', {
+      url: "/sightread",
+      views: {
+        'menuContent@menu': {
+          templateUrl: "sightread.html",
+	  controller: "booksCtrl3"	
+        }
+      }
+    })
+	   .state('menu.diplomas', {
+      url: "/diplomas",
+      views: {
+        'menuContent': {
+          templateUrl: "diplomas.html"
+        }
+      }
+    })
+ .state('menu.statistics', {
+      url: "/statistics",
+      views: {
+        'menuContent': {
+          templateUrl: "statistics.html"
+        }
+      }
+    })
+   .state('menu.reel', {
+      url: "/reel",
+      views: {
+        'menuContent': {
+          templateUrl: "reel.html"
+        }
+      }
+    })
+    .state('menu.about', {
+      url: "/about",
+      views: {
+        'menuContent': {
+          templateUrl: "about.html"
+        }
+      }
+    })
+  .state('menu.regulation', {
+      url: "/regulation",
+      views: {
+        'menuContent': {
+          templateUrl: "regulation.html",
+          controller: "AccordianCtrl"
+        }
+      }
+    })
+
+  .state('menu.aboutus', {
+      url: "/aboutus",
+      views: {
+        'menuContent': {
+          templateUrl: "aboutus.html"
+        }
+      }
+    })
+    ;
+
+  $urlRouterProvider.otherwise("menu/tab/profile");
+  $ionicConfigProvider.tabs.position('bottom'); 
+})
+
+ .controller('AppCtrl', function() {
+  ionic.Platform.ready(function() {
+  });
+ })       
+
+.controller('MenuCtrl', ['$http', '$scope', '$ionicSideMenuDelegate', '$ionicModal', function($http, $scope, $ionicSideMenuDelegate, $ionicModal) {
+  $scope.toggleRight = function() {
+    $ionicSideMenuDelegate.toggleRight();
+  };
+
+  $scope.logout = function() {
+    $('.preloader').fadeIn('slow');
+
+    var requestData = {
+      action: "removeToken",
+      token: localStorage.getItem('MStoken')
+    };
+
+    var config = {
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      followRedirects: true
+    };
+
+    $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData, config)
+      .then(function(response) {
+        if (response.data.status === "success") {
+          localStorage.removeItem('MStoken');
+          $('.preloader').css({ 'display': 'none' });
+          window.location.href = 'https://app.mozartacademy.mx/';
+        }
+      })
+      .catch(function(error) {
+        $('.preloader').css({ 'display': 'none' });
+        window.location.href = 'https://app.mozartacademy.mx/';
+      });
+  };
+
+ }])
+
+       .controller('profileCtrl', function($scope) {
+            $scope.isModalVisible = false;
+    let deferredPrompt;
+	const isAndroid = /Android/i.test(navigator.userAgent);
+
+    // Registrar el Service Worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').then(function(registration) {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, function(err) {
+            console.log('ServiceWorker registration failed: ', err);
+        });
+    }
+
+    // Manejar el evento 'beforeinstallprompt'
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+if (isAndroid) {
+        e.preventDefault();
+        deferredPrompt = e;
+        $scope.isModalVisible = true;
+        $scope.$apply(); // Forzar la actualización del scope
+}
+    });
+
+
+    // Función para agregar a la pantalla de inicio
+    $scope.addToHomeScreen = function() {
+        $scope.isModalVisible = false;
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted the A2HS prompt');
+            } else {
+                console.log('User dismissed the A2HS prompt');
+            }
+            deferredPrompt = null;
+        });
+    };
+
+    // Cerrar modal
+    $scope.closeModal = function() {
+        $scope.isModalVisible = false;
+    };
+
+    // Cerrar modal si se hace clic fuera de él
+    $scope.checkCloseModal = function(event) {
+        if (event.target.id === 'myModal') {
+            $scope.closeModal();
+        }
+    };
+       })
+
+  .controller('StatusCtrl', ['$http', '$scope', '$ionicModal', 'userData', function($http, $scope, $ionicModal, userData){
+         $scope.userData = userData;
+  
+	   $ionicModal.fromTemplateUrl('modal.html', {
+  scope: $scope,
+  animation: 'slide-in-up'  
+}).then(function(modal) {
+  $scope.modal = modal;
+});
+      $scope.goToPayment = function() {
+  window.location.href = '#/menu/payment';
+};
+      
+    }])
+   .controller('manualsCtrl', ['$http', '$scope', '$sce', 'SharedState', function($http, $scope, $sce, SharedState){
+    $scope.trustAsResourceUrl = function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+    
+     $scope.selectedManualUrl = '';
+
+    $scope.showModal = function(index) {
+      $scope.selectedManualUrl = 'https://drive.google.com/file/d/' + $scope.manuals[index].id + '/preview';
+        document.getElementById('modalPDF').classList.add('four');
+    };
+
+    $scope.hideModal = function(index) {
+        const modal = document.getElementById('modalPDF');
+        modal.classList.add('out');
+        setTimeout(() => {
+            modal.classList.remove('four', 'out');
+        }, 400);
+    };
+
+   $scope.isLoading = true;
+  SharedState.getNum().then(function(data) {
+    $scope.lvl = data.lvl;
+    $scope.blq = data.blq;
+     $scope.isLoading = false;
+  })
+
+ $scope.manuals = [ 
+      {'title': 'Bloque 1 - Nivel 2','background': 'https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy', 'id': '1zs8OzO57s1b0MTavriKWjMohnLjr39-d', 'lvl': 2, 'blq': 1},            
+      {'title': 'Bloque 3 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1VuxMiv3W89OBAzxXaz6kzBkEyRxonnJB', 'lvl': 1, 'blq': 3},
+      {'title': 'Bloque 2 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '10Q34O2uDPaj5ZG7bpYpx8BGHZ4Q18ZLB', 'lvl': 1, 'blq': 2},
+      {'title': 'Bloque 1 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1Kghxri_BvRE0Ho4c2vMfrdBGp8HTmrGJ', 'lvl': 1, 'blq': 1},
+      {'title': 'Bloque 3 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu', 'lvl': 0, 'blq': 3},
+      {'title': 'Bloque 2 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1nxK06XODrHt2J6lScQz4JjthmPoc16Ec', 'lvl': 0, 'blq': 2},
+      {'title': 'Bloque 1 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa', 'lvl': 0, 'blq': 1 }
+    ];
+
+ 
+}])
+	 .controller('repCtrl1', ['$http', '$scope', '$sce', 'SharedState', function($http, $scope, $sce, SharedState){
+    $scope.trustAsResourceUrl = function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+    
+     $scope.selectedManualUrl = '';
+
+    $scope.showModal = function(index) {
+      $scope.selectedManualUrl = 'https://drive.google.com/file/d/' + $scope.manuals[index].id + '/preview';
+        document.getElementById('modalBasic').classList.add('four');
+    };
+
+    $scope.hideModal = function(index) {
+        const modal = document.getElementById('modalBasic');
+        modal.classList.add('out');
+        setTimeout(() => {
+            modal.classList.remove('four', 'out');
+        }, 400);
+    };
+
+     $scope.isLoading = true;
+  SharedState.getNum().then(function(data) {
+    $scope.lvl = data.lvl;
+    $scope.blq = data.blq;
+     $scope.isLoading = false;
+  })
+	    
+$scope.manuals = [ 
+      {'title': 'Bloque 1 - Nivel 2','background': 'https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy', 'id': '1zs8OzO57s1b0MTavriKWjMohnLjr39-d', 'lvl': 2, 'blq': 1},            
+      {'title': 'Bloque 3 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1VuxMiv3W89OBAzxXaz6kzBkEyRxonnJB', 'lvl': 1, 'blq': 3},
+      {'title': 'Bloque 2 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '10Q34O2uDPaj5ZG7bpYpx8BGHZ4Q18ZLB', 'lvl': 1, 'blq': 2},
+      {'title': 'Bloque 1 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1Kghxri_BvRE0Ho4c2vMfrdBGp8HTmrGJ', 'lvl': 1, 'blq': 1},
+      {'title': 'Bloque 3 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu', 'lvl': 0, 'blq': 3},
+      {'title': 'Bloque 2 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1nxK06XODrHt2J6lScQz4JjthmPoc16Ec', 'lvl': 0, 'blq': 2},
+      {'title': 'Bloque 1 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa', 'lvl': 0, 'blq': 1 }
+    ];
+    
+}])
+   .controller('repCtrl2', ['$http', '$scope', '$sce', 'SharedState', function($http, $scope, $sce, SharedState){
+    $scope.trustAsResourceUrl = function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+    
+     $scope.selectedManualUrl = '';
+
+    $scope.showModal = function(index) {
+      $scope.selectedManualUrl = 'https://drive.google.com/file/d/' + $scope.manuals[index].id + '/preview';
+        document.getElementById('modalBeginner').classList.add('four');
+    };
+
+    $scope.hideModal = function(index) {
+        const modal = document.getElementById('modalBeginner');
+        modal.classList.add('out');
+        setTimeout(() => {
+            modal.classList.remove('four', 'out');
+        }, 400);
+    };
+
+     $scope.isLoading = true;
+  SharedState.getNum().then(function(data) {
+    $scope.lvl = data.lvl;
+    $scope.blq = data.blq;
+     $scope.isLoading = false;
+  })
+	    
+$scope.manuals = [ 
+      {'title': 'Bloque 1 - Nivel 2','background': 'https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy', 'id': '1zs8OzO57s1b0MTavriKWjMohnLjr39-d', 'lvl': 2, 'blq': 1},            
+      {'title': 'Bloque 3 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1VuxMiv3W89OBAzxXaz6kzBkEyRxonnJB', 'lvl': 1, 'blq': 3},
+      {'title': 'Bloque 2 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '10Q34O2uDPaj5ZG7bpYpx8BGHZ4Q18ZLB', 'lvl': 1, 'blq': 2},
+      {'title': 'Bloque 1 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1Kghxri_BvRE0Ho4c2vMfrdBGp8HTmrGJ', 'lvl': 1, 'blq': 1},
+      {'title': 'Bloque 3 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu', 'lvl': 0, 'blq': 3},
+      {'title': 'Bloque 2 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1nxK06XODrHt2J6lScQz4JjthmPoc16Ec', 'lvl': 0, 'blq': 2},
+      {'title': 'Bloque 1 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa', 'lvl': 0, 'blq': 1 }
+    ];
+    
+}])
+	   .controller('repCtrl3', ['$http', '$scope', '$sce', 'SharedState', function($http, $scope, $sce, SharedState){
+    $scope.trustAsResourceUrl = function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+    
+     $scope.selectedManualUrl = '';
+
+    $scope.showModal = function(index) {
+      $scope.selectedManualUrl = 'https://drive.google.com/file/d/' + $scope.manuals[index].id + '/preview';
+        document.getElementById('modalIntermediate').classList.add('four');
+    };
+
+    $scope.hideModal = function(index) {
+        const modal = document.getElementById('modalIntermediate');
+        modal.classList.add('out');
+        setTimeout(() => {
+            modal.classList.remove('four', 'out');
+        }, 400);
+    };
+
+     $scope.isLoading = true;
+  SharedState.getNum().then(function(data) {
+    $scope.lvl = data.lvl;
+    $scope.blq = data.blq;
+     $scope.isLoading = false;
+  })
+	    
+$scope.manuals = [ 
+      {'title': 'Bloque 1 - Nivel 2','background': 'https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy', 'id': '1zs8OzO57s1b0MTavriKWjMohnLjr39-d', 'lvl': 2, 'blq': 1},            
+      {'title': 'Bloque 3 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1VuxMiv3W89OBAzxXaz6kzBkEyRxonnJB', 'lvl': 1, 'blq': 3},
+      {'title': 'Bloque 2 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '10Q34O2uDPaj5ZG7bpYpx8BGHZ4Q18ZLB', 'lvl': 1, 'blq': 2},
+      {'title': 'Bloque 1 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1Kghxri_BvRE0Ho4c2vMfrdBGp8HTmrGJ', 'lvl': 1, 'blq': 1},
+      {'title': 'Bloque 3 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu', 'lvl': 0, 'blq': 3},
+      {'title': 'Bloque 2 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1nxK06XODrHt2J6lScQz4JjthmPoc16Ec', 'lvl': 0, 'blq': 2},
+      {'title': 'Bloque 1 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa', 'lvl': 0, 'blq': 1 }
+    ];
+    
+}])
+	
+	   .controller('repCtrl4', ['$http', '$scope', '$sce', 'SharedState', function($http, $scope, $sce, SharedState){
+    $scope.trustAsResourceUrl = function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+    
+     $scope.selectedManualUrl = '';
+
+    $scope.showModal = function(index) {
+      $scope.selectedManualUrl = 'https://drive.google.com/file/d/' + $scope.manuals[index].id + '/preview';
+        document.getElementById('modalAdvanced').classList.add('four');
+    };
+
+    $scope.hideModal = function(index) {
+        const modal = document.getElementById('modalAdvanced');
+        modal.classList.add('out');
+        setTimeout(() => {
+            modal.classList.remove('four', 'out');
+        }, 400);
+    };
+
+     $scope.isLoading = true;
+  SharedState.getNum().then(function(data) {
+    $scope.lvl = data.lvl;
+    $scope.blq = data.blq;
+     $scope.isLoading = false;
+  })
+	    
+$scope.manuals = [ 
+      {'title': 'Bloque 1 - Nivel 2','background': 'https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy', 'id': '1zs8OzO57s1b0MTavriKWjMohnLjr39-d', 'lvl': 2, 'blq': 1},            
+      {'title': 'Bloque 3 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1VuxMiv3W89OBAzxXaz6kzBkEyRxonnJB', 'lvl': 1, 'blq': 3},
+      {'title': 'Bloque 2 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '10Q34O2uDPaj5ZG7bpYpx8BGHZ4Q18ZLB', 'lvl': 1, 'blq': 2},
+      {'title': 'Bloque 1 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1Kghxri_BvRE0Ho4c2vMfrdBGp8HTmrGJ', 'lvl': 1, 'blq': 1},
+      {'title': 'Bloque 3 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu', 'lvl': 0, 'blq': 3},
+      {'title': 'Bloque 2 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1nxK06XODrHt2J6lScQz4JjthmPoc16Ec', 'lvl': 0, 'blq': 2},
+      {'title': 'Bloque 1 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa', 'lvl': 0, 'blq': 1 }
+    ];
+    
+}])
+
+	   .controller('booksCtrl1', ['$http', '$scope', '$sce', 'SharedState', function($http, $scope, $sce, SharedState){
+    $scope.trustAsResourceUrl = function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+    
+     $scope.selectedManualUrl = '';
+
+    $scope.showModal = function(index) {
+      $scope.selectedManualUrl = 'https://drive.google.com/file/d/' + $scope.manuals[index].id + '/preview';
+        document.getElementById('modalSolfiege').classList.add('four');
+    };
+
+    $scope.hideModal = function(index) {
+        const modal = document.getElementById('modalSolfiege');
+        modal.classList.add('out');
+        setTimeout(() => {
+            modal.classList.remove('four', 'out');
+        }, 400);
+    };
+
+     $scope.isLoading = true;
+  SharedState.getNum().then(function(data) {
+    $scope.lvl = data.lvl;
+    $scope.blq = data.blq;
+     $scope.isLoading = false;
+  })
+	    
+$scope.manuals = [ 
+      {'title': 'Bloque 1 - Nivel 2','background': 'https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy', 'id': '1zs8OzO57s1b0MTavriKWjMohnLjr39-d', 'lvl': 2, 'blq': 1},            
+      {'title': 'Bloque 3 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1VuxMiv3W89OBAzxXaz6kzBkEyRxonnJB', 'lvl': 1, 'blq': 3},
+      {'title': 'Bloque 2 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '10Q34O2uDPaj5ZG7bpYpx8BGHZ4Q18ZLB', 'lvl': 1, 'blq': 2},
+      {'title': 'Bloque 1 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1Kghxri_BvRE0Ho4c2vMfrdBGp8HTmrGJ', 'lvl': 1, 'blq': 1},
+      {'title': 'Bloque 3 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu', 'lvl': 0, 'blq': 3},
+      {'title': 'Bloque 2 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1nxK06XODrHt2J6lScQz4JjthmPoc16Ec', 'lvl': 0, 'blq': 2},
+      {'title': 'Bloque 1 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa', 'lvl': 0, 'blq': 1 }
+    ];
+    
+}])
+	   .controller('booksCtrl2', ['$http', '$scope', '$sce', 'SharedState', function($http, $scope, $sce, SharedState){
+    $scope.trustAsResourceUrl = function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+    
+     $scope.selectedManualUrl = '';
+
+    $scope.showModal = function(index) {
+      $scope.selectedManualUrl = 'https://drive.google.com/file/d/' + $scope.manuals[index].id + '/preview';
+        document.getElementById('modalScales').classList.add('four');
+    };
+
+    $scope.hideModal = function(index) {
+        const modal = document.getElementById('modalScales');
+        modal.classList.add('out');
+        setTimeout(() => {
+            modal.classList.remove('four', 'out');
+        }, 400);
+    };
+
+     $scope.isLoading = true;
+  SharedState.getNum().then(function(data) {
+    $scope.lvl = data.lvl;
+    $scope.blq = data.blq;
+     $scope.isLoading = false;
+  })
+	    
+$scope.manuals = [ 
+      {'title': 'Bloque 1 - Nivel 2','background': 'https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy', 'id': '1zs8OzO57s1b0MTavriKWjMohnLjr39-d', 'lvl': 2, 'blq': 1},            
+      {'title': 'Bloque 3 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1VuxMiv3W89OBAzxXaz6kzBkEyRxonnJB', 'lvl': 1, 'blq': 3},
+      {'title': 'Bloque 2 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '10Q34O2uDPaj5ZG7bpYpx8BGHZ4Q18ZLB', 'lvl': 1, 'blq': 2},
+      {'title': 'Bloque 1 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1Kghxri_BvRE0Ho4c2vMfrdBGp8HTmrGJ', 'lvl': 1, 'blq': 1},
+      {'title': 'Bloque 3 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu', 'lvl': 0, 'blq': 3},
+      {'title': 'Bloque 2 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1nxK06XODrHt2J6lScQz4JjthmPoc16Ec', 'lvl': 0, 'blq': 2},
+      {'title': 'Bloque 1 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa', 'lvl': 0, 'blq': 1 }
+    ];
+    
+}])
+	   .controller('booksCtrl3', ['$http', '$scope', '$sce', 'SharedState', function($http, $scope, $sce, SharedState){
+    $scope.trustAsResourceUrl = function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+    
+     $scope.selectedManualUrl = '';
+
+    $scope.showModal = function(index) {
+      $scope.selectedManualUrl = 'https://drive.google.com/file/d/' + $scope.manuals[index].id + '/preview';
+        document.getElementById('modalSightread').classList.add('four');
+    };
+
+    $scope.hideModal = function(index) {
+        const modal = document.getElementById('modalSightread');
+        modal.classList.add('out');
+        setTimeout(() => {
+            modal.classList.remove('four', 'out');
+        }, 400);
+    };
+
+     $scope.isLoading = true;
+  SharedState.getNum().then(function(data) {
+    $scope.lvl = data.lvl;
+    $scope.blq = data.blq;
+     $scope.isLoading = false;
+  })
+	    
+$scope.manuals = [ 
+      {'title': 'Bloque 1 - Nivel 2','background': 'https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy', 'id': '1zs8OzO57s1b0MTavriKWjMohnLjr39-d', 'lvl': 2, 'blq': 1},            
+      {'title': 'Bloque 3 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1VuxMiv3W89OBAzxXaz6kzBkEyRxonnJB', 'lvl': 1, 'blq': 3},
+      {'title': 'Bloque 2 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '10Q34O2uDPaj5ZG7bpYpx8BGHZ4Q18ZLB', 'lvl': 1, 'blq': 2},
+      {'title': 'Bloque 1 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1Kghxri_BvRE0Ho4c2vMfrdBGp8HTmrGJ', 'lvl': 1, 'blq': 1},
+      {'title': 'Bloque 3 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu', 'lvl': 0, 'blq': 3},
+      {'title': 'Bloque 2 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1nxK06XODrHt2J6lScQz4JjthmPoc16Ec', 'lvl': 0, 'blq': 2},
+      {'title': 'Bloque 1 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa', 'lvl': 0, 'blq': 1 }
+    ];
+    
+}])
+    
+  .controller('AccordianCtrl', function($scope){
+    $scope.groups = [{
+        "heading": "Matrícula",
+        "body": [
+            {"no":1, "name":"Asignación de horario", "text":"El alumno elegirá un horario de clase dentro de los disponibles en la academia, es posible elegirlo para comenzar a la media (por ejemplo de 2:30 a 3:30) siempre y cuando se acuerde con la administración. "},
+            {"no":2, "name":"Cambio de horario", "text":"Para tramitar un cambio de horario o plan de pago, se deberá realizar al término de la mensualidad vigente. "}
+        ]
+    },{
+        "heading": "Asistencias",
+        "body": [
+           {"no":1, "name":"raj", "text":"25"},
+            {"no":2, "name":"kumar", "text":"24"},
+            {"no":3, "name":"kumar", "text":"24"}
+        ]
+    }, {
+        "heading": "Inasistencias",
+        "body": [
+            {"sno":10, "name":"John", "age":"25", "sex":"M", "status":"Pass"},
+            {"sno":20, "name":"Ravi", "age":"24", "sex":"M", "status":"fail"},
+            {"sno":30, "name":"Priya", "age":"26", "sex":"F", "status":"Fail"}
+        ]
+    }, {
+        "heading": "Retardos",
+        "body": [
+            {"sno":10, "name":"John", "age":"25", "sex":"M", "status":"Pass"},
+            {"sno":20, "name":"Ravi", "age":"24", "sex":"M", "status":"fail"},
+            {"sno":30, "name":"Priya", "age":"26", "sex":"F", "status":"Fail"}
+        ]
+    }
+                    
+                    ]; 
+
+    /*
+    * if given group is the selected group, deselect it
+    * else, select the given group
+    */
+    $scope.toggleGroup = function(group) {
+        if ($scope.isGroupShown(group)) {
+            $scope.shownGroup = null;
+        } else {
+            $scope.shownGroup = group;
+        }
+    };
+
+    $scope.isGroupShown = function(group) {
+        return $scope.shownGroup === group;
+    };
+
+    $scope.isDetailShown = function(bodyitem) {
+        return $scope.shownDetail === bodyitem;
+    };
+
+    $scope.toggleDetail = function(bodyitem) {
+        if ($scope.isDetailShown(bodyitem)) {
+            $scope.shownDetail = null;
+        } else {
+            $scope.shownDetail = bodyitem;
+        }
+    };
+});
+
+    </script>
+
+
+
+
+
+
+
+<script>
+$(window).on('load', function() { 
+  var storedToken = localStorage.getItem('MStoken');
+  if (storedToken) {
+    var api = "https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec";
+
+    var validationData = {
+      redirect: "follow",
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify({
+        action: "validateToken",
+        token: storedToken
+      })
+    };
+
+  fetch(api, validationData)
+  .then(response => response.text())
+  .then(res => {
+    var validation = JSON.parse(res);
+    if (validation.status == "success") {
+      $('.preloader').css({'display':'none'})  
+      $('.mainSection').fadeIn('slow')
+      /*var url = window.location.href;
+        if(url == "https://app.mozart.studio/#/menu/tab/agenda"){
+          var iframe = document.getElementById('agendaFrame');
+        iframe.src = 'https://app.mozart.studio/agenda';
+        }*/
+      //loadData(api, storedToken, "si");    
+    } else {
+      localStorage.removeItem('MStoken');
+      window.location.href = 'https://app.mozartacademy.mx/';
+    }
+  })
+  } else {
+    window.location.href = 'https://app.mozartacademy.mx/';
+  }
+});
+
+
+
+
+
+ /*      
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js').then(function(registration) {
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      }, function(err) {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+    });
+  }
+
+  let deferredPrompt;
+  var modal = document.getElementById("myModal");
+  var btn = document.querySelector('.add-to-btn');
+  var span = document.querySelector(".close");
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    modal.style.display = "block";
+
+    btn.addEventListener('click', () => {
+      modal.style.display = "none";
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the A2HS prompt');
+        } else {
+          console.log('User dismissed the A2HS prompt');
+        }
+        deferredPrompt = null;
+      });
+    });
+  });
+
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+  */
+</script>
