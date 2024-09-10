@@ -1866,7 +1866,6 @@ class="js-trigger-video-modal" onclick="toggle_video_modal(this)"> <i class="ri-
    $scope.userData = [];
   $scope.userDataLoaded = false;
   $scope.today = new Date()
-    $scope.lsn = 5
 
   var requestData = { 
     action: "getProfileData",
@@ -1887,6 +1886,7 @@ class="js-trigger-video-modal" onclick="toggle_video_modal(this)"> <i class="ri-
       $scope.userData = response.data;
       $scope.userDataLoaded = true;
      $scope.userLevel = $scope.getLevel($scope.userData.lvl)
+      $scope.lsn = $scope.userData.lsn
  $scope.history = $scope.userData.lessons
       $scope.startAnimation = function() {
         $('.progress-bar').animate({
