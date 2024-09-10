@@ -1,8 +1,8 @@
 <head>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
-<link rel="icon" href="https://lh3.googleusercontent.com/d/1k9LA88h-FVVn9EeryBRVBrtc5tPl92CK" type="image/x-icon">
-    <title>Mozart Studio</title>
+<link rel="icon" href="https://lh3.googleusercontent.com/d/16vmyfZfuuu5p9xT57X_CANKBjDTA-f-S" type="image/x-icon">
+    <title>Taller de Piano</title>
   
 <link href="https://code.ionicframework.com/1.3.3/css/ionic.min.css" rel="stylesheet">
   <script src="https://code.ionicframework.com/1.3.3/js/ionic.bundle.min.js"></script>
@@ -1416,7 +1416,7 @@ app
 .factory('SharedState', function($http, $q) {
   var requestData = {
     action: "getBasicData",
-    token: localStorage.getItem('MStoken')
+    token: localStorage.getItem('TPtoken')
   };
 
   var config = {
@@ -1428,7 +1428,7 @@ app
   var getNum = function() {
     var deferred = $q.defer();
 
-    $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData, config)
+    $http.post('https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec', requestData, config)
       .then(function(response) {
         deferred.resolve({
           lvl: response.data.lvl,
@@ -1478,7 +1478,7 @@ app
 	      }
               var requestData = {
                 action: "getProfileData",
-                token: localStorage.getItem('MStoken')
+                token: localStorage.getItem('TPtoken')
               };
 
               var config = {
@@ -1488,7 +1488,7 @@ app
                 followRedirects: true
               };
  
-              return $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData, config)
+              return $http.post('https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec', requestData, config)
                 .then(function(response) {
                 loadingService.setHasLoaded(true);
                 $ionicLoading.hide();
@@ -1729,7 +1729,7 @@ app
 
     var requestData = {
       action: "removeToken",
-      token: localStorage.getItem('MStoken')
+      token: localStorage.getItem('TPtoken')
     };
 
     var config = {
@@ -1739,17 +1739,17 @@ app
       followRedirects: true
     };
 
-    $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData, config)
+    $http.post('https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec', requestData, config)
       .then(function(response) {
         if (response.data.status === "success") {
-          localStorage.removeItem('MStoken');
+          localStorage.removeItem('TPtoken');
           $('.preloader').css({ 'display': 'none' });
-          window.location.href = 'https://app.mozartacademy.mx/';
+          window.location.href = 'https://cubiculociencias.github.io/tallerdepiano/';
         }
       })
       .catch(function(error) {
         $('.preloader').css({ 'display': 'none' });
-        window.location.href = 'https://app.mozartacademy.mx/';
+        window.location.href = 'https://cubiculociencias.github.io/tallerdepiano/';
       });
   };
 
@@ -2203,7 +2203,7 @@ $scope.manuals = [
 $(window).on('load', function() { 
   var storedToken = localStorage.getItem('TPtoken');
   if (storedToken) {
-    var api = "https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec";
+    var api = "https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec";
 
     var validationData = {
       redirect: "follow",
