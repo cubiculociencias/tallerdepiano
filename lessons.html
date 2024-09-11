@@ -1,8 +1,5 @@
 
 <head>
- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
-<link rel="icon" href="https://lh3.googleusercontent.com/d/1L1kLwLAt2KksPG2tN4tT1bRle4RqveWo" type="image/x-icon">
-    <title>Taller de Piano</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.1/angular-materialize.min.js"></script>
@@ -14,6 +11,7 @@
 
 
 <style>
+
   .collection {
   border: none;
 }
@@ -111,7 +109,7 @@
 .collapsible {
     
     
-    transition: max-height 0.3s ease-out; /* Define la transición de altura máxima */
+    transition: max-height 0.3s ease-out; 
 }
 
 .text-inside{
@@ -406,8 +404,8 @@ iframe#quiz {
   <!-- End Header -->
   <!-- Tabs Nav Start -->
   <div class="row">
-    <div class="col s12" >
-      <ul class="tabs"> 
+   <div class="col s12" style="overflow-x: auto;">
+  <ul class="tabs" style="display: flex; white-space: nowrap;">
         <li class="tab col s9 levelp"><a href="#test1"><span>Preparatorio</span></a></li>
         <li class="tab col s9 level1" ><a href="#test2"><span>&nbsp&nbsp&nbsp&nbsp Grado 1 &nbsp&nbsp&nbsp&nbsp</span></a></li>
         <li class="tab col s9 level2" ><a href="#test3"><span>&nbsp&nbsp&nbsp&nbsp Grado 2 &nbsp&nbsp&nbsp&nbsp</span></a></li>
@@ -426,26 +424,31 @@ iframe#quiz {
   <!-- CSS Course Start -->
   <ul class="collection with-header levelp" ng-repeat="data in allData">
     <li class="collection-header">
-      <h4 class="grey-text">{{data.block}}</h4>
+      <h4 >{{data.block}}</h4>
     </li>
     <li class="collection-item" ng-repeat="lesson in data.lessons">
       <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton"> 
-        <div>{{lesson.name}}<span class="secondary-content"><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id == num+lesson.material.length-1">schedule</i><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id > num+lesson.material.length-1">lock</i></span></div>
-      </a> 
+        <div>{{lesson.name}} 
+   <span class="secondary-content" ng-if="loading"><i class="material-icons">lock</i></span>
+          <span class="secondary-content" ng-if="lvl < 1">
+          <i class="material-icons" ng-if="lesson.id == lsn">schedule</i>
+          <i class="material-icons" ng-if="lesson.id > lsn">lock</i>
+          </span></div>
+      </a>  
       
       <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
      <div class="linehorizontal" ></div>
-        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lesson.material[0].id <= num">
+        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lvl > 0 || lesson.id <= lsn">
           <div class="collapsible-header">
-      <i class="material-icons" ng-if="material.id < num">{{material.icon}}</i>
-<i class="material-icons" ng-if="material.id >= num">pending_actions</i>
-            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="material.id < num">check</i></span></div>
+   <i class="material-icons" ng-if="lvl > 0 || lesson.id < lsn">{{material.icon}}</i>
+<i class="material-icons" ng-if="lvl == 0 && lesson.id >= lsn">pending_actions</i>
+            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="lvl > 0 || lesson.id < lsn">check</i></span></div>
           <div class="collapsible-body">
             
   <div class="row">
     <div class="col s12">
-      <ul class="tabs">
-          <li ng-repeat="activity in material.activity" class="tab col">
+      <ul class="tabs" style="display: flex; white-space: nowrap;">
+          <li ng-repeat="activity in material.activity" class="tab col s9">
     <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
 <span class="text-inside js-trigger-video-modal"  onclick="toggle_video_modal(this)" data-youtube-id="{{activity.url}}" ng-if="activity.media == 'video'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
   </li>
@@ -478,26 +481,29 @@ iframe#quiz {
     <!-- CSS Course Start -->
       <ul class="collection with-header level1" ng-repeat="data in allData">
     <li class="collection-header">
-      <h4 class="grey-text">{{data.block}}</h4>
+      <h4 >{{data.block}}</h4>
     </li>
     <li class="collection-item" ng-repeat="lesson in data.lessons">
       <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
-        <div>{{lesson.name}}<span class="secondary-content"><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id == num+lesson.material.length-1">schedule</i><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id > num+lesson.material.length-1">lock</i></span></div>
+         <div>{{lesson.name}}<span class="secondary-content" ng-if="lvl < 2">
+          <i class="material-icons" ng-if="lesson.id == lsn">schedule</i>
+          <i class="material-icons" ng-if="lesson.id > lsn">lock</i>
+          </span></div>
       </a>
       
       <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
      <div class="linehorizontal" ></div>
-        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lesson.material[0].id <= num">
+        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lvl > 1 || lesson.id <= lsn">
           <div class="collapsible-header">
-      <i class="material-icons" ng-if="material.id < num">{{material.icon}}</i>
-<i class="material-icons" ng-if="material.id >= num">pending_actions</i>
-            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="material.id < num">check</i></span></div>
+   <i class="material-icons" ng-if="lvl > 1 || lesson.id < lsn">{{material.icon}}</i>
+<i class="material-icons" ng-if="lvl == 1 && lesson.id >= lsn">pending_actions</i>
+            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="lvl > 1 || lesson.id < lsn">check</i></span></div>
           <div class="collapsible-body">
             
   <div class="row">
     <div class="col s12">
-      <ul class="tabs">
-          <li ng-repeat="activity in material.activity" class="tab col">
+      <ul class="tabs" style="display: flex; white-space: nowrap;">
+          <li ng-repeat="activity in material.activity" class="tab col s9">
     <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
 <span class="text-inside js-trigger-video-modal"  onclick="toggle_video_modal(this)" data-youtube-id="{{activity.url}}" ng-if="activity.media == 'video'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
   </li>
@@ -519,26 +525,29 @@ iframe#quiz {
       <!-- JAVASCRIPT Course Start -->
       <ul class="collection with-header level2" ng-repeat="data in allData">
     <li class="collection-header">
-      <h4 class="grey-text">{{data.block}}</h4>
+      <h4 >{{data.block}}</h4>
     </li>
     <li class="collection-item" ng-repeat="lesson in data.lessons">
       <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
-        <div>{{lesson.name}}<span class="secondary-content"><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id == num+lesson.material.length-1">schedule</i><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id > num+lesson.material.length-1">lock</i></span></div>
+        <div>{{lesson.name}}<span class="secondary-content" ng-if="lvl < 3">
+          <i class="material-icons" ng-if="lesson.id == lsn">schedule</i>
+          <i class="material-icons" ng-if="lesson.id > lsn">lock</i>
+          </span></div>
       </a>
       
       <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
      <div class="linehorizontal" ></div>
-        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lesson.material[0].id <= num">
+       <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lvl > 2 || lesson.id <= lsn">
           <div class="collapsible-header">
-      <i class="material-icons" ng-if="material.id < num">{{material.icon}}</i>
-<i class="material-icons" ng-if="material.id >= num">pending_actions</i>
-            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="material.id < num">check</i></span></div>
+   <i class="material-icons" ng-if="lvl > 2 || lesson.id < lsn">{{material.icon}}</i>
+<i class="material-icons" ng-if="lvl == 2 && lesson.id >= lsn">pending_actions</i>
+            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="lvl > 2 || lesson.id < lsn">check</i></span></div>
           <div class="collapsible-body">
             
   <div class="row">
     <div class="col s12">
-      <ul class="tabs">
-          <li ng-repeat="activity in material.activity" class="tab col">
+      <ul class="tabs" style="display: flex; white-space: nowrap;">
+          <li ng-repeat="activity in material.activity" class="tab col s9">
     <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
 <span class="text-inside js-trigger-video-modal"  onclick="toggle_video_modal(this)" data-youtube-id="{{activity.url}}" ng-if="activity.media == 'video'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
   </li>
@@ -559,26 +568,29 @@ iframe#quiz {
     <div id="test4" class="col s12" ng-controller="level3">
       <ul class="collection with-header level3" ng-repeat="data in allData">
     <li class="collection-header">
-      <h4 class="grey-text">{{data.block}}</h4>
+      <h4 >{{data.block}}</h4>
     </li>
     <li class="collection-item" ng-repeat="lesson in data.lessons">
       <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
-        <div>{{lesson.name}}<span class="secondary-content"><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id == num+lesson.material.length-1">schedule</i><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id > num+lesson.material.length-1">lock</i></span></div>
+        <div>{{lesson.name}}<span class="secondary-content" ng-if="lvl < 4">
+          <i class="material-icons" ng-if="lesson.id == lsn">schedule</i>
+          <i class="material-icons" ng-if="lesson.id > lsn">lock</i>
+          </span></div>
       </a>
       
       <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
      <div class="linehorizontal" ></div>
-        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lesson.material[0].id <= num">
+     <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lvl > 3 || lesson.id <= lsn">
           <div class="collapsible-header">
-      <i class="material-icons" ng-if="material.id < num">{{material.icon}}</i>
-<i class="material-icons" ng-if="material.id >= num">pending_actions</i>
-            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="material.id < num">check</i></span></div>
+   <i class="material-icons" ng-if="lvl > 3 || lesson.id < lsn">{{material.icon}}</i>
+<i class="material-icons" ng-if="lvl == 3 && lesson.id >= lsn">pending_actions</i>
+            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="lvl > 3 || lesson.id < lsn">check</i></span></div>
           <div class="collapsible-body">
             
   <div class="row">
     <div class="col s12">
-      <ul class="tabs">
-          <li ng-repeat="activity in material.activity" class="tab col">
+      <ul class="tabs" style="display: flex; white-space: nowrap;">
+          <li ng-repeat="activity in material.activity" class="tab col s9">
     <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
 <span class="text-inside js-trigger-video-modal"  onclick="toggle_video_modal(this)" data-youtube-id="{{activity.url}}" ng-if="activity.media == 'video'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
   </li>
@@ -597,26 +609,29 @@ iframe#quiz {
 <div id="test5" class="col s12" ng-controller="level4">
       <ul class="collection with-header level4" ng-repeat="data in allData">
     <li class="collection-header">
-      <h4 class="grey-text">{{data.block}}</h4>
+      <h4 >{{data.block}}</h4>
     </li>
     <li class="collection-item" ng-repeat="lesson in data.lessons">
       <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
-        <div>{{lesson.name}}<span class="secondary-content"><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id == num+lesson.material.length-1">schedule</i><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id > num+lesson.material.length-1">lock</i></span></div>
+       <div>{{lesson.name}}<span class="secondary-content" ng-if="lvl < 5">
+          <i class="material-icons" ng-if="lesson.id == lsn">schedule</i>
+          <i class="material-icons" ng-if="lesson.id > lsn">lock</i>
+          </span></div>
       </a>
       
       <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
      <div class="linehorizontal" ></div>
-        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lesson.material[0].id <= num">
+        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lvl > 4 || lesson.id <= lsn">
           <div class="collapsible-header">
-      <i class="material-icons" ng-if="material.id < num">{{material.icon}}</i>
-<i class="material-icons" ng-if="material.id >= num">pending_actions</i>
-            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="material.id < num">check</i></span></div>
+   <i class="material-icons" ng-if="lvl > 4 || lesson.id < lsn">{{material.icon}}</i>
+<i class="material-icons" ng-if="lvl == 4 && lesson.id >= lsn">pending_actions</i>
+            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="lvl > 4 || lesson.id < lsn">check</i></span></div>
           <div class="collapsible-body">
             
   <div class="row">
     <div class="col s12">
-      <ul class="tabs">
-          <li ng-repeat="activity in material.activity" class="tab col">
+      <ul class="tabs" style="display: flex; white-space: nowrap;">
+          <li ng-repeat="activity in material.activity" class="tab col s9">
     <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
 <span class="text-inside js-trigger-video-modal"  onclick="toggle_video_modal(this)" data-youtube-id="{{activity.url}}" ng-if="activity.media == 'video'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
   </li>
@@ -634,26 +649,29 @@ iframe#quiz {
 <div id="test6" class="col s12" ng-controller="level5">
       <ul class="collection with-header level5" ng-repeat="data in allData">
     <li class="collection-header">
-      <h4 class="grey-text">{{data.block}}</h4>
+      <h4 >{{data.block}}</h4>
     </li>
     <li class="collection-item" ng-repeat="lesson in data.lessons">
       <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
-        <div>{{lesson.name}}<span class="secondary-content"><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id == num+lesson.material.length-1">schedule</i><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id > num+lesson.material.length-1">lock</i></span></div>
+      <div>{{lesson.name}}<span class="secondary-content" ng-if="lvl < 6">
+          <i class="material-icons" ng-if="lesson.id == lsn">schedule</i>
+          <i class="material-icons" ng-if="lesson.id > lsn">lock</i>
+          </span></div>
       </a>
       
       <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
      <div class="linehorizontal" ></div>
-        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lesson.material[0].id <= num">
+        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lvl > 5 || lesson.id <= lsn">
           <div class="collapsible-header">
-      <i class="material-icons" ng-if="material.id < num">{{material.icon}}</i>
-<i class="material-icons" ng-if="material.id >= num">pending_actions</i>
-            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="material.id < num">check</i></span></div>
+   <i class="material-icons" ng-if="lvl > 5 || lesson.id < lsn">{{material.icon}}</i>
+<i class="material-icons" ng-if="lvl == 5 && lesson.id >= lsn">pending_actions</i>
+            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="lvl > 5 || lesson.id < lsn">check</i></span></div>
           <div class="collapsible-body">
             
   <div class="row">
     <div class="col s12">
-      <ul class="tabs">
-          <li ng-repeat="activity in material.activity" class="tab col">
+      <ul class="tabs" style="display: flex; white-space: nowrap;">
+          <li ng-repeat="activity in material.activity" class="tab col s9">
     <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
 <span class="text-inside js-trigger-video-modal"  onclick="toggle_video_modal(this)" data-youtube-id="{{activity.url}}" ng-if="activity.media == 'video'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
   </li>
@@ -672,26 +690,29 @@ iframe#quiz {
 <div id="test7" class="col s12" ng-controller="level6">
       <ul class="collection with-header level6" ng-repeat="data in allData">
     <li class="collection-header">
-      <h4 class="grey-text">{{data.block}}</h4>
+      <h4 >{{data.block}}</h4>
     </li>
     <li class="collection-item" ng-repeat="lesson in data.lessons">
       <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
-        <div>{{lesson.name}}<span class="secondary-content"><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id == num+lesson.material.length-1">schedule</i><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id > num+lesson.material.length-1">lock</i></span></div>
+       <div>{{lesson.name}}<span class="secondary-content" ng-if="lvl < 7">
+          <i class="material-icons" ng-if="lesson.id == lsn">schedule</i>
+          <i class="material-icons" ng-if="lesson.id > lsn">lock</i>
+          </span></div>
       </a>
       
       <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
      <div class="linehorizontal" ></div>
-        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lesson.material[0].id <= num">
+       <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lvl > 6 || lesson.id <= lsn">
           <div class="collapsible-header">
-      <i class="material-icons" ng-if="material.id < num">{{material.icon}}</i>
-<i class="material-icons" ng-if="material.id >= num">pending_actions</i>
-            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="material.id < num">check</i></span></div>
+   <i class="material-icons" ng-if="lvl > 6 || lesson.id < lsn">{{material.icon}}</i>
+<i class="material-icons" ng-if="lvl == 6 && lesson.id >= lsn">pending_actions</i>
+            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="lvl > 6 || lesson.id < lsn">check</i></span></div>
           <div class="collapsible-body">
             
   <div class="row">
     <div class="col s12">
-      <ul class="tabs">
-          <li ng-repeat="activity in material.activity" class="tab col">
+      <ul class="tabs" style="display: flex; white-space: nowrap;">
+          <li ng-repeat="activity in material.activity" class="tab col s9">
     <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
 <span class="text-inside js-trigger-video-modal"  onclick="toggle_video_modal(this)" data-youtube-id="{{activity.url}}" ng-if="activity.media == 'video'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
   </li>
@@ -710,26 +731,29 @@ iframe#quiz {
 <div id="test8" class="col s12" ng-controller="level7">
       <ul class="collection with-header level7" ng-repeat="data in allData">
     <li class="collection-header">
-      <h4 class="grey-text">{{data.block}}</h4>
+      <h4 >{{data.block}}</h4>
     </li>
     <li class="collection-item" ng-repeat="lesson in data.lessons">
       <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
-        <div>{{lesson.name}}<span class="secondary-content"><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id == num+lesson.material.length-1">schedule</i><i class="material-icons" ng-if="lesson.material[lesson.material.length - 1].id > num+lesson.material.length-1">lock</i></span></div>
+       <div>{{lesson.name}}<span class="secondary-content" ng-if="lvl < 8">
+          <i class="material-icons" ng-if="lesson.id == lsn">schedule</i>
+          <i class="material-icons" ng-if="lesson.id > lsn">lock</i>
+          </span></div>
       </a>
       
       <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
      <div class="linehorizontal" ></div>
-        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lesson.material[0].id <= num">
+       <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lvl > 7 || lesson.id <= lsn">
           <div class="collapsible-header">
-      <i class="material-icons" ng-if="material.id < num">{{material.icon}}</i>
-<i class="material-icons" ng-if="material.id >= num">pending_actions</i>
-            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="material.id < num">check</i></span></div>
+   <i class="material-icons" ng-if="lvl > 7 || lesson.id < lsn">{{material.icon}}</i>
+<i class="material-icons" ng-if="lvl == 7 && lesson.id >= lsn">pending_actions</i>
+            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="lvl > 7 || lesson.id < lsn">check</i></span></div>
           <div class="collapsible-body">
             
   <div class="row">
     <div class="col s12">
-      <ul class="tabs">
-          <li ng-repeat="activity in material.activity" class="tab col">
+      <ul class="tabs" style="display: flex; white-space: nowrap;">
+          <li ng-repeat="activity in material.activity" class="tab col s9">
     <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
 <span class="text-inside js-trigger-video-modal"  onclick="toggle_video_modal(this)" data-youtube-id="{{activity.url}}" ng-if="activity.media == 'video'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
   </li>
@@ -858,7 +882,10 @@ app.factory('SharedState', function($http, $q) {
 
     $http.post('https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec', requestData, config)
       .then(function(response) {
-        deferred.resolve(response.data.id);
+        deferred.resolve({
+          lvl: response.data.lvl,
+          lsn: response.data.lsn
+        });
       }, function(error) {
         deferred.reject(error);
       });
@@ -873,17 +900,21 @@ app.factory('SharedState', function($http, $q) {
  
   app
 .controller('levelP', ["$scope", "SharedState", function($scope, SharedState) {
-     SharedState.getNum().then(function(num) {
-    $scope.num = num;
+    $scope.loading = true;
+    SharedState.getNum().then(function(data) {
+    $scope.lsn = data.lsn;
+      $scope.lvl = data.lvl;
+      $scope.loading = false;
   })
+
     $scope.allData = [
      {
           block: "Bloque 1",
           lessons: [
             {
               name: 'Lección 1: Introducción',
+              id: 1,
               material:[{
-                id: 1,
                 title: 'Ritmo y métrica',
                 icon: 'library_books',
                 activity:[{
@@ -900,7 +931,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 2,
                 title: 'Posición de Do',
                 icon: 'library_books',
                 activity:[{
@@ -922,7 +952,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 3,
                 title: 'Pieza: Ode to Joy - var 2',
                 icon: 'audio_file',
                 activity:[{
@@ -942,9 +971,9 @@ app.factory('SharedState', function($http, $q) {
           },
           {
               name: 'Lección 2: Grand Staff',
+              id: 2,
               material:[
               {
-                id: 4,
                 title: 'El Pentagrama y el Grand Staff',
                 icon: 'library_books',
                 activity:[{
@@ -966,7 +995,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 5,
                 title: 'Pieza: Ode to Joy - var 3',
                 icon: 'audio_file',
                 activity:[{
@@ -987,8 +1015,8 @@ app.factory('SharedState', function($http, $q) {
 
           {
               name: 'Lección 3: Intervalos',
+              id: 3,
               material:[{
-                id: 6,
                 title: 'Intervalos de 2da y 3era',
                 icon: 'library_books',
                 activity:[{
@@ -1012,7 +1040,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 7,
                 title: 'Pieza: Mountain Climbing',
                 icon: 'audio_file',
                 activity:[{
@@ -1033,8 +1060,8 @@ app.factory('SharedState', function($http, $q) {
 
           {
               name: 'Lección 4: Intervalos (2da parte)',
+              id: 4,
               material:[{
-                id: 8,
                 title: 'Intervalos de 4ta y 5ta',
                 icon: 'library_books',
                 activity:[{
@@ -1058,7 +1085,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 9,
                 title: 'Pieza: Jingle Bells',
                 icon: 'audio_file',
                 activity:[{
@@ -1087,8 +1113,8 @@ app.factory('SharedState', function($http, $q) {
           lessons: [
             {
               name: 'Lección 5: Frases',
+              id: 5,
               material:[{
-                id: 10,
                 title: 'Construcción de frases',
                 icon: 'library_books',
                 activity:[{
@@ -1113,7 +1139,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 11,
                 title: 'Pieza: Run Away River',
                 icon: 'audio_file',
                 activity:[{
@@ -1133,8 +1158,8 @@ app.factory('SharedState', function($http, $q) {
           },
           {
               name: 'Lección 6: Acordes',
+              id: 6,
               material:[{
-                id: 12,
                 title: 'Construcción de acordes',
                 icon: 'library_books',
                 activity:[{
@@ -1151,7 +1176,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 13,
                 title: 'Acorde C y G7',
                 icon: 'library_books',
                 activity:[{
@@ -1175,7 +1199,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 14,
                 title: 'Pieza: Trumpet Voluntary',
                 icon: 'audio_file',
                 activity:[{
@@ -1195,8 +1218,8 @@ app.factory('SharedState', function($http, $q) {
           },
               {
               name: 'Lección 7: Corcheas y Staccato',
+              id: 7,
               material:[{
-                id: 15,
                 title: 'Definición',
                 icon: 'library_books',
                 activity:[{
@@ -1221,7 +1244,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 16,
                 title: 'Ejercicios',
                 icon: 'library_books',
                 activity:[
@@ -1240,7 +1262,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 17,
                 title: 'Pieza: Old German Dance',
                 icon: 'audio_file',
                 activity:[{
@@ -1260,8 +1281,8 @@ app.factory('SharedState', function($http, $q) {
           },
           {
               name: 'Lección 8: Ejercicios de coordinación',
+              id: 8,
               material:[{
-                id: 18,
                 title: 'Transposición',
                 icon: 'library_books',
                 activity:[/*{
@@ -1280,7 +1301,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 19,
                 title: 'Pieza: Allegretto',
                 icon: 'audio_file',
                 activity:[/*{
@@ -1308,8 +1328,8 @@ app.factory('SharedState', function($http, $q) {
           lessons: [
             {
               name: 'Lección 9: Posición de Do II',
+              id: 9,
               material:[{
-                id: 20,
                 title: 'Posición de Do II',
                 icon: 'library_books',
                 activity:[{
@@ -1327,7 +1347,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 21,
                 title: 'Marcas de Tempo y Dinámicas',
                 icon: 'library_books',
                 activity:[{
@@ -1350,7 +1369,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 22,
                 title: 'Pieza: Little Playmates',
                 icon: 'audio_file',
                 activity:[{
@@ -1370,8 +1388,8 @@ app.factory('SharedState', function($http, $q) {
           },
           {
               name: 'Lección 10: Escala de Do Mayor',
+              id: 10,
               material:[{
-                id: 23,
                 title: 'Definición y ejercicios',
                 icon: 'library_books',
                 activity:[/*{
@@ -1389,7 +1407,6 @@ app.factory('SharedState', function($http, $q) {
               },
 
               {
-                id: 24,
                 title: 'Pieza: Fish Scales',
                 icon: 'audio_file',
                 activity:[/*{
@@ -1410,8 +1427,8 @@ app.factory('SharedState', function($http, $q) {
 
            {
               name: 'Lección 11: Posición de Sol',
+              id: 11,
               material:[{
-                id: 25,
                 title: 'Definición y ejercicios',
                 icon: 'library_books',
                 activity:[{
@@ -1436,7 +1453,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 26,
                 title: 'Pieza: Bagpipe',
                 icon: 'audio_file',
                 activity:[{
@@ -1456,8 +1472,8 @@ app.factory('SharedState', function($http, $q) {
           },
           {
               name: 'Lección 12: Ligadura de prolongación',
+              id: 12,
               material:[{
-                id: 27,
                 title: 'Definición y ejercicios',
                 icon: 'library_books',
                 activity:[{
@@ -1475,7 +1491,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 28,
                 title: 'Pieza: Sonatina',
                 icon: 'audio_file',
                 activity:[{
@@ -1495,30 +1510,24 @@ app.factory('SharedState', function($http, $q) {
           }
 
         ]
-      }
-
-
-
-
-      
+      }     
 ]
-  
-  
   
   }])
 
 .controller('level1', ["$scope", "SharedState", function($scope, SharedState) {
-   SharedState.getNum().then(function(num) {
-    $scope.num = num;
+    SharedState.getNum().then(function(data) {
+    $scope.lsn = data.lsn;
+      $scope.lvl = data.lvl;
   })
    $scope.allData = [
      {
           block: "Bloque 1",
+          id: 1,
           lessons: [
             {
               name: 'Lección 1: Posición de Sol (2da parte)',
               material:[{
-                id: 29,
                 title: 'Solfeo I',
                 icon: 'music_note',
                 activity:[{
@@ -1535,7 +1544,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 30,
                 title: 'Posición de Sol (parte 2)',
                 icon: 'library_books',
                 activity:[{
@@ -1552,7 +1560,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 31,
                 title: 'Pieza: Minuet, Gurlitt',
                 icon: 'audio_file',
                 activity:[{
@@ -1572,9 +1579,9 @@ app.factory('SharedState', function($http, $q) {
           },
           {
               name: 'Lección 2: Posición combinada',
+              id: 2,
               material:[
               {
-                id: 32,
                 title: 'Solfeo II',
                 icon: 'music_note',
                 activity:[{
@@ -1591,7 +1598,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 33,
                 title: 'Posición combinada',
                 icon: 'library_books',
                 activity:[/*{
@@ -1613,7 +1619,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 34,
                 title: 'Pieza: Minuet, Reinagle',
                 icon: 'audio_file',
                 activity:[{
@@ -1634,8 +1639,8 @@ app.factory('SharedState', function($http, $q) {
 
           {
               name: 'Lección 3: Alteraciones',
+              id: 3,
               material:[{
-                id: 35,
                 title: 'Solfeo III',
                 icon: 'music_note',
                 activity:[/*{
@@ -1652,35 +1657,22 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 36,
                 title: 'Alteraciones',
                 icon: 'library_books',
                 activity:[{
                   icon: 'smart_display',
-                  type: 'Sostenido',
+                  type: 'El sostenido',
                   media: 'video',
                   url: 'https://www.youtube.com/embed/0tyWeauOFzQ'
                   },{
-                  icon: 'smart_display',
-                  type: 'Bemol',
-                  media: 'video',
-                  url: 'https://www.youtube.com/embed/aLNz-5bsWb8'
-                  },{
                   icon: 'auto_stories',
-                  type: 'El Sostenido',
+                  type: 'Ejercicio',
                   media: 'pdf',
                   url: 'https://drive.google.com/file/d/1azmdnqr2BWqj3NiWWCg-Fl0-DBcDA6II/preview'
-                  },
-                  {
-                  icon: 'auto_stories',
-                  type: 'El Bemol',
-                  media: 'pdf',
-                  url: 'https://drive.google.com/file/d/1_UXn8vUzyImBDGlY_Q9RFZOT703Nfngq/preview'
                   }
                 ]
               },
               {
-                id: 37,
                 title: 'La armadura',
                 icon: 'library_books',
                 activity:[{
@@ -1702,7 +1694,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 38,
                 title: 'Pieza: Promenade',
                 icon: 'audio_file',
                 activity:[{
@@ -1733,8 +1724,8 @@ app.factory('SharedState', function($http, $q) {
           lessons: [
             {
               name: 'Lección 4: Cambio de posición',
+              id: 4,
               material:[{
-                id: 39,
                 title: 'Solfeo IV',
                 icon: 'music_note',
                 activity:[/*{
@@ -1752,7 +1743,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 40,
                 title: 'Definición',
                 icon: 'library_books',
                 activity:[{
@@ -1770,7 +1760,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 41,
                 title: 'Pieza: Dance',
                 icon: 'audio_file',
                 activity:[{
@@ -1790,9 +1779,9 @@ app.factory('SharedState', function($http, $q) {
           },
           {
               name: 'Lección 5: Intervalos de 6ta',
+              id: 5,
               material:[
               {
-                id: 42,
                 title: 'Solfeo V',
                 icon: 'music_note',
                 activity:[{
@@ -1809,7 +1798,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 43,
                 title: 'Intervalos de 6ta',
                 icon: 'library_books',
                 activity:[{
@@ -1831,7 +1819,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 44,
                 title: 'DC al Fine',
                 icon: 'library_books',
                 activity:[/*{
@@ -1849,7 +1836,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 45,
                 title: 'Pieza: Sonatina, Gurlitt',
                 icon: 'audio_file',
                 activity:[{
@@ -1870,8 +1856,8 @@ app.factory('SharedState', function($http, $q) {
 
           {
               name: 'Lección 6: Posición de Fa',
+              id: 6,
               material:[{
-                id: 46,
                 title: 'Solfeo VI',
                 icon: 'music_note',
                 activity:[/*{
@@ -1888,8 +1874,24 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 47,
-                title: 'Definición',
+                title: 'El bemol',
+                icon: 'library_books',
+                activity:[{
+                  icon: 'smart_display',
+                  type: 'Bemol',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/aLNz-5bsWb8'
+                  },
+                  {
+                  icon: 'auto_stories',
+                  type: 'El Bemol',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d/1_UXn8vUzyImBDGlY_Q9RFZOT703Nfngq/preview'
+                  }
+                ]
+              },
+              {
+                title: 'Posición de Fa',
                 icon: 'library_books',
                 activity:[{
                   icon: 'smart_display',
@@ -1911,7 +1913,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 48,
                 title: 'Pieza: The Old Windmill',
                 icon: 'audio_file',
                 activity:[{
@@ -1939,9 +1940,9 @@ app.factory('SharedState', function($http, $q) {
           lessons: [
             {
               name: 'Lección 7: Escalas de C, G y F',
+              id: 7,
               material:[
               {
-                id: 49,
                 title: 'Escalas C, G y F',
                 icon: 'library_books',
                 activity:[/*{
@@ -1958,7 +1959,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 50,
                 title: 'Pieza: First Etude',
                 icon: 'audio_file',
                 activity:[{
@@ -1978,9 +1978,9 @@ app.factory('SharedState', function($http, $q) {
           },
           {
               name: 'Lección 8: Más Notación Musical',
+              id: 8,
               material:[
               {
-                id: 51,
                 title: '8va y Natural',
                 icon: 'library_books',
                 activity:[{
@@ -2014,7 +2014,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },*/
               {
-                id: 52,
                 title: 'Pieza: Jinx',
                 icon: 'audio_file',
                 activity:[{
@@ -2035,8 +2034,8 @@ app.factory('SharedState', function($http, $q) {
 
           {
               name: 'Lección 9: Síncopas',
+              id: 9,
               material:[{
-                id: 53,
                 title: 'Definición',
                 icon: 'music_note',
                 activity:[{
@@ -2058,7 +2057,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 54,
                 title: 'Pieza: Minuet and Trío',
                 icon: 'audio_file',
                 activity:[{
@@ -2087,8 +2085,8 @@ app.factory('SharedState', function($http, $q) {
           lessons: [
             {
               name: 'Elección de Pieza Final',
+              id: 10,
               material:[{
-                id: 55,
                 title: 'Lista A',
                 icon: 'library_music',
                 activity:[{
@@ -2099,7 +2097,6 @@ app.factory('SharedState', function($http, $q) {
                   }
                 ]
                 },{
-                id: 56,
                 title: 'Lista B',
                 icon: 'library_music',
                 activity:[{
@@ -2123,8 +2120,9 @@ app.factory('SharedState', function($http, $q) {
 
  
 .controller('level2', ["$scope", "SharedState", function($scope, SharedState) {
-    SharedState.getNum().then(function(num) {
-    $scope.num = num;
+    SharedState.getNum().then(function(data) {
+    $scope.lsn = data.lsn;
+      $scope.lvl = data.lvl;
   })
    $scope.allData = [
      {
@@ -2132,8 +2130,8 @@ app.factory('SharedState', function($http, $q) {
           lessons: [
             {
               name: 'Lección 1: Cambio de Posición II',
+              id: 1,
               material:[{
-                id: 57,
                 title: 'Solfeo VII',
                 icon: 'music_note',
                 activity:[{
@@ -2150,7 +2148,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 58,
                 title: 'Cambio de posición II',
                 icon: 'library_books',
                 activity:[{
@@ -2167,7 +2164,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 59,
                 title: 'Pieza: Allemande',
                 icon: 'audio_file',
                 activity:[{
@@ -2187,9 +2183,9 @@ app.factory('SharedState', function($http, $q) {
           },
           {
               name: 'Lección 2: Contrapunto',
+              id: 2,
               material:[
               {
-                id: 60,
                 title: 'Solfeo VIII',
                 icon: 'music_note',
                 activity:[/*{
@@ -2206,7 +2202,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 61,
                 title: 'Definición',
                 icon: 'library_books',
                 activity:[{
@@ -2223,7 +2218,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 62,
                 title: 'Pieza: Andante, Beyer',
                 icon: 'audio_file',
                 activity:[{
@@ -2244,8 +2238,8 @@ app.factory('SharedState', function($http, $q) {
 
           {
               name: 'Lección 3: Intervalos de 7ma y 8va',
+              id: 3,
               material:[{
-                id: 63,
                 title: 'Solfeo IX',
                 icon: 'music_note',
                 activity:[/*{
@@ -2262,8 +2256,7 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 64,
-                title: 'Definición',
+                title: 'Intervalos de 8va y 7ma',
                 icon: 'library_books',
                 activity:[{
                   icon: 'smart_display',
@@ -2279,7 +2272,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 65,
                 title: 'Pieza: Minuet, Leopold Mozart',
                 icon: 'audio_file',
                 activity:[{
@@ -2310,9 +2302,9 @@ app.factory('SharedState', function($http, $q) {
           block: "Bloque 2",
           lessons: [
             {
-              name: 'Lección 4: Series Armónicas',
+              name: 'Lección 4: Grados de escalas',
+              id: 4,
               material:[{
-                id: 66,
                 title: 'Definición',
                 icon: 'music_note',
                 activity:[{
@@ -2329,7 +2321,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 67,
                 title: 'Pieza: Aria in F',
                 icon: 'audio_file',
                 activity:[{
@@ -2348,10 +2339,10 @@ app.factory('SharedState', function($http, $q) {
             ]
           },
            {
-              name: 'Lección 6: Triadas',
+              name: 'Lección 5: Triadas',
+              id: 5,
               material:[
               {
-                id: 68,
                 title: 'Construcción de triadas',
                 icon: 'library_books',
                 activity:[{
@@ -2373,7 +2364,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 69,
                 title: 'Triadas mayores y menores',
                 icon: 'library_books',
                 activity:[{
@@ -2395,7 +2385,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 70,
                 title: 'Pieza: Waltz, Kabalevsky',
                 icon: 'audio_file',
                 activity:[{
@@ -2414,10 +2403,10 @@ app.factory('SharedState', function($http, $q) {
             ]
           },
             {
-              name: 'Lección 5: Escalas',
+              name: 'Lección 6: Inversión de triadas',
+              id: 6,
               material:[
               {
-                id: 71,
                 title: 'Escalas',
                 icon: 'library_books',
                 activity:[{
@@ -2438,16 +2427,19 @@ app.factory('SharedState', function($http, $q) {
                   }
                 ]
               },
-              
               {
-                id: 72,
-                title: 'Elección de Pieza Final 1',
+                title: 'Pieza: Waltz, Kabalevsky',
                 icon: 'audio_file',
                 activity:[{
                   icon: 'piano',
                   type: 'Ejemplo',
                   media: 'video',
                   url: 'https://www.youtube.com/embed/'
+                  },{
+                  icon: 'description',
+                  type: 'Partitura',
+                  media: 'pdf',
+                  url: 'https://drive.google.com/file/d//preview'
                   }
                 ]
               }
@@ -2464,9 +2456,9 @@ app.factory('SharedState', function($http, $q) {
           block: "Bloque 3",
           lessons: [
              {
-              name: 'Lección 6: Arpegios',
+              name: 'Lección 7: Arpegios',
+              id: 7,
               material:[{
-                id: 73,
                 title: 'Definición',
                 icon: 'music_note',
                 activity:[{
@@ -2488,7 +2480,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 74,
                 title: 'Pieza: Melody, Kohler',
                 icon: 'audio_file',
                 activity:[{
@@ -2508,9 +2499,9 @@ app.factory('SharedState', function($http, $q) {
           },
             {
               name: 'Lección 8: Tresillos',
+              id: 8,
               material:[
               {
-                id: 75,
                 title: 'Tresillos',
                 icon: 'library_books',
                 activity:[{
@@ -2528,7 +2519,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 76,
                 title: 'Pieza: ',
                 icon: 'audio_file',
                 activity:[{
@@ -2548,9 +2538,9 @@ app.factory('SharedState', function($http, $q) {
           },
             {
               name: 'Lección 9: Métricas compuestas',
+              id: 9,
               material:[
               {
-                id: 77,
                 title: 'Definición',
                 icon: 'library_books',
                 activity:[{
@@ -2568,7 +2558,6 @@ app.factory('SharedState', function($http, $q) {
                 ]
               },
               {
-                id: 78,
                 title: 'Pieza: Melody, Le Couppey',
                 icon: 'audio_file',
                 activity:[{
@@ -2596,20 +2585,25 @@ app.factory('SharedState', function($http, $q) {
           lessons: [
             {
               name: 'Elección de Pieza Final',
+              id: 10,
               material:[{
-                id: 79,
-                title: 'Definición',
-                icon: 'music_note',
+                title: 'Lista A',
+                icon: 'library_music',
                 activity:[{
-                  icon: 'smart_display',
+                  icon: 'video_library',
                   type: 'Lección',
                   media: 'video',
-                  url: 'https://www.youtube.com/embed/'
-                  },{
-                  icon: 'auto_stories',
-                  type: 'Teoría',
-                  media: 'pdf',
-                  url: 'https://drive.google.com/file/d//preview'
+                  url: 'https://www.youtube.com/embed/playlist?list=PLFLLmJ16LJSyilSL5i2UoEEiHaioZTVaW'
+                  }
+                ]
+                },{
+                title: 'Lista B',
+                icon: 'library_music',
+                activity:[{
+                  icon: 'video_library',
+                  type: 'Lección',
+                  media: 'video',
+                  url: 'https://www.youtube.com/embed/playlist?list=PLFLLmJ16LJSy1cuiGt1xCqne4nQasdXMw'
                   }
                 ]
                 },
