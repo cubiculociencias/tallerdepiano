@@ -2359,8 +2359,7 @@ footer{
   function onMediaSuccess(stream) {
     mediaRecorder = new MediaStreamRecorder(stream);
     mediaRecorder.stream = stream;
-    mediaRecorder.mimeType = 'audio/mp3';  
-    //mediaRecorder.mimeType = 'audio/wav';  
+    mediaRecorder.mimeType = 'audio/wav';  
     //mediaRecorder.mimeType = 'audio/webm';  
     mediaRecorder.audioChannels = 1;
     mediaRecorder.ondataavailable = function(blob) {
