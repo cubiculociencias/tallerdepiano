@@ -2380,7 +2380,7 @@ footer{
   });
       var reader = new FileReader();
           reader.onloadend = function() {
-            var base64Audio = reader.result;
+            var base64Audio = "data:audio/mp3"+reader.result.split(";")[1];
             document.getElementById("AudioData").value = base64Audio;
           };
           reader.readAsDataURL(blob);
