@@ -431,7 +431,7 @@ iframe#quiz {
         <div>{{lesson.name}} 
    <span class="secondary-content" ng-if="loading"><i class="material-icons">lock</i></span>
           <span class="secondary-content" ng-if="lvl < 1">
-          <i class="material-icons" ng-if="lesson.id == lsn">schedule</i>
+          <i class="material-icons" ng-if="lesson.id == lsn && lvl == 0">schedule</i>
           <i class="material-icons" ng-if="lesson.id > lsn">lock</i>
           </span></div>
       </a>  
@@ -486,14 +486,14 @@ iframe#quiz {
     <li class="collection-item" ng-repeat="lesson in data.lessons">
       <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
          <div>{{lesson.name}}<span class="secondary-content" ng-if="lvl < 2">
-          <i class="material-icons" ng-if="lesson.id == lsn">schedule</i>
-          <i class="material-icons" ng-if="lesson.id > lsn">lock</i>
+          <i class="material-icons" ng-if="lesson.id == lsn && lvl == 1">schedule</i>
+          <i class="material-icons" ng-if="lesson.id > lsn || lvl < 2">lock</i>
           </span></div>
       </a>
       
       <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
      <div class="linehorizontal" ></div>
-        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lvl > 1 || lesson.id <= lsn">
+        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lesson.id <= lsn && lvl > 1">
           <div class="collapsible-header">
    <i class="material-icons" ng-if="lvl > 1 || lesson.id < lsn">{{material.icon}}</i>
 <i class="material-icons" ng-if="lvl == 1 && lesson.id >= lsn">pending_actions</i>
@@ -530,14 +530,14 @@ iframe#quiz {
     <li class="collection-item" ng-repeat="lesson in data.lessons">
       <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
         <div>{{lesson.name}}<span class="secondary-content" ng-if="lvl < 3">
-          <i class="material-icons" ng-if="lesson.id == lsn">schedule</i>
-          <i class="material-icons" ng-if="lesson.id > lsn">lock</i>
+          <i class="material-icons" ng-if="lesson.id == lsn && lvl == 2">schedule</i>
+          <i class="material-icons" ng-if="lesson.id > lsn || lvl < 3">lock</i>
           </span></div>
       </a>
       
       <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
      <div class="linehorizontal" ></div>
-       <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lvl > 2 || lesson.id <= lsn">
+       <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lvl > 2 && lesson.id <= lsn">
           <div class="collapsible-header">
    <i class="material-icons" ng-if="lvl > 2 || lesson.id < lsn">{{material.icon}}</i>
 <i class="material-icons" ng-if="lvl == 2 && lesson.id >= lsn">pending_actions</i>
@@ -573,8 +573,8 @@ iframe#quiz {
     <li class="collection-item" ng-repeat="lesson in data.lessons">
       <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
         <div>{{lesson.name}}<span class="secondary-content" ng-if="lvl < 4">
-          <i class="material-icons" ng-if="lesson.id == lsn">schedule</i>
-          <i class="material-icons" ng-if="lesson.id > lsn">lock</i>
+          <i class="material-icons" ng-if="lesson.id == lsn && lvl == 4">schedule</i>
+          <i class="material-icons" ng-if="lesson.id > lsn || lvl < 4">lock</i>
           </span></div>
       </a>
       
@@ -614,8 +614,8 @@ iframe#quiz {
     <li class="collection-item" ng-repeat="lesson in data.lessons">
       <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
        <div>{{lesson.name}}<span class="secondary-content" ng-if="lvl < 5">
-          <i class="material-icons" ng-if="lesson.id == lsn">schedule</i>
-          <i class="material-icons" ng-if="lesson.id > lsn">lock</i>
+          <i class="material-icons" ng-if="lesson.id == lsn && lvl == 4">schedule</i>
+          <i class="material-icons" ng-if="lesson.id > lsn || lvl < 5">lock</i>
           </span></div>
       </a>
       
@@ -654,8 +654,8 @@ iframe#quiz {
     <li class="collection-item" ng-repeat="lesson in data.lessons">
       <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
       <div>{{lesson.name}}<span class="secondary-content" ng-if="lvl < 6">
-          <i class="material-icons" ng-if="lesson.id == lsn">schedule</i>
-          <i class="material-icons" ng-if="lesson.id > lsn">lock</i>
+          <i class="material-icons" ng-if="lesson.id == lsn && lvl == 5">schedule</i>
+          <i class="material-icons" ng-if="lesson.id > lsn || lvl < 6">lock</i>
           </span></div>
       </a>
       
@@ -695,8 +695,8 @@ iframe#quiz {
     <li class="collection-item" ng-repeat="lesson in data.lessons">
       <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
        <div>{{lesson.name}}<span class="secondary-content" ng-if="lvl < 7">
-          <i class="material-icons" ng-if="lesson.id == lsn">schedule</i>
-          <i class="material-icons" ng-if="lesson.id > lsn">lock</i>
+          <i class="material-icons" ng-if="lesson.id == lsn && lvl == 6">schedule</i>
+          <i class="material-icons" ng-if="lesson.id > lsn || lvl < 7">lock</i>
           </span></div>
       </a>
       
@@ -736,8 +736,8 @@ iframe#quiz {
     <li class="collection-item" ng-repeat="lesson in data.lessons">
       <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
        <div>{{lesson.name}}<span class="secondary-content" ng-if="lvl < 8">
-          <i class="material-icons" ng-if="lesson.id == lsn">schedule</i>
-          <i class="material-icons" ng-if="lesson.id > lsn">lock</i>
+          <i class="material-icons" ng-if="lesson.id == lsn && lvl == 7">schedule</i>
+          <i class="material-icons" ng-if="lesson.id > lsn || lvl < 8">lock</i>
           </span></div>
       </a>
       
