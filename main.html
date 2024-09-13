@@ -1757,7 +1757,6 @@ app
        .controller('profileCtrl', function($scope) {
             $scope.isModalVisible = false;
     let deferredPrompt;
-	const isAndroid = /Android/i.test(navigator.userAgent);
 
     // Registrar el Service Worker
     if ('serviceWorker' in navigator) {
@@ -1771,12 +1770,10 @@ app
     // Manejar el evento 'beforeinstallprompt'
 
     window.addEventListener('beforeinstallprompt', (e) => {
-if (isAndroid) {
         e.preventDefault();
         deferredPrompt = e;
         $scope.isModalVisible = true;
         $scope.$apply(); // Forzar la actualización del scope
-}
     });
 
 
