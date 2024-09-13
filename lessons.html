@@ -493,7 +493,7 @@ iframe#quiz {
       
       <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
      <div class="linehorizontal" ></div>
-        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lesson.id <= lsn && lvl > 1">
+        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lesson.id <= lsn || lvl > 1">
           <div class="collapsible-header">
    <i class="material-icons" ng-if="lvl > 1 || lesson.id < lsn">{{material.icon}}</i>
 <i class="material-icons" ng-if="lvl == 1 && lesson.id >= lsn">pending_actions</i>
@@ -537,7 +537,7 @@ iframe#quiz {
       
       <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
      <div class="linehorizontal" ></div>
-       <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lvl > 2 && lesson.id <= lsn">
+       <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lvl > 2 || lesson.id <= lsn">
           <div class="collapsible-header">
    <i class="material-icons" ng-if="lvl > 2 || lesson.id < lsn">{{material.icon}}</i>
 <i class="material-icons" ng-if="lvl == 2 && lesson.id >= lsn">pending_actions</i>
