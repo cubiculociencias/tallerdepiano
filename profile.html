@@ -46,9 +46,10 @@
 .profile-user-data > * {float: left;}
  .profile-user-data   .circle {
     border-radius: 100% !important;
-    overflow: hidden;
+    overflow: hidden; 
     width: 95px;
     height: 95px;
+   margin-top: 10px;
    margin-right: 10px;
 }
 .profile-user-data img { margin-right: 10px; max-width: 100px;}
@@ -408,20 +409,20 @@
 }
   
   
-  
+   
 .profile-pic {
   width: 100px;
   height: 100px;
-  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
+  margin-left: -2px;
   border-radius: 50%;
   -o-object-position: center;
      object-position: center;
   -o-object-fit: cover;
      object-fit: cover;
-}
+} 
    
 .p-image {
-  top: 95px;
+  top: 105px;
   left: 20px;
   position: absolute;
   color: #666666;
@@ -523,158 +524,7 @@
   
   
  
-  
- .badges{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(98px, 1fr));
-  grid-gap: 12px;
-  height: auto;
-}
-  
 
-.badge2 {
-  margin-top: 10px;
-   margin-bottom: 10px;
-  margin-right: 10%;
-   margin-left: 20%;
-  width: 69px;
-  height: 69px;
-  border: 2px solid white;
-  border-radius: 50%;
-  box-sizing: border-box;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-  
-  .badge2::after {
-     content: attr(data-badge-name);
-     font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      position: absolute;
-      top: 80%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.75);
-      color: #fff;
-      padding: 5px 10px;
-      border-radius: 5px;
-      font-size: 13px;
-      white-space: nowrap;
-      opacity: 0;
-      transition: opacity 0.3s;
-      pointer-events: none;
-    }
-
-    .badge2:hover::after {
-      opacity: 1;
-    }
-
-
-    .badge2:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.1);
-    }
-  
-  
-  
-
-.badge-orange {
-  background: orange;
-  box-shadow: 0 0 0 4px orange;
-}
-
-.badge-green {
-  background: #2EBC74;
-  box-shadow: 0 0 0 4px #2EBC74;
-}
-
-.badge-turquoise {
-  background: #2FBAAC;
-  box-shadow: 0 0 0 4px #2FBAAC;
-}
-
-
-.badge-olive {
-  background: #b4cc2f;
-  box-shadow: 0 0 0 4px #b4cc2f;
-}
-
-.badge-red {
-  background: #cc492f;
-  box-shadow: 0 0 0 4px #cc492f;
-}
-
-.badge-blue {
-  background: #2f84cc;
-  box-shadow: 0 0 0 4px #2f84cc;
-}
-
-.badge-magenta {
-  background: #cc2f54;
-  box-shadow: 0 0 0 4px #cc2f54;
-}
-  
-  .badge-black {
-  background: black;
-  box-shadow: 0 0 0 4px black;
-}
-  
-  .badge-inactive {
-  background: rgba(211, 211, 211, 0.5); /* Color gris tenue con transparencia */
-  box-shadow: 0 0 0 4px rgba(211, 211, 211, 0.5);
-}
-  
- 
-
-.dashicons:before {
-  position: relative;
-  top: 13px;
-  left: 1px;
-  font-size: 40px;
-  color: white;
-}
-
-.dashicons-networking:before {
-  top: 11px;
-  left: 0;
-}
-  
-
-  .circular-progress {
-
-  width: 69px;
-  height: 69px;
-  border-radius: 50%;
-  box-sizing: border-box;
-
-   transform: scale(1.34) translate(-2.2%, -45.4%);
-}
-.circular-progress svg {
-  transform: rotate(270deg);
-}
-.circular-progress circle {
-  stroke-width: 5;
-  fill: none;
-  stroke-linecap: round;
-}
-.circular-progress circle:nth-of-type(1) {
- stroke: #dee2e6;
-}
-.circular-progress circle:nth-of-type(2) {
- 
-  stroke-dasharray: 251.4285714286;
-}
-.circular-progress .pct {
-  font-size: 8px;
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-30%, 380%);
-  font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-  
-   .badge2:hover .circular-progress circle:nth-of-type(2){
-    stroke: #dee2e6;
-}
 
 
   
@@ -682,12 +532,14 @@
   
 
   .menu-bar {
+    position: absolute;
             display: flex;
             justify-content: space-around;
             background-color: black;
             padding: 10px 0;
             list-style: none;
-            margin: 0;
+            margin-top: -170px;
+    margin-left: 40px;
              border-radius: 10px;
             font-weight: 550;
   box-shadow: 0px 8px 20px -8px rgba(26, 33, 43, 0.5), 0px 4px 12px 0px rgba(26, 33, 43, 0.05), 0px 1px 3px 0px rgba(26, 33, 43, 0.25), 0px 1.5px 0.5px 0px #454D57 inset, 0px -3px 1px 0px rgba(0, 0, 0, 0.5) inset;
@@ -717,13 +569,13 @@
 }
 
     .menu-bar2 {
+      position: absolute;
             display: flex;
             justify-content: space-around;
             background-color: black;
             padding: 10px 0;
             list-style: none;
-            margin: 0;
-      margin-top: 7px;
+        margin-top: -130px;
              border-radius: 10px;
             font-weight: 550;
   box-shadow: 0px 8px 20px -8px rgba(26, 33, 43, 0.5), 0px 4px 12px 0px rgba(26, 33, 43, 0.05), 0px 1px 3px 0px rgba(26, 33, 43, 0.25), 0px 1.5px 0.5px 0px #454D57 inset, 0px -3px 1px 0px rgba(0, 0, 0, 0.5) inset;
@@ -773,11 +625,12 @@
 }
 .audio-record span {
   position: absolute;
-  color: gray;
+  color: white;
+   text-shadow: 1px 2px 3px black, 0px 2px 5px black, 0px 1px 3px black!important; 
   font-weight: 300;
   font-size: 14px;
-  margin-left: 13px;
-  margin-top: 160px;
+  margin-left: -7px;
+  margin-top: 70px;
 }
  .audio-record input[type=checkbox] {
      position: absolute;
@@ -871,8 +724,9 @@
 
 
 #record-audio {
-  position: relative;
-    margin: 45px auto 0;
+
+  margin-top: -145px;
+    
 }
 
 
@@ -1003,21 +857,19 @@
  .metronome { 
    position: absolute;
    display: block;
-  width: calc(100% - .5em);
+  width: calc(100% - .2em);
   padding: 0.5em 0.01em 0.2em 1em;   
-  margin-left: -50px;
-   transform: scale(0.7);
+   margin-top: 160px;
+   transform: scale(0.8);
   font: inherit;
   line-height: 1;
   overflow: hidden;
-  text-overflow: ellipsis;
    background: black;
-   opacity: .75;
+  box-shadow: 0px 8px 20px -8px rgba(26, 33, 43, 0.5), 0px 4px 12px 0px rgba(26, 33, 43, 0.05), 0px 1px 3px 0px rgba(26, 33, 43, 0.25), 0px 1.5px 0.5px 0px #454D57 inset, 0px -3px 1px 0px rgba(0, 0, 0, 0.5) inset;
   color: white;
-  border-radius: 0.25em;
+   border-radius: 10px;
   cursor: default;
   z-index: 10;
-  outline-color: white;
 }
 
 #stop{
@@ -1423,58 +1275,24 @@ iframe#youtube {
 
 
 
-
-#full-screen-btn{
-    position: absolute;
-            justify-content: space-around;
-            background-color: black;
-            color: white; 
-  text-decoration: none;
-            padding: 10px 20px;
-  margin-top: 90px;
-             border-radius: 10px;
-            font-weight: 550;
-  box-shadow: 0px 8px 20px -8px rgba(26, 33, 43, 0.5), 0px 4px 12px 0px rgba(26, 33, 43, 0.05), 0px 1px 3px 0px rgba(26, 33, 43, 0.25), 0px 1.5px 0.5px 0px #454D57 inset, 0px -3px 1px 0px rgba(0, 0, 0, 0.5) inset;
-  }
+ 
 
 
 @media screen and (min-width:576px){
-   .drive{
-    height: 480px;
-    width: 140%;
-    margin-left: -20%;
-    margin-top: -50px;
-  }
-   .metronome { 
-     margin-top: -50px;
-     margin-left: -130px;
+  .metronome { 
+     margin-top: 170px;
   }
   .menu-bar{
-    position: absolute; 
-    margin-top: -400px;
-     margin-left: -65px;
+    margin-top: -140px;
   }
-  #full-screen-btn{
-  margin-left: 120px;
-  margin-top: 35px;
+
+  .menu-bar2{ 
+    margin-top: -100px;
+  }
+  #record-audio {
+  margin-top: -135px;
 }
-  .menu-bar2{ /* menu2 */
-     position: absolute; 
-    margin-top: -400px;
-     margin-left: -65px;
-  }
-  .mic-container{
-    margin-top: -20px;
-    margin-left: 380px;
-  }
-.mic-container span{
- margin-top: 55px;
-    margin-left: -15px;
-  }
-  #record-audio{
-    margin-top: 75px;
-    margin-left: -465px;
-  }
+
   
 }
   
@@ -1485,23 +1303,26 @@ iframe#youtube {
     margin-left: -40%;
   }
       .metronome { 
+        margin-top: -10px;
      margin-left: -200px;
   }
   .menu-bar{
-     margin-left: -135px;
+     margin-top: -400px;
+     margin-left: -145px;
   }
      .menu-bar2{
-     margin-left: -135px;
+        margin-top: -350px;
+     margin-left: -145px;
   }
      .mic-container{
+       margin-top: 10px;
     margin-left: 450px;
   }
 
-      #full-screen-btn{
-  margin-left: 50px;
-}
+
       #record-audio{
-    margin-left: -535px;
+        margin-top: 30px;
+    margin-left: -605px;
   }
      #lsnContainer{
        height: 285px !important;
@@ -1519,6 +1340,9 @@ iframe#youtube {
      .achievement-list-panel{
        margin-top: 50px;
      }
+        #noDocAlert{
+        display: none;
+      }
    
 }
   
@@ -1536,15 +1360,14 @@ iframe#youtube {
       .menu-bar2{
      margin-left: -190px;
   }
- #full-screen-btn{
-  margin-left: -10px;
-}
+
         .mic-container{
     margin-left: 500px;
   }
-       #record-audio{
-    margin-left: -590px;
+       #record-audio{ 
+    margin-left: -700px;
   } 
+   
    
 }
   
@@ -1555,26 +1378,25 @@ iframe#youtube {
      height: 840px;
     margin-left: -150%;
   }
-          .metronome { 
-     margin-top: 20px;
+       .metronome { 
+     margin-left: -330px;
+         width: 300px;
   }
-         .menu-bar{ 
-     margin-top: -755px;
+  .menu-bar{
+     margin-top: -780px;
+     margin-left: -300px;
+  } 
+      .menu-bar2{
+         margin-top: -730px;
+     margin-left: -300px;
   }
-        .menu-bar2{
-     margin-top: -755px;
+
+        .mic-container{
+    margin-left: 640px;
   }
-        
-    #full-screen-btn{
-  visibility: hidden !important;
-}
-           .mic-container{
-             margin-top: 55px;
-    margin-left: 520px;
-  }
-#record-audio{
-    margin-top: 145px;
-    margin-left: -590px;
+       #record-audio{ 
+          margin-top: 25px;
+    margin-left: -940px;
   } 
 }
 
@@ -1606,7 +1428,7 @@ iframe#youtube {
 
 
     <div class="row" >
-      <div class="col-sm-8">
+      <div class="col-sm-7">
         <div class="profile-user-data clearfix">
           <div class="circle">
               <img class="profile-pic" src={{picture}}>
@@ -1673,7 +1495,7 @@ class="js-trigger-video-modal" onclick="toggle_video_modal2(this)" style="color:
           </div>
         </div>
       </div>
-      <div class="col-sm-4" ng-if="userData.status == 'ACTIVO'">
+      <div class="col-sm-5" ng-if="userData.status == 'ACTIVO'">
         <div class="dashboard-panel achievement-list-panel">
           <div class="panel-header">
           <h4><i class="fa fa-fw fa-book"></i> Manual en curso</h4>
@@ -1737,7 +1559,9 @@ class="js-trigger-video-modal" onclick="toggle_video_modal2(this)" style="color:
 <span id="clicks"></span>
          
 </div>
-      
+       <div  class="alert alert-info" style="position: absolute;  margin-top: -10px; font-size: 15px;" id="noDocAlert">
+    Este documento no es visible en dispositivos móviles. Por favor, utiliza una computadora, tablet o tu partitura impresa, para leer la partitura mientras grabas tu tarea en este dispositivo.
+        </div>
        <div class="metronome">  
     <div hidden>
     <button class="main-btn blue flex-centered" id="tap" hidden>Tap</button> 
@@ -1774,7 +1598,7 @@ class="js-trigger-video-modal" onclick="toggle_video_modal2(this)" style="color:
     <div class="thick-fill"></div>
   </div>   
   </div> 
-   <a href="#" class="menu-bar" id="full-screen-btn" style="visibility: hidden;"> Fullscreen </a>   
+
   
         <iframe class="drive" id="drivemodal" src="" frameborder="0">
         </iframe>
@@ -1862,11 +1686,12 @@ class="js-trigger-video-modal" onclick="toggle_video_modal(this)"> <i class="ri-
 
 
   angular.module('studentsApp', [])
-  .controller('Controller1', ['$http', '$scope', '$sce', '$timeout', function($http, $scope, $sce, $timeout) {
+  .controller('Controller1', ['$http', '$scope', '$sce', '$timeout', '$interval', function($http, $scope, $sce, $timeout, $interval) {
    $scope.userData = [];
   $scope.userDataLoaded = false;
   $scope.today = new Date()
 
+   function getData(){
   var requestData = { 
     action: "getProfileData",
     token: localStorage.getItem('TPtoken')
@@ -1916,7 +1741,9 @@ class="js-trigger-video-modal" onclick="toggle_video_modal(this)"> <i class="ri-
     return "Nivel "+lvl.toString()
   }
 }
+    }
     
+   getData()
     
     $scope.dateToString = function(fechaOriginal){
   const partesFecha = fechaOriginal.split('/');
@@ -2098,6 +1925,7 @@ $scope.manuals = [
  });
      }
     
+      $interval(getData, 120000);
     
 
 }]);
@@ -2114,8 +1942,6 @@ if (/Android/i.test(navigator.userAgent) && !/Mobile/i.test(navigator.userAgent)
   detectOrientation();
   window.addEventListener('load', detectOrientation);
   window.addEventListener('resize', detectOrientation);
-} else if (!/Android|webOS|iPhone|iPad|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-  document.getElementById('full-screen-btn').style.visibility = 'visible';
 } 
 
 
@@ -2133,19 +1959,6 @@ if (/Android/i.test(navigator.userAgent) && !/Mobile/i.test(navigator.userAgent)
 };
 
 
-
-document.getElementById('full-screen-btn').addEventListener('click', function() {
-    // Verifica si el navegador soporta la API de pantalla completa
-    if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen();
-    } else if (document.documentElement.mozRequestFullScreen) { // Firefox
-        document.documentElement.mozRequestFullScreen();
-    } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari y Opera
-        document.documentElement.webkitRequestFullscreen();
-    } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
-        document.documentElement.msRequestFullscreen();
-    }
-});
 
 
 
@@ -2207,6 +2020,17 @@ function toggle_video_modal(element) {
        var url = element.getAttribute('data-pdf-url');
           $("#drivemodal").attr('src', url);   
         document.getElementById('modal-container2').classList.add('four');
+ if (!/Android|webOS|iPhone|iPad|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+   if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+        document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari y Opera
+        document.documentElement.webkitRequestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+        document.documentElement.msRequestFullscreen();
+    }
+} 
     };
 
     function hideModal() {
@@ -2218,7 +2042,12 @@ function toggle_video_modal(element) {
         }, 400);
       var metronome = document.getElementById('recorder');
       metronome.style.display = 'none';
+       if (!/Android|webOS|iPhone|iPad|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+   if (document.fullscreenElement) {
+    document.exitFullscreen()
     }
+  }
+ }
 
 
 
@@ -2334,7 +2163,7 @@ background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQ
     //mediaRecorder.mimeType = 'audio/webm';  
     mediaRecorder.audioChannels = 1;
     mediaRecorder.ondataavailable = function(blob) {
-      $('#record-audio').html("<audio id='player1' src=" + URL.createObjectURL(blob) + " style='width: 310px; ' type='audio/mp3' controls></audio> ");
+      $('#record-audio').html("<audio id='player1' src=" + URL.createObjectURL(blob) + " style='width: 310px;' type='audio/mp3' controls></audio> ");
        const player = new MediaElementPlayer('player1', {
         features: ['playpause', 'progress'],
     }); 
@@ -2714,5 +2543,9 @@ bothDisplay.addEventListener('click', function(){
     digitalDisplayContainer.style.display = 'flex';
 });
 
+
+  setInterval(function() {
+    location.reload(); 
+}, 60000); 
 
 </script>
