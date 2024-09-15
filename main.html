@@ -386,7 +386,7 @@ body {
 
 
     
-  <section class="mainSection" style="display: none;">
+  <section class="mainSection" >
 
 
  <div ng-app="ionicApp">
@@ -410,9 +410,11 @@ body {
         </ion-header-bar>
         <ion-content>
           <ul class="list">
-            <a href="#/menu/tab/profile" class="item" ng-class="(activeMenuClr=='profile')?'menuSelectedColor':''" ng-click="activeMenuClr = 'profile'" menu-toggle="right" ><i class="ri-shield-user-fill"></i>&nbsp&nbspPerfil</a>
+            <a href="#/menu/profile" class="item" ng-class="(activeMenuClr=='profile')?'menuSelectedColor':''" ng-click="activeMenuClr = 'profile'" menu-toggle="right" ><i class="ri-home-4-fill"></i>&nbsp&nbspInicio</a>
+               <a href="#/menu/agenda" class="item" ng-class="(activeMenuClr=='agenda')?'menuSelectedColor':''" ng-click="activeMenuClr = 'agenda'" menu-toggle="right"><i class="ri-calendar-event-fill"></i>&nbsp&nbspAgenda</a>
                <a href="#/menu/lessons" class="item" ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" ng-click="activeMenuClr = 'lessons'" menu-toggle="right"><i class="ri-presentation-fill"></i>&nbsp&nbspLecciones</a>
                            <a href="#/menu/library" class="item" ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" ng-click="activeMenuClr = 'library'" menu-toggle="right"><i class="ri-git-repository-fill"></i>&nbsp&nbspBiblioteca</a>
+                              
        <a href="#/menu/reel" class="item" ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" ng-click="activeMenuClr = 'reel'" menu-toggle="right"><i class="ri-award-fill"></i>&nbsp&nbspReel de logros</a>   
 	<!--   <a href="#/menu/resources" class="item" ng-class="(activeMenuClr=='resources')?'menuSelectedColor':''" ng-click="activeMenuClr = 'resources'" menu-toggle="right"><i class="ri-dashboard-fill"></i>&nbsp&nbspRecursos</a>
 	  <a href="#/menu/chat" class="item" ng-class="(activeMenuClr=='chat')?'menuSelectedColor':''" ng-click="activeMenuClr = 'chat'"  menu-toggle="right"><i class="ri-question-answer-fill"></i>&nbsp&nbspTutor</a>     
@@ -432,36 +434,20 @@ body {
     </ion-side-menus>
   </script>    
     
-  <script id="tabs.html" type="text/ng-template">
-
-      <ion-nav-bar class="bar-stable" >    
-        <ion-nav-buttons side="right">
-          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
-        </ion-nav-buttons>      
-    </ion-nav-bar>   
-
-       <ion-tabs class="tabs-icon-top tabs-stable"  >
-       <ion-tab title="Agenda" icon="ion-android-calendar" href="#/menu/tab/agenda" >
-        <ion-nav-view name="agenda-tab"></ion-nav-view>
-      </ion-tab>     
-     <ion-tab title="Perfil" icon="ion-ios-contact-outline" href="#/menu/tab/profile">
-        <ion-nav-view name="profile-tab"></ion-nav-view>
-      </ion-tab>  
-       <ion-tab title="Status" icon="ion-android-clipboard" href="#/menu/tab/status">
-        <ion-nav-view name="status-tab"></ion-nav-view>
-      </ion-tab>
-      
-    </ion-tabs>
-
-  </script>
+ 
 
 
 
   <script id="agenda.html" type="text/ng-template">
     <ion-view title="Agenda">
+      
+      <ion-nav-bar class="bar-stable">
+        <ion-nav-buttons side="right">
+          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
+        </ion-nav-buttons>      
+    </ion-nav-bar>
+    
       <ion-content>
-       
-   
 
        <div class="iframe-container"><iframe id="agendaFrame" src="https://cubiculociencias.github.io/tallerdepiano/agenda" frameborder="0" allowfullscreen></iframe></div>
     
@@ -471,8 +457,20 @@ body {
     
     <script id="profile.html" type="text/ng-template">
     <ion-view title="Perfil">
-      <ion-content >
+      
+      <ion-nav-bar class="bar-stable">
+        <ion-nav-buttons side="right">
+          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
+        </ion-nav-buttons>      
+    </ion-nav-bar>
+      
+      <ion-content > 
  
+
+		<button class="button button-light" style="position: absolute; margin-top: 1px; right: 1px; z-index: 999; transform: scale(1.4); background: transparent;" ng-click="goToStatus()">
+  <i class="icon ri-secure-payment-fill"></i>
+					</button>
+
         <div class="iframe-container"><iframe id="profileFrame" src="https://cubiculociencias.github.io/tallerdepiano/profile" frameborder="0" allowfullscreen></iframe></div> 
 
           <div id="myModal" class="modal" ng-show="isModalVisible" ng-click="checkCloseModal($event)">
@@ -480,7 +478,7 @@ body {
       <span class="close" ng-click="closeModal()">&times;</span>
       <button class="add-to-btn" ng-click="addToHomeScreen()">Agregar a pantalla de inicio</button>
     </div>
-  </div>
+  </div> 
         
       </ion-content>
     </ion-view>
@@ -489,6 +487,9 @@ body {
 
        <script id="status.html" type="text/ng-template">
     <ion-view title="Status">
+      
+        <ion-back-button></ion-back-button>
+          
       <ion-content >
        <div class="list">
 				<a class="item item-avatar" href="" >
@@ -538,7 +539,7 @@ body {
          
          <div class="item item-icon-left item-button-right">
            <i class="icon ri-calendar-close-fill"></i> Baja temporal
-					<button class="button button-assertive" style="transform: scale(.8); margin-right: -20px; margin-top: 10px;" ng-click="modal.show()">
+					<button class="button button-assertive" style="transform: scale(.8); margin-right: -20px; margin-top: 10px;" >
 						solicitar         
 					</button>
          <p style="font-size: 10px;">Puedes solicitar 2 por año</p>  
@@ -1258,7 +1259,7 @@ body {
 
           <ion-back-button></ion-back-button>
 
-    <div class="iframe-container"><iframe src="https://dashboard.mozart.studio/notereader" frameborder="0" allowfullscreen></iframe></div>
+    <div class="iframe-container"><iframe src="https://app.mozartacademy.mx/notereader" frameborder="0" allowfullscreen></iframe></div>
        
       </ion-content>
     </ion-view>
@@ -1271,7 +1272,7 @@ body {
 
           <ion-back-button></ion-back-button>
 
-   <div class="iframe-container"><iframe src="https://dashboard.mozart.studio/circleoffifths" frameborder="0" allowfullscreen></iframe></div>
+   <div class="iframe-container"><iframe src="https://app.mozartacademy.mx/circleoffifths" frameborder="0" allowfullscreen></iframe></div>
        
       </ion-content>
     </ion-view>
@@ -1308,38 +1309,6 @@ body {
 
 
 
-  <script id="regulation.html" type="text/ng-template">   
-    <ion-view>
-        <ion-content>
-            <ion-back-button></ion-back-button>
-
-            <ion-list>
-                <div ng-repeat="group in groups">
-                    <ion-item class="item-stable item-icon-right" ng-click="toggleGroup(group)" ng-class="{active: isGroupShown(group)}">
-                        <i class="icon" ng-class="isGroupShown(group) ? 'ion-chevron-up' : 'ion-chevron-down'" style="font-size:20px;"></i>
-                        &nbsp;
-                       {{group.heading}}
-                    </ion-item>
-                    <div class="item-accordion" ng-show="isGroupShown(group)">
-                        <div class="list">
-                            <div ng-repeat="bodyitem in group.body">
-                                <a class="item" ng-click="toggleDetail(bodyitem)">
-                  {{ bodyitem.no }}  {{bodyitem.name}}
-                                </a>
-                                <div ng-show="isDetailShown(bodyitem)">
-                                <div class="list card card-4" style="height: 100%;">
-        <div class="item item-body">
-     <p> {{ bodyitem.text }}</p>
-         </div> </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ion-list>
-        </ion-content>
-    </ion-view>
-</script>
 
 
 
@@ -1391,10 +1360,6 @@ body {
 
   </section>
 
- <section class="preloader" >
-    <div id="loading">&nbsp;</div>
-    <div id="loading-text">Cargando</div>
-  </section> 
 
 </body>
 
@@ -1403,15 +1368,6 @@ body {
 
   var app = angular.module('ionicApp', ['ionic']);
 app
-.service('loadingService', function() {
-  var hasLoaded = false;
-  this.getHasLoaded = function() {
-    return hasLoaded;
-  };
-  this.setHasLoaded = function(value) {
-    hasLoaded = value;
-  };
-})
 .factory('SharedState', function($http, $q) {
   var requestData = {
     action: "getBasicData",
@@ -1454,62 +1410,27 @@ app
       templateUrl: "menu.html",
       controller: 'MenuCtrl'
     })
-    .state('menu.tabs', {
-      url: "/tab",
-      views: {
-        'menuContent' :{
-          templateUrl: "tabs.html"
-        }
-      }
-    })
-   .state('menu.tabs.status', {
+   .state('menu.status', {
       url: "/status",
       views: {
-        'status-tab': {
+        'menuContent': {
           templateUrl: "status.html",
-          controller: 'StatusCtrl',
-	  resolve: {
-            userData: function($http, $ionicLoading, loadingService) {
-	     if (!loadingService.getHasLoaded()) {
-	        $ionicLoading.show({
-	          template: 'Cargando...'
-	        });
-	      }
-              var requestData = {
-                action: "getProfileData",
-                token: localStorage.getItem('TPtoken')
-              };
-
-              var config = {
-                headers: {
-                  "Content-Type": "text/plain;charset=utf-8"
-                },
-                followRedirects: true
-              };
- 
-              return $http.post('https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec', requestData, config)
-                .then(function(response) {
-                loadingService.setHasLoaded(true);
-                $ionicLoading.hide();
-                  return response.data;
-                });
-            }
-          }	
+          controller: 'StatusCtrl'
         }
       }
     })
-    .state('menu.tabs.agenda', {
+    .state('menu.agenda', {
       url: "/agenda",
       views: {
-        'agenda-tab': {
+        'menuContent': {
           templateUrl: "agenda.html"
         }
       }
     })
-  .state('menu.tabs.profile', {
+  .state('menu.profile', {
       url: "/profile",
       views: {
-        'profile-tab': {
+        'menuContent': {
           templateUrl: "profile.html",
           controller: "profileCtrl"
         }
@@ -1707,9 +1628,9 @@ app
         }
       }
     })
-    ;
+    ; 
 
-  $urlRouterProvider.otherwise("menu/tab/profile");
+  $urlRouterProvider.otherwise("menu/profile");
   $ionicConfigProvider.tabs.position('bottom'); 
 })
 
@@ -1722,6 +1643,7 @@ app
   $scope.toggleRight = function() {
     $ionicSideMenuDelegate.toggleRight();
   };
+  
 
   $scope.logout = function() {
     $('.preloader').fadeIn('slow');
@@ -1757,6 +1679,7 @@ app
        .controller('profileCtrl', function($scope) {
             $scope.isModalVisible = false;
     let deferredPrompt;
+	const isAndroid = /Android/i.test(navigator.userAgent);
 
     // Registrar el Service Worker
     if ('serviceWorker' in navigator) {
@@ -1770,10 +1693,12 @@ app
     // Manejar el evento 'beforeinstallprompt'
 
     window.addEventListener('beforeinstallprompt', (e) => {
+if (isAndroid) {
         e.preventDefault();
         deferredPrompt = e;
         $scope.isModalVisible = true;
         $scope.$apply(); // Forzar la actualización del scope
+}
     });
 
 
@@ -1802,10 +1727,33 @@ app
             $scope.closeModal();
         }
     };
+  
+     $scope.goToStatus = function() {
+  window.location.href = '#/menu/status';
+};
        })
 
-  .controller('StatusCtrl', ['$http', '$scope', '$ionicModal', 'userData', function($http, $scope, $ionicModal, userData){
-         $scope.userData = userData;
+  .controller('StatusCtrl', ['$http', '$scope', '$ionicModal', '$ionicLoading', function($http, $scope, $ionicModal, $ionicLoading){
+    $ionicLoading.show({
+            template: 'Cargando...'
+          });
+     var requestData = {
+                action: "getProfileData",
+                token: localStorage.getItem('TPtoken')
+              };
+
+              var config = {
+                headers: {
+                  "Content-Type": "text/plain;charset=utf-8"
+                },
+                followRedirects: true
+              };
+ 
+              $http.post('https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec', requestData, config)
+                .then(function(response) {
+                $ionicLoading.hide();
+                  $scope.userData = response.data;
+                });
   
 	   $ionicModal.fromTemplateUrl('modal.html', {
   scope: $scope,
@@ -2125,71 +2073,8 @@ $scope.manuals = [
     ];
     
 }])
-    
-  .controller('AccordianCtrl', function($scope){
-    $scope.groups = [{
-        "heading": "Matrícula",
-        "body": [
-            {"no":1, "name":"Asignación de horario", "text":"El alumno elegirá un horario de clase dentro de los disponibles en la academia, es posible elegirlo para comenzar a la media (por ejemplo de 2:30 a 3:30) siempre y cuando se acuerde con la administración. "},
-            {"no":2, "name":"Cambio de horario", "text":"Para tramitar un cambio de horario o plan de pago, se deberá realizar al término de la mensualidad vigente. "}
-        ]
-    },{
-        "heading": "Asistencias",
-        "body": [
-           {"no":1, "name":"raj", "text":"25"},
-            {"no":2, "name":"kumar", "text":"24"},
-            {"no":3, "name":"kumar", "text":"24"}
-        ]
-    }, {
-        "heading": "Inasistencias",
-        "body": [
-            {"sno":10, "name":"John", "age":"25", "sex":"M", "status":"Pass"},
-            {"sno":20, "name":"Ravi", "age":"24", "sex":"M", "status":"fail"},
-            {"sno":30, "name":"Priya", "age":"26", "sex":"F", "status":"Fail"}
-        ]
-    }, {
-        "heading": "Retardos",
-        "body": [
-            {"sno":10, "name":"John", "age":"25", "sex":"M", "status":"Pass"},
-            {"sno":20, "name":"Ravi", "age":"24", "sex":"M", "status":"fail"},
-            {"sno":30, "name":"Priya", "age":"26", "sex":"F", "status":"Fail"}
-        ]
-    }
-                    
-                    ]; 
-
-    /*
-    * if given group is the selected group, deselect it
-    * else, select the given group
-    */
-    $scope.toggleGroup = function(group) {
-        if ($scope.isGroupShown(group)) {
-            $scope.shownGroup = null;
-        } else {
-            $scope.shownGroup = group;
-        }
-    };
-
-    $scope.isGroupShown = function(group) {
-        return $scope.shownGroup === group;
-    };
-
-    $scope.isDetailShown = function(bodyitem) {
-        return $scope.shownDetail === bodyitem;
-    };
-
-    $scope.toggleDetail = function(bodyitem) {
-        if ($scope.isDetailShown(bodyitem)) {
-            $scope.shownDetail = null;
-        } else {
-            $scope.shownDetail = bodyitem;
-        }
-    };
-});
 
     </script>
-
-
 
 
 
@@ -2219,13 +2104,7 @@ $(window).on('load', function() {
     var validation = JSON.parse(res);
     if (validation.status == "success") {
       $('.preloader').css({'display':'none'})  
-      $('.mainSection').fadeIn('slow')
-      /*var url = window.location.href;
-        if(url == "https://app.mozart.studio/#/menu/tab/agenda"){
-          var iframe = document.getElementById('agendaFrame');
-        iframe.src = 'https://app.mozart.studio/agenda';
-        }*/
-      //loadData(api, storedToken, "si");    
+      $('.mainSection').fadeIn('slow')  
     } else {
       localStorage.removeItem('TPtoken');
       window.location.href = 'https://cubiculociencias.github.io/tallerdepiano/';
@@ -2237,52 +2116,5 @@ $(window).on('load', function() {
 });
 
 
-
-
-
- /*      
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/sw.js').then(function(registration) {
-        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-      }, function(err) {
-        console.log('ServiceWorker registration failed: ', err);
-      });
-    });
-  }
-
-  let deferredPrompt;
-  var modal = document.getElementById("myModal");
-  var btn = document.querySelector('.add-to-btn');
-  var span = document.querySelector(".close");
-
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    modal.style.display = "block";
-
-    btn.addEventListener('click', () => {
-      modal.style.display = "none";
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('User accepted the A2HS prompt');
-        } else {
-          console.log('User dismissed the A2HS prompt');
-        }
-        deferredPrompt = null;
-      });
-    });
-  });
-
-  span.onclick = function() {
-    modal.style.display = "none";
-  }
-
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
-  */
 </script>
+
