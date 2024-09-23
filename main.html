@@ -402,6 +402,67 @@ body {
     }
 }
 
+.dropdownContent {
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  background: #fff;
+  min-width: 250px;
+  box-shadow: 0px 0px 15px 8px rgba(50, 50, 50, 0.2);
+  border-radius: 8px;
+  z-index: 1000;
+  padding: 20px 10px;
+}
+
+#bannerRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+}
+
+.profileImageContainer img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.profileName {
+  margin: 10px 0 5px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.profileEmail {
+  margin: 0;
+  color: #777;
+  font-size: 14px;
+}
+
+.dropdown-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown-item i {
+  margin-right: 10px;
+}
+
+	 
+
 </style>
 
 <body>
@@ -432,7 +493,7 @@ body {
         </ion-header-bar>
         <ion-content>
           <ul class="list">
-            <a href="#/menu/status" class="item"  menu-toggle="right" ><i class="ri-user-fill"></i>&nbsp&nbspPerfil</a> 
+          <!--     <a href="#/menu/status" class="item"  menu-toggle="right" ><i class="ri-user-fill"></i>&nbsp&nbspPerfil</a>  -->
             <a href="#/menu/lessons" class="item" ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" ng-click="activeMenuClr = 'lessons'" menu-toggle="right"><i class="ri-presentation-fill" ></i>&nbsp&nbspCursos</a> 
            <!--    <a href="#/menu/profile" class="item" ng-class="(activeMenuClr=='profile')?'menuSelectedColor':''" ng-click="activeMenuClr = 'profile'" menu-toggle="right"><i class="ri-line-chart-fill" ></i>&nbsp&nbspProgreso</a> -->
               
@@ -568,11 +629,40 @@ body {
      <script id="lessons.html" type="text/ng-template">
     <ion-view >
 
-      <ion-nav-bar class="bar-light" >
-        <h1 class="title" style="text-align: left; z-index: 999; position: absolute; font-size: 18px; font-weight: 550; margin-top: 10px; font-family: 'Poppins', sans-serif">   <img src="https://lh3.googleusercontent.com/d/16vmyfZfuuu5p9xT57X_CANKBjDTA-f-S" width="35" height="35" style="margin-top: -5px; margin-left: 15px; margin-right: 5px; border-radius: 50%;"/> Taller de Piano</h1>
+      <ion-nav-bar class="bar-light" >      
+        <ion-nav-buttons side="left">
+  <!--  <button class="button button-clear" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif">
+      <img src="https://lh3.googleusercontent.com/d/1EP2I0BOMo_8mXsR9qqAv08PxjztZFaQ8" width="35" height="35" style="border-radius: 50%;" />
+       Mozart Academy
+    </button> -->
+       <button class="button button-clear" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif">
+      <img src="https://lh3.googleusercontent.com/d/16vmyfZfuuu5p9xT57X_CANKBjDTA-f-S" width="35" height="35" style="border-radius: 50%;" />
+      Taller de Piano
+    </button>
+  </ion-nav-buttons>
+       
         <ion-nav-buttons side="right">
           <button class="button button-clear" ng-click="toggleRight()">menu<i class="button button-icon ion-navicon"></i></button>
         </ion-nav-buttons>   
+       
+        <div class="dropdownContent" ng-show="isDropdownVisible" ng-click="$event.stopPropagation()">
+     <div id="bannerRow">
+      <div class="profileImageContainer">
+        <img src="https://lh3.googleusercontent.com/d/1EP2I0BOMo_8mXsR9qqAv08PxjztZFaQ8"  />
+      </div>
+      <p class="profileName">Taller de Piano</p>
+      <p class="profileEmail">piano.unam@gmail.com</p>
+    </div>
+    <div class="dropdown-item" ng-click="goToProfile()">
+      <i class="ion-ios-contact-outline"></i> Perfil
+    </div>
+    <div class="dropdown-item" ng-click="goToAgenda()">
+      <i class="ion-android-calendar"></i> Agenda
+    </div>
+    <div class="dropdown-item" ng-click="goToStatus()">
+      <i class="ion-card"></i> Pagos
+    </div>
+  </div>
         
     </ion-nav-bar>
 
@@ -1664,6 +1754,20 @@ app
     }, 10);
     
     $ionicSideMenuDelegate.toggleRight();
+};
+
+	  $scope.isDropdownVisible = false;
+    $scope.toggleDropdown = function() {
+      $scope.isDropdownVisible = !$scope.isDropdownVisible;
+    };
+   $scope.goToProfile = function() {
+  window.location.href = '#/menu/profile';
+};  
+     $scope.goToAgenda = function() {
+  window.location.href = '#/menu/agenda';
+};  
+     $scope.goToStatus = function() {
+  window.location.href = '#/menu/status';
 };
 
   $scope.logout = function() {
