@@ -380,6 +380,28 @@ body {
   100% { transform: rotate(360deg); }
 }
 
+	 .anim {
+    position: relative;
+    display: block;
+    
+  animation: slide_in 0.3s ease-in-out forwards;
+    opacity: 0;
+    left: -10px;
+
+}
+
+
+@keyframes slide_in {
+    from {
+        left: -10px;
+        opacity: 0;
+    }
+    to {
+        left: 0px;
+        opacity: 1;
+    }
+}
+
 </style>
 
 <body>
@@ -404,18 +426,17 @@ body {
     <ion-side-menus >
     
 
-      <ion-side-menu side="right">
+      <ion-side-menu side'right' width='210'>
         <ion-header-bar class="bar-stable">
           <h1 class="title">Menu</h1>
         </ion-header-bar>
         <ion-content>
-          <ul class="list">
-            <a href="#/menu/profile" class="item" ng-class="(activeMenuClr=='profile')?'menuSelectedColor':''" ng-click="activeMenuClr = 'profile'" menu-toggle="right" ><i class="ri-home-4-fill"></i>&nbsp&nbspInicio</a>
-	     <a href="#/menu/lessons" class="item" ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" ng-click="activeMenuClr = 'lessons'" menu-toggle="right"><i class="ri-presentation-fill"></i>&nbsp&nbspLecciones</a>
-               <a href="#/menu/agenda" class="item" ng-class="(activeMenuClr=='agenda')?'menuSelectedColor':''" ng-click="activeMenuClr = 'agenda'" menu-toggle="right"><i class="ri-calendar-event-fill"></i>&nbsp&nbspAgenda</a>
-                           <a href="#/menu/library" class="item" ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" ng-click="activeMenuClr = 'library'" menu-toggle="right"><i class="ri-git-repository-fill"></i>&nbsp&nbspBiblioteca</a>
-                              
-       <a href="#/menu/reel" class="item" ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" ng-click="activeMenuClr = 'reel'" menu-toggle="right"><i class="ri-award-fill"></i>&nbsp&nbspReel de logros</a>   
+      <ul class="list">
+            <a href="#/menu/status" class="item"  menu-toggle="right" ><i class="ri-user-fill"></i>&nbsp&nbspPerfil</a> 
+            <a href="#/menu/lessons" class="item" ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" ng-click="activeMenuClr = 'lessons'" menu-toggle="right"><i class="ri-presentation-fill" ></i>&nbsp&nbspCursos</a> 
+               <a href="#/menu/library" class="item" ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" ng-click="activeMenuClr = 'library'" menu-toggle="right"><i class="ri-git-repository-fill" ></i>&nbsp&nbspBiblioteca</a>                        
+       <a href="#/menu/reel" class="item" ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" ng-click="activeMenuClr = 'reel'" menu-toggle="right"><i class="ri-award-fill" ></i>&nbsp&nbspReel de logros</a>   
+	  
 	<!--   <a href="#/menu/resources" class="item" ng-class="(activeMenuClr=='resources')?'menuSelectedColor':''" ng-click="activeMenuClr = 'resources'" menu-toggle="right"><i class="ri-dashboard-fill"></i>&nbsp&nbspRecursos</a>
 	  <a href="#/menu/chat" class="item" ng-class="(activeMenuClr=='chat')?'menuSelectedColor':''" ng-click="activeMenuClr = 'chat'"  menu-toggle="right"><i class="ri-question-answer-fill"></i>&nbsp&nbspTutor</a>     
              <a href="#/menu/about" class="item" ng-class="(activeMenuClr=='about')?'menuSelectedColor':''" ng-click="activeMenuClr = 'about'" menu-toggle="right"><i class="ri-file-paper-2-fill"></i>&nbsp&nbspLineamientos</a> -->
@@ -458,28 +479,13 @@ body {
     <script id="profile.html" type="text/ng-template">
     <ion-view title="Perfil">
       
-      <ion-nav-bar class="bar-stable">
-        <ion-nav-buttons side="right">
-          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
-        </ion-nav-buttons>      
-    </ion-nav-bar>
-      
+       <ion-back-button></ion-back-button>
       <ion-content > 
- 
 
 		<button class="button button-light" style="position: absolute; margin-top: 1px; right: 1px; z-index: 999; transform: scale(1.4); background: transparent;" ng-click="goToStatus()">
   <i class="icon ri-secure-payment-fill"></i>
 					</button>
-
-        <div class="iframe-container"><iframe id="profileFrame" src="https://cubiculociencias.github.io/tallerdepiano/profile" frameborder="0" allowfullscreen></iframe></div> 
-
-          <div id="myModal" class="modal" ng-show="isModalVisible" ng-click="checkCloseModal($event)">
-    <div class="modal-content">
-      <span class="close" ng-click="closeModal()">&times;</span>
-      <button class="add-to-btn" ng-click="addToHomeScreen()">Agregar a pantalla de inicio</button>
-    </div>
-  </div> 
-        
+        <div class="iframe-container"><iframe id="profileFrame" src="https://cubiculociencias.github.io/tallerdepiano/profile" frameborder="0" allowfullscreen></iframe></div>   
       </ion-content>
     </ion-view>
   </script>
@@ -560,10 +566,12 @@ body {
      <script id="lessons.html" type="text/ng-template">
     <ion-view title="Lecciones">
 
-      <ion-nav-bar class="bar-stable">
+      <ion-nav-bar class="bar-light" >
+        <h1 class="title" style="text-align: left; z-index: 999; position: absolute; font-size: 18px; font-weight: 550; margin-top: 10px; font-family: 'Poppins', sans-serif">   <img src="https://lh3.googleusercontent.com/d/16vmyfZfuuu5p9xT57X_CANKBjDTA-f-S" width="35" height="35" style="margin-top: -5px; margin-left: 15px; margin-right: 5px; border-radius: 50%;"/> Taller de Piano</h1>
         <ion-nav-buttons side="right">
-          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
-        </ion-nav-buttons>      
+          <button class="button button-clear" ng-click="toggleRight()">menu<i class="button button-icon ion-navicon"></i></button>
+        </ion-nav-buttons>   
+        
     </ion-nav-bar>
 
      <ion-content>
@@ -1360,6 +1368,11 @@ body {
 
   </section>
 
+	 <section class="preloader" style="display: none;">
+    <div id="loading">&nbsp;</div>
+    <div id="loading-text">Cargando</div>
+  </section> 
+
 
 </body>
 
@@ -1630,7 +1643,7 @@ app
     })
     ; 
 
-  $urlRouterProvider.otherwise("menu/profile");
+  $urlRouterProvider.otherwise("menu/lessons");
   $ionicConfigProvider.tabs.position('bottom'); 
 })
 
@@ -1641,9 +1654,15 @@ app
 
 .controller('MenuCtrl', ['$http', '$scope', '$ionicSideMenuDelegate', '$ionicModal', function($http, $scope, $ionicSideMenuDelegate, $ionicModal) {
   $scope.toggleRight = function() {
+    $('.item').removeClass('anim');
+    setTimeout(function() {
+        $('.item').each(function(index) {
+            $(this).addClass('anim').css('animation-delay', (index * 0.1) + 's');
+        });
+    }, 10);
+    
     $ionicSideMenuDelegate.toggleRight();
-  };
-  
+};
 
   $scope.logout = function() {
     $('.preloader').fadeIn('slow');
