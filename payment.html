@@ -1,0 +1,812 @@
+ <head>
+  <title>Taller de piano</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+ 
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js"></script>
+   <script src="https://pay.google.com/gp/p/js/pay.js"></script>
+<script src="https://js.braintreegateway.com/web/3.90.0/js/client.min.js"></script>
+<script src="https://js.braintreegateway.com/web/3.90.0/js/google-payment.min.js"></script>
+</head>
+
+<style> 
+  *,
+*:after,
+*:before{
+  padding: 0;
+  margin:0;
+  box-sizing: border-box;
+}
+
+#app{
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+  margin: auto;
+}
+
+h1, h2, h3, h4, p , label, button{
+  font-family: BentonSans,Benton Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+  color: #4a5568;
+}
+
+p, label{
+  color: #62748e;
+}
+
+.fs_xs{
+  font-size: 1.2rem;
+}
+
+
+.upper_case{
+  text-transform: uppercase;
+}
+
+
+
+.tab{
+  background-color: #f7fafc;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+  grid-column: 1/4;
+}
+
+.container{
+  max-width: 80%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  margin: auto;
+}
+
+.wrapper{
+  position: relative;
+  width: 100%;
+  align-self: stretch;
+}
+  .wrapper img{
+  max-width: 100%;
+  height: 230px;
+  object-fit: cover;
+  object-position: center;
+  background-color: #fff;
+  width: 100%;
+}
+  .price{
+    padding: 10px 20px; 
+    margin-top: 170px; 
+    position: absolute; 
+    color: white; 
+    text-shadow: 1px 2px 3px black, 0px 8px 13px black, 0px 18px 23px black!important; 
+  }
+.option{
+  border: rgba(0, 0, 0, 0.08) 1px solid;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #edf2f7;
+  transition: all 500ms ease-in-out;
+  overflow: hidden;
+  height: 100%;
+}
+
+.option:hover{
+ box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+
+
+.details{
+  padding: 1rem;
+  margin-bottom: -20px;
+}
+
+.detail_button{
+  cursor: pointer;
+  background-color: transparent;
+  color: #62748e;
+  font-weight: 500;
+  border: 1px solid #62748e;
+  border-radius: 5px;
+  padding: .5rem;
+  margin-top: 1rem;
+}
+
+
+
+input {
+  opacity: 0;
+  width: 0px;
+}
+
+input[type="radio"]:checked + .option{
+  background-color: #f7f3fb;
+  border: #79589f 1px solid;
+}
+
+input[type="radio"]:checked + .option h3{
+  color: #79589f;
+}
+
+
+
+@media screen and (max-width: 900px) {
+  .container{
+    grid-template-columns: repeat(2, 1fr)
+  }
+  .option{
+    grid-template-rows: 50% 50%;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .container{
+    grid-template-columns: 1fr;
+  }
+}
+  
+  .nav-pills .nav-link.active {
+    background-color: black;
+    color: white;
+}
+  
+.whatsapp-button {
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 12px 20px;
+  background: #25D366;
+  text-align: left;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  border-radius: 12px;
+  box-shadow: rgba(255, 255, 255, 0.25) 0 0 0 3px inset;
+  transition: 0.3s ease-out;
+}
+.whatsapp-button, .whatsapp-button:hover, .whatsapp-button:focus, .whatsapp-button:active {
+  color: #fff;
+  text-decoration: none;
+}
+.whatsapp-button:hover, .whatsapp-button:focus {
+  background: #22bf5b;
+}
+.whatsapp-button:focus {
+  outline: none;
+}
+.whatsapp-button:active {
+  background: #1ea951;
+  transition: none;
+}
+.whatsapp-button p {
+  margin: 0;
+}
+.whatsapp-button span {
+  display: block;
+  font-size: 14px;
+  line-height: 18px;
+}
+.whatsapp-button strong {
+  display: block;
+  font-weight: 700;
+}
+.whatsapp-button svg {
+  width: 36px;
+  height: 36px;
+  fill: currentcolor;
+  flex-shrink: 0;
+  margin-right: 8px;
+}
+  
+  
+  
+
+.uploader {
+  text-align: center;
+  display: block;
+  clear: both;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 600px;
+}
+.uploader label {
+  float: left;
+  clear: both;
+  width: 100%;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  background: #fff;
+  border-radius: 7px;
+  border: 3px solid #eee;
+  transition: all 0.2s ease;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.uploader label:hover {
+  border-color: #454cad;
+}
+.uploader label.hover {
+  border: 3px solid #454cad;
+  box-shadow: inset 0 0 0 6px #eee;
+}
+.uploader label.hover #start i.fa {
+  transform: scale(0.8);
+  opacity: 0.3;
+}
+.uploader #start {
+  float: left;
+  clear: both;
+  width: 100%;
+}
+.uploader #start.hidden {
+  display: none;
+}
+.uploader #start i.fa {
+  font-size: 50px;
+  margin-bottom: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+.uploader #response {
+  float: left;
+  clear: both;
+  width: 100%;
+}
+.uploader #response.hidden {
+  display: none;
+}
+.uploader #response #messages {
+  margin-bottom: 0.5rem;
+}
+.uploader #file-image {
+  display: inline;
+  /*margin: 0 auto 0.5rem auto;
+  width: auto;
+  height: auto;
+  max-width: 100px;*/
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  object-position: center;
+  background-color: #fff;
+}
+.uploader #file-image.hidden {
+  display: none;
+}
+.uploader #notimage {
+  display: block;
+  float: left;
+  clear: both;
+  width: 100%;
+}
+.uploader #notimage.hidden {
+  display: none;
+}
+
+
+.uploader input[type=file] {
+  display: none;
+}
+.uploader div {
+  margin: 0 0 0.5rem 0;
+  color: #5f6982;
+}
+.uploader .btn {
+  display: inline-block;
+  margin: 0.5rem 0.5rem 1rem 0.5rem;
+  clear: both;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  text-transform: initial;
+  border: none;
+  border-radius: 0.2rem;
+  outline: none;
+  padding: 0 1rem;
+  height: 36px;
+  line-height: 36px;
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
+  background: #454cad;
+  border-color: #454cad;
+  cursor: pointer;
+}
+</style>
+
+<div class="tab" style="display: none;" id="sendStatus">
+    <div class="container">
+<div class="wrapper" >
+        <input type="radio" name="option" id="production">
+        <label class="option" for="production">
+          <img src="https://lh3.googleusercontent.com/d/1Hv9WGtVuOhTwTcolJyMO7IIlZjjydQsU" />
+
+            <div class="details">
+              <div class="text">
+                <h4>Pago enviado</h4>
+                <p>Estamos validando tu pago. En breve serás notificado de aprobado y tendrás acceso al contenido.</p>
+           
+              </div>
+          </div>
+          </label>
+      </div>
+       </div>
+   </div>
+
+<main id=app>
+
+  <div class="tab">
+     <!--    <p class="fs_xs upper_case">Planes de Pago</p>  -->
+    <div class="container">
+   
+ <div class="wrapper">
+        <input type="radio" name="option" id="free">
+        <label class="option" for="free">
+          <img src="https://i.ibb.co/W3bVHyp/Skype-piano-lessons-copy-2-750x750-2.jpg" />
+            <h4 class="price">$300 MXN <span style="font-size: 13px;">/mes</span></h4>
+            <div class="details">
+              <div class="text">
+                <h4>Curso de piano por ZOOM</h4>
+                <p >Toma 1 clase de piano semanal de 1 hora de duración.</p>
+              </div>                           
+              <button class="detail_button" onclick="openClasstimeModal()">Horarios</button>
+               <button class="detail_button" onclick="openPaymentInfoModal(1)">Inscribir</button>
+          </div>
+          </label>
+      </div>
+      <div class="wrapper">
+        <input type="radio" name="option" id="production">
+        <label class="option" for="production">
+          <img src="https://lh3.googleusercontent.com/d/1i9CIMoY2uKv5WKw7EHUYn_FRyafasDnL" alt="production" />
+          <h4 class="price">$150 MXN <span style="font-size: 13px;">/mes</span></h4>
+            <div class="details">
+              <div class="text">
+                <h4>Piano sin límites</h4>
+                <p>Desbloquea lecciones.</p>
+              </div>
+                           <button class="detail_button" onclick="openPaymentInfoModal(2)">Inscribir</button>
+          </div>
+          </label>
+      </div>
+      <div class="wrapper">
+        <input type="radio" name="option" id="advanced">
+        <label class="option" for="advanced">
+          <img src="https://i.ibb.co/c8xTZFM/Whats-App-Image-2022-05-27-at-8-42-00-AM.jpg" alt="advanced" />
+           <h4 class="price">$1500 MXN</h4>
+            <div class="details">
+              <div class="text">
+                <h4>Acceso Total</h4>
+                <p>Desbloquea y accede a todo nuestro contenido sin restricciones de por vida.</p>
+              </div>
+                          <button class="detail_button" onclick="openPaymentInfoModal(3)">Inscribir</button>
+          </div>
+          </label>
+      </div>
+  <!--    <div class="wrapper">
+        <input type="radio" name="option" id="enterprise">
+        <label class="option" for="enterprise">
+          <img src="https://www0.assets.heroku.com/packs/media/pricing-app/images/app-type-enterprise-gray-367216d90fe953edb719e498dee506e8.svg" alt="enterprise" />
+            <div class="details">
+              <div class="text">
+                <h3>Enterprise</h3>
+                <p class="pad-b1">Contact Sales for custom pricing</p>
+                <p>Apps that meet the control, compliance, and collaboration needs of large scale organizations.</p>
+              </div>
+              <button class="detail_button">Estimate</button>
+              <button class="detail_button active">Selected</button>
+          </div>
+          </label>
+      </div> -->
+    </div>
+  </div>
+</main>
+
+
+
+  <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true" >
+    <div class="modal-dialog " role="document" >
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        <div class="modal-content" style="margin: 0;">
+  <div class="row">
+    <aside class="col-lg-12 mx-auto text-center">
+      <article class="card" >
+        <div class="card-body p-5">
+          
+           <h4>Completa tu pago</h4> <br>
+
+
+          <ul class="nav bg-light nav-pills rounded flex-column mb-3" role="tablist" >
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="pill" href="#nav-tab-card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Paypal_2014_logo.png" style=" width: 22px; margin-bottom: 5px; "> Paypal</a>
+            </li>
+           <!--  <li class="nav-item">
+              <a class="nav-link" data-toggle="pill" href="#nav-tab-google">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/archive/c/c1/20210618182605%21Google_%22G%22_logo.svg" style=" width: 20px; margin-bottom: 5px; "> Google Pay</a>
+            </li> -->
+             <li class="nav-item">
+              <a class="nav-link" data-toggle="pill" href="#nav-tab-bank">
+             <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/Oxxo_Logo.svg" style=" width: 25px; margin-bottom: 5px;"> OXXO</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="pill" href="#nav-tab-bbva">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/BBVA_2019.svg" style=" width: 30px; margin-bottom: 5px; "> Transferencia</a>
+            </li>
+           
+          </ul> 
+
+          <div class="tab-content" >
+            <div class="tab-pane fade" id="nav-tab-card" style="background-color: transparent;">
+              <!--<p class="alert alert-success">Some text success or error</p>-->
+              <p>Paypal is easiest way to pay online</p>
+              <p>
+           <!-- <form action="https://www.paypal.me/pianounam" method="post" target="_top"> https://www.paypal.com/cgi-bin/webscr
+      <input type="hidden" name="cmd" value="_s-xclick">
+      <input type="hidden" name="hosted_button_id" value="KR9QLWUCGB98U">
+      <input type="image" src="https://lh3.googleusercontent.com/d/1TRC42weedxBQ4r9XMtulM0VS4B11KfKj" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+    </form> -->
+              
+                <a href="https://www.paypal.me/pianounam" target="_blank">
+                  <img src="https://lh3.googleusercontent.com/d/1TRC42weedxBQ4r9XMtulM0VS4B11KfKj" border="0">
+                </a>
+              </p>
+             <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">Monto</h2>
+                                            <p class="amount" style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left"></p>
+              <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">Nombre</h2>
+                                            <p  style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left">Maria de los Remedios</p>
+                  <p style="color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left"><strong>Instrucciones: </strong>Accede a tu cuenta e ingresa el monto a pagar.</p> 
+            </div> <!-- tab-pane.// -->
+            
+            
+            
+            
+             <div class="tab-pane fade" id="nav-tab-google" style="background-color: transparent;">
+              <!--<p class="alert alert-success">Some text success or error</p>-->
+              <p>Paypal is easiest way to pay online</p>
+              <p>
+  
+               <div id="google-pay-button" style="background-color: red; display: contents;"><input type="image" src="https://raw.githubusercontent.com/google-pay/google-pay-button/1d25aa6162ad2330d3c9441ba7e6e2fb406f64c0/docs/images/google-pay-button.svg" ></div>
+              </p>
+              <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </p>
+            
+            </div> 
+            
+            
+            
+
+            <div class="tab-pane fade" id="nav-tab-bbva" style="background-color: transparent;">
+
+               <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">BANCO</h2>
+                                            <p style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left">BBVA - Bancomer</p>
+               <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">Número de Tarjeta</h2>
+                                            <p style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left;text-decoration: none;">5256 7821 7891 5792</p>
+               <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">CLABE</h2>
+                                            <p style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left;text-decoration: none;">0022 6090 3516 5075 21</p>
+               <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">Concepto</h2>
+                                            <p style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left">curso de piano</p>
+               <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">Monto</h2>
+                                            <p class="amount" style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left"></p>
+
+
+<br>
+              
+              <form id="file-upload-form" class="uploader">
+  <input id="file-upload" type="file" name="fileUpload" accept="image/*" />
+
+  <label for="file-upload" id="file-drag">
+    <img id="file-image" src="#" alt="Preview" class="hidden">
+    <div id="start2">
+      <i class="fa fa-download" aria-hidden="true"></i>
+      <div>Selecciona tu imagen</div>
+      <div id="notimage" class="hidden">Please select an image</div>
+      <span id="file-upload-btn" class="btn btn-primary">Seleccionar</span>
+    </div>
+    <div id="response" class="hidden">
+      <div id="messages"></div>
+    </div>
+     <input type="hidden" id="imageData">
+     <span id="file-send-btn" class="btn" data-dismiss="modal" style="display: none;" onclick="uploadImage()"> Enviar </span>  
+  </label> 
+                 
+</form>
+    
+              <p style="color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left"><strong>Instrucciones: </strong>Para que podamos validar y registrar tu pago, debes subir una imagen del comprobante mediante una captura de pantalla y enviarlo.</p>      
+            </div>
+
+            <div class="tab-pane fade" id="nav-tab-bank" style="background-color: transparent;">
+                   <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">Presenta este QR al cajero del OXXO</h2>
+           
+ <img src="https://lh3.googleusercontent.com/d/1_avjpaS-l-uLh9y2PqnwlSahTZS5F9-S" border="0" height="200px">
+         <br> 
+          
+               <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">Numero de Cuenta</h2>
+                                            <p style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left">0022 6090 3516 5075 21</p>
+               <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">Monto</h2>
+                                            <p class="amount" style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left"></p>
+          
+
+<br> 
+              
+     <form id="file-upload-form" class="uploader">
+  <input id="file-upload" type="file" name="fileUpload" accept="image/*" />
+
+  <label for="file-upload" id="file-drag">
+    <img id="file-image" src="#" alt="Preview" class="hidden">
+    <div id="start2">
+      <i class="fa fa-download" aria-hidden="true"></i>
+      <div>Selecciona tu imagen</div>
+      <div id="notimage" class="hidden">Please select an image</div>
+      <span id="file-upload-btn" class="btn btn-primary">Seleccionar</span>
+    </div>
+    <div id="response" class="hidden">
+      <div id="messages"></div>
+    </div>
+     <input type="hidden" id="imageData">
+     <span id="file-send-btn" class="btn" data-dismiss="modal" style="display: none;" onclick="uploadImage()"> Enviar </span>  
+  </label> 
+                 
+</form>
+                <p style="color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left"><strong>Instrucciones: </strong>Para que podamos validar y registrar tu pago, debes subir una foto del ticket de pago y enviarlo.</p>  
+            </div> <!-- tab-pane.// -->
+          </div> <!-- tab-content .// -->
+
+        </div> <!-- card-body.// -->
+      </article> <!-- card.// -->
+
+    </aside> <!-- col.// -->
+  </div> <!-- row.// -->
+ </div>
+    </div>
+</div>
+
+
+
+
+ <div class="modal fade" id="classtimeModal" tabindex="-1" role="dialog" aria-labelledby="classtimeModal" aria-hidden="true" >
+    <div class="modal-dialog " role="document" >
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        <div class="modal-content" style="margin: 0; background: #084c7c" >
+    <img src="https://lh3.googleusercontent.com/d/1rQBoybB5DXHRFOEs6hx4ln6H922opGJW" style=" width: auto; height; 180px; margin-bottom: 5px; "/>
+          
+      </div>
+      </div>
+   </div>
+
+
+<script> 
+   function openPaymentInfoModal(option) {
+   $('#profileModal').modal('show');  
+      if (option == 1) {
+        $('.amount').text('$300 MXN pesos');
+    } else if (option == 2) {
+        $('.amount').text('$150 MXN pesos');
+    } else if (option == 3) {
+        $('.amount').text('$1500 MXN pesos');
+    }
+}
+  
+   function openClasstimeModal() {
+   $('#classtimeModal').modal('show');  
+}
+  
+  
+  
+ 
+  function ekUpload(){
+  function Init() {
+
+    console.log("Upload Initialised");
+
+    var fileSelect    = document.getElementById('file-upload'),
+        fileDrag      = document.getElementById('file-drag'),
+        submitButton  = document.getElementById('submit-button');
+
+    fileSelect.addEventListener('change', fileSelectHandler, false);
+
+    // Is XHR2 available?
+    var xhr = new XMLHttpRequest();
+    if (xhr.upload) {
+      // File Drop
+      fileDrag.addEventListener('dragover', fileDragHover, false);
+      fileDrag.addEventListener('dragleave', fileDragHover, false);
+      fileDrag.addEventListener('drop', fileSelectHandler, false);
+    }
+  }
+
+  function fileDragHover(e) {
+    var fileDrag = document.getElementById('file-drag');
+
+    e.stopPropagation();
+    e.preventDefault();
+
+    fileDrag.className = (e.type === 'dragover' ? 'hover' : 'modal-body file-upload');
+  }
+
+  function fileSelectHandler(e) {
+    // Fetch FileList object
+    var files = e.target.files || e.dataTransfer.files;
+
+    // Cancel event and hover styling
+    fileDragHover(e);
+
+    // Process all File objects
+    for (var i = 0, f; f = files[i]; i++) {
+      parseFile(f);
+      convertFileToBase64(f);
+    }
+  }
+    
+    function convertFileToBase64(file) {
+    var reader = new FileReader();
+    reader.onloadend = function() {
+      var base64image = reader.result.split(',')[1];
+      document.getElementById("imageData").value = base64image;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // Output
+  function output(msg) {
+    // Response
+    var m = document.getElementById('messages');
+    m.innerHTML = msg;
+  }
+
+  function parseFile(file) {
+
+    console.log(file.name);
+    output(
+      '<br><strong style="font-size: 12px;">' + encodeURI(file.name) + '</strong>'
+    );
+    
+    // var fileType = file.type;
+    // console.log(fileType);
+    var imageName = file.name;
+
+    var isGood = (/\.(?=gif|jpg|png|jpeg)/gi).test(imageName);
+    if (isGood) {
+      //document.getElementById('start2').classList.add("hidden");
+      document.getElementById('start2').style.display = 'none';
+      document.getElementById('response').classList.remove("hidden");
+       document.getElementById('file-send-btn').style.display = 'block';
+      document.getElementById('notimage').classList.add("hidden");
+      // Thumbnail Preview
+      document.getElementById('file-image').classList.remove("hidden");
+      document.getElementById('file-image').src = URL.createObjectURL(file);
+    }
+    else {
+      document.getElementById('file-image').classList.add("hidden");
+      document.getElementById('notimage').classList.remove("hidden");
+      document.getElementById('start2').classList.remove("hidden");
+      document.getElementById('response').classList.add("hidden");
+      document.getElementById("file-upload-form").reset();
+    }
+  }
+
+
+  // Check for the various File API support.
+  if (window.File && window.FileList && window.FileReader) {
+    Init();
+  } else {
+    document.getElementById('file-drag').style.display = 'none';
+  }
+}
+ekUpload();
+  
+  
+  function uploadImage() {
+    var base64Data = document.getElementById("imageData").value;
+   /*  if (base64Data) {
+        // Aquí envías el `base64Data` a tu servidor
+        var requestData = {
+            action: "postPaymentImage",
+            token: localStorage.getItem('MStoken'),
+            blob: base64Data
+        };
+
+        var config = {
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            followRedirects: true, 
+        };
+
+        $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData, config)
+            .then(function(response) {
+                document.getElementById("imageData").value = '';
+            })
+            .catch(function(error) {
+                console.error("Error uploading audio:", error);
+            });
+    } else {
+        console.log("No audio data to upload.");
+    }*/
+    document.getElementById("app").style.display = "none";
+    document.getElementById("sendStatus").style.display = "block";
+  }
+  
+  
+  var button = document.querySelector('#google-pay-button');
+var paymentsClient = new google.payments.api.PaymentsClient({
+  environment: 'TEST' // Or 'PRODUCTION'
+});
+
+braintree.client.create({
+  authorization: 'sandbox_d52wbnyb_7t5bdrz6q6fys95x'
+}, function (clientErr, clientInstance) {
+  braintree.googlePayment.create({
+    client: clientInstance,
+    googlePayVersion: 2
+    //googleMerchantId: 'merchant-id-from-google' // Optional in sandbox; if set in sandbox, this value must be a valid production Google Merchant ID
+  }, function (googlePaymentErr, googlePaymentInstance) {
+    paymentsClient.isReadyToPay({
+      // see https://developers.google.com/pay/api/web/reference/object#IsReadyToPayRequest
+      apiVersion: 2,
+      apiVersionMinor: 0,
+      allowedPaymentMethods: googlePaymentInstance.createPaymentDataRequest().allowedPaymentMethods,
+      existingPaymentMethodRequired: true // Optional
+    }).then(function(response) {
+      if (response.result) {
+        button.addEventListener('click', function (event) {
+          event.preventDefault();
+
+          var paymentDataRequest = googlePaymentInstance.createPaymentDataRequest({
+            transactionInfo: {
+              currencyCode: 'USD',
+              totalPriceStatus: 'FINAL',
+              totalPrice: '10.00' // Your amount
+            }
+          });
+
+          // We recommend collecting billing address information, at minimum
+          // billing postal code, and passing that billing postal code with all
+          // Google Pay card transactions as a best practice.
+          // See all available options at https://developers.google.com/pay/api/web/reference/object
+          var cardPaymentMethod = paymentDataRequest.allowedPaymentMethods[0];
+          cardPaymentMethod.parameters.billingAddressRequired = true;
+          cardPaymentMethod.parameters.billingAddressParameters = {
+            format: 'FULL',
+            phoneNumberRequired: true
+          };
+
+          paymentsClient.loadPaymentData(paymentDataRequest).then(function(paymentData) {
+            googlePaymentInstance.parseResponse(paymentData, function (err, result) {
+              if (err) {
+                // Handle parsing error
+                console.log(err.message);
+              }
+  console.log(result);
+              // Send result.nonce to your server
+              // result.type may be either "AndroidPayCard" or "PayPalAccount", and
+              // paymentData will contain the billingAddress for card payments
+            });
+          }).catch(function (err) {
+            // Handle errors
+            console.log(err.message);
+          });
+        });
+      }
+    }).catch(function (err) {
+      // Handle errors
+      console.log(err.message);
+    });
+  });
+
+  // Set up other Braintree components
+});
+</script>
