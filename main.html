@@ -523,13 +523,9 @@ body {
 
 
   <script id="agenda.html" type="text/ng-template">
-    <ion-view title="Agenda">
+    <ion-view >
       
-      <ion-nav-bar class="bar-stable">
-        <ion-nav-buttons side="right">
-          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
-        </ion-nav-buttons>      
-    </ion-nav-bar>
+    <ion-back-button></ion-back-button>
     
       <ion-content>
 
@@ -540,7 +536,7 @@ body {
   </script>
     
     <script id="profile.html" type="text/ng-template">
-    <ion-view title="Perfil">
+    <ion-view >
       
        <ion-back-button></ion-back-button>
       <ion-content > 
@@ -553,7 +549,7 @@ body {
 
 
        <script id="status.html" type="text/ng-template">
-    <ion-view title="Status">
+    <ion-view>
       
         <ion-back-button></ion-back-button>
           
@@ -651,14 +647,14 @@ body {
       <p class="profileName">{{userData.name}}</p>
       <p class="profileEmail">{{userData.mail}}</p>
     </div>
-    <div class="dropdown-item" ng-click="goToProfile()">
+    <div class="dropdown-item" ng-click="goToStatus()">
       <i class="ion-ios-contact-outline"></i> Perfil
     </div>
     <div class="dropdown-item" ng-click="goToAgenda()">
       <i class="ion-android-calendar"></i> Agenda
     </div>
-    <div class="dropdown-item" ng-click="goToStatus()">
-      <i class="ion-card"></i> Ajustes
+    <div class="dropdown-item" >
+      <i class="ion-android-download"></i> Instalar App
     </div>
   </div>
         
@@ -700,14 +696,14 @@ body {
       <p class="profileName">{{userData.name}}</p>
       <p class="profileEmail">{{userData.mail}}</p>
     </div>
-    <div class="dropdown-item" ng-click="goToProfile()">
+   <div class="dropdown-item" ng-click="goToStatus()">
       <i class="ion-ios-contact-outline"></i> Perfil
     </div>
     <div class="dropdown-item" ng-click="goToAgenda()">
       <i class="ion-android-calendar"></i> Agenda
     </div>
-    <div class="dropdown-item" ng-click="goToStatus()">
-      <i class="ion-card"></i> Ajustes
+    <div class="dropdown-item" >
+      <i class="ion-android-download"></i> Instalar App
     </div>
   </div>
         
@@ -767,14 +763,14 @@ body {
       <p class="profileName">{{userData.name}}</p>
       <p class="profileEmail">{{userData.mail}}</p>
     </div>
-    <div class="dropdown-item" ng-click="goToProfile()">
+     <div class="dropdown-item" ng-click="goToStatus()">
       <i class="ion-ios-contact-outline"></i> Perfil
     </div>
     <div class="dropdown-item" ng-click="goToAgenda()">
       <i class="ion-android-calendar"></i> Agenda
     </div>
-    <div class="dropdown-item" ng-click="goToStatus()">
-      <i class="ion-card"></i> Ajustes
+    <div class="dropdown-item" >
+      <i class="ion-android-download"></i> Instalar App
     </div>
   </div>
         
