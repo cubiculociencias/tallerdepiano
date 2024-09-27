@@ -506,9 +506,11 @@ iframe#quiz {
 .overview-card:hover {
   transition: none;
   transform: scale(1.02);
-}
- 
+} 
 
+.overview-card:hover .level-button {
+  transform: translate(20px, 0);
+}
 
 .job-overview-buttons {
   display: flex;
@@ -520,15 +522,17 @@ iframe#quiz {
   font-size: 11px;
   padding: 0 8px;
   height: 10px;
-  margin-top: -30px;
+  margin-top: -35px;
   font-weight: 500;
-}
+} 
 .job-overview-buttons .search-buttons.time-button {
-  color: #fc5757;
-  margin-right: 8px;
+  margin-left: -10px;
 }
 .job-overview-buttons .search-buttons.level-button {
-  color: #5052d5;
+  position: absolute;
+  right: 45px;
+
+  transition: transform 0.5s ease;
 }
 
  .overview-wrapper {
@@ -557,8 +561,8 @@ iframe#quiz {
 }
 .overview-detail .job-card-subtitle {
   font-size: 12px;
-  margin-top: -20px;
-  margin-left: -22px;
+  margin-top: -25px;
+  margin-left: -25px;
   font-weight: 500;
 }
 
@@ -693,6 +697,8 @@ iframe#quiz {
   white-space: nowrap;
 }
 .explain-subtitle {
+  display: flex;
+  align-items: center;
   font-size: 13px;
   font-weight: 500;
   margin-top: -2px;
@@ -1118,9 +1124,7 @@ iframe#quiz {
     width: 180%;
     margin-left: -40%;
   }
-     .close-modal {
-       display: none !important;
-     }
+
       .metronome { 
         margin-top: -10px;
      margin-left: -200px;
@@ -1198,6 +1202,7 @@ iframe#quiz {
      height: 840px;
     margin-left: -150%;
   }
+
        .metronome { 
      margin-left: -330px;
        
@@ -1641,14 +1646,14 @@ input[type="radio"]:checked + label.green-bg::after {
 }
 
 </style>
-
+ 
 
 <body ng-app="materializeApp">
 
   <!-- End Header -->
   <!-- Tabs Nav Start -->    
   <div class="row"> 
-       <div class="col s12 m4">  
+       <div class="col s12 m4" ng-controller="lvlMenu">  
    <div class="col s12" style="overflow-x: auto;">
   <ul class="tabs lvlmenu"  > 
       <li class="tab levelp"> 
@@ -1663,15 +1668,26 @@ input[type="radio"]:checked + label.green-bg::after {
               <div class="job-card-subtitle">
                Preparatorio 
               </div> 
-            </div>
+            </div> 
          
-          </div>
-          <div class="job-overview-buttons">
-            <div class="search-buttons time-button">24 actividades</div>
-            <div class="search-buttons level-button">Básico</div>
-            
-            <i class="locklvl ri-award-fill" style="color: orange !important"> </i>
-          </div>
+          </div> 
+          <div class="job-overview-buttons" ng-if="lvl > 0 && status == 'ACTIVO'">
+    <div class="search-buttons time-button" style="color: green">COMPLETADO</div>
+    <div class="search-buttons level-button" style="color: green">Progreso: 100 %</div>  
+    <i class="locklvl ri-award-fill" style="color: orange !important"> </i>
+   </div>
+ 
+    <div class="job-overview-buttons" ng-if="lvl == 0 && status == 'ACTIVO'">
+  <div class="search-buttons time-button">EN CURSO</div>
+  <div class="search-buttons level-button">Progreso: {{progress}} %</div>
+  <i class="locklvl ri-time-line"> </i>
+   </div>
+
+   <div class="job-overview-buttons" ng-if="status != 'ACTIVO'">
+<div class="search-buttons time-button" style="color: black;">BLOQUEADO</div>
+<div class="search-buttons level-button" style="color: black">Progreso: -</div>    
+<i class="locklvl ri-lock-fill" style="background: silver;" > </i>
+   </div>
         </div>
       </div>
     </a>
@@ -1685,18 +1701,29 @@ input[type="radio"]:checked + label.green-bg::after {
             <img src="https://lh3.googleusercontent.com/d/12G4AuBpDZcg1LAiVq6gfNWShiB-2eXLB" width="50" height="50" style="margin-right: 10px; border-radius: 10px;" />
             <div class="overview-detail">
               <div class="job-card-title">Taller de Piano</div>
-              <div class="job-card-subtitle" style="margin-left: -50px">
+              <div class="job-card-subtitle" style="margin-left: -55px">
    Grado 1 
               </div> 
             </div>
          
           </div>
-          <div class="job-overview-buttons">
-            <div class="search-buttons time-button">24 actividades</div>
-            <div class="search-buttons level-button">Principiante</div>
-            
-           <i class="locklvl ri-time-line" > </i>
-          </div>
+        <div class="job-overview-buttons" ng-if="lvl > 1 && status == 'ACTIVO'">
+    <div class="search-buttons time-button" style="color: green">COMPLETADO</div>
+    <div class="search-buttons level-button" style="color: green">Progreso: 100 %</div>  
+    <i class="locklvl ri-award-fill" style="color: orange !important"> </i>
+   </div>
+ 
+    <div class="job-overview-buttons" ng-if="lvl == 1 && status == 'ACTIVO'">
+  <div class="search-buttons time-button" >EN CURSO</div>
+  <div class="search-buttons level-button">Progreso: {{progress}} %</div>
+  <i class="locklvl ri-time-line"> </i>
+   </div>
+  
+   <div class="job-overview-buttons" ng-if="lvl<1 || status != 'ACTIVO'">
+<div class="search-buttons time-button" style="color: black;">BLOQUEADO</div>
+<div class="search-buttons level-button" style="color: black">Progreso: -</div>    
+<i class="locklvl ri-lock-fill" style="background: silver;" > </i>
+   </div>  
         </div>
       </div>
           </a>
@@ -1707,20 +1734,31 @@ input[type="radio"]:checked + label.green-bg::after {
         <div class="job-card overview-card"> 
           <div class="overview-wrapper">
             <img src="https://lh3.googleusercontent.com/d/12G4AuBpDZcg1LAiVq6gfNWShiB-2eXLB" width="50" height="50" style="margin-right: 10px; border-radius: 10px;" />
-            <div class="overview-detail">
+            <div class="overview-detail"> 
               <div class="job-card-title">Taller de Piano</div>
-              <div class="job-card-subtitle" style="margin-left: -50px">
+              <div class="job-card-subtitle" style="margin-left: -55px">
    Grado 2 
               </div> 
             </div>
          
           </div>
-          <div class="job-overview-buttons">
-            <div class="search-buttons time-button">24 actividades</div>
-            <div class="search-buttons level-button">Principiante</div>
-            
-            <i class="locklvl ri-lock-fill" style="background: silver;"> </i>
-          </div>
+         <div class="job-overview-buttons" ng-if="lvl > 2 && status == 'ACTIVO'">
+    <div class="search-buttons time-button" style="color: green">COMPLETADO</div>
+    <div class="search-buttons level-button" style="color: green">Progreso: 100 %</div>  
+    <i class="locklvl ri-award-fill" style="color: orange !important"> </i>
+   </div>
+ 
+    <div class="job-overview-buttons" ng-if="lvl == 2 && status == 'ACTIVO'">
+  <div class="search-buttons time-button" >EN CURSO</div>
+  <div class="search-buttons level-button">Progreso: {{progress}} %</div>
+  <i class="locklvl ri-time-line"> </i>
+   </div>
+ 
+   <div class="job-overview-buttons" ng-if="lvl<2 || status != 'ACTIVO'">
+<div class="search-buttons time-button" style="color: black;">BLOQUEADO</div>
+<div class="search-buttons level-button" style="color: black">Progreso: -</div>    
+<i class="locklvl ri-lock-fill" style="background: silver;" > </i>
+   </div>  
         </div>
       </div>
           </a> 
@@ -1733,18 +1771,29 @@ input[type="radio"]:checked + label.green-bg::after {
             <img src="https://lh3.googleusercontent.com/d/12G4AuBpDZcg1LAiVq6gfNWShiB-2eXLB" width="50" height="50" style="margin-right: 10px; border-radius: 10px;" />
             <div class="overview-detail">
               <div class="job-card-title">Taller de Piano</div>
-              <div class="job-card-subtitle" style="margin-left: -50px">
+              <div class="job-card-subtitle" style="margin-left: -55px">
    Grado 3 
               </div> 
             </div>
          
           </div>
-          <div class="job-overview-buttons">
-            <div class="search-buttons time-button">24 actividades</div>
-            <div class="search-buttons level-button">Intermedio</div>
-            
-            <i class="locklvl ri-lock-fill" style="background: silver;"> </i>
-          </div>
+       <div class="job-overview-buttons" ng-if="lvl > 3 && status == 'ACTIVO'">
+    <div class="search-buttons time-button" style="color: green">COMPLETADO</div>
+    <div class="search-buttons level-button" style="color: green">Progreso: 100 %</div>  
+    <i class="locklvl ri-award-fill" style="color: orange !important"> </i>
+   </div>
+ 
+    <div class="job-overview-buttons" ng-if="lvl == 3 && status == 'ACTIVO'">
+  <div class="search-buttons time-button" >EN CURSO</div>
+  <div class="search-buttons level-button">Progreso: {{progress}} %</div>
+  <i class="locklvl ri-time-line"> </i>
+   </div>
+ 
+   <div class="job-overview-buttons" ng-if="lvl<3 || status != 'ACTIVO'">
+<div class="search-buttons time-button" style="color: black;">BLOQUEADO</div>
+<div class="search-buttons level-button" style="color: black">Progreso: -</div>    
+<i class="locklvl ri-lock-fill" style="background: silver;" > </i>
+   </div>  
         </div>
       </div>
             </a>
@@ -1758,18 +1807,29 @@ input[type="radio"]:checked + label.green-bg::after {
             <img src="https://lh3.googleusercontent.com/d/12G4AuBpDZcg1LAiVq6gfNWShiB-2eXLB" width="50" height="50" style="margin-right: 10px; border-radius: 10px;" />
             <div class="overview-detail">
               <div class="job-card-title">Taller de Piano</div>
-              <div class="job-card-subtitle" style="margin-left: -50px">
+              <div class="job-card-subtitle" style="margin-left: -55px">
    Grado 4 
               </div> 
             </div>
          
           </div>
-          <div class="job-overview-buttons">
-            <div class="search-buttons time-button">24 actividades</div>
-            <div class="search-buttons level-button">Intermedio</div>
-            
-            <i class="locklvl ri-lock-fill" style="background: silver;"> </i>
-          </div>
+       <div class="job-overview-buttons" ng-if="lvl > 4 && status == 'ACTIVO'">
+    <div class="search-buttons time-button" style="color: green">COMPLETADO</div>
+    <div class="search-buttons level-button" style="color: green">Progreso: 100 %</div>  
+    <i class="locklvl ri-award-fill" style="color: orange !important"> </i>
+   </div>
+ 
+    <div class="job-overview-buttons" ng-if="lvl == 4 && status == 'ACTIVO'">
+  <div class="search-buttons time-button" >EN CURSO</div>
+  <div class="search-buttons level-button">Progreso: {{progress}} %</div>
+  <i class="locklvl ri-time-line"> </i>
+   </div>
+ 
+   <div class="job-overview-buttons" ng-if="lvl<4 || status != 'ACTIVO'">
+<div class="search-buttons time-button" style="color: black;">BLOQUEADO</div>
+<div class="search-buttons level-button" style="color: black">Progreso: -</div>    
+<i class="locklvl ri-lock-fill" style="background: silver;" > </i>
+   </div>  
         </div>
       </div>
       </a>
@@ -1782,18 +1842,29 @@ input[type="radio"]:checked + label.green-bg::after {
             <img src="https://lh3.googleusercontent.com/d/12G4AuBpDZcg1LAiVq6gfNWShiB-2eXLB" width="50" height="50" style="margin-right: 10px; border-radius: 10px;" />
             <div class="overview-detail">
               <div class="job-card-title">Taller de Piano</div>
-              <div class="job-card-subtitle" style="margin-left: -50px">
-   Grado 5 
+              <div class="job-card-subtitle" style="margin-left: -55px">
+   Grado 5  
               </div> 
             </div>
           
           </div>
-          <div class="job-overview-buttons">
-            <div class="search-buttons time-button">24 actividades</div>
-            <div class="search-buttons level-button">Intermedio</div>
-            
-            <i class="locklvl ri-lock-fill" style="background: silver;"> </i>
-          </div>
+       <div class="job-overview-buttons" ng-if="lvl > 5 && status == 'ACTIVO'">
+    <div class="search-buttons time-button" style="color: green">COMPLETADO</div>
+    <div class="search-buttons level-button" style="color: green">Progreso: 100 %</div>  
+    <i class="locklvl ri-award-fill" style="color: orange !important"> </i>
+   </div>
+ 
+    <div class="job-overview-buttons" ng-if="lvl == 5 && status == 'ACTIVO'">
+  <div class="search-buttons time-button" >EN CURSO</div>
+  <div class="search-buttons level-button">Progreso: {{progress}} %</div>
+  <i class="locklvl ri-time-line"> </i>
+   </div>
+ 
+   <div class="job-overview-buttons" ng-if="lvl<5 || status != 'ACTIVO'">
+<div class="search-buttons time-button" style="color: black;">BLOQUEADO</div>
+<div class="search-buttons level-button" style="color: black">Progreso: -</div>    
+<i class="locklvl ri-lock-fill" style="background: silver;" > </i>
+   </div>  
         </div>
       </div>
         </a>
@@ -1803,7 +1874,7 @@ input[type="radio"]:checked + label.green-bg::after {
 </div>
     <!-- Tabs Nav End -->
 
-    
+     
    <div class="col s12 m8">      
     <div id="test1" class="col s12" ng-controller="levelP">
   <!-- CSS Course Start -->
@@ -1811,65 +1882,92 @@ input[type="radio"]:checked + label.green-bg::after {
       <div class="job-explain" >
       <img class="job-bg" src="https://lh3.googleusercontent.com/d/1rlF9FPo-cn93vx7NaYK6Z0LNogarJWk_">
       <div class="job-logos"> 
-
+ 
          <img src="https://lh3.googleusercontent.com/d/1EP2I0BOMo_8mXsR9qqAv08PxjztZFaQ8" width="80" height="80" style="margin-right: 10px; border-radius: 15px;"/>
-         
-      </div> 
+         <button class="progressbtn"  onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/profile';" ng-if="lvl == 0 && status == 'ACTIVO'"> Ver progreso </button>   
+ <button class="progressbtn"  onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/payment';" ng-if="lvl == 0 && status != 'ACTIVO'"> Inscribirse </button>  
+      </div>  
       <div class="job-explain-content">
       <div class="job-title-wrapper">
        <div class="job-card-title2" >Taller de Piano </div>
        <div class="job-action"> 
          <i class="locklvl ri-award-fill" style="font-size: 25px; margin-right: 5px; color: #F44336" ng-if="lvl > 0 && status == 'ACTIVO'"> </i>
-      <i class="locklvl ri-lock-fill" style="font-size: 20px; margin-right: 10px;" ng-if="lvl > 0 && status != 'ACTIVO'"> </i>
-        <!-- <button class="progressbtn"> progreso </button> -->
+      <i class="locklvl ri-lock-fill" style="font-size: 20px; margin-right: 10px;" ng-if="status != 'ACTIVO'"> </i>
+         
        </div> 
        </div>
        <div class="job-subtitle-wrapper">
         <div class="company-name" style="color: #F44336">Grado Preparatorio <span class="comp-location">Nivel básico</span></div>
         <div class="posted">
     <span ng-if="lvl > 0 && status == 'ACTIVO'">COMPLETADO</span>
-          <span ng-if="lvl > 0 && status != 'ACTIVO'">BLOQUEADO</span>
-          <span ng-if="lvl == 0">EN CURSO</span>
-          <span class="app-number">{{counter}} Alumnos inscritos</span></div>
+          <span ng-if="status != 'ACTIVO'">BLOQUEADO</span>
+          <span ng-if="lvl == 0 && status == 'ACTIVO'">EN CURSO</span>
+          <span class="app-number">{{counter}} Alumnos inscritos</span>
+        </div>
        </div>
+        
+     
+        
        <div class="explain-bar" ng-if="lvl > 0 && status == 'ACTIVO'">
         <div class="explain-contents">
         <div class="explain-title">Progreso</div> 
         <div class="explain-subtitle">100%</div>
          </div> 
-        <div class="explain-contents"> 
-        <div class="explain-title">Dias transcurridos</div>
-        <div class="explain-subtitle">54 dias</div>
-         </div>
-        <div class="explain-contents">
+          <div class="explain-contents">
         <div class="explain-title">Puntaje de Tests</div>
-        <div class="explain-subtitle">45/50 </div>
+        <div class="explain-subtitle">{{history[0].score}}</div>
          </div>
-        <div class="explain-contents">
+        <div class="explain-contents"> 
+        <div class="explain-title">Fecha de inicio</div>
+        <div class="explain-subtitle">{{history[0].beginDate}}</div>
+         </div>   
+        <div class="explain-contents"> 
         <div class="explain-title">Fecha de termino</div>
-        <div class="explain-subtitle">29/09/2023</div>
-         </div>
+        <div class="explain-subtitle">{{history[0].finishDate}}</div>
+         </div> 
                 </div>
         
-          <div class="explain-bar" ng-if="lvl > 0 && status != 'ACTIVO'">
+         <div class="explain-bar" ng-if="lvl == 0 && status == 'ACTIVO'">
         <div class="explain-contents">
-        <div class="explain-title">Progreso</div> 
+        <div class="explain-title">Progreso</div>
+        <div class="explain-subtitle">{{progress}} %</div>
+         </div>
+        <div class="explain-contents">
+        <div class="explain-title">Límite de próxima entrega</div>
+        <div class="explain-subtitle">{{convertirFecha(currentlsns[1].limitdate)}}</div>
+         </div>
+            <div class="explain-contents"> 
+        <div class="explain-title">Fecha de inicio</div>
+        <div class="explain-subtitle">{{history[0].beginDate}}</div>
+         </div>   
+        <div class="explain-contents"> 
+        <div class="explain-title">Fecha de termino</div>
         <div class="explain-subtitle">-</div>
          </div> 
+                </div> 
+          
+      
+            <div class="overview-text-subheader" style="margin-top: 15px;" ng-if="status != 'ACTIVO'">Este curso establece las bases para lograr una lectura fluida de partituras, lo cual se traduce en una interpretación más limpia y precisa de las piezas.</div>
+        
+          <div class="explain-bar" ng-if="status != 'ACTIVO'">
         <div class="explain-contents">
-        <div class="explain-title">Dias transcurridos</div>
+        <div class="explain-title">Progreso</div>
         <div class="explain-subtitle">-</div>
+         </div>   
+        <div class="explain-contents">
+         <div class="explain-title">Termino del nivel</div>
+        <div class="explain-subtitle">  <i class="material-icons">workspace_premium</i><span style="margin-left: 5px;">Diploma</span></div>
          </div>
         <div class="explain-contents">
-        <div class="explain-title">Puntaje de Tests</div>
-        <div class="explain-subtitle">-</div>
+        <div class="explain-title">Horas en video</div>
+          <div class="explain-subtitle"><i class="material-icons">tv</i><span style="margin-left: 5px;">12 horas</span></div>
          </div>
         <div class="explain-contents">
-        <div class="explain-title">Fecha de termino</div>
-        <div class="explain-subtitle">-</div>
+        <div class="explain-title">Recursos</div>
+        <div class="explain-subtitle">  <i class="material-icons">audio_file</i><span style="margin-left: 5px;">30 actividades</span></div>
          </div>
                 </div>
-        
+         
                </div>
      </div>
       
@@ -1877,34 +1975,40 @@ input[type="radio"]:checked + label.green-bg::after {
     <li class="collection-header">
       <h4 >{{data.block}}</h4> 
     </li>
-    
+     
     <li class="collection-item" ng-repeat="lesson in data.lessons">
-      <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton"> 
+      <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">  
         <div>{{lesson.name}} 
    <span class="secondary-content" ng-if="loading || status !== 'ACTIVO'"><i class="material-icons">lock</i></span>
-          <span class="secondary-content" ng-if="lvl < 1">
-          <i class="material-icons" ng-if="lesson.id == lsn && lvl == 0">schedule</i>
+          <span class="secondary-content" ng-if="lvl == 0 && status == 'ACTIVO'">
+          <i class="material-icons" ng-if="lesson.id == lsn">schedule</i>
           <i class="material-icons" ng-if="lesson.id > lsn">lock</i>
-          </span></div>
-      </a>  
+          </span>
+       </div>
+      </a>   
       
       <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton ">
      <div class="linehorizontal"></div>        
         <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="(lvl > 0 || lesson.id <= lsn) && status === 'ACTIVO'">
           <div class="collapsible-header">
-   <i class="material-icons" ng-if="lvl > 0 || lesson.id < lsn">{{material.icon}}</i>
-<i class="material-icons" ng-if="lvl == 0 && lesson.id >= lsn">pending_actions</i>
-            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="lvl > 0 || lesson.id < lsn" >check</i></span></div>
+   <i class="material-icons" >{{material.icon}}</i>
+            {{material.title}}<span class="secondary-content"></span></div>
           <div class="collapsible-body">
                
   <div class="row">  
-    <div class="col s12">
+    <div class="col s12"> 
       <ul class="tabs" style="display: flex; white-space: nowrap;">
           <li ng-repeat="activity in material.activity" class="tab col s9">
-            <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && lvl === 0 && lsn === lesson.id">pending_actions</i>
-    <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" this-lvl=0 current-lvl="{{lvl}}" lsn-id="{{lesson.id}}" current-lsn="{{lsn}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+              
+            <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && lvl === 0 && lsn === lesson.id && currentlsns[activity.index].status == 'A corrección'">cancel</i> 
+                 <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && lvl === 0 && lsn === lesson.id && currentlsns[activity.index].status == 'En revisión'">pending_actions</i>
+                <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && (lvl > 0 || lesson.id < lsn)">verified</i> 
+                    <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && lvl === 0 && lsn === lesson.id && currentlsns[activity.index].status == 'Evaluada'">verified</i> 
+             
+    <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" this-lvl=0 current-lvl="{{lvl}}" lsn-id="{{lesson.id}}" current-lsn="{{lsn}}" current-status="{{currentlsns[activity.index].status}}" current-index="{{activity.index}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
           <span class="text-inside"  this-lvl="{{lvl}}" quiz-icon="{{activity.icon}}" quiz-title="{{activity.type}}" quiz-subtitle="{{activity.title}}" data-package="{{activity.package}}" onclick="showQuiz(this)" ng-if="activity.media == 'quiz'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>  
 <span class="text-inside js-trigger-video-modal"  onclick="toggle_video_modal(this)" data-youtube-id="{{activity.url}}" ng-if="activity.media == 'video'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+            
   </li>
       </ul> 
     </div>
@@ -1937,38 +2041,103 @@ input[type="radio"]:checked + label.green-bg::after {
       <div class="job-logos">
 
          <img src="https://lh3.googleusercontent.com/d/1EP2I0BOMo_8mXsR9qqAv08PxjztZFaQ8" width="80" height="80" style="margin-right: 10px; border-radius: 15px;"/>
-        <button class="progressbtn"  onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/profile';"> ver progreso </button>   
+   <button class="progressbtn"  onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/profile';" ng-if="lvl == 1 && status == 'ACTIVO'"> Ver progreso </button> 
+ <button class="progressbtn"  onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/payment';" ng-if="lvl == 1 && status != 'ACTIVO'"> Inscribirse </button>  
       </div>  
      
       <div class="job-explain-content"> 
       <div class="job-title-wrapper">
        <div class="job-card-title2" >Taller de Piano </div>
        <div class="job-action"> 
-     
+    <i class="locklvl ri-award-fill" style="font-size: 25px; margin-right: 5px; color: #F44336" ng-if="lvl > 1 && status == 'ACTIVO'"> </i>
+      <i class="locklvl ri-lock-fill" style="font-size: 20px; margin-right: 10px;" ng-if="lvl<1 || status != 'ACTIVO'"> </i>   
        </div> 
        </div>
        <div class="job-subtitle-wrapper">
         <div class="company-name" style="color: #9024dc">Grado 1 <span class="comp-location">Nivel Principiante</span></div>
-        <div class="posted">EN CURSO<span class="app-number">28 Alumnos inscritos</span></div>
+        <div class="posted">
+    <span ng-if="lvl > 1 && status == 'ACTIVO'">COMPLETADO</span>
+    <span ng-if="lvl == 1 && status == 'ACTIVO'">EN CURSO</span>
+   <span ng-if="lvl < 1 || status != 'ACTIVO'">BLOQUEADO</span>
+          <span class="app-number">{{counter}} Alumnos inscritos</span>
+          </div>
        </div>
-       <div class="explain-bar" >
+     <div class="explain-bar" ng-if="lvl > 1 && status == 'ACTIVO'">
+        <div class="explain-contents">
+        <div class="explain-title">Progreso</div> 
+        <div class="explain-subtitle">100%</div>
+         </div> 
+          <div class="explain-contents">
+        <div class="explain-title">Puntaje de Tests</div>
+        <div class="explain-subtitle">{{history[0].score}}</div>
+         </div>
+        <div class="explain-contents"> 
+        <div class="explain-title">Fecha de inicio</div>
+        <div class="explain-subtitle">{{history[0].beginDate}}</div>
+         </div>   
+        <div class="explain-contents"> 
+        <div class="explain-title">Fecha de termino</div>
+        <div class="explain-subtitle">{{history[0].finishDate}}</div>
+         </div> 
+                </div>
+        
+         <div class="explain-bar" ng-if="lvl == 1 && status == 'ACTIVO'">
         <div class="explain-contents">
         <div class="explain-title">Progreso</div>
-        <div class="explain-subtitle">15%</div>
-         </div>
-        <div class="explain-contents">
-        <div class="explain-title">Tiempo de práctica</div>
-        <div class="explain-subtitle">40 min</div>
-         </div>
-        <div class="explain-contents">
-        <div class="explain-title">Status de entrega</div>
-        <div class="explain-subtitle">Pendiente   </div>
+        <div class="explain-subtitle">{{progress}} %</div>
          </div>
         <div class="explain-contents">
         <div class="explain-title">Límite de próxima entrega</div>
-        <div class="explain-subtitle">Viernes 20 de septiembre</div>
+        <div class="explain-subtitle">{{convertirFecha(currentlsns[1].limitdate)}}</div>
          </div>
-                </div>
+            <div class="explain-contents"> 
+        <div class="explain-title">Fecha de inicio</div>
+        <div class="explain-subtitle">{{history[0].beginDate}}</div>
+         </div>   
+        <div class="explain-contents"> 
+        <div class="explain-title">Fecha de termino</div>
+        <div class="explain-subtitle">-</div>
+         </div> 
+                </div> 
+
+                  <div class="explain-bar" ng-if="lvl < 1 && status == 'ACTIVO'">
+        <div class="explain-contents">
+        <div class="explain-title">Progreso</div>
+        <div class="explain-subtitle">-</div>
+         </div>
+        <div class="explain-contents">
+        <div class="explain-title">Límite de próxima entrega</div>
+        <div class="explain-subtitle">-</div>
+         </div>
+            <div class="explain-contents"> 
+        <div class="explain-title">Fecha de inicio</div>
+        <div class="explain-subtitle">-</div>
+         </div>   
+        <div class="explain-contents"> 
+        <div class="explain-title">Fecha de termino</div>
+        <div class="explain-subtitle">-</div>
+         </div> 
+                </div> 
+        
+     <!--   <div class="overview-text-subheader" style="margin-top: 15px;" ng-if="status != 'ACTIVO'">Este nivel establece los fundamentos del concepto de tonalidad.</div>  -->
+            <div class="explain-bar" ng-if="status != 'ACTIVO'">
+        <div class="explain-contents">
+        <div class="explain-title">Progreso</div>
+        <div class="explain-subtitle">-</div>
+         </div>   
+        <div class="explain-contents">
+         <div class="explain-title">Termino del nivel</div>
+        <div class="explain-subtitle">  <i class="material-icons">workspace_premium</i><span style="margin-left: 5px;">Diploma</span></div>
+         </div>
+        <div class="explain-contents">
+        <div class="explain-title">Horas en video</div>
+          <div class="explain-subtitle"><i class="material-icons">tv</i><span style="margin-left: 5px;">12 horas</span></div>
+         </div>
+        <div class="explain-contents">
+        <div class="explain-title">Recursos</div>
+        <div class="explain-subtitle">  <i class="material-icons">audio_file</i><span style="margin-left: 5px;">30 actividades</span></div>
+         </div>
+                </div> 
                </div>
      </div>
     <!-- CSS Course Start -->
@@ -1978,27 +2147,32 @@ input[type="radio"]:checked + label.green-bg::after {
     </li>
     <li class="collection-item" ng-repeat="lesson in data.lessons">
       <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
-         <div>{{lesson.name}}<span class="secondary-content" ng-if="lvl < 2">
-          <i class="material-icons" ng-if="lesson.id == lsn && lvl == 1">schedule</i>
-          <i class="material-icons" ng-if="lesson.id > lsn || lvl < 2">lock</i>
+         <div>{{lesson.name}}<span class="secondary-content" ng-if="lvl < 1 || status !== 'ACTIVO'"><i class="material-icons">lock</i></span>
+          <span class="secondary-content" ng-if="lvl == 1 && status == 'ACTIVO'">
+          <i class="material-icons" ng-if="lesson.id == lsn">schedule</i>
+          <i class="material-icons" ng-if="lesson.id > lsn">lock</i>
           </span></div>
-      </a>
+      </a> 
       
       <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
      <div class="linehorizontal" ></div>
-        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lesson.id <= lsn || lvl > 1">
+        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="(lesson.id <= lsn || lvl > 1) && status === 'ACTIVO'">
           <div class="collapsible-header">
-   <i class="material-icons" ng-if="lvl > 1 || lesson.id < lsn">{{material.icon}}</i>
-<i class="material-icons" ng-if="lvl == 1 && lesson.id >= lsn">pending_actions</i>
-            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="lvl > 1 || lesson.id < lsn">check</i></span></div>
+   <i class="material-icons">{{material.icon}}</i>
+            {{material.title}}</div>
           <div class="collapsible-body">
             
   <div class="row">
     <div class="col s12">
       <ul class="tabs" style="display: flex; white-space: nowrap;">
           <li ng-repeat="activity in material.activity" class="tab col s9">
-             <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="getLsnStatus(activity.code, 'Evaluada') == true && lvl === 1 && lsn === lesson.id">pending_actions</i>
-    <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+            <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && lvl === 1 && lsn === lesson.id && currentlsns[activity.index].status == 'A corrección'">cancel</i> 
+                 <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && lvl === 1 && lsn === lesson.id && currentlsns[activity.index].status == 'En revisión'">pending_actions</i>
+                <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && (lvl > 1 || lesson.id < lsn)">verified</i> 
+                    <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && lvl === 1 && lsn === lesson.id && currentlsns[activity.index].status == 'Evaluada'">verified</i> 
+            
+    <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" this-lvl=1 current-lvl="{{lvl}}" lsn-id="{{lesson.id}}" current-lsn="{{lsn}}" current-status="{{currentlsns[activity.index].status}}" current-index="{{activity.index}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+          <span class="text-inside"  this-lvl="{{lvl}}" quiz-icon="{{activity.icon}}" quiz-title="{{activity.type}}" quiz-subtitle="{{activity.title}}" data-package="{{activity.package}}" onclick="showQuiz(this)" ng-if="activity.media == 'quiz'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>  
 <span class="text-inside js-trigger-video-modal"  onclick="toggle_video_modal(this)" data-youtube-id="{{activity.url}}" ng-if="activity.media == 'video'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
   </li>
       </ul>
@@ -2021,40 +2195,85 @@ input[type="radio"]:checked + label.green-bg::after {
       <div class="job-logos">
 
          <img src="https://lh3.googleusercontent.com/d/1EP2I0BOMo_8mXsR9qqAv08PxjztZFaQ8" width="80" height="80" style="margin-right: 10px; border-radius: 15px;"/>
-     <button class="progressbtn"  onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/payment';"> ver progreso </button>  
+<button class="progressbtn"  onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/profile';" ng-if="lvl == 2 && status == 'ACTIVO'"> Ver progreso </button>   
+ <button class="progressbtn"  onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/payment';" ng-if="lvl == 2 && status != 'ACTIVO'"> Inscribirse </button>  
       </div> 
       <div class="job-explain-content">
       <div class="job-title-wrapper">
        <div class="job-card-title2">Taller de Piano </div>
        <div class="job-action"> 
-      <i class="locklvl ri-lock-fill" style="font-size: 20px; margin-right: 10px;"> </i>
+    <i class="locklvl ri-award-fill" style="font-size: 25px; margin-right: 5px; color: #F44336" ng-if="lvl > 2 && status == 'ACTIVO'"> </i>
+      <i class="locklvl ri-lock-fill" style="font-size: 20px; margin-right: 10px;" ng-if="lvl < 2 || status != 'ACTIVO'"> </i>
        </div> 
        </div>
        <div class="job-subtitle-wrapper">
         <div class="company-name" style="color: #1894cc">Grado 2 <span class="comp-location">Nivel Principiante</span></div>
-        <div class="posted">BLOQUEADO<span class="app-number">28 Alumnos activos</span></div>
+        <div class="posted"><span ng-if="lvl > 2 && status == 'ACTIVO'">COMPLETADO</span>
+    <span ng-if="lvl == 2 && status == 'ACTIVO'">EN CURSO</span>
+    <span ng-if="lvl < 2 || status != 'ACTIVO'">BLOQUEADO</span>
+    <span class="app-number">{{counter}} Alumnos inscritos</span>
+    </div>
        </div>
    
-        <div class="overview-text-subheader" style="margin-top: 15px;">El curso se enfoca en que puedas lograr una lectura fluida de partituras.</div>
+     
 
-       <div class="explain-bar" >
+     <div class="explain-bar" ng-if="lvl > 2 && status == 'ACTIVO'">
+        <div class="explain-contents">
+        <div class="explain-title">Progreso</div> 
+        <div class="explain-subtitle">100%</div>
+         </div> 
+          <div class="explain-contents">
+        <div class="explain-title">Puntaje de Tests</div>
+        <div class="explain-subtitle">{{history[0].score}}</div>
+         </div>
+        <div class="explain-contents"> 
+        <div class="explain-title">Fecha de inicio</div>
+        <div class="explain-subtitle">{{history[0].beginDate}}</div>
+         </div>   
+        <div class="explain-contents"> 
+        <div class="explain-title">Fecha de termino</div>
+        <div class="explain-subtitle">{{history[0].finishDate}}</div>
+         </div> 
+                </div>
+        
+         <div class="explain-bar" ng-if="lvl == 2 && status == 'ACTIVO'">
+        <div class="explain-contents">
+        <div class="explain-title">Progreso</div>
+        <div class="explain-subtitle">{{progress}} %</div>
+         </div>
+        <div class="explain-contents">
+        <div class="explain-title">Límite de próxima entrega</div>
+        <div class="explain-subtitle">{{convertirFecha(currentlsns[1].limitdate)}}</div>
+         </div>
+            <div class="explain-contents"> 
+        <div class="explain-title">Fecha de inicio</div>
+        <div class="explain-subtitle">{{history[0].beginDate}}</div>
+         </div>   
+        <div class="explain-contents"> 
+        <div class="explain-title">Fecha de termino</div>
+        <div class="explain-subtitle">-</div>
+         </div> 
+                </div> 
+
+        
+                  <div class="explain-bar" ng-if="lvl < 2 || status != 'ACTIVO'">
         <div class="explain-contents">
         <div class="explain-title">Progreso</div>
         <div class="explain-subtitle">-</div>
          </div>
         <div class="explain-contents">
-         <div class="explain-title">Recursos</div>
-        <div class="explain-subtitle">  <i class="material-icons">audio_file</i><span style=" position: absolute; margin-top: 5px; margin-left: 2px;">30 actividades</span></div>
+        <div class="explain-title">Límite de próxima entrega</div>
+        <div class="explain-subtitle">-</div>
          </div>
-        <div class="explain-contents">
-        <div class="explain-title">Horas en video</div>
-          <div class="explain-subtitle"><i class="material-icons">tv</i><span style=" position: absolute; margin-top: 5px; margin-left: 5px;">12 horas</span></div>
-         </div>
-        <div class="explain-contents">
-        <div class="explain-title">Recursos</div>
-        <div class="explain-subtitle">  <i class="material-icons">audio_file</i><span style=" position: absolute; margin-top: 5px; margin-left: 2px;">30 actividades</span></div>
-         </div>
-                </div>
+            <div class="explain-contents"> 
+        <div class="explain-title">Fecha de inicio</div>
+        <div class="explain-subtitle">-</div>
+         </div>   
+        <div class="explain-contents"> 
+        <div class="explain-title">Fecha de termino</div>
+        <div class="explain-subtitle">-</div>
+         </div> 
+                </div> 
                </div>
      </div>
       <!-- JAVASCRIPT Course Start -->
@@ -2064,26 +2283,34 @@ input[type="radio"]:checked + label.green-bg::after {
     </li>
     <li class="collection-item" ng-repeat="lesson in data.lessons">
       <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
-        <div>{{lesson.name}}<span class="secondary-content" ng-if="lvl < 3">
-          <i class="material-icons" ng-if="lesson.id == lsn && lvl == 2">schedule</i>
-          <i class="material-icons" ng-if="lesson.id > lsn || lvl < 3">lock</i>
-          </span></div>
+        <div>{{lesson.name}}
+          <span class="secondary-content" ng-if="lvl < 2 || status !== 'ACTIVO'"><i class="material-icons">lock</i></span>
+          <span class="secondary-content" ng-if="lvl == 2 && status == 'ACTIVO'">
+          <i class="material-icons" ng-if="lesson.id == lsn">schedule</i>
+          <i class="material-icons" ng-if="lesson.id > lsn">lock</i>
+          </span>
+          </div>
       </a>
       
       <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
      <div class="linehorizontal" ></div>
-       <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lvl > 2 || lesson.id <= lsn">
+       <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="(lvl > 2 || lesson.id <= lsn) && status === 'ACTIVO'">
           <div class="collapsible-header">
-   <i class="material-icons" ng-if="lvl > 2 || lesson.id < lsn">{{material.icon}}</i>
-<i class="material-icons" ng-if="lvl == 2 && lesson.id >= lsn">pending_actions</i>
-            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="lvl > 2 || lesson.id < lsn">check</i></span></div>
+   <i class="material-icons" >{{material.icon}}</i>
+            {{material.title}}</div>
           <div class="collapsible-body">
             
   <div class="row">
     <div class="col s12">
       <ul class="tabs" style="display: flex; white-space: nowrap;">
           <li ng-repeat="activity in material.activity" class="tab col s9">
-    <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+      <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && lvl === 2 && lsn === lesson.id && currentlsns[activity.index].status == 'A corrección'">cancel</i> 
+                 <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && lvl === 2 && lsn === lesson.id && currentlsns[activity.index].status == 'En revisión'">pending_actions</i>
+                <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && (lvl > 2 || lesson.id < lsn)">verified</i> 
+                    <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && lvl === 2 && lsn === lesson.id && currentlsns[activity.index].status == 'Evaluada'">verified</i> 
+            
+    <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" this-lvl=2 current-lvl="{{lvl}}" lsn-id="{{lesson.id}}" current-lsn="{{lsn}}" current-status="{{currentlsns[activity.index].status}}" current-index="{{activity.index}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+          <span class="text-inside"  this-lvl="{{lvl}}" quiz-icon="{{activity.icon}}" quiz-title="{{activity.type}}" quiz-subtitle="{{activity.title}}" data-package="{{activity.package}}" onclick="showQuiz(this)" ng-if="activity.media == 'quiz'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>  
 <span class="text-inside js-trigger-video-modal"  onclick="toggle_video_modal(this)" data-youtube-id="{{activity.url}}" ng-if="activity.media == 'video'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
   </li>
       </ul>
@@ -2106,36 +2333,82 @@ input[type="radio"]:checked + label.green-bg::after {
       <div class="job-logos">
 
          <img src="https://lh3.googleusercontent.com/d/1EP2I0BOMo_8mXsR9qqAv08PxjztZFaQ8" width="80" height="80" style="margin-right: 10px; border-radius: 15px;"/>
+        <button class="progressbtn"  onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/profile';" ng-if="lvl == 3 && status == 'ACTIVO'"> Ver progreso </button>   
+ <button class="progressbtn"  onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/payment';" ng-if="lvl == 3 && status != 'ACTIVO'"> Inscribirse </button>  
       </div> 
       <div class="job-explain-content">
       <div class="job-title-wrapper">
-       <div class="job-card-title2">Taller de Piano - Intermedio I</div>
+       <div class="job-card-title2">Taller de Piano</div>
        <div class="job-action"> 
-           <i class="locklvl ri-lock-fill" style="font-size: 20px; margin-right: 10px;"> </i>
+       <i class="locklvl ri-award-fill" style="font-size: 25px; margin-right: 5px; color: #F44336" ng-if="lvl > 3 && status == 'ACTIVO'"> </i>
+      <i class="locklvl ri-lock-fill" style="font-size: 20px; margin-right: 10px;" ng-if="lvl < 3 || status != 'ACTIVO'"> </i>
        </div> 
        </div>
        <div class="job-subtitle-wrapper">
         <div class="company-name" style="color: #489454">Grado 3 <span class="comp-location">Nivel Intermedio</span></div>
-        <div class="posted">ACTIVO<span class="app-number">28 Alumnos activos</span></div>
+        <div class="posted"> <span ng-if="lvl > 3 && status == 'ACTIVO'">COMPLETADO</span>
+    <span ng-if="lvl == 3 && status == 'ACTIVO'">EN CURSO</span>
+    <span ng-if="lvl < 3 || status != 'ACTIVO'">BLOQUEADO</span>
+    <span class="app-number">{{counter}} Alumnos inscritos</span></div>
        </div>
-       <div class="explain-bar" >
-         <div class="explain-contents">
+       <div class="explain-bar" ng-if="lvl > 3 && status == 'ACTIVO'">
+        <div class="explain-contents">
+        <div class="explain-title">Progreso</div> 
+        <div class="explain-subtitle">100%</div>
+         </div> 
+          <div class="explain-contents">
+        <div class="explain-title">Puntaje de Tests</div>
+        <div class="explain-subtitle">{{history[0].score}}</div>
+         </div>
+        <div class="explain-contents"> 
+        <div class="explain-title">Fecha de inicio</div>
+        <div class="explain-subtitle">{{history[0].beginDate}}</div>
+         </div>   
+        <div class="explain-contents"> 
+        <div class="explain-title">Fecha de termino</div>
+        <div class="explain-subtitle">{{history[0].finishDate}}</div>
+         </div> 
+                </div>
+        
+         <div class="explain-bar" ng-if="lvl == 3 && status == 'ACTIVO'">
+        <div class="explain-contents">
         <div class="explain-title">Progreso</div>
-        <div class="explain-subtitle">-</div>
+        <div class="explain-subtitle">{{progress}} %</div>
          </div>
         <div class="explain-contents">
-        <div class="explain-title">Tiempo trabajado</div>
-        <div class="explain-subtitle">-</div>
+        <div class="explain-title">Límite de próxima entrega</div>
+        <div class="explain-subtitle">{{convertirFecha(currentlsns[1].limitdate)}}</div>
          </div>
+            <div class="explain-contents"> 
+        <div class="explain-title">Fecha de inicio</div>
+        <div class="explain-subtitle">{{history[0].beginDate}}</div>
+         </div>   
+        <div class="explain-contents"> 
+        <div class="explain-title">Fecha de termino</div>
+        <div class="explain-subtitle">-</div>
+         </div> 
+                </div> 
+
+
+
+                  <div class="explain-bar" ng-if="lvl < 3 || status != 'ACTIVO'">
         <div class="explain-contents">
-        <div class="explain-title">Velocidad de entrega</div>
+        <div class="explain-title">Progreso</div>
         <div class="explain-subtitle">-</div>
          </div>
         <div class="explain-contents">
         <div class="explain-title">Límite de próxima entrega</div>
         <div class="explain-subtitle">-</div>
          </div>
-                </div>
+            <div class="explain-contents"> 
+        <div class="explain-title">Fecha de inicio</div>
+        <div class="explain-subtitle">-</div>
+         </div>   
+        <div class="explain-contents"> 
+        <div class="explain-title">Fecha de termino</div>
+        <div class="explain-subtitle">-</div>
+         </div> 
+                </div> 
                </div>
      </div>
       
@@ -2145,26 +2418,33 @@ input[type="radio"]:checked + label.green-bg::after {
     </li>
     <li class="collection-item" ng-repeat="lesson in data.lessons">
       <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
-        <div>{{lesson.name}}<span class="secondary-content" ng-if="lvl < 4">
-          <i class="material-icons" ng-if="lesson.id == lsn && lvl == 4">schedule</i>
-          <i class="material-icons" ng-if="lesson.id > lsn || lvl < 4">lock</i>
-          </span></div>
+        <div>{{lesson.name}}<span class="secondary-content" ng-if="lvl < 3 || status !== 'ACTIVO'"><i class="material-icons">lock</i></span>
+          <span class="secondary-content" ng-if="lvl == 3 && status == 'ACTIVO'">
+          <i class="material-icons" ng-if="lesson.id == lsn">schedule</i>
+          <i class="material-icons" ng-if="lesson.id > lsn">lock</i>
+          </span>
+</div>
       </a>
       
       <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
      <div class="linehorizontal" ></div>
-     <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lvl > 3 || lesson.id <= lsn">
+     <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="(lvl > 3 || lesson.id <= lsn) && status === 'ACTIVO'">
           <div class="collapsible-header">
-   <i class="material-icons" ng-if="lvl > 3 || lesson.id < lsn">{{material.icon}}</i>
-<i class="material-icons" ng-if="lvl == 3 && lesson.id >= lsn">pending_actions</i>
-            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="lvl > 3 || lesson.id < lsn">check</i></span></div>
+   <i class="material-icons" >{{material.icon}}</i>
+            {{material.title}}</div>
           <div class="collapsible-body">
             
   <div class="row">
     <div class="col s12">
       <ul class="tabs" style="display: flex; white-space: nowrap;">
           <li ng-repeat="activity in material.activity" class="tab col s9">
-    <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+     <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && lvl === 3 && lsn === lesson.id && currentlsns[activity.index].status == 'A corrección'">cancel</i> 
+                 <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && lvl === 3 && lsn === lesson.id && currentlsns[activity.index].status == 'En revisión'">pending_actions</i>
+                <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && (lvl > 3 || lesson.id < lsn)">verified</i> 
+                    <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && lvl === 3 && lsn === lesson.id && currentlsns[activity.index].status == 'Evaluada'">verified</i> 
+            
+    <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" this-lvl=3 current-lvl="{{lvl}}" lsn-id="{{lesson.id}}" current-lsn="{{lsn}}" current-status="{{currentlsns[activity.index].status}}" current-index="{{activity.index}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+          <span class="text-inside"  this-lvl="{{lvl}}" quiz-icon="{{activity.icon}}" quiz-title="{{activity.type}}" quiz-subtitle="{{activity.title}}" data-package="{{activity.package}}" onclick="showQuiz(this)" ng-if="activity.media == 'quiz'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>  
 <span class="text-inside js-trigger-video-modal"  onclick="toggle_video_modal(this)" data-youtube-id="{{activity.url}}" ng-if="activity.media == 'video'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
   </li>
       </ul>
@@ -2185,36 +2465,83 @@ input[type="radio"]:checked + label.green-bg::after {
       <div class="job-logos">
 
          <img src="https://lh3.googleusercontent.com/d/1EP2I0BOMo_8mXsR9qqAv08PxjztZFaQ8" width="80" height="80" style="margin-right: 10px; border-radius: 15px;"/>
+        <button class="progressbtn"  onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/profile';" ng-if="lvl == 4 && status == 'ACTIVO'"> Ver progreso </button>   
+ <button class="progressbtn"  onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/payment';" ng-if="lvl == 4 && status != 'ACTIVO'"> Inscribirse </button> 
       </div> 
       <div class="job-explain-content">
       <div class="job-title-wrapper">
-       <div class="job-card-title2">Taller de Piano - Intermedio II</div>
+       <div class="job-card-title2">Taller de Piano</div>
        <div class="job-action"> 
-           <i class="locklvl ri-lock-fill" style="font-size: 20px; margin-right: 10px;"> </i>
+      <i class="locklvl ri-award-fill" style="font-size: 25px; margin-right: 5px; color: #F44336" ng-if="lvl > 4 && status == 'ACTIVO'"> </i>
+      <i class="locklvl ri-lock-fill" style="font-size: 20px; margin-right: 10px;" ng-if="lvl < 4 || status != 'ACTIVO'"> </i>
        </div> 
        </div>
        <div class="job-subtitle-wrapper">
         <div class="company-name" style="color: #f0ac14">Grado 4 <span class="comp-location">Nivel Intermedio</span></div>
-        <div class="posted">ACTIVO<span class="app-number">28 Alumnos activos</span></div>
+        <div class="posted"><span ng-if="lvl > 4 && status == 'ACTIVO'">COMPLETADO</span>
+    <span ng-if="lvl == 4 && status == 'ACTIVO'">EN CURSO</span>
+    <span ng-if="lvl < 4 || status != 'ACTIVO'">BLOQUEADO</span>
+    <span class="app-number">{{counter}} Alumnos inscritos</span>
+    </div>
        </div>
-       <div class="explain-bar" >
+       <div class="explain-bar" ng-if="lvl > 4 && status == 'ACTIVO'">
+        <div class="explain-contents">
+        <div class="explain-title">Progreso</div> 
+        <div class="explain-subtitle">100%</div>
+         </div> 
+          <div class="explain-contents">
+        <div class="explain-title">Puntaje de Tests</div>
+        <div class="explain-subtitle">{{history[0].score}}</div>
+         </div>
+        <div class="explain-contents"> 
+        <div class="explain-title">Fecha de inicio</div>
+        <div class="explain-subtitle">{{history[0].beginDate}}</div>
+         </div>   
+        <div class="explain-contents"> 
+        <div class="explain-title">Fecha de termino</div>
+        <div class="explain-subtitle">{{history[0].finishDate}}</div>
+         </div> 
+                </div>
+        
+         <div class="explain-bar" ng-if="lvl == 4 && status == 'ACTIVO'">
         <div class="explain-contents">
         <div class="explain-title">Progreso</div>
-        <div class="explain-subtitle">-</div>
+        <div class="explain-subtitle">{{progress}} %</div>
          </div>
         <div class="explain-contents">
-        <div class="explain-title">Tiempo trabajado</div>
-        <div class="explain-subtitle">-</div>
+        <div class="explain-title">Límite de próxima entrega</div>
+        <div class="explain-subtitle">{{convertirFecha(currentlsns[1].limitdate)}}</div>
          </div>
+            <div class="explain-contents"> 
+        <div class="explain-title">Fecha de inicio</div>
+        <div class="explain-subtitle">{{history[0].beginDate}}</div>
+         </div>   
+        <div class="explain-contents"> 
+        <div class="explain-title">Fecha de termino</div>
+        <div class="explain-subtitle">-</div>
+         </div> 
+                </div> 
+
+
+
+                  <div class="explain-bar" ng-if="lvl < 4 || status != 'ACTIVO'">
         <div class="explain-contents">
-        <div class="explain-title">Velocidad de entrega</div>
+        <div class="explain-title">Progreso</div>
         <div class="explain-subtitle">-</div>
          </div>
         <div class="explain-contents">
         <div class="explain-title">Límite de próxima entrega</div>
         <div class="explain-subtitle">-</div>
          </div>
-                </div>
+            <div class="explain-contents"> 
+        <div class="explain-title">Fecha de inicio</div>
+        <div class="explain-subtitle">-</div>
+         </div>   
+        <div class="explain-contents"> 
+        <div class="explain-title">Fecha de termino</div>
+        <div class="explain-subtitle">-</div>
+         </div> 
+                </div> 
                </div>
      </div>
   
@@ -2224,26 +2551,33 @@ input[type="radio"]:checked + label.green-bg::after {
     </li>
     <li class="collection-item" ng-repeat="lesson in data.lessons">
       <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
-       <div>{{lesson.name}}<span class="secondary-content" ng-if="lvl < 5">
-          <i class="material-icons" ng-if="lesson.id == lsn && lvl == 4">schedule</i>
-          <i class="material-icons" ng-if="lesson.id > lsn || lvl < 5">lock</i>
-          </span></div>
+       <div>{{lesson.name}}<span class="secondary-content" ng-if="lvl < 4 || status !== 'ACTIVO'"><i class="material-icons">lock</i></span>
+          <span class="secondary-content" ng-if="lvl == 4 && status == 'ACTIVO'">
+          <i class="material-icons" ng-if="lesson.id == lsn">schedule</i>
+          <i class="material-icons" ng-if="lesson.id > lsn">lock</i>
+          </span>
+          </div>
       </a>
       
       <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
      <div class="linehorizontal" ></div>
-        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lvl > 4 || lesson.id <= lsn">
+        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="(lvl > 4 || lesson.id <= lsn) && status === 'ACTIVO'">
           <div class="collapsible-header">
-   <i class="material-icons" ng-if="lvl > 4 || lesson.id < lsn">{{material.icon}}</i>
-<i class="material-icons" ng-if="lvl == 4 && lesson.id >= lsn">pending_actions</i>
-            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="lvl > 4 || lesson.id < lsn">check</i></span></div>
+   <i class="material-icons">{{material.icon}}</i>
+            {{material.title}}</div>
           <div class="collapsible-body">
             
   <div class="row">
     <div class="col s12">
       <ul class="tabs" style="display: flex; white-space: nowrap;">
           <li ng-repeat="activity in material.activity" class="tab col s9"> 
-    <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+    <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && lvl === 4 && lsn === lesson.id && currentlsns[activity.index].status == 'A corrección'">cancel</i> 
+                 <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && lvl === 4 && lsn === lesson.id && currentlsns[activity.index].status == 'En revisión'">pending_actions</i>
+                <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && (lvl > 4 || lesson.id < lsn)">verified</i> 
+                    <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && lvl === 4 && lsn === lesson.id && currentlsns[activity.index].status == 'Evaluada'">verified</i> 
+            
+    <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" this-lvl=4 current-lvl="{{lvl}}" lsn-id="{{lesson.id}}" current-lsn="{{lsn}}" current-status="{{currentlsns[activity.index].status}}" current-index="{{activity.index}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+          <span class="text-inside"  this-lvl="{{lvl}}" quiz-icon="{{activity.icon}}" quiz-title="{{activity.type}}" quiz-subtitle="{{activity.title}}" data-package="{{activity.package}}" onclick="showQuiz(this)" ng-if="activity.media == 'quiz'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>  
 <span class="text-inside js-trigger-video-modal"  onclick="toggle_video_modal(this)" data-youtube-id="{{activity.url}}" ng-if="activity.media == 'video'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
   </li>
       </ul>
@@ -2263,37 +2597,84 @@ input[type="radio"]:checked + label.green-bg::after {
       <div class="job-logos">
 
          <img src="https://lh3.googleusercontent.com/d/1EP2I0BOMo_8mXsR9qqAv08PxjztZFaQ8" width="80" height="80" style="margin-right: 10px; border-radius: 15px;"/>
+        <button class="progressbtn"  onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/profile';" ng-if="lvl == 5 && status == 'ACTIVO'"> Ver progreso </button>   
+ <button class="progressbtn"  onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/payment';" ng-if="lvl == 5 && status != 'ACTIVO'"> Inscribirse </button> 
       </div> 
       <div class="job-explain-content">
       <div class="job-title-wrapper">
-       <div class="job-card-title2">Taller de Piano - Intermedio III</div>
+       <div class="job-card-title2">Taller de Piano</div>
        <div class="job-action"> 
-          <i class="locklvl ri-lock-fill" style="font-size: 20px; margin-right: 10px;"> </i>
-        <!--- <button class="progressbtn"> progreso </button> -->
+     <i class="locklvl ri-award-fill" style="font-size: 25px; margin-right: 5px; color: #F44336" ng-if="lvl > 5 && status == 'ACTIVO'"> </i>
+      <i class="locklvl ri-lock-fill" style="font-size: 20px; margin-right: 10px;" ng-if="lvl < 5 || status != 'ACTIVO'"> </i>
        </div>  
        </div>
        <div class="job-subtitle-wrapper">
         <div class="company-name" style="color: #485cb4">Grado 5 <span class="comp-location">Nivel Intermedio</span></div>
-        <div class="posted"><span class="app-number">2 Alumnos activos</span></div>
+       <div class="posted">
+    <span ng-if="lvl > 5 && status == 'ACTIVO'">COMPLETADO</span>
+    <span ng-if="lvl == 5 && status == 'ACTIVO'">EN CURSO</span>
+    <span ng-if="lvl < 5 || status != 'ACTIVO'">BLOQUEADO</span>
+    <span class="app-number">{{counter}} Alumnos inscritos</span>
+ </div>
        </div>
-       <div class="explain-bar" >
+       <div class="explain-bar" ng-if="lvl > 5 && status == 'ACTIVO'">
+        <div class="explain-contents">
+        <div class="explain-title">Progreso</div> 
+        <div class="explain-subtitle">100%</div>
+         </div> 
+          <div class="explain-contents">
+        <div class="explain-title">Puntaje de Tests</div>
+        <div class="explain-subtitle">{{history[0].score}}</div>
+         </div>
+        <div class="explain-contents"> 
+        <div class="explain-title">Fecha de inicio</div>
+        <div class="explain-subtitle">{{history[0].beginDate}}</div>
+         </div>   
+        <div class="explain-contents"> 
+        <div class="explain-title">Fecha de termino</div>
+        <div class="explain-subtitle">{{history[0].finishDate}}</div>
+         </div> 
+                </div>
+        
+         <div class="explain-bar" ng-if="lvl == 5 && status == 'ACTIVO'">
         <div class="explain-contents">
         <div class="explain-title">Progreso</div>
-        <div class="explain-subtitle">-</div>
+        <div class="explain-subtitle">{{progress}} %</div>
          </div>
         <div class="explain-contents">
-        <div class="explain-title">Tiempo trabajado</div>
-        <div class="explain-subtitle">-</div>
+        <div class="explain-title">Límite de próxima entrega</div>
+        <div class="explain-subtitle">{{convertirFecha(currentlsns[1].limitdate)}}</div>
          </div>
+            <div class="explain-contents"> 
+        <div class="explain-title">Fecha de inicio</div>
+        <div class="explain-subtitle">{{history[0].beginDate}}</div>
+         </div>   
+        <div class="explain-contents"> 
+        <div class="explain-title">Fecha de termino</div>
+        <div class="explain-subtitle">-</div>
+         </div> 
+                </div> 
+
+
+
+                  <div class="explain-bar" ng-if="lvl < 5 || status != 'ACTIVO'">
         <div class="explain-contents">
-        <div class="explain-title">Velocidad de entrega</div>
+        <div class="explain-title">Progreso</div>
         <div class="explain-subtitle">-</div>
          </div>
         <div class="explain-contents">
         <div class="explain-title">Límite de próxima entrega</div>
         <div class="explain-subtitle">-</div>
          </div>
-                </div>
+            <div class="explain-contents"> 
+        <div class="explain-title">Fecha de inicio</div>
+        <div class="explain-subtitle">-</div>
+         </div>   
+        <div class="explain-contents"> 
+        <div class="explain-title">Fecha de termino</div>
+        <div class="explain-subtitle">-</div>
+         </div> 
+                </div> 
                </div>
      </div>
   
@@ -2303,26 +2684,32 @@ input[type="radio"]:checked + label.green-bg::after {
     </li>
     <li class="collection-item" ng-repeat="lesson in data.lessons">
       <a href="#lesson" ng-init="lesson.showButton = false" ng-click="lesson.showButton = !lesson.showButton">
-      <div>{{lesson.name}}<span class="secondary-content" ng-if="lvl < 6">
-          <i class="material-icons" ng-if="lesson.id == lsn && lvl == 5">schedule</i>
-          <i class="material-icons" ng-if="lesson.id > lsn || lvl < 6">lock</i>
+      <div>{{lesson.name}}<span class="secondary-content" ng-if="lvl < 5 || status !== 'ACTIVO'"><i class="material-icons">lock</i></span>
+          <span class="secondary-content" ng-if="lvl == 5 && status == 'ACTIVO'">
+          <i class="material-icons" ng-if="lesson.id == lsn">schedule</i>
+          <i class="material-icons" ng-if="lesson.id > lsn">lock</i>
           </span></div>
       </a>
       
       <ul class="collapsible popout" data-collapsible="accordion" ng-if="lesson.showButton">
      <div class="linehorizontal" ></div>
-        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="lvl > 5 || lesson.id <= lsn">
+        <li ng-repeat="material in lesson.material" class="container-lessons" ng-if="(lvl > 5 || lesson.id <= lsn) && status === 'ACTIVO'">
           <div class="collapsible-header">
-   <i class="material-icons" ng-if="lvl > 5 || lesson.id < lsn">{{material.icon}}</i>
-<i class="material-icons" ng-if="lvl == 5 && lesson.id >= lsn">pending_actions</i>
-            {{material.title}}<span class="secondary-content"><i class="material-icons" ng-if="lvl > 5 || lesson.id < lsn">check</i></span></div>
+   <i class="material-icons" >{{material.icon}}</i>
+            {{material.title}}</div>
           <div class="collapsible-body">
             
   <div class="row">
     <div class="col s12">
       <ul class="tabs" style="display: flex; white-space: nowrap;">
           <li ng-repeat="activity in material.activity" class="tab col s9">
-    <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+   <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && lvl === 5 && lsn === lesson.id && currentlsns[activity.index].status == 'A corrección'">cancel</i> 
+                 <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && lvl === 5 && lsn === lesson.id && currentlsns[activity.index].status == 'En revisión'">pending_actions</i>
+                <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && (lvl > 5 || lesson.id < lsn)">verified</i> 
+                    <i class="material-icons" style="position: absolute; font-size: 15px; margin-left: -15px; margin-top: 10px; " ng-if="activity.media != 'video' && lvl === 5 && lsn === lesson.id && currentlsns[activity.index].status == 'Evaluada'">verified</i> 
+            
+    <span class="text-inside"  onclick="showModal(this)" data-pdf-id="{{activity.url}}" this-lvl=5 current-lvl="{{lvl}}" lsn-id="{{lesson.id}}" current-lsn="{{lsn}}" current-status="{{currentlsns[activity.index].status}}" current-index="{{activity.index}}" ng-if="activity.media == 'pdf'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
+          <span class="text-inside"  this-lvl="{{lvl}}" quiz-icon="{{activity.icon}}" quiz-title="{{activity.type}}" quiz-subtitle="{{activity.title}}" data-package="{{activity.package}}" onclick="showQuiz(this)" ng-if="activity.media == 'quiz'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>  
 <span class="text-inside js-trigger-video-modal"  onclick="toggle_video_modal(this)" data-youtube-id="{{activity.url}}" ng-if="activity.media == 'video'"><i class="material-icons inside">{{activity.icon}}</i>{{activity.type}}</span>
   </li>
       </ul>
@@ -2388,7 +2775,8 @@ input[type="radio"]:checked + label.green-bg::after {
 </div>
   
 
-<div id="modalPDF" class="modal-container">
+  
+<div id="modalPDF" class="modal-container" ng-controller="pdfHandler">
         <div class="modal-background">
             <div class="modal-doc">
               
@@ -2410,7 +2798,7 @@ input[type="radio"]:checked + label.green-bg::after {
  
 <div id="record-audio"></div>
 <!-- <button id="delete-audio">Eliminar</button> -->
-  <input type="hidden" id="AudioData">
+  <input type="hidden" id="AudioData" current-index="">
 <span id="clicks"></span>
          
 </div>
@@ -2563,7 +2951,8 @@ var app = angular.module('materializeApp', ['ui.materialize']);
 app.factory('SharedState', function($http, $q) {
   var requestData = {
     action: "getBasicData",
-    token: localStorage.getItem('TPtoken')
+    token: "U2FsdGVkX18Y3Ikd7Ppb+2aVdv2AgN/p1JCgChHIAXGylvVbAToWW9G0M2yhM3aa"
+    //localStorage.getItem('TPtoken')
   };
 
   var config = {
@@ -2580,8 +2969,10 @@ app.factory('SharedState', function($http, $q) {
         deferred.resolve({
           lvl: response.data.lvl,
           lsn: response.data.lsn,
+          progress: response.data.progress,
           lssons: response.data.lessons,
           status: response.data.status,
+          history: response.data.history,
           counterLvl: response.data.counterLvl
         });
       }, function(error) {
@@ -2597,15 +2988,54 @@ app.factory('SharedState', function($http, $q) {
 });
  
   app
+    .controller('pdfHandler', ["$scope", "SharedState", function($scope, SharedState){
+     $scope.uploadAudio = function() { 
+     
+      SharedState.getNum().then(function(data) {
+        var index = document.getElementById("AudioData").getAttribute('current-index')
+      $scope.currentlsns = filterCurrent(data.lssons, data.lsn);
+        alert($scope.currentlsns[index].status)
+  })
+   }
+    
+     function filterCurrent(obj, lsn) {
+    return obj.filter(function(entry) {
+        return entry.index == lsn;
+    });
+}
+    
+  }])
+  .controller('lvlMenu', ["$scope", "SharedState", function($scope, SharedState){ 
+      SharedState.getNum().then(function(data) {
+        $scope.lvl = data.lvl;
+      $scope.progress = data.progress;
+     $scope.status = data.status;
+      $scope.counter = data.counterLvl[0]
+        
+        if(data.lvl == 1){
+          $('ul.tabs').tabs('select_tab', 'test2');
+        }else if(data.lvl == 2){
+          $('ul.tabs').tabs('select_tab', 'test3');
+        }else if(data.lvl == 3){
+          $('ul.tabs').tabs('select_tab', 'test4');
+        }
+        
+  })
+
+    
+  }])
 .controller('levelP', ["$scope", "SharedState", function($scope, SharedState) {
     $scope.loading = true;
+  
+  
     SharedState.getNum().then(function(data) {
     $scope.lsn = data.lsn;
       $scope.lvl = data.lvl;
+      $scope.progress = data.progress;
       $scope.counter = data.counterLvl[0]
       $scope.status = data.status;
       $scope.currentlsns = filterCurrent(data.lssons);
-      
+       $scope.history = data.history;
       $scope.loading = false;
   })
 
@@ -2615,6 +3045,19 @@ app.factory('SharedState', function($http, $q) {
         return entry.index == $scope.lsn;
     });
 }
+  
+  $scope.convertirFecha = function(fecha) {
+  const dias = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+  const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+
+  const [dia, mes, año] = fecha.split('/').map(Number);
+  const date = new Date(año, mes - 1, dia);
+  const nombreDia = dias[date.getDay()];
+  const nombreMes = meses[date.getMonth()];
+  return `${nombreDia} ${dia} de ${nombreMes}`;
+}
+  
+  
 
     $scope.allData = [
      {
@@ -2705,6 +3148,7 @@ app.factory('SharedState', function($http, $q) {
                   },{
                   icon: 'description',
                   type: 'Ejercicios',
+                  index: 0,
                   media: 'pdf',
                   url: 'https://drive.google.com/file/d/1Ys_fybQsMIjS4zaCRLO9lV8qsvmvooXq/preview'
                   }
@@ -2721,6 +3165,7 @@ app.factory('SharedState', function($http, $q) {
                   },{
                   icon: 'description',
                   type: 'Partitura',
+                  index: 1,
                   media: 'pdf',
                   url: 'https://drive.google.com/file/d/15amNYqOJwINhWNjw8I77uRWZ-6sh15-e/preview'
                   }
@@ -2751,6 +3196,7 @@ app.factory('SharedState', function($http, $q) {
                   icon: 'description',
                   type: 'Ejercicios',
                   media: 'pdf',
+                    index: 0,
                   url: 'https://drive.google.com/file/d/1Dom_0ZjNoslBKZpUa3IUDN8XMzcxZ1Jd/preview'
                   }
                 ]
@@ -2767,6 +3213,7 @@ app.factory('SharedState', function($http, $q) {
                   icon: 'description',
                   type: 'Partitura',
                   media: 'pdf',
+                    index: 1,
                   url: 'https://drive.google.com/file/d/1jo4LcVuPV-Q0eytfVFyDdCPqbTDX1aU9/preview'
                   }
                 ] 
@@ -3232,31 +3679,40 @@ app.factory('SharedState', function($http, $q) {
   }])
 
 .controller('level1', ["$scope", "SharedState", function($scope, SharedState) {
-    $scope.loading = true;
-    SharedState.getNum().then(function(data) {
+     SharedState.getNum().then(function(data) {
     $scope.lsn = data.lsn;
       $scope.lvl = data.lvl;
-      $scope.loading = false;
+      $scope.progress = data.progress;
+      $scope.counter = data.counterLvl[1]
       $scope.status = data.status;
-      $scope.lssons = data.lssons;
+      $scope.currentlsns = filterCurrent(data.lssons);
+       $scope.history = data.history;
   })
-  
 
-  $scope.getLsnStatus = function(code, status) {
-    var result = $scope.lssons.find(function(element) {
-        return element.index == $scope.lsn && code == element.code;
+
+  function filterCurrent(obj) {
+    return obj.filter(function(entry) {
+        return entry.index == $scope.lsn;
     });
-    if(result.status == status){
-      return true
-    }
+}
+  
+  $scope.convertirFecha = function(fecha) {
+  const dias = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+  const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+
+  const [dia, mes, año] = fecha.split('/').map(Number);
+  const date = new Date(año, mes - 1, dia);
+  const nombreDia = dias[date.getDay()];
+  const nombreMes = meses[date.getMonth()];
+  return `${nombreDia} ${dia} de ${nombreMes}`;
 }
    $scope.allData = [
      {
           block: "Bloque 1",
-          id: 1,
           lessons: [
             {
               name: 'Lección 1: Posición de Sol (2da parte)',
+              id: 1,
               material:[{
                 title: 'Solfeo I',
                 icon: 'music_note',
@@ -3857,7 +4313,30 @@ app.factory('SharedState', function($http, $q) {
     SharedState.getNum().then(function(data) {
     $scope.lsn = data.lsn;
       $scope.lvl = data.lvl;
+      $scope.progress = data.progress;
+      $scope.counter = data.counterLvl[2]
+      $scope.status = data.status;
+      $scope.currentlsns = filterCurrent(data.lssons);
+       $scope.history = data.history;
   })
+
+
+  function filterCurrent(obj) {
+    return obj.filter(function(entry) {
+        return entry.index == $scope.lsn;
+    });
+}
+  
+  $scope.convertirFecha = function(fecha) {
+  const dias = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+  const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+
+  const [dia, mes, año] = fecha.split('/').map(Number);
+  const date = new Date(año, mes - 1, dia);
+  const nombreDia = dias[date.getDay()];
+  const nombreMes = meses[date.getMonth()];
+  return `${nombreDia} ${dia} de ${nombreMes}`;
+}
    $scope.allData = [
      {
           block: "Bloque 1",
@@ -4356,7 +4835,33 @@ app.factory('SharedState', function($http, $q) {
 
 
 .controller('level3', ["$scope", "SharedState", function($scope, SharedState) {
-     $scope.num = SharedState.num
+      SharedState.getNum().then(function(data) {
+    $scope.lsn = data.lsn;
+      $scope.lvl = data.lvl;
+      $scope.progress = data.progress;
+      $scope.counter = data.counterLvl[3]
+      $scope.status = data.status;
+      $scope.currentlsns = filterCurrent(data.lssons);
+       $scope.history = data.history;
+  })
+
+
+  function filterCurrent(obj) {
+    return obj.filter(function(entry) {
+        return entry.index == $scope.lsn;
+    });
+}
+  
+  $scope.convertirFecha = function(fecha) {
+  const dias = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+  const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+
+  const [dia, mes, año] = fecha.split('/').map(Number);
+  const date = new Date(año, mes - 1, dia);
+  const nombreDia = dias[date.getDay()];
+  const nombreMes = meses[date.getMonth()];
+  return `${nombreDia} ${dia} de ${nombreMes}`;
+}
     $scope.allData = [
      {
           block: "Bloque 1",
@@ -4580,7 +5085,33 @@ app.factory('SharedState', function($http, $q) {
 
 
 .controller('level4', ["$scope", "SharedState", function($scope, SharedState) {
-     $scope.num = SharedState.num
+      SharedState.getNum().then(function(data) {
+    $scope.lsn = data.lsn;
+      $scope.lvl = data.lvl;
+      $scope.progress = data.progress;
+      $scope.counter = data.counterLvl[4]
+      $scope.status = data.status;
+      $scope.currentlsns = filterCurrent(data.lssons);
+       $scope.history = data.history;
+  })
+
+
+  function filterCurrent(obj) {
+    return obj.filter(function(entry) {
+        return entry.index == $scope.lsn;
+    });
+}
+  
+  $scope.convertirFecha = function(fecha) {
+  const dias = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+  const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+
+  const [dia, mes, año] = fecha.split('/').map(Number);
+  const date = new Date(año, mes - 1, dia);
+  const nombreDia = dias[date.getDay()];
+  const nombreMes = meses[date.getMonth()];
+  return `${nombreDia} ${dia} de ${nombreMes}`;
+}
     $scope.allData = [
      {
           block: "Bloque 1",
@@ -4802,7 +5333,33 @@ app.factory('SharedState', function($http, $q) {
 
 
 .controller('level5', ["$scope", "SharedState", function($scope, SharedState) {
-     $scope.num = SharedState.num
+      SharedState.getNum().then(function(data) {
+    $scope.lsn = data.lsn;
+      $scope.lvl = data.lvl;
+      $scope.progress = data.progress;
+      $scope.counter = data.counterLvl[1]
+      $scope.status = data.status;
+      $scope.currentlsns = filterCurrent(data.lssons);
+       $scope.history = data.history;
+  })
+
+
+  function filterCurrent(obj) {
+    return obj.filter(function(entry) {
+        return entry.index == $scope.lsn;
+    });
+}
+  
+  $scope.convertirFecha = function(fecha) {
+  const dias = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+  const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+
+  const [dia, mes, año] = fecha.split('/').map(Number);
+  const date = new Date(año, mes - 1, dia);
+  const nombreDia = dias[date.getDay()];
+  const nombreMes = meses[date.getMonth()];
+  return `${nombreDia} ${dia} de ${nombreMes}`;
+}
     $scope.allData = [
      {
           block: "Bloque 1",
@@ -5058,10 +5615,15 @@ function showModal(element) {
   var currentlvl = element.getAttribute('current-lvl');
      var thislvl = element.getAttribute('this-lvl');
      var currentlsn = element.getAttribute('current-lsn');
+  var currentIndex = element.getAttribute('current-index'); 
      var lsnid = element.getAttribute('lsn-id');
-          $("#drive").attr('src', url);        
+   var currentStatus = element.getAttribute('current-status'); 
+  
+          $("#drive").attr('src', url);    
+    $("#AudioData").attr('current-index', currentIndex); 
         document.getElementById('modalPDF').classList.add('four');
-  if(currentlsn === lsnid && currentlvl === thislvl){
+  
+  if(currentlsn === lsnid && currentlvl === thislvl && (currentStatus == 'A corrección' || currentStatus == 'Límite de entrega: ')){
   $(".metronome").css('display', 'block'); 
   $("#menu-bar1").css('display', 'flex'); 
 
