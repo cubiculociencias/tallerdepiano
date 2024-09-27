@@ -2100,7 +2100,7 @@ input[type="radio"]:checked + label.green-bg::after {
          </div> 
                 </div> 
 
-                  <div class="explain-bar" ng-if="lvl < 1 && status == 'ACTIVO'">
+                  <div class="explain-bar" ng-if="lvl < 1 || status != 'ACTIVO'">
         <div class="explain-contents">
         <div class="explain-title">Progreso</div>
         <div class="explain-subtitle">-</div>
@@ -2120,24 +2120,6 @@ input[type="radio"]:checked + label.green-bg::after {
                 </div> 
         
      <!--   <div class="overview-text-subheader" style="margin-top: 15px;" ng-if="status != 'ACTIVO'">Este nivel establece los fundamentos del concepto de tonalidad.</div>  -->
-            <div class="explain-bar" ng-if="status != 'ACTIVO'">
-        <div class="explain-contents">
-        <div class="explain-title">Progreso</div>
-        <div class="explain-subtitle">-</div>
-         </div>   
-        <div class="explain-contents">
-         <div class="explain-title">Termino del nivel</div>
-        <div class="explain-subtitle">  <i class="material-icons">workspace_premium</i><span style="margin-left: 5px;">Diploma</span></div>
-         </div>
-        <div class="explain-contents">
-        <div class="explain-title">Horas en video</div>
-          <div class="explain-subtitle"><i class="material-icons">tv</i><span style="margin-left: 5px;">12 horas</span></div>
-         </div>
-        <div class="explain-contents">
-        <div class="explain-title">Recursos</div>
-        <div class="explain-subtitle">  <i class="material-icons">audio_file</i><span style="margin-left: 5px;">30 actividades</span></div>
-         </div>
-                </div> 
                </div>
      </div>
     <!-- CSS Course Start -->
