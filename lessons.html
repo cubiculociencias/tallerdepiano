@@ -1933,7 +1933,7 @@ input[type="radio"]:checked + label.green-bg::after {
         <div class="explain-subtitle">{{progress}} %</div>
          </div>
         <div class="explain-contents">
-        <div class="explain-title">Límite de próxima entrega</div>
+        <div class="explain-title">Límite de entrega</div>
         <div class="explain-subtitle">{{convertirFecha(currentlsns[1].limitdate)}}</div>
          </div>
             <div class="explain-contents"> 
@@ -1941,31 +1941,29 @@ input[type="radio"]:checked + label.green-bg::after {
         <div class="explain-subtitle">{{history[0].beginDate}}</div>
          </div>   
         <div class="explain-contents"> 
-        <div class="explain-title">Fecha de termino</div>
+        <div class="explain-title">Próximo pago</div>
         <div class="explain-subtitle">-</div>
          </div> 
                 </div> 
           
-      
-            <div class="overview-text-subheader" style="margin-top: 15px;" ng-if="status != 'ACTIVO'">Este curso establece las bases para lograr una lectura fluida de partituras, lo cual se traduce en una interpretación más limpia y precisa de las piezas.</div>
-        
+
           <div class="explain-bar" ng-if="status != 'ACTIVO'">
-        <div class="explain-contents">
+      <div class="explain-contents">
         <div class="explain-title">Progreso</div>
         <div class="explain-subtitle">-</div>
+         </div>
+        <div class="explain-contents">
+        <div class="explain-title">Límite de entrega</div>
+        <div class="explain-subtitle">-</div>
+         </div>
+            <div class="explain-contents"> 
+        <div class="explain-title">Fecha de inicio</div>
+        <div class="explain-subtitle">-</div>
          </div>   
-        <div class="explain-contents">
-         <div class="explain-title">Termino del nivel</div>
-        <div class="explain-subtitle">  <i class="material-icons">workspace_premium</i><span style="margin-left: 5px;">Diploma</span></div>
-         </div>
-        <div class="explain-contents">
-        <div class="explain-title">Horas en video</div>
-          <div class="explain-subtitle"><i class="material-icons">tv</i><span style="margin-left: 5px;">12 horas</span></div>
-         </div>
-        <div class="explain-contents">
-        <div class="explain-title">Recursos</div>
-        <div class="explain-subtitle">  <i class="material-icons">audio_file</i><span style="margin-left: 5px;">30 actividades</span></div>
-         </div>
+        <div class="explain-contents"> 
+        <div class="explain-title">Fecha de termino</div>
+        <div class="explain-subtitle">-</div>
+         </div> 
                 </div>
          
                </div>
@@ -2049,7 +2047,7 @@ input[type="radio"]:checked + label.green-bg::after {
       <div class="job-title-wrapper">
        <div class="job-card-title2" >Taller de Piano </div>
        <div class="job-action"> 
-    <i class="locklvl ri-award-fill" style="font-size: 25px; margin-right: 5px; color: #F44336" ng-if="lvl > 1 && status == 'ACTIVO'"> </i>
+    <i class="locklvl ri-award-fill" style="font-size: 25px; margin-right: 5px; color: #9024dc" ng-if="lvl > 1 && status == 'ACTIVO'"> </i>
       <i class="locklvl ri-lock-fill" style="font-size: 20px; margin-right: 10px;" ng-if="lvl<1 || status != 'ACTIVO'"> </i>   
        </div> 
        </div>
@@ -2087,7 +2085,7 @@ input[type="radio"]:checked + label.green-bg::after {
         <div class="explain-subtitle">{{progress}} %</div>
          </div>
         <div class="explain-contents">
-        <div class="explain-title">Límite de próxima entrega</div>
+        <div class="explain-title">Límite de entrega</div>
         <div class="explain-subtitle">{{convertirFecha(currentlsns[1].limitdate)}}</div>
          </div>
             <div class="explain-contents"> 
@@ -2095,7 +2093,7 @@ input[type="radio"]:checked + label.green-bg::after {
         <div class="explain-subtitle">{{history[0].beginDate}}</div>
          </div>   
         <div class="explain-contents"> 
-        <div class="explain-title">Fecha de termino</div>
+        <div class="explain-title">Próximo pago</div>
         <div class="explain-subtitle">-</div>
          </div> 
                 </div> 
@@ -2106,7 +2104,7 @@ input[type="radio"]:checked + label.green-bg::after {
         <div class="explain-subtitle">-</div>
          </div>
         <div class="explain-contents">
-        <div class="explain-title">Límite de próxima entrega</div>
+        <div class="explain-title">Límite de entrega</div>
         <div class="explain-subtitle">-</div>
          </div>
             <div class="explain-contents"> 
@@ -2184,7 +2182,7 @@ input[type="radio"]:checked + label.green-bg::after {
       <div class="job-title-wrapper">
        <div class="job-card-title2">Taller de Piano </div>
        <div class="job-action"> 
-    <i class="locklvl ri-award-fill" style="font-size: 25px; margin-right: 5px; color: #F44336" ng-if="lvl > 2 && status == 'ACTIVO'"> </i>
+    <i class="locklvl ri-award-fill" style="font-size: 25px; margin-right: 5px; color: #1894cc" ng-if="lvl > 2 && status == 'ACTIVO'"> </i>
       <i class="locklvl ri-lock-fill" style="font-size: 20px; margin-right: 10px;" ng-if="lvl < 2 || status != 'ACTIVO'"> </i>
        </div> 
        </div>
@@ -2224,7 +2222,7 @@ input[type="radio"]:checked + label.green-bg::after {
         <div class="explain-subtitle">{{progress}} %</div>
          </div>
         <div class="explain-contents">
-        <div class="explain-title">Límite de próxima entrega</div>
+        <div class="explain-title">Límite de entrega</div>
         <div class="explain-subtitle">{{convertirFecha(currentlsns[1].limitdate)}}</div>
          </div>
             <div class="explain-contents"> 
@@ -2232,7 +2230,7 @@ input[type="radio"]:checked + label.green-bg::after {
         <div class="explain-subtitle">{{history[0].beginDate}}</div>
          </div>   
         <div class="explain-contents"> 
-        <div class="explain-title">Fecha de termino</div>
+        <div class="explain-title">Próximo pago</div>
         <div class="explain-subtitle">-</div>
          </div> 
                 </div> 
@@ -2244,7 +2242,7 @@ input[type="radio"]:checked + label.green-bg::after {
         <div class="explain-subtitle">-</div>
          </div>
         <div class="explain-contents">
-        <div class="explain-title">Límite de próxima entrega</div>
+        <div class="explain-title">Límite de entrega</div>
         <div class="explain-subtitle">-</div>
          </div>
             <div class="explain-contents"> 
@@ -2322,7 +2320,7 @@ input[type="radio"]:checked + label.green-bg::after {
       <div class="job-title-wrapper">
        <div class="job-card-title2">Taller de Piano</div>
        <div class="job-action"> 
-       <i class="locklvl ri-award-fill" style="font-size: 25px; margin-right: 5px; color: #F44336" ng-if="lvl > 3 && status == 'ACTIVO'"> </i>
+       <i class="locklvl ri-award-fill" style="font-size: 25px; margin-right: 5px; color: #489454" ng-if="lvl > 3 && status == 'ACTIVO'"> </i>
       <i class="locklvl ri-lock-fill" style="font-size: 20px; margin-right: 10px;" ng-if="lvl < 3 || status != 'ACTIVO'"> </i>
        </div> 
        </div>
@@ -2358,7 +2356,7 @@ input[type="radio"]:checked + label.green-bg::after {
         <div class="explain-subtitle">{{progress}} %</div>
          </div>
         <div class="explain-contents">
-        <div class="explain-title">Límite de próxima entrega</div>
+        <div class="explain-title">Límite de entrega</div>
         <div class="explain-subtitle">{{convertirFecha(currentlsns[1].limitdate)}}</div>
          </div>
             <div class="explain-contents"> 
@@ -2366,7 +2364,7 @@ input[type="radio"]:checked + label.green-bg::after {
         <div class="explain-subtitle">{{history[0].beginDate}}</div>
          </div>   
         <div class="explain-contents"> 
-        <div class="explain-title">Fecha de termino</div>
+        <div class="explain-title">Próximo pago</div>
         <div class="explain-subtitle">-</div>
          </div> 
                 </div> 
@@ -2379,7 +2377,7 @@ input[type="radio"]:checked + label.green-bg::after {
         <div class="explain-subtitle">-</div>
          </div>
         <div class="explain-contents">
-        <div class="explain-title">Límite de próxima entrega</div>
+        <div class="explain-title">Límite de entrega</div>
         <div class="explain-subtitle">-</div>
          </div>
             <div class="explain-contents"> 
@@ -2454,7 +2452,7 @@ input[type="radio"]:checked + label.green-bg::after {
       <div class="job-title-wrapper">
        <div class="job-card-title2">Taller de Piano</div>
        <div class="job-action"> 
-      <i class="locklvl ri-award-fill" style="font-size: 25px; margin-right: 5px; color: #F44336" ng-if="lvl > 4 && status == 'ACTIVO'"> </i>
+      <i class="locklvl ri-award-fill" style="font-size: 25px; margin-right: 5px; color: #f0ac14" ng-if="lvl > 4 && status == 'ACTIVO'"> </i>
       <i class="locklvl ri-lock-fill" style="font-size: 20px; margin-right: 10px;" ng-if="lvl < 4 || status != 'ACTIVO'"> </i>
        </div> 
        </div>
@@ -2491,7 +2489,7 @@ input[type="radio"]:checked + label.green-bg::after {
         <div class="explain-subtitle">{{progress}} %</div>
          </div>
         <div class="explain-contents">
-        <div class="explain-title">Límite de próxima entrega</div>
+        <div class="explain-title">Límite de entrega</div>
         <div class="explain-subtitle">{{convertirFecha(currentlsns[1].limitdate)}}</div>
          </div>
             <div class="explain-contents"> 
@@ -2499,7 +2497,7 @@ input[type="radio"]:checked + label.green-bg::after {
         <div class="explain-subtitle">{{history[0].beginDate}}</div>
          </div>   
         <div class="explain-contents"> 
-        <div class="explain-title">Fecha de termino</div>
+        <div class="explain-title">Próximo pago</div>
         <div class="explain-subtitle">-</div>
          </div> 
                 </div> 
@@ -2512,7 +2510,7 @@ input[type="radio"]:checked + label.green-bg::after {
         <div class="explain-subtitle">-</div>
          </div>
         <div class="explain-contents">
-        <div class="explain-title">Límite de próxima entrega</div>
+        <div class="explain-title">Límite de entrega</div>
         <div class="explain-subtitle">-</div>
          </div>
             <div class="explain-contents"> 
@@ -2586,7 +2584,7 @@ input[type="radio"]:checked + label.green-bg::after {
       <div class="job-title-wrapper">
        <div class="job-card-title2">Taller de Piano</div>
        <div class="job-action"> 
-     <i class="locklvl ri-award-fill" style="font-size: 25px; margin-right: 5px; color: #F44336" ng-if="lvl > 5 && status == 'ACTIVO'"> </i>
+     <i class="locklvl ri-award-fill" style="font-size: 25px; margin-right: 5px; color: #485cb4" ng-if="lvl > 5 && status == 'ACTIVO'"> </i>
       <i class="locklvl ri-lock-fill" style="font-size: 20px; margin-right: 10px;" ng-if="lvl < 5 || status != 'ACTIVO'"> </i>
        </div>  
        </div>
@@ -2624,7 +2622,7 @@ input[type="radio"]:checked + label.green-bg::after {
         <div class="explain-subtitle">{{progress}} %</div>
          </div>
         <div class="explain-contents">
-        <div class="explain-title">Límite de próxima entrega</div>
+        <div class="explain-title">Límite de entrega</div>
         <div class="explain-subtitle">{{convertirFecha(currentlsns[1].limitdate)}}</div>
          </div>
             <div class="explain-contents"> 
@@ -2632,7 +2630,7 @@ input[type="radio"]:checked + label.green-bg::after {
         <div class="explain-subtitle">{{history[0].beginDate}}</div>
          </div>   
         <div class="explain-contents"> 
-        <div class="explain-title">Fecha de termino</div>
+        <div class="explain-title">Próximo pago</div>
         <div class="explain-subtitle">-</div>
          </div> 
                 </div> 
@@ -2645,7 +2643,7 @@ input[type="radio"]:checked + label.green-bg::after {
         <div class="explain-subtitle">-</div>
          </div>
         <div class="explain-contents">
-        <div class="explain-title">Límite de próxima entrega</div>
+        <div class="explain-title">Límite de entrega</div>
         <div class="explain-subtitle">-</div>
          </div>
             <div class="explain-contents"> 
