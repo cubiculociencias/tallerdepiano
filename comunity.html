@@ -829,7 +829,7 @@ font-family: 'Raleway';
 }
   
   @media (min-width: 700px) {  
-    #youtubeframe{
+    .youtubeframe{
       height: 340px;
     }
 }
@@ -876,7 +876,7 @@ font-family: 'Raleway';
                                 </svg></div>
  
 </div>                           
-                               <iframe width="100%" height="{{post.height}}" ng-src="{{trustAsResourceUrl(post.url)}}" frameborder="0" id="youtubeframe"></iframe>
+                               <iframe width="100%" height="{{post.height}}" ng-src="{{trustAsResourceUrl(post.url)}}" frameborder="0" ng-class="{'youtubeframe': post.type != 'audio'}"></iframe>
 
                          
   <div id='app2' class='container' ng-if="post.type == 'diploma'" >
