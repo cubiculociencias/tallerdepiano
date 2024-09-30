@@ -889,14 +889,12 @@ font-family: 'Raleway';
                           </div>
                           <div class="post_footer" ng-if="post.type != 'instagram'">
                              
-                         <div class="row">
-  <div class="col">
-    <p>{{post.likes.length}} likes</p>
-  </div>
-  <div class="col">
- 
+<div class="row">
+    <p style="margin-left: 5px;">{{post.likes.length}} likes</p>
+  </div>       
+<div class="row">
                <div class="btn-toolbar justify-content-end" role="toolbar" aria-label="Toolbar with button groups">
-  <div class="btn-group mr-2" role="group" aria-label="First group">
+  <div class="btn-group ml-2" role="group" aria-label="First group">
     <button type="button" class="btn btn-outline-danger btn-sm"  ng-class="{ 'active': dangerButtonActive[$index] }" ng-click="newLike($index, post)">
       <i class="far fa-heart" aria-hidden="true"></i>
     </button>
@@ -905,8 +903,7 @@ font-family: 'Raleway';
     </button>
     
   </div>
-</div>
-</div>
+</div> 
 </div>
                             
               <a data-toggle="collapse" href="#collapse{{post.id}}" role="button" aria-expanded="false" aria-controls="collapse{{post.id}}">comentarios...</a>
