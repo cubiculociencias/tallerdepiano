@@ -1269,8 +1269,6 @@ iframe#quiz {
   -webkit-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
-  background-color: #1c232b;
-  color: #E6EAEF;
   -webkit-transition: 0.5s all;
   -o-transition: 0.5s all;
   transition: 0.5s all;
@@ -1331,7 +1329,6 @@ iframe#quiz {
 #quiz-body h1 {
   text-align: center;
   font-size: 22px;
- color: #E6EAEF;
   font-weight: 700;
   margin: 0;
 }
@@ -1563,7 +1560,6 @@ input[type="radio"]:checked + label.green-bg::after {
 
 
 .next-btn {
-  background-color: transparent ;
   border-radius: 5px ;
   color: #384656;
   font-weight: 600 ;
@@ -2920,8 +2916,8 @@ input[type="radio"]:checked + label.green-bg::after {
     <p>Obtuviste <span class="bold" id="correctAnswers"></span> de <span class="bold" id="totalQuestions"></span> preguntas correctas.</p>
     <p style="margin-top: 10px;">Tiempo empleado: <span class="bold" id="finalTime"></span></p>
     <div class="buttons-container">
-      <button type="button" id="close-results-btn" class="btn blue-btn">Cerrar</button>
-      <button type="button" id="start-over-btn" class="btn blue-btn">De nuevo</button> 
+      <button type="button" id="close-results-btn" class="btn close-btn">Cerrar</button>
+      <button type="button" id="start-over-btn" class="btn close-btn">De nuevo</button> 
     </div>
   </section>
 </div>
@@ -5934,7 +5930,7 @@ var startButton = document.getElementById('start-quiz-btn');
 
     let button = document.createElement("button");
     button.classList.add("next-btn")
-    button.style.backgroundColor = "transparent";
+    button.style.backgroundColor = "#E6EAEF";
 
     if (isLastQuestion()) {
       button.id = "show-results-btn";
