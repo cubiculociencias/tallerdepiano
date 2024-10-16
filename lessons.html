@@ -6073,17 +6073,37 @@ function destroyQuiz() {
 
 
 
-  function onMediaSuccess(stream) {
-    mediaRecorder = new MediaStreamRecorder(stream);
-    mediaRecorder.stream = stream;
+function onMediaSuccess(stream) {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  
+    // Crear un filtro de paso bajo
+    const lowpassFilter = audioCtx.createBiquadFilter();
+    lowpassFilter.type = "lowpass"; // Filtro de paso bajo
+    lowpassFilter.frequency.setValueAtTime(1000, audioCtx.currentTime); // Frecuencia de corte: 1000Hz
+  
+    // Crear la fuente de audio desde el stream del micrófono
+    const source = audioCtx.createMediaStreamSource(stream);
+  
+    // Conectar la fuente al filtro
+    source.connect(lowpassFilter);
+  
+    // Crear un destino para conectar el filtro
+    const destination = audioCtx.createMediaStreamDestination();
+    lowpassFilter.connect(destination);
+
+    // Crear el MediaStreamRecorder a partir del audio filtrado
+    mediaRecorder = new MediaStreamRecorder(destination.stream);
+    mediaRecorder.stream = destination.stream; // Usamos el stream filtrado
     mediaRecorder.mimeType = 'audio/wav';  
-    //mediaRecorder.mimeType = 'audio/webm';  
     mediaRecorder.audioChannels = 1;
+
     mediaRecorder.ondataavailable = function(blob) {
       $('#record-audio').html("<audio id='player1' src=" + URL.createObjectURL(blob) + " style='width: 310px;' type='audio/mp3' controls></audio> ");
-       const player = new MediaElementPlayer('player1', {
+      
+      const player = new MediaElementPlayer('player1', {
         features: ['playpause', 'progress'],
-    }); 
+      });
+
       $('#delete-audio').on('click', function() {
         $('#record-audio').empty(); 
         document.getElementById("AudioData").value = "";
@@ -6093,21 +6113,20 @@ function destroyQuiz() {
         menuBar2.style.visibility = 'hidden';
         menuBar1.style.visibility = 'visible';
         document.getElementById('back-menu-bar').style.visibility = 'visible';
-       
-  });
+      });
+
       var reader = new FileReader();
-          reader.onloadend = function() {
-            base64Audio = reader.result.split(";")[1];
-           // var base64Audio = "data:audio/mp3;"+reader.result.split(";")[1];
-            document.getElementById("AudioData").value = base64Audio;
-          };
-          reader.readAsDataURL(blob);
+      reader.onloadend = function() {
+        base64Audio = reader.result.split(";")[1];
+        document.getElementById("AudioData").value = base64Audio;
+      };
+      reader.readAsDataURL(blob);
     };
- 
+
     var timeInterval = 360 * 1000;
     mediaRecorder.start(timeInterval);
     $('#stop-recording').disabled = false;
-  }
+}
 
 
 
