@@ -1974,7 +1974,6 @@ if (/Android/i.test(navigator.userAgent) && !/Mobile/i.test(navigator.userAgent)
               $('#audio_record-icon').prop('checked', true);
                $('#toggle-recorder').text('Detener');
               startRecording();
-              vol(0.3)
             } else {
                 //metronome.style.display = 'none';
               //document.getElementById('back-menu-bar').style.visibility = 'visible';
@@ -1983,7 +1982,6 @@ if (/Android/i.test(navigator.userAgent) && !/Mobile/i.test(navigator.userAgent)
               document.getElementById('recorder2').style.visibility = 'hidden';
                $('#audio_record-icon').prop('checked', false);
                $('#toggle-recorder').text('Grabar');
-              vol(1)
               stopRecording();
               
             }
