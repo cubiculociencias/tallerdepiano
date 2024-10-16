@@ -540,8 +540,13 @@ body {
     <script id="profile.html" type="text/ng-template">
     <ion-view >
 
-	        <ion-nav-bar class="bar-light" >      
-  <ion-back-button></ion-back-button>
+	        <ion-nav-bar class="bar-light" >     
+
+	     <ion-nav-buttons side="left">
+    <button class="button button-clear" ng-click="goBack()">
+      <i class="ion-arrow-left-c"></i> Back
+    </button>
+  </ion-nav-buttons>  
        
         <ion-nav-buttons side="right">
           <button class="button button-clear" ng-click="toggleRight()">menu<i class="button button-icon ion-navicon"></i></button>
@@ -1953,6 +1958,11 @@ app
      $scope.goToStatus = function() {
   window.location.href = '#/menu/status';
 };
+	
+$scope.goBack = function() {
+  window.history.back();
+};
+
 
   $scope.logout = function() {
     $('.preloader').fadeIn('slow');
