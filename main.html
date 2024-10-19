@@ -543,7 +543,7 @@ body {
 	        <ion-nav-bar class="bar-light" >     
 
 	     <ion-nav-buttons side="left">
-    <button class="button button-clear" ng-click="goBack()">
+    <button class="button button-clear" ng-click="goToMain()">
       <i class="ri-arrow-left-s-line"></i> regresar
     </button>
   </ion-nav-buttons>  
@@ -1959,8 +1959,8 @@ app
   window.location.href = '#/menu/status';
 };
 	
-$scope.goBack = function() {
-  window.history.back();
+$scope.goToMain = function() {
+   window.location.href = '#/main';
 };
 
 
