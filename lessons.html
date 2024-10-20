@@ -5089,6 +5089,17 @@ function showModal(element) {
      var url = element.getAttribute('data-pdf-id');
           $("#drive").attr('src', url);        
         document.getElementById('modalPDF').classList.add('four');
+    if (!/Android|webOS|iPhone|iPad|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+   if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+        document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari y Opera
+        document.documentElement.webkitRequestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+        document.documentElement.msRequestFullscreen();
+    }
+} 
 }
  
       function closemodal() {
@@ -5099,7 +5110,11 @@ function showModal(element) {
             modal.classList.remove('four', 'out');
         }, 300);
         $("#drive").attr('src', '');
-        
+         if (!/Android|webOS|iPhone|iPad|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+   if (document.fullscreenElement) {
+    document.exitFullscreen()
+    }
+  }
       }
 
 </script>
