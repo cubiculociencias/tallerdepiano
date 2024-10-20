@@ -548,28 +548,7 @@ body {
     </button>
   </ion-nav-buttons>  
        
-        <ion-nav-buttons side="right">
-          <button class="button button-clear" ng-click="toggleRight()">menu<i class="button button-icon ion-navicon"></i></button>
-        </ion-nav-buttons>   
-       
-        <div class="dropdownContent" ng-show="isDropdownVisible" ng-click="$event.stopPropagation()">
-     <div id="bannerRow">
-      <div class="profileImageContainer">
-        <img src="{{userData.photo}}"  />
-      </div>
-      <p class="profileName">{{userData.name}}</p>
-      <p class="profileEmail">{{userData.mail}}</p>
-    </div>
-    <div class="dropdown-item" ng-click="goToStatus()">
-      <i class="ion-ios-contact-outline"></i> Perfil
-    </div>
-    <div class="dropdown-item" ng-click="goToAgenda()">
-      <i class="ion-android-calendar"></i> Agenda
-    </div>
-    <div class="dropdown-item" >
-      <i class="ion-android-download"></i> Instalar App
-    </div>
-  </div>
+
         
     </ion-nav-bar>
 	    
