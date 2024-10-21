@@ -1452,7 +1452,7 @@ iframe#youtube {
                 <button style="float:right; margin-right: -15px; margin-top: 7px; font-size: 11px;" data-pdf-url="{{entry.pdf}}" onclick="showModal(this)" ng-click="selectEntry(entry)" ng-if="entry.status !== 'En revisión' && entry.status !== 'Evaluada'" class="btn btn-dark btn-sm">Abrir </button>
                <div style="float:right; margin-right: -9px; margin-top: 8px;" ng-if="entry.status == 'En revisión'"> Entregada </div>
                 <div style="float:right; margin-right: -15px;" ng-if="entry.status == 'Evaluada' && entry.quote"><i class="ri-award-fill" style="font-size: 25px; color: orange;"></i>  </div>
-       <div ng-if="entry.status == 'Límite de entrega: '" data-youtube-id="{{entry.video}}" 
+       <div ng-if="entry.status == 'Límite de entrega: ' && entry.video" data-youtube-id="{{entry.video}}" 
 class="js-trigger-video-modal" onclick="toggle_video_modal(this)" style="color: red; cursor: pointer; padding: 0 40px"> <i class="ri-youtube-fill yticon" style="float:right;  font-size: 26px; "></i></div>     
                 <div ng-if="entry.status === 'A corrección' && entry.cVideo" data-youtube-id="{{entry.cVideo}}" 
 class="js-trigger-video-modal" onclick="toggle_video_modal(this)" style="color: red; cursor: pointer; padding: 0 40px"> <i class="ri-file-video-line yticon" style="float:right;  font-size: 26px; "></i></div>  
