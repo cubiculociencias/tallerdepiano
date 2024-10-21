@@ -1182,7 +1182,35 @@ input[type="radio"]:checked + label.green-bg::after {
   }
 }
 
+  .menu-bar {
+    position: absolute;
+            display: flex;
+            justify-content: space-around;
+            background-color: black;
+             padding: 10px 20px;
+    color: white;
+            list-style: none;
+            margin: 0;
+    margin-left: -240px;
+    margin-top: -10px;
+             border-radius: 10px;
+            font-weight: 550;
+  box-shadow: 0px 8px 20px -8px rgba(26, 33, 43, 0.5), 0px 4px 12px 0px rgba(26, 33, 43, 0.05), 0px 1px 3px 0px rgba(26, 33, 43, 0.25), 0px 1.5px 0.5px 0px #454D57 inset, 0px -3px 1px 0px rgba(0, 0, 0, 0.5) inset;
+        }
 
+
+
+.menu-bar:hover {
+  color: white;
+            text-decoration: none;
+    transform: scaleX(1.03) scaleY(1.06) translateZ(0);
+}
+
+.menu-bar:active {
+   color: white;
+   text-decoration: none;
+    transform: scale(0.96) translateZ(0);
+}
 
 
 
@@ -2346,7 +2374,7 @@ input[type="radio"]:checked + label.green-bg::after {
         <div class="modal-background">
             <div class="modal-doc">
                         
-              
+     <button class="menu-bar"> Salir </button>           
      <iframe id="drive" src="" frameborder="0"></iframe>     
                 <a 
           href="#" 
