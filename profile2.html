@@ -2042,7 +2042,7 @@ function closemodal() {
        var url = element.getAttribute('data-pdf-url');
           $("#drivemodal").attr('src', url);   
         document.getElementById('modal-container2').classList.add('four');
-/* if (!/Android|webOS|iPhone|iPad|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+ if (!/Android|webOS|iPhone|iPad|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
    if (document.documentElement.requestFullscreen) {
         document.documentElement.requestFullscreen();
     } else if (document.documentElement.mozRequestFullScreen) { // Firefox
@@ -2052,7 +2052,7 @@ function closemodal() {
     } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
         document.documentElement.msRequestFullscreen();
     }
-} */
+} 
     };
 
     function hideModal() {
