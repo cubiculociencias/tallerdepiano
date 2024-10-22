@@ -1893,7 +1893,7 @@ app
   });
  })       
 
-.controller('MenuCtrl', ['$http', '$scope', '$ionicSideMenuDelegate', '$ionicModal', 'SharedState', function($http, $scope, $ionicSideMenuDelegate, $ionicModal, SharedState) {
+.controller('MenuCtrl', ['$http', '$scope', '$ionicSideMenuDelegate', '$ionicModal', 'SharedState', '$document', function($http, $scope, $ionicSideMenuDelegate, $ionicModal, SharedState, $document) {
   $scope.toggleRight = function() {
     $('.item').removeClass('anim');
     setTimeout(function() {
@@ -1914,6 +1914,15 @@ app
       $scope.isDropdownVisible = !$scope.isDropdownVisible;
     };
 
+	  $document.on('click', function(event) {
+    var isClickInside = angular.element(event.target).closest('.dropdownContent').length > 0;
+
+    if (!isClickInside) {
+      $scope.$apply(function() {
+        $scope.isDropdownVisible = false;
+      });
+    }
+  });
 	
    $scope.goToProfile = function() {
   window.location.href = '#/menu/profile';
