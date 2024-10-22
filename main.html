@@ -872,9 +872,6 @@ body {
     <div class="dropdown-item" ng-click="goToAgenda()">
       <i class="ion-android-calendar"></i> Agenda
     </div>
-    <div class="dropdown-item" >
-      <i class="ion-android-download"></i> Instalar App
-    </div>
   </div>
         
     </ion-nav-bar>
@@ -896,7 +893,7 @@ body {
         </a>
 
         <a class="item item-icon-left item-button-right" href="#/menu/books">
-           <i class="icon ri-booklet-fill"></i> Entrenamiento
+           <i class="icon ri-booklet-fill"></i> Libros complementarios
          <p style="font-size: 10px;">Libros/métodos complementarios</p>  
         </a>
      
@@ -942,7 +939,7 @@ body {
 </div>
  
         <div class="documents">
-      <div class="document" ng-repeat="manual in manuals" ng-click="openURL(lvl, $index)" ng-if="lvl > manual.lvl || (manual.lvl == lvl && manual.blq <= blq)">
+      <div class="document" ng-repeat="manual in manuals" ng-click="openURL($index)" ng-if="lvl > manual.lvl || (manual.lvl == lvl && manual.blq <= blq)">
         <div class="document__img" ng-style="{'background-image': 'url(' + manual.background + ')'}"></div>
           <div class="document__title">{{manual.title}}</div>
          </div>
@@ -1245,7 +1242,7 @@ body {
           <p style="font-size: 10px;"> Habilidad para interpretar música al instante.</p> 
         </a>
 
-	     <div class="item item-divider itemDividerforitem">Apps musicales</div>
+	<!--     <div class="item item-divider itemDividerforitem">Apps musicales</div>
 	 <a class="item item-avatar" href="#/menu/metronome">
         <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/42/1e/07/421e07cc-b33b-e384-1995-06183618693a/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/460x0w.webp">
            <h2> Metrónomo</h2>
@@ -1262,7 +1259,7 @@ body {
      <p> Entrenamiento armónico</p>
           </a>
 	    
-    </div>  
+    </div>   -->
 
        
       </ion-content>
@@ -1916,6 +1913,17 @@ app
     $scope.toggleDropdown = function() {
       $scope.isDropdownVisible = !$scope.isDropdownVisible;
     };
+
+document.addEventListener('click', function(event) {
+  var dropdownContainer = document.querySelector('.dropdownContent');
+
+  if (!dropdownContainer.contains(event.target)) {
+    $scope.$apply(function() {
+      $scope.isDropdownVisible = false;
+    });
+  }
+})
+	
    $scope.goToProfile = function() {
   window.location.href = '#/menu/profile';
 };  
@@ -2059,14 +2067,6 @@ if (isAndroid) {
         return $sce.trustAsResourceUrl(url);
     };
     
-     $scope.selectedManualUrl = '';
-
-	 $scope.openURL = function(lvl, index) {
-        var id = $scope.manuals[lvl][index].id;
-	var url = 'https://drive.google.com/file/d/' + id + '/preview'	 
-        window.open(url, '_blank');
-    };   
-
 
    $scope.isLoading = true;
   SharedState.getNum().then(function(data) {
@@ -2075,15 +2075,27 @@ if (isAndroid) {
      $scope.isLoading = false;
   })
 
- $scope.manuals = [ 
-      {'title': 'Bloque 1 - Nivel 2','background': 'https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy', 'id': '1zs8OzO57s1b0MTavriKWjMohnLjr39-d', 'lvl': 2, 'blq': 1},            
-      {'title': 'Bloque 3 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1VuxMiv3W89OBAzxXaz6kzBkEyRxonnJB', 'lvl': 1, 'blq': 3},
-      {'title': 'Bloque 2 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '10Q34O2uDPaj5ZG7bpYpx8BGHZ4Q18ZLB', 'lvl': 1, 'blq': 2},
-      {'title': 'Bloque 1 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1Kghxri_BvRE0Ho4c2vMfrdBGp8HTmrGJ', 'lvl': 1, 'blq': 1},
-      {'title': 'Bloque 3 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu', 'lvl': 0, 'blq': 3},
-      {'title': 'Bloque 2 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1nxK06XODrHt2J6lScQz4JjthmPoc16Ec', 'lvl': 0, 'blq': 2},
-      {'title': 'Bloque 1 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa', 'lvl': 0, 'blq': 1 }
-    ];
+$scope.openURL = function(index) {
+  var url = $scope.manuals[$scope.lvl][index].url;
+  window.open(url, '_blank');
+};
+
+
+$scope.manuals = [
+  [ // Nivel 0
+    { 'title': 'Bloque 1 - Nivel P', 'background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'url': 'https://drive.google.com/file/d/1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa/preview' },
+    { 'title': 'Bloque 2 - Nivel P', 'background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'url': 'https://drive.google.com/file/d/1nxK06XODrHt2J6lScQz4JjthmPoc16Ec/preview' },
+    { 'title': 'Bloque 3 - Nivel P', 'background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'url': 'https://drive.google.com/file/d/1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu/preview' }
+  ],
+  [ // Nivel 1
+    { 'title': 'Bloque 1 - Nivel 1', 'background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'url': 'https://drive.google.com/file/d/1Kghxri_BvRE0Ho4c2vMfrdBGp8HTmrGJ/preview' },
+    { 'title': 'Bloque 2 - Nivel 1', 'background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'url': 'https://drive.google.com/file/d/10Q34O2uDPaj5ZG7bpYpx8BGHZ4Q18ZLB/preview' },
+    { 'title': 'Bloque 3 - Nivel 1', 'background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'url': 'https://drive.google.com/file/d/1VuxMiv3W89OBAzxXaz6kzBkEyRxonnJB/preview' }
+  ],
+  [ // Nivel 2
+    { 'title': 'Bloque 1 - Nivel 2', 'background': 'https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy', 'url': 'https://drive.google.com/file/d/1zs8OzO57s1b0MTavriKWjMohnLjr39-d/preview' }
+  ]
+];
 
  
 }])
