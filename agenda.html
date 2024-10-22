@@ -26,8 +26,6 @@
 	direction: ltr;
 	text-align: left;
   filter: blur(2px);
-	max-width: 500px;
-  margin: auto;
 }
 
 
@@ -1230,6 +1228,147 @@ be a descendant of the grid when it is being dragged.
   visibility: hidden;
   transition-duration: 1s
 }
+
+
+
+
+	
+
+.is-striped {
+  background-color: rgba(233, 200, 147, 0.2);
+}
+
+/* Table column sizing
+================================== */
+.date-cell {
+  width: 20%;
+}
+
+.topic-cell {
+  width: 41%;
+}
+
+.access-link-cell {
+  width: 13%;
+}
+
+.replay-link-cell {
+  width: 13%;
+}
+
+.pdf-cell {
+  width: 13%;
+}
+
+/* Apply styles
+================================== */
+.Rtable {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+}
+.Rtable .Rtable-row {
+  width: 100%;
+  display: flex;
+}
+.Rtable .Rtable-row .Rtable-cell {
+  box-sizing: border-box;
+  flex-grow: 1;
+  padding: 0.8em 1.2em;
+  overflow: hidden;
+  list-style: none;
+}
+.Rtable .Rtable-row .Rtable-cell.column-heading {
+  background-color: #43BAC0;
+  color: white;
+  padding: 1em;
+}
+.Rtable .Rtable-row .Rtable-cell .Rtable-cell--heading {
+  display: none;
+}
+.Rtable .Rtable-row .Rtable-cell .Rtable-cell--content a {
+  font-size: 2em;
+  color: #333;
+}
+
+.date-content{
+   display: flex;
+  align-items: center;
+}
+
+.text-container {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+}
+ .webinar-date {
+  font-weight: 700;
+}
+
+
+
+
+/* Responsive
+==================================== */
+
+  .is-striped {
+    background-color: white;
+  }
+
+  .Rtable--collapse {
+    display: block;
+    width: 100%;
+    padding: 1em;
+    box-shadow: none;
+  }
+  .Rtable--collapse .Rtable-row {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 2em;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+  }
+  .Rtable--collapse .Rtable-row .Rtable-cell {
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+  }
+  .Rtable--collapse .Rtable-row .Rtable-cell .Rtable-cell--heading {
+    display: inline-block;
+    flex: 1;
+    max-width: 120px;
+    min-width: 120px;
+    color: #43BAC0;
+    font-weight: 700;
+    border-right: 1px solid #ccc;
+    margin-right: 1em;
+  }
+  .Rtable--collapse .Rtable-row .Rtable-cell .Rtable-cell--content {
+    flex: 2;
+    padding-left: 1em;
+    
+  }
+  .Rtable--collapse .topic-cell {
+    background-color: #43BAC0;
+    color: white;
+    font-weight: 700;
+    order: -1;
+  }
+  .Rtable--collapse .topic-cell .Rtable-cell--content {
+    padding-left: 0 !important;
+  }
+  .Rtable--collapse .Rtable-row--head {
+    display: none;
+  }
+
+.no-flexbox .Rtable {
+  display: block;
+}
+.no-flexbox .Rtable.Rtable-cell {
+  width: 100%;
+}
 </style>
 
 
@@ -1253,17 +1392,56 @@ be a descendant of the grid when it is being dragged.
             <script type="text/ng-template" id="myModalContent.html">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
-                    <h3 class="modal-title">Clase</h3>
+                    <h3 class="modal-title">{{nome}}</h3>
                 </div>
                 <div class="modal-body">
-                    <div class="text-center well">
-                    <p>
-                        <label for="nome">{{    nome   }}</label>
-                    </p>
-                    <p>
-                        <label for="nome">{{   gfExtenso    }}</label>
-                    </p>
-                </div>
+                   
+                  
+                  
+                  <div class="Rtable Rtable--5cols Rtable--collapse">
+    <div class="Rtable-row">
+        <div class="Rtable-cell topic-cell">
+        <div class="Rtable-cell--content title-content">Datos del evento</div>
+      </div>
+      <div class="Rtable-cell date-cell">
+        <div class="Rtable-cell--content date-content">
+         <a href="#0" > <i class="ri-calendar-schedule-fill"></i></a> 
+          <div class="text-container">
+          <span class="webinar-date">{{datZoom}}</span>{{timZoom}} </div>
+        </div>
+      </div> 
+         <div class="Rtable-cell replay-link-cell">
+        <div class="Rtable-cell--content date-content">
+         <a href="https://wa.me/{{whats}}" target="_blank"> <i class="ri-whatsapp-fill" style="color: green"></i></a> 
+           <div class="text-container" ng-if="isZoom">
+          <span class="webinar-date" >Prof. {{teacher}}</span>{{phone}}</div>
+
+
+         <div class="text-container" ng-if="!isZoom">
+          <span class="webinar-date">Taller de Piano</span>55 6492 6947</div>
+        </div>
+      </div>
+    
+      <div class="Rtable-cell access-link-cell" ng-if="isZoom">
+       <div class="Rtable-cell--content date-content">
+         <a href="https://us02web.zoom.us/j/2963134430?pwd=Vzk3aTFCSTdDSFBoK1c1SVh4eEwwZz09" target="_blank"> <i class="ri-video-chat-fill" style="color: #0B5CFF"></i></a> 
+          <div class="text-container">
+            Datos de sesión de ZOOM
+          <span class="webinar-date"> 398 094 289</span>password: bartok</div>
+        </div>
+      </div>
+              
+      <div class="Rtable-cell access-link-cell" ng-if="isPay">
+       <div class="Rtable-cell--content date-content">
+         <a href="#" target="_blank"> <i class="ri-bank-card-2-fill" style="color: #4267B2"></i></a> 
+          <a style="font-size: 15px; margin-left: 10px; text-decoration: underline; color: blue; font-weight: 500" href="https://cubiculociencias.github.io/tallerdepiano/payment" target="_blank">
+            Ir a datos de pago
+         </a>
+        </div>
+      </div>
+              
+    </div>
+  </div>
                 
                 </div>
                 <div class="modal-footer">
@@ -1321,7 +1499,10 @@ be a descendant of the grid when it is being dragged.
             </div>
         </div>
         <p></p>
-
+       <div class="col-md-12">  
+           <button style="margin-top: 20px; float: right;" ng-click="bookpiano()"> Agendar</button>
+       
+                       </div>
     </div>
 </div>
 
@@ -1331,13 +1512,13 @@ be a descendant of the grid when it is being dragged.
 app.controller('Ctrl', function($scope, $http, $uibModal, $log, $compile, uiCalendarConfig) {
     $scope.teste = "calendar";
 
- 
+  
   
    var requestData = {
     action: "getBasicData",
     token: localStorage.getItem('TPtoken')
   };
-
+ 
   var config = {
     headers: {
       "Content-Type": "text/plain;charset=utf-8"
@@ -1401,6 +1582,9 @@ app.controller('Ctrl', function($scope, $http, $uibModal, $log, $compile, uiCale
             resolve: {
                 items: function() {
                     return $scope.selected;
+                },
+                userData: function() {
+                    return $scope.userData;
                 }
             }
         });
@@ -1430,7 +1614,7 @@ app.controller('Ctrl', function($scope, $http, $uibModal, $log, $compile, uiCale
                 return event.color; 
               }
                 
-            },
+            }, 
             eventBackgroundColor: 'LightSeaGreen',
             eventRender: function(event, element) {
                 element.find('.fc-time').text(""); 
@@ -1455,13 +1639,27 @@ app.controller('Ctrl', function($scope, $http, $uibModal, $log, $compile, uiCale
 
 });
 
-app.controller('ModalInstanceCtrl', function($scope, $uibModalInstance, items) {
+app.controller('ModalInstanceCtrl', function($scope, $uibModalInstance, items, userData) {
 
     $scope.nome = items.title;
+    $scope.teacher = userData.teacher
+  $scope.phone = userData.tPhone
+  $scope.whats = userData.twPhone
     // Mudando formato como é mostrado DateTime no input
     $scope.ted = items.start;
     $scope.date = moment($scope.ted).format("DD-MM-YYYY HH:mm");
     $scope.gfExtenso = moment(items.start).format("dddd D MMMM YYYY, HH:mm a");
+  var gfParts = $scope.gfExtenso.split(",")
+  $scope.datZoom = gfParts[0]
+  $scope.timZoom = gfParts[1] 
+   
+$scope.isZoom = $scope.nome.includes("Clase");
+  $scope.isPay = $scope.nome.includes("pago");
+if(!$scope.isZoom){
+   $scope.teacher = "Taller de Piano"
+  $scope.phone = "55 6492 6947"
+  $scope.whats = "5215564926947"
+}
     // FIM Mudando formato como é mostrado DateTime no input
 
     $scope.items = items;
@@ -1482,9 +1680,12 @@ app.controller('ModalInstanceCtrl', function($scope, $uibModalInstance, items) {
 
 
 app.controller('bookCtrl', function($scope, $http, $uibModalInstance, items, userData, uiCalendarConfig) {
+  // Agrega aquí la lógica necesaria para el controlador del modal
    $scope.miss = userData.repositions;
   $scope.delay = userData.skips;
-
+  // Por ejemplo, puedes definir una función para cerrar el modal
+  
+ 
 
     $scope.cancel = function() {
         $uibModalInstance.dismiss('cancel');
@@ -1524,7 +1725,7 @@ app.controller('bookCtrl', function($scope, $http, $uibModalInstance, items, use
   for(i=0;i<items.length;i++){
     if(items[i].attendance === ""){
       var date = new Date(items[i].start)
-      $scope.daysForService3.push(returnDateFormat(date))
+      $scope.daysForService3.push(items[i].title + " - " + returnDateFormat(date))
     }
   }
   
@@ -1611,22 +1812,14 @@ app.controller('bookCtrl', function($scope, $http, $uibModalInstance, items, use
     return dat2.charAt(0).toUpperCase() + dat2.slice(1);
   }
   
-
-
-function getMonthIndex(month) {
-    var months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
-    return months.indexOf(month.toLowerCase());
-};
-  
-  function getLimit(day){
+   function getLimit(day){
     if(day == 'Miércoles' || day == 'Jueves'){
       return 17
     }else if(day == 'Viernes'){
       return 12
     }
   }
-
-
+  
 
 
     function dateToISO(dateString, timeString) {
@@ -1747,7 +1940,8 @@ $scope.sendData = function(service){
   var title = $scope.selectedDay
   var requestData = {
     action: "logDate",
-    token: localStorage.getItem('TPtoken'),
+    token: "U2FsdGVkX1/nUuDQw51xvgUc1SJbNB7ovqirHxEhFI0Mq6tuxq5e/7jiW0KqEp3D",
+     //localStorage.getItem('MStoken'),
      event: service,
      title: title.split(" -")[0]
   }; 
@@ -1755,7 +1949,8 @@ $scope.sendData = function(service){
   }else{
   var requestData = {
     action: "logDate",
-    token: localStorage.getItem('TPtoken'),
+    token: "U2FsdGVkX1/nUuDQw51xvgUc1SJbNB7ovqirHxEhFI0Mq6tuxq5e/7jiW0KqEp3D",
+     //localStorage.getItem('MStoken'),
      event: service,
      date: $scope.selectedDay, 
      time: $scope.selectedHour
@@ -1768,13 +1963,13 @@ $scope.sendData = function(service){
     },
     followRedirects: true, 
   }; 
- $http.post('https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec', requestData, config)
+ $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData, config)
     .then(function(response) {
   })
   }
-
-
-	
+ 
+   
+  
 });
 
 </script>
