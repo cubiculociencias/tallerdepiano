@@ -1914,15 +1914,6 @@ app
       $scope.isDropdownVisible = !$scope.isDropdownVisible;
     };
 
-document.addEventListener('click', function(event) {
-  var dropdownContainer = document.querySelector('.dropdownContent');
-
-  if (!dropdownContainer.contains(event.target)) {
-    $scope.$apply(function() {
-      $scope.isDropdownVisible = false;
-    });
-  }
-})
 	
    $scope.goToProfile = function() {
   window.location.href = '#/menu/profile';
