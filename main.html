@@ -2053,11 +2053,7 @@ if (isAndroid) {
 };
       
     }])
-   .controller('manualsCtrl', ['$http', '$scope', '$sce', 'SharedState', function($http, $scope, $sce, SharedState){
-    $scope.trustAsResourceUrl = function(url) {
-        return $sce.trustAsResourceUrl(url);
-    };
-    
+   .controller('manualsCtrl', ['$http', '$scope', 'SharedState', function($http, $scope, SharedState){
 
    $scope.isLoading = true;
   SharedState.getNum().then(function(data) {
@@ -2067,25 +2063,19 @@ if (isAndroid) {
   })
 
 $scope.openURL = function(index) {
-  var url = $scope.manuals[$scope.lvl][index].url;
+  var url = $scope.manuals[index].url;
   window.open(url, '_blank');
 };
 
 
 $scope.manuals = [
-  [ // Nivel 0
     { 'title': 'Bloque 1 - Nivel P', 'background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'url': 'https://drive.google.com/file/d/1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa/preview' },
     { 'title': 'Bloque 2 - Nivel P', 'background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'url': 'https://drive.google.com/file/d/1nxK06XODrHt2J6lScQz4JjthmPoc16Ec/preview' },
-    { 'title': 'Bloque 3 - Nivel P', 'background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'url': 'https://drive.google.com/file/d/1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu/preview' }
-  ],
-  [ // Nivel 1
+    { 'title': 'Bloque 3 - Nivel P', 'background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'url': 'https://drive.google.com/file/d/1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu/preview' },
     { 'title': 'Bloque 1 - Nivel 1', 'background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'url': 'https://drive.google.com/file/d/1Kghxri_BvRE0Ho4c2vMfrdBGp8HTmrGJ/preview' },
     { 'title': 'Bloque 2 - Nivel 1', 'background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'url': 'https://drive.google.com/file/d/10Q34O2uDPaj5ZG7bpYpx8BGHZ4Q18ZLB/preview' },
-    { 'title': 'Bloque 3 - Nivel 1', 'background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'url': 'https://drive.google.com/file/d/1VuxMiv3W89OBAzxXaz6kzBkEyRxonnJB/preview' }
-  ],
-  [ // Nivel 2
+    { 'title': 'Bloque 3 - Nivel 1', 'background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'url': 'https://drive.google.com/file/d/1VuxMiv3W89OBAzxXaz6kzBkEyRxonnJB/preview' },
     { 'title': 'Bloque 1 - Nivel 2', 'background': 'https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy', 'url': 'https://drive.google.com/file/d/1zs8OzO57s1b0MTavriKWjMohnLjr39-d/preview' }
-  ]
 ];
 
  
