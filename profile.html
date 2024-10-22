@@ -1701,7 +1701,7 @@ class="js-trigger-video-modal" onclick="toggle_video_modal(this)"> <i class="ri-
    function getData(){
   var requestData = { 
     action: "getProfileData",
-    token: "U2FsdGVkX1/egeCLMQ+kZ+Zr0yE5Kx2dob7Ee5HKgDiTlsPhi5U+9KMFCpiEf3YM"
+    token: localStorage.getItem('TPtoken')
   };
 
   var config = {
