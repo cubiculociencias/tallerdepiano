@@ -14,8 +14,8 @@
 
 
 <style>
-   body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif ;
 }
   
 .dashboard-container {
@@ -239,16 +239,11 @@
 
 
 .progress{
-  height: 8px; width: 90%; 
-  background-color: #484B53; 
+
   margin-top: 5px;
   margin-bottom: -25px;
 }
 
-.progress .progress-bar {
-  background-color: #FF8095;
-  box-shadow: 0px 0px 30px #FF2AA6;
-}
 
 
 .documents {
@@ -429,12 +424,15 @@
   transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
 }
 
+
+
   
-  
-   .drive{
-    height: 400px;
-    width: 100%;
+     .drive{
+      height: 450px;
+    width: 120%;
+    margin-left: -25px;
   }
+  
   
   .modal-container {
     position: fixed;
@@ -479,6 +477,17 @@
     font-weight: 300;
     position: relative;
   }
+
+.close-modal {
+    display: block;
+    position: absolute;
+   top: -30px;
+    right: -15px;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+}
 
   @keyframes blowUpContent {
     0% {
@@ -538,8 +547,8 @@
             background-color: black;
             padding: 10px 0;
             list-style: none;
-            margin-top: -170px;
-    margin-left: 40px;
+            margin-top: -20px;
+    margin-left: 140px;
              border-radius: 10px;
             font-weight: 550;
   box-shadow: 0px 8px 20px -8px rgba(26, 33, 43, 0.5), 0px 4px 12px 0px rgba(26, 33, 43, 0.05), 0px 1px 3px 0px rgba(26, 33, 43, 0.25), 0px 1.5px 0.5px 0px #454D57 inset, 0px -3px 1px 0px rgba(0, 0, 0, 0.5) inset;
@@ -781,7 +790,7 @@
     text-align: center;
     vertical-align: middle;
   }
-  #modal-container2 .modal-background .modal-msg {
+ .modal-background .modal-msg {
     padding: 10px;
     width: 75%;
     display: inline-block;
@@ -857,9 +866,10 @@
  .metronome { 
    position: absolute;
    display: block;
-  width: calc(100% - .2em);
-  padding: 0.5em 0.01em 0.2em 1em;   
-   margin-top: 160px;
+  width: calc(100% - 5em);
+  padding: 1em 0.001em 0.5em 1em;   
+   margin-top: -50px;
+   margin-left: -20px;
    transform: scale(0.8);
   font: inherit;
   line-height: 1;
@@ -1278,50 +1288,35 @@ iframe#youtube {
  
 
 
-@media screen and (min-width:576px){
-  .metronome { 
-     margin-top: 170px;
-  }
-  .menu-bar{
-    margin-top: -140px;
-  }
 
-  .menu-bar2{ 
-    margin-top: -100px;
-  }
-  #record-audio {
-  margin-top: -135px;
-}
-
-  
-}
   
    @media screen and (min-width:700px){
-   .drive{
+   #drivemodal{
     height: 480px;
     width: 180%;
     margin-left: -40%;
   }
       .metronome { 
-        margin-top: -10px;
+        margin-top: -40px;
      margin-left: -200px;
+        width: 300px;
   }
   .menu-bar{
-     margin-top: -400px;
-     margin-left: -145px;
+     margin-top: -420px;
+     margin-left: -165px;
   }
      .menu-bar2{
-        margin-top: -350px;
-     margin-left: -145px;
+        margin-top: -370px;
+     margin-left: -165px;
   }
      .mic-container{
-       margin-top: 10px;
+       margin-top: -20px;
     margin-left: 450px;
   }
 
 
       #record-audio{
-        margin-top: 30px;
+        margin-top: 40px;
     margin-left: -605px;
   }
      #lsnContainer{
@@ -1330,90 +1325,63 @@ iframe#youtube {
      }
      
      .profile-user-data{
-       margin-top: 20px;
+       margin-top: 10px;
      }
      
-     .p-image{
-       margin-top: 20px;
-     }
+   
      
      .achievement-list-panel{
        margin-top: 50px;
      }
-        #noDocAlert{
-        display: none;
-      }
+     
+     .close-modal {
+       margin-right: -150px;
+     }
+   
    
 }
   
-    @media screen and (min-width:850px){
-   .drive{
-    width: 300%;
-    margin-left: -100%;
-  }
-       .metronome { 
-     margin-left: -250px;
-  }
-  .menu-bar{
-     margin-left: -190px;
-  } 
-      .menu-bar2{
-     margin-left: -190px;
-  }
 
-        .mic-container{
-    margin-left: 500px;
-  }
-       #record-audio{ 
-    margin-left: -700px;
-  } 
-   
-   
-}
-  
-      @media screen and (min-width:1050px){
-   .drive{
-     margin-top: 15px;
-    width: 400%;
-     height: 840px;
-    margin-left: -150%;
+
+
+
+  @media screen and (min-width:1250px){
+    #drivemodal{
+     margin-top: -15px;
+    width: 200%;
+     height: 850px;
+    margin-left: -50%;
   }
        .metronome { 
+          margin-top: -10px;
      margin-left: -330px;
          width: 300px;
   }
   .menu-bar{
-     margin-top: -780px;
+     margin-top: -730px;
      margin-left: -300px;
   } 
       .menu-bar2{
-         margin-top: -730px;
+         margin-top: -680px;
      margin-left: -300px;
   }
 
         .mic-container{
+          margin-top: 30px;
     margin-left: 640px;
   }
        #record-audio{ 
           margin-top: 25px;
     margin-left: -940px;
   } 
+    
+
 }
 
-  
-@media screen and (max-width:575px) {
-     .drive{
-    height: 420px;
-    width: 120%;
-    margin-left: -25px;
-       
-  }
-}
-  
+
+
+
 </style>
-
-
-
 
 <div ng-app="studentsApp" ng-controller="Controller1" >
   
@@ -1433,24 +1401,20 @@ iframe#youtube {
           <div class="circle">
               <img class="profile-pic" src={{picture}}>
           </div>
-          <div class="p-image" style="cursor: pointer;">
-            <i class="fa fa-camera upload-button"></i>
-            <input class="file-upload" type="file" style="display: none;" accept="image/*"/>
-          </div>
+   
           <div class="main-data" >
             <h4 style="font-size: 19px;">{{userData.name}}</h4>
-            
-            <div class="pull-left achievement-count" ng-if="userData.plan === 'Premium - $1300'" style="color: #77777a; font-size: 12px;"> PLAN PREMIUM
-            <i class="ri-vip-crown-fill text-golden"></i>  </div>
-        <div class="pull-left achievement-count" ng-if="userData.plan === 'Pro - $700'" style="color: #77777a; font-size: 12px;"> PLAN PRO
-            <i class="ri-verified-badge-fill text-blue"></i>  </div>
-       <div class="pull-left achievement-count" ng-if="userData.plan === 'Estudiante - $350'" style="color: #77777a; font-size: 12px;"> PLAN ESTUDIANTE
-            <i class="ri-graduation-cap-fill"></i>  </div> 
+             
+         
+        <div class="pull-left achievement-count" ng-if="userData.classtime !== ''" style="color: #77777a; font-size: 12px;"> PLAN ZOOM
+           <i class="ri-video-chat-fill" style="color: #0B5CFF"></i>  </div>
+       <div class="pull-left achievement-count" ng-if="userData.classtime === ''" style="color: #77777a; font-size: 12px;"> PLAN ASÍNCRONO
+            <i class="ri-mac-line"></i>  </div> 
      
        
           <br>
           <div style="margin-top: 1px">    {{userLevel}}  </div>
-             <div style="font-size: 11px">Bloque: <span>{{userData.blq}}</span> - Lección: <span>{{userData.lsn}} </span> </div>
+             
 
         <div class="progress">
           <div class="progress-bar" style="background-color: {{userData.color}};" role="progressbar" aria-valuemin="0" aria-valuemax="100" ng-style="{width: userData.progress + '%'}" ng-init="startAnimation()"></div>
@@ -1460,7 +1424,7 @@ iframe#youtube {
         </div>
         
   
-       
+        
           
          <div class="user-stats " ng-if="userData.status == 'INACTIVO'" style="text-align: center;"> 
             <div  class="alert alert-danger">
@@ -1470,7 +1434,7 @@ iframe#youtube {
         </div>
         
           
-        <div class="dashboard-panel registry-log-panel">
+        <div class="dashboard-panel registry-log-panel" ng-if="userData.status == 'ACTIVO'">
           <div class="panel-header">
             <h4><i class="fa fa-fw fa-clock-o"></i> Registro de actividad</h4>
           
@@ -1481,11 +1445,12 @@ iframe#youtube {
                 <button style="float:right; margin-right: -15px; margin-top: 7px; font-size: 11px;" data-pdf-url="{{entry.pdf}}" onclick="showModal(this)" ng-click="selectEntry(entry)" ng-if="entry.status !== 'En revisión' && entry.status !== 'Evaluada'" class="btn btn-dark btn-sm">Abrir </button>
                <div style="float:right; margin-right: -9px; margin-top: 8px;" ng-if="entry.status == 'En revisión'"> Entregada </div>
                 <div style="float:right; margin-right: -15px;" ng-if="entry.status == 'Evaluada' && entry.quote"><i class="ri-award-fill" style="font-size: 25px; color: orange;"></i>  </div>
-               <div ng-if="entry.status == 'Límite de entrega: '" data-youtube-id="{{entry.video}}" 
-class="js-trigger-video-modal" onclick="toggle_video_modal(this)" style="color: red; cursor: pointer; padding: 0 40px"> <i class="ri-youtube-fill yticon" style="float:right;  font-size: 26px; "></i></div>
-                <div ng-if="entry.status === 'A corrección'" data-youtube-id="{{entry.video}}" 
-class="js-trigger-video-modal" onclick="toggle_video_modal2(this)" style="color: gray; cursor: pointer; padding: 0 40px"> <i class="ri-chat-quote-line yticon" style="float:right; font-size: 26px; "></i></div>
-                        <span style="font-size: 13px;">{{entry.name}}</span>
+       <div ng-if="entry.status == 'Límite de entrega: ' && entry.video" data-youtube-id="{{entry.video}}" 
+class="js-trigger-video-modal" onclick="toggle_video_modal(this)" style="color: red; cursor: pointer; padding: 0 40px"> <i class="ri-youtube-fill yticon" style="float:right;  font-size: 26px; "></i></div>     
+                <div ng-if="entry.status === 'A corrección' && entry.cVideo" data-youtube-id="{{entry.cVideo}}" 
+class="js-trigger-video-modal" onclick="toggle_video_modal(this)" style="color: red; cursor: pointer; padding: 0 40px"> <i class="ri-file-video-line yticon" style="float:right;  font-size: 26px; "></i></div>  
+               <div ng-if="entry.status === 'A corrección' && entry.cPDF" data-pdf-url="{{entry.cPDF}}" onclick="showModal3(this)" ng-click="selectEntry(entry)" style="color: gray; cursor: pointer; padding: 0 40px"> <i class="ri-file-warning-line yticon" style="float:right; font-size: 26px; "></i></div> 
+                        <span style="font-size: 13px;">{{entry.name}}</span>  
                <small style="font-size: 11px; margin-top: 2px;">{{entry.status}} <span ng-if="entry.status == 'Límite de entrega: '"> {{dateToString(entry.limitdate)}}</span></small>
            
                <small ng-if="entry.status == 'Límite de entrega: ' && stringToDate(entry.limitdate) < today" style="font-size: 9px; margin-top: 2px; position:absolute;">Entrega atrasada, envía un avance</small>
@@ -1501,12 +1466,16 @@ class="js-trigger-video-modal" onclick="toggle_video_modal2(this)" style="color:
           <h4><i class="fa fa-fw fa-book"></i> Manual en curso</h4>
           </div>
        <div class="panel-body">
-            <div class="documents">
+ 
+         
+
+  <div class="documents">
                 <div class="document" ng-repeat="manual in manuals[userData.lvl] | filter:manualFilter" ng-click="openURL(userData.lvl, $index)">
                     <div class="document__img" ng-style="{'background-image': 'url(' + manual.background + ')'}"></div>
                     <div class="document__title">{{manual.title}}</div>
                 </div>
             </div>
+
         </div>
         </div>
         
@@ -1559,9 +1528,7 @@ class="js-trigger-video-modal" onclick="toggle_video_modal2(this)" style="color:
 <span id="clicks"></span>
          
 </div>
-       <div  class="alert alert-info" style="position: absolute;  margin-top: -10px; font-size: 15px;" id="noDocAlert">
-    Este documento no es visible en dispositivos móviles. Por favor, utiliza una computadora, tablet o tu partitura impresa, para leer la partitura mientras grabas tu tarea en este dispositivo.
-        </div>
+     
        <div class="metronome">  
     <div hidden>
     <button class="main-btn blue flex-centered" id="tap" hidden>Tap</button> 
@@ -1613,7 +1580,7 @@ class="js-trigger-video-modal" onclick="toggle_video_modal2(this)" style="color:
        <ul class="menu-bar2" id="menu-bar2" style="visibility: hidden;">
             <li><a href="#" id="delete-audio">Eliminar</a></li>
            <li><a href="#" ng-click="uploadAudio()">Enviar</a></li> 
-       <!--     <li><a href="#" ng-click="uploadAudio($index)">Entregar</a></li>-->
+       <!--     <li><a href="#" ng-click="uploadAudio($index)">Entregar</a></li>--> 
         </ul>
      <!--  <div class="multimedia" style="font-size: 35px;">
  <div data-youtube-id="bwiHhgPjkR8" 
@@ -1627,6 +1594,44 @@ class="js-trigger-video-modal" onclick="toggle_video_modal(this)"> <i class="ri-
     </div>
   </div>
   
+  
+  
+  
+     <div id="modal-container3" class="modal-container">     
+  <div class="modal-background"  >   
+    <div class="modal-msg" > 
+   
+
+        <iframe class="drive" id="drivemodal3" src="" frameborder="0">
+        </iframe>
+    
+              <a 
+          href="#" 
+          class="close-modal" onclick="closemodal()" 
+        >
+          <!-- X close video icon -->
+          <svg 
+            version="1.1" 
+            xmlns="http://www.w3.org/2000/svg" 
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0"
+            y="0"
+            viewBox="0 0 32 32" 
+            style="enable-background:new 0 0 32 32;" 
+            xml:space="preserve" 
+            width="24" 
+            height="24" 
+          >
+                <path fill="#ffffff" d="M30.3448276,31.4576271 C29.9059965,31.4572473 29.4852797,31.2855701 29.1751724,30.980339 L0.485517241,2.77694915 C-0.122171278,2.13584324 -0.104240278,1.13679247 0.52607603,0.517159487 C1.15639234,-0.102473494 2.17266813,-0.120100579 2.82482759,0.477288136 L31.5144828,28.680678 C31.9872448,29.1460053 32.1285698,29.8453523 31.8726333,30.4529866 C31.6166968,31.0606209 31.0138299,31.4570487 30.3448276,31.4576271 Z" id="Shape"></path>
+                <path fill="#ffffff" d="M1.65517241,31.4576271 C0.986170142,31.4570487 0.383303157,31.0606209 0.127366673,30.4529866 C-0.12856981,29.8453523 0.0127551942,29.1460053 0.485517241,28.680678 L29.1751724,0.477288136 C29.8273319,-0.120100579 30.8436077,-0.102473494 31.473924,0.517159487 C32.1042403,1.13679247 32.1221713,2.13584324 31.5144828,2.77694915 L2.82482759,30.980339 C2.51472031,31.2855701 2.09400353,31.4572473 1.65517241,31.4576271 Z" id="Shape"></path>
+          </svg> 
+        </a>   
+   
+
+             </div>
+    </div>
+  </div>
+
   
   
    <div class="video-modal">
@@ -1674,17 +1679,12 @@ class="js-trigger-video-modal" onclick="toggle_video_modal(this)"> <i class="ri-
 </div> 
   
 </div>
-  
-  
-  
-  
-  
-  
+
+
+
+
 <script>
   
-
-
-
   angular.module('studentsApp', [])
   .controller('Controller1', ['$http', '$scope', '$sce', '$timeout', '$interval', function($http, $scope, $sce, $timeout, $interval) {
    $scope.userData = [];
@@ -1720,15 +1720,6 @@ class="js-trigger-video-modal" onclick="toggle_video_modal(this)"> <i class="ri-
       };
     $scope.picture = $scope.userData.photo
   
-     angular.element(document).ready(function() {
-    angular.element(".file-upload").on('change', function() {
-      readURL(this);
-    });
-    
-    angular.element(".upload-button").on('click', function() {
-      angular.element(".file-upload").click();
-    });
-      });
 
          
     
@@ -1930,11 +1921,7 @@ $scope.manuals = [
 
 }]);
   
-  
-</script>
 
-
-<script>
   window.onload = function(){
   
 if (/Android/i.test(navigator.userAgent) && !/Mobile/i.test(navigator.userAgent)) {
@@ -1974,6 +1961,7 @@ if (/Android/i.test(navigator.userAgent) && !/Mobile/i.test(navigator.userAgent)
               $('#audio_record-icon').prop('checked', true);
                $('#toggle-recorder').text('Detener');
               startRecording();
+              vol(0.3)
             } else {
                 //metronome.style.display = 'none';
               //document.getElementById('back-menu-bar').style.visibility = 'visible';
@@ -1982,6 +1970,7 @@ if (/Android/i.test(navigator.userAgent) && !/Mobile/i.test(navigator.userAgent)
               document.getElementById('recorder2').style.visibility = 'hidden';
                $('#audio_record-icon').prop('checked', false);
                $('#toggle-recorder').text('Grabar');
+              vol(1)
               stopRecording();
               
             }
@@ -2012,6 +2001,25 @@ function toggle_video_modal(element) {
 
 
 
+ function showModal3(element) {
+       var url = element.getAttribute('data-pdf-url');
+          $("#drivemodal3").attr('src', url);   
+        document.getElementById('modal-container3').classList.add('four');
+     var icon = element.querySelector('.yticon');
+    if (icon) {
+        icon.style.animation = 'none';
+    }
+    };
+
+function closemodal() {
+        event.preventDefault();
+       const modal = document.getElementById('modal-container3');
+        modal.classList.add('out');
+        setTimeout(() => {
+            modal.classList.remove('four', 'out');
+        }, 300);
+        $("#drivemodal3").attr('src', '');      
+}
 
 
   function showModal(element) {
@@ -2154,17 +2162,37 @@ background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQ
 
 
 
-  function onMediaSuccess(stream) {
-    mediaRecorder = new MediaStreamRecorder(stream);
-    mediaRecorder.stream = stream;
+function onMediaSuccess(stream) {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  
+    // Crear un filtro de paso bajo
+    const lowpassFilter = audioCtx.createBiquadFilter();
+    lowpassFilter.type = "lowpass"; // Filtro de paso bajo
+    lowpassFilter.frequency.setValueAtTime(1000, audioCtx.currentTime); // Frecuencia de corte: 1000Hz
+  
+    // Crear la fuente de audio desde el stream del micrófono
+    const source = audioCtx.createMediaStreamSource(stream);
+  
+    // Conectar la fuente al filtro
+    source.connect(lowpassFilter);
+  
+    // Crear un destino para conectar el filtro
+    const destination = audioCtx.createMediaStreamDestination();
+    lowpassFilter.connect(destination);
+
+    // Crear el MediaStreamRecorder a partir del audio filtrado
+    mediaRecorder = new MediaStreamRecorder(destination.stream);
+    mediaRecorder.stream = destination.stream; // Usamos el stream filtrado
     mediaRecorder.mimeType = 'audio/wav';  
-    //mediaRecorder.mimeType = 'audio/webm';  
     mediaRecorder.audioChannels = 1;
+
     mediaRecorder.ondataavailable = function(blob) {
-      $('#record-audio').html("<audio id='player1' src=" + URL.createObjectURL(blob) + " style='width: 310px; ' type='audio/mp3' controls></audio> ");
-       const player = new MediaElementPlayer('player1', {
+      $('#record-audio').html("<audio id='player1' src=" + URL.createObjectURL(blob) + " style='width: 310px;' type='audio/mp3' controls></audio> ");
+      
+      const player = new MediaElementPlayer('player1', {
         features: ['playpause', 'progress'],
-    }); 
+      });
+
       $('#delete-audio').on('click', function() {
         $('#record-audio').empty(); 
         document.getElementById("AudioData").value = "";
@@ -2174,20 +2202,21 @@ background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQ
         menuBar2.style.visibility = 'hidden';
         menuBar1.style.visibility = 'visible';
         document.getElementById('back-menu-bar').style.visibility = 'visible';
-       
-  });
+      });
+
       var reader = new FileReader();
-          reader.onloadend = function() {
-            var base64Audio = reader.result;
-            document.getElementById("AudioData").value = base64Audio;
-          };
-          reader.readAsDataURL(blob);
+      reader.onloadend = function() {
+        base64Audio = reader.result.split(";")[1];
+        document.getElementById("AudioData").value = base64Audio;
+      };
+      reader.readAsDataURL(blob);
     };
- 
+
     var timeInterval = 360 * 1000;
     mediaRecorder.start(timeInterval);
     $('#stop-recording').disabled = false;
-  }
+} 
+
 
 
 
@@ -2331,7 +2360,9 @@ function playNote(t){
   var note = audioCtx.createOscillator();
   note.connect(volume);
   volume.connect(audioCtx.destination);
-  
+
+
+ 
 var now = audioCtx.currentTime;
 var attackTime = .1;
 var releaseTime = 0.01;
@@ -2341,8 +2372,6 @@ volume.gain.linearRampToValueAtTime(2, now + attackTime);
 volume.gain.linearRampToValueAtTime(0, now + attackTime + releaseTime);
 
 note.frequency.setValueAtTime(800, audioCtx.currentTime);  
-
-
 
 /*  if(firstBeating.checked){
     if(noteFlag == 0){
@@ -2542,5 +2571,6 @@ bothDisplay.addEventListener('click', function(){
   setInterval(function() {
     location.reload(); 
 }, 60000); 
-
 </script>
+  
+   
