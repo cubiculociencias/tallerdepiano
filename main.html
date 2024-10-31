@@ -496,9 +496,8 @@ body {
           <ul class="list">
           <!--     <a href="#/menu/status" class="item"  menu-toggle="right" ><i class="ri-user-fill"></i>&nbsp&nbspPerfil</a>  -->
            <a href="#/menu/lessons" class="item" ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" ng-click="activeMenuClr = 'lessons'" menu-toggle="right"><i class="" >🎹</i>&nbsp&nbspTaller de Piano</a> 
+	 <a href="#/menu/profile" class="item" ng-class="(activeMenuClr=='profile')?'menuSelectedColor':''" ng-click="activeMenuClr = 'profile'" menu-toggle="right"><i class="ri-line-chart-fill" ></i>&nbsp&nbspProgreso</a> 
             <a href="#/menu/courses" class="item" ng-class="(activeMenuClr=='courses')?'menuSelectedColor':''" ng-click="activeMenuClr = 'courses'" menu-toggle="right"><i class="ri-presentation-fill" ></i>&nbsp&nbspCursos</a> 
-           <!--    <a href="#/menu/profile" class="item" ng-class="(activeMenuClr=='profile')?'menuSelectedColor':''" ng-click="activeMenuClr = 'profile'" menu-toggle="right"><i class="ri-line-chart-fill" ></i>&nbsp&nbspProgreso</a> -->
-              
                            <a href="#/menu/library" class="item" ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" ng-click="activeMenuClr = 'library'" menu-toggle="right"><i class="ri-git-repository-fill" ></i>&nbsp&nbspBiblioteca</a>
                               
        <a href="#/menu/reel" class="item" ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" ng-click="activeMenuClr = 'reel'" menu-toggle="right"><i class="ri-gallery-fill" ></i>&nbsp&nbspGalería</a>   
@@ -546,16 +545,43 @@ body {
     <script id="profile.html" type="text/ng-template">
     <ion-view >
 
-	        <ion-nav-bar class="bar-light" >     
-
-	     <ion-nav-buttons side="left">
-    <button class="button button-clear" ng-click="goToMain()">
-      <i class="ri-arrow-left-s-line"></i> regresar
+   <ion-nav-bar class="bar-light" >      
+        <ion-nav-buttons side="left">
+  <!--  <button class="button button-clear" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif">
+      <img src="https://lh3.googleusercontent.com/d/1EP2I0BOMo_8mXsR9qqAv08PxjztZFaQ8" width="35" height="35" style="border-radius: 50%;" />
+       Mozart Academy
+    </button> -->
+       <button class="button button-clear" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif">
+      <img src="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V" width="35" height="35" style="border-radius: 50%;" />
+      Taller de Piano
+  <div style="position: absolute; bottom: -5px; left: 25px; width: 15px; height: 15px; background-color: #d3d3d3; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
+        <i class="icon ion-chevron-down" style="font-size: 8px; color: black; transform: scale(0.27);"></i>
+    </div>
     </button>
-  </ion-nav-buttons>  
+  </ion-nav-buttons>
        
-
-        
+        <ion-nav-buttons side="right">
+          <button class="button button-clear" ng-click="toggleRight()">menu<i class="button button-icon ion-navicon"></i></button>
+        </ion-nav-buttons>   
+       
+        <div class="dropdownContent" ng-show="isDropdownVisible" ng-click="$event.stopPropagation()">
+     <div id="bannerRow">
+      <div class="profileImageContainer">
+        <img src="{{userData.photo}}"  />
+      </div>
+      <p class="profileName">{{userData.name}}</p>
+      <p class="profileEmail">{{userData.mail}}</p>
+    </div>
+    <div class="dropdown-item" ng-click="goToStatus()">
+      <i class="ion-ios-contact-outline"></i> Perfil
+    </div>
+    <div class="dropdown-item" ng-click="goToAgenda()">
+      <i class="ion-android-calendar"></i> Agenda
+    </div>
+    <div class="dropdown-item" >
+      <i class="ion-android-download"></i> Instalar App
+    </div>
+  </div>  
     </ion-nav-bar>
 	    
       <ion-content > 
