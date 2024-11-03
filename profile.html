@@ -1,4 +1,3 @@
-
 <head>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.1/js/bootstrap.js"></script>
@@ -189,8 +188,8 @@
 }
 
   .status-default:before {
-    content: "\f0e7";
-    /*content: "\f11d"; */
+   content: "\f0e7";
+    /*content: "\f11d";*/ 
 }
   
   .yticon{
@@ -999,7 +998,7 @@ ul{
   z-index: -1;
   height: 15px;
   width: 29.6%; /* When input value is 147 (default) */
-} 
+}
 
 .tempoSlider {
   -webkit-appearance: none;
@@ -1021,7 +1020,7 @@ ul{
   height: 15px;
   cursor: pointer;
   background: transparent;
-} 
+}
 
 .tempoSlider::-webkit-slider-thumb {
   height: 25px;
@@ -1031,7 +1030,7 @@ ul{
   border: 1px solid white;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  -webkit-appearance: none; 
+  -webkit-appearance: none;
   margin-top: -5px;
   
 }
@@ -1316,7 +1315,7 @@ iframe#youtube {
     margin-left: 450px;
   }
 
- 
+
       #record-audio{
         margin-top: 40px;
     margin-left: -605px;
@@ -1382,9 +1381,7 @@ iframe#youtube {
 
 
 
-html {
-    box-sizing: border-box;
-}
+
 
 
 
@@ -1397,9 +1394,6 @@ html {
     font-family: sans-serif;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
-}
-body {
-    margin: 0;
 }
 
 
@@ -1850,6 +1844,7 @@ body {
   /*border: 1px solid #d8d8d8;*/
   margin-left: 7px;
   margin-top: auto;
+
 </style>
 
 <div ng-app="studentsApp" ng-controller="Controller1" >
@@ -1908,11 +1903,11 @@ body {
             </span>
           </button> <br><br><br><br><br><br><br><br><br><br>
         </div>
-         
+        
           
         <div class="dashboard-panel registry-log-panel" ng-if="userData.status == 'ACTIVO'">
           <div class="panel-header">
-            <h4><i class="fa fa-fw fa-flag"></i> Actividad</h4>
+        <h4><i class="fa fa-fw fa-flag"></i> Actividad</h4>
           
           </div>
           <div class="panel-body log-list-container" id="lsnContainer" style="max-height: 185px;"> 
@@ -1920,7 +1915,8 @@ body {
              <li ng-repeat="entry in history | filter:filterByLevel" ng-class="{'status-pending': entry.status === 'En revisión', 'status-delayed': entry.status === 'Límite de entrega: ' && stringToDate(entry.limitdate) < today, 'status-completed': entry.status === 'Evaluada', 'status-error': entry.status === 'A corrección', 'status-default': (entry.status === 'Límite de entrega: '  && stringToDate(entry.limitdate) >= today) || entry.status === 'Asignado'}">
                 <button style="float:right; margin-right: -15px; margin-top: 7px; font-size: 11px;" data-pdf-url="{{entry.pdf}}" onclick="showModal(this)" ng-click="selectEntry(entry)" ng-if="entry.status !== 'En revisión' && entry.status !== 'Evaluada'" class="btn btn-dark btn-sm">Abrir </button>
                <div style="float:right; margin-right: -9px; margin-top: 8px;" ng-if="entry.status == 'En revisión'"> Entregada </div>
-                <div style="float:right; margin-right: -15px; color: green; font-size: 15px; font-weight: 600;" ng-if="entry.status == 'Evaluada' && entry.score"><i class="ri-award-fill" style="font-size: 25px; color: orange; " ng-if="entry.score == 100"></i> +{{entry.score}}    </div> 
+               <div style="float:right; margin-right: -15px; color: green; font-size: 15px; font-weight: 600;" ng-if="entry.status == 'Evaluada' && entry.score"><i class="ri-award-fill" style="font-size: 25px; color: orange; " ng-if="entry.score == 100"></i> +{{entry.score}}    </div> 
+                <div style="float:right; margin-right: -15px;" ng-if="entry.status == 'Evaluada' && entry.quote"><i class="ri-award-fill" style="font-size: 25px; color: orange;"></i>  </div>
        <div ng-if="entry.status == 'Límite de entrega: ' && entry.video" data-youtube-id="{{entry.video}}" 
 class="js-trigger-video-modal" onclick="toggle_video_modal(this)" style="color: red; cursor: pointer; padding: 0 40px"> <i class="ri-youtube-fill yticon" style="float:right;  font-size: 26px; "></i></div>     
                 <div ng-if="entry.status === 'A corrección' && entry.cVideo" data-youtube-id="{{entry.cVideo}}" 
@@ -1936,12 +1932,12 @@ class="js-trigger-video-modal" onclick="toggle_video_modal(this)" style="color: 
           </div>
         </div>
       </div>
-      <div class="col-sm-7" >
+      <div class="col-sm-7" ng-if="userData.status == 'ACTIVO'">
         <div class="dashboard-panel achievement-list-panel">
           <div class="panel-header">
-          <h4><i class="fa fa-fw fa-trophy"></i> Ranking</h4>
+      <h4><i class="fa fa-fw fa-trophy"></i> Ranking</h4>
           </div>
-       <div class="panel-body" style="max-height: 450px !important">
+         <div class="panel-body" style="max-height: 450px !important">
  
          
 
@@ -2014,15 +2010,6 @@ class="js-trigger-video-modal" onclick="toggle_video_modal(this)" style="color: 
     
     
      </div>
-
-        </div>
-        </div>
-        
-        
-      
-        
-        
-      </div>
     </div>
  </div> 
 
@@ -2030,7 +2017,7 @@ class="js-trigger-video-modal" onclick="toggle_video_modal(this)" style="color: 
   
   
   
-   
+  
    <div id="modal-container2" class="modal-container">
       <div id="rotate-screen" style="overflow: hidden; display: none;">
     <div class="rotate-content">
@@ -2233,7 +2220,8 @@ class="js-trigger-video-modal" onclick="toggle_video_modal(this)"> <i class="ri-
    function getData(){
   var requestData = { 
     action: "getProfileData",
-    token: localStorage.getItem('TPtoken')
+    token: "U2FsdGVkX1+Z6M/J/t+jyWRPGyLvsQ59OB1KBA584h2y7JP6aP8jij6WZTd90vNm",
+    //localStorage.getItem('TPtoken'),
   };
 
   var config = {
@@ -2298,39 +2286,7 @@ class="js-trigger-video-modal" onclick="toggle_video_modal(this)"> <i class="ri-
     return entry.index <= $scope.lsn;
 };
 
-    $scope.manualFilter = function(manual, index) {
-      return index <= $scope.userData.blq - 1;
-    };
 
-
-$scope.manuals = [ 
-  [
-    {'title': 'Bloque 1 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-',  
-    'url': 'https://drive.google.com/file/d/1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa'},
-    {'title': 'Bloque 2 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-',  
-    'url': 'https://drive.google.com/file/d/1nxK06XODrHt2J6lScQz4JjthmPoc16Ec'}, 
-    {'title': 'Bloque 3 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-',  
-    'url': 'https://drive.google.com/file/d/1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu'}   
-  ],
-  [
-    {'title': 'Bloque 1 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM',  
-    'url': 'https://drive.google.com/file/d/1Kghxri_BvRE0Ho4c2vMfrdBGp8HTmrGJ'},
-    {'title': 'Bloque 2 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM',  
-    'url': 'https://drive.google.com/file/d/10Q34O2uDPaj5ZG7bpYpx8BGHZ4Q18ZLB'},
-    {'title': 'Bloque 3 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM',  
-    'url': 'https://drive.google.com/file/d/1VuxMiv3W89OBAzxXaz6kzBkEyRxonnJB'}     
-  ],
-  [
-     {'title': 'Bloque 1 - Nivel 2','background': 'https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy',  
-  'url': 'https://drive.google.com/file/d/1zs8OzO57s1b0MTavriKWjMohnLjr39-d'},
-     {'title': 'Bloque 2 - Nivel 2','background': 'https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy',  
-  'url': 'https://drive.google.com/file/d/1zs8OzO57s1b0MTavriKWjMohnLjr39-d'}  
-  ]
-  
-];
-
-    
-    
    
     
     
@@ -2358,7 +2314,7 @@ $scope.manuals = [
     .then(function(response) {
     })  
 
-     /*   $('#record-audio').empty(); 
+      /*  $('#record-audio').empty(); 
         document.getElementById("AudioData").value = "";
       //document.getElementById('recorder').style.display = 'none';
       var menuBar1 = document.getElementById('menu-bar1');
@@ -2366,7 +2322,7 @@ $scope.manuals = [
         menuBar2.style.visibility = 'hidden';
         menuBar1.style.visibility = 'visible';
         document.getElementById('back-menu-bar').style.visibility = 'visible';
-       alert("Actividad enviada a revisión")  */
+       alert("Actividad enviada a revisión")*/
       
       document.getElementById('menu-bar1').style.visibility = 'visible';
        document.getElementById('menu-bar2').style.visibility = 'hidden';
@@ -2386,74 +2342,15 @@ $scope.manuals = [
    }; 
 
 
-     $scope.openURL = function(lvl, index) {
-        var url = $scope.manuals[lvl][index].url;
-        window.open(url, '_blank');
-    };
-    
-    
-    var readURL = function(input) {
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
 
-        reader.onload = function(e) {
-          $scope.$apply(function() {
-            $scope.picture = e.target.result;
-            $scope.uploadImage(e.target.result); // Enviar la imagen cargada al servidor
-          });
-        };
 
-        reader.readAsDataURL(input.files[0]);
-      } 
-    };
-    
-     $scope.selectedManualUrl = '';
-     
-    
-     $scope.trustAsResourceUrl = function(url) {
-        return $sce.trustAsResourceUrl(url);
-    };
-    
-    
     $scope.selectedEntry = null;
     $scope.selectEntry = function(entry) {
        $scope.selectedEntry = entry;
     };
     
-/*     $scope.showModal = function(entry) {
-       $scope.selectedManualUrl = entry.pdf;
-       $scope.selectedEntry = entry;
-        document.getElementById('modal-container2').classList.add('four');
-    };
 
-    $scope.hideModal = function() {
-        const modal = document.getElementById('modal-container2');
-        modal.classList.add('out');
-        setTimeout(() => {
-            modal.classList.remove('four', 'out');
-        }, 400);
-      var metronome = document.getElementById('recorder');
-      metronome.style.display = 'none';
-    };  */
-    
-    
-     $scope.uploadImage = function(data){
-       var requestData = {
-    action: "postImage",
-    token: localStorage.getItem('TPtoken'),
-    blob: data
-  };
 
-  var config = {
-    headers: {
-      "Content-Type": "text/plain;charset=utf-8"
-    },
-    followRedirects: true, 
-  };
- $http.post('https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec', requestData, config)
-       .then(function(response) {
- });
-     }
     
       $interval(getData, 120000);
     
