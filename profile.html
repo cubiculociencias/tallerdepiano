@@ -2220,8 +2220,7 @@ class="js-trigger-video-modal" onclick="toggle_video_modal(this)"> <i class="ri-
    function getData(){
   var requestData = { 
     action: "getProfileData",
-    token: "U2FsdGVkX1+Z6M/J/t+jyWRPGyLvsQ59OB1KBA584h2y7JP6aP8jij6WZTd90vNm",
-    //localStorage.getItem('TPtoken'),
+    token: localStorage.getItem('TPtoken'),
   };
 
   var config = {
