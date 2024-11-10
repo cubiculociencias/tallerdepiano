@@ -1,0 +1,735 @@
+
+ <link href="https://cdn.jsdelivr.net/foundation/6.2.0/foundation.min.css" rel="stylesheet"/>
+<link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet"/> 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/foundation/6.2.0/foundation.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Shuffle/4.0.0/shuffle.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+
+
+
+<style>
+  
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,700,900);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,700);
+
+
+
+body {
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #313131;
+  background: #ecf0f1;
+}
+
+body::-webkit-scrollbar {
+  width: 8px;
+}
+body::-webkit-scrollbar-track {
+  border-radius: 0;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: rgba(131, 135, 193, 0.4);
+  border-radius: 40px;
+}
+
+.row {
+  max-width: 1024px;
+}
+
+body,
+p,
+a,
+li {
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+}
+
+a {
+  color: #219e9a;
+}
+
+
+.book-item_title {
+  margin-top: 6px;
+
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  color: #313131;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+
+h4 {
+  margin-bottom: 12px;
+  font-size: 22px;
+  line-height: 40px;
+  color: rgba(49, 49, 49, 0.7);
+}
+
+p:not(.author) {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+p.author {
+  margin-bottom: 10px;
+  letter-spacing: -1px;
+  font-weight: 400;
+  color: rgba(49, 49, 49, 0.5);
+}
+
+/*
+ *  Button
+*/
+.btn {
+  margin-bottom: 0;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 3px;
+  background-color: rgba(49, 49, 49, 0.5);
+}
+
+
+/*
+ *  Header
+*/
+.page-header {
+  position: relative;
+  margin-bottom: 55px;
+  width: 100%;
+  border-bottom: 1px solid #d2d6d5;
+  background-color: #fff;
+}
+
+.main-logo {
+  display: inline-block;
+  padding: 1em;
+  width: auto;
+}
+.main-logo a.logo {
+  display: block;
+  width: 150px;
+  height: 40px;
+  text-indent: -9999px;
+  background: url("http://interactivejoe.com/book-viewer/assets/images/logo.svg");
+  background-color: #fff;
+  transition: background-color 250ms ease-out;
+}
+.main-logo a.logo:hover, .main-logo a.logo:focus {
+  background-color: #ecf0f1;
+}
+
+.menu-search {
+  float: right;
+  width: calc(100% - 200px);
+}
+
+
+@-webkit-keyframes anim-1 {
+  50% {
+    opacity: 0;
+    transform: translate3d(1em, 0, 0);
+  }
+  51% {
+    opacity: 0;
+    transform: translate3d(-1em, -40%, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, -40%, 0);
+  }
+}
+@keyframes anim-1 {
+  50% {
+    opacity: 0;
+    bottom: 24px;
+    transform: translate3d(5em, 0, 0);
+  }
+  51% {
+    opacity: 0;
+    bottom: 24px;
+    transform: translate3d(-5em, -40%, 0);
+  }
+  100% {
+    opacity: 1;
+    bottom: 24px;
+    transform: translate3d(0, -40%, 0);
+  }
+}
+
+.main-container {
+  position: relative;
+  overflow-x: hidden;
+}
+.main-container.prevent-scroll, .main-container.nav-menu-open {
+  overflow: hidden;
+}
+
+.toolbar {
+  margin-bottom: 30px;
+  border-bottom: 1px solid #d2d6d5;
+}
+.toolbar select {
+  margin-bottom: 7px;
+  color: #313131;
+  font-size: 14px;
+  border: none;
+  background-color: transparent;
+}
+.toolbar .filter-options {
+  line-height: 40px;
+}
+.toolbar a.filter-item {
+  margin-right: 16px;
+  padding-bottom: 18px;
+  font-size: 14px;
+  color: #313131;
+  border-bottom: 0px solid transparent;
+  transition: all 250ms ease-out;
+}
+.toolbar a.filter-item:last-child {
+  margin-right: 0;
+}
+.toolbar a.filter-item.active {
+  padding-bottom: 15px;
+  color: #219e9a;
+  font-weight: bold;
+  border-bottom: 3px solid #219e9a;
+}
+
+#grid {
+  margin-bottom: 60px;
+}
+
+.book-item {
+  margin: 15px 0;
+  padding: 15px;
+  list-style-type: none;
+}
+.book-item:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 15px;
+  width: calc(100% - 105px);
+  height: 100%;
+  border-radius: 3px;
+  box-shadow: 0 0 0 0 transparent;
+  background-color: rgba(255, 255, 255, 0);
+  z-index: -1;
+  transition: all 250ms ease-out;
+}
+.book-item:hover:after {
+  box-shadow: 0px 1px 1px 1px rgba(210, 214, 213, 0.5);
+  background-color: #fff;
+}
+.book-item:hover .item-img img {
+  box-shadow: 0px 0px 10px 0px rgba(49, 49, 49, 0.25);
+}
+.book-item:hover .btn {
+  background-color: #219e9a;
+}
+.book-item:hover .bk-bookdefault {
+  transform: rotate3d(0, 1, 0, 25deg);
+}
+.book-item:hover .bk-back {
+  opacity: 1;
+}
+.book-item .item-img {
+  display: inline-block;
+  float: left;
+  padding-right: 30px;
+}
+.book-item .item-img img {
+  box-shadow: 0 0 0 0 transparent;
+  transition: all 250ms ease-out;
+}
+.book-item .item-details {
+  padding-right: 30px;
+}
+.book-item h3 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.book-item p:not(.author) {
+  display: block;
+  display: -webkit-box;
+  height: 63px;
+  /* Fallback for non-webkit */
+  font-size: 15px;
+  line-height: 1.4;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/*
+ *  Book Rotate
+*/
+.bk-img {
+  position: relative;
+  display: inline-block;
+  float: left;
+  padding-right: 30px;
+  list-style: none;
+  /* Individual style & artwork */
+}
+.bk-img .bk-wrapper {
+  position: relative;
+  width: 150px;
+  height: 215px;
+  float: left;
+  z-index: 1;
+  perspective: 1400px;
+}
+.bk-img .bk-wrapper:last-child {
+  margin-right: 0;
+}
+.bk-img .bk-book {
+  position: absolute;
+  width: 100%;
+  height: 215px;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+}
+.bk-img .bk-book > div,
+.bk-img .bk-front > div {
+  display: block;
+  position: absolute;
+}
+.bk-img .bk-front {
+  transform-style: preserve-3d;
+  transform-origin: 0% 50%;
+  transition: transform 0.5s;
+  transform: translate3d(0, 0, 20px);
+  z-index: 10;
+}
+.bk-img .bk-front > div {
+  z-index: 1;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  border-radius: 0 3px 3px 0;
+  box-shadow: inset 4px 0 10px rgba(0, 0, 0, 0.1);
+}
+.bk-img .bk-front:after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  bottom: 1px;
+  left: -1px;
+  width: 1px;
+}
+.bk-img .bk-front,
+.bk-img .bk-back,
+.bk-img .bk-front > div {
+  width: 150px;
+  height: 215px;
+}
+.bk-img .bk-left,
+.bk-img .bk-right {
+  width: 40px;
+  left: -20px;
+}
+.bk-img .bk-back {
+  transform: rotate3d(0, 1, 0, -180deg) translate3d(0, 0, 20px);
+  box-shadow: 5px 7px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 3px 0 0 3px;
+  opacity: 0;
+  transition: opacity 250ms ease-out;
+}
+.bk-img .bk-back:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10px;
+  bottom: 0;
+  width: 3px;
+  background: rgba(0, 0, 0, 0.06);
+  box-shadow: 1px 0 3px rgba(255, 255, 255, 0.1);
+}
+.bk-img .bk-left {
+  height: 215px;
+  transform: rotate3d(0, 1, 0, -90deg);
+}
+.bk-img .bk-left h2 {
+  width: 215px;
+  height: 40px;
+  transform-origin: 0 0;
+  transform: rotate(90deg) translateY(-40px);
+}
+.bk-img .bk-cover {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; 
+}
+.bk-img .bk-cover:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10px;
+  bottom: 0;
+  width: 3px;
+  background: rgba(0, 0, 0, 0.06);
+  box-shadow: 1px 0 3px rgba(255, 255, 255, 0.1);
+}
+.bk-img .bk-cover {
+  background-repeat: no-repeat;
+  background-position: top left !important;
+}
+.bk-img .bk-front > div,
+.bk-img .bk-left {
+  background-color: #219e9a;
+}
+
+/*
+ *  Lightbox
+*/
+.main-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  background-color: rgba(49, 49, 49, 0.65);
+}
+.main-overlay .overlay-full {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.main-overlay .overlay-details {
+  position: absolute;
+  display: block;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  max-width: 800px;
+  max-height: 480px;
+  padding: 40px;
+  overflow: hidden;
+  border-radius: 3px;
+  background-color: #fff;
+  box-shadow: 0px 2px 1px 2px rgba(0, 0, 0, 0.3);
+  transform: translate(-50%, -50%);
+}
+.main-overlay .overlay-image {
+  display: inline-block;
+  margin-right: 30px;
+  max-width: 275px;
+  vertical-align: top;
+}
+.main-overlay .overlay-image img {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+  box-shadow: -12px 12px 15px -5px rgba(0, 0, 0, 0.3);
+}
+.main-overlay .overlay-image .back-color {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 275px;
+  height: 100%;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  background-color: green;
+}
+.main-overlay .close-overlay-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 30px;
+  height: 30px;
+  opacity: 0.3;
+  text-indent: -9999px;
+  transition: opacity 250ms ease-out;
+}
+.main-overlay .close-overlay-btn:hover {
+  opacity: 1;
+}
+.main-overlay .close-overlay-btn:before {
+  content: " ";
+  position: absolute;
+  left: 15px;
+  width: 2px;
+  height: 33px;
+  background-color: #313131;
+}
+.main-overlay .close-overlay-btn:after {
+  content: " ";
+  position: absolute;
+  left: 15px;
+  width: 2px;
+  height: 33px;
+  background-color: #313131;
+}
+.main-overlay .close-overlay-btn:before {
+  transform: rotate(45deg);
+}
+.main-overlay .close-overlay-btn:after {
+  transform: rotate(-45deg);
+}
+.main-overlay .back-preview-btn {
+  position: absolute;
+  top: 7px;
+  left: -34px;
+  width: 30px;
+  height: 30px;
+  opacity: 0.3;
+  text-indent: -9999px;
+  transition: opacity 250ms ease-out;
+}
+.main-overlay .back-preview-btn:hover {
+  opacity: 1;
+}
+.main-overlay .back-preview-btn:before {
+  content: " ";
+  position: absolute;
+  left: 15px;
+  width: 2px;
+  height: 15px;
+  background-color: #313131;
+}
+.main-overlay .back-preview-btn:after {
+  content: " ";
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  width: 2px;
+  height: 15px;
+  background-color: #313131;
+}
+.main-overlay .back-preview-btn:before {
+  transform: rotate(45deg);
+}
+.main-overlay .back-preview-btn:after {
+  transform: rotate(-45deg);
+}
+.main-overlay .overlay-desc {
+  display: inline-block;
+  margin-top: -400px;
+  width: calc(100% - 320px);
+  vertical-align: top;
+  transition: all 500ms ease-out;
+}
+.main-overlay .overlay-desc.activated {
+  display: inline-block;
+  margin-top: 0;
+}
+.main-overlay .overlay-preview {
+  position: relative;
+  display: inline-block;
+  float: right;
+  margin-top: 40px;
+  width: calc(100% - 310px);
+  vertical-align: top;
+  transition: all 500ms ease-out;
+}
+.main-overlay .overlay-preview.activated {
+  margin-top: -430px;
+}
+.main-overlay .preview-content {
+  padding-right: 24px;
+  padding-top: 10px;
+  display: block;
+  display: -webkit-box;
+  height: 360px;
+  /* Fallback for non-webkit */
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-line-clamp: 16;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow: scroll;
+  text-overflow: clip;
+  font-weight: 400;
+}
+.main-overlay .preview-content h5,
+.main-overlay .preview-content p {
+  font-family: "Roboto Slab", serif;
+}
+.main-overlay .preview-content h5 {
+  font-weight: bold;
+}
+.main-overlay .preview-content p {
+  font-weight: normal;
+}
+.main-overlay .preview-content:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 40px;
+  width: 100%;
+  height: 30px;
+  background: rgba(255, 255, 255, 0);
+  background: linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 30%, white 80%);
+}
+.main-overlay .preview-content:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background: rgba(255, 255, 255, 0);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 30%, white 80%);
+}
+
+.overlay-details {
+  display: none;
+}
+
+/*
+ *  Footer
+*/
+#footer {
+  margin-top: 60px;
+  padding: 15px 0 20px;
+  border-top: 1px solid #fff;
+  background-color: rgba(49, 49, 49, 0.5);
+}
+#footer div,
+#footer a,
+#footer p {
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+}
+</style>
+
+<div id="main-container" class="main-container nav-effect-1" ng-app="booksApp" ng-controller="Ctrl">
+
+  <div class="main clearfix">
+
+    <!-- Main Section -->
+    <div class="page-container">
+      <div class="page-title category-title"></div>
+
+      <section id="book_list">
+        <div class="toolbar row">
+          <div class="filter-options small-12 medium-9 columns">
+            <a href="#" 
+               class="filter-item" 
+               ng-class="{active: filterGenre === 'all'}" 
+               ng-click="filterGenre = 'all'">All Categories</a>
+            <a href="#" 
+               class="filter-item" 
+               ng-class="{active: filterGenre === 'fantasy'}" 
+               ng-click="filterGenre = 'fantasy'">Fantasy</a>
+            <a href="#" 
+               class="filter-item" 
+               ng-class="{active: filterGenre === 'sci-fi'}" 
+               ng-click="filterGenre = 'sci-fi'">Sci-Fi</a>
+            <a href="#" 
+               class="filter-item" 
+               ng-class="{active: filterGenre === 'classic'}" 
+               ng-click="filterGenre = 'classic'">Classics</a>
+            <a href="#" 
+               class="filter-item" 
+               ng-class="{active: filterGenre === 'jazz'}" 
+               ng-click="filterGenre = 'jazz'">Jazz</a>
+            <a href="#" 
+               class="filter-item" 
+               ng-class="{active: filterGenre === 'young'}" 
+               ng-click="filterGenre = 'young'">Young Adult</a>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <select class="sort-options" ng-model="sortOption">
+              <option value="" disabled selected>Sort by</option>
+              <option value="title">Alphabetical</option>
+              <option value="-dateCreated">Published (Newest)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid-shuffle">
+          <ul id="grid" class="row">
+            <li class="book-item small-12 medium-6 columns" 
+                ng-repeat="sheet in repertoire | filter:genreFilter | orderBy:sortOption">
+              <div class="bk-img">
+                <div class="bk-wrapper"> 
+                  <div class="bk-book bk-bookdefault">
+                    <div class="bk-front">
+                      <div class="bk-cover" 
+                           style="background-image: url('{{sheet.cover}}')"></div>
+                    </div>
+                    <div class="bk-left"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="item-details">
+                <h3 class="book-item_title">{{sheet.title}}</h3>
+                <p class="author">por {{sheet.author}}</p>
+                <p>{{sheet.genre}} <br> Grado {{sheet.grade}}</p>
+                <button ng-click="openPDF(sheet.pdf)" class="btn">Abrir</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer Content -->
+  
+  </div>
+
+
+</div>
+
+
+<script>
+  angular.module('booksApp', [])
+.controller('Ctrl', ['$scope', function($scope) {
+  $scope.repertoire = [
+    {
+      title: "Sonatina in C No1 Op.39",
+      author: "Frank Lynes",
+      genre: "classic",
+      grade: 3,
+      dateCreated: 1937,
+      cover: "https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy",
+      pdf: "https://drive.google.com/file/d/1zL68S8gCtzoVRghNtZvQDcQiFSxd6fXq/view"
+    },
+    {
+      title: "Attitude!",
+      author: "Nicholas Scott Burt",
+      genre: "jazz",
+      grade: 3,
+      dateCreated: 2021,
+      cover: "https://lh3.googleusercontent.com/d/14BNhjijIP_cPD6GghFACNTIJzyek9Vzz",
+      pdf: "https://drive.google.com/file/d/14BNhjijIP_cPD6GghFACNTIJzyek9Vzz/view"
+    }
+    // Agrega más elementos aquí...
+  ];
+
+  $scope.filterGenre = 'all'; // Filtro inicial
+  $scope.sortOption = '';     // Sin orden inicial
+
+  $scope.genreFilter = function(sheet) {
+    if ($scope.filterGenre === 'all') {
+      return true;
+    }
+    return sheet.genre === $scope.filterGenre;
+  };
+
+  $scope.openPDF = function(url) {
+    window.open(url, '_blank');
+  };
+}]);
+
+</script>
