@@ -41,6 +41,17 @@
 .dashboard-panel .panel-header h4 i {color: #d8d8d8; }
 
 .dashboard-panel .panel-body {margin-top: 10px; height: 350px; border: 1px solid #d8d8d8; overflow-y: auto; }
+
+ .panel-body::-webkit-scrollbar {
+  width: 8px;
+}
+.panel-body::-webkit-scrollbar-track {
+  border-radius: 0;
+}
+.panel-body::-webkit-scrollbar-thumb {
+  background-color: rgba(131, 135, 193, 0.4);
+  border-radius: 40px;
+}
  
 /*-- Datos del usuario --*/
 .profile-user-data {padding: 10px 0;}
