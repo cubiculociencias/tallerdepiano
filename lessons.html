@@ -434,7 +434,11 @@ iframe#quiz {
 
 
 /* Cambia el diseño a vertical en pantallas amplias (médium y superiores) */
-@media (min-width: 600px) {
+@media (min-width: 990px) {
+   .mainContain{
+      display: flex;
+      flex-direction: row;
+    }
 
   .job-explain{
     margin-top: 20px;
@@ -462,14 +466,14 @@ iframe#quiz {
     ul.lvlmenu li.tab {
     display: flex;
   flex-direction: column;
-  width: 330px;
+  width: 260px;
   height: auto;
   flex-shrink: 0;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   transform: scale(0.9);
-      width: 100%;
+    /*  width: 100%; */
        text-transform: none;
   }
   
@@ -1397,8 +1401,8 @@ input[type="radio"]:checked + label.green-bg::after {
 
   <!-- End Header -->
   <!-- Tabs Nav Start -->    
-  <div class="row"> 
-       <div class="col s12 m4" ng-controller="lvlMenu">  
+  <div class="mainContain"> 
+       <div ng-controller="lvlMenu">  
    <div class="col s12" style="overflow-x: auto;">
   <ul class="tabs lvlmenu"  > 
       <li class="tab levelp"> 
@@ -1620,7 +1624,7 @@ input[type="radio"]:checked + label.green-bg::after {
     <!-- Tabs Nav End -->
 
      
-   <div class="col s12 m8">      
+   <div style="width: 100%; margin-right: 10px;">      
     <div id="test1" class="col s12" ng-controller="levelP">
   <!-- CSS Course Start -->
        
