@@ -545,43 +545,12 @@ body {
     <script id="profile.html" type="text/ng-template">
     <ion-view >
 
-   <ion-nav-bar class="bar-light" >      
-        <ion-nav-buttons side="left">
-  <!--  <button class="button button-clear" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif">
-      <img src="https://lh3.googleusercontent.com/d/1EP2I0BOMo_8mXsR9qqAv08PxjztZFaQ8" width="35" height="35" style="border-radius: 50%;" />
-       Mozart Academy
-    </button> -->
-       <button class="button button-clear" ng-click="toggleDropdown($event)" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif">
-      <img src="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V" width="35" height="35" style="border-radius: 50%;" />
-      Taller de Piano
-  <div style="position: absolute; bottom: -5px; left: 25px; width: 15px; height: 15px; background-color: #d3d3d3; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
-        <i class="icon ion-chevron-down" style="font-size: 8px; color: black; transform: scale(0.27);"></i>
-    </div>
+     <ion-nav-bar class="bar-light" >     
+       <ion-nav-buttons side="left">
+    <button class="button button-clear" ng-click="goToMain()">
+      <i class="ri-arrow-left-s-line"></i> regresar
     </button>
-  </ion-nav-buttons>
-       
-        <ion-nav-buttons side="right">
-          <button class="button button-clear" ng-click="toggleRight()">menu<i class="button button-icon ion-navicon"></i></button>
-        </ion-nav-buttons>   
-       
-        <div class="dropdownContent" ng-show="isDropdownVisible" ng-click="$event.stopPropagation()">
-     <div id="bannerRow">
-      <div class="profileImageContainer">
-        <img src="{{userData.photo}}"  />
-      </div>
-      <p class="profileName">{{userData.name}}</p>
-      <p class="profileEmail">{{userData.mail}}</p>
-    </div>
-    <div class="dropdown-item" ng-click="goToStatus()">
-      <i class="ion-ios-contact-outline"></i> Perfil
-    </div>
-    <div class="dropdown-item" ng-click="goToAgenda()">
-      <i class="ion-android-calendar"></i> Agenda
-    </div>
-    <div class="dropdown-item" >
-      <i class="ion-android-download"></i> Instalar App
-    </div>
-  </div>  
+  </ion-nav-buttons>  
     </ion-nav-bar>
       
       <ion-content > 
@@ -905,35 +874,8 @@ body {
 
      <ion-content>
        
-    <div class="list">
-  
-      <div class="item item-divider itemDividerforitem">Partituras</div>
-       <a class="item item-icon-left item-button-right" href="#/menu/manuals">
-           <i class="icon ri-book-2-fill"></i> Manuales
-          <p style="font-size: 10px;">Recopilación de los manuales que has completado</p> 
-        </a>
-     
-     <a class="item item-icon-left item-button-right" href="#/menu/repertoire">
-           <i class="icon ri-folder-music-fill"></i> Repertorio
-         <p style="font-size: 10px;">Recopilación de las piezas que has completado</p>  
-        </a>
+<div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/books" frameborder="0" allowfullscreen ></iframe></div> 
 
-        <a class="item item-icon-left item-button-right" href="#/menu/books">
-           <i class="icon ri-booklet-fill"></i> Libros complementarios
-         <p style="font-size: 10px;">Libros/métodos complementarios</p>  
-        </a>
-     
-     
- <!-- <div class="item item-divider itemDividerforitem">Historial</div>
-       <a class="item item-icon-left item-button-right" href="#/menu/diplomas">
-           <i class="icon ri-award-fill"></i> Diplomas
-          <p style="font-size: 10px;">Reconocimientos por terminar cada nivel</p> 
-        </a>
-      <a class="item item-icon-left item-button-right" href="#/menu/statistics">
-           <i class="icon ri-pie-chart-box-fill"></i> Estadísticas
-          <p style="font-size: 10px;">Métricas de tu desempeño</p> 
-        </a>     
-   </div>  -->
       </ion-content>
       
      
