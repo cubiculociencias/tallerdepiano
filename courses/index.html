@@ -1,624 +1,1592 @@
+<head>  
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<head>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.1/angular-materialize.min.js"></script>
+ <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>
-<link href="https://cdn.jsdelivr.net/npm/remixicon@3.7.0/fonts/remixicon.css" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
 </head>
-  
+
+
+
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
-* {
-  outline: none;
-  box-sizing: border-box;
-}
+ @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
 :root {
-  --body-bg-color: #e5ecef;
-  --theme-bg-color: #fafafb;
-  --body-font: "Poppins", sans-serif;
-  --body-color: #2f2f33;
-  --active-color: #0162ff;
-  --active-light-color: #e1ebfb;
-  --header-bg-color: #fff;
-  --search-border-color: #efefef;
-  --border-color: #d8d8d8;
-  --alert-bg-color: #e8f2ff;
-  --subtitle-color: #83838e;
-  --inactive-color: #f0f0f0;
-  --placeholder-color: #9b9ba5;
-  --time-button: #fc5757;
-  --level-button: #5052d5;
-  --button-color: #fff;
+  --bg-body: rgb(245, 247, 255);
+  --primary-color: rgb(42, 51, 65);
+  --primary-hover-color: rgb(158, 161, 166);
+  --scrollbar-color: rgba(131, 135, 193, 0.4);
+  --card-bg-color: rgba(230, 231, 247, 0.1);
+  --pop-bg-color: rgb(245, 247, 255, 0.9);
+  --star-color: #ddcc14;
+  --border-color: rgba(131, 135, 193, 0.4);
+  --shadow-color: rgba(0, 0, 0, 0.05);
+  --accent-color: rgb(194, 33, 105);
 }
 
-
-
-::-moz-placeholder {
-  color: var(--placeholder-color);
-}
-
-:-ms-input-placeholder {
-  color: var(--placeholder-color);
-}
-
-::placeholder {
-  color: var(--placeholder-color);
-}
-
-img {
-  max-width: 100%;
-}
-
-html {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+
+
+ul,
+ul li {
+  outline: 0;
+  list-style: none;
+}
+
+ul li a {
+  text-decoration: none;
+}
+
+
+
+h1 {
+  font-size: clamp(1rem, 4vw, 1.2rem) !important;
+  font-weight: 600 !important;
+}
+
+h2 {
+  font-size: clamp(0.9rem, 4vw, 1rem) !important;
+  font-weight: 600 !important;
 }
 
 body {
-  background-color: var(--body-bg-color);
-  font-family: var(--body-font);
-  font-size: 15px;
-  color: var(--body-color);
-}
-
-
-.job {
-  display: flex;
-  flex-direction: column;
-  max-width: 1400px;
-
-  margin: 0 auto;
+  position: relative;
+  background: var(--bg-body);
   overflow: hidden;
-  background-color: var(--theme-bg-color);
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  font-weight: 600;
-  font-size: 18px;
-  cursor: pointer;
-}
-.logo svg {
-  width: 24px;
-  margin-right: 12px;
-}
+/* MAIN MENU */
 
-
-
-.wrapper {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  scroll-behavior: smooth;
-  padding: 10px 40px;
-  overflow: auto;
-}
-
-.search-button {
-  background-color: var(--active-color);
-  height: 55px;
-  border: none;
-  font-weight: 600;
-  font-size: 14px;
-  padding: 0 15px;
-  border-radius: 0 8px 8px 0;
-  color: var(--button-color);
-  cursor: pointer;
-  margin-left: auto;
-}
-
-.search.item {
-  position: absolute;
-  top: 10px;
-  left: 25px;
-  font-size: 13px;
-  color: var(--active-color);
-  border: 1px solid var(--search-border-color);
-  padding: 8px 10px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-}
-.search.item svg {
-  width: 12px;
-  margin-left: 5px;
-}
-.search.item:last-child {
-  left: 185px;
-}
-
-.main-container {
-  display: flex;
-  flex-grow: 1;
-  padding-top: 30px;
-}
-
-.search-type {
-  width: 270px;
-  display: flex;
-  flex-direction: column;
+.main-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 180px;
   height: 100%;
-  flex-shrink: 0;
-}
-
-
-.search-buttons {
-  border: none;
-  color: var(--button-color);
-  background-color: var(--active-color);
-  padding: 8px 10px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  margin-top: 14px;
-}
-
-.job-wrapper {
-  padding-top: 20px;
-}
-
-.job-time {
-  padding-top: 20px;
-}
-.job-time-title {
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.type-container {
-  display: flex;
-  align-items: center;
-  color: var(--subtitle-color);
-  font-size: 13px;
-}
-.type-container label {
-  margin-left: 2px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-.type-container + .type-container {
-  margin-top: 10px;
-}
-
-.job-number {
-  margin-left: auto;
-  background-color: var(--inactive-color);
-  color: var(--subtitle-color);
-  font-size: 10px;
-  font-weight: 500;
-  padding: 5px;
-  border-radius: 4px;
-}
-
-.job-style {
-  display: none;
-}
-
-.job-style + label:before {
-  content: "";
-  margin-right: 10px;
-  width: 16px;
-  height: 16px;
-  border: 1px solid var(--subtitle-color);
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.job-style:checked + label:before {
-  background-color: var(--active-color);
-  border-color: var(--active-color);
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' class='feather feather-check'%3e%3cpath d='M20 6L9 17l-5-5'/%3e%3c/svg%3e");
-  background-position: 50%;
-  background-size: 14px;
-  background-repeat: no-repeat;
-}
-
-.job-style:checked + label + span {
-  background-color: var(--active-light-color);
-  color: var(--active-color);
-}
-
-.searched-jobs {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
-  padding-left: 40px;
-}
-
-@-webkit-keyframes slideY {
-  0% {
-    opacity: 0;
-    transform: translateY(200px);
-  }
-}
-
-@keyframes slideY {
-  0% {
-    opacity: 0;
-    transform: translateY(200px);
-  }
-}
-.searched-bar {
-  display: flex;
-  align-items: center;
   justify-content: space-between;
-  -webkit-animation: slideY 0.6s both;
-          animation: slideY 0.6s both;
-}
-.searched-show {
-  font-size: 19px;
-  font-weight: 600;
-}
-.searched-sort {
-  font-size: 14px;
-  color: var(--subtitle-color);
-}
-.searched-sort .post-time {
-  font-weight: 600;
-  color: var(--subtitle-color);
-}
-.searched-sort .menu-icon {
-  font-size: 9px;
-  color: var(--placeholder-color);
-  margin-left: 6px;
+  border-right: 1px solid var(--border-color);
+  padding: 12px 0 10px;
+  overflow: hidden;
+  font-family: inherit;
 }
 
-.job-cards {
-  padding-top: 20px;
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.user-info img {
+  max-width: 160px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 50%;
+  padding: 20px;
+}
+
+.user-info p {
+  color: var(--primary-color);
+  font-size: clamp(0.8rem, 3vw, 1rem);
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.3;
+  margin: -15px 0 30px;
+}
+
+
+/* CONTENT */
+
+.content {
+ 
+  min-height: 100vh;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-column-gap: 25px;
-  grid-row-gap: 25px;
-  -webkit-animation: slideY 0.6s both;
-          animation: slideY 0.6s both;
-}
-@media screen and (max-width: 1212px) {
-  .job-cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media screen and (max-width: 930px) {
-  .job-cards {
-    grid-template-columns: repeat(1, 1fr);
-  }
+  grid-template-columns: 75% 25%;
 }
 
-.job-card {
+.card {
   padding: 20px 16px;
-  background-color: var(--header-bg-color);
+  background-color: white;
   border-radius: 8px;
   cursor: pointer;
   transition: 0.2s;
     box-shadow:  0 4px 8px 0px rgba(0,0,0,0.2);
 }
-.job-card:hover {
-  transform: scale(1.02);
+  
+  .card:hover{
+    transform: scale(1.02)
+  }
+
+/* LEFT CONTENT */
+
+.left-content {
+  padding: 25px 20px 40px;
+  color: var(--primary-color);
+  height: 100vh;
+  overflow: auto;
 }
 
 
-.job-card svg {
-  width: 46px;
-  padding: 10px;
-  border-radius: 8px;
+
+
+/* HEADER */
+
+.header {
+  margin: 0 auto;
+  width: 100%;
 }
-.job-card-title {
-  font-weight: 600;
-  margin-top: 16px;
-  font-size: 14px;
+
+.header-mobile,
+.header-tablet {
+  display: none;
 }
-.job-card-subtitle {
-  color: var(--subtitle-color);
-  font-size: 13px;
-  margin-top: 14px;
-  line-height: 1.6em;
+
+.header-desktop {
+  display: block;
 }
-.job-card-header {
-  display: flex;
-  align-items: flex-start;
+
+/* UPCOMING EVENTS */
+
+.upcoming-events h1 {
+  margin: 16px 0 10px;
+}
+
+.event-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+  padding: 14px 0 20px;
+}
+
+.event-card {
+  display: grid;
+  grid-auto-flow: dense;
+  grid-template-rows: 2fr 0.8fr 0.5fr;
+  padding: 8px;
+}
+
+/* Event Header */
+
+.event-header {
+  position: relative;
+
+  margin-bottom: 2px;
+}
+
+.event-header img {
+  position: relative;
+  inset: 0;
+  width: 80px;
+  height: 80px;
+  margin-left: 15px; 
+  margin-top: 15px;
+  border-radius: 10px;
+
+  object-fit: cover;
+}
+
+.event-header p {
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  font-size: 0.8rem;
+  color: rgb(240, 248, 255);
+  background-color: rgba(17, 16, 45, 0.6);
+  padding: 4px 6px;
+  border-radius: 3px;
+  box-shadow: 0 8px 20px rgba(74, 72, 72, 0.1);
+}
+
+.bx-heart,
+.bxs-heart {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 1.4rem;
+  color: rgb(240, 248, 255);
+  background-color: rgba(17, 16, 45, 0.6);
+  padding: 4px;
+  border-radius: 50%;
+  box-shadow: 0 8px 20px rgba(74, 72, 72, 0.1);
 }
 
 
-.detail-button {
-  background-color: var(--active-light-color);
-  color: var(--active-color);
-  font-size: 11px;
-  font-weight: 500;
-  padding: 6px 8px;
-  border-radius: 4px;
-}
-.detail-button + .detail-button {
-  margin-left: 4px;
+/* Event Content */
+
+.event-content {
+  height: 70px;
+  display: grid;
+  grid-auto-flow: dense;
+  grid-template-rows: 2fr 1fr;
+  padding: 6px 6px 12px ;
 }
 
-.job-card-buttons {
+.event-content h2 {
+margin-top: -20px;
+  line-height: 1.3;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  @supports (-webkit-line-clamp: 2) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: initial;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}
+
+.event-content p {
+  font-size: clamp(0.8rem, 4vw, 0.9rem) !important;
+  opacity: 0.8;
+}
+
+/* Event Footer */
+
+.event-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  margin-top: 4px;
+  padding: 0 4px;
 }
 
-.card-buttons,
-.card-buttons-msg {
-  padding: 10px;
-  width: 100%;
-  font-size: 12px;
+.event-footer p {
+  color: rgb(240, 248, 255);
+  font-size: clamp(0.6rem, 3vw, 0.8rem);
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 6px 10px;
+  border-radius: 50px;
+}
+
+.btn-group {
+  display: inline-flex;
+}
+
+.event-footer button {
+  background-color: rgb(51, 108, 215);
+  color: rgb(240, 248, 255);
+  padding: 5px 10px;
+  outline: 0;
+  border: 2px solid rgb(51, 108, 215);
+  border-radius: 4px;
+  font-size: clamp(0.6rem, 3vw, 0.8rem);
+  font-weight: 500;
+  margin-left: 3px;
+  transition: all 0.4s ease-in-out;
   cursor: pointer;
 }
 
-.card-buttons {
-  margin-right: 12px;
-}
-.card-buttons-msg {
-  background-color: var(--inactive-color);
-  color: var(--subtitle-color);
+.event-footer button:hover {
+  background-color: rgb(90, 139, 231);
+  border: 2px solid rgb(151, 177, 226);
 }
 
-.menu-dot {
-  background-color: var(--placeholder-color);
-  box-shadow: -6px 0 0 0 var(--placeholder-color), 6px 0 0 0 var(--placeholder-color);
-  width: 4px;
-  height: 4px;
-  border: 0;
-  padding: 0;
+/* Share Button Popup */
+
+.share {
+  position: relative;
+}
+
+
+/* REVIEWS */
+
+.reviews h1 {
+  margin: 60px 0 20px;
+}
+
+.review-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.review-card {
+  padding: 20px;
+}
+
+.review-card h2 {
+  margin-bottom: 8px;
+}
+
+.review-card p {
+  margin-top: 10px;
+  line-height: 1.5;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  @supports (-webkit-line-clamp: 3) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: initial;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+}
+
+.ratings i {
+  color: var(--star-color);
+  font-size: 1.15rem;
+}
+
+/* RIGHT CONTENT */
+
+.right-content {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--border-color);
+  padding: 25px 20px;
+  color: var(--primary-color);
+  height: 100vh;
+  overflow: auto;
+}
+
+/* INTERACTION CONTROL */
+
+.interaction-control-mobile {
+  display: none;
+}
+
+.interaction-control {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.interactions {
+  justify-content: flex-end;
+  align-items: center;
+  gap: 25px;
+}
+
+.interactions i {
+  font-size: 1.25rem;
+  color: var(--primary-color);
+  user-select: none;
+}
+
+.notified {
+  position: relative;
+}
+
+.notified::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  right: -1px;
+  background-color: rgb(211, 17, 43);
+  width: 10px;
+  aspect-ratio: 1/1;
   border-radius: 50%;
+}
+
+.fa-envelope::after {
+  right: -4px;
+  background-color: rgb(48, 153, 36);
+}
+
+/* Light/Dark Mode */
+
+.mode-icon i {
+  color: var(--primary-color);
+  transform: translateY(2px);
+  transition: all 0.2s linear;
+  cursor: pointer;
+}
+
+.mode-icon i:hover {
+  color: var(--primary-hover-color);
+}
+
+.hidden {
+  display: none;
+}
+
+/* ANALYTICS */
+
+.analytics h1 {
+  margin-bottom: 24px;
+}
+
+/* Total Events */
+
+.total-events {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.event-number {
+  position: relative;
+  display: grid;
+  grid-auto-flow: dense;
+  grid-template-rows: 1fr 0.5fr;
+  width: 100%;
+  padding: 10px;
+}
+
+.event-number p {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: var(--accent-color);
+}
+
+.event-number i {
+  position: absolute;
+  right: 8px;
+  bottom: 6px;
+  font-size: 2.5rem;
+}
+
+/* Chart */
+
+.chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background: var(--card-bg-color);
+  border-radius: 8px;
+  border: 2px solid rgba(169, 150, 253, 0.5);
+  box-shadow: 0 7px 25px var(--shadow-color);
+  padding: 20px 15px;
+  margin: 20px 0;
+}
+
+.chart h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.chart ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  margin: 10px 0;
+}
+
+.chart ul li {
+  font-size: 0.8rem;
+  font-weight: 500;
+  background-color: var(--card-bg-color);
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
+  padding: 6px;
+  box-shadow: 0px 2px 3px 0px var(--shadow-color),
+    0px 1px 4px 0px var(--shadow-color), 0px 2px 1px -1px var(--shadow-color);
+}
+
+.chart .percentage {
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+/* CONTACTS */
+
+.contacts h1 {
+  margin: 20px 0;
+}
+
+.contact-status {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0;
+  border-bottom: 2px solid var(--border-color);
+  margin-bottom: 15px;
+}
+
+.contact-status:last-child {
+  border-bottom: unset;
+}
+
+.contact-activity {
+  display: flex;
+  align-items: center;
+  column-gap: 14px;
+}
+
+.contact-activity img {
+  max-width: 45px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.contact-activity i{
+  max-width: 45px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.contact-activity p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  padding-right: 10px;
+}
+
+.contact-activity p span {
+  font-weight: 700;
+  margin-left: 2px;
+}
+
+
+
+.contact-status small {
+  font-size: 0.8rem;
+  opacity: 0.5;
   margin-left: auto;
-  margin-right: 8px;
 }
 
-.header-shadow {
-  box-shadow: 0 4px 20px rgba(88, 99, 148, 0.17);
-  z-index: 1;
+/* SCROLLBAR STYLE */
+
+.left-content::-webkit-scrollbar,
+.right-content::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 8px;
 }
 
-@-webkit-keyframes slide {
-  0% {
-    opacity: 0;
-    transform: translateX(300px);
+.left-content::-webkit-scrollbar-track,
+.right-content::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  border-radius: 0;
+}
+
+.left-content::-webkit-scrollbar-thumb,
+.right-content::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-color);
+  border-radius: 40px;
+}
+
+/* MEDIA QUERIES */
+
+@media (max-width: 1500px) {
+  .main-menu {
+    width: 100px;
+  }
+
+  .user-info img {
+    padding: 12px;
+  }
+
+  .user-info p {
+    line-height: 1.1;
+    margin: -5px 0 30px;
+  }
+
+  .nav-icon {
+    text-align: center;
+    transform: translateY(2px);
+  }
+
+  .nav-text {
+    display: none;
+  }
+
+  .content {
+
+    grid-template-columns: 70% 30%;
   }
 }
 
-@keyframes slide {
-  0% {
-    opacity: 0;
-    transform: translateX(300px);
+@media (max-width: 1120px) {
+  .content {
+    grid-template-columns: 65% 35%;
+  }
+
+  .event-number i {
+    font-size: 2.2rem;
   }
 }
 
-
-#lesson-container{
-   width: 100%;
-    height: 100vh; 
-    position: relative;
-}
-
-#lesson-container iframe {
+@media (max-width: 1120px) {
+  .search-box input {
     width: 100%;
+  }
+
+  .search-box i {
+    right: 2%;
+  }
+}
+
+@media (max-width: 980px) {
+  .content {
+    grid-template-columns: 60% 40%;
+  }
+
+  .header-mobile,
+  .header-desktop {
+    display: none;
+  }
+
+  .header-tablet {
+    display: block;
+  }
+
+  .chart {
+    padding: 20px 10px;
+  }
+}
+
+@media (max-width: 840px) {
+  .content {
+    grid-template-columns: 55% 45%;
+  }
+
+  .event-number i {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 825px) {
+  .left-content {
+    padding: 25px 20px 20px;
+  }
+
+  .review-container {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  body {
+    overflow: auto;
+  }
+
+  .main-menu {
+    width: 70px;
+  }
+
+  .user-info img {
+    max-width: 80px;
+  }
+
+  .user-info p {
+    line-height: 1.1;
+    margin: -10px 0 30px;
+  }
+
+  .nav-item a {
+    padding: 8px 0;
+  }
+
+  .content {
+
+    grid-template-columns: 100%;
+    grid-template-areas:
+      "leftContent"
+      "rightContent";
+    overflow: auto;
+  }
+
+  .left-content {
+    grid-area: leftContent;
+    height: auto;
+    overflow: unset;
+  }
+
+  .header-mobile,
+  .header-tablet {
+    display: none;
+  }
+
+  .header-desktop {
+    display: block;
+  }
+
+  .review-container {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .right-content {
+    grid-area: rightContent;
+    border-left: unset;
+    height: auto;
+    overflow: unset;
+  }
+
+  .chart {
+    width: 50%;
+    margin: 20px auto;
+  }
+
+  .search-and-check {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 20px;
+  }
+
+  .search-box {
+    flex-grow: 1;
+  }
+
+  .interaction-control {
+    display: none;
+  }
+
+  .interaction-control-mobile {
+    display: inline-flex;
+  }
+
+  .interactions {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 650px) {
+  .chart {
+    width: 65%;
+  }
+}
+
+@media (max-width: 610px) {
+  .header-mobile,
+  .header-desktop {
+    display: none;
+  }
+
+  .header-tablet {
+    display: block;
+  }
+}
+
+@media (max-width: 550px) {
+  .user-info {
+    padding: 3px;
+  }
+
+  .header img {
+    aspect-ratio: 4/2;
     height: 100%;
-    border: none; /* Esto elimina el borde del iframe */
-    display: block; /* Esto elimina cualquier espacio extra */
-}
-
-@media screen and (max-width: 1300px) {
-  .detail-page .search-type {
-    display: none;
   }
-  .detail-page .searched-jobs {
-    padding-left: 0;
-  }
-   
-   .job-cards {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media screen and (max-width: 990px) {
-
-
-  .job-subtitle-wrapper {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  
-   .job-cards {
-    grid-template-columns: repeat(2, 1fr);
+ 
+  .chart {
+    width: 80%;
   }
 
-  .job-subtitle-wrapper .posted {
-    margin-left: 0;
-    margin-top: 6px;
+  .search-and-check {
+    gap: 20px;
+  }
+
+  .interactions {
+    gap: 10px;
+  }
+
+  .interactions i {
+    font-size: 1.1rem;
+  }
+
+  .mode-icon i {
+    font-size: 1.4rem;
   }
 }
 
-@media screen and (max-width: 760px) {
-  .detail-page .job-overview-cards {
+@media (max-width: 450px) {
+  .header-tablet,
+  .header-desktop {
     display: none;
   }
 
-  .user-name {
-    display: none;
-  }
-  
-
-  .user-profile {
-    margin-right: 0;
+  .header-mobile {
+    display: block;
   }
 
-  .job-explain {
-    margin-left: 0;
-  }
-}
-@media screen and (max-width: 730px) {
-  .search-type {
-    display: none;
+  .bx-heart,
+  .bxs-heart {
+    font-size: 1.2rem;
   }
 
-  .searched-jobs {
-    padding-left: 0;
+  .review-container {
+    gap: 20px;
   }
 
-  .search-menu div:not(:last-of-type) {
-    border: 0;
+  .search-box input {
+    height: 30px;
+    font-size: 0.8rem;
+    padding: 8px 30px 8px 10px;
   }
 
-  .job-cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .search-location {
-    display: none;
+  .search-box i {
+    top: 20%;
+    font-size: 1.1rem;
   }
 }
-@media screen and (max-width: 620px) {
-  .job-cards {
-    grid-template-columns: repeat(1, 1fr);
+
+@media (max-width: 400px) {
+  .main-menu {
+    width: 60px;
   }
 
+  .user-info {
+    padding: 0;
+  }
 
-}
+  .nav-icon {
+    font-size: 0.9rem;
+  }
 
-@media screen and (max-width: 520px) {
  
 
-  .searched-bar {
-    flex-direction: column;
-    align-items: flex-start;
+  .review-container {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   }
 
-  .searched-sort {
-    margin-top: 5px;
-  }
-
-  .main-container {
-    padding-top: 20px;
-  }
-}
-@media screen and (max-width: 380px) {
-  .explain-contents {
+  .chart {
     width: 100%;
-    margin: 0;
-  }
-
-  .explain-contents:nth-child(2) ~ .explain-contents {
-    margin: 0;
-    border: 0;
-  }
-
-  .wrapper {
-    padding: 20px;
-  }
-
-  .header {
-    padding: 0 20px;
   }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+/*-- Datos del usuario --*/
+
+.profile-user-data > * {float: left;}
+ .profile-user-data   .circle {
+    border-radius: 100% !important;
+    overflow: hidden; 
+    width: 95px;
+    height: 95px;
+   margin-top: 10px;
+   margin-right: 10px;
+}
+.profile-user-data img { margin-right: 10px; max-width: 100px;}
+.profile-user-data .main-data {padding: 10px 0 50px; margin-bottom: 15px; width: calc(100% - 115px); }
+.main-data h4{
+  font-size: 19px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.main-data .planTag{
+  color: #77777a; 
+  font-size: 12px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.main-data .userLvl{
+  margin-top: 1px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.profile-user-data .main-data h4 {margin: 0; font-size: 20px; font-weight: }
+.profile-user-data .main-data span {font-size: 12px;}
+
+
+.progress{
+
+  margin-top: 5px;
+  margin-bottom: -25px;
+}
+
+@media (max-width: 770px){
+  /*.analytics{
+    display: none;
+  }
+  .contacts{
+    display: none;
+  }*/
+  
+  .reviews{
+     display: none;
+  }
+  .header{
+    display: none;
+  }
+  .profile-user-data{
+    display: none;
+  }
+  .upcoming-events h1{
+    display: none;
+  }
+  .right-content{
+    margin-top: -40px;
+    background-color: rgb(245, 247, 255);
+  }
+  .event-footer{
+    margin-bottom: 7px;
+  }
+}
+
+
+ .custom-alert {
+            background-color: #FFF2CC; /* Fondo beige */
+            color: #333333; /* Texto oscuro */
+            padding: 30px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .custom-alert h1 {
+            font-size: clamp(1.5rem, 3vw, 2rem); /* Tamaño adaptable */
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .custom-alert p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .alert-image {
+            width: 100px; /* Ajusta el tamaño según el diseño */
+            margin-right: 20px;
+        }
+
+        .alert-button {
+            background-color: #357EDD; /* Azul del botón */
+            color: white;
+            border-radius: 6px;
+           font-size: 0.9rem;
+            padding: 8px 16px;
+            text-decoration: none;
+            font-weight: bold;
+         
+        }
+
+        .alert-button:hover {
+            background-color: #2b65b1;
+            color: white;
+          text-decoration: none;
+        }
+
+
+
+
+
+
+
+  .iframe-container {
+            position: relative;
+    display: none;
+            overflow: hidden;
+            max-width: 100%;
+            height: 1500px;
+    
+        }
+
+        /* Estilo para hacer el iframe responsivo */
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
 </style>
 
-<div class="job" ng-app="app" ng-controller="main">
+<body >
+  <div ng-app="studentsApp" ng-controller="Controller1" >  
 
-  
-  
-  
- <div class="wrapper">
+    <section class="content">
+      <div class="left-content">
+    
 
-  <div class="main-container" id="main-container">
+        <div class="header">
+         <div class="alert custom-alert" role="alert">
+    <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/697ef286-1104-4c6c-91d6-0b2a1e04009b" alt="Illustration" class="alert-image">
+    <div>
+        <h1>Power your business with Dashing Admin.</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem.</p>
+        <a href="#" class="alert-button">Take a Tour →</a> <br>
+    </div>
+</div>
+        </div>
 
-   <div class="searched-jobs">
-    <div class="searched-bar"> 
-     <div class="searched-show">Escoge un curso</div> 
-     <div class="searched-sort">Sort by: <span class="post-time">Newest Post </span><span class="menu-icon">▼</span></div>
-    </div> 
+        <div class="upcoming-events">
+          <h1>Cursos</h1>
+
+
+           <div class="iframe-container" id="lsnIframe"><iframe src="https://www.mozartacademy.mx/lessons" frameborder="0" allowfullscreen></iframe></div>
+
+
+           
+          <div class="event-container">
+
+
+
+
+
+            <div class="card event-card">
+              <div class="event-header">
+                <img
+                  src="https://lh3.googleusercontent.com/d/1hehOXFySwwgHSYm5ND5NInQoosAscMvx"
+                  alt="" />
+                <p>Progreso 50%</p>
+      
+              </div>
+              <div class="event-content">
+                <h2>Taller de Piano</h2>
+                <p>Skyline Amphitheater</p>
+              </div>
+              <div class="event-footer">
+                <p style="background-color: #e48e2c">Concert</p>
+                <div class="btn-group">
+                  <button onclick="openLesson()">Abrir</button>
+                  <div class="share">
+                    <button class="share-btn">
+                      <i class="fa-solid fa-share"></i>
+                    </button>
+                    <ul class="popup">
+                      <li>
+                        <a href="#" style="color: rgb(79, 153, 213)"
+                          ><i class="bx bxl-twitter"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="#" style="color: rgb(34, 173, 34)"
+                          ><i class="bx bxl-whatsapp"></i
+                        ></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card event-card">
+              <div class="event-header">
+                <img
+                  src="https://lh3.googleusercontent.com/d/1-A9oZ5hVHzA1WyhkUkIC4DnF1gYL1uto"
+                  alt="" />
+                <p>Progreso 20%</p>
+                <i class="bx bxs-heart like-btn"></i>
+              </div>
+              <div class="event-content">
+                <h2>Historia de la Música</h2>
+                <p>Dance Studio X</p>
+              </div>
+              <div class="event-footer">
+                <p style="background-color: #582bac">Workshop</p>
+                <div class="btn-group">
+                  <button>Buy Ticket</button>
+                  <div class="share">
+                    <button class="share-btn">
+                      <i class="fa-solid fa-share"></i>
+                    </button>
+                    <ul class="popup">
+                      <li>
+                        <a href="#" style="color: rgb(79, 153, 213)"
+                          ><i class="bx bxl-twitter"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="#" style="color: rgb(34, 173, 34)"
+                          ><i class="bx bxl-whatsapp"></i
+                        ></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card event-card">
+              <div class="event-header">
+                <img
+                  src="https://lh3.googleusercontent.com/d/1W2aGnwRwtbQ4NVLjw9RKjbtsSdR7wYQc"
+                  alt="" />
+                <p>Progreso: -</p>
+                <i class="bx bx-heart like-btn"></i>
+              </div>
+              <div class="event-content">
+                <h2>Solfeo</h2>
+                <p>Jazz Haven Lounge</p>
+              </div>
+              <div class="event-footer">
+                <p style="background-color: #e48e2c">Concert</p>
+                <div class="btn-group">
+                  <button>Buy Ticket</button>
+                  <div class="share">
+                    <button class="share-btn">
+                      <i class="fa-solid fa-share"></i>
+                    </button>
+                    <ul class="popup">
+                      <li>
+                        <a href="#" style="color: rgb(79, 153, 213)"
+                          ><i class="bx bxl-twitter"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="#" style="color: rgb(34, 173, 34)"
+                          ><i class="bx bxl-whatsapp"></i
+                        ></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card event-card">
+             <div class="job-card-header"> 
+       <img src="https://lh3.googleusercontent.com/d/1W2aGnwRwtbQ4NVLjw9RKjbtsSdR7wYQc" width="50" height="50" />
+       <div class="menu-dot"> 
+         <span class="price-box__dollar">Progreso: 50%</span>
+        </div>
+      </div>
+       <div class="event-content">
+                <h2>Solfeo</h2>
+                <p>Epoch Theater</p>
+              </div>
+              <div class="event-footer">
+                <p style="background-color: #b31a4d">Theatre</p>
+                <div class="btn-group">
+                  <button>Buy Ticket</button>
+                  <div class="share">
+                    <button class="share-btn">
+                      <i class="fa-solid fa-share"></i>
+                    </button>
+                    <ul class="popup">
+                      <li>
+                        <a href="#" style="color: rgb(79, 153, 213)"
+                          ><i class="bx bxl-twitter"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="#" style="color: rgb(34, 173, 34)"
+                          ><i class="bx bxl-whatsapp"></i
+                        ></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card event-card">
+              <div class="event-header">
+                <img
+                  src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/35bab020-129e-4858-9ce7-076f804fdcc5"
+                  alt="" />
+                <p>April 4, 8:30 PM</p>
+                <i class="bx bx-heart like-btn"></i>
+              </div>
+              <div class="event-content">
+                <h2>Timeless Tales Revived</h2>
+                <p>Epoch Theater</p>
+              </div>
+              <div class="event-footer">
+                <p style="background-color: #b31a4d">Theatre</p>
+                <div class="btn-group">
+                  <button>Buy Ticket</button>
+                  <div class="share">
+                    <button class="share-btn">
+                      <i class="fa-solid fa-share"></i>
+                    </button>
+                    <ul class="popup">
+                      <li>
+                        <a href="#" style="color: rgb(79, 153, 213)"
+                          ><i class="bx bxl-twitter"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="#" style="color: rgb(34, 173, 34)"
+                          ><i class="bx bxl-whatsapp"></i
+                        ></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card event-card">
+              <div class="event-header">
+                <img
+                  src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/13b71f3a-4fe3-4d95-8f83-1bd5722f5108"
+                  alt="" />
+                <p>April 5, 6:45 PM</p>
+                <i class="bx bx-heart like-btn"></i>
+              </div>
+              <div class="event-content">
+                <h2>Abstract Art Class</h2>
+                <p>Artistic Horizon Studio</p>
+              </div>
+              <div class="event-footer">
+                <p style="background-color: #582bac">Workshop</p>
+                <div class="btn-group">
+                  <button>Buy Ticket</button>
+                  <div class="share">
+                    <button class="share-btn">
+                      <i class="fa-solid fa-share"></i>
+                    </button>
+                    <ul class="popup">
+                      <li>
+                        <a href="#" style="color: rgb(79, 153, 213)"
+                          ><i class="bx bxl-twitter"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="#" style="color: rgb(34, 173, 34)"
+                          ><i class="bx bxl-whatsapp"></i
+                        ></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
      
- 
-    <div class="job-cards" >
-     <div class="job-card" ng-repeat="course in courses"> 
-      <div class="job-card-header"> 
-       <img ng-src="{{course.img}}" width="50" height="50" style="margin-right: 10px; border-radius: 10px;"/>
-       <div class="menu-dot"></div>
-      </div>
-      <div class="job-card-title">{{course.title}}</div> 
-      <div class="job-card-subtitle"> 
-       {{course.description}}
-      </div>
-      <div class="job-detail-buttons">
-       <button class="search-buttons detail-button">{{course.NoLsns}}</button>
-       <button class="search-buttons detail-button">{{course.time}}</button>
-       <button class="search-buttons detail-button">{{course.level}}</button>
-      </div>
-      <div class="job-card-buttons">
-       <button class="search-buttons card-buttons" id="openLsn" ng-click="openLesson(course)">Abrir</button>
-       <button class="search-buttons card-buttons-msg">Comprar</button>
-      </div>
-     </div>
 
-    </div> 
-    </div>
-    </div>
-   </div>
-  
+       
+          </div>
+        </div>
 
+        <div class="reviews">
+          <h1>Past Event Reviews</h1>
+          <div class="review-container">
+            <div class="card review-card">
+              <h2>Metal Sculpture Workshop</h2>
+              <div class="ratings">
+                <i class="bx bxs-star"></i>
+                <i class="bx bxs-star"></i>
+                <i class="bx bxs-star"></i>
+                <i class="bx bx-star"></i>
+                <i class="bx bx-star"></i>
+              </div>
+              <p>
+                The metal sculpture workshop was a bit tough because shaping the
+                metal was harder than expected. It would have been better with
+                simpler instructions on how to mold the material.
+              </p>
+            </div>
+
+            <div class="card review-card">
+              <h2>Electro Groove Night</h2>
+              <div class="ratings">
+                <i class="bx bxs-star"></i>
+                <i class="bx bxs-star"></i>
+                <i class="bx bxs-star"></i>
+                <i class="bx bxs-star"></i>
+                <i class="bx bxs-star-half"></i>
+              </div>
+              <p>
+                The Electro Groove Night was so much fun! The music was awesome,
+                and everyone had a great time dancing – a fantastic night out
+                for sure!
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="right-content">
   
-  </div>
+        
+        
+        
+
+<div class="profile-user-data clearfix">
+          <div class="circle">
+              <img class="profile-pic" src={{picture}}>
+          </div>
+   
+          <div class="main-data" style="margin-top: 12px;">
+            <h4 >{{userData.name}}</h4>
+             
+         
+        <div class="pull-left planTag" ng-if="userData.classtime !== ''" > PLAN ZOOM
+           <i class="ri-video-chat-fill" style="color: #0B5CFF"></i>  </div>
+       <div class="pull-left planTag" ng-if="userData.classtime === ''" > PLAN ASÍNCRONO
+            <i class="ri-mac-line"></i>  </div> 
+     
+       
+          <br>
+          <div class="userLvl">    {{userLevel}}  </div>
+             
+
+        <div class="progress">
+          <div class="progress-bar" style="background-color: {{userData.color}};" role="progressbar" aria-valuemin="0" aria-valuemax="100" ng-style="{width: userData.progress + '%'}" ng-init="startAnimation()"></div>
+        </div>
+
+          </div>  
+        </div>
+
+        
+      
+
+        
+
+             <div class="analytics">
+          <h1>Analytics</h1>
+          <div class="analytics-container">
+           <div class="total-events">
+              <div class="event-number card">
+                <h2>Manuales</h2>
+                <p>2</p>
+                <i class="bx bx-check-circle"></i>
+              </div>
+              <div class="event-number card">
+                <h2>Piezas</h2>
+                <p>3</p>
+                <i class="bx bx-timer"></i>
+              </div>
+            </div> 
+        
+          </div>
+        </div>
+
+
+        
+        <div class="contacts">
+          <h1>Eventos</h1>
+          <div class="contacts-container">
+            <div class="contact-status" ng-repeat="user in feed | limitTo:-6">
+              <div class="contact-activity">
+                <img src="{{user.img}}" />
+                <p>{{user.name}}{{getEvent(user.task)}} <br>
+                  <span style="color: {{lvlColor(user.lvl)}}"><i class='fa fa-trophy' ng-if="getEvent(user.task) == ' ha subido de nivel'"></i> {{user.task}} </span></p>
+              </div>
+              <small>hace 1 hora</small>
+            </div>
+          </div>
+        </div>
+        
+        
+        
+  </body>
+
+
 
 
 <script>
-  //$(document).ready(function() {
-//$('.search-box').focus();
-//});
-
-
-
-
-  //Angular Materialize
-var app = angular.module('app', []);
-
-
-app.controller('main', ["$scope", "$sce", "$http", function($scope, $sce, $http) {
-  // Datos de los cursos
-$scope.courses = [
-  {"img": "https://lh3.googleusercontent.com/d/1hehOXFySwwgHSYm5ND5NInQoosAscMvx", "bg": "https://lh3.googleusercontent.com/d/1rlF9FPo-cn93vx7NaYK6Z0LNogarJWk_", "title": "Taller de Piano", "description": "En este curso aprenderás los fundamentos de la lectura de partituras", "NoLsns": "12 lecciones", 
-    "time": "20 horas", "level": "Principiante", "url": "https://cubiculociencias.github.io/tallerdepiano/lessons"},{"img": "https://lh3.googleusercontent.com/d/1z3SvZ_B3VTvEgcCrW_Cscx1D1X5z8md6","bg": "https://lh3.googleusercontent.com/d/1KdPZwT1dWIfSYoP-BsXA9P1tUgapEx9L", "title": "Taller de Piano - Avanzado", "description": "En este curso aprenderás los fundamentos de armonía", "NoLsns": "9 lecciones", 
-    "time": "22 horas", "level": "Avanzado"},{"img": "https://lh3.googleusercontent.com/d/1B_IxvzjTkE-2F_WWsTkhHegGajrswoQr","bg": "", "title": "Solfeo", "description": "En este curso aprenderás los fundamentos de la lectura de partituras", "NoLsns": "12 lecciones", 
-    "time": "20 horas", "level": "principiante"},{"img": "https://lh3.googleusercontent.com/d/10OB7GYosbcANXqMyUxuiRkvZzIq_9Jvz", "title": "Lectura a primer vista", "description": "En este curso aprenderás los fundamentos de armonía", "NoLsns": "9 lecciones", 
-    "time": "22 horas", "level": "intermedio temprano"},{"img": "https://lh3.googleusercontent.com/d/1SFRiqJ5HL7-R6gJf6apLtMVNJJGnZYff", "bg": "https://lh3.googleusercontent.com/d/1BqTh4jdVtF83wfGea9Eimk0JtAZYxu-4", "title": "Historia de la música", "description": "En este curso aprenderás los fundamentos de armonía", "NoLsns": "9 lecciones", 
-    "time": "22 horas", "level": "intermedio temprano"},{"img": "https://lh3.googleusercontent.com/d/1k1WcmpMRCDYEjq0GC6Ed2vakvYjcu17X", "title": "Biografías de compositores", "description": "En este curso aprenderás los fundamentos de armonía", "NoLsns": "9 lecciones", 
-    "time": "22 horas", "level": "intermedio temprano"},{"img": "https://lh3.googleusercontent.com/d/1AP246MlVz0lKOQri6ly-ybwc4GgScGzf", "title": "Taller de Composición", "description": "En este curso aprenderás los fundamentos de armonía", "NoLsns": "9 lecciones", 
-    "time": "22 horas", "level": "intermedio temprano"}
-]
   
-  
-  $scope.openLesson = function(course) {
-    if(course.url){
-        window.location.href = course.url;
-    }
-   /* $scope.selectedItem = course.title;
-    $scope.selectedURL = course.url;
-    document.getElementById("lesson-container").style.display = "block"
-    document.getElementById("main-container").style.display = "none"
-    document.querySelector(".wrapper").style.display = "none";*/
+  angular.module('studentsApp', [])
+  .controller('Controller1', ['$http', '$scope', '$sce', '$timeout', '$interval', function($http, $scope, $sce, $timeout, $interval) {
+   $scope.userData = [];
+  $scope.userDataLoaded = false;
+  $scope.today = new Date()
 
-  
+   function getData(){
+  var requestData = { 
+    action: "getProfileData",
+    token: localStorage.getItem('TPtoken')
   };
 
+  var config = {
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    },
+    followRedirects: true, 
+  };
+ 
+      
+   
+  $http.post('https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec', requestData, config)
+    .then(function(response) { 
+      $scope.userData = response.data;
+      $scope.userDataLoaded = true;
+     $scope.userLevel = $scope.getLevel($scope.userData.lvl)
+      $scope.lsn = $scope.userData.lsn
+ $scope.history = $scope.userData.lessons
+      $scope.startAnimation = function() {
+        $('.progress-bar').animate({
+          width: $scope.userData.progress + '%'
+        }, 500); 
+      };
+    $scope.picture = $scope.userData.photo
+    })
+     
+     
+     
+     $scope.feed = [
+{"name": "Juan", "lvl": 0, "img": "https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V", "task": "Pieza 2: Oda a la alegria, var 2", "date": ""},
+{"name": "Juan", "lvl": 3, "img": "https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V", "task": "Oda a la alegria, var 2", "date": ""},
+{"name": "Juan", "lvl": 2, "img": "https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V", "task": "Nivel 2" , "date": ""},
+{"name": "Juan", "lvl": 0, "img": "https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V", "task": "Oda a la alegria, var 2", "date": ""},
+{"name": "Juan", "lvl": 0, "img": "https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V", "task": "Oda a la alegria, var 2", "date": ""},
+{"name": "Jose", "lvl": 1, "img": "https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V", "task": "Nivel 1", "date": ""},
+{"name": "Pedro", "lvl": 1, "img": "https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V", "task": "Oda a la alegria, var 2", "date": ""},
+{"name": "Mario", "lvl": 0, "img": "https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V", "task": "Oda a la alegria, var 2", "date": ""},
+]
+     
+
+$scope.lvlColor = function(lvl){
+  if(lvl == 0){
+    return "#F44336"
+  }else if(lvl == 1){
+    return "#9024dc"
+  }else if(lvl == 2){
+    return "#1894cc"
+  }else if(lvl == 3){
+    return "#489454"
+  }else if(lvl == 4){
+    return "#f0ac14"
+  }else if(lvl == 5){
+    return "#485cb4"
+  }else if(lvl == 6){
+    return "#08949c"
+  }
+}     
+     
+$scope.getEvent = function(task){
+  if(task.split(" ")[0] == "Nivel"){
+    return " ha subido de nivel"
+  }else{
+    return " ha entregado"
+  }
+}
+     
+    
+     $scope.getLevel = function(lvl){
+  if(lvl == 0){
+     return "Nivel Preparatorio"
+  }else{
+    return "Nivel "+lvl.toString()
+  }
+}
+    }
+    
+   getData()
+    
+     $scope.filterByLevel = function(entry) {
+    return entry.index <= $scope.lsn;
+};
+    
+    $scope.dateToString = function(fechaOriginal){
+  const partesFecha = fechaOriginal.split('/');
+  const fecha = new Date(partesFecha[2], partesFecha[1] - 1, partesFecha[0]);
+  const diasSemana = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+  const meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];  
+  const diaSemana = diasSemana[fecha.getDay()];
+  const dia = fecha.getDate();
+  const mes = meses[fecha.getMonth()];
+
+  return `${diaSemana} ${dia} de ${mes}`;
+}
+    
+    $scope.stringToDate = function(dateStr) {
+  const parts = dateStr.split('/');
+  var date = new Date(parts[2], parts[1] - 1, parts[0]);
+  date.setDate(date.getDate() + 1);
+  return date
+};
+
+      $interval(getData, 120000);
+    
+
+}]);
   
-  $scope.trustAsResourceUrl = function(url) {
-        return $sce.trustAsResourceUrl(url);
-    };
-
-}])
-
-
-</script>
 
 
 
  
+
+const navItems = document.querySelectorAll(".nav-item");
+
+navItems.forEach((navItem, i) => {
+  navItem.addEventListener("click", () => {
+    navItems.forEach((item, j) => {
+      item.className = "nav-item";
+    });
+    navItem.className = "nav-item active";
+  });
+});
+
+//! Light/Dark Mode
+
+const moonIcon = document.querySelector(".moon");
+const sunIcon = document.querySelector(".sun");
+const nightImage = document.querySelector(".night-img");
+const morningImage = document.querySelector(".morning-img");
+const toggle = document.querySelector(".toggle");
+
+function switchTheme() {
+  document.body.classList.toggle("darkmode");
+  if (document.body.classList.contains("darkmode")) {
+    sunIcon.classList.remove("hidden");
+    moonIcon.classList.add("hidden");
+    morningImage.classList.add("hidden");
+    nightImage.classList.remove("hidden");
+  } else {
+    sunIcon.classList.add("hidden");
+    moonIcon.classList.remove("hidden");
+    morningImage.classList.remove("hidden");
+    nightImage.classList.add("hidden");
+  }
+}
+
+//! Share Button Popup
+
+const sharebtns = document.querySelectorAll(".share-btn");
+
+sharebtns.forEach((btn) => {
+  btn.addEventListener("click", (event) => {
+    const popup = btn.closest(".event-footer").querySelector(".popup");
+
+    btn.classList.toggle("active");
+    popup.classList.toggle("active");
+
+    event.stopPropagation();
+  });
+});
+
+document.addEventListener("click", (event) => {
+  const popups = document.querySelectorAll(".popup");
+
+  popups.forEach((popup) => {
+    if (popup.classList.contains("active") && !popup.contains(event.target)) {
+      popup.classList.remove("active");
+
+      const shareBtn = popup
+        .closest(".event-footer")
+        .querySelector(".share-btn");
+      shareBtn.classList.remove("active");
+    }
+  });
+});
+
+//! Like Buttons
+
+const likeBtns = document.querySelectorAll(".like-btn");
+
+likeBtns.forEach((likeBtn) => {
+  likeBtn.addEventListener("click", () => {
+    if (likeBtn.classList.contains("bxs-heart")) {
+      likeBtn.classList.remove("bxs-heart");
+      likeBtn.classList.add("bx-heart");
+      likeBtn.classList.remove("bounce-in");
+    } else {
+      likeBtn.classList.add("bxs-heart");
+      likeBtn.classList.remove("bx-heart");
+      likeBtn.classList.add("bounce-in");
+    }
+  });
+});
+
+//! Chart JS
+
+
+  
+
+</script>
