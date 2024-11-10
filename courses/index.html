@@ -238,7 +238,7 @@ body {
 }
 
 .event-content h2 {
-margin-top: -20px;
+margin-top: -30px;
   line-height: 1.3;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -256,6 +256,7 @@ margin-top: -20px;
 
 .event-content p {
   font-size: clamp(0.8rem, 4vw, 0.9rem) !important;
+  margin-top: -10px;
   opacity: 0.8;
 }
 
@@ -288,9 +289,8 @@ margin-top: -20px;
   outline: 0;
   border: 2px solid rgb(51, 108, 215);
   border-radius: 4px;
-  font-size: clamp(0.6rem, 3vw, 0.8rem);
+  font-size: 16px;
   font-weight: 500;
-  margin-left: 3px;
   transition: all 0.4s ease-in-out;
   cursor: pointer;
 }
@@ -981,6 +981,25 @@ body::-webkit-scrollbar-thumb {
 
 
 
+
+
+
+
+  .iframe-container {
+            position: relative;
+    display: none;
+            overflow: hidden;
+            max-width: 100%;
+            height: 1500px;
+    
+        }
+
+        /* Estilo para hacer el iframe responsivo */
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
 </style>
 
 <body >
@@ -991,21 +1010,30 @@ body::-webkit-scrollbar-thumb {
     
 
         <div class="header">
-         <div class="alert custom-alert" role="alert">
-    <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/697ef286-1104-4c6c-91d6-0b2a1e04009b" alt="Illustration" class="alert-image">
+         <div class="alert custom-alert" role="alert" ng-if="userData.status == 'ACTIVO'">
+    <img src="https://lh3.googleusercontent.com/d/1KfDR_uzcyYuEmZ0eYHwzgt--c1rYNLz6" class="alert-image">
     <div>
-        <h1>Power your business with Dashing Admin.</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem.</p>
-        <a href="#" class="alert-button">Take a Tour →</a> <br>
+        <h1>Bienvenido {{nameShort}}!</h1>
+        <p>Es hora de sacar brillo a ese piano <i class="ri-hand-heart-line"></i>.</p>
+   
     </div>
 </div>
+           
+    <div class="alert custom-alert" role="alert" ng-if="userData.status != 'ACTIVO' && userDataLoaded">
+    <img src="https://lh3.googleusercontent.com/d/1p5SQfC_8hNK_1O_jKzaepAlYyL6QG5nD" class="alert-image">
+    <div>
+        <h1>Busca tu plan ideal.</h1>
+        <p>Conoce más sobre nuestros planes de trabajo y escoge el ideal para ti.</p>
+        <a href="#" class="alert-button">información →</a> <br>
+    </div>
+</div>          
         </div>
 
         <div class="upcoming-events">
-          <h1>Cursos</h1>
+          <h1>Asignaturas</h1>
 
 
-      
+           <div class="iframe-container" id="lsnIframe"><iframe src="https://www.mozartacademy.mx/lessons" frameborder="0" allowfullscreen></iframe></div>
 
 
            
@@ -1020,18 +1048,20 @@ body::-webkit-scrollbar-thumb {
                 <img
                   src="https://lh3.googleusercontent.com/d/1hehOXFySwwgHSYm5ND5NInQoosAscMvx"
                   alt="" />
-                <p>Progreso 50%</p>
+                <p>Progreso: {{totalProgress}} %</p>
       
               </div>
               <div class="event-content">
                 <h2>Taller de Piano</h2>
-                <p>Skyline Amphitheater</p>
+                <p>Aprende los fundamentos teóricos y técnicos de una correcta ejecución.</p>
               </div>
               <div class="event-footer">
-                <p style="background-color: #e48e2c">Concert</p>
+ <p style="background-color: green">Activo</p>                
+     <!--        <p style="background-color: green" ng-if="userData.status == 'ACTIVO'">Activo</p> 
+   <p style="background-color: orange" ng-if="userData.status != 'ACTIVO'">Pendiente</p> -->               
                 <div class="btn-group">
-                  <button onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/tab/practice';">Abrir</button>
-                  <div class="share">
+                  <button onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/tab/practice';" >&nbsp&nbspAbrir&nbsp&nbsp</button>
+           <!--       <div class="share">
                     <button class="share-btn">
                       <i class="fa-solid fa-share"></i>
                     </button>
@@ -1047,194 +1077,105 @@ body::-webkit-scrollbar-thumb {
                         ></a>
                       </li>
                     </ul>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
 
+
+             <div class="card event-card">
+              <div class="event-header">
+                <img src="https://lh3.googleusercontent.com/d/1B_IxvzjTkE-2F_WWsTkhHegGajrswoQr" />
+                <i class="bx bxs-heart ri-lock-2-fill like-btn"></i>
+              </div>
+              <div class="event-content">
+                <h2>Solfeo</h2>
+                <p >Identifica notación musical y entrena tu oido.</p>
+              </div>
+               <div class="event-footer">
+             <p style="background-color: silver">Próximamente</p> 
+           </div>
+            </div>
+
+             <div class="card event-card">
+              <div class="event-header">
+                <img src="https://lh3.googleusercontent.com/d/1sqfN5814Keycr5rVtqHDWgkgZXK146hF" />
+                <i class="bx bxs-heart ri-lock-2-fill like-btn"></i>
+              </div>
+              <div class="event-content">
+                <h2>Armonía</h2>
+                <p >Comprende el lenguaje musical tonal en su totalidad.</p>
+              </div>
+               <div class="event-footer">
+             <p style="background-color: silver">Próximamente</p> 
+           </div>
+            </div>
+
+
+             <div class="card event-card">
+              <div class="event-header">
+                <img src="https://lh3.googleusercontent.com/d/10OB7GYosbcANXqMyUxuiRkvZzIq_9Jvz" />
+                <i class="bx bxs-heart ri-lock-2-fill like-btn"></i>
+              </div>
+              <div class="event-content">
+                <h2>Lectura a primer vista</h2>
+                <p >Desarrolla la lectura fluida de partituras.</p>
+              </div>
+               <div class="event-footer">
+             <p style="background-color: silver">Próximamente</p> 
+           </div>
+            </div>
+
+
+
+
+              <div class="card event-card">
+              <div class="event-header">
+                <img src="https://lh3.googleusercontent.com/d/1qBSPqmPqcnh7W0Z7EGvIrml9XvvfLuoW" />
+                <i class="bx bxs-heart ri-lock-2-fill like-btn"></i>
+              </div>
+              <div class="event-content">
+                <h2>Biografías</h2>
+                <p >Conoce la vida y las obras de los músicos más influyentes de la historia.</p>
+              </div>
+               <div class="event-footer">
+             <p style="background-color: silver">Próximamente</p> 
+           </div>
+            </div>
+
+
             <div class="card event-card">
               <div class="event-header">
-                <img
-                  src="https://lh3.googleusercontent.com/d/1-A9oZ5hVHzA1WyhkUkIC4DnF1gYL1uto"
-                  alt="" />
-                <p>Progreso 20%</p>
-                <i class="bx bxs-heart like-btn"></i>
+                <img src="https://lh3.googleusercontent.com/d/1-A9oZ5hVHzA1WyhkUkIC4DnF1gYL1uto" />
+                <i class="bx bxs-heart ri-lock-2-fill like-btn"></i>
               </div>
               <div class="event-content">
                 <h2>Historia de la Música</h2>
-                <p>Dance Studio X</p>
+                <p >Explora la evolución de la música a través de los siglos.</p>
               </div>
-              <div class="event-footer">
-                <p style="background-color: #582bac">Workshop</p>
-                <div class="btn-group">
-                  <button>Buy Ticket</button>
-                  <div class="share">
-                    <button class="share-btn">
-                      <i class="fa-solid fa-share"></i>
-                    </button>
-                    <ul class="popup">
-                      <li>
-                        <a href="#" style="color: rgb(79, 153, 213)"
-                          ><i class="bx bxl-twitter"></i
-                        ></a>
-                      </li>
-                      <li>
-                        <a href="#" style="color: rgb(34, 173, 34)"
-                          ><i class="bx bxl-whatsapp"></i
-                        ></a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+               <div class="event-footer">
+             <p style="background-color: silver">Próximamente</p> 
+           </div>
             </div>
 
-            <div class="card event-card">
+
+             <div class="card event-card">
               <div class="event-header">
-                <img
-                  src="https://lh3.googleusercontent.com/d/1W2aGnwRwtbQ4NVLjw9RKjbtsSdR7wYQc"
-                  alt="" />
-                <p>Progreso: -</p>
-                <i class="bx bx-heart like-btn"></i>
+                <img src="https://lh3.googleusercontent.com/d/1z3SvZ_B3VTvEgcCrW_Cscx1D1X5z8md6" />
+                <i class="bx bxs-heart ri-lock-2-fill like-btn"></i>
               </div>
               <div class="event-content">
-                <h2>Solfeo</h2>
-                <p>Jazz Haven Lounge</p>
+                <h2>Técnica de Piano Avanzada</h2>
+                <p >Desarrolla destreza motriz avanzada en el piano.</p>
               </div>
-              <div class="event-footer">
-                <p style="background-color: #e48e2c">Concert</p>
-                <div class="btn-group">
-                  <button>Buy Ticket</button>
-                  <div class="share">
-                    <button class="share-btn">
-                      <i class="fa-solid fa-share"></i>
-                    </button>
-                    <ul class="popup">
-                      <li>
-                        <a href="#" style="color: rgb(79, 153, 213)"
-                          ><i class="bx bxl-twitter"></i
-                        ></a>
-                      </li>
-                      <li>
-                        <a href="#" style="color: rgb(34, 173, 34)"
-                          ><i class="bx bxl-whatsapp"></i
-                        ></a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+               <div class="event-footer">
+             <p style="background-color: silver">Próximamente</p> 
+           </div>
             </div>
 
-            <div class="card event-card">
-             <div class="job-card-header"> 
-       <img src="https://lh3.googleusercontent.com/d/1W2aGnwRwtbQ4NVLjw9RKjbtsSdR7wYQc" width="50" height="50" />
-       <div class="menu-dot"> 
-         <span class="price-box__dollar">Progreso: 50%</span>
-        </div>
-      </div>
-       <div class="event-content">
-                <h2>Solfeo</h2>
-                <p>Epoch Theater</p>
-              </div>
-              <div class="event-footer">
-                <p style="background-color: #b31a4d">Theatre</p>
-                <div class="btn-group">
-                  <button>Buy Ticket</button>
-                  <div class="share">
-                    <button class="share-btn">
-                      <i class="fa-solid fa-share"></i>
-                    </button>
-                    <ul class="popup">
-                      <li>
-                        <a href="#" style="color: rgb(79, 153, 213)"
-                          ><i class="bx bxl-twitter"></i
-                        ></a>
-                      </li>
-                      <li>
-                        <a href="#" style="color: rgb(34, 173, 34)"
-                          ><i class="bx bxl-whatsapp"></i
-                        ></a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <div class="card event-card">
-              <div class="event-header">
-                <img
-                  src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/35bab020-129e-4858-9ce7-076f804fdcc5"
-                  alt="" />
-                <p>April 4, 8:30 PM</p>
-                <i class="bx bx-heart like-btn"></i>
-              </div>
-              <div class="event-content">
-                <h2>Timeless Tales Revived</h2>
-                <p>Epoch Theater</p>
-              </div>
-              <div class="event-footer">
-                <p style="background-color: #b31a4d">Theatre</p>
-                <div class="btn-group">
-                  <button>Buy Ticket</button>
-                  <div class="share">
-                    <button class="share-btn">
-                      <i class="fa-solid fa-share"></i>
-                    </button>
-                    <ul class="popup">
-                      <li>
-                        <a href="#" style="color: rgb(79, 153, 213)"
-                          ><i class="bx bxl-twitter"></i
-                        ></a>
-                      </li>
-                      <li>
-                        <a href="#" style="color: rgb(34, 173, 34)"
-                          ><i class="bx bxl-whatsapp"></i
-                        ></a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <div class="card event-card">
-              <div class="event-header">
-                <img
-                  src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/13b71f3a-4fe3-4d95-8f83-1bd5722f5108"
-                  alt="" />
-                <p>April 5, 6:45 PM</p>
-                <i class="bx bx-heart like-btn"></i>
-              </div>
-              <div class="event-content">
-                <h2>Abstract Art Class</h2>
-                <p>Artistic Horizon Studio</p>
-              </div>
-              <div class="event-footer">
-                <p style="background-color: #582bac">Workshop</p>
-                <div class="btn-group">
-                  <button>Buy Ticket</button>
-                  <div class="share">
-                    <button class="share-btn">
-                      <i class="fa-solid fa-share"></i>
-                    </button>
-                    <ul class="popup">
-                      <li>
-                        <a href="#" style="color: rgb(79, 153, 213)"
-                          ><i class="bx bxl-twitter"></i
-                        ></a>
-                      </li>
-                      <li>
-                        <a href="#" style="color: rgb(34, 173, 34)"
-                          ><i class="bx bxl-whatsapp"></i
-                        ></a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
+ 
 
      
 
@@ -1243,26 +1184,12 @@ body::-webkit-scrollbar-thumb {
         </div>
 
         <div class="reviews">
-          <h1>Past Event Reviews</h1>
+          <h1>Próximos eventos</h1>
           <div class="review-container">
-            <div class="card review-card">
-              <h2>Metal Sculpture Workshop</h2>
-              <div class="ratings">
-                <i class="bx bxs-star"></i>
-                <i class="bx bxs-star"></i>
-                <i class="bx bxs-star"></i>
-                <i class="bx bx-star"></i>
-                <i class="bx bx-star"></i>
-              </div>
-              <p>
-                The metal sculpture workshop was a bit tough because shaping the
-                metal was harder than expected. It would have been better with
-                simpler instructions on how to mold the material.
-              </p>
-            </div>
+           
 
             <div class="card review-card">
-              <h2>Electro Groove Night</h2>
+              <h2>Recital de fin de año</h2>
               <div class="ratings">
                 <i class="bx bxs-star"></i>
                 <i class="bx bxs-star"></i>
@@ -1271,9 +1198,21 @@ body::-webkit-scrollbar-thumb {
                 <i class="bx bxs-star-half"></i>
               </div>
               <p>
-                The Electro Groove Night was so much fun! The music was awesome,
-                and everyone had a great time dancing – a fantastic night out
-                for sure!
+                Te invitamos a participar en nuestro próximo recital de fin de año programado para mitades de Diciembre del 2024. 
+              </p>
+            </div>
+
+             <div class="card review-card">
+              <h2>Periodo de vacaciones</h2>
+              <div class="ratings">
+                <i class="bx bxs-star"></i>
+                <i class="bx bxs-star"></i>
+                <i class="bx bxs-star"></i>
+                <i class="bx bx-star"></i>
+                <i class="bx bx-star"></i>
+              </div>
+              <p>
+                Tendremos un breve periodo de vacaciones a partir del 24 de Diciembre al 1 de Enero.
               </p>
             </div>
 
@@ -1340,7 +1279,7 @@ body::-webkit-scrollbar-thumb {
 
         
         <div class="contacts">
-          <h1>Eventos</h1>
+          <h1>Logros</h1>
           <div class="contacts-container">
             <div class="contact-status" ng-repeat="user in feed | limitTo:-6">
               <div class="contact-activity">
@@ -1388,13 +1327,15 @@ body::-webkit-scrollbar-thumb {
       $scope.userData = response.data;
       $scope.userDataLoaded = true;
      $scope.userLevel = $scope.getLevel($scope.userData.lvl)
-      $scope.lsn = $scope.userData.lsn
- $scope.history = $scope.userData.lessons
+   /*   $scope.lsn = $scope.userData.lsn*/
+    $scope.totalProgress = parseFloat(($scope.userData.progress / 4).toFixed(1));
+    $scope.nameShort = $scope.userData.name.split(" ")[0]
+ /*$scope.history = $scope.userData.lessons
       $scope.startAnimation = function() {
         $('.progress-bar').animate({
           width: $scope.userData.progress + '%'
         }, 500); 
-      };
+      };*/
     $scope.picture = $scope.userData.photo
     })
      
