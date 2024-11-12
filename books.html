@@ -6,10 +6,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Shuffle/4.0.0/shuffle.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
 
-
-
 <style>
-  
+ 
 @import url(https://fonts.googleapis.com/css?family=Lato:400,300,700,900);
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,700);
 
@@ -18,7 +16,7 @@
 body {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #313131;
-  background: #f2f4f7;
+  background: #ecf0f1;
 }
 
 body::-webkit-scrollbar {
@@ -282,24 +280,8 @@ p.author {
   list-style: none;
   /* Individual style & artwork */
 }
-.bk-img .bk-wrapper {
-  position: relative;
-  width: 150px;
-  height: 215px;
-  float: left;
-  z-index: 1;
-  perspective: 1400px;
-}
-.bk-img .bk-wrapper:last-child {
-  margin-right: 0;
-}
-.bk-img .bk-book {
-  position: absolute;
-  width: 100%;
-  height: 215px;
-  transform-style: preserve-3d;
-  transition: transform 0.5s;
-}
+
+
 .bk-img .bk-book > div,
 .bk-img .bk-front > div {
   display: block;
@@ -334,38 +316,8 @@ p.author {
   width: 150px;
   height: 215px;
 }
-.bk-img .bk-left,
-.bk-img .bk-right {
-  width: 40px;
-  left: -20px;
-}
-.bk-img .bk-back {
-  transform: rotate3d(0, 1, 0, -180deg) translate3d(0, 0, 20px);
-  box-shadow: 5px 7px 15px rgba(0, 0, 0, 0.3);
-  border-radius: 3px 0 0 3px;
-  opacity: 0;
-  transition: opacity 250ms ease-out;
-}
-.bk-img .bk-back:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 10px;
-  bottom: 0;
-  width: 3px;
-  background: rgba(0, 0, 0, 0.06);
-  box-shadow: 1px 0 3px rgba(255, 255, 255, 0.1);
-}
-.bk-img .bk-left {
-  height: 215px;
-  transform: rotate3d(0, 1, 0, -90deg);
-}
-.bk-img .bk-left h2 {
-  width: 215px;
-  height: 40px;
-  transform-origin: 0 0;
-  transform: rotate(90deg) translateY(-40px);
-}
+
+
 .bk-img .bk-cover {
   background-repeat: no-repeat;
   background-position: center;
@@ -385,10 +337,7 @@ p.author {
   background-repeat: no-repeat;
   background-position: top left !important;
 }
-.bk-img .bk-front > div,
-.bk-img .bk-left {
-  background-color: #219e9a;
-}
+
 
 /*
  *  Lightbox
@@ -611,6 +560,8 @@ p.author {
 }
 </style>
 
+
+
 <div id="main-container" class="main-container nav-effect-1" ng-app="booksApp" ng-controller="Ctrl">
 
   <div class="main clearfix">
@@ -625,60 +576,82 @@ p.author {
             <a href="#" 
                class="filter-item" 
                ng-class="{active: filterGenre === 'all'}" 
-               ng-click="filterGenre = 'all'">All Categories</a>
+               ng-click="filterGenre = 'all'">Todos</a>
             <a href="#" 
                class="filter-item" 
-               ng-class="{active: filterGenre === 'fantasy'}" 
-               ng-click="filterGenre = 'fantasy'">Fantasy</a>
+               ng-class="{active: filterGenre === 'manual'}" 
+               ng-click="filterGenre = 'manual'">Manuales</a>
             <a href="#" 
                class="filter-item" 
-               ng-class="{active: filterGenre === 'sci-fi'}" 
-               ng-click="filterGenre = 'sci-fi'">Sci-Fi</a>
+               ng-class="{active: filterGenre === 'sheet'}" 
+               ng-click="filterGenre = 'sheet'">Piezas</a>
             <a href="#" 
                class="filter-item" 
-               ng-class="{active: filterGenre === 'classic'}" 
-               ng-click="filterGenre = 'classic'">Classics</a>
-            <a href="#" 
-               class="filter-item" 
-               ng-class="{active: filterGenre === 'jazz'}" 
-               ng-click="filterGenre = 'jazz'">Jazz</a>
-            <a href="#" 
-               class="filter-item" 
-               ng-class="{active: filterGenre === 'young'}" 
-               ng-click="filterGenre = 'young'">Young Adult</a>
+               ng-class="{active: filterGenre === 'repertoire'}" 
+               ng-click="filterGenre = 'repertoire'">Piezas finales</a>
+           
           </div>
 
           <div class="small-12 medium-3 columns">
             <select class="sort-options" ng-model="sortOption">
-              <option value="" disabled selected>Sort by</option>
-              <option value="title">Alphabetical</option>
-              <option value="-dateCreated">Published (Newest)</option>
+              <option value="" disabled selected>Ordenar por</option>
+              <option value="title">Alfabético</option>
+              <option value="-dateCreated">Más reciente</option>
             </select>
           </div>
         </div>
-
         <div class="grid-shuffle">
           <ul id="grid" class="row">
             <li class="book-item small-12 medium-6 columns" 
                 ng-repeat="sheet in repertoire | filter:genreFilter | orderBy:sortOption">
               <div class="bk-img">
-                <div class="bk-wrapper"> 
-                  <div class="bk-book bk-bookdefault">
+
                     <div class="bk-front">
                       <div class="bk-cover" 
-                           style="background-image: url('{{sheet.cover}}')"></div>
+                           style="background-image: url('{{sheet.background}}')"></div>
                     </div>
-                    <div class="bk-left"></div>
-                  </div>
-                </div>
               </div>
               <div class="item-details">
                 <h3 class="book-item_title">{{sheet.title}}</h3>
                 <p class="author">por {{sheet.author}}</p>
-                <p>{{sheet.genre}} <br> Grado {{sheet.grade}}</p>
-                <button ng-click="openPDF(sheet.pdf)" class="btn">Abrir</button>
+                <p> Grado {{sheet.lvl}}<br> {{sheet.style}}  </p>
+                <button ng-click="openPDF(sheet.url)" class="btn">Abrir</button>
+              </div>
+            </li> 
+            <li class="book-item small-12 medium-6 columns" ng-repeat="sheet in antology | filter:genreFilter | orderBy:sortOption" ng-if="lvl > sheet.lvl || (sheet.lvl == lvl && sheet.lsn <= lsn)">
+              <div class="bk-img">
+            
+                    <div class="bk-front">
+                      <div class="bk-cover" 
+                           style="background-image: url('{{sheet.background}}')"></div>
+                    </div>
+          
+              </div>
+              <div class="item-details">
+                <h3 class="book-item_title">{{sheet.title}}</h3>
+                <p class="author">por {{sheet.author}}</p>
+                <p>Grado {{sheet.lvl}} </p>
+                <button ng-click="openPDF(sheet.url)" class="btn">Abrir</button>
               </div>
             </li>
+              <li class="book-item small-12 medium-6 columns" ng-repeat="manual in manuals | filter:genreFilter | orderBy:sortOption" ng-if="lvl > manual.lvl || (manual.lvl == lvl && manual.blq <= blq)">
+              <div class="bk-img">
+            
+                    <div class="bk-front">
+                      <div class="bk-cover" 
+                           style="background-image: url('{{manual.background}}')"></div>
+                    </div>
+          
+              </div>
+              <div class="item-details">
+                <h3 class="book-item_title">{{manual.title}}</h3>
+                <p class="author">Grado {{manual.lvl}}</p>
+                <p>Bloque {{manual.blq}} </p>
+                <button ng-click="openPDF(manual.url)" class="btn">Abrir</button>
+              </div>
+            </li>
+            
+            
           </ul>
         </div>
       </section>
@@ -693,29 +666,59 @@ p.author {
 
 
 <script>
-  angular.module('booksApp', [])
-.controller('Ctrl', ['$scope', function($scope) {
-  $scope.repertoire = [
-    {
-      title: "Sonatina in C No1 Op.39",
-      author: "Frank Lynes",
-      genre: "classic",
-      grade: 3,
-      dateCreated: 1937,
-      cover: "https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy",
-      pdf: "https://drive.google.com/file/d/1zL68S8gCtzoVRghNtZvQDcQiFSxd6fXq/view"
-    },
-    {
-      title: "Attitude!",
-      author: "Nicholas Scott Burt",
-      genre: "jazz",
-      grade: 3,
-      dateCreated: 2021,
-      cover: "https://lh3.googleusercontent.com/d/14BNhjijIP_cPD6GghFACNTIJzyek9Vzz",
-      pdf: "https://drive.google.com/file/d/14BNhjijIP_cPD6GghFACNTIJzyek9Vzz/view"
+ angular.module('booksApp', [])
+.controller('Ctrl', ['$scope', '$http', function($scope, $http) {
+  
+ $scope.isLoading = true;
+
+  var requestData = { 
+    action: "getBasicData",
+    token: "U2FsdGVkX1+Z6M/J/t+jyWRPGyLvsQ59OB1KBA584h2y7JP6aP8jij6WZTd90vNm"
+    //localStorage.getItem('TPtoken')
+  };
+
+  var config = {
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
     }
-    // Agrega más elementos aquí...
-  ];
+  };
+           
+  $http.post('https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec', requestData, config)
+    .then(function(response) { 
+      $scope.lvl = response.data.lvl;
+    $scope.blq = response.data.blq;
+     $scope.lsn = response.data.lsn;
+    $scope.repertoire = response.data.repertoire;
+     $scope.isLoading = false;
+    })          
+
+
+
+$scope.openURL = function(index) {
+  var url = $scope.manuals[index].url;
+  window.open(url, '_blank');
+};
+
+
+$scope.manuals = [
+    { 'title': 'Nivel 2 - B1', 'background': 'https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy', 'url': 'https://drive.google.com/file/d/1zs8OzO57s1b0MTavriKWjMohnLjr39-d', 'lvl': 2, 'blq': 1, 'genre': 'manual'  },
+    { 'title': 'Nivel 1 - B3', 'background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'url': 'https://drive.google.com/file/d/1VuxMiv3W89OBAzxXaz6kzBkEyRxonnJB', 'lvl': 1, 'blq': 3, 'genre': 'manual'  },
+    { 'title': 'Nivel 1 - B2', 'background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'url': 'https://drive.google.com/file/d/10Q34O2uDPaj5ZG7bpYpx8BGHZ4Q18ZLB', 'lvl': 1, 'blq': 2, 'genre': 'manual'  },
+    { 'title': 'Nivel 1 - B1', 'background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'url': 'https://drive.google.com/file/d/1Kghxri_BvRE0Ho4c2vMfrdBGp8HTmrGJ', 'lvl': 1, 'blq': 1, 'genre': 'manual'  },
+    { 'title': 'Nivel Preparatorio - B3', 'background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'url': 'https://drive.google.com/file/d/1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu', 'lvl': 0, 'blq': 3, 'genre': 'manual'  },
+    { 'title': 'Nivel Preparatorio - B2', 'background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'url': 'https://drive.google.com/file/d/1nxK06XODrHt2J6lScQz4JjthmPoc16Ec', 'lvl': 0, 'blq': 2, 'genre': 'manual'  },
+    { 'title': 'Nivel Preparatorio - B1', 'background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'url': 'https://drive.google.com/file/d/1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa', 'lvl': 0, 'blq': 1, 'genre': 'manual'  }
+]; 
+  
+  $scope.antology = [
+    { 'title': 'Aria', 'author': 'Johann Sebastian Bach', 'background': 'https://lh3.googleusercontent.com/d/1WhaTn70R8qil68wjWdMAmLfa6Ij77dzC', 'url': 'https://drive.google.com/file/d/1WhaTn70R8qil68wjWdMAmLfa6Ij77dzC', 'lvl': 2, 'genre': 'sheet'  },
+    { 'title': 'Minuet', 'author': 'Leopold Mozart', 'background': 'https://lh3.googleusercontent.com/d/1wEngXDEnzxCH-nUdvqpyP9TJl2LT7Z0X', 'url': 'https://drive.google.com/file/d/1wEngXDEnzxCH-nUdvqpyP9TJl2LT7Z0X', 'lvl': 2, 'genre': 'sheet'  },
+    { 'title': 'Allemande', 'author': 'Johann Herman Shein', 'background': 'https://lh3.googleusercontent.com/d/1ArvTOodKca-OExVvFaQnMYw3aj71mizc', 'url': 'https://drive.google.com/file/d/1ArvTOodKca-OExVvFaQnMYw3aj71mizc', 'lvl': 2, 'genre': 'sheet'  },
+    { 'title': 'The old windmill', 'author': 'Dunhill', 'background': 'https://lh3.googleusercontent.com/d/1Yf667gGJI9QBfA0xMqvAiiyKUhF-HvaZ', 'url': 'https://drive.google.com/file/d/1Yf667gGJI9QBfA0xMqvAiiyKUhF-HvaZ', 'lvl': 1, 'genre': 'sheet'  },
+    { 'title': 'Sonatina', 'author': 'Cornelius Gurlitt', 'background': 'https://lh3.googleusercontent.com/d/1F7mj27XUDWz6-8R6adN6f6vLUnJAEOio', 'url': 'https://drive.google.com/file/d/1F7mj27XUDWz6-8R6adN6f6vLUnJAEOio', 'lvl': 0, 'genre': 'sheet'  }
+]; 
+  
+
 
   $scope.filterGenre = 'all'; // Filtro inicial
   $scope.sortOption = '';     // Sin orden inicial
