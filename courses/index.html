@@ -910,17 +910,17 @@ body::-webkit-scrollbar-thumb {
 @media (max-width: 770px){
   /*.analytics{
     display: none;
-  }
+  }*/
   .contacts{
     display: none;
-  }*/
-  
+  }
   .reviews{
      display: none;
   }
   .header{
     display: none;
   }
+  
   .profile-user-data{
     display: none;
   }
@@ -1327,6 +1327,7 @@ body::-webkit-scrollbar-thumb {
       $scope.userData = response.data;
       $scope.userDataLoaded = true;
      $scope.userLevel = $scope.getLevel($scope.userData.lvl)
+    $scope.feed = $scope.userData.feed
    /*   $scope.lsn = $scope.userData.lsn*/
     $scope.totalProgress = parseFloat(($scope.userData.progress / 4).toFixed(1));
     $scope.nameShort = $scope.userData.name.split(" ")[0]
@@ -1340,17 +1341,7 @@ body::-webkit-scrollbar-thumb {
     })
      
      
-     
-     $scope.feed = [
-{"name": "Juan", "lvl": 0, "img": "https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V", "task": "Pieza 2: Oda a la alegria, var 2", "date": ""},
-{"name": "Juan", "lvl": 3, "img": "https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V", "task": "Oda a la alegria, var 2", "date": ""},
-{"name": "Juan", "lvl": 2, "img": "https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V", "task": "Nivel 2" , "date": ""},
-{"name": "Juan", "lvl": 0, "img": "https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V", "task": "Oda a la alegria, var 2", "date": ""},
-{"name": "Juan", "lvl": 0, "img": "https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V", "task": "Oda a la alegria, var 2", "date": ""},
-{"name": "Jose", "lvl": 1, "img": "https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V", "task": "Nivel 1", "date": ""},
-{"name": "Pedro", "lvl": 1, "img": "https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V", "task": "Oda a la alegria, var 2", "date": ""},
-{"name": "Mario", "lvl": 0, "img": "https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V", "task": "Oda a la alegria, var 2", "date": ""},
-]
+ 
      
 
 $scope.lvlColor = function(lvl){
