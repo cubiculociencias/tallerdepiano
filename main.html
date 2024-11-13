@@ -632,10 +632,16 @@ body {
   </script>
 
 
-       <script id="status.html" type="text/ng-template">
+     <script id="status.html" type="text/ng-template">
     <ion-view>
       
-        <ion-back-button></ion-back-button>
+           <ion-nav-bar class="bar-light" >     
+       <ion-nav-buttons side="left">
+    <button class="button button-clear" ng-click="goToMain()">
+      <i class="ri-arrow-left-s-line"></i> regresar
+    </button>
+  </ion-nav-buttons>  
+    </ion-nav-bar>
           
       <ion-content >
        <div class="list">
@@ -647,62 +653,81 @@ body {
           <p>{{userData.mail}}</p>         
         </a>
         
-        <div class="item item-divider itemDividerforitem">Status académico</div>
-       
-        <a class="item">
-          Próximo pago
-      <p>{{userData.nextpay}}</p>   
+        <div class="item item-divider itemDividerforitem">Mi plan</div>
+
+          <a class="item item-icon-left">
+            <span class="item-note"  style=" margin-top: 10px;" >{{userPrice}}</span>
+      <i class="icon ri-vip-crown-fill" style="color: orange; text-shadow: 0 0 10px orange;"></i> Plan de pago
+         <p style="color: orange; text-shadow: 0 0 10px orange;">Premium </p>  
         </a>
-         <a class="item"> 
-          Horario de clase
-           <span class="item-note"  style=" margin-top: 3px;">{{userData.plan}}</span>
-      <p>{{userData.classtime}}</p>   
-        </a>
-         <div class="item item-divider itemDividerforitem">Asistencias</div>
          
-         <div class="item item-icon-left item-button-right">
-           <i class="icon ri-calendar-check-fill"></i> Asistencias
-          <button class="button button-balanced" style=" margin-top: 10px;">
-            {{userData.classCounter}}
-          </button>
-          <p style="font-size: 10px;">El contador indica cuantas clases te quedan</p> 
+         
+           <div class="item item-icon-left">
+      <i class="icon ri-calendar-schedule-fill" ></i> Próximo pago
+         <p>{{userData.nextpay}} </p>  
+        </div>
+         
+  <ion-list>
+      <ion-item class="item-icon-left">
+     
+      <i class="icon ri-calendar-schedule-fill" ></i> Próximo pago
+         <p>{{userData.nextpay}} </p>  
+         
+          <ion-option-button class="button-positive" >Edit</ion-option-button>
+          <ion-option-button class="button-assertive" >Delete</ion-option-button>
+          </ion-item>
+     </ion-list> 
+
+         
+     
+         
+         <div class="item item-divider itemDividerforitem">Asistencias</div>
+             <div class="item item-icon-left">
+      <i class="icon ri-calendar-event-fill" ></i> Horario de clase
+        <p>{{userData.classtime[0]}} <br> {{userData.classtime[1]}}</p>    
         </div>
          
          <div class="item item-icon-left item-button-right">
-           <i class="icon ri-calendar-schedule-fill"></i> Reposiciones
-          <button class="button button-calm"  style=" margin-top: 10px;">
-          {{userData.repositions}}
+           <i class="icon ri-calendar-close-fill"></i> Faltas
+           <button class="button button-dark"  style="transform: scale(.9); margin-right: -5px; margin-top: 10px;">
+          solicitar
+          </button>
+          <p style="font-size: 10px;">El contador indica cuantas clases te quedan</p> 
+        </div>   
+         
+         <div class="item item-icon-left item-button-right">
+           <i class="icon ri-calendar-schedule-fill"></i> Reposición de clase
+          <button class="button button-dark"  style="transform: scale(.9); margin-right: -5px; margin-top: 10px;">
+          solicitar
           </button>
          <p style="font-size: 10px;">El contador indica cuantas reposiciones te quedan</p>  
         </div>
          
-         <div class="item item-icon-left item-button-right">
-           <i class="icon ri-calendar-event-fill"></i> Extensión de pago
-          <button class="button button-stable" style="transform: scale(.8); margin-right: -20px; margin-top: 10px;">
-            solicitar         
-          </button>
-         <p style="font-size: 10px;">Puedes solicitar 2 por semestre</p>  
-        </div>
+    
          
          <div class="item item-icon-left item-button-right">
-           <i class="icon ri-calendar-close-fill"></i> Baja temporal
-          <button class="button button-assertive" style="transform: scale(.8); margin-right: -20px; margin-top: 10px;" >
+           <i class="icon ri-close-circle-fill" style="color: red;"></i> Baja temporal
+          <button class="button button-assertive" style="transform: scale(.9); margin-right: -5px; margin-top: 10px;" >
             solicitar         
           </button>
          <p style="font-size: 10px;">Puedes solicitar 2 por año</p>  
         </div>
          
-          <div class="item item-divider itemDividerforitem">Social feed</div>
-         <a class="item" ng-click="showPopup()">
-          Nombre de usuario
-      <p>{{userData.username}}</p>   
-        </a>
+          <div class="item item-divider itemDividerforitem">Contacto</div>
+          <div class="item item-icon-left item-button-right">
+           <i class="icon ri-whatsapp-fill" style="color: green;"></i> Prof. Daniel
+          <button class="button button-balanced"  style="transform: scale(.9); margin-right: -5px; margin-top: 10px;">
+        Contactar
+          </button>
+         <p > 56 2736 2997</p>  
+        </div>
           
          
          </div>
       </ion-content>
     </ion-view>
   </script>
+    
     
      <script id="lessons.html" type="text/ng-template">
     <ion-view >
@@ -2092,39 +2117,12 @@ if (isAndroid) {
   
        })
 
-  .controller('StatusCtrl', ['$http', '$scope', '$ionicModal', '$ionicLoading', 'SharedState', function($http, $scope, $ionicModal, $ionicLoading, SharedState){
-    $ionicLoading.show({
-            template: 'Cargando...'
-          });
+  .controller('StatusCtrl', ['$scope', 'SharedState', function($scope, SharedState){
     
   SharedState.getNum().then(function(data) {
        $scope.userData = data.data;
-       $ionicLoading.hide();
   })
-   /*  var requestData = {
-                action: "getProfileData",
-                token: localStorage.getItem('TPtoken')
-              };
-
-              var config = {
-                headers: {
-                  "Content-Type": "text/plain;charset=utf-8"
-                },
-                followRedirects: true
-              };
  
-              $http.post('https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec', requestData, config)
-                .then(function(response) {
-                $ionicLoading.hide();
-                  $scope.userData = response.data;
-                });
-  
-     $ionicModal.fromTemplateUrl('modal.html', {
-  scope: $scope,
-  animation: 'slide-in-up'  
-}).then(function(modal) {
-  $scope.modal = modal;
-});*/
       $scope.goToPayment = function() {
   window.location.href = '#/menu/payment';
 };
