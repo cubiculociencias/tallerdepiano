@@ -632,7 +632,7 @@ body {
   </script>
 
 
-     <script id="status.html" type="text/ng-template">
+   <script id="status.html" type="text/ng-template">
     <ion-view>
       
            <ion-nav-bar class="bar-light" >     
@@ -645,20 +645,27 @@ body {
           
       <ion-content >
        <div class="list">
-        <a class="item item-avatar" href="" >
+
+         
+        <ion-list>
+      <ion-item class="item-avatar">
+     
+        <img data-ng-src="{{userData.photo}}"> 
           
-          <img data-ng-src="{{userData.photo}}">
-             <span class="item-note">{{userData.status}}</span>
-          <h2>{{userData.name}}</h2>       
-          <p>{{userData.mail}}</p>         
-        </a>
+           <h2>{{userData.name}}</h2>       
+          <p>{{userData.mail}}</p> 
+         
+          <ion-option-button class="button-calm" >Editar</ion-option-button>
+          </ion-item>
+     </ion-list>    
         
         <div class="item item-divider itemDividerforitem">Mi plan</div>
 
           <a class="item item-icon-left">
-            <span class="item-note"  style=" margin-top: 10px;" >{{userPrice}}</span>
-      <i class="icon ri-vip-crown-fill" style="color: orange; text-shadow: 0 0 10px orange;"></i> Plan de pago
-         <p style="color: orange; text-shadow: 0 0 10px orange;">Premium </p>  
+            <span class="item-note"  style=" margin-top: 10px;" >{{userData.status}}</span>
+         <i class="icon ri-currency-fill" ></i>
+       Plan de pago
+         <p style="color: orange; text-shadow: 0 0 10px orange;"><i class="ri-vip-crown-fill" style="color: orange; text-shadow: 0 0 10px orange;"></i> Premium </p>  
         </a>
          
          
@@ -666,37 +673,40 @@ body {
       <i class="icon ri-calendar-schedule-fill" ></i> Próximo pago
          <p>{{userData.nextpay}} </p>  
         </div>
-         
-  <ion-list>
-      <ion-item class="item-icon-left">
-     
-      <i class="icon ri-calendar-schedule-fill" ></i> Próximo pago
-         <p>{{userData.nextpay}} </p>  
-         
-          <ion-option-button class="button-positive" >Edit</ion-option-button>
-          <ion-option-button class="button-assertive" >Delete</ion-option-button>
-          </ion-item>
-     </ion-list> 
 
          
-     
+        <div class="item item-divider itemDividerforitem">Contacto</div>
+         
+           <div class="item item-icon-left item-button-right">
+           <i class="icon ri-video-chat-fill" style="color: blue;"></i> Datos de sesión de ZOOM
+          <button class="button button-positive"  style="transform: scale(.9); margin-right: -5px; margin-top: 20px;">
+       Ingresar
+          </button>
+         <p> ID: 554 353 354 
+         <br> Password: bartok
+         </p>  
+        </div>
+         
+         
+          <div class="item item-icon-left item-button-right">
+           <i class="icon ri-whatsapp-fill" style="color: green;"></i> Prof. Daniel
+          <button class="button button-balanced"  style="transform: scale(.9); margin-right: -5px; margin-top: 10px;">
+        Contactar
+          </button>
+         <p > 56 2736 2997</p>  
+        </div>
+         
          
          <div class="item item-divider itemDividerforitem">Asistencias</div>
              <div class="item item-icon-left">
       <i class="icon ri-calendar-event-fill" ></i> Horario de clase
-        <p>{{userData.classtime[0]}} <br> {{userData.classtime[1]}}</p>    
+        <p>{{userData.classtime}} </p>    
         </div>
          
-         <div class="item item-icon-left item-button-right">
-           <i class="icon ri-calendar-close-fill"></i> Faltas
-           <button class="button button-dark"  style="transform: scale(.9); margin-right: -5px; margin-top: 10px;">
-          solicitar
-          </button>
-          <p style="font-size: 10px;">El contador indica cuantas clases te quedan</p> 
-        </div>   
+     
          
          <div class="item item-icon-left item-button-right">
-           <i class="icon ri-calendar-schedule-fill"></i> Reposición de clase
+           <i class="icon ri-calendar-close-fill"></i> Reposición de clase
           <button class="button button-dark"  style="transform: scale(.9); margin-right: -5px; margin-top: 10px;">
           solicitar
           </button>
@@ -713,14 +723,8 @@ body {
          <p style="font-size: 10px;">Puedes solicitar 2 por año</p>  
         </div>
          
-          <div class="item item-divider itemDividerforitem">Contacto</div>
-          <div class="item item-icon-left item-button-right">
-           <i class="icon ri-whatsapp-fill" style="color: green;"></i> Prof. Daniel
-          <button class="button button-balanced"  style="transform: scale(.9); margin-right: -5px; margin-top: 10px;">
-        Contactar
-          </button>
-         <p > 56 2736 2997</p>  
-        </div>
+       
+         
           
          
          </div>
