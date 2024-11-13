@@ -462,8 +462,16 @@ body {
   margin-right: 10px;
 }
 
-   
-.tabs-container {
+
+
+.tabs-icon-top .tab-item .icon {
+  position: relative;
+  top: 9px; 
+} 
+   .tabs-icon-top .tab-item {
+  text-decoration: none;
+}     
+.tabs-striped {
     display: none;
 }
 .tabframe-container{
@@ -472,7 +480,7 @@ body {
 
 /* Mostrar la barra de tabs solo en pantallas de hasta 768px */
 @media (max-width: 850px) {
-    .tabs-container {
+    .tabs-striped {
         display: block;
     }
     .tabframe-container{
@@ -570,11 +578,11 @@ body {
       </ion-nav-buttons>
     </ion-nav-bar>
 
-    <ion-tabs class="tabs-container tabs-icon-top tabs-stable">
-      <ion-tab title="Teoría" icon="ion-ios-people" href="#/menu/tab/theory">
+      <ion-tabs class="tabs-striped tabs-icon-top tabs-stable ">
+      <ion-tab title="Lecciones" icon="ri-graduation-cap-fill" href="#/menu/tab/theory">
         <ion-nav-view name="theory-tab"></ion-nav-view>
       </ion-tab>
-      <ion-tab title="Práctica" icon="ion-ios-contact-outline" href="#/menu/tab/practice">
+      <ion-tab title="Evaluación" icon="ri-aed-fill" href="#/menu/tab/practice">
         <ion-nav-view name="practice-tab"></ion-nav-view>
       </ion-tab>
     </ion-tabs>
