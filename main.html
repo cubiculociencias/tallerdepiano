@@ -730,6 +730,12 @@ ion-side-menu .list .item:hover {
           </div>
           <div class="main-data" style="margin-top: 12px;" ng-if="!loadingProfile">
             <h4 >{{userData.name}}</h4>
+       <div class="pull-left achievement-count" ng-if="userData.classtime !== ''" style="color: #77777a; font-size: 12px;"> PLAN ZOOM
+           <i class="ri-video-chat-fill" style="color: #0B5CFF"></i>  </div>
+       <div class="pull-left achievement-count" ng-if="userData.classtime === ''" style="color: #77777a; font-size: 12px;"> PLAN ASÍNCRONO
+            <i class="ri-mac-line"></i>  </div> 
+     
+     
         <div class="pull-left planTag" ng-if="userPlan == 'Premium' && userData.status == 'ACTIVO'" style="color: orange; text-shadow: 0 0 10px orange;"> PLAN PREMIUM
             <i class="ri-vip-crown-fill" style="color: orange; text-shadow: 0 0 10px orange;"></i>  </div>
     <div class="pull-left planTag" ng-if="userPlan == 'Pro' && userData.status == 'ACTIVO'" style="color: #20a2f1; text-shadow: 0 0 1px #20a2f1;"> PLAN PRO
