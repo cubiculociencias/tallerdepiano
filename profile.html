@@ -1609,30 +1609,32 @@ body {
 
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 75% 25%;
+  grid-template-columns: auto 330px;
 }
 
 
+ /*
 .left-content {
-  padding: 25px 20px 40px;
   color: var(--primary-color);
   height: 100vh;
   width: 100% !important;
   overflow: auto;
 }
-
+*/
 
 
 /* RIGHT CONTENT */
 
 .right-content {
   background-color: white;
+ position: fixed; 
   display: flex;
   flex-direction: column;
-  border-left: 1px solid var(--border-color);
-  padding: 25px 20px;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); 
   color: var(--primary-color);
   height: 100vh;
+ width: 330px; 
+ right: 0;
   overflow: auto;
 }
 
@@ -1661,55 +1663,32 @@ body::-webkit-scrollbar-thumb {
 
 /* MEDIA QUERIES */
 
-
-
-
-
-@media (min-width: 760px) {
-  .content {
-    grid-template-columns: 65% 35%;
+@media (min-width: 761px) {
+  .logContainer{
+    height: 180px !important;
   }
-}
-
-
+  }
 
 @media (max-width: 760px) {
-  body {
-    overflow: auto;
-  }
-
- 
   .content {
-
-    grid-template-columns: 100%;
-    grid-template-areas:
-      "leftContent"
-      "rightContent";
-    overflow: auto;
+    grid-template-columns: 1fr; 
   }
 
   .left-content {
-    grid-area: leftContent;
-    height: auto;
-    overflow: unset;
-    display: none;
+    display: none; 
   }
-   .iframe-container {
-            height: 700px !important;
-        }
-
 
   .right-content {
-    grid-area: rightContent;
-    border-left: unset;
-    height: auto;
-    overflow: unset;
+    width: 100%; 
+    height: auto; 
   }
-
-
+  .logContainer{
+    height: 500px !important;
+  }
+  .whatsContainer{
+    display: none;
+  }
 }
-
-
 
   .iframe-container {
             position: relative;
@@ -1740,11 +1719,9 @@ body::-webkit-scrollbar-thumb {
       </div>
 
       <div class="right-content">
-
-
-
+ 
    <div >
-        <div class="profile-user-data clearfix">
+  <!--      <div class="profile-user-data clearfix">
           <div class="circle">
               <img class="profile-pic" src={{picture}}>
           </div>
@@ -1768,9 +1745,16 @@ body::-webkit-scrollbar-thumb {
         </div>
 
           </div>  
-        </div>
+        </div> -->
         
-  
+
+    <div class="showbox" ng-if="!userDataLoaded">
+      <div class="loader">
+        <svg class="circular" viewbox="25 25 50 50">
+          <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
+        </svg>
+      </div>
+    </div>
         
           
          <div class="user-stats " ng-if="userData.status != 'ACTIVO'" style="text-align: center;"> 
@@ -1789,11 +1773,13 @@ body::-webkit-scrollbar-thumb {
         
           
         <div class="dashboard-panel registry-log-panel" ng-if="userData.status == 'ACTIVO'">
-          <div class="panel-header">
+
+
+          <div class="panel-header" style="transform: scale(0.95)">
         <h4><i class="fa fa-fw fa-flag"></i> Actividad</h4>
           
           </div>
-          <div class="panel-body log-list-container logContainer"> 
+          <div class="panel-body log-list-container logContainer" style="transform: scale(0.95)"> 
              <ul class="list-unstyled log-list">
              <li ng-repeat="entry in history | filter:filterByLevel" ng-class="{'status-pending': entry.status === 'En revisión', 'status-delayed': entry.status === 'Límite de entrega: ' && stringToDate(entry.limitdate) < today, 'status-completed': entry.status === 'Evaluada', 'status-error': entry.status === 'A corrección', 'status-default': (entry.status === 'Límite de entrega: '  && stringToDate(entry.limitdate) >= today) || entry.status === 'Asignado'}">
                 <button style="float:right; margin-right: -15px; margin-top: 7px; font-size: 11px;" data-pdf-url="{{entry.pdf}}" onclick="showModal(this)" ng-click="selectEntry(entry)" ng-if="entry.status !== 'En revisión' && entry.status !== 'Evaluada'" class="btn btn-dark btn-sm">Abrir </button>
@@ -1811,8 +1797,12 @@ class="js-trigger-video-modal" onclick="toggle_video_modal(this)" style="color: 
                <small ng-if="entry.status == 'Límite de entrega: ' && stringToDate(entry.limitdate) < today" style="font-size: 9px; margin-top: 2px; position:absolute;">Entrega atrasada, envía un avance</small>
                     </li>
             </ul>
-           
           </div>
+          
+         
+      <div class="iframe-container whatsContainer" style="height: 400px !important; transform: scale(0.95)"><iframe src="https://cubiculociencias.github.io/tallerdepiano/chat" frameborder="0"  allowfullscreen></iframe></div>     
+          
+          
         </div>
       </div>
   
@@ -2816,4 +2806,3 @@ bothDisplay.addEventListener('click', function(){
     location.reload(); 
 }, 60000); 
 </script>
-  
