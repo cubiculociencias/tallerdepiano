@@ -1,8 +1,8 @@
 <head>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
-<link rel="icon" href="https://lh3.googleusercontent.com/d/16vmyfZfuuu5p9xT57X_CANKBjDTA-f-S" type="image/x-icon">
-    <title>Taller de Piano</title>
+<link rel="icon" href="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V" type="image/x-icon">
+    <title>Mozart Appcademy</title>
   
 <link href="https://code.ionicframework.com/1.3.3/css/ionic.min.css" rel="stylesheet">
   <script src="https://code.ionicframework.com/1.3.3/js/ionic.bundle.min.js"></script>
@@ -10,7 +10,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
- <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-i18n/1.3.3/angular-locale_es-mx.js"></script>
+ <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
  <link rel="manifest" href="/manifest.json">
 </head>
@@ -100,13 +101,64 @@ body {
   text-align: center;
 }
 
-.menuSelectedColor {    
-  border-left: solid 7px #311B92 !important;
-    background-color: #E8E9EE !important;
-  color: #311B92 !important;
-  font-weight:bold;
+ #loadingProfile {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  left: 50%;
+  background-image: url(https://raw.githubusercontent.com/niklausgerber/PreLoadMe/master/img/status.gif);
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: -50px 0 0 -100px;
 }
 
+ion-side-menu {
+  background-color: #f8f9fc; /* Fondo claro */
+  color: #3a3b3c; /* Texto oscuro */
+  width: 300px;
+  border-right: 1px solid #e0e0e0;
+ 
+}
+
+
+
+ion-side-menu .list .item {
+  padding: 15px 20px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  color:  #374151;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 2px; /* Bordes redondeados */
+    border-top: 1px solid transparent !important; 
+    border-bottom: 1px solid transparent !important; 
+  
+}
+
+ion-side-menu .list .item i {
+  font-size: 20px;
+  color: #374151;
+  margin-right: 10px; /* Espaciado entre ícono y texto */
+}
+
+
+
+ion-side-menu .item:hover i {
+  transform: scale(1.1); /* Agrandar ligeramente el ícono */
+}
+
+
+ion-side-menu .list .item:hover {
+  background-color: #f5f6f6; /* Fondo hover */
+  color: #343a40; /* Texto más oscuro al pasar mouse */
+}
+
+.menuSelectedColor {    
+
+    background-color: #f0f2f5 !important;
+  color: #1F2937 !important;
+  font-weight:bold;
+}
 
 .card{
   font-family: 'Nunito', sans-serif;
@@ -167,45 +219,6 @@ body {
 
 
 
-
-     
-.documents {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-  grid-auto-rows: 214px;
-  grid-gap: 12px;
-  height: auto;
-  background-color: #FFF;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 12px;
-}
-
-.document {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 15px 0 0;
-  flex-direction: column;
-}
-.document__img {
-  width: 105px;
-  height: 136px;
-
-  background-size: cover;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-.document__img:hover {
-  transform: translateY(-4px);
-}
-.document__title {
-  margin: 8px 0 2px;
-  color: #777;
-}
-.document__date {
-  font-size: 10px;
-}
 
    .drive{
     height: 450px;
@@ -406,7 +419,7 @@ body {
 .dropdownContent {
   position: absolute;
   top: 50px;
-  left: 10px;
+  right: 10px;
   background: #fff;
   min-width: 250px;
   box-shadow: 0px 0px 15px 8px rgba(50, 50, 50, 0.2);
@@ -462,7 +475,7 @@ body {
   margin-right: 10px;
 }
 
-
+   
 
 .tabs-icon-top .tab-item .icon {
   position: relative;
@@ -486,7 +499,204 @@ body {
     .tabframe-container{
       display: none;
     }
+      .right-content{
+     display: none !important;
+  }
+  .content {
+  grid-template-columns: 100% 0 !important;
+  }
 }
+
+@media (min-width: 850px) {
+  .menubtn{
+    display: none;
+  }
+    .hintMsg{
+        display: none;
+    }
+  ion-side-menu .list .item {
+  font-size: 15px;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    color: red;
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+}
+
+.pulseTab {
+  animation: pulse 1s ease-in-out 5;
+}
+
+.hintMsg {
+  position: fixed;
+  bottom: 100px; /* Just above the tab bar */
+  left: 50%;
+  transform: translateX(-50%);
+ /* background-color: rgba(0, 0, 0, 0.8);
+  color: white;*/
+    background-color: white;
+  color: black;
+  padding: 10px 15px; 
+  border-radius: 8px;
+  font-size: 14px;
+  z-index: 1000;
+  animation: fadeInOut 5s forwards;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+}
+     
+
+.profile-user-data > * {float: left; margin-left: 5px;}
+ .profile-user-data   .circle {
+    border-radius: 100% !important;
+    overflow: hidden; 
+    width: 55px;
+    height: 55px;
+   margin-top: 20px;
+   margin-right: 10px;
+     margin-left: 15px;
+}
+.profile-user-data img { margin-right: 10px; max-width: 100%;}
+.profile-user-data .main-data {padding: 10px 0 20px; margin-bottom: 15px;  }
+.main-data h4{
+  font-size: 13px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.main-data .planTag{
+  color: #77777a; 
+  font-size: 12px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.main-data .userLvl{
+  margin-top: 1px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.profile-user-data .main-data h4 {margin: 0; font-size: 17px; font-weight: }
+.profile-user-data .main-data span {font-size: 12px;}
+
+
+.progress{
+ height: 12px;
+  margin-top: 5px;
+  margin-bottom: -10px;
+}
+     
+     
+   
+.slide-hint-left {
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: slideLeft 1.5s infinite;
+  font-size: 18px;
+  color: #666;
+}
+
+@keyframes slideLeft {
+  0%, 100% {
+    opacity: 0;
+    transform: translateX(0) translateY(-50%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-10px) translateY(-50%);
+  }
+}
+
+
+.custom-select {
+  width: 100%; /* Ajusta para ocupar todo el ancho */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 20px; /* Espacio entre select y botones */
+}
+   
+   .custom-select2 {
+  width: 100%; /* Ajusta para ocupar todo el ancho */
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+     margin-right: 5px;
+}
+   .item-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.item-input span {
+  margin-right: 10px;
+}
+
+.item-input input,
+.item-input select {
+  flex-grow: 1;
+  max-width: 200px; /* Puedes ajustar el tamaño máximo */
+  text-align: center;
+}
+   
+.alertIcon{
+  font-size: 18px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: auto 270px; /* Deja que el lado izquierdo sea flexible */
+  height: 100vh;
+}
+
+.left-content {
+  overflow-y: auto; /* Permite scroll si el contenido es más grande */
+  background-color: #f5f5f5; /* Fondo opcional */
+}
+
+.right-content {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+   box-shadow: -1px 0 2px rgba(0, 0, 0, 0.3); 
+  height: 100vh;
+  overflow-y: auto;
+  position: fixed; 
+  right: 0;
+  width: 270px; 
+}
+
+     
 </style>
 
 <body>
@@ -504,37 +714,53 @@ body {
     </ion-nav-back-button>
   </ion-nav-bar>
 
-  <ion-nav-view animation="slide-right"></ion-nav-view>
+  <ion-nav-view animation="slide-left"></ion-nav-view>
 
     
  <script id="menu.html" type="text/ng-template">
     <ion-side-menus >
-      <ion-side-menu side="right" width='210'>
+      <ion-side-menu side="left" width='240'  expose-aside-when="large">
          
-    
-        <ion-header-bar class="bar-stable">
-          <h1 class="title">Menu</h1> 
-        </ion-header-bar>
         <ion-content>
+
+      <div class="profile-user-data clearfix">
+        <div id="loadingProfile" ng-if="loadingProfile"></div>
+          <div class="circle">
+              <img class="profile-pic" src="{{userData.photo}}">
+          </div>
+          <div class="main-data" style="margin-top: 12px;" ng-if="!loadingProfile">
+            <h4 >{{userData.name}}</h4>
+        <div class="pull-left planTag" ng-if="userPlan == 'Premium' && userData.status == 'ACTIVO'" style="color: orange; text-shadow: 0 0 10px orange;"> PLAN PREMIUM
+            <i class="ri-vip-crown-fill" style="color: orange; text-shadow: 0 0 10px orange;"></i>  </div>
+    <div class="pull-left planTag" ng-if="userPlan == 'Pro' && userData.status == 'ACTIVO'" style="color: #20a2f1; text-shadow: 0 0 1px #20a2f1;"> PLAN PRO
+            <i class="ri-verified-badge-fill" style="color: #20a2f1; text-shadow: none;"></i>  </div>
+      <div class="pull-left planTag" ng-if="userPlan == 'Estudiante' && userData.status == 'ACTIVO'" style="color: orange; text-shadow: 0 0 10px orange;"> PLAN ESTUDIANTE
+            <i class="ri-graduation-cap-fill" style="color: orange; text-shadow: 0 0 10px orange;"></i>  </div>
+    <div class="pull-left planTag" ng-if="userPlan == 'Standard' && userData.status == 'ACTIVO'" style="color: brown;"> PLAN STANDARD </div>
+            <br>
+        <div class="userLvl" ng-if="userData.lvl == 0"> Nivel Preparatorio </div>
+          <div class="userLvl" ng-if="userData.lvl != 0"> Nivel {{userData.lvl}} </div>
+        <div class="progress">
+          <div class="progress-bar" style="background-color: {{userData.color}};" role="progressbar" aria-valuemin="0" aria-valuemax="100" ng-style="{width: userData.progress + '%'}" ng-init="startAnimation()"></div>
+        </div>
+          </div>  
+        </div>
+     
           <ul class="list">
-          <!--     <a href="#/menu/status" class="item"  menu-toggle="right" ><i class="ri-user-fill"></i>&nbsp&nbspPerfil</a>  
-           <a href="#/menu/lessons" class="item" ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" ng-click="activeMenuClr = 'lessons'" menu-toggle="right"><i class="" >🎹</i>&nbsp&nbspTaller de Piano</a> 
-   <a href="#/menu/profile" class="item" ng-class="(activeMenuClr=='profile')?'menuSelectedColor':''" ng-click="activeMenuClr = 'profile'" menu-toggle="right"><i class="ri-line-chart-fill" ></i>&nbsp&nbspProgreso</a>  -->
-            <a href="#/menu/courses" class="item" ng-class="(activeMenuClr=='courses')?'menuSelectedColor':''" ng-click="activeMenuClr = 'courses'" menu-toggle="right"><i class="ri-presentation-fill" ></i>&nbsp&nbspInicio</a> 
-                           <a href="#/menu/library" class="item" ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" ng-click="activeMenuClr = 'library'" menu-toggle="right"><i class="ri-git-repository-fill" ></i>&nbsp&nbspBiblioteca</a>
+           <a href="#/menu/courses" class="item" ng-class="(activeMenuClr=='courses')?'menuSelectedColor':''" ng-click="activeMenuClr = 'courses'" menu-toggle="left"><i class="ri-presentation-line" ></i>&nbsp&nbspInicio</a> 
+<a href="#/menu/agenda" class="item" ng-class="(activeMenuClr=='agenda')?'menuSelectedColor':''" ng-click="activeMenuClr = 'agenda'" menu-toggle="left"><i class="ri-calendar-todo-line"></i>&nbsp&nbspAgenda</a> 
+                           <a href="#/menu/library" class="item" ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" ng-click="activeMenuClr = 'library'" menu-toggle="left"><i class="ri-book-shelf-line" ></i>&nbsp&nbspBiblioteca</a>
                               
-       <a href="#/menu/reel" class="item" ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" ng-click="activeMenuClr = 'reel'" menu-toggle="right"><i class="ri-gallery-fill" ></i>&nbsp&nbspGalería</a>   
-  <!--   <a href="#/menu/resources" class="item" ng-class="(activeMenuClr=='resources')?'menuSelectedColor':''" ng-click="activeMenuClr = 'resources'" menu-toggle="right"><i class="ri-dashboard-fill"></i>&nbsp&nbspRecursos</a>
-    <a href="#/menu/chat" class="item" ng-class="(activeMenuClr=='chat')?'menuSelectedColor':''" ng-click="activeMenuClr = 'chat'"  menu-toggle="right"><i class="ri-question-answer-fill"></i>&nbsp&nbspTutor</a>     
-             <a href="#/menu/about" class="item" ng-class="(activeMenuClr=='about')?'menuSelectedColor':''" ng-click="activeMenuClr = 'about'" menu-toggle="right"><i class="ri-file-paper-2-fill"></i>&nbsp&nbspLineamientos</a> -->
+       <a href="#/menu/reel/achievements" class="item" ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" ng-click="activeMenuClr = 'reel'" menu-toggle="left"><i class="ri-chat-history-line"></i>&nbsp&nbspFeed</a>   
           </ul>
+     
         </ion-content>
-    <ion-footer-bar>
- 
+ <ion-footer-bar style="z-index: 999 !important;">
+         <button class="button button-royal menubtn" ng-click="installApp()" style="font-size: 20px; text-align: center; z-index: 999; top: -50px; width: 100%; "><i class="ri-download-cloud-2-line" ></i> Descargar</button>
   <button class="button pull-right" ng-click="logout()"><i class="icon ri-logout-box-r-line"></i>Salir</button>
 </ion-footer-bar>
-      </ion-side-menu>
 
+      </ion-side-menu>
       <ion-side-menu-content >        
         <ion-nav-view name="menuContent"></ion-nav-view>
       </ion-side-menu-content>
@@ -546,75 +772,246 @@ body {
 
 
 
-  <script id="agenda.html" type="text/ng-template">
+
+ <script id="agenda.html" type="text/ng-template">
     <ion-view >
       
-      <ion-nav-bar class="bar-light" >     
-       <ion-nav-buttons side="left">
-    <button class="button button-clear" ng-click="goToMain()">
-      <i class="ri-arrow-left-s-line"></i> regresar
+     <ion-nav-bar class="bar-light" >      
+        <ion-nav-buttons side="right">
+
+       <button class="button button-clear" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;">
+      <img src="{{userData.photo}}" width="35" height="35" style="border-radius: 50%;" />
+  <div style="position: absolute; bottom: -5px; left: 25px; width: 15px; height: 15px; background-color: #d3d3d3; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
+        <i class="icon ion-chevron-down" style="font-size: 8px; color: black; transform: scale(0.27);"></i>
+    </div>
     </button>
-  </ion-nav-buttons>    
+  </ion-nav-buttons>
+       
+        <ion-nav-buttons side="left">
+          <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
+        </ion-nav-buttons>   
+       
+        <div class="dropdownContent" ng-show="isDropdownVisible" ng-click="$event.stopPropagation()">
+     <div id="bannerRow">
+      <div class="profileImageContainer">
+        <img src="{{userData.photo}}"  />
+      </div>
+      <p class="profileName">{{userData.name}}</p>
+      <p class="profileEmail">{{userData.mail}}</p>
+    </div>
+    <div class="dropdown-item" ng-click="goToStatus()">
+      <i class="ion-ios-contact-outline"></i> Perfil
+    </div>
+  <div class="dropdown-item" ng-click="goToStatus()">
+      <i class="ion-card"></i> Pagos
+    </div>
+     <div class="dropdown-item" ng-click="goToChat()">
+      <i class="ion-ios-chatboxes-outline"></i> Tutoría
+    </div>
+  </div>
+        
     </ion-nav-bar>
+
+
+
+
     
       <ion-content>
-
+   <section class="content">
+      <div class="left-content">
        <div class="iframe-container"><iframe id="agendaFrame" src="https://cubiculociencias.github.io/tallerdepiano/agenda" frameborder="0" allowfullscreen></iframe></div>
-    
+        </div>
+
+
+        <div class="right-content " >
+  <div class="list">
+  
+          <ion-list > 
+    <div ng-if="userData.status != 'ACTIVO'">
+      <ion-item class="item-divider itemDividerforitem" >
+    Asistencias
+        </ion-item>
+      <ion-item class="item-icon-left">
+         <i class="icon ri-currency-fill" ></i>
+       Plan de pago
+        <p style="color: red">Pago pendiente </p>  
+          </ion-item>
+                 <ion-item class="item-icon-left item-icon-right" >
+<i class="icon ri-calendar-schedule-fill" ></i> Próximo pago
+         <p style="color: red">{{userData.nextpay}} </p>  
+          <i class="icon ri-arrow-left-double-fill slide-hint-left" style="margin-top: 35px;"></i>
+            <ion-option-button class="button-balanced"  onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/payment';">Pagar</ion-option-button>
+                </ion-item>
+       </div>  
+
+ <div ng-if="userData.status == 'ACTIVO'">           
+             <ion-item class="item-divider itemDividerforitem" >
+    Asistencias
+        </ion-item>
+            <ion-item class="item-icon-left" >
+      <i class="icon ri-calendar-event-fill" ></i> Horario de clase
+        <p>{{userData.classtime[0]}} <br> {{userData.classtime[1]}}</p>   
+        </ion-item>
+      <ion-item class="item-icon-left item-button-right">
+        <i class="icon ri-calendar-close-fill" ></i> Reposiciones
+         <button class="button button-dark" style="transform: scale(.8); margin-right: -5px; margin-top: 10px;" ng-click="showAlert()">
+            solicitar           
+          </button>
+         <p style="font-size: 10px;">Agenda con anticipación</p>    
+          </ion-item>
+           </div> 
+     </ion-list>   
+   
+   
+   
+    <!--  <ion-list ng-if="userData.status == 'ACTIVO' && userData.format == 'En línea por ZOOM'"> -->
+   <ion-list >
+             <ion-item class="item-divider itemDividerforitem">
+    Contacto
+        </ion-item>
+
+ <ion-item class="item-icon-left item-icon-right">
+    <i class="icon ri-video-chat-fill" style="color: blue; "></i> Datos de ZOOM
+    <p> ID: 296 313 4430<br> Password: bartok</p> 
+     <i class="icon ri-arrow-left-double-fill slide-hint-left" style="margin-top: 50px;"></i>
+            <ion-option-button class="button-positive"  onclick="window.top.location.href='window.location.href='https://us02web.zoom.us/j/2963134430?pwd=Vzk3aTFCSTdDSFBoK1c1SVh4eEwwZz09';">Ingresar</ion-option-button>
+          </ion-item>
+   
+   
+          <ion-item class="item-icon-left item-icon-right">
+    <i class="icon ri-whatsapp-fill" style="color: green;"></i> Prof. Daniel
+         <p > 56 2736 2997</p> 
+      <i class="icon ri-arrow-left-double-fill slide-hint-left" style="margin-top: 35px;"></i>
+            <ion-option-button class="button-balanced"  onclick="window.top.location.href='window.location.href='https://wa.me/525627362997';">Contactar</ion-option-button>
+          </ion-item>
+
+   
+     <ion-item class="item-divider itemDividerforitem">
+   Bajas
+        </ion-item>
+      <ion-item class="item-icon-left item-icon-right">
+        <i class="icon ri-close-circle-fill" style="color: red;"></i> Baja temporal
+      
+         <p style="font-size: 10px;">Expón el motivo de tu baja </p> 
+    <i class="icon ri-arrow-left-double-fill slide-hint-left" style="margin-top: 35px;" ng-if="userData.status != 'ACTIVO'"></i>
+   <ion-option-button class="button-assertive"  ng-click="showAlert2()">Solicitar</ion-option-button>
+          </ion-item>
+   </ion-list>
+
+
+         </div>
+  </div>
+ </section>
+      </ion-content>
+    </ion-view>
+
+  </script>
+
+
+
+
+ <script id="attendance.html" type="text/ng-template">
+    <ion-view >
+
+       <ion-nav-bar class="bar-light" >     
+       <ion-nav-buttons side="left">
+    <button class="button button-clear" ng-click="goToAgenda()">
+      <i class="ri-arrow-left-s-line"></i> regresar
+    </button>
+  </ion-nav-buttons>  
+    </ion-nav-bar>
+
+      <ion-content>
+
+
+  <div class="list">
+  
+          <ion-list > 
+    <div ng-if="userData.status != 'ACTIVO'">
+      <ion-item class="item-divider itemDividerforitem" >
+    Asistencias
+        </ion-item>
+      <ion-item class="item-icon-left">
+         <i class="icon ri-currency-fill" ></i>
+       Plan de pago
+        <p style="color: red">Pago pendiente </p>  
+          </ion-item>
+                 <ion-item class="item-icon-left item-icon-right" >
+<i class="icon ri-calendar-schedule-fill" ></i> Próximo pago
+         <p style="color: red">{{userData.nextpay}} </p>  
+          <i class="icon ri-arrow-left-double-fill slide-hint-left" style="margin-top: 35px;"></i>
+            <ion-option-button class="button-balanced"  onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/payment';">Pagar</ion-option-button>
+                </ion-item>
+       </div>  
+
+ <div ng-if="userData.status == 'ACTIVO'">           
+             <ion-item class="item-divider itemDividerforitem" >
+    Asistencias
+        </ion-item>
+            <ion-item class="item-icon-left" >
+      <i class="icon ri-calendar-event-fill" ></i> Horario de clase
+        <p>{{userData.classtime[0]}} <br> {{userData.classtime[1]}}</p>   
+        </ion-item>
+      <ion-item class="item-icon-left item-button-right">
+        <i class="icon ri-calendar-close-fill" ></i> Reposiciones
+         <button class="button button-dark" style="transform: scale(.8); margin-right: -5px; margin-top: 10px;" ng-click="showAlert()">
+            solicitar           
+          </button>
+         <p style="font-size: 10px;">Agenda con anticipación</p>    
+          </ion-item>
+           </div> 
+     </ion-list>   
+   
+   
+   
+    <!--  <ion-list ng-if="userData.status == 'ACTIVO' && userData.format == 'En línea por ZOOM'"> -->
+   <ion-list >
+             <ion-item class="item-divider itemDividerforitem">
+    Contacto
+        </ion-item>
+
+ <ion-item class="item-icon-left item-icon-right">
+    <i class="icon ri-video-chat-fill" style="color: blue; "></i> Datos de ZOOM
+    <p> ID: 296 313 4430<br> Password: bartok</p> 
+     <i class="icon ri-arrow-left-double-fill slide-hint-left" style="margin-top: 50px;"></i>
+            <ion-option-button class="button-positive"  onclick="window.top.location.href='window.location.href='https://us02web.zoom.us/j/2963134430?pwd=Vzk3aTFCSTdDSFBoK1c1SVh4eEwwZz09';">Ingresar</ion-option-button>
+          </ion-item>
+   
+   
+          <ion-item class="item-icon-left item-icon-right">
+    <i class="icon ri-whatsapp-fill" style="color: green;"></i> Prof. Daniel
+         <p > 56 2736 2997</p> 
+      <i class="icon ri-arrow-left-double-fill slide-hint-left" style="margin-top: 35px;"></i>
+            <ion-option-button class="button-balanced"  onclick="window.top.location.href='window.location.href='https://wa.me/525627362997';">Contactar</ion-option-button>
+          </ion-item>
+
+   
+     <ion-item class="item-divider itemDividerforitem">
+   Bajas
+        </ion-item>
+      <ion-item class="item-icon-left item-icon-right">
+        <i class="icon ri-close-circle-fill" style="color: red;"></i> Baja temporal
+      
+         <p style="font-size: 10px;">Expón el motivo de tu baja </p> 
+    <i class="icon ri-arrow-left-double-fill slide-hint-left" style="margin-top: 35px;" ng-if="userData.status != 'ACTIVO'"></i>
+   <ion-option-button class="button-assertive"  ng-click="showAlert2()">Solicitar</ion-option-button>
+          </ion-item>
+   </ion-list>
+
+
+         </div>
+
       </ion-content>
     </ion-view>
   </script>
 
 
 
-              
-<script id="tabs.html" type="text/ng-template">
-  <ion-view>
-    <ion-nav-bar class="bar-light">
-      <ion-nav-buttons side="left">
-        <button class="button button-clear" ng-click="goToMain()">
-          <i class="ri-arrow-left-s-line"></i> regresar
-        </button>
-      </ion-nav-buttons>
-    </ion-nav-bar>
-
-      <ion-tabs class="tabs-striped tabs-icon-top tabs-stable ">
-      <ion-tab title="Lecciones" icon="ri-graduation-cap-fill" href="#/menu/tab/theory">
-        <ion-nav-view name="theory-tab"></ion-nav-view>
-      </ion-tab>
-      <ion-tab title="Evaluación" icon="ri-aed-fill" href="#/menu/tab/practice">
-        <ion-nav-view name="practice-tab"></ion-nav-view>
-      </ion-tab>
-    </ion-tabs>
-
-    <ion-content class="padding tabframe-container"> 
-        <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/profile" frameborder="0" allowfullscreen ></iframe></div> 
-    </ion-content> 
-
-  </ion-view>
-</script>
-
- <script id="theory.html" type="text/ng-template"> 
-  <ion-view > 
-    <ion-content class="padding"> 
-        <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/lessons" frameborder="0" allowfullscreen ></iframe></div> 
-    </ion-content> 
-  </ion-view> 
-</script>
-
- <script id="practice.html" type="text/ng-template"> 
-  <ion-view > 
-    <ion-content class="padding"> 
-        <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/profile" frameborder="0" allowfullscreen ></iframe></div> 
-    </ion-content> 
-  </ion-view> 
-</script>
-
       
     
     <script id="profile.html" type="text/ng-template">
     <ion-view >
-
+      
      <ion-nav-bar class="bar-light" >     
        <ion-nav-buttons side="left">
     <button class="button button-clear" ng-click="goToMain()">
@@ -632,9 +1029,9 @@ body {
   </script>
 
 
-   <script id="status.html" type="text/ng-template">
+
+  <script id="status.html" type="text/ng-template">
     <ion-view>
-      
            <ion-nav-bar class="bar-light" >     
        <ion-nav-buttons side="left">
     <button class="button button-clear" ng-click="goToMain()">
@@ -642,123 +1039,94 @@ body {
     </button>
   </ion-nav-buttons>  
     </ion-nav-bar>
-          
       <ion-content >
        <div class="list">
-
-         
         <ion-list>
       <ion-item class="item-avatar">
-     
-        <img data-ng-src="{{userData.photo}}"> 
-          
+        <img data-ng-src="{{userData.photo}}">    
            <h2>{{userData.name}}</h2>       
-          <p>{{userData.mail}}</p> 
-         
+          <p>{{userData.mail}}</p>    
           <ion-option-button class="button-calm" >Editar</ion-option-button>
           </ion-item>
      </ion-list>    
-        
-        <div class="item item-divider itemDividerforitem">Mi plan</div>
-
-          <a class="item item-icon-left">
-            <span class="item-note"  style=" margin-top: 10px;" >{{userData.status}}</span>
+          <ion-list>
+      <ion-item class="item-divider itemDividerforitem" >
+    Mi plan
+        </ion-item>
+      <ion-item class="item-icon-left">
+            <span class="item-note"  style="  margin-top: 5px; color: green" ng-if="userData.status == 'ACTIVO'">ACTIVO</span>
+           <span class="item-note"  style=" color: red" ng-if="userData.status != 'ACTIVO'">Pago pendiente</span>
          <i class="icon ri-currency-fill" ></i>
        Plan de pago
-         <p style="color: orange; text-shadow: 0 0 10px orange;"><i class="ri-vip-crown-fill" style="color: orange; text-shadow: 0 0 10px orange;"></i> Premium </p>  
-        </a>
-         
-         
-           <div class="item item-icon-left">
-      <i class="icon ri-calendar-schedule-fill" ></i> Próximo pago
-         <p>{{userData.nextpay}} </p>  
-        </div>
-
-         
-        <div class="item item-divider itemDividerforitem">Contacto</div>
-         
-           <div class="item item-icon-left item-button-right">
-           <i class="icon ri-video-chat-fill" style="color: blue;"></i> Datos de sesión de ZOOM
-          <button class="button button-positive"  style="transform: scale(.9); margin-right: -5px; margin-top: 20px;">
-       Ingresar
-          </button>
-         <p> ID: 554 353 354 
-         <br> Password: bartok
-         </p>  
-        </div>
-         
-         
-          <div class="item item-icon-left item-button-right">
-           <i class="icon ri-whatsapp-fill" style="color: green;"></i> Prof. Daniel
-          <button class="button button-balanced"  style="transform: scale(.9); margin-right: -5px; margin-top: 10px;">
-        Contactar
-          </button>
-         <p > 56 2736 2997</p>  
-        </div>
-         
-         
-         <div class="item item-divider itemDividerforitem">Asistencias</div>
-             <div class="item item-icon-left">
-      <i class="icon ri-calendar-event-fill" ></i> Horario de clase
-        <p>{{userData.classtime}} </p>    
-        </div>
-         
-     
-         
-         <div class="item item-icon-left item-button-right">
-           <i class="icon ri-calendar-close-fill"></i> Reposición de clase
-          <button class="button button-dark"  style="transform: scale(.9); margin-right: -5px; margin-top: 10px;">
-          solicitar
-          </button>
-         <p style="font-size: 10px;">El contador indica cuantas reposiciones te quedan</p>  
-        </div>
-         
-    
-         
-         <div class="item item-icon-left item-button-right">
-           <i class="icon ri-close-circle-fill" style="color: red;"></i> Baja temporal
-          <button class="button button-assertive" style="transform: scale(.9); margin-right: -5px; margin-top: 10px;" >
-            solicitar         
-          </button>
-         <p style="font-size: 10px;">Puedes solicitar 2 por año</p>  
-        </div>
-         
-       
-         
+         <p style="color: orange; text-shadow: 0 0 10px orange;" ng-if="userPlan == 'Premium' && userData.status == 'ACTIVO'"><i class="ri-vip-crown-fill" style="color: orange; text-shadow: 0 0 10px orange;"></i> Premium </p>   
+        <p style="color: #20a2f1; text-shadow: 0 0 1px #20a2f1;" ng-if="userPlan == 'Pro' && userData.status == 'ACTIVO'"><i class="ri-verified-badge-fill" style="color: #20a2f1; text-shadow: none;" ></i> PRO </p>   
+         <p ng-if="userPlan == 'Estudiante' && userData.status == 'ACTIVO'">><i class="ri-graduation-cap-fill'" ></i> Estudiante </p>  
+          <p style="color: brown;" ng-if="userPlan == 'Standard' && userData.status == 'ACTIVO'"> Standard </p> 
+          </ion-item>
+          <ion-item class="item-icon-left" ng-if="userData.status == 'ACTIVO'">
+<i class="icon ri-presentation-fill" ></i> Formato
+         <p>{{userData.format}} </p>   
+                </ion-item>
+                 <ion-item class="item-icon-left item-icon-right" >
+<i class="icon ri-calendar-schedule-fill" ></i> Próximo pago
+         <p ng-style="{'color': userData.status !== 'ACTIVO' ? 'red' : 'green'}">{{userData.nextpay}} </p>  
+          <i class="icon ri-arrow-left-double-fill slide-hint-left" style="margin-top: 35px;" ng-if="userData.status != 'ACTIVO'"></i>
+            <ion-option-button class="button-balanced" ng-if="userData.status != 'ACTIVO'" onclick="window.top.location.href='https://app.mozartacademy.mx/main#/menu/payment';">Pagar</ion-option-button>
+                </ion-item>
+           
+    </ion-list>    
+        
           
-         
          </div>
       </ion-content>
     </ion-view>
   </script>
-    
-    
-     <script id="lessons.html" type="text/ng-template">
+
+
+
+
+
+      
+
+        <script id="courses.html" type="text/ng-template">
     <ion-view >
 
       <ion-nav-bar class="bar-light" >      
-        <ion-nav-buttons side="left">
-  <!--  <button class="button button-clear" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif">
-      <img src="https://lh3.googleusercontent.com/d/1EP2I0BOMo_8mXsR9qqAv08PxjztZFaQ8" width="35" height="35" style="border-radius: 50%;" />
-       Mozart Academy
-    </button> -->
-       <button class="button button-clear" ng-click="toggleDropdown($event)" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif">
-      <img src="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V" width="35" height="35" style="border-radius: 50%;" />
-      Taller de Piano
+        <ion-nav-buttons side="right">
+
+     <button class="button button-clear" ng-click="dropdownChat()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 18px;">
+<i class="ri-question-answer-line"></i>
+            <div style="position: absolute; top: -3px; left: 18px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(chats | filter:{read: false}).length && chatCounter">
+        <div style="font-size: 13px; color: white;"> {{(chats | filter:{read: false}).length}}</div>
+    </div>
+</button> 
+          
+     <button class="button button-clear" ng-click="dropdownNotif()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 25px;">
+  <i class="ri-notification-3-line" ></i>
+            <div style="position: absolute; top: -3px; left: 18px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(alerts | filter:{seen: false}).length && alertCounter">
+        <div style="font-size: 13px; color: white;" > {{(alerts | filter:{seen: false}).length}}</div>
+    </div> 
+</button>
+
+       <button class="button button-clear" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;">
+      <img src="{{userData.photo}}" width="35" height="35" style="border-radius: 50%;" />
   <div style="position: absolute; bottom: -5px; left: 25px; width: 15px; height: 15px; background-color: #d3d3d3; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
         <i class="icon ion-chevron-down" style="font-size: 8px; color: black; transform: scale(0.27);"></i>
     </div>
     </button>
   </ion-nav-buttons>
        
-        <ion-nav-buttons side="right">
-          <button class="button button-clear" ng-click="toggleRight()">menu<i class="button button-icon ion-navicon"></i></button>
-        </ion-nav-buttons>   
+        <ion-nav-buttons side="left">
+          <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
+        </ion-nav-buttons>  
+
+            
        
         <div class="dropdownContent" ng-show="isDropdownVisible" ng-click="$event.stopPropagation()">
      <div id="bannerRow">
       <div class="profileImageContainer">
-        <img src="{{userData.photo}}"  />
+     <div id="loading" ng-if="loadingProfile" style="height: 60px;"></div>
+        <img src="{{userData.photo}}"  ng-if="!loadingProfile"/>
       </div>
       <p class="profileName">{{userData.name}}</p>
       <p class="profileEmail">{{userData.mail}}</p>
@@ -766,70 +1134,46 @@ body {
     <div class="dropdown-item" ng-click="goToStatus()">
       <i class="ion-ios-contact-outline"></i> Perfil
     </div>
-    <div class="dropdown-item" ng-click="goToAgenda()">
-      <i class="ion-android-calendar"></i> Agenda
+             <div class="dropdown-item" ng-click="goToStatus()">
+      <i class="ion-card"></i> Pagos
     </div>
-    <div class="dropdown-item" >
-      <i class="ion-android-download"></i> Instalar App
+    <div class="dropdown-item" ng-click="goToChat()">
+      <i class="ion-ios-chatboxes-outline"></i> Tutoría
     </div>
   </div>
+
+    <div class="dropdownContent" ng-show="dropdownChatVisible" ng-click="$event.stopPropagation()">
+  <div class="dropdown-item" 
+       ng-click="goToChat()" 
+       ng-if="(chats | filter:{read: false}).length > 0">
+    <i class="ri-feedback-line alertIcon"></i>
+    Tienes {{(chats | filter:{read: false}).length}} nuevos mensajes  
+  </div>
+  <span style="margin-left: 15px;" 
+        ng-if="(chats | filter:{read: false}).length == 0" ng-click="goToChat()"> 
+    No hay mensajes 
+  </span>
+</div>
+
+
+<div class="dropdownContent" ng-show="dropdownNotifVisible" ng-click="$event.stopPropagation()">
+   <div class="dropdown-item" ng-repeat="alert in alerts" style="color: {{alert.color}}">
+      <i class="{{alert.icon}} alertIcon" ></i> {{alert.subject}} 
+         <div style="font-size: 10px; position: absolute; margin-top: 30px;  color: gray;">Hace {{calculateDaysAgo(alert.date)}} días</div>
+    </div> 
+      <span style="margin-left: 15px;" ng-if="alerts.length == 0"> No hay alertas </span>
+  </div>  
         
     </ion-nav-bar>
 
      <ion-content>
-       
-   <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/lessons" frameborder="0" allowfullscreen></iframe></div>
-
+   <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/courses" frameborder="0" allowfullscreen></iframe></div>
       </ion-content>
 
-    </ion-view>
-  </script>  
-
-
-            <script id="courses.html" type="text/ng-template">
-    <ion-view >
-
-      <ion-nav-bar class="bar-light" >      
-        <ion-nav-buttons side="left">
-  <!--  <button class="button button-clear" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif">
-      <img src="https://lh3.googleusercontent.com/d/1EP2I0BOMo_8mXsR9qqAv08PxjztZFaQ8" width="35" height="35" style="border-radius: 50%;" />
-       Mozart Academy
-    </button> -->
-       <button class="button button-clear" ng-click="toggleDropdown($event)" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif">
-      <img src="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V" width="35" height="35" style="border-radius: 50%;" />
-     Taller de Piano
-  <div style="position: absolute; bottom: -5px; left: 25px; width: 15px; height: 15px; background-color: #d3d3d3; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
-        <i class="icon ion-chevron-down" style="font-size: 8px; color: black; transform: scale(0.27);"></i>
-    </div>
-    </button>
-  </ion-nav-buttons>
-       
-        <ion-nav-buttons side="right">
-          <button class="button button-clear" ng-click="toggleRight()">menu<i class="button button-icon ion-navicon"></i></button>
-        </ion-nav-buttons>   
-       
-        <div class="dropdownContent" ng-show="isDropdownVisible" ng-click="$event.stopPropagation()">
-     <div id="bannerRow">
-      <div class="profileImageContainer">
-        <img src="{{userData.photo}}"  />
-      </div>
-      <p class="profileName">{{userData.name}}</p>
-      <p class="profileEmail">{{userData.mail}}</p>
-    </div>
-    <div class="dropdown-item" ng-click="goToStatus()">
-      <i class="ion-ios-contact-outline"></i> Perfil
-    </div>
-    <div class="dropdown-item" ng-click="goToAgenda()">
-      <i class="ion-android-calendar"></i> Agenda
-    </div>
-    <div class="dropdown-item" ng-click="installApp()">
-      <i class="ion-android-download" ></i> Instalar App
-    </div>
-
- <div id="myModal" class="modal" ng-show="isModalVisible">
+  <div id="myModal" class="modal" ng-show="isModalVisible">
     <div class="modal-content">
       <span class="close" ng-click="closeModal()" style="color: black">&times;</span>
-       <img src="https://lh3.googleusercontent.com/d/14h1sox3jQT6akLOHzvt_RK2y6cEsT_Di" alt="Agregar a inicio" style="max-width: 100%;" />
+       <img src="https://lh3.googleusercontent.com/d/1bJZN2UX0fspMxGdHpyinsx29oj6dyG5X" style="max-width: 100%;" />
     <p style="text-align: center; font-weight: bold;">
       <br> Agrega a inicio:   </p> 
         <p style="text-align: center;" >
@@ -838,38 +1182,33 @@ body {
        3. Agregar
        </p>
     </div>
-  </div>
-       
-  </div>
-        
-    </ion-nav-bar>
-
-     <ion-content>
-       
-   <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/courses" frameborder="0" allowfullscreen></iframe></div>
-
-      </ion-content>
+  </div>           
 
     </ion-view>
-  </script>  
+  </script>   
+
     
-      <script id="reel.html" type="text/ng-template">
-    <ion-view >
     
+ 
+
+
+        
+        
+<script id="reel.html" type="text/ng-template">
+  <ion-view>
         <ion-nav-bar class="bar-light" >      
-        <ion-nav-buttons side="left">
-  <!--  <button class="button button-clear" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif">
-      <img src="https://lh3.googleusercontent.com/d/1EP2I0BOMo_8mXsR9qqAv08PxjztZFaQ8" width="35" height="35" style="border-radius: 50%;" />
-       Mozart Academy
-    </button> -->
-       <button class="button button-clear" ng-click="toggleDropdown($event)" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif">
-      <img src="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V" width="35" height="35" style="border-radius: 50%;" />
-      Taller de Piano
+        <ion-nav-buttons side="right">
+
+       <button class="button button-clear" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;">
+      <img src="{{userData.photo}}" width="35" height="35" style="border-radius: 50%;" />
+  <div style="position: absolute; bottom: -5px; left: 25px; width: 15px; height: 15px; background-color: #d3d3d3; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
+        <i class="icon ion-chevron-down" style="font-size: 8px; color: black; transform: scale(0.27);"></i>
+    </div>
     </button>
   </ion-nav-buttons>
        
-        <ion-nav-buttons side="right">
-          <button class="button button-clear" ng-click="toggleRight()">menu<i class="button button-icon ion-navicon"></i></button>
+        <ion-nav-buttons side="left">
+          <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
         </ion-nav-buttons>   
        
         <div class="dropdownContent" ng-show="isDropdownVisible" ng-click="$event.stopPropagation()">
@@ -880,34 +1219,118 @@ body {
       <p class="profileName">{{userData.name}}</p>
       <p class="profileEmail">{{userData.mail}}</p>
     </div>
-   <div class="dropdown-item" ng-click="goToStatus()">
+    <div class="dropdown-item" ng-click="goToStatus()">
       <i class="ion-ios-contact-outline"></i> Perfil
     </div>
-    <div class="dropdown-item" ng-click="goToAgenda()">
-      <i class="ion-android-calendar"></i> Agenda
+           <div class="dropdown-item" ng-click="goToStatus()">
+      <i class="ion-card"></i> Pagos
     </div>
-    <div class="dropdown-item" >
-      <i class="ion-android-download"></i> Instalar App
+     <div class="dropdown-item" ng-click="goToChat()">
+      <i class="ion-ios-chatboxes-outline"></i> Tutoría
     </div>
-  </div>
+  </div> 
         
     </ion-nav-bar>
-        
-      <ion-content >
-       
-        <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/comunity" frameborder="0" allowfullscreen ></iframe></div> 
-    
-      </ion-content>
-    </ion-view>
-  </script>
 
+<div class="hintMsg"><i class="ri-information-2-line" style="font-size: 20px;"></i> Explora más funciones</div>
+    <ion-tabs class="tabs-striped tabs-icon-top tabs-stable ">
+      <ion-tab title="Puntaje" icon="ri-line-chart-fill" href="#/menu/reel/score" class="pulseTab">
+        <ion-nav-view name="score-tab"></ion-nav-view>
+      </ion-tab>
+      <ion-tab title="Logros" icon="ri-trophy-fill" href="#/menu/reel/achievements">
+        <ion-nav-view name="achievements-tab"></ion-nav-view>
+      </ion-tab>
+    </ion-tabs>
+
+
+    <ion-content class="padding tabframe-container"> 
+        <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/achievements" frameborder="0" allowfullscreen ></iframe></div> 
+    </ion-content> 
+
+  </ion-view>
+</script>
+
+
+
+
+ <script id="score.html" type="text/ng-template"> 
+  <ion-view > 
+    <ion-content class="padding"> 
+        <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/score" frameborder="0" allowfullscreen ></iframe></div> 
+    </ion-content> 
+  </ion-view> 
+</script>
+
+ <script id="achievements.html" type="text/ng-template"> 
+  <ion-view > 
+    <ion-content class="padding"> 
+        <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/achievements" frameborder="0" allowfullscreen ></iframe></div> 
+    </ion-content> 
+  </ion-view> 
+</script>
+
+
+
+
+        
+        
+<script id="tabs.html" type="text/ng-template">
+  <ion-view>
+    <ion-nav-bar class="bar-light">
+      <ion-nav-buttons side="left">
+        <button class="button button-clear" ng-click="goToMain()">
+          <i class="ri-arrow-left-s-line"></i> regresar
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
     
+<div class="hintMsg"><i class="ri-information-2-line" style="font-size: 20px;"></i> Explora más funciones</div>
+    <ion-tabs class="tabs-striped tabs-icon-top tabs-stable ">
+      <ion-tab title="Lecciones" icon="ri-graduation-cap-fill" href="#/menu/tab/theory" >
+        <ion-nav-view name="theory-tab"></ion-nav-view>
+      </ion-tab>
+      <ion-tab title="Evaluación" icon="ri-aed-fill" href="#/menu/tab/practice" class="pulseTab">
+        <ion-nav-view name="practice-tab"></ion-nav-view>
+      </ion-tab>
+    </ion-tabs>
+
+    <ion-content class="padding tabframe-container"> 
+        <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/profile" frameborder="0" allowfullscreen ></iframe></div> 
+    </ion-content> 
+
+  </ion-view>
+</script>
+
+
+
+
+ <script id="theory.html" type="text/ng-template"> 
+  <ion-view > 
+    <ion-content class="padding"> 
+        <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/lessons" frameborder="0" allowfullscreen ></iframe></div> 
+    </ion-content> 
+  </ion-view> 
+</script>
+
+ <script id="practice.html" type="text/ng-template"> 
+  <ion-view > 
+    <ion-content class="padding"> 
+        <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/profile" frameborder="0" allowfullscreen ></iframe></div> 
+    </ion-content> 
+  </ion-view> 
+</script>
 
     
         <script id="chat.html" type="text/ng-template">
     <ion-view >
 
-      <ion-back-button></ion-back-button>
+    <ion-nav-bar class="bar-light">
+      <ion-nav-buttons side="left">
+        <button class="button button-clear" ng-click="goToMain()">
+          <i class="ri-arrow-left-s-line"></i> regresar
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
     
       <ion-content>
         <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/chat" frameborder="0" allowfullscreen ></iframe></div> 
@@ -919,12 +1342,12 @@ body {
          <script id="payment.html" type="text/ng-template">
     <ion-view >
 
-     <ion-nav-bar class="bar-light" >     
-       <ion-nav-buttons side="left">
-    <button class="button button-clear" ng-click="goToMain()">
-      <i class="ri-arrow-left-s-line"></i> regresar
-    </button>
-  </ion-nav-buttons>  
+     <ion-nav-bar class="bar-light">
+      <ion-nav-buttons side="left">
+        <button class="button button-clear" ng-click="goToMain()">
+          <i class="ri-arrow-left-s-line"></i> regresar
+        </button>
+      </ion-nav-buttons>
     </ion-nav-bar>
     
       <ion-content>
@@ -932,24 +1355,25 @@ body {
       </ion-content>
     </ion-view>
   </script>
+
+
     
    <script id="library.html" type="text/ng-template">
     <ion-view >
 
       <ion-nav-bar class="bar-light" >      
-        <ion-nav-buttons side="left">
-  <!--  <button class="button button-clear" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif">
-      <img src="https://lh3.googleusercontent.com/d/1EP2I0BOMo_8mXsR9qqAv08PxjztZFaQ8" width="35" height="35" style="border-radius: 50%;" />
-       Mozart Academy
-    </button> -->
-       <button class="button button-clear" ng-click="toggleDropdown($event)" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif">
-      <img src="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V" width="35" height="35" style="border-radius: 50%;" />
-      Taller de Piano
+        <ion-nav-buttons side="right">
+
+       <button class="button button-clear" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;">
+      <img src="{{userData.photo}}" width="35" height="35" style="border-radius: 50%;" />
+  <div style="position: absolute; bottom: -5px; left: 25px; width: 15px; height: 15px; background-color: #d3d3d3; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
+        <i class="icon ion-chevron-down" style="font-size: 8px; color: black; transform: scale(0.27);"></i>
+    </div>
     </button>
   </ion-nav-buttons>
        
-        <ion-nav-buttons side="right">
-          <button class="button button-clear" ng-click="toggleRight()">menu<i class="button button-icon ion-navicon"></i></button>
+        <ion-nav-buttons side="left">
+          <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
         </ion-nav-buttons>   
        
         <div class="dropdownContent" ng-show="isDropdownVisible" ng-click="$event.stopPropagation()">
@@ -960,650 +1384,25 @@ body {
       <p class="profileName">{{userData.name}}</p>
       <p class="profileEmail">{{userData.mail}}</p>
     </div>
-     <div class="dropdown-item" ng-click="goToStatus()">
+    <div class="dropdown-item" ng-click="goToStatus()">
       <i class="ion-ios-contact-outline"></i> Perfil
     </div>
-    <div class="dropdown-item" ng-click="goToAgenda()">
-      <i class="ion-android-calendar"></i> Agenda
+        <div class="dropdown-item" ng-click="goToStatus()">
+      <i class="ion-card"></i> Pagos
     </div>
+    <div class="dropdown-item" ng-click="goToChat()">
+      <i class="ion-ios-chatboxes-outline"></i> Tutoría
+    </div>       
   </div>
         
     </ion-nav-bar>
 
 
      <ion-content>
-       
-<div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/books" frameborder="0" allowfullscreen ></iframe></div> 
-
+  <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/books" frameborder="0" allowfullscreen ></iframe></div> 
       </ion-content>
       
      
-    </ion-view>
-  </script>   
-
-
-  
-
-    
-   <script id="manuals.html" type="text/ng-template">   
-       <ion-view>
-
- <ion-nav-bar class="bar-light" >     
-  <ion-nav-buttons side="left">
-    <button class="button button-clear" ng-click="goToMain()">
-      <i class="ri-arrow-left-s-line"></i> regresar
-    </button>
-  </ion-nav-buttons>  
- </ion-nav-bar>
-     
-      <ion-content>
-     
-<div ng-if="isLoading" style="display: flex; justify-content: center; align-items: center; height: 80vh;">
-  <div class="alert alert-info" style="text-align: center; width: 250px; ">
-     <div class="ionic-spinner"> </div>
-   Cargando...
-  </div>
-</div>
- 
-        <div class="documents">
-      <div class="document" ng-repeat="manual in manuals" ng-click="openURL($index)" ng-if="lvl > manual.lvl || (manual.lvl == lvl && manual.blq <= blq)">
-        <div class="document__img" ng-style="{'background-image': 'url(' + manual.background + ')'}"></div>
-          <div class="document__title">{{manual.title}}</div>
-         </div>
-     </div>
-  
-       
-      </ion-content>
-    </ion-view>
-  </script>
-
-
-  
-    
-    
-     <script id="repertoire.html" type="text/ng-template">   
-       <ion-view title="Repertorio">
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-       
-       <div class="list">
-  
-        <a class="item item-icon-right" href="#/menu/repertoire/basic">
-      Básico   <i class="icon ri-walk-fill"></i>
-          <p style="font-size: 10px;">Piezas de Grado Preparatorio</p> 
-        </a>
-      
-        <a class="item item-icon-right" href="#/menu/repertoire/beginner">
-      Principiante   <i class="icon ri-run-fill"></i>
-          <p style="font-size: 10px;">Piezas de Grado 1 y 2</p> 
-        </a>
-       <a class="item item-icon-right" href="#/menu/repertoire/intermediate">
-      Intermedio <i class="icon ri-riding-fill"></i>
-          <p style="font-size: 10px;">Piezas de Grado 3, 4 y 5</p> 
-        </a>
-       <a class="item item-icon-right" href="#/menu/repertoire/advanced">
-    Avanzado   <i class="icon ri-flight-takeoff-fill"></i>
-          <p style="font-size: 10px;">Piezas de Grado 6, 7 y 8</p> 
-        </a>
-    </div>  
-       
-      </ion-content>
-    </ion-view>
-  </script>
-
-
-
-       <script id="basic.html" type="text/ng-template">   
-       <ion-view title="Repertorio básico">
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
-<div ng-if="isLoading" style="display: flex; justify-content: center; align-items: center; height: 80vh;">
-  <div class="alert alert-info" style="text-align: center; width: 250px; ">
-     <div class="ionic-spinner"> </div>
-   Cargando...
-  </div>
-</div>
- 
-        <div class="documents">
-      <div class="document" ng-repeat="manual in manuals" ng-click="showModal($index)" ng-if="lvl > manual.lvl || (manual.lvl == lvl && manual.blq <= blq)">
-        <div class="document__img" ng-style="{'background-image': 'url(' + manual.background + ')'}"></div>
-          <div class="document__title">{{manual.title}}</div>
-         </div>
-     </div>
-  
-
-    <div id="modalBasic" class="modal-container">
-        <div class="modal-background" ng-click="hideModal()">
-            <div class="modalDoc">
-        
-                      <a 
-         href="" 
-         class="close-modal" 
-        >
-         <!-- X close video icon -->
-          <svg 
-            version="1.1" 
-            xmlns="http://www.w3.org/2000/svg" 
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            x="0"
-            y="0"
-            viewBox="0 0 32 32" 
-            style="enable-background:new 0 0 32 32;" 
-            xml:space="preserve" 
-            width="24" 
-            height="24" 
-          >
-                <path fill="#ffffff" d="M30.3448276,31.4576271 C29.9059965,31.4572473 29.4852797,31.2855701 29.1751724,30.980339 L0.485517241,2.77694915 C-0.122171278,2.13584324 -0.104240278,1.13679247 0.52607603,0.517159487 C1.15639234,-0.102473494 2.17266813,-0.120100579 2.82482759,0.477288136 L31.5144828,28.680678 C31.9872448,29.1460053 32.1285698,29.8453523 31.8726333,30.4529866 C31.6166968,31.0606209 31.0138299,31.4570487 30.3448276,31.4576271 Z" id="Shape"></path>
-                <path fill="#ffffff" d="M1.65517241,31.4576271 C0.986170142,31.4570487 0.383303157,31.0606209 0.127366673,30.4529866 C-0.12856981,29.8453523 0.0127551942,29.1460053 0.485517241,28.680678 L29.1751724,0.477288136 C29.8273319,-0.120100579 30.8436077,-0.102473494 31.473924,0.517159487 C32.1042403,1.13679247 32.1221713,2.13584324 31.5144828,2.77694915 L2.82482759,30.980339 C2.51472031,31.2855701 2.09400353,31.4572473 1.65517241,31.4576271 Z" id="Shape"></path>
-          </svg>
-        </a>
-       
-                <iframe class="drive" ng-src="{{trustAsResourceUrl(selectedManualUrl)}}" frameborder="0"></iframe>
-            </div>
-        </div>
-    </div>
-       
-      </ion-content>
-    </ion-view>
-  </script>
-
-
-    
-       <script id="beginner.html" type="text/ng-template">   
-       <ion-view title="Repertorio principiante">
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
-<div ng-if="isLoading" style="display: flex; justify-content: center; align-items: center; height: 80vh;">
-  <div class="alert alert-info" style="text-align: center; width: 250px; ">
-     <div class="ionic-spinner"> </div>
-   Cargando...
-  </div>
-</div>
- 
-        <div class="documents">
-      <div class="document" ng-repeat="manual in manuals" ng-click="showModal($index)" ng-if="lvl > manual.lvl || (manual.lvl == lvl && manual.blq <= blq)">
-        <div class="document__img" ng-style="{'background-image': 'url(' + manual.background + ')'}"></div>
-          <div class="document__title">{{manual.title}}</div>
-         </div>
-     </div>
-  
-
-    <div id="modalBeginner" class="modal-container">
-        <div class="modal-background" ng-click="hideModal()">
-            <div class="modalDoc">
-        
-                      <a 
-         href="" 
-         class="close-modal" 
-        >
-         <!-- X close video icon -->
-          <svg 
-            version="1.1" 
-            xmlns="http://www.w3.org/2000/svg" 
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            x="0"
-            y="0"
-            viewBox="0 0 32 32" 
-            style="enable-background:new 0 0 32 32;" 
-            xml:space="preserve" 
-            width="24" 
-            height="24" 
-          >
-                <path fill="#ffffff" d="M30.3448276,31.4576271 C29.9059965,31.4572473 29.4852797,31.2855701 29.1751724,30.980339 L0.485517241,2.77694915 C-0.122171278,2.13584324 -0.104240278,1.13679247 0.52607603,0.517159487 C1.15639234,-0.102473494 2.17266813,-0.120100579 2.82482759,0.477288136 L31.5144828,28.680678 C31.9872448,29.1460053 32.1285698,29.8453523 31.8726333,30.4529866 C31.6166968,31.0606209 31.0138299,31.4570487 30.3448276,31.4576271 Z" id="Shape"></path>
-                <path fill="#ffffff" d="M1.65517241,31.4576271 C0.986170142,31.4570487 0.383303157,31.0606209 0.127366673,30.4529866 C-0.12856981,29.8453523 0.0127551942,29.1460053 0.485517241,28.680678 L29.1751724,0.477288136 C29.8273319,-0.120100579 30.8436077,-0.102473494 31.473924,0.517159487 C32.1042403,1.13679247 32.1221713,2.13584324 31.5144828,2.77694915 L2.82482759,30.980339 C2.51472031,31.2855701 2.09400353,31.4572473 1.65517241,31.4576271 Z" id="Shape"></path>
-          </svg>
-        </a>
-       
-                <iframe class="drive" ng-src="{{trustAsResourceUrl(selectedManualUrl)}}" frameborder="0"></iframe>
-            </div>
-        </div>
-    </div>
-       
-      </ion-content>
-    </ion-view>
-  </script>
-
-
-
-
-    
-       <script id="intermediate.html" type="text/ng-template">   
-       <ion-view title="Repertorio intermedio">
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
-<div ng-if="isLoading" style="display: flex; justify-content: center; align-items: center; height: 80vh;">
-  <div class="alert alert-info" style="text-align: center; width: 250px; ">
-     <div class="ionic-spinner"> </div>
-   Cargando...
-  </div>
-</div>
- 
-        <div class="documents">
-      <div class="document" ng-repeat="manual in manuals" ng-click="showModal($index)" ng-if="lvl > manual.lvl || (manual.lvl == lvl && manual.blq <= blq)">
-        <div class="document__img" ng-style="{'background-image': 'url(' + manual.background + ')'}"></div>
-          <div class="document__title">{{manual.title}}</div>
-         </div>
-     </div>
-  
-
-    <div id="modalIntermediate" class="modal-container">
-        <div class="modal-background" ng-click="hideModal()">
-            <div class="modalDoc">
-        
-                      <a 
-         href="" 
-         class="close-modal" 
-        >
-         <!-- X close video icon -->
-          <svg 
-            version="1.1" 
-            xmlns="http://www.w3.org/2000/svg" 
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            x="0"
-            y="0"
-            viewBox="0 0 32 32" 
-            style="enable-background:new 0 0 32 32;" 
-            xml:space="preserve" 
-            width="24" 
-            height="24" 
-          >
-                <path fill="#ffffff" d="M30.3448276,31.4576271 C29.9059965,31.4572473 29.4852797,31.2855701 29.1751724,30.980339 L0.485517241,2.77694915 C-0.122171278,2.13584324 -0.104240278,1.13679247 0.52607603,0.517159487 C1.15639234,-0.102473494 2.17266813,-0.120100579 2.82482759,0.477288136 L31.5144828,28.680678 C31.9872448,29.1460053 32.1285698,29.8453523 31.8726333,30.4529866 C31.6166968,31.0606209 31.0138299,31.4570487 30.3448276,31.4576271 Z" id="Shape"></path>
-                <path fill="#ffffff" d="M1.65517241,31.4576271 C0.986170142,31.4570487 0.383303157,31.0606209 0.127366673,30.4529866 C-0.12856981,29.8453523 0.0127551942,29.1460053 0.485517241,28.680678 L29.1751724,0.477288136 C29.8273319,-0.120100579 30.8436077,-0.102473494 31.473924,0.517159487 C32.1042403,1.13679247 32.1221713,2.13584324 31.5144828,2.77694915 L2.82482759,30.980339 C2.51472031,31.2855701 2.09400353,31.4572473 1.65517241,31.4576271 Z" id="Shape"></path>
-          </svg>
-        </a>
-       
-                <iframe class="drive" ng-src="{{trustAsResourceUrl(selectedManualUrl)}}" frameborder="0"></iframe>
-            </div>
-        </div>
-    </div>
-       
-      </ion-content>
-    </ion-view>
-  </script>
-
-
-
-    
-       <script id="advanced.html" type="text/ng-template">   
-       <ion-view title="Repertorio avanzado">
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
-<div ng-if="isLoading" style="display: flex; justify-content: center; align-items: center; height: 80vh;">
-  <div class="alert alert-info" style="text-align: center; width: 250px; ">
-     <div class="ionic-spinner"> </div>
-   Cargando...
-  </div>
-</div>
- 
-        <div class="documents">
-      <div class="document" ng-repeat="manual in manuals" ng-click="showModal($index)" ng-if="lvl > manual.lvl || (manual.lvl == lvl && manual.blq <= blq)">
-        <div class="document__img" ng-style="{'background-image': 'url(' + manual.background + ')'}"></div>
-          <div class="document__title">{{manual.title}}</div>
-         </div>
-     </div>
-  
-
-    <div id="modalAdvanced" class="modal-container">
-        <div class="modal-background" ng-click="hideModal()">
-            <div class="modalDoc">
-        
-                      <a 
-         href="" 
-         class="close-modal" 
-        >
-         <!-- X close video icon -->
-          <svg 
-            version="1.1" 
-            xmlns="http://www.w3.org/2000/svg" 
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            x="0"
-            y="0"
-            viewBox="0 0 32 32" 
-            style="enable-background:new 0 0 32 32;" 
-            xml:space="preserve" 
-            width="24" 
-            height="24" 
-          >
-                <path fill="#ffffff" d="M30.3448276,31.4576271 C29.9059965,31.4572473 29.4852797,31.2855701 29.1751724,30.980339 L0.485517241,2.77694915 C-0.122171278,2.13584324 -0.104240278,1.13679247 0.52607603,0.517159487 C1.15639234,-0.102473494 2.17266813,-0.120100579 2.82482759,0.477288136 L31.5144828,28.680678 C31.9872448,29.1460053 32.1285698,29.8453523 31.8726333,30.4529866 C31.6166968,31.0606209 31.0138299,31.4570487 30.3448276,31.4576271 Z" id="Shape"></path>
-                <path fill="#ffffff" d="M1.65517241,31.4576271 C0.986170142,31.4570487 0.383303157,31.0606209 0.127366673,30.4529866 C-0.12856981,29.8453523 0.0127551942,29.1460053 0.485517241,28.680678 L29.1751724,0.477288136 C29.8273319,-0.120100579 30.8436077,-0.102473494 31.473924,0.517159487 C32.1042403,1.13679247 32.1221713,2.13584324 31.5144828,2.77694915 L2.82482759,30.980339 C2.51472031,31.2855701 2.09400353,31.4572473 1.65517241,31.4576271 Z" id="Shape"></path>
-          </svg>
-        </a>
-       
-                <iframe class="drive" ng-src="{{trustAsResourceUrl(selectedManualUrl)}}" frameborder="0"></iframe>
-            </div>
-        </div>
-    </div>
-       
-      </ion-content>
-    </ion-view>
-  </script>
-
-    <script id="books.html" type="text/ng-template">   
-       <ion-view>
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
- <div class="list">
-   <div class="item item-divider itemDividerforitem">Métodos</div>
-        <a class="item item-icon-left" href="#/menu/books/solfiege">
-      Solfeo   <i class="icon ri-voiceprint-line"></i>
-          <p style="font-size: 10px;">Entrenamiento para identificar notas</p> 
-        </a>
-      
-        <a class="item item-icon-left" href="#/menu/books/scales">
-      Escalas y Arpegios  <i class="icon ri-arrow-up-down-fill"></i>
-          <p style="font-size: 10px;">Ejercicios técnicos para mejorar la destreza.</p> 
-        </a>
-       <a class="item item-icon-left" href="#/menu/books/sightread">
-      Lectura a primer vista   <i class="icon ri-book-open-line"></i>
-          <p style="font-size: 10px;"> Habilidad para interpretar música al instante.</p> 
-        </a>
-
-  <!--     <div class="item item-divider itemDividerforitem">Apps musicales</div>
-   <a class="item item-avatar" href="#/menu/metronome">
-        <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/42/1e/07/421e07cc-b33b-e384-1995-06183618693a/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/460x0w.webp">
-           <h2> Metrónomo</h2>
-     <p> metronome beats </p>
-          </a>
-     <a class="item item-avatar" href="#/menu/notereader">
-            <img src="https://play-lh.googleusercontent.com/NzG7u3_0xrBfYdx-_ddIZn9x8VFv5oBtOuMsgpWIZJ8vqB8pWUIUeIMcl-9saY8-N0o=w480-h960-rw">
-           <h2> Lectura de notas </h2>
-     <p> Entrenamiento melódico</p>
-          </a>
-      <a class="item item-avatar" href="#/menu/circlefifths">
-            <img src="https://lh3.googleusercontent.com/d/16w1B_HGaZPCaG5uhMjTA824i_uTFcnTF=s100-p">
-           <h2> Círculo de quintas </h2>
-     <p> Entrenamiento armónico</p>
-          </a>
-      
-    </div>   -->
-
-       
-      </ion-content>
-    </ion-view>
-  </script>
-
-
-
-         <script id="solfiege.html" type="text/ng-template">   
-       <ion-view title="Solfeo">
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
-<div ng-if="isLoading" style="display: flex; justify-content: center; align-items: center; height: 80vh;">
-  <div class="alert alert-info" style="text-align: center; width: 250px; ">
-     <div class="ionic-spinner"> </div>
-   Cargando...
-  </div>
-</div>
- 
-        <div class="documents">
-      <div class="document" ng-repeat="manual in manuals" ng-click="showModal($index)" ng-if="lvl > manual.lvl || (manual.lvl == lvl && manual.blq <= blq)">
-        <div class="document__img" ng-style="{'background-image': 'url(' + manual.background + ')'}"></div>
-          <div class="document__title">{{manual.title}}</div>
-         </div>
-     </div>
-  
-
-    <div id="modalSofiege" class="modal-container">
-        <div class="modal-background" ng-click="hideModal()">
-            <div class="modalDoc">
-        
-                      <a 
-         href="" 
-         class="close-modal" 
-        >
-         <!-- X close video icon -->
-          <svg 
-            version="1.1" 
-            xmlns="http://www.w3.org/2000/svg" 
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            x="0"
-            y="0"
-            viewBox="0 0 32 32" 
-            style="enable-background:new 0 0 32 32;" 
-            xml:space="preserve" 
-            width="24" 
-            height="24" 
-          >
-                <path fill="#ffffff" d="M30.3448276,31.4576271 C29.9059965,31.4572473 29.4852797,31.2855701 29.1751724,30.980339 L0.485517241,2.77694915 C-0.122171278,2.13584324 -0.104240278,1.13679247 0.52607603,0.517159487 C1.15639234,-0.102473494 2.17266813,-0.120100579 2.82482759,0.477288136 L31.5144828,28.680678 C31.9872448,29.1460053 32.1285698,29.8453523 31.8726333,30.4529866 C31.6166968,31.0606209 31.0138299,31.4570487 30.3448276,31.4576271 Z" id="Shape"></path>
-                <path fill="#ffffff" d="M1.65517241,31.4576271 C0.986170142,31.4570487 0.383303157,31.0606209 0.127366673,30.4529866 C-0.12856981,29.8453523 0.0127551942,29.1460053 0.485517241,28.680678 L29.1751724,0.477288136 C29.8273319,-0.120100579 30.8436077,-0.102473494 31.473924,0.517159487 C32.1042403,1.13679247 32.1221713,2.13584324 31.5144828,2.77694915 L2.82482759,30.980339 C2.51472031,31.2855701 2.09400353,31.4572473 1.65517241,31.4576271 Z" id="Shape"></path>
-          </svg>
-        </a>
-       
-                <iframe class="drive" ng-src="{{trustAsResourceUrl(selectedManualUrl)}}" frameborder="0"></iframe>
-            </div>
-        </div>
-    </div>
-       
-      </ion-content>
-    </ion-view>
-  </script>
-
-
-         <script id="scales.html" type="text/ng-template">   
-       <ion-view title="Escalas y Arpegios">
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
-<div ng-if="isLoading" style="display: flex; justify-content: center; align-items: center; height: 80vh;">
-  <div class="alert alert-info" style="text-align: center; width: 250px; ">
-     <div class="ionic-spinner"> </div>
-   Cargando...
-  </div>
-</div>
- 
-        <div class="documents">
-      <div class="document" ng-repeat="manual in manuals" ng-click="showModal($index)" ng-if="lvl > manual.lvl || (manual.lvl == lvl && manual.blq <= blq)">
-        <div class="document__img" ng-style="{'background-image': 'url(' + manual.background + ')'}"></div>
-          <div class="document__title">{{manual.title}}</div>
-         </div>
-     </div>
-  
-
-    <div id="modalScales" class="modal-container">
-        <div class="modal-background" ng-click="hideModal()">
-            <div class="modalDoc">
-        
-                      <a 
-         href="" 
-         class="close-modal" 
-        >
-         <!-- X close video icon -->
-          <svg 
-            version="1.1" 
-            xmlns="http://www.w3.org/2000/svg" 
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            x="0"
-            y="0"
-            viewBox="0 0 32 32" 
-            style="enable-background:new 0 0 32 32;" 
-            xml:space="preserve" 
-            width="24" 
-            height="24" 
-          >
-                <path fill="#ffffff" d="M30.3448276,31.4576271 C29.9059965,31.4572473 29.4852797,31.2855701 29.1751724,30.980339 L0.485517241,2.77694915 C-0.122171278,2.13584324 -0.104240278,1.13679247 0.52607603,0.517159487 C1.15639234,-0.102473494 2.17266813,-0.120100579 2.82482759,0.477288136 L31.5144828,28.680678 C31.9872448,29.1460053 32.1285698,29.8453523 31.8726333,30.4529866 C31.6166968,31.0606209 31.0138299,31.4570487 30.3448276,31.4576271 Z" id="Shape"></path>
-                <path fill="#ffffff" d="M1.65517241,31.4576271 C0.986170142,31.4570487 0.383303157,31.0606209 0.127366673,30.4529866 C-0.12856981,29.8453523 0.0127551942,29.1460053 0.485517241,28.680678 L29.1751724,0.477288136 C29.8273319,-0.120100579 30.8436077,-0.102473494 31.473924,0.517159487 C32.1042403,1.13679247 32.1221713,2.13584324 31.5144828,2.77694915 L2.82482759,30.980339 C2.51472031,31.2855701 2.09400353,31.4572473 1.65517241,31.4576271 Z" id="Shape"></path>
-          </svg>
-        </a>
-       
-                <iframe class="drive" ng-src="{{trustAsResourceUrl(selectedManualUrl)}}" frameborder="0"></iframe>
-            </div>
-        </div>
-    </div>
-       
-      </ion-content>
-    </ion-view>
-  </script>
-
-
-         <script id="sightread.html" type="text/ng-template">   
-       <ion-view title="Lectura a primer vista">
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
-<div ng-if="isLoading" style="display: flex; justify-content: center; align-items: center; height: 80vh;">
-  <div class="alert alert-info" style="text-align: center; width: 250px; ">
-     <div class="ionic-spinner"> </div>
-   Cargando...
-  </div>
-</div>
- 
-        <div class="documents">
-      <div class="document" ng-repeat="manual in manuals" ng-click="showModal($index)" ng-if="lvl > manual.lvl || (manual.lvl == lvl && manual.blq <= blq)">
-        <div class="document__img" ng-style="{'background-image': 'url(' + manual.background + ')'}"></div>
-          <div class="document__title">{{manual.title}}</div>
-         </div>
-     </div>
-  
-
-    <div id="modalSightread" class="modal-container">
-        <div class="modal-background" ng-click="hideModal()">
-            <div class="modalDoc">
-        
-                      <a 
-         href="" 
-         class="close-modal" 
-        >
-         <!-- X close video icon -->
-          <svg 
-            version="1.1" 
-            xmlns="http://www.w3.org/2000/svg" 
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            x="0"
-            y="0"
-            viewBox="0 0 32 32" 
-            style="enable-background:new 0 0 32 32;" 
-            xml:space="preserve" 
-            width="24" 
-            height="24" 
-          >
-                <path fill="#ffffff" d="M30.3448276,31.4576271 C29.9059965,31.4572473 29.4852797,31.2855701 29.1751724,30.980339 L0.485517241,2.77694915 C-0.122171278,2.13584324 -0.104240278,1.13679247 0.52607603,0.517159487 C1.15639234,-0.102473494 2.17266813,-0.120100579 2.82482759,0.477288136 L31.5144828,28.680678 C31.9872448,29.1460053 32.1285698,29.8453523 31.8726333,30.4529866 C31.6166968,31.0606209 31.0138299,31.4570487 30.3448276,31.4576271 Z" id="Shape"></path>
-                <path fill="#ffffff" d="M1.65517241,31.4576271 C0.986170142,31.4570487 0.383303157,31.0606209 0.127366673,30.4529866 C-0.12856981,29.8453523 0.0127551942,29.1460053 0.485517241,28.680678 L29.1751724,0.477288136 C29.8273319,-0.120100579 30.8436077,-0.102473494 31.473924,0.517159487 C32.1042403,1.13679247 32.1221713,2.13584324 31.5144828,2.77694915 L2.82482759,30.980339 C2.51472031,31.2855701 2.09400353,31.4572473 1.65517241,31.4576271 Z" id="Shape"></path>
-          </svg>
-        </a>
-       
-                <iframe class="drive" ng-src="{{trustAsResourceUrl(selectedManualUrl)}}" frameborder="0"></iframe>
-            </div>
-        </div>
-    </div>
-       
-      </ion-content>
-    </ion-view>
-  </script>
-
-
-      <script id="diplomas.html" type="text/ng-template">   
-       <ion-view>
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
-   <div style="display: flex; justify-content: center; align-items: center; height: 80vh;">
-  <div class="alert alert-danger" style="text-align: center; width: 250px; padding: 15px;">
-    Sin elementos para mostrar aún
-  </div>
-</div>
- 
-      </ion-content>
-    </ion-view>
-  </script>
-
-
-    
- <script id="statistics.html" type="text/ng-template">
-<ion-view>
-     <ion-content>
-         <ion-back-button></ion-back-button>
-
-<div style="display: flex; justify-content: center; align-items: center; height: 80vh;">
-  <div class="alert alert-danger" style="text-align: center; width: 250px; padding: 15px;">
-    Sin elementos para mostrar aún
-  </div>
-</div>
-   
-      </ion-content>
-    </ion-view>
-  </script>  
-
-
- <script id="metronome.html" type="text/ng-template">   
-       <ion-view>
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
-       <div class="iframe-container"><iframe src="https://embed.metronome.app/" frameborder="0" allowfullscreen></iframe></div>
-       
-      </ion-content>
-    </ion-view>
-  </script>
-    
-
- <script id="notereader.html" type="text/ng-template">   
-       <ion-view>
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
-    <div class="iframe-container"><iframe src="https://app.mozartacademy.mx/notereader" frameborder="0" allowfullscreen></iframe></div>
-       
-      </ion-content>
-    </ion-view>
-  </script>
-
-
-     <script id="circlefifths.html" type="text/ng-template">   
-       <ion-view>
-      <ion-content >
-
-          <ion-back-button></ion-back-button>
-
-   <div class="iframe-container"><iframe src="https://app.mozartacademy.mx/circleoffifths" frameborder="0" allowfullscreen></iframe></div>
-       
-      </ion-content>
-    </ion-view>
-  </script>
-
-
-
-
-
-<script id="about.html" type="text/ng-template">
- 
-   <ion-view title="Lineamientos">
-
-      <ion-nav-bar class="bar-stable">
-        <ion-nav-buttons side="right">
-          <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()"></button>
-        </ion-nav-buttons>      
-    </ion-nav-bar>
-
-     <ion-content>
-    <div class="list">
-          <a class="item" href="#/menu/regulation">
-            Reglamento
-          </a>
-
-
-          <a class="item" href="#/menu/aboutus">
-           Acerca de
-          </a>
-</div>
-      </ion-content>
     </ion-view>
   </script>   
 
@@ -1612,17 +1411,7 @@ body {
 
 
 
-   <script id="aboutus.html" type="text/ng-template">   
-       <ion-view>
-      <ion-content >
 
-          <ion-back-button></ion-back-button>
-
-        <h2>Acerca de</h2>
- 
-      </ion-content>
-    </ion-view>
-  </script>
 
 
 
@@ -1675,7 +1464,7 @@ body {
 app
 .factory('SharedState', function($http, $q) {
   var requestData = {
-    action: "getBasicData",
+    action: "getProfileData",
     token: localStorage.getItem('TPtoken')
   };
 
@@ -1729,7 +1518,17 @@ app
       url: "/agenda",
       views: {
         'menuContent': {
-          templateUrl: "agenda.html"
+          templateUrl: "agenda.html",
+            controller: 'agendaCtrl'
+        }
+      }
+    })
+        .state('menu.attendance', {
+      url: "/attendance",
+      views: {
+        'menuContent': {
+          templateUrl: "attendance.html",
+            controller: 'attendanceCtrl'
         }
       }
     })
@@ -1737,8 +1536,7 @@ app
       url: "/profile",
       views: {
         'menuContent': {
-          templateUrl: "profile.html",
-          controller: "profileCtrl"
+          templateUrl: "profile.html"
         }
       }
     })
@@ -1750,15 +1548,7 @@ app
         }
       }
     }) 
-.state('menu.courses', {
-      url: "/courses",
-      views: {
-        'menuContent': {
-          templateUrl: "courses.html"
-        }
-      }
-    }) 
-           .state('menu.tabs', {
+       .state('menu.tabs', {
       url: "/tab",
       views: {
         'menuContent' :{
@@ -1782,6 +1572,38 @@ app
           }
         }
       })
+ .state('menu.reel', {
+      url: "/reel",
+      views: {
+        'menuContent' :{
+          templateUrl: "reel.html"
+        }
+      }
+    })
+      .state("menu.reel.score", {
+        url: "/score",
+        views: {
+          "score-tab": {
+            templateUrl: "score.html"
+          }
+        }
+      })
+       .state("menu.reel.achievements", {
+        url: "/achievements",
+        views: {
+          "achievements-tab": {
+            templateUrl: "achievements.html"
+          }
+        }
+      })
+      .state('menu.courses', {
+      url: "/courses",
+      views: {
+        'menuContent': {
+          templateUrl: "courses.html"
+        }
+      }
+    }) 
  .state('menu.chat', {
       url: "/chat",
       views: {
@@ -1798,31 +1620,7 @@ app
         }
       }
     })
-   .state('menu.metronome', {
-      url: "/metronome",
-      views: {
-        'menuContent': {
-          templateUrl: "metronome.html"
-        }
-      }
-    })
-   .state('menu.notereader', {
-      url: "/notereader",
-      views: {
-        'menuContent': {
-          templateUrl: "notereader.html"
-        }
-      }
-    })
-
-  .state('menu.circlefifths', {
-      url: "/circlefifths",
-      views: {
-        'menuContent': {
-          templateUrl: "circlefifths.html"
-        }
-      }
-    })
+ 
    .state('menu.library', {
       url: "/library",
       views: {
@@ -1832,62 +1630,7 @@ app
       }
     })
  
-   .state('menu.manuals', {
-      url: "/manuals",
-      views: {
-        'menuContent': {
-          templateUrl: "manuals.html",
-          controller: "manualsCtrl"
-        }
-      }
-    })
-
-   .state('menu.repertoire', {
-      url: "/repertoire",
-      views: {
-        'menuContent': {
-          templateUrl: "repertoire.html"
-        }
-      }
-    })
-  .state('menu.repertoire.basic', {
-      url: "/basic",
-      views: {
-        'menuContent@menu': {
-          templateUrl: "basic.html",
-    controller: "repCtrl1"  
-        }
-      }
-    })
-      .state('menu.repertoire.beginner', {
-      url: "/beginner",
-      views: {
-        'menuContent@menu': {
-          templateUrl: "beginner.html",
-    controller: "repCtrl2"  
-        }
-      }
-    })
-      .state('menu.repertoire.intermediate', {
-      url: "/intermediate",
-      views: {
-        'menuContent@menu': {
-          templateUrl: "intermediate.html",
-    controller: "repCtrl3"  
-        }
-      }
-    })
-      .state('menu.repertoire.advanced', {
-      url: "/advanced",
-      views: {
-        'menuContent@menu': {
-          templateUrl: "advanced.html",
-    controller: "repCtrl4"  
-        }
-      }
-    })
-  
-
+   
      .state('menu.books', {
       url: "/books",
       views: {
@@ -1896,83 +1639,9 @@ app
         }
       }
     })
-.state('menu.books.solfiege', {
-      url: "/solfiege",
-      views: {
-        'menuContent@menu': {
-          templateUrl: "solfiege.html",
-    controller: "booksCtrl1"  
-        }
-      }
-    })
-            .state('menu.books.scales', {
-      url: "/scales",
-      views: {
-        'menuContent@menu': {
-          templateUrl: "scales.html",
-    controller: "booksCtrl2"  
-        }
-      }
-    })
-            .state('menu.books.sightread', {
-      url: "/sightread",
-      views: {
-        'menuContent@menu': {
-          templateUrl: "sightread.html",
-    controller: "booksCtrl3"  
-        }
-      }
-    })
-     .state('menu.diplomas', {
-      url: "/diplomas",
-      views: {
-        'menuContent': {
-          templateUrl: "diplomas.html"
-        }
-      }
-    })
- .state('menu.statistics', {
-      url: "/statistics",
-      views: {
-        'menuContent': {
-          templateUrl: "statistics.html"
-        }
-      }
-    })
-   .state('menu.reel', {
-      url: "/reel",
-      views: {
-        'menuContent': {
-          templateUrl: "reel.html"
-        }
-      }
-    })
-    .state('menu.about', {
-      url: "/about",
-      views: {
-        'menuContent': {
-          templateUrl: "about.html"
-        }
-      }
-    })
-  .state('menu.regulation', {
-      url: "/regulation",
-      views: {
-        'menuContent': {
-          templateUrl: "regulation.html",
-          controller: "AccordianCtrl"
-        }
-      }
-    })
 
-  .state('menu.aboutus', {
-      url: "/aboutus",
-      views: {
-        'menuContent': {
-          templateUrl: "aboutus.html"
-        }
-      }
-    })
+
+
     ; 
 
   $urlRouterProvider.otherwise("menu/courses");
@@ -1984,7 +1653,7 @@ app
   });
  })       
 
-.controller('MenuCtrl', ['$http', '$scope', '$ionicSideMenuDelegate', '$ionicModal', 'SharedState', '$document', function($http, $scope, $ionicSideMenuDelegate, $ionicModal, SharedState, $document) {
+.controller('MenuCtrl', ['$http', '$scope', '$ionicSideMenuDelegate', '$ionicModal', 'SharedState', function($http, $scope, $ionicSideMenuDelegate, $ionicModal, SharedState) {
   $scope.toggleRight = function() {
     $('.item').removeClass('anim');
     setTimeout(function() {
@@ -1993,47 +1662,123 @@ app
         });
     }, 10);
     
-    $ionicSideMenuDelegate.toggleRight();
+    $ionicSideMenuDelegate.toggleLeft();
+      $scope.dropdownNotifVisible = false;
+      $scope.isDropdownVisible = false;
+      $scope.dropdownChatVisible = false;
 };
-  
+
+    $scope.loadingProfile = true;
   SharedState.getNum().then(function(data) {
        $scope.userData = data.data;
-  })
+       $scope.userPlan = data.data.plan.split(" ")[0];
+      $scope.chats = JSON.parse(data.data.messages);
+    $scope.alerts = JSON.parse(data.data.alerts);
+      $scope.loadingProfile = false;
+  }) 
 
-    $scope.isDropdownVisible = false;
-    $scope.toggleDropdown = function(event) {
-      event.stopPropagation();
+     $scope.isDropdownVisible = false;
+    $scope.toggleDropdown = function() {
       $scope.isDropdownVisible = !$scope.isDropdownVisible;
+      $scope.dropdownChatVisible = false;
+      $scope.dropdownNotifVisible = false;
+    };
+    
+ $scope.chatCounter = true;
+ $scope.alertCounter = true;
+    
+    $scope.dropdownChatVisible = false;
+    $scope.dropdownChat = function() {
+      $scope.dropdownChatVisible = !$scope.dropdownChatVisible;
+      $scope.isDropdownVisible = false;
+      $scope.dropdownNotifVisible = false;
+      $scope.chatCounter = false;  
     };
 
-    $document.on('click', function(event) {
-    const dropdown = document.querySelector('.dropdownContent');
-    if ($scope.isDropdownVisible && !dropdown.contains(event.target)) {
-      $scope.$apply(function() {
-        $scope.isDropdownVisible = false;
-      });
-    }
-  });
-
-     $scope.$on('$destroy', function() {
-    $document.off('click');
-  });
-
-     
+    $scope.dropdownNotifVisible = false;
+    $scope.dropdownNotif = function() {
+      $scope.dropdownNotifVisible = !$scope.dropdownNotifVisible;
+      $scope.isDropdownVisible = false;
+      $scope.dropdownChatVisible = false;
+      $scope.alertCounter = false;  
+    };
   
+ $scope.calculateDaysAgo = function(alertDate) {
+  const alertDateObj = new Date(alertDate); // Convierte la fecha del string a un objeto Date
+  const today = new Date(); // Fecha actual
+  const timeDiff = Math.abs(today - alertDateObj); // Diferencia en milisegundos
+  const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)); // Conversión a días
+  return daysDiff;
+};
+
    $scope.goToProfile = function() {
   window.location.href = '#/menu/profile';
 };  
-     $scope.goToAgenda = function() {
-  window.location.href = '#/menu/agenda';
+     $scope.goToChat = function() {
+  window.location.href = '#/menu/chat';
 };  
      $scope.goToStatus = function() {
   window.location.href = '#/menu/status';
 };
-  
-$scope.goToMain = function() {
+      $scope.goToAgenda = function() {
+  window.location.href = '#/menu/agenda';
+};
+    $scope.goToMain = function() {
    window.location.href = '#/main';
 };
+
+  $scope.isModalVisible = false;
+let deferredPrompt;
+const isAndroid = /Android/i.test(navigator.userAgent);
+const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+// Registrar el Service Worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').then(function (registration) {
+    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+  }, function (err) {
+    console.log('ServiceWorker registration failed: ', err);
+  });
+}
+
+if ('setAppBadge' in navigator) {
+  navigator.setAppBadge(5).catch((err) => {
+    console.error('Error al establecer la insignia:', err);
+  });
+} 
+
+// Manejar el evento 'beforeinstallprompt'
+window.addEventListener('beforeinstallprompt', (e) => {
+  if (isAndroid) {
+    e.preventDefault();
+    deferredPrompt = e;
+  }
+});
+
+// Función para agregar a la pantalla de inicio
+$scope.installApp = function () {
+  if (isAndroid && deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User accepted the A2HS prompt');
+      } else {
+        console.log('User dismissed the A2HS prompt');
+      }
+      deferredPrompt = null;
+    });
+  } else if (isIOS) {
+    // Mostrar modal con la animación GIF para iOS
+    $scope.isModalVisible = true;
+      $ionicSideMenuDelegate.toggleLeft();
+  }
+};
+
+// Cerrar modal
+$scope.closeModal = function () {
+  $scope.isModalVisible = false;
+};
+
 
 
   $scope.logout = function() {
@@ -2061,70 +1806,17 @@ $scope.goToMain = function() {
       })
       .catch(function(error) {
         $('.preloader').css({ 'display': 'none' });
-        window.location.href = 'https://cubiculociencias.github.io/tallerdepiano/';
+       window.location.href = 'https://cubiculociencias.github.io/tallerdepiano/';
       });
   };
 
  }])
 
-       .controller('profileCtrl', function($scope) {
-            $scope.isModalVisible = false;
-    let deferredPrompt;
-  const isAndroid = /Android/i.test(navigator.userAgent);
-
-    // Registrar el Service Worker
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js').then(function(registration) {
-            console.log('ServiceWorker registration successful with scope: ', registration.scope);
-        }, function(err) {
-            console.log('ServiceWorker registration failed: ', err);
-        });
-    }
-
-    // Manejar el evento 'beforeinstallprompt'
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-if (isAndroid) {
-        e.preventDefault();
-        deferredPrompt = e;
-        $scope.isModalVisible = true;
-        $scope.$apply(); // Forzar la actualización del scope
-}
-    });
-
-
-    // Función para agregar a la pantalla de inicio
-    $scope.addToHomeScreen = function() {
-        $scope.isModalVisible = false;
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-                console.log('User accepted the A2HS prompt');
-            } else {
-                console.log('User dismissed the A2HS prompt');
-            }
-            deferredPrompt = null;
-        });
-    };
-
-    // Cerrar modal
-    $scope.closeModal = function() {
-        $scope.isModalVisible = false;
-    };
-
-    // Cerrar modal si se hace clic fuera de él
-    $scope.checkCloseModal = function(event) {
-        if (event.target.id === 'myModal') {
-            $scope.closeModal();
-        }
-    };
-  
-       })
-
-  .controller('StatusCtrl', ['$scope', 'SharedState', function($scope, SharedState){
+      .controller('StatusCtrl', ['$scope', 'SharedState', function($scope, SharedState){
     
   SharedState.getNum().then(function(data) {
        $scope.userData = data.data;
+      $scope.userPlan = data.data.plan.split(" ")[0]
   })
  
       $scope.goToPayment = function() {
@@ -2132,306 +1824,436 @@ if (isAndroid) {
 };
       
     }])
-   .controller('manualsCtrl', ['$http', '$scope', 'SharedState', function($http, $scope, SharedState){
 
-   $scope.isLoading = true;
+   .controller('agendaCtrl', ['$scope', 'SharedState', '$ionicPopup', function($scope, SharedState, $ionicPopup){
+
+    
   SharedState.getNum().then(function(data) {
-    $scope.lvl = data.lvl;
-    $scope.blq = data.blq;
-     $scope.isLoading = false;
+       $scope.userData = data.data;
+    $scope.agenda = JSON.parse(data.data.agenda);
+    $scope.userPlan = data.data.plan.split(" ")[0]
+    $scope.userPrice = data.data.plan.split(" ")[2]
   })
-
-$scope.openURL = function(index) {
-  var url = $scope.manuals[index].url;
-  window.open(url, '_blank');
+      $scope.goToPayment = function() {
+  window.location.href = '#/menu/payment';
+};
+       $scope.returnDateFormat = function(date){
+    const dat = new Date(date);
+  const options = { weekday: 'long', month: 'long', day: 'numeric' };
+    var dat2 = dat.toLocaleDateString("es-mx",options).replace(",","");
+    return dat2.charAt(0).toUpperCase() + dat2.slice(1);
+  }
+     $scope.attendanceFilter = function(item) {
+  return item.attendance == ''; 
 };
 
 
-$scope.manuals = [
-    { 'title': 'Nivel 2 - B1', 'background': 'https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy', 'url': 'https://drive.google.com/file/d/1zs8OzO57s1b0MTavriKWjMohnLjr39-d', 'lvl': 2, 'blq': 1  },
-    { 'title': 'Nivel 1 - B3', 'background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'url': 'https://drive.google.com/file/d/1VuxMiv3W89OBAzxXaz6kzBkEyRxonnJB', 'lvl': 1, 'blq': 3  },
-    { 'title': 'Nivel 1 - B2', 'background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'url': 'https://drive.google.com/file/d/10Q34O2uDPaj5ZG7bpYpx8BGHZ4Q18ZLB', 'lvl': 1, 'blq': 2  },
-    { 'title': 'Nivel 1 - B1', 'background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'url': 'https://drive.google.com/file/d/1Kghxri_BvRE0Ho4c2vMfrdBGp8HTmrGJ', 'lvl': 1, 'blq': 1  },
-    { 'title': 'Nivel Preparatorio - B3', 'background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'url': 'https://drive.google.com/file/d/1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu', 'lvl': 0, 'blq': 3  },
-    { 'title': 'Nivel Preparatorio - B2', 'background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'url': 'https://drive.google.com/file/d/1nxK06XODrHt2J6lScQz4JjthmPoc16Ec', 'lvl': 0, 'blq': 2  },
-    { 'title': 'Nivel Preparatorio - B1', 'background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'url': 'https://drive.google.com/file/d/1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa', 'lvl': 0, 'blq': 1  }
-];
+  $scope.selectedOption = null; 
+$scope.showAlert = function() {
+  var myPopup = $ionicPopup.show({
+    template: `
+     <div ng-if="!showSummary">
+     <label >Fecha de falta</label>
+      <select ng-model="popupData.selectedOption" class="custom-select">
+        <option ng-repeat="data in agenda | filter: attendanceFilter" value="{{data}}"> 
+          {{returnDateFormat(data.start)}}
+        </option>
+      </select>
+       <label ng-if="popupData.selectedOption">¿Cómo vas a reponer?</label>
+     <select ng-model="popupData.selectedOption2" class="custom-select" ng-if="popupData.selectedOption">
+      <option value="opc2" > 
+          Tomaré la reposición en otro horario de clase
+        </option>
+     <option value="opc1" > 
+       Tomaré 2 horas seguidas la siguiente semana en mi horario de clase
+        </option>
+      </select>
+      
+   <div ng-if="popupData.selectedOption2 === 'opc2'">
+        <label class="item item-input">
+          Fecha
+          <input type="date" ng-model="popupData.selectedDate" ng-change="updateAvailableTimes()">
+        </label>
 
+        <label class="item item-input" ng-if="popupData.availableTimes.length > 0">
+          Hora
+          <span>{{ selectedTime }}</span>
+        <select ng-model="popupData.selectedTime" class="custom-select2">
+        <option ng-repeat="time in popupData.availableTimes" value="{{time}}">
+          {{time}}
+        </option>
+      </select>
+        </label>
+      </div>
+       </div>  
+       
+      <div ng-if="showSummary">
+        <p><strong>Fecha de reposición:</strong><br> {{popupData.selectedDate | date: 'fullDate'}}</p>
+        <p><strong>Hora de inicio:</strong><br> {{popupData.selectedTime}}</p>
+      </div>
+     
+    `,
+    title: 'Agenda la reposición de tu clase',
+    scope: $scope,
+    buttons: [
+     { 
+        text: 'Cancelar',
+        onTap: function() {
+          $scope.popupData.selectedOption = null; 
+          $scope.popupData.selectedOption2 = null; 
+           $scope.popupData.selectedDate = null; 
+           $scope.popupData.selectedTime = null; 
+          $scope.showSummary = false;
+        }
+      },
+      {
+        text: '<b>Continuar</b> ',
+        type: 'button-positive',
+        onTap: function(e) {
+           if (!$scope.showSummary) {
+            if (!$scope.popupData.selectedDate || !$scope.popupData.selectedTime) {
+              e.preventDefault()
+              if ($scope.popupData.selectedOption2 === 'opc1') {
+                $scope.showSummary = true;
+                var dat = JSON.parse($scope.popupData.selectedOption)
+                var nextClass = new Date(dat.start)
+                nextClass.setDate(nextClass.getDate() + 7);
+                nextClass.setHours(nextClass.getHours() + 6);
+                $scope.popupData.selectedDate = nextClass
+                $scope.popupData.selectedTime = nextClass.getHours()+':00 Hrs'
+              } else if ($scope.popupData.selectedOption2 === 'opc2' && !$scope.popupData.selectedTime) {
+                alert("Ingresa una fecha válida")
+              }  
+            } else { 
+              $scope.showSummary = true;
+              e.preventDefault(); 
+            }
+          } else {
+            return $scope.popupData;
+          }
+        }
+      }
+    ]
+  }); 
 
+  myPopup.then(function(res) {
+    if (res) {
+      $scope.popupData.selectedOption = null; 
+          $scope.popupData.selectedOption2 = null; 
+           $scope.popupData.selectedDate = null; 
+           $scope.popupData.selectedTime = null; 
+          $scope.showSummary = false;
+      alert("Reposición agendada")
+     // alert($scope.userData.name);
+    }
+  });
+}; 
  
-}])
-   .controller('repCtrl1', ['$http', '$scope', '$sce', 'SharedState', function($http, $scope, $sce, SharedState){
-    $scope.trustAsResourceUrl = function(url) {
-        return $sce.trustAsResourceUrl(url);
-    };
+
     
-     $scope.selectedManualUrl = '';
+    $scope.showAlert2 = function() {
+  var myPopup = $ionicPopup.show({
+    template: `
+     <div>
+     <label >Expón el motivo de tu baja</label>
+<textarea name="longText" rows="4" cols="50" placeholder="Escriba su texto..." ng-model="popupData2.returnText"></textarea> <br>
+<label>Fecha aproximada de tu regreso a clases</label>
+        <label class="item-input">
+          Fecha
+          <input type="date" ng-model="popupData2.returnDate">
+        </label>
+    `,
+    title: 'Solicitud de baja temporal',
+    scope: $scope,
+    buttons: [
+     { 
+        text: 'Cancelar',
+        onTap: function() {
+          $scope.popupData2.returnText = null; 
+           $scope.popupData2.returnDate = null; 
+        }
+      },
+      {
+        text: '<b>Solicitar</b> ',
+        type: 'button-positive',
+        onTap: function(e) {
+          if (!$scope.popupData2.returnText || !$scope.popupData2.returnDate) {
+            alert("Ingresa todos los datos")
+              e.preventDefault()
+          } else {
+            return $scope.popupData2;
+          }
+        }
+      }
+    ]
+  }); 
 
-    $scope.showModal = function(index) {
-      $scope.selectedManualUrl = 'https://drive.google.com/file/d/' + $scope.manuals[index].id + '/preview';
-        document.getElementById('modalBasic').classList.add('four');
-    };
+  myPopup.then(function(res) {
+    if (res) {
+      alert("Solicitud enviada")
+    }
+  });
+}; 
+ 
+    
+$scope.popupData = {
+  selectedDate: null,
+  availableTimes: [],
+  selectedTime: null
+};
 
-    $scope.hideModal = function(index) {
-        const modal = document.getElementById('modalBasic');
-        modal.classList.add('out');
-        setTimeout(() => {
-            modal.classList.remove('four', 'out');
-        }, 400);
-    };
+    
+$scope.popupData2 = {
+  returnDate: null,
+  returnText: null
+};
 
-     $scope.isLoading = true;
+$scope.updateAvailableTimes = function() {
+  const selectedDate = new Date($scope.popupData.selectedDate);
+  const today = new Date();
+  const twoWeeksFromToday = new Date();
+  twoWeeksFromToday.setDate(today.getDate() + 14);
+
+  // Reset available times if out of range
+  if (selectedDate < today || selectedDate > twoWeeksFromToday) {
+    $scope.popupData.availableTimes = [];
+    return;
+  }
+
+  const day = selectedDate.getDay();
+  let times = [];
+
+  if (day === 3 || day === 4 || day === 5) { // Wednesday, Thursday, Friday
+    times = ["11:00 Hrs", "12:00 Hrs", "13:00 Hrs", "14:00 Hrs", "15:00 Hrs", "16:00 Hrs"];
+  } else if (day === 6) { // Saturday
+    times = ["10:00 Hrs", "11:00 Hrs", "12:00 Hrs", "13:00 Hrs", "14:00 Hrs"];
+  } else if (day === 0) { // Sunday
+    times = ["9:00 Hrs", "10:00 Hrs", "11:00 Hrs", "12:00 Hrs", "13:00 Hrs"];
+  } else { // Monday, Tuesday or invalid
+    times = [];
+  }
+
+  $scope.popupData.availableTimes = times;
+};
+ }])
+
+
+
+  .controller('attendanceCtrl', ['$scope', 'SharedState', '$ionicPopup', function($scope, SharedState, $ionicPopup){
+
+    
   SharedState.getNum().then(function(data) {
-    $scope.lvl = data.lvl;
-    $scope.blq = data.blq;
-     $scope.isLoading = false;
+       $scope.userData = data.data;
+    $scope.agenda = JSON.parse(data.data.agenda);
+    $scope.userPlan = data.data.plan.split(" ")[0]
+    $scope.userPrice = data.data.plan.split(" ")[2]
   })
+      $scope.goToPayment = function() {
+  window.location.href = '#/menu/payment';
+};
+       $scope.returnDateFormat = function(date){
+    const dat = new Date(date);
+  const options = { weekday: 'long', month: 'long', day: 'numeric' };
+    var dat2 = dat.toLocaleDateString("es-mx",options).replace(",","");
+    return dat2.charAt(0).toUpperCase() + dat2.slice(1);
+  }
+     $scope.attendanceFilter = function(item) {
+  return item.attendance == ''; 
+};
+
+
+  $scope.selectedOption = null; 
+$scope.showAlert = function() {
+  var myPopup = $ionicPopup.show({
+    template: `
+     <div ng-if="!showSummary">
+     <label >Fecha de falta</label>
+      <select ng-model="popupData.selectedOption" class="custom-select">
+        <option ng-repeat="data in agenda | filter: attendanceFilter" value="{{data}}"> 
+          {{returnDateFormat(data.start)}}
+        </option>
+      </select>
+       <label ng-if="popupData.selectedOption">¿Cómo vas a reponer?</label>
+     <select ng-model="popupData.selectedOption2" class="custom-select" ng-if="popupData.selectedOption">
+      <option value="opc2" > 
+          Tomaré la reposición en otro horario de clase
+        </option>
+     <option value="opc1" > 
+       Tomaré 2 horas seguidas la siguiente semana en mi horario de clase
+        </option>
+      </select>
       
-$scope.manuals = [ 
-      {'title': 'Bloque 1 - Nivel 2','background': 'https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy', 'id': '1zs8OzO57s1b0MTavriKWjMohnLjr39-d', 'lvl': 2, 'blq': 1},            
-      {'title': 'Bloque 3 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1VuxMiv3W89OBAzxXaz6kzBkEyRxonnJB', 'lvl': 1, 'blq': 3},
-      {'title': 'Bloque 2 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '10Q34O2uDPaj5ZG7bpYpx8BGHZ4Q18ZLB', 'lvl': 1, 'blq': 2},
-      {'title': 'Bloque 1 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1Kghxri_BvRE0Ho4c2vMfrdBGp8HTmrGJ', 'lvl': 1, 'blq': 1},
-      {'title': 'Bloque 3 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu', 'lvl': 0, 'blq': 3},
-      {'title': 'Bloque 2 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1nxK06XODrHt2J6lScQz4JjthmPoc16Ec', 'lvl': 0, 'blq': 2},
-      {'title': 'Bloque 1 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa', 'lvl': 0, 'blq': 1 }
-    ];
+   <div ng-if="popupData.selectedOption2 === 'opc2'">
+        <label class="item item-input">
+          Fecha
+          <input type="date" ng-model="popupData.selectedDate" ng-change="updateAvailableTimes()">
+        </label>
+
+        <label class="item item-input" ng-if="popupData.availableTimes.length > 0">
+          Hora
+          <span>{{ selectedTime }}</span>
+        <select ng-model="popupData.selectedTime" class="custom-select2">
+        <option ng-repeat="time in popupData.availableTimes" value="{{time}}">
+          {{time}}
+        </option>
+      </select>
+        </label>
+      </div>
+       </div>  
+       
+      <div ng-if="showSummary">
+        <p><strong>Fecha de reposición:</strong><br> {{popupData.selectedDate | date: 'fullDate'}}</p>
+        <p><strong>Hora de inicio:</strong><br> {{popupData.selectedTime}}</p>
+      </div>
+     
+    `,
+    title: 'Agenda la reposición de tu clase',
+    scope: $scope,
+    buttons: [
+     { 
+        text: 'Cancelar',
+        onTap: function() {
+          $scope.popupData.selectedOption = null; 
+          $scope.popupData.selectedOption2 = null; 
+           $scope.popupData.selectedDate = null; 
+           $scope.popupData.selectedTime = null; 
+          $scope.showSummary = false;
+        }
+      },
+      {
+        text: '<b>Continuar</b> ',
+        type: 'button-positive',
+        onTap: function(e) {
+           if (!$scope.showSummary) {
+            if (!$scope.popupData.selectedDate || !$scope.popupData.selectedTime) {
+              e.preventDefault()
+              if ($scope.popupData.selectedOption2 === 'opc1') {
+                $scope.showSummary = true;
+                var dat = JSON.parse($scope.popupData.selectedOption)
+                var nextClass = new Date(dat.start)
+                nextClass.setDate(nextClass.getDate() + 7);
+                nextClass.setHours(nextClass.getHours() + 6);
+                $scope.popupData.selectedDate = nextClass
+                $scope.popupData.selectedTime = nextClass.getHours()+':00 Hrs'
+              } else if ($scope.popupData.selectedOption2 === 'opc2' && !$scope.popupData.selectedTime) {
+                alert("Ingresa una fecha válida")
+              }  
+            } else { 
+              $scope.showSummary = true;
+              e.preventDefault(); 
+            }
+          } else {
+            return $scope.popupData;
+          }
+        }
+      }
+    ]
+  }); 
+
+  myPopup.then(function(res) {
+    if (res) {
+      $scope.popupData.selectedOption = null; 
+          $scope.popupData.selectedOption2 = null; 
+           $scope.popupData.selectedDate = null; 
+           $scope.popupData.selectedTime = null; 
+          $scope.showSummary = false;
+      alert("Reposición agendada")
+     // alert($scope.userData.name);
+    }
+  });
+}; 
+ 
+
     
-}])
-   .controller('repCtrl2', ['$http', '$scope', '$sce', 'SharedState', function($http, $scope, $sce, SharedState){
-    $scope.trustAsResourceUrl = function(url) {
-        return $sce.trustAsResourceUrl(url);
-    };
+    $scope.showAlert2 = function() {
+  var myPopup = $ionicPopup.show({
+    template: `
+     <div>
+     <label >Expón el motivo de tu baja</label>
+<textarea name="longText" rows="4" cols="50" placeholder="Escriba su texto..." ng-model="popupData2.returnText"></textarea> <br>
+<label>Fecha aproximada de tu regreso a clases</label>
+        <label class="item-input">
+          Fecha
+          <input type="date" ng-model="popupData2.returnDate">
+        </label>
+    `,
+    title: 'Solicitud de baja temporal',
+    scope: $scope,
+    buttons: [
+     { 
+        text: 'Cancelar',
+        onTap: function() {
+          $scope.popupData2.returnText = null; 
+           $scope.popupData2.returnDate = null; 
+        }
+      },
+      {
+        text: '<b>Solicitar</b> ',
+        type: 'button-positive',
+        onTap: function(e) {
+          if (!$scope.popupData2.returnText || !$scope.popupData2.returnDate) {
+            alert("Ingresa todos los datos")
+              e.preventDefault()
+          } else {
+            return $scope.popupData2;
+          }
+        }
+      }
+    ]
+  }); 
+
+  myPopup.then(function(res) {
+    if (res) {
+      alert("Solicitud enviada")
+    }
+  });
+}; 
+ 
     
-     $scope.selectedManualUrl = '';
+$scope.popupData = {
+  selectedDate: null,
+  availableTimes: [],
+  selectedTime: null
+};
 
-    $scope.showModal = function(index) {
-      $scope.selectedManualUrl = 'https://drive.google.com/file/d/' + $scope.manuals[index].id + '/preview';
-        document.getElementById('modalBeginner').classList.add('four');
-    };
-
-    $scope.hideModal = function(index) {
-        const modal = document.getElementById('modalBeginner');
-        modal.classList.add('out');
-        setTimeout(() => {
-            modal.classList.remove('four', 'out');
-        }, 400);
-    };
-
-     $scope.isLoading = true;
-  SharedState.getNum().then(function(data) {
-    $scope.lvl = data.lvl;
-    $scope.blq = data.blq;
-     $scope.isLoading = false;
-  })
-      
-$scope.manuals = [ 
-      {'title': 'Bloque 1 - Nivel 2','background': 'https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy', 'id': '1zs8OzO57s1b0MTavriKWjMohnLjr39-d', 'lvl': 2, 'blq': 1},            
-      {'title': 'Bloque 3 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1VuxMiv3W89OBAzxXaz6kzBkEyRxonnJB', 'lvl': 1, 'blq': 3},
-      {'title': 'Bloque 2 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '10Q34O2uDPaj5ZG7bpYpx8BGHZ4Q18ZLB', 'lvl': 1, 'blq': 2},
-      {'title': 'Bloque 1 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1Kghxri_BvRE0Ho4c2vMfrdBGp8HTmrGJ', 'lvl': 1, 'blq': 1},
-      {'title': 'Bloque 3 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu', 'lvl': 0, 'blq': 3},
-      {'title': 'Bloque 2 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1nxK06XODrHt2J6lScQz4JjthmPoc16Ec', 'lvl': 0, 'blq': 2},
-      {'title': 'Bloque 1 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa', 'lvl': 0, 'blq': 1 }
-    ];
     
-}])
-     .controller('repCtrl3', ['$http', '$scope', '$sce', 'SharedState', function($http, $scope, $sce, SharedState){
-    $scope.trustAsResourceUrl = function(url) {
-        return $sce.trustAsResourceUrl(url);
-    };
-    
-     $scope.selectedManualUrl = '';
+$scope.popupData2 = {
+  returnDate: null,
+  returnText: null
+};
 
-    $scope.showModal = function(index) {
-      $scope.selectedManualUrl = 'https://drive.google.com/file/d/' + $scope.manuals[index].id + '/preview';
-        document.getElementById('modalIntermediate').classList.add('four');
-    };
+$scope.updateAvailableTimes = function() {
+  const selectedDate = new Date($scope.popupData.selectedDate);
+  const today = new Date();
+  const twoWeeksFromToday = new Date();
+  twoWeeksFromToday.setDate(today.getDate() + 14);
 
-    $scope.hideModal = function(index) {
-        const modal = document.getElementById('modalIntermediate');
-        modal.classList.add('out');
-        setTimeout(() => {
-            modal.classList.remove('four', 'out');
-        }, 400);
-    };
+  // Reset available times if out of range
+  if (selectedDate < today || selectedDate > twoWeeksFromToday) {
+    $scope.popupData.availableTimes = [];
+    return;
+  }
 
-     $scope.isLoading = true;
-  SharedState.getNum().then(function(data) {
-    $scope.lvl = data.lvl;
-    $scope.blq = data.blq;
-     $scope.isLoading = false;
-  })
-      
-$scope.manuals = [ 
-      {'title': 'Bloque 1 - Nivel 2','background': 'https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy', 'id': '1zs8OzO57s1b0MTavriKWjMohnLjr39-d', 'lvl': 2, 'blq': 1},            
-      {'title': 'Bloque 3 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1VuxMiv3W89OBAzxXaz6kzBkEyRxonnJB', 'lvl': 1, 'blq': 3},
-      {'title': 'Bloque 2 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '10Q34O2uDPaj5ZG7bpYpx8BGHZ4Q18ZLB', 'lvl': 1, 'blq': 2},
-      {'title': 'Bloque 1 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1Kghxri_BvRE0Ho4c2vMfrdBGp8HTmrGJ', 'lvl': 1, 'blq': 1},
-      {'title': 'Bloque 3 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu', 'lvl': 0, 'blq': 3},
-      {'title': 'Bloque 2 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1nxK06XODrHt2J6lScQz4JjthmPoc16Ec', 'lvl': 0, 'blq': 2},
-      {'title': 'Bloque 1 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa', 'lvl': 0, 'blq': 1 }
-    ];
-    
-}])
-  
-     .controller('repCtrl4', ['$http', '$scope', '$sce', 'SharedState', function($http, $scope, $sce, SharedState){
-    $scope.trustAsResourceUrl = function(url) {
-        return $sce.trustAsResourceUrl(url);
-    };
-    
-     $scope.selectedManualUrl = '';
+  const day = selectedDate.getDay();
+  let times = [];
 
-    $scope.showModal = function(index) {
-      $scope.selectedManualUrl = 'https://drive.google.com/file/d/' + $scope.manuals[index].id + '/preview';
-        document.getElementById('modalAdvanced').classList.add('four');
-    };
+  if (day === 3 || day === 4 || day === 5) { // Wednesday, Thursday, Friday
+    times = ["11:00 Hrs", "12:00 Hrs", "13:00 Hrs", "14:00 Hrs", "15:00 Hrs", "16:00 Hrs"];
+  } else if (day === 6) { // Saturday
+    times = ["10:00 Hrs", "11:00 Hrs", "12:00 Hrs", "13:00 Hrs", "14:00 Hrs"];
+  } else if (day === 0) { // Sunday
+    times = ["9:00 Hrs", "10:00 Hrs", "11:00 Hrs", "12:00 Hrs", "13:00 Hrs"];
+  } else { // Monday, Tuesday or invalid
+    times = [];
+  }
 
-    $scope.hideModal = function(index) {
-        const modal = document.getElementById('modalAdvanced');
-        modal.classList.add('out');
-        setTimeout(() => {
-            modal.classList.remove('four', 'out');
-        }, 400);
-    };
+  $scope.popupData.availableTimes = times;
+};
+ }])    
 
-     $scope.isLoading = true;
-  SharedState.getNum().then(function(data) {
-    $scope.lvl = data.lvl;
-    $scope.blq = data.blq;
-     $scope.isLoading = false;
-  })
-      
-$scope.manuals = [ 
-      {'title': 'Bloque 1 - Nivel 2','background': 'https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy', 'id': '1zs8OzO57s1b0MTavriKWjMohnLjr39-d', 'lvl': 2, 'blq': 1},            
-      {'title': 'Bloque 3 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1VuxMiv3W89OBAzxXaz6kzBkEyRxonnJB', 'lvl': 1, 'blq': 3},
-      {'title': 'Bloque 2 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '10Q34O2uDPaj5ZG7bpYpx8BGHZ4Q18ZLB', 'lvl': 1, 'blq': 2},
-      {'title': 'Bloque 1 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1Kghxri_BvRE0Ho4c2vMfrdBGp8HTmrGJ', 'lvl': 1, 'blq': 1},
-      {'title': 'Bloque 3 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu', 'lvl': 0, 'blq': 3},
-      {'title': 'Bloque 2 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1nxK06XODrHt2J6lScQz4JjthmPoc16Ec', 'lvl': 0, 'blq': 2},
-      {'title': 'Bloque 1 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa', 'lvl': 0, 'blq': 1 }
-    ];
-    
-}])
 
-     .controller('booksCtrl1', ['$http', '$scope', '$sce', 'SharedState', function($http, $scope, $sce, SharedState){
-    $scope.trustAsResourceUrl = function(url) {
-        return $sce.trustAsResourceUrl(url);
-    };
-    
-     $scope.selectedManualUrl = '';
-
-    $scope.showModal = function(index) {
-      $scope.selectedManualUrl = 'https://drive.google.com/file/d/' + $scope.manuals[index].id + '/preview';
-        document.getElementById('modalSolfiege').classList.add('four');
-    };
-
-    $scope.hideModal = function(index) {
-        const modal = document.getElementById('modalSolfiege');
-        modal.classList.add('out');
-        setTimeout(() => {
-            modal.classList.remove('four', 'out');
-        }, 400);
-    };
-
-     $scope.isLoading = true;
-  SharedState.getNum().then(function(data) {
-    $scope.lvl = data.lvl;
-    $scope.blq = data.blq;
-     $scope.isLoading = false;
-  })
-      
-$scope.manuals = [ 
-      {'title': 'Bloque 1 - Nivel 2','background': 'https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy', 'id': '1zs8OzO57s1b0MTavriKWjMohnLjr39-d', 'lvl': 2, 'blq': 1},            
-      {'title': 'Bloque 3 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1VuxMiv3W89OBAzxXaz6kzBkEyRxonnJB', 'lvl': 1, 'blq': 3},
-      {'title': 'Bloque 2 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '10Q34O2uDPaj5ZG7bpYpx8BGHZ4Q18ZLB', 'lvl': 1, 'blq': 2},
-      {'title': 'Bloque 1 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1Kghxri_BvRE0Ho4c2vMfrdBGp8HTmrGJ', 'lvl': 1, 'blq': 1},
-      {'title': 'Bloque 3 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu', 'lvl': 0, 'blq': 3},
-      {'title': 'Bloque 2 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1nxK06XODrHt2J6lScQz4JjthmPoc16Ec', 'lvl': 0, 'blq': 2},
-      {'title': 'Bloque 1 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa', 'lvl': 0, 'blq': 1 }
-    ];
-    
-}])
-     .controller('booksCtrl2', ['$http', '$scope', '$sce', 'SharedState', function($http, $scope, $sce, SharedState){
-    $scope.trustAsResourceUrl = function(url) {
-        return $sce.trustAsResourceUrl(url);
-    };
-    
-     $scope.selectedManualUrl = '';
-
-    $scope.showModal = function(index) {
-      $scope.selectedManualUrl = 'https://drive.google.com/file/d/' + $scope.manuals[index].id + '/preview';
-        document.getElementById('modalScales').classList.add('four');
-    };
-
-    $scope.hideModal = function(index) {
-        const modal = document.getElementById('modalScales');
-        modal.classList.add('out');
-        setTimeout(() => {
-            modal.classList.remove('four', 'out');
-        }, 400);
-    };
-
-     $scope.isLoading = true;
-  SharedState.getNum().then(function(data) {
-    $scope.lvl = data.lvl;
-    $scope.blq = data.blq;
-     $scope.isLoading = false;
-  })
-      
-$scope.manuals = [ 
-      {'title': 'Bloque 1 - Nivel 2','background': 'https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy', 'id': '1zs8OzO57s1b0MTavriKWjMohnLjr39-d', 'lvl': 2, 'blq': 1},            
-      {'title': 'Bloque 3 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1VuxMiv3W89OBAzxXaz6kzBkEyRxonnJB', 'lvl': 1, 'blq': 3},
-      {'title': 'Bloque 2 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '10Q34O2uDPaj5ZG7bpYpx8BGHZ4Q18ZLB', 'lvl': 1, 'blq': 2},
-      {'title': 'Bloque 1 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1Kghxri_BvRE0Ho4c2vMfrdBGp8HTmrGJ', 'lvl': 1, 'blq': 1},
-      {'title': 'Bloque 3 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu', 'lvl': 0, 'blq': 3},
-      {'title': 'Bloque 2 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1nxK06XODrHt2J6lScQz4JjthmPoc16Ec', 'lvl': 0, 'blq': 2},
-      {'title': 'Bloque 1 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa', 'lvl': 0, 'blq': 1 }
-    ];
-    
-}])
-     .controller('booksCtrl3', ['$http', '$scope', '$sce', 'SharedState', function($http, $scope, $sce, SharedState){
-    $scope.trustAsResourceUrl = function(url) {
-        return $sce.trustAsResourceUrl(url);
-    };
-    
-     $scope.selectedManualUrl = '';
-
-    $scope.showModal = function(index) {
-      $scope.selectedManualUrl = 'https://drive.google.com/file/d/' + $scope.manuals[index].id + '/preview';
-        document.getElementById('modalSightread').classList.add('four');
-    };
-
-    $scope.hideModal = function(index) {
-        const modal = document.getElementById('modalSightread');
-        modal.classList.add('out');
-        setTimeout(() => {
-            modal.classList.remove('four', 'out');
-        }, 400);
-    };
-
-     $scope.isLoading = true;
-  SharedState.getNum().then(function(data) {
-    $scope.lvl = data.lvl;
-    $scope.blq = data.blq;
-     $scope.isLoading = false;
-  })
-      
-$scope.manuals = [ 
-      {'title': 'Bloque 1 - Nivel 2','background': 'https://lh3.googleusercontent.com/d/1qsgmUvohMMn8LcQZLp-Zkk283MV2VmNy', 'id': '1zs8OzO57s1b0MTavriKWjMohnLjr39-d', 'lvl': 2, 'blq': 1},            
-      {'title': 'Bloque 3 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1VuxMiv3W89OBAzxXaz6kzBkEyRxonnJB', 'lvl': 1, 'blq': 3},
-      {'title': 'Bloque 2 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '10Q34O2uDPaj5ZG7bpYpx8BGHZ4Q18ZLB', 'lvl': 1, 'blq': 2},
-      {'title': 'Bloque 1 - Nivel 1','background': 'https://lh3.googleusercontent.com/d/1Uf_sUg2ELZPF8t0fcuCdH6ZZOWrwzghM', 'id': '1Kghxri_BvRE0Ho4c2vMfrdBGp8HTmrGJ', 'lvl': 1, 'blq': 1},
-      {'title': 'Bloque 3 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1vYZFwqvHFg6m097Ivk4uRGAY38-EUvEu', 'lvl': 0, 'blq': 3},
-      {'title': 'Bloque 2 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1nxK06XODrHt2J6lScQz4JjthmPoc16Ec', 'lvl': 0, 'blq': 2},
-      {'title': 'Bloque 1 - Nivel P','background': 'https://lh3.googleusercontent.com/d/12_KSNMB0Z3z9knY_8vIofHT3Xvl-JUj-', 'id': '1bufcRACzv0QKKJDoc6RYhC1m7irb-UPa', 'lvl': 0, 'blq': 1 }
-    ];
-    
-}])
 
     </script>
-
-
 
 
 <script>
@@ -2461,7 +2283,7 @@ $(window).on('load', function() {
       $('.mainSection').fadeIn('slow')  
     } else {
       localStorage.removeItem('TPtoken');
-      window.location.href = 'https://cubiculociencias.github.io/tallerdepiano/';
+     window.location.href = 'https://cubiculociencias.github.io/tallerdepiano/';
     }
   })
   } else {
@@ -2471,5 +2293,3 @@ $(window).on('load', function() {
 
 
 </script>
-
-
