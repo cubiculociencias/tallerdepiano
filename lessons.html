@@ -1394,6 +1394,17 @@ input[type="radio"]:checked + label.green-bg::after {
   margin-left: 7px;
   margin-top: auto;
 }
+
+   ::-webkit-scrollbar:horizontal {
+  height: 2px; /* Cambia el tamaño del scrollbar horizontal */
+}
+::-webkit-scrollbar-thumb:horizontal {
+  background-color: #ccc; /* Color del thumb */
+  border-radius: 2px; /* Redondeo */
+}
+::-webkit-scrollbar {
+  width: 2px; /* Tamaño normal de scrollbar vertical */
+}
 </style>
  
 
@@ -1443,7 +1454,7 @@ input[type="radio"]:checked + label.green-bg::after {
   </li>
         <li class="tab level1" >
           <a href="#test2">
-            <span class="titlelvlrow">&nbsp&nbsp&nbsp&nbsp Grado 1 &nbsp&nbsp&nbsp&nbsp</span>
+            <span class="titlelvlrow">&nbsp&nbsp&nbsp&nbsp Nivel 1 &nbsp&nbsp&nbsp&nbsp</span>
             <div class="job-overview-card">
         <div class="job-card overview-card">
           <div class="overview-wrapper">
@@ -1478,7 +1489,7 @@ input[type="radio"]:checked + label.green-bg::after {
           </a>
           </li>
         <li class="tab level2" >
-          <a href="#test3">  <span class="titlelvlrow">&nbsp&nbsp&nbsp&nbsp Grado 2 &nbsp&nbsp&nbsp&nbsp</span>
+          <a href="#test3">  <span class="titlelvlrow">&nbsp&nbsp&nbsp&nbsp Nivel 2 &nbsp&nbsp&nbsp&nbsp</span>
             <div class="job-overview-card">
         <div class="job-card overview-card"> 
           <div class="overview-wrapper">
@@ -1513,7 +1524,7 @@ input[type="radio"]:checked + label.green-bg::after {
           </a> 
           </li>
           <li class="tab level3">
-            <a href="#test4">  <span class="titlelvlrow">&nbsp&nbsp&nbsp&nbsp Grado 3 &nbsp&nbsp&nbsp&nbsp</span>
+            <a href="#test4">  <span class="titlelvlrow">&nbsp&nbsp&nbsp&nbsp Nivel 3 &nbsp&nbsp&nbsp&nbsp</span>
             <div class="job-overview-card">
         <div class="job-card overview-card">
           <div class="overview-wrapper">  
@@ -1549,7 +1560,7 @@ input[type="radio"]:checked + label.green-bg::after {
             </li> 
     <li class="tab level4">
       <a href="#test5">
-          <span class="titlelvlrow">&nbsp&nbsp&nbsp&nbsp Grado 4 &nbsp&nbsp&nbsp&nbsp</span>
+          <span class="titlelvlrow">&nbsp&nbsp&nbsp&nbsp Nivel 4 &nbsp&nbsp&nbsp&nbsp</span>
             <div class="job-overview-card">
         <div class="job-card overview-card">
           <div class="overview-wrapper">
@@ -1584,7 +1595,7 @@ input[type="radio"]:checked + label.green-bg::after {
       </a>
       </li>
       <li class="tab level5">
-        <a href="#test6">  <span class="titlelvlrow">&nbsp&nbsp&nbsp&nbsp Grado 5 &nbsp&nbsp&nbsp&nbsp</span>
+        <a href="#test6">  <span class="titlelvlrow">&nbsp&nbsp&nbsp&nbsp Nivel 5 &nbsp&nbsp&nbsp&nbsp</span>
             <div class="job-overview-card">
         <div class="job-card overview-card">
           <div class="overview-wrapper">
@@ -1634,14 +1645,14 @@ input[type="radio"]:checked + label.green-bg::after {
  
          <img src="https://lh3.googleusercontent.com/d/1EP2I0BOMo_8mXsR9qqAv08PxjztZFaQ8" width="80" height="80" style="margin-right: 10px; border-radius: 15px;"/>
 
-         <button class="unlockBtn" onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/payment';" ng-if="status != 'ACTIVO'" style="background-color: #1894cc">
+         <div class="unlockBtn" onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/payment';" ng-if="status != 'ACTIVO'" style="background-color: #eeeeee; color: black;">
             <span class="btnBorderRight"></span>
             <span class="btnBorderLeft"></span>
             <span class="btniContainer">
-             <i class="btnIcon ri-lock-fill" style="margin-top: -1px; margin-left: -5px;"> </i>
-           Desbloquear
+             <i class="btnIcon ri-lock-fill" style="margin-top: -1px; margin-left: -5px; color: black;"> </i>
+           Bloqueado
             </span>
-          </button>
+          </div>
       </div>  
       <div class="job-explain-content">
       <div class="job-title-wrapper">
@@ -1653,7 +1664,7 @@ input[type="radio"]:checked + label.green-bg::after {
        </div> 
        </div>
        <div class="job-subtitle-wrapper">
-        <div class="company-name" style="color: #F44336">Grado Preparatorio <span class="comp-location">Nivel básico</span></div>
+        <div class="company-name" style="color: #F44336">Nivel Preparatorio <span class="comp-location">Básico</span></div>
         <div class="posted">
     <span ng-if="lvl > 0 && status == 'ACTIVO'">COMPLETADO</span>
           <span ng-if="status != 'ACTIVO'">BLOQUEADO</span>
@@ -1664,63 +1675,6 @@ input[type="radio"]:checked + label.green-bg::after {
         
      
         
-       <div class="explain-bar" ng-if="lvl > 0 && status == 'ACTIVO'">
-        <div class="explain-contents">
-        <div class="explain-title">Progreso</div> 
-        <div class="explain-subtitle">100%</div>
-         </div> 
-          <div class="explain-contents">
-        <div class="explain-title">Puntaje de Tests</div>
-        <div class="explain-subtitle">{{history[0].score}}</div>
-         </div>
-        <div class="explain-contents"> 
-        <div class="explain-title">Fecha de inicio</div>
-        <div class="explain-subtitle">{{history[0].beginDate}}</div>
-         </div>   
-        <div class="explain-contents"> 
-        <div class="explain-title">Fecha de termino</div>
-        <div class="explain-subtitle">{{history[0].finishDate}}</div>
-         </div> 
-                </div>
-        
-         <div class="explain-bar" ng-if="lvl == 0 && status == 'ACTIVO'">
-        <div class="explain-contents">
-        <div class="explain-title">Progreso</div>
-        <div class="explain-subtitle">{{progress}} %</div>
-         </div>
-        <div class="explain-contents">
-        <div class="explain-title">Límite de entrega</div>
-        <div class="explain-subtitle">{{convertirFecha(currentlsns[1].limitdate)}}</div>
-         </div>
-            <div class="explain-contents"> 
-        <div class="explain-title">Fecha de inicio</div>
-        <div class="explain-subtitle">{{history[0].beginDate}}</div>
-         </div>   
-        <div class="explain-contents"> 
-        <div class="explain-title">Próximo pago</div>
-        <div class="explain-subtitle">-</div>
-         </div> 
-                </div> 
-          
-
-          <div class="explain-bar" ng-if="status != 'ACTIVO'">
-      <div class="explain-contents">
-        <div class="explain-title">Progreso</div>
-        <div class="explain-subtitle">-</div>
-         </div>
-        <div class="explain-contents">
-        <div class="explain-title">Límite de entrega</div>
-        <div class="explain-subtitle">-</div>
-         </div>
-            <div class="explain-contents"> 
-        <div class="explain-title">Fecha de inicio</div>
-        <div class="explain-subtitle">-</div>
-         </div>   
-        <div class="explain-contents"> 
-        <div class="explain-title">Fecha de termino</div>
-        <div class="explain-subtitle">-</div>
-         </div> 
-                </div>
          
                </div>
      </div>
@@ -1796,14 +1750,14 @@ input[type="radio"]:checked + label.green-bg::after {
 
          <img src="https://lh3.googleusercontent.com/d/1EP2I0BOMo_8mXsR9qqAv08PxjztZFaQ8" width="80" height="80" style="margin-right: 10px; border-radius: 15px;"/>
 
-<button class="unlockBtn" onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/payment';" ng-if="status != 'ACTIVO'" style="background-color: #9024dc">
+ <div class="unlockBtn" onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/payment';" ng-if="status != 'ACTIVO'" style="background-color: #eeeeee; color: black;">
             <span class="btnBorderRight"></span>
             <span class="btnBorderLeft"></span>
             <span class="btniContainer">
-             <i class="btnIcon ri-lock-fill" style="margin-top: -1px; margin-left: -5px;"> </i>
-           Desbloquear
+             <i class="btnIcon ri-lock-fill" style="margin-top: -1px; margin-left: -5px; color: black;"> </i>
+           Bloqueado
             </span>
-          </button>
+          </div>
       </div>  
      
       <div class="job-explain-content"> 
@@ -1815,7 +1769,7 @@ input[type="radio"]:checked + label.green-bg::after {
        </div> 
        </div>
        <div class="job-subtitle-wrapper">
-        <div class="company-name" style="color: #9024dc">Grado 1 <span class="comp-location">Nivel Principiante</span></div>
+        <div class="company-name" style="color: #9024dc">Nivel 1 <span class="comp-location">Principiante</span></div>
         <div class="posted">
     <span ng-if="lvl > 1 && status == 'ACTIVO'">COMPLETADO</span>
     <span ng-if="lvl == 1 && status == 'ACTIVO'">EN CURSO</span>
@@ -1823,62 +1777,9 @@ input[type="radio"]:checked + label.green-bg::after {
           <span class="app-number">{{counter}} Alumnos inscritos</span>
           </div>
        </div>
-     <div class="explain-bar" ng-if="lvl > 1 && status == 'ACTIVO'">
-        <div class="explain-contents">
-        <div class="explain-title">Progreso</div> 
-        <div class="explain-subtitle">100%</div>
-         </div> 
-          <div class="explain-contents">
-        <div class="explain-title">Puntaje de Tests</div>
-        <div class="explain-subtitle">{{history[0].score}}</div>
-         </div>
-        <div class="explain-contents"> 
-        <div class="explain-title">Fecha de inicio</div>
-        <div class="explain-subtitle">{{history[0].beginDate}}</div>
-         </div>   
-        <div class="explain-contents"> 
-        <div class="explain-title">Fecha de termino</div>
-        <div class="explain-subtitle">{{history[0].finishDate}}</div>
-         </div> 
-                </div>
-        
-         <div class="explain-bar" ng-if="lvl == 1 && status == 'ACTIVO'">
-        <div class="explain-contents">
-        <div class="explain-title">Progreso</div>
-        <div class="explain-subtitle">{{progress}} %</div>
-         </div>
-        <div class="explain-contents">
-        <div class="explain-title">Límite de entrega</div>
-        <div class="explain-subtitle">{{convertirFecha(currentlsns[1].limitdate)}}</div>
-         </div>
-            <div class="explain-contents"> 
-        <div class="explain-title">Fecha de inicio</div>
-        <div class="explain-subtitle">{{history[0].beginDate}}</div>
-         </div>   
-        <div class="explain-contents"> 
-        <div class="explain-title">Próximo pago</div>
-        <div class="explain-subtitle">-</div>
-         </div> 
-                </div> 
+   
+      
 
-                  <div class="explain-bar" ng-if="lvl < 1 || status != 'ACTIVO'">
-        <div class="explain-contents">
-        <div class="explain-title">Progreso</div>
-        <div class="explain-subtitle">-</div>
-         </div>
-        <div class="explain-contents">
-        <div class="explain-title">Límite de entrega</div>
-        <div class="explain-subtitle">-</div>
-         </div>
-            <div class="explain-contents"> 
-        <div class="explain-title">Fecha de inicio</div>
-        <div class="explain-subtitle">-</div>
-         </div>   
-        <div class="explain-contents"> 
-        <div class="explain-title">Fecha de termino</div>
-        <div class="explain-subtitle">-</div>
-         </div> 
-                </div> 
         
      <!--   <div class="overview-text-subheader" style="margin-top: 15px;" ng-if="status != 'ACTIVO'">Este nivel establece los fundamentos del concepto de tonalidad.</div>  -->
                </div>
@@ -1939,14 +1840,14 @@ input[type="radio"]:checked + label.green-bg::after {
 
          <img src="https://lh3.googleusercontent.com/d/1EP2I0BOMo_8mXsR9qqAv08PxjztZFaQ8" width="80" height="80" style="margin-right: 10px; border-radius: 15px;"/>
 
-<button class="unlockBtn" onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/payment';" ng-if="status != 'ACTIVO'" style="background-color: #1894cc;">
+ <div class="unlockBtn" onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/payment';" ng-if="status != 'ACTIVO'" style="background-color: #eeeeee; color: black;">
             <span class="btnBorderRight"></span>
             <span class="btnBorderLeft"></span>
             <span class="btniContainer">
-             <i class="btnIcon ri-lock-fill" style="margin-top: -1px; margin-left: -5px;"> </i>
-           Desbloquear
+             <i class="btnIcon ri-lock-fill" style="margin-top: -1px; margin-left: -5px; color: black;"> </i>
+           Bloqueado
             </span>
-          </button> 
+          </div>
       </div> 
       <div class="job-explain-content">
       <div class="job-title-wrapper">
@@ -1957,73 +1858,14 @@ input[type="radio"]:checked + label.green-bg::after {
        </div> 
        </div>
        <div class="job-subtitle-wrapper">
-        <div class="company-name" style="color: #1894cc">Grado 2 <span class="comp-location">Nivel Principiante</span></div>
+        <div class="company-name" style="color: #1894cc">Nivel 2 <span class="comp-location">Principiante</span></div>
         <div class="posted"><span ng-if="lvl > 2 && status == 'ACTIVO'">COMPLETADO</span>
     <span ng-if="lvl == 2 && status == 'ACTIVO'">EN CURSO</span>
     <span ng-if="lvl < 2 || status != 'ACTIVO'">BLOQUEADO</span>
     <span class="app-number">{{counter}} Alumnos inscritos</span>
     </div>
        </div>
-   
-     
 
-     <div class="explain-bar" ng-if="lvl > 2 && status == 'ACTIVO'">
-        <div class="explain-contents">
-        <div class="explain-title">Progreso</div> 
-        <div class="explain-subtitle">100%</div>
-         </div> 
-          <div class="explain-contents">
-        <div class="explain-title">Puntaje de Tests</div>
-        <div class="explain-subtitle">{{history[0].score}}</div>
-         </div>
-        <div class="explain-contents"> 
-        <div class="explain-title">Fecha de inicio</div>
-        <div class="explain-subtitle">{{history[0].beginDate}}</div>
-         </div>   
-        <div class="explain-contents"> 
-        <div class="explain-title">Fecha de termino</div>
-        <div class="explain-subtitle">{{history[0].finishDate}}</div>
-         </div> 
-                </div>
-        
-         <div class="explain-bar" ng-if="lvl == 2 && status == 'ACTIVO'">
-        <div class="explain-contents">
-        <div class="explain-title">Progreso</div>
-        <div class="explain-subtitle">{{progress}} %</div>
-         </div>
-        <div class="explain-contents">
-        <div class="explain-title">Límite de entrega</div>
-        <div class="explain-subtitle">{{convertirFecha(currentlsns[1].limitdate)}}</div>
-         </div>
-            <div class="explain-contents"> 
-        <div class="explain-title">Fecha de inicio</div>
-        <div class="explain-subtitle">{{history[0].beginDate}}</div>
-         </div>   
-        <div class="explain-contents"> 
-        <div class="explain-title">Próximo pago</div>
-        <div class="explain-subtitle">-</div>
-         </div> 
-                </div> 
-
-        
-                  <div class="explain-bar" ng-if="lvl < 2 || status != 'ACTIVO'">
-        <div class="explain-contents">
-        <div class="explain-title">Progreso</div>
-        <div class="explain-subtitle">-</div>
-         </div>
-        <div class="explain-contents">
-        <div class="explain-title">Límite de entrega</div>
-        <div class="explain-subtitle">-</div>
-         </div>
-            <div class="explain-contents"> 
-        <div class="explain-title">Fecha de inicio</div>
-        <div class="explain-subtitle">-</div>
-         </div>   
-        <div class="explain-contents"> 
-        <div class="explain-title">Fecha de termino</div>
-        <div class="explain-subtitle">-</div>
-         </div> 
-                </div> 
                </div>
      </div>
       <!-- JAVASCRIPT Course Start -->
@@ -2084,14 +1926,14 @@ input[type="radio"]:checked + label.green-bg::after {
 
          <img src="https://lh3.googleusercontent.com/d/1EP2I0BOMo_8mXsR9qqAv08PxjztZFaQ8" width="80" height="80" style="margin-right: 10px; border-radius: 15px;"/>
 
-<button class="unlockBtn" onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/payment';" ng-if="status != 'ACTIVO'" style="background-color: #489454;">
+ <div class="unlockBtn" onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/payment';" ng-if="status != 'ACTIVO'" style="background-color: #eeeeee; color: black;">
             <span class="btnBorderRight"></span>
             <span class="btnBorderLeft"></span>
             <span class="btniContainer">
-             <i class="btnIcon ri-lock-fill" style="margin-top: -1px; margin-left: -5px;"> </i>
-           Desbloquear
+             <i class="btnIcon ri-lock-fill" style="margin-top: -1px; margin-left: -5px; color: black;"> </i>
+           Bloqueado
             </span>
-          </button> 
+          </div>
       </div> 
       <div class="job-explain-content">
       <div class="job-title-wrapper">
@@ -2102,70 +1944,13 @@ input[type="radio"]:checked + label.green-bg::after {
        </div> 
        </div>
        <div class="job-subtitle-wrapper">
-        <div class="company-name" style="color: #489454">Grado 3 <span class="comp-location">Nivel Intermedio</span></div>
+        <div class="company-name" style="color: #489454">Nivel 3 <span class="comp-location">Intermedio inicial</span></div>
         <div class="posted"> <span ng-if="lvl > 3 && status == 'ACTIVO'">COMPLETADO</span>
     <span ng-if="lvl == 3 && status == 'ACTIVO'">EN CURSO</span>
     <span ng-if="lvl < 3 || status != 'ACTIVO'">BLOQUEADO</span>
     <span class="app-number">{{counter}} Alumnos inscritos</span></div>
        </div>
-       <div class="explain-bar" ng-if="lvl > 3 && status == 'ACTIVO'">
-        <div class="explain-contents">
-        <div class="explain-title">Progreso</div> 
-        <div class="explain-subtitle">100%</div>
-         </div> 
-          <div class="explain-contents">
-        <div class="explain-title">Puntaje de Tests</div>
-        <div class="explain-subtitle">{{history[0].score}}</div>
-         </div>
-        <div class="explain-contents"> 
-        <div class="explain-title">Fecha de inicio</div>
-        <div class="explain-subtitle">{{history[0].beginDate}}</div>
-         </div>   
-        <div class="explain-contents"> 
-        <div class="explain-title">Fecha de termino</div>
-        <div class="explain-subtitle">{{history[0].finishDate}}</div>
-         </div> 
-                </div>
-        
-         <div class="explain-bar" ng-if="lvl == 3 && status == 'ACTIVO'">
-        <div class="explain-contents">
-        <div class="explain-title">Progreso</div>
-        <div class="explain-subtitle">{{progress}} %</div>
-         </div>
-        <div class="explain-contents">
-        <div class="explain-title">Límite de entrega</div>
-        <div class="explain-subtitle">{{convertirFecha(currentlsns[1].limitdate)}}</div>
-         </div>
-            <div class="explain-contents"> 
-        <div class="explain-title">Fecha de inicio</div>
-        <div class="explain-subtitle">{{history[0].beginDate}}</div>
-         </div>   
-        <div class="explain-contents"> 
-        <div class="explain-title">Próximo pago</div>
-        <div class="explain-subtitle">-</div>
-         </div> 
-                </div> 
 
-
-
-                  <div class="explain-bar" ng-if="lvl < 3 || status != 'ACTIVO'">
-        <div class="explain-contents">
-        <div class="explain-title">Progreso</div>
-        <div class="explain-subtitle">-</div>
-         </div>
-        <div class="explain-contents">
-        <div class="explain-title">Límite de entrega</div>
-        <div class="explain-subtitle">-</div>
-         </div>
-            <div class="explain-contents"> 
-        <div class="explain-title">Fecha de inicio</div>
-        <div class="explain-subtitle">-</div>
-         </div>   
-        <div class="explain-contents"> 
-        <div class="explain-title">Fecha de termino</div>
-        <div class="explain-subtitle">-</div>
-         </div> 
-                </div> 
                </div>
      </div>
       
@@ -2223,14 +2008,14 @@ input[type="radio"]:checked + label.green-bg::after {
 
          <img src="https://lh3.googleusercontent.com/d/1EP2I0BOMo_8mXsR9qqAv08PxjztZFaQ8" width="80" height="80" style="margin-right: 10px; border-radius: 15px;"/>
     
-<button class="unlockBtn" onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/payment';" ng-if="status != 'ACTIVO'" style="background-color: #f0ac14;">
+ <div class="unlockBtn" onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/payment';" ng-if="status != 'ACTIVO'" style="background-color: #eeeeee; color: black;">
             <span class="btnBorderRight"></span>
             <span class="btnBorderLeft"></span>
             <span class="btniContainer">
-             <i class="btnIcon ri-lock-fill" style="margin-top: -1px; margin-left: -5px;"> </i>
-           Desbloquear
+             <i class="btnIcon ri-lock-fill" style="margin-top: -1px; margin-left: -5px; color: black;"> </i>
+           Bloqueado
             </span>
-          </button>
+          </div>
       </div> 
       <div class="job-explain-content">
       <div class="job-title-wrapper">
@@ -2241,71 +2026,17 @@ input[type="radio"]:checked + label.green-bg::after {
        </div> 
        </div>
        <div class="job-subtitle-wrapper">
-        <div class="company-name" style="color: #f0ac14">Grado 4 <span class="comp-location">Nivel Intermedio</span></div>
+        <div class="company-name" style="color: #f0ac14">Nivel 4 <span class="comp-location">Intermedio</span></div>
         <div class="posted"><span ng-if="lvl > 4 && status == 'ACTIVO'">COMPLETADO</span>
     <span ng-if="lvl == 4 && status == 'ACTIVO'">EN CURSO</span>
     <span ng-if="lvl < 4 || status != 'ACTIVO'">BLOQUEADO</span>
     <span class="app-number">{{counter}} Alumnos inscritos</span>
     </div>
        </div>
-       <div class="explain-bar" ng-if="lvl > 4 && status == 'ACTIVO'">
-        <div class="explain-contents">
-        <div class="explain-title">Progreso</div> 
-        <div class="explain-subtitle">100%</div>
-         </div> 
-          <div class="explain-contents">
-        <div class="explain-title">Puntaje de Tests</div>
-        <div class="explain-subtitle">{{history[0].score}}</div>
-         </div>
-        <div class="explain-contents"> 
-        <div class="explain-title">Fecha de inicio</div>
-        <div class="explain-subtitle">{{history[0].beginDate}}</div>
-         </div>   
-        <div class="explain-contents"> 
-        <div class="explain-title">Fecha de termino</div>
-        <div class="explain-subtitle">{{history[0].finishDate}}</div>
-         </div> 
-                </div>
-        
-         <div class="explain-bar" ng-if="lvl == 4 && status == 'ACTIVO'">
-        <div class="explain-contents">
-        <div class="explain-title">Progreso</div>
-        <div class="explain-subtitle">{{progress}} %</div>
-         </div>
-        <div class="explain-contents">
-        <div class="explain-title">Límite de entrega</div>
-        <div class="explain-subtitle">{{convertirFecha(currentlsns[1].limitdate)}}</div>
-         </div>
-            <div class="explain-contents"> 
-        <div class="explain-title">Fecha de inicio</div>
-        <div class="explain-subtitle">{{history[0].beginDate}}</div>
-         </div>   
-        <div class="explain-contents"> 
-        <div class="explain-title">Próximo pago</div>
-        <div class="explain-subtitle">-</div>
-         </div> 
-                </div> 
+  
+ 
 
-
-
-                  <div class="explain-bar" ng-if="lvl < 4 || status != 'ACTIVO'">
-        <div class="explain-contents">
-        <div class="explain-title">Progreso</div>
-        <div class="explain-subtitle">-</div>
-         </div>
-        <div class="explain-contents">
-        <div class="explain-title">Límite de entrega</div>
-        <div class="explain-subtitle">-</div>
-         </div>
-            <div class="explain-contents"> 
-        <div class="explain-title">Fecha de inicio</div>
-        <div class="explain-subtitle">-</div>
-         </div>   
-        <div class="explain-contents"> 
-        <div class="explain-title">Fecha de termino</div>
-        <div class="explain-subtitle">-</div>
-         </div> 
-                </div> 
+     
                </div>
      </div>
   
@@ -2362,14 +2093,14 @@ input[type="radio"]:checked + label.green-bg::after {
 
          <img src="https://lh3.googleusercontent.com/d/1EP2I0BOMo_8mXsR9qqAv08PxjztZFaQ8" width="80" height="80" style="margin-right: 10px; border-radius: 15px;"/>
 
-<button class="unlockBtn" onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/payment';" ng-if="status != 'ACTIVO'" style="background-color: #485cb4;">
+ <div class="unlockBtn" onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/payment';" ng-if="status != 'ACTIVO'" style="background-color: #eeeeee; color: black;">
             <span class="btnBorderRight"></span>
             <span class="btnBorderLeft"></span>
             <span class="btniContainer">
-             <i class="btnIcon ri-lock-fill" style="margin-top: -1px; margin-left: -5px;"> </i>
-           Desbloquear
+             <i class="btnIcon ri-lock-fill" style="margin-top: -1px; margin-left: -5px; color: black;"> </i>
+           Bloqueado
             </span>
-          </button>
+          </div>
       </div> 
       <div class="job-explain-content">
       <div class="job-title-wrapper">
@@ -2380,7 +2111,7 @@ input[type="radio"]:checked + label.green-bg::after {
        </div>  
        </div>
        <div class="job-subtitle-wrapper">
-        <div class="company-name" style="color: #485cb4">Grado 5 <span class="comp-location">Nivel Intermedio</span></div>
+        <div class="company-name" style="color: #485cb4">Nivel 5 <span class="comp-location">Intermedio</span></div>
        <div class="posted">
     <span ng-if="lvl > 5 && status == 'ACTIVO'">COMPLETADO</span>
     <span ng-if="lvl == 5 && status == 'ACTIVO'">EN CURSO</span>
@@ -2388,64 +2119,8 @@ input[type="radio"]:checked + label.green-bg::after {
     <span class="app-number">{{counter}} Alumnos inscritos</span>
  </div>
        </div>
-       <div class="explain-bar" ng-if="lvl > 5 && status == 'ACTIVO'">
-        <div class="explain-contents">
-        <div class="explain-title">Progreso</div> 
-        <div class="explain-subtitle">100%</div>
-         </div> 
-          <div class="explain-contents">
-        <div class="explain-title">Puntaje de Tests</div>
-        <div class="explain-subtitle">{{history[0].score}}</div>
-         </div>
-        <div class="explain-contents"> 
-        <div class="explain-title">Fecha de inicio</div>
-        <div class="explain-subtitle">{{history[0].beginDate}}</div>
-         </div>   
-        <div class="explain-contents"> 
-        <div class="explain-title">Fecha de termino</div>
-        <div class="explain-subtitle">{{history[0].finishDate}}</div>
-         </div> 
-                </div>
-        
-         <div class="explain-bar" ng-if="lvl == 5 && status == 'ACTIVO'">
-        <div class="explain-contents">
-        <div class="explain-title">Progreso</div>
-        <div class="explain-subtitle">{{progress}} %</div>
-         </div>
-        <div class="explain-contents">
-        <div class="explain-title">Límite de entrega</div>
-        <div class="explain-subtitle">{{convertirFecha(currentlsns[1].limitdate)}}</div>
-         </div>
-            <div class="explain-contents"> 
-        <div class="explain-title">Fecha de inicio</div>
-        <div class="explain-subtitle">{{history[0].beginDate}}</div>
-         </div>   
-        <div class="explain-contents"> 
-        <div class="explain-title">Próximo pago</div>
-        <div class="explain-subtitle">-</div>
-         </div> 
-                </div> 
 
 
-
-                  <div class="explain-bar" ng-if="lvl < 5 || status != 'ACTIVO'">
-        <div class="explain-contents">
-        <div class="explain-title">Progreso</div>
-        <div class="explain-subtitle">-</div>
-         </div>
-        <div class="explain-contents">
-        <div class="explain-title">Límite de entrega</div>
-        <div class="explain-subtitle">-</div>
-         </div>
-            <div class="explain-contents"> 
-        <div class="explain-title">Fecha de inicio</div>
-        <div class="explain-subtitle">-</div>
-         </div>   
-        <div class="explain-contents"> 
-        <div class="explain-title">Fecha de termino</div>
-        <div class="explain-subtitle">-</div>
-         </div> 
-                </div> 
                </div>
      </div>
   
@@ -5012,7 +4687,7 @@ app.factory('SharedState', function($http, $q) {
     $scope.lsn = data.lsn;
       $scope.lvl = data.lvl;
       $scope.progress = data.progress;
-      $scope.counter = data.counterLvl[1]
+      $scope.counter = data.counterLvl[5]
       $scope.status = data.status;
       $scope.currentlsns = filterCurrent(data.lssons);
        $scope.history = data.history;
