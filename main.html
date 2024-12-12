@@ -575,22 +575,26 @@ ion-side-menu .list .item:hover {
 }
      
 
-.profile-user-data > * {float: left; margin-left: 5px;}
- .profile-user-data   .circle {
+.profile-user-data {
+    display: flex;
+    align-items: center;
+}
+.profile-user-data .circle {
+    flex-shrink: 0; /* Evita que el contenedor de la imagen se reduzca */
     border-radius: 100% !important;
     overflow: hidden; 
     width: 55px;
     height: 55px;
-   margin-top: 20px;
-   margin-right: 10px;
-     margin-left: 15px;
+    margin: 10px 2px 0 10px; /* Ajusta los márgenes */
 }
 .profile-user-data img { margin-right: 10px; max-width: 100%;}
-.profile-user-data .main-data {padding: 10px 0 20px; margin-bottom: 15px;  }
-.main-data h4{
-  font-size: 13px;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+.profile-user-data .main-data {
+    flex-grow: 1; /* Permite que el contenedor de texto use el espacio restante */
+    padding: 10px 10px 20px;
+    margin-bottom: 5px;
+    overflow: hidden; /* Evita desbordamientos */
 }
+
 .main-data .planTag{
   color: #77777a; 
   font-size: 12px;
@@ -600,7 +604,12 @@ ion-side-menu .list .item:hover {
   margin-top: 1px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
-.profile-user-data .main-data h4 {margin: 0; font-size: 17px; font-weight: }
+.main-data h4 {
+    font-size: 17px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+
+    overflow: hidden; 
+}
 .profile-user-data .main-data span {font-size: 12px;}
 
 
