@@ -12,14 +12,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
-<script src='https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js'></script>
 <script async defer src="//www.instagram.com/embed.js"></script>
 </head>
 
 
 <style>
-	/*** base color: #f27275 ***/
+  /*** base color: #f27275 ***/
 body {
   font-size: 0.9rem;
 }
@@ -68,12 +66,22 @@ a {color: #f27275;}a:hover, a:focus {color:#666;}
   background: #fff;
   border-radius: 4px;
   margin-bottom: 10px;
-    box-shadow:  0 4px 8px 0px rgba(0,0,0,0.2);
+ /*   box-shadow:  0 4px 8px 0px rgba(0,0,0,0.2);*/
+
 }
 
 
 .post_thumbnail img{width:100%;text-align: center;}
-.post_header, .post_footer {
+.post_header {
+  padding: 10px 5px;
+  color: #777;
+  width: 100%;
+   display: flex; /* Usamos flexbox */
+  align-items: center; /* Alinea elementos verticalmente */
+  justify-content: space-between;
+}
+  
+  .post_footer {
   padding: 10px 20px;
   color: #777;
   width: 100%;
@@ -233,114 +241,6 @@ iframe#instagram-embed-0{height: auto;}
   border-radius: 40px;
 }
 
-
-
-
-.container {
-font-family: 'Raleway';
-  font-size: 14px;
-  margin-top: -30px;
-  margin-bottom: 15px;
-  font-weight: 500;
-  -webkit-font-smoothing: antialiased;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.card-wrap {
-  margin: 10px;
-  transform: perspective(800px);
-  transform-style: preserve-3d;
-  cursor: pointer;
-}
-.card-wrap:hover .card-info {
-  transform: translateY(0);
-}
-.card-wrap:hover .card-info p {
-  opacity: 1;
-}
-.card-wrap:hover .card-info, .card-wrap:hover .card-info p {
-  transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-}
-.card-wrap:hover .card-info:after {
-  transition: 5s cubic-bezier(0.23, 1, 0.32, 1);
-  opacity: 1;
-  transform: translateY(0);
-}
-.card-wrap:hover .card-bg {
-  transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1), opacity 5s cubic-bezier(0.23, 1, 0.32, 1);
-  opacity: 1;
-}
-.card-wrap:hover .card {
-  transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 2s cubic-bezier(0.23, 1, 0.32, 1);
-  box-shadow: rgba(255, 255, 255, 0.2) 0 0 40px 5px, white 0 0 0 1px, rgba(0, 0, 0, 0.66) 0 30px 60px 0, inset #333 0 0 0 5px, inset white 0 0 0 6px;
-}
-
-.card {
-  position: relative;
-  
-  flex: 0 0 240px;
-  width: 240px;
-  height: 320px;
-  background-color: #333;
-  overflow: hidden;
-  border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.66) 0 30px 60px 0, inset #333 0 0 0 5px, inset rgba(255, 255, 255, 0.5) 0 0 0 6px;
-  transition: 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
-}
-
-.card-bg {
-  opacity: 0.75;
-  position: absolute;
-
-  width: 100%;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  transition: 1s cubic-bezier(0.445, 0.05, 0.55, 0.95), opacity 5s 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
-  pointer-events: none;
-}
-
-.card-info {
-  padding: 20px;
-  position: absolute;
-  bottom: 0;
-  color: #fff;
-  transform: translateY(40%);
-  transition: 0.6s 1.6s cubic-bezier(0.215, 0.61, 0.355, 1);
-}
-.card-info p {
-  opacity: 0;
-  text-shadow: black 0 2px 3px;
-  transition: 0.6s 1.6s cubic-bezier(0.215, 0.61, 0.355, 1);
-}
-.card-info * {
-  position: relative;
-  z-index: 1;
-}
-.card-info:after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.6) 100%);
-  background-blend-mode: overlay;
-  opacity: 0;
-  transform: translateY(100%);
-  transition: 5s 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
-}
-
-.card-info h1 {
-  font-family: 'Playfair Display';
-  font-size: 36px;
-  font-weight: 700;
-  text-shadow: rgba(0, 0, 0, 0.5) 0 10px 10px;
-}
 
 
 #op{
@@ -647,7 +547,7 @@ font-family: 'Raleway';
 
 .bar-column {
   top: 210px;
-	position: absolute;
+  position: absolute;
    width: 100%;
   margin-left: 15%;
   margin-right: 15%;
@@ -657,38 +557,38 @@ font-family: 'Raleway';
 
 
 .bar {
-	height: 8px;
-	width: 58%;
-	border-radius: 4px;
-	background-color: #484B53;
-	position: absolute;
+  height: 8px;
+  width: 58%;
+  border-radius: 4px;
+  background-color: #484B53;
+  position: absolute;
 }
 
 .fill {
-	height: 8px;
-	border-radius: 4px;
-	background-color: #FF8095;
-	box-shadow: 0px 0px 30px #FF2AA6;
-	position: absolute;
+  height: 8px;
+  border-radius: 4px;
+  background-color: #FF8095;
+  box-shadow: 0px 0px 30px #FF2AA6;
+  position: absolute;
 }
 
 .fill-u {
-	width: 50%;
-	animation-name: filling-u;
-	animation-duration: 1s;
-	animation-timing-function: ease-out;
-	animation-iteration-count: initial;
+  width: 50%;
+  animation-name: filling-u;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: initial;
 }
 
 @keyframes filling-u {
-	0% {
-		box-shadow: 0px 0px 0px #FF2AA6;
-		width: 0px;
-	}
-	100% {
-		box-shadow: 0px 0px 30px #FF2AA6;
-		width: 50%;
-	}
+  0% {
+    box-shadow: 0px 0px 0px #FF2AA6;
+    width: 0px;
+  }
+  100% {
+    box-shadow: 0px 0px 30px #FF2AA6;
+    width: 50%;
+  }
 }
 
 
@@ -815,13 +715,23 @@ font-family: 'Raleway';
   }
 }
   
+  
+  
+@media (min-width: 480px) {  
+    .youtubeframe{
+      height: 300px;
+    }
+}
+  
   @media (min-width: 700px) {  
     .youtubeframe{
-      height: 340px;
+      height: 400px;
     }
 }
 
-  
+   .youtubeframe{
+      border-radius: 10px !important;
+    }
   
   .content {
   display: grid;
@@ -843,52 +753,6 @@ font-family: 'Raleway';
   width: 300px; 
 }
 
-
-	/* Chart */
-
-.chart {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  background: var(--card-bg-color);
-  border-radius: 8px;
-  border: 2px solid rgba(169, 150, 253, 0.5);
-  box-shadow: 0 7px 25px var(--shadow-color);
-  padding: 20px 15px;
-  margin: 20px 0;
-}
-
-.chart h2 {
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.chart ul {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  list-style: none;
-  margin: 10px 0;
-}
-
-.chart ul li {
-  font-size: 0.8rem;
-  font-weight: 500;
-  background-color: var(--card-bg-color);
-  border: 2px solid var(--border-color);
-  border-radius: 6px;
-  padding: 6px;
-  box-shadow: 0px 2px 3px 0px var(--shadow-color),
-    0px 1px 4px 0px var(--shadow-color), 0px 2px 1px -1px var(--shadow-color);
-}
-
-.chart .percentage {
-  font-weight: 700;
-  color: var(--accent-color);
-}
 
 
 
@@ -1185,7 +1049,7 @@ font-family: 'Raleway';
 
 
 
-	.fixed-bottom-bar {
+  .fixed-bottom-bar {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -1257,7 +1121,146 @@ font-family: 'Raleway';
 .media-item span {
   font-size: 12px;
   color: #3a3b3c;
-}	
+} 
+
+
+
+
+
+  
+
+.profile-info {
+  display: flex; /* Alineación horizontal para la imagen y el texto */
+  align-items: center; /* Asegura que la imagen y el texto estén alineados verticalmente */
+}
+
+.profile-pic {
+  border-radius: 50%; /* Hace la imagen circular */
+  overflow: hidden;
+  width: 35px;
+  height: 35px;
+  margin-right: 10px; /* Espacio entre imagen y texto */
+  flex-shrink: 0; /* Evita que la imagen se reduzca */
+}
+
+.profile-pic img {
+  width: 100%; /* Ajusta el tamaño dentro del contenedor */
+  height: auto;
+  display: block;
+}
+
+
+.text-container {
+  display: flex;
+  justify-content: left; /* Centra horizontalmente la imagen */
+
+  width: 100%; /* Ancho completo del contenedor */
+  height: auto; /* Ajusta la altura según el contenido */
+  margin-top: -20px;
+   padding: 0px 5px 20px 15px;
+  overflow: hidden;
+}
+
+
+.image-container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente la imagen */
+  align-items: center; /* Centra verticalmente si hay altura extra en el contenedor */
+  width: 100%; /* Ancho completo del contenedor */
+  height: auto; /* Ajusta la altura según el contenido */
+  overflow: hidden; /* Oculta cualquier contenido que desborde */
+}
+
+.post-image {
+  width: 300px; /* Ancho fijo para la imagen */
+  height: auto; /* Mantiene la proporción de la imagen */
+  border-radius: 8px; /* (Opcional) Bordes redondeados */
+}
+
+ 
+
+
+
+ .poll-container {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.poll-voter {
+    width: 100%;
+}
+
+.poll-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.vote-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.poll-option {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.transparent-bar {
+    margin-top: 5px;
+    background-color: transparent;
+    height: 30px;
+  position: relative;
+    border-radius: 5px;
+}
+
+.poll-option-bar {
+    margin-top: 5px;
+    background-color: #ADC0DF;
+    height: 30px;
+  position: relative;
+    border-radius: 5px;
+  width: 0;
+}
+
+.animate-bar{
+   animation: slide_in 0.3s ease-in-out forwards;
+}
+
+@keyframes slide_in {
+    from {
+        width: 0;
+    }
+    to {
+        width: var(--target-width)
+    }
+}
+
+
+
+.poll-vote-button {
+    flex-shrink: 0;
+}
+
+.vote-btn {
+    padding: 5px 10px;
+    background-color: #ADC0DF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+}
+
+.vote-btn:hover {
+    background-color: #92a8d1;
+}
+
 </style>
 
  
@@ -1270,11 +1273,7 @@ font-family: 'Raleway';
         <main class="page-content left-content"> 
             <div class="container-fluid">
                 <div class="row">
-                  <ul class="filtermenu">
-                        <li ng-click="filterPosts('all')" ng-class="{active: filter === 'all'}">Recientes</li>
-                        <li ng-click="filterPosts('youtube')" ng-class="{active: filter === 'youtube'}">Videos</li>
-                        <li ng-click="filterPosts('audio')" ng-class="{active: filter === 'audio'}">Audios</li>
-                    </ul>
+                 
                     <div class="col-md-12 posts-group">
                        
       <div class="showbox" ng-if="userDataLoaded">
@@ -1287,35 +1286,61 @@ font-family: 'Raleway';
                       
     <div ng-repeat="post in filteredData.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
                         <div class="post " >
-                          <div class="post_header">
+                          <div class="post_header" ng-if="post.type != 'instagram'"> 
+                             <div class="profile-info">
+                             <div class="profile-pic">
+              <img src="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V">
+          </div>
                             <a href="#" ng-click="handleUserProfile(post.user)">{{post.user}}</a>
-                            <div style="float:right;"> {{post.date}} </div>
+                               </div>
+                            <div style="float:right;">hace {{post.date[0]}} días </div>
                           </div>
-                          <div class="post_thumbnail">
-  <div style="height: 150px; background: #343434; display: flex; justify-content: center; align-items: center;" ng-if="post.type == 'audio'">
-                              <div style="margin-top: 45px;">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 125" height="160" style="filter: invert(1);">
-        <path d="M85.83,53.22h-5L77.37,42.86a1.9,1.9,0,0,0-3.66.21L69.46,63.32,64.87,32.67a1.9,1.9,0,0,0-3.76.06L57.26,66.94l-5-43.9a1.9,1.9,0,0,0-3.78,0l-5,43.9L39.69,32.73a1.9,1.9,0,0,0-3.77-.06l-4.48,30L27.12,38.93a1.9,1.9,0,0,0-3.71-.14L19.89,52.33H14.13a1.5,1.5,0,1,0,0,3h6.61a1.91,1.91,0,0,0,1.84-1.43l2.48-9.54L29.68,69.7a1.9,1.9,0,0,0,3.75-.06l4.22-28.22,4,35.54a1.9,1.9,0,0,0,3.78,0L50.4,33l5,43.94a1.9,1.9,0,0,0,3.77,0l4-35.54L67.4,69.83a1.9,1.9,0,0,0,3.73.1l4.68-22.27,2.52,7.53a1.48,1.48,0,0,0,1.42,1h6.08A1.5,1.5,0,0,0,85.83,53.22Z"/>
-                                </svg></div>
+                          <div class="post_thumbnail" >
+  <div style="height: 150px; background: #343434; display: flex; justify-content: center; align-items: center; " ng-if="post.type == 'audio'">
+                       
+   <img src="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V" height="160">
  
 </div>                           
-                               <iframe width="100%" height="{{post.height}}" ng-src="{{trustAsResourceUrl(post.url)}}" frameborder="0" ng-class="{'youtubeframe': post.type != 'audio'}"></iframe>
+                               <iframe width="100%" height="{{post.height}}" ng-src="{{trustAsResourceUrl(post.url)}}" frameborder="0" ng-class="{'youtubeframe': post.type == 'youtube'}"></iframe> 
+                            
+                  
+  <div class="image-container" ng-if="post.type == 'img'">
+    <img src="{{post.url}}"   class="post-image" />
+  </div>
+                            
+     <div class="text-container" ng-if="post.type == 'text'">
+    {{post.url}}
+  </div>
+    
 
-                         
-  <div id='app2' class='container' ng-if="post.type == 'diploma'" >
-  <card data-image='{{post.url}}' >
-    <h1 slot='header'>click</h1>
-    <p slot='content'>Reconocimiento por haber concluido el nivel preparatorio</p>
-  </card> 
-</div> 
+<div class="poll-container" ng-if="post.type == 'poll'">
+    <div class="poll-voter"> 
+        <h4 class="poll-title">{{post.url}}</h4>
+        <div class="poll-list">
+            <div class="vote-row" ng-repeat="opt in post.likes">
+                <div class="poll-option">
+                    <div class="transparent-bar"  ng-show="isButton"></div>
+                    <div class="poll-option-bar"  ng-class="{'animate-bar': opt.animate}"   ng-style="{'--target-width': opt.pct + '%'}"  ng-show="!isButton"></div>
+                    <p style="position: absolute; margin-top: -25px; margin-left: 10px;"><span style="font-weight: 700;" ng-show="!isButton">{{opt.pct | number:0}}%</span> {{opt.name}}  </p> 
+                </div>  
+                <div class="poll-vote-button">
+                    <button class="vote-btn" ng-click="addVote(post, opt)" ng-disabled="!isButton">Votar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                    
+
+                          
                         <!---    <img src="https://loremflickr.com/620/640/istanbul?random=1" /> --->
                           </div>
-                          <div class="post_footer" ng-if="post.type != 'instagram'">
+                          <div class="post_footer" ng-if="post.type != 'instagram' && post.type != 'poll'">
                              
+    
 <div class="row">
-    <p style="margin-left: 5px;">{{post.likes.length}} likes</p>
-  </div>       
-<div class="row">
+  
                <div class="btn-toolbar justify-content-end" role="toolbar" aria-label="Toolbar with button groups">
   <div class="btn-group ml-2" role="group" aria-label="First group">
     <button type="button" class="btn btn-outline-danger btn-sm"  ng-class="{ 'active': dangerButtonActive[$index] }" ng-click="newLike($index, post)">
@@ -1328,22 +1353,28 @@ font-family: 'Raleway';
   </div>
 </div> 
 </div>
-                            
-              <a data-toggle="collapse" href="#collapse{{post.id}}" role="button" aria-expanded="false" aria-controls="collapse{{post.id}}">comentarios...</a>
-        <div class="comments collapse multi-collapse" id="collapse{{post.id}}">
-            <p ng-repeat="comment in post.comments">{{comment.user}}: {{comment.comment}}</p>   
+ <div class="row">
+    <p style="margin-left: 5px; margin-top: 10px; margin-bottom: 5px; font-weight: 700">{{post.likes.length}} Me gusta</p>
+  </div>                              
+              <a data-toggle="collapse" href="#collapse{{post.id}}" role="button" aria-expanded="false" aria-controls="collapse{{post.id}}" >ver comentarios</a> 
+        <div class="comments collapse multi-collapse" id="collapse{{post.id}}" style="margin-top: 5px;">
+          <p ng-repeat="comment in post.comments"><span style="font-weight: 700">{{comment.user}}</span> {{comment.comment}}</p>   
+               <p ng-if="post.comments.length == 0">No hay comentarios</p>  
         </div>    
     </div> 
    </div>
             
-                       
-                    
+                        
+                               <hr class="hr-pagi">       
                       </div>
 
                     </div>
                 </div>
-                <hr class="hr-pagi">  
-              
+       <ul class="filtermenu">
+                        <li ng-click="filterPosts('all')" ng-class="{active: filter === 'all'}">Recientes</li>
+                        <li ng-click="filterPosts('youtube')" ng-class="{active: filter === 'youtube'}">Videos</li>
+                        <li ng-click="filterPosts('audio')" ng-class="{active: filter === 'audio'}">Audios</li>
+                    </ul>
               
                <div class="row">
                     <div class="form-group col-md-12">           
@@ -1365,7 +1396,7 @@ font-family: 'Raleway';
               
               
          
-            </div>
+            </div> <br><br>
         </main>
         <!-- page-content" -->
 
@@ -1412,8 +1443,8 @@ font-family: 'Raleway';
     <input id="audioDataInput" type="file" style="display: none;" accept="audio/*" />
      <div id="audioData" style="display: none;"> </div> 
     <div class="media-item upload-camera" >
-      <i class="ri-camera-2-fill"></i>
-      <span>Foto&nbsp&nbsp&nbsp&nbsp</span>
+      <i class="ri-movie-fill"></i>
+      <span>Video&nbsp&nbsp</span>
     </div>
     <input type="file" class="cameraInput" accept="image/*" capture="environment"  style="display: none;">
     <div class="media-item" id="recordBtn">
@@ -1421,9 +1452,9 @@ font-family: 'Raleway';
       <span>Encuesta</span>
     </div>
   </div>
-</div> 
-	
+</div>  
   
+   
   <div class="right-content">
 
 
@@ -1444,11 +1475,11 @@ font-family: 'Raleway';
                                 <div class="medal-gold"></div>
                             </div>
                             <div class="ranking-table-data">
-                              {{userData.ranking[0].name}} 
-                <br>  <span style="font-size: 12px; color: {{userData.ranking[0].color}}">  {{userData.ranking[0].lvl}}</span>
+                              {{ranking[0].name}} 
+                <br>  <span style="font-size: 12px; color: {{userData.ranking[0].color}}">  {{ranking[0].lvl}}</span>
                           </div>
                             <div class="ranking-table-data">
-                                <div class="complete" style="color: orange !important; text-shadow: 0 0 10px orange; font-weight: 700; font-size: 20px !important;">{{userData.ranking[0].score}}</div>
+                                <div class="complete" style="color: orange !important; text-shadow: 0 0 10px orange; font-weight: 700; font-size: 20px !important;">{{ranking[0].score}}</div>
                             </div>
                         </div>
                         <div class="ranking-table-row-leader-2">
@@ -1456,11 +1487,11 @@ font-family: 'Raleway';
                                 <div class="medal-silver"></div>
                             </div> 
                             <div class="ranking-table-data">
-                                {{userData.ranking[1].name}}
-        <br>  <span style="font-size: 12px; color: {{userData.ranking[1].color}}">  {{userData.ranking[1].lvl}}</span>
+                                {{ranking[1].name}}
+        <br>  <span style="font-size: 12px; color: {{ranking[1].color}}">  {{ranking[1].lvl}}</span>
                         </div>
                             <div class="ranking-table-data">
-                                <div class="complete" style="color: #2980b9  !important; text-shadow: 0 0 10px #85c1e9 ; font-weight: 500; font-size: 18px !important;">{{userData.ranking[1].score}}</div>
+                                <div class="complete" style="color: #2980b9  !important; text-shadow: 0 0 10px #85c1e9 ; font-weight: 500; font-size: 18px !important;">{{ranking[1].score}}</div>
                             </div> 
                         </div>
                         <div class="ranking-table-row-leader-3">
@@ -1468,17 +1499,17 @@ font-family: 'Raleway';
                                 <div class="medal-bronze"></div>
                             </div>
                             <div class="ranking-table-data">
-                               {{userData.ranking[2].name}}
-                               <br>  <span style="font-size: 12px; color: {{userData.ranking[2].color}}">  {{userData.ranking[2].lvl}}</span>
+                               {{ranking[2].name}}
+                               <br>  <span style="font-size: 12px; color: {{ranking[2].color}}">  {{ranking[2].lvl}}</span>
 </div>
                             <div class="ranking-table-data">
-                                <div class="complete" style="color: #85929e   !important; text-shadow: 0 0 5px #85929e; font-size: 16.5px !important;">{{userData.ranking[2].score}}</div>
+                                <div class="complete" style="color: #85929e   !important; text-shadow: 0 0 5px #85929e; font-size: 16.5px !important;">{{ranking[2].score}}</div>
                             </div>
                         </div>
 
 
                          <div class="ranking-table-body">
-        <div class="ranking-table-row" ng-repeat="user in userData.ranking.slice(3)">
+        <div class="ranking-table-row" ng-repeat="user in ranking.slice(3)">
             <div class="ranking-table-data">{{ $index + 4 }}</div> <!-- Muestra posición -->
             <div class="ranking-table-data">{{ user.name }}<br>  <span style="font-size: 12px; color: {{user.color}}">  {{user.lvl}}</span></div>
             <div class="ranking-table-data"><div class="complete">{{ user.score }}</div></div>
@@ -1494,15 +1525,6 @@ font-family: 'Raleway';
      </div>
 
 
-
-            <div class="chart" id="doughnut-chart">
-              <h2>Distribution of Attended Events</h2>
-              <canvas id="doughnut"></canvas>
-              <ul></ul>
-            </div>
-
-
-
     </div>
   
   
@@ -1511,7 +1533,7 @@ font-family: 'Raleway';
     </div>
     <!-- page-wrapper -->
   
-  
+   
   
   
 <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true" >
@@ -1536,10 +1558,10 @@ font-family: 'Raleway';
 
                 <img class="card-avatar" ng-src="{{user.photo}}" alt="avatar" />
                 <h1 class="card-fullname" style="margin-bottom: 15px;">{{user.nameshort}}
-		<div class="progress" > 
+    <div class="progress" > 
           <div class="progress-bar" style=" background-color: {{user.color}};" role="progressbar" aria-valuemin="0" aria-valuemax="100" ng-style="{width: user.progress + '%'}" ng-init="startAnimation()"></div>
         </div>
-		</h1>
+    </h1>
 
                 <h2 class="card-jobtitle"  >
 
@@ -1600,7 +1622,7 @@ font-family: 'Raleway';
 
 
 <script type="module">
-	
+  
 import confetti from "https://esm.run/canvas-confetti@1";
 
    /*   
@@ -1631,20 +1653,51 @@ var app = angular.module('postApp', [])
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-      }
+      } 
     }).then(function(response) {
       $scope.data = response.data.posts; 
        $scope.profileData = response.data.profiles
+          $scope.ranking = response.data.ranking
       $scope.filterPosts('all');
       $scope.updatePagination();
       $scope.userDataLoaded = false
+       $scope.data.forEach(post => {
+        if (post.type === 'poll') {
+            processPollData(post);
+        }
+    });
     });
    
-    
+   function processPollData(post) {
+    post.totalVotes = post.likes.reduce((total, opt) => total + opt.votes.length, 0);
+    post.likes.forEach(opt => {
+        opt.pct = post.totalVotes > 0 ? (opt.votes.length / post.totalVotes) * 100 : 0;
+    });
+}
    
+$scope.isButton = true;
+
+ $scope.addVote = function(post, opt) {
+    if ($scope.isButton) {
+        $scope.isButton = false;
+      
+        opt.votes.push("Usuario");
+        processPollData(post);
+        opt.animate = false;
+       post.likes.forEach(option => {
+         option.isButton = false; 
+         option.animate = true; 
+            });
+    } 
+};
+
+
+
+   
+      
     $scope.user = "@anonimo"
 
- var requestData = {
+ var requestData = { 
         action: "getUserName",
         token: localStorage.getItem('MStoken')
     };
@@ -1735,6 +1788,7 @@ $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7
 
   $scope.filterPosts = function(type) {
     $scope.filter = type;
+   
     if (type === 'all') {
       $scope.filteredData = $scope.data;
     } else {
@@ -1742,6 +1796,8 @@ $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7
         return post.type === type;
       });
     }
+   
+  
      $timeout(function() {
             $('.post').hide().fadeIn(400);
         }, 100);
@@ -1822,141 +1878,6 @@ $scope.newLike = function(index, post) {
 
 
 
-
-
-
-Vue.config.devtools = true;
-
-Vue.component('card', {
-  template: `
-    <div class='card-wrap'
-      @mouseenter='handleMouseEnter'
-      @mouseleave='handleMouseLeave'
-      ref='card'>
-      <div class='card'
-        :style='cardStyle'>
-        <div class='card-bg' :style='[cardBgTransform, cardBgImage]'></div>
-        <div class='card-info'>
-          <slot name='header'></slot>
-          <slot name='content'></slot>
-        </div>
-      </div>
-    </div>`,
-  mounted() {
-    this.width = this.$refs.card.offsetWidth;
-    this.height = this.$refs.card.offsetHeight;
-
-    // Add devicemotion event listener
-    window.addEventListener('devicemotion', this.handleDeviceMotion);
-  },
-  destroyed() {
-    // Remove devicemotion event listener when component is destroyed
-    window.removeEventListener('devicemotion', this.handleDeviceMotion);
-  },
-  props: ['dataImage'],
-  data: () => ({
-    width: 0,
-    height: 0,
-    gravity: { x: 0, y: 0, z: 0 }
-  }),
-  computed: {
-    cardStyle() {
-      const rX = this.gravity.x * 20;
-      const rY = this.gravity.y * -20;
-      return {
-        transform: `rotateY(${rX}deg) rotateX(${rY}deg)`
-      };
-    },
-    cardBgTransform() {
-      const tX = this.gravity.x * -30;
-      const tY = this.gravity.y * -30;
-      return {
-        transform: `translateX(${tX}px) translateY(${tY}px)`
-      };
-    },
-    cardBgImage() {
-      return {
-        backgroundImage: `url(${this.dataImage})`
-      };
-    }
-  },
-  methods: {
-    handleMouseEnter() {
-      clearTimeout(this.mouseLeaveDelay);
-    },
-    handleMouseLeave() {
-      this.mouseLeaveDelay = setTimeout(() => {
-        this.gravity.x = 0;
-        this.gravity.y = 0;
-      }, 100);
-    }
-  }
-});
-
-const app2 = new Vue({
-  el: '#app2'
-});
-
-
-
-
-
-
-const chartData = {
-  labels: ["Workshop", "Theater", "Concert", "Sport"],
-  data: [40, 15, 25, 20],
-};
-
-const chart = document.getElementById("doughnut");
-const eventList = document.querySelector(".chart ul");
-
-new Chart(chart, {
-  type: "doughnut",
-  data: {
-    labels: ["Workshop", "Theater", "Concert", "Sport"],
-    datasets: [
-      {
-        label: "# of Events",
-        data: [8, 3, 5, 4],
-        backgroundColor: ["#582bac", "#b31a4d", "#e48e2c", "#4a920f"],
-        offset: 10,
-        hoverOffset: 8,
-        hoverBorderColor: "#9a999b",
-        borderWidth: 1,
-      },
-    ],
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: true,
-        labels: {
-          color: "#8b8a96",
-          font: {
-            size: 12,
-            weight: 600,
-          },
-        },
-      },
-    },
-    layout: {
-      padding: {
-        bottom: 10,
-      },
-    },
-  },
-});
-
-function population() {
-  chartData.labels.forEach((label, i) => {
-    let eachEvent = document.createElement("li");
-    eachEvent.innerHTML = `${label}: <span class="percentage">${chartData.data[i]}%</span> `;
-    eventList.appendChild(eachEvent);
-  });
-}
-
-population();
 
 
 </script>
