@@ -607,7 +607,7 @@ ion-side-menu .list .item:hover {
 .main-data h4 {
     font-size: 17px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
-
+margin-bottom: 1px;
     overflow: hidden; 
 }
 .profile-user-data .main-data span {font-size: 12px;}
@@ -733,7 +733,7 @@ ion-side-menu .list .item:hover {
         <ion-content>
 
       <div class="profile-user-data clearfix">
-        <div id="loadingProfile" ng-if="loadingProfile"></div>
+        <div id="loadingProfile" ng-if="loadingProfile" style="margin-top: 20px !important;"></div>
           <div class="circle">
               <img class="profile-pic" src="{{userData.photo}}">
           </div>
