@@ -1,8 +1,8 @@
 <head>
 
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
 <link rel="icon" href="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V" type="image/x-icon">
-    <title>Taller de Piano</title>
+    <title>Mozart Appcademy</title>
   
 <link href="https://code.ionicframework.com/1.3.3/css/ionic.min.css" rel="stylesheet">
   <script src="https://code.ionicframework.com/1.3.3/js/ionic.bundle.min.js"></script>
@@ -208,7 +208,7 @@ ion-side-menu .list .item:hover {
 
         .iframe-container iframe {
           position: absolute;
-          top: 0;
+          top: 15px;
         left: 0;
             width: 100%;
             height: 100%;
@@ -490,7 +490,10 @@ ion-side-menu .list .item:hover {
 .tabframe-container{
       display: block;
     }
-
+.bar-light{
+     box-shadow:  0 2px 4px 0px rgba(0,0,0,0.1);
+      height: 55px !important;
+   }
 /* Mostrar la barra de tabs solo en pantallas de hasta 768px */
 @media (max-width: 850px) {
     .tabs-striped {
@@ -505,19 +508,33 @@ ion-side-menu .list .item:hover {
   .content {
   grid-template-columns: 100% 0 !important;
   }
+     #chatFrame{
+   height: 83vh !important;
+}
 }
 
 @media (min-width: 850px) {
-  .menubtn{
+.menubtn{
     display: none;
   }
-    .hintMsg{
+ .hintMsg{
         display: none;
     }
+
+
+    /*
+     #chatFrame{
+  margin-top: -20px;
+}
+.left-content {
+  margin-top: 15px !important;
+}*/
+    
  /* ion-side-menu .list .item {
   font-size: 15px;
   } */
 }
+     
 
 @keyframes pulse {
   0% {
@@ -685,11 +702,15 @@ width: 155px;
   font-size: 18px;
 }
 
+ #chatFrame{
+     height: 90vh;
+}
+     
 .content {
   display: grid;
   grid-template-columns: auto 330px; /* Deja que el lado izquierdo sea flexible */
-  height: 100vh;
-}
+  height: 92.5vh;
+}   
 
 .left-content {
   overflow-y: auto; /* Permite scroll si el contenido es más grande */
@@ -700,14 +721,44 @@ width: 155px;
   background-color: white;
   display: flex;
   flex-direction: column;
-   box-shadow: -1px 0 2px rgba(0, 0, 0, 0.3); 
+  border: 1px solid #e1e8ed;
   height: 100vh;
   overflow-y: auto;
   position: fixed; 
   right: 0;
+    top: 15px;
   width: 330px; 
 }
+       
 
+
+  .barImage:before {
+    position: absolute;
+    content: "";
+    height: 50px;
+    width: 50px;
+    top: -5px;
+    left: -2.6px;
+    border-radius: 50%;
+    border: 1px solid silver;
+    animation: 1.5s linear 0s normal none infinite focuse;
+}
+   
+   @keyframes focuse {
+  0% {
+    transform: scale(0.8);
+    opacity: 1; }
+  75% {
+    transform: scale(1.2);
+    opacity: 0; }
+  100% {
+    transform: scale(1.2);
+    opacity: 0; } }
+@keyframes slide {
+  from {
+    background-position: 0 0; }
+  to {
+    background-position: 40px 0; } }
      
 </style>
 
@@ -742,12 +793,6 @@ width: 155px;
           </div>
           <div class="main-data" style="margin-top: 12px;" ng-if="!loadingProfile">
             <h4 >{{userData.name}}</h4>
-       <div class="pull-left achievement-count" ng-if="userData.classtime !== ''" style="color: #77777a; font-size: 12px;"> PLAN ZOOM
-           <i class="ri-video-chat-fill" style="color: #0B5CFF"></i>  </div>
-       <div class="pull-left achievement-count" ng-if="userData.classtime === ''" style="color: #77777a; font-size: 12px;"> PLAN ASÍNCRONO
-            <i class="ri-mac-line"></i>  </div> 
-     
-     
         <div class="pull-left planTag" ng-if="userPlan == 'Premium' && userData.status == 'ACTIVO'" style="color: orange; text-shadow: 0 0 10px orange;"> PLAN PREMIUM
             <i class="ri-vip-crown-fill" style="color: orange; text-shadow: 0 0 10px orange;"></i>  </div>
     <div class="pull-left planTag" ng-if="userPlan == 'Pro' && userData.status == 'ACTIVO'" style="color: #20a2f1; text-shadow: 0 0 1px #20a2f1;"> PLAN PRO
@@ -764,13 +809,14 @@ width: 155px;
           </div>  
         </div>
      
-          <ul class="list">
-           <a href="#/menu/courses" class="item" ng-class="(activeMenuClr=='courses')?'menuSelectedColor':''" ng-click="activeMenuClr = 'courses'" menu-toggle="left"><i class="ri-presentation-line" ></i>&nbsp&nbspInicio</a> 
+ <ul class="list">
+           <a href="#/menu/tab/theory" class="item" ng-class="(activeMenuClr=='home')?'menuSelectedColor':''" ng-click="activeMenuClr = 'home'" menu-toggle="left"><i class="ri-presentation-line" ></i>&nbsp&nbspInicio</a> 
+      <a href="#/menu/courses" class="item" ng-class="(activeMenuClr=='courses')?'menuSelectedColor':''" ng-click="activeMenuClr = 'courses'" menu-toggle="left"><i class="ri-puzzle-2-line" ></i>&nbsp&nbspCursos</a> 
 <a href="#/menu/agenda" class="item" ng-class="(activeMenuClr=='agenda')?'menuSelectedColor':''" ng-click="activeMenuClr = 'agenda'" menu-toggle="left"><i class="ri-calendar-todo-line"></i>&nbsp&nbspAgenda</a> 
+          <a href="#/menu/reel/achievements" class="item" ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" ng-click="activeMenuClr = 'reel'" menu-toggle="left"><i class="ri-user-community-line"></i></i>&nbsp&nbspComunidad</a>    
                            <a href="#/menu/library" class="item" ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" ng-click="activeMenuClr = 'library'" menu-toggle="left"><i class="ri-book-shelf-line" ></i>&nbsp&nbspBiblioteca</a>
-                              
-       <a href="#/menu/reel/achievements" class="item" ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" ng-click="activeMenuClr = 'reel'" menu-toggle="left"><i class="ri-user-community-line"></i></i>&nbsp&nbspComunidad</a>     
           </ul>
+
      
         </ion-content>
  <ion-footer-bar style="z-index: 999 !important;">
@@ -794,11 +840,25 @@ width: 155px;
  <script id="agenda.html" type="text/ng-template">
     <ion-view >
       
-     <ion-nav-bar class="bar-light" >      
+    <ion-nav-bar class="bar-light" >      
         <ion-nav-buttons side="right">
 
-       <button class="button button-clear" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;">
-      <img src="{{userData.photo}}" width="35" height="35" style="border-radius: 50%;" />
+     <button class="button button-clear" ng-click="dropdownChat()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 18px;">
+<i class="ri-question-answer-line"></i>
+            <div style="position: absolute; top: -3px; left: 18px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(chats | filter:{read: false}).length && chatCounter">
+        <div style="font-size: 13px; color: white;"> {{(chats | filter:{read: false}).length}}</div>
+    </div>
+</button> 
+          
+     <button class="button button-clear" ng-click="dropdownNotif()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 25px;">
+  <i class="ri-notification-3-line" ></i>
+            <div style="position: absolute; top: -3px; left: 18px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(alerts | filter:{seen: false}).length && alertCounter">
+        <div style="font-size: 13px; color: white;" > {{(alerts | filter:{seen: false}).length}}</div>
+    </div> 
+</button>
+
+       <button class="button button-clear" ng-class="{ 'barImage': btnBar }" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;">
+      <img src="{{userData.photo}}" width="40" height="40" style="border-radius: 50%;" />
   <div style="position: absolute; bottom: -5px; left: 25px; width: 15px; height: 15px; background-color: #d3d3d3; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
         <i class="icon ion-chevron-down" style="font-size: 8px; color: black; transform: scale(0.27);"></i>
     </div>
@@ -807,12 +867,15 @@ width: 155px;
        
         <ion-nav-buttons side="left">
           <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
-        </ion-nav-buttons>   
+        </ion-nav-buttons>  
+
+            
        
         <div class="dropdownContent" ng-show="isDropdownVisible" ng-click="$event.stopPropagation()">
      <div id="bannerRow">
       <div class="profileImageContainer">
-        <img src="{{userData.photo}}"  />
+     <div id="loading" ng-if="loadingProfile" style="height: 60px;"></div>
+        <img src="{{userData.photo}}"  ng-if="!loadingProfile"/>
       </div>
       <p class="profileName">{{userData.name}}</p>
       <p class="profileEmail">{{userData.mail}}</p>
@@ -820,13 +883,35 @@ width: 155px;
     <div class="dropdown-item" ng-click="goToStatus()">
       <i class="ion-ios-contact-outline"></i> Perfil
     </div>
-  <div class="dropdown-item" ng-click="goToStatus()">
+             <div class="dropdown-item" ng-click="goToStatus()">
       <i class="ion-card"></i> Pagos
     </div>
-     <div class="dropdown-item" ng-click="goToChat()">
+    <div class="dropdown-item" ng-click="goToChat()">
       <i class="ion-ios-chatboxes-outline"></i> Tutoría
     </div>
   </div>
+
+    <div class="dropdownContent" ng-show="dropdownChatVisible" ng-click="$event.stopPropagation()">
+  <div class="dropdown-item" 
+       ng-click="goToChat()" 
+       ng-if="(chats | filter:{read: false}).length > 0">
+    <i class="ri-feedback-line alertIcon"></i>
+    Tienes {{(chats | filter:{read: false}).length}} nuevos mensajes  
+  </div>
+  <span style="margin-left: 15px;" 
+        ng-if="(chats | filter:{read: false}).length == 0" ng-click="goToChat()"> 
+    No hay mensajes 
+  </span>
+</div>
+
+
+<div class="dropdownContent" ng-show="dropdownNotifVisible" ng-click="$event.stopPropagation()">
+   <div class="dropdown-item" ng-repeat="alert in alerts" style="color: {{alert.color}}">
+      <i class="{{alert.icon}} alertIcon" ></i> {{alert.subject}} 
+         <div style="font-size: 10px; position: absolute; margin-top: 30px;  color: gray;">Hace {{calculateDaysAgo(alert.date)}} días</div>
+    </div> 
+      <span style="margin-left: 15px;" ng-if="alerts.length == 0"> No hay alertas </span>
+  </div>  
         
     </ion-nav-bar>
 
@@ -837,7 +922,7 @@ width: 155px;
       <ion-content>
    <section class="content">
       <div class="left-content">
-       <div class="iframe-container"><iframe id="agendaFrame" src="https://cubiculociencias.github.io/tallerdepiano/agenda" frameborder="0" allowfullscreen></iframe></div>
+       <div class="iframe-container"><iframe id="agendaFrame" src="https://www.mozartappcademy.com/agenda" frameborder="0" allowfullscreen></iframe></div>
         </div>
 
 
@@ -858,7 +943,7 @@ width: 155px;
 <i class="icon ri-calendar-schedule-fill" ></i> Próximo pago
          <p style="color: red">{{userData.nextpay}} </p>  
           <i class="icon ri-arrow-left-double-fill slide-hint-left" style="margin-top: 35px;"></i>
-            <ion-option-button class="button-balanced"  onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/payment';">Pagar</ion-option-button>
+            <ion-option-button class="button-balanced"  onclick="window.top.location.href='https://www.mozartappcademy.com/main#/menu/payment';">Pagar</ion-option-button>
                 </ion-item>
        </div>  
 
@@ -868,7 +953,7 @@ width: 155px;
         </ion-item>
             <ion-item class="item-icon-left" >
       <i class="icon ri-calendar-event-fill" ></i> Horario de clase
-        <p>{{userData.classtime}}</p>   
+        <p>{{userData.classtime[0]}} <br> {{userData.classtime[1]}}</p>   
         </ion-item>
       <ion-item class="item-icon-left item-button-right">
         <i class="icon ri-calendar-close-fill" ></i> Reposiciones
@@ -888,20 +973,26 @@ width: 155px;
     Contacto
         </ion-item>
 
- <ion-item class="item-icon-left item-icon-right">
-    <i class="icon ri-video-chat-fill" style="color: blue; "></i> Datos de ZOOM
-    <p> ID: 296 313 4430<br> Password: bartok</p> 
-     <i class="icon ri-arrow-left-double-fill slide-hint-left" style="margin-top: 50px;"></i>
-            <ion-option-button class="button-positive"  onclick="window.top.location.href='window.location.href='https://us02web.zoom.us/j/2963134430?pwd=Vzk3aTFCSTdDSFBoK1c1SVh4eEwwZz09';">Ingresar</ion-option-button>
-          </ion-item>
-   
-   
-          <ion-item class="item-icon-left item-icon-right">
+<ion-item class="item-icon-left item-icon-right">
+    <i class="icon ri-video-chat-fill" style="color: blue;"></i> Datos de ZOOM
+    <p> ID: 296 313 4430<br> Password: bartok</p>
+    <i class="icon ri-arrow-left-double-fill slide-hint-left" style="margin-top: 50px;"></i>
+    <ion-option-button class="button-positive" 
+        onclick="window.location.href='https://us02web.zoom.us/j/2963134430?pwd=Vzk3aTFCSTdDSFBoK1c1SVh4eEwwZz09';">
+        Ingresar
+    </ion-option-button>
+</ion-item>
+
+<ion-item class="item-icon-left item-icon-right">
     <i class="icon ri-whatsapp-fill" style="color: green;"></i> Prof. Daniel
-         <p > 56 2736 2997</p> 
-      <i class="icon ri-arrow-left-double-fill slide-hint-left" style="margin-top: 35px;"></i>
-            <ion-option-button class="button-balanced"  onclick="window.top.location.href='window.location.href='https://wa.me/525627362997';">Contactar</ion-option-button>
-          </ion-item>
+    <p> 56 2736 2997</p>
+    <i class="icon ri-arrow-left-double-fill slide-hint-left" style="margin-top: 35px;"></i>
+    <ion-option-button class="button-balanced" 
+        onclick="window.location.href='https://wa.me/525627362997';">
+        Contactar
+    </ion-option-button>
+</ion-item>
+
 
    
      <ion-item class="item-divider itemDividerforitem">
@@ -958,7 +1049,7 @@ width: 155px;
 <i class="icon ri-calendar-schedule-fill" ></i> Próximo pago
          <p style="color: red">{{userData.nextpay}} </p>  
           <i class="icon ri-arrow-left-double-fill slide-hint-left" style="margin-top: 35px;"></i>
-            <ion-option-button class="button-balanced"  onclick="window.top.location.href='https://cubiculociencias.github.io/tallerdepiano/main#/menu/payment';">Pagar</ion-option-button>
+            <ion-option-button class="button-balanced"  onclick="window.top.location.href='https://www.mozartappcademy.com/main#/menu/payment';">Pagar</ion-option-button>
                 </ion-item>
        </div>  
 
@@ -968,7 +1059,7 @@ width: 155px;
         </ion-item>
             <ion-item class="item-icon-left" >
       <i class="icon ri-calendar-event-fill" ></i> Horario de clase
-        <p> {{userData.classtime}}</p>   
+        <p>{{userData.classtime[0]}} <br> {{userData.classtime[1]}}</p>   
         </ion-item>
       <ion-item class="item-icon-left item-button-right">
         <i class="icon ri-calendar-close-fill" ></i> Reposiciones
@@ -988,20 +1079,26 @@ width: 155px;
     Contacto
         </ion-item>
 
- <ion-item class="item-icon-left item-icon-right">
-    <i class="icon ri-video-chat-fill" style="color: blue; "></i> Datos de ZOOM
-    <p> ID: 296 313 4430<br> Password: bartok</p> 
-     <i class="icon ri-arrow-left-double-fill slide-hint-left" style="margin-top: 50px;"></i>
-            <ion-option-button class="button-positive"  onclick="window.top.location.href='window.location.href='https://us02web.zoom.us/j/2963134430?pwd=Vzk3aTFCSTdDSFBoK1c1SVh4eEwwZz09';">Ingresar</ion-option-button>
-          </ion-item>
-   
-   
-          <ion-item class="item-icon-left item-icon-right">
+<ion-item class="item-icon-left item-icon-right">
+    <i class="icon ri-video-chat-fill" style="color: blue;"></i> Datos de ZOOM
+    <p> ID: 296 313 4430<br> Password: bartok</p>
+    <i class="icon ri-arrow-left-double-fill slide-hint-left" style="margin-top: 50px;"></i>
+    <ion-option-button class="button-positive" 
+        onclick="window.location.href='https://us02web.zoom.us/j/2963134430?pwd=Vzk3aTFCSTdDSFBoK1c1SVh4eEwwZz09';">
+        Ingresar
+    </ion-option-button>
+</ion-item>
+
+<ion-item class="item-icon-left item-icon-right">
     <i class="icon ri-whatsapp-fill" style="color: green;"></i> Prof. Daniel
-         <p > 56 2736 2997</p> 
-      <i class="icon ri-arrow-left-double-fill slide-hint-left" style="margin-top: 35px;"></i>
-            <ion-option-button class="button-balanced"  onclick="window.top.location.href='window.location.href='https://wa.me/525627362997';">Contactar</ion-option-button>
-          </ion-item>
+    <p> 56 2736 2997</p>
+    <i class="icon ri-arrow-left-double-fill slide-hint-left" style="margin-top: 35px;"></i>
+    <ion-option-button class="button-balanced" 
+        onclick="window.location.href='https://wa.me/525627362997';">
+        Contactar
+    </ion-option-button>
+</ion-item>
+
 
    
      <ion-item class="item-divider itemDividerforitem">
@@ -1041,7 +1138,7 @@ width: 155px;
       <ion-content > 
 
 
-        <div class="iframe-container"><iframe id="profileFrame" src="https://cubiculociencias.github.io/tallerdepiano/profile" frameborder="0" allowfullscreen></iframe></div>   
+        <div class="iframe-container"><iframe id="profileFrame" src="https://www.mozartappcademy.com/profile" frameborder="0" allowfullscreen></iframe></div>   
       </ion-content>
     </ion-view>
   </script>
@@ -1089,7 +1186,7 @@ width: 155px;
 <i class="icon ri-calendar-schedule-fill" ></i> Próximo pago
          <p ng-style="{'color': userData.status !== 'ACTIVO' ? 'red' : 'green'}">{{userData.nextpay}} </p>  
           <i class="icon ri-arrow-left-double-fill slide-hint-left" style="margin-top: 35px;" ng-if="userData.status != 'ACTIVO'"></i>
-            <ion-option-button class="button-balanced" ng-if="userData.status != 'ACTIVO'" onclick="window.top.location.href='https://app.mozartacademy.mx/main#/menu/payment';">Pagar</ion-option-button>
+            <ion-option-button class="button-balanced" ng-if="userData.status != 'ACTIVO'" onclick="window.top.location.href='https://www.mozartappcademy.com/main#/menu/payment';">Pagar</ion-option-button>
                 </ion-item>
            
     </ion-list>    
@@ -1103,7 +1200,7 @@ width: 155px;
 
 
 
-
+      
       
 
         <script id="courses.html" type="text/ng-template">
@@ -1126,8 +1223,8 @@ width: 155px;
     </div> 
 </button>
 
-       <button class="button button-clear" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;">
-      <img src="{{userData.photo}}" width="35" height="35" style="border-radius: 50%;" />
+       <button class="button button-clear" ng-class="{ 'barImage': btnBar }" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;">
+      <img src="{{userData.photo}}" width="40" height="40" style="border-radius: 50%;" />
   <div style="position: absolute; bottom: -5px; left: 25px; width: 15px; height: 15px; background-color: #d3d3d3; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
         <i class="icon ion-chevron-down" style="font-size: 8px; color: black; transform: scale(0.27);"></i>
     </div>
@@ -1185,7 +1282,7 @@ width: 155px;
     </ion-nav-bar>
 
      <ion-content>
-   <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/courses" frameborder="0" allowfullscreen></iframe></div>
+   <div class="iframe-container"><iframe src="https://www.mozartappcademy.com/courses" frameborder="0" allowfullscreen></iframe></div>
       </ion-content>
 
   <div id="myModal" class="modal" ng-show="isModalVisible">
@@ -1217,8 +1314,22 @@ width: 155px;
         <ion-nav-bar class="bar-light" >      
         <ion-nav-buttons side="right">
 
-       <button class="button button-clear" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;">
-      <img src="{{userData.photo}}" width="35" height="35" style="border-radius: 50%;" />
+     <button class="button button-clear" ng-click="dropdownChat()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 18px;">
+<i class="ri-question-answer-line"></i>
+            <div style="position: absolute; top: -3px; left: 18px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(chats | filter:{read: false}).length && chatCounter">
+        <div style="font-size: 13px; color: white;"> {{(chats | filter:{read: false}).length}}</div>
+    </div>
+</button> 
+          
+     <button class="button button-clear" ng-click="dropdownNotif()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 25px;">
+  <i class="ri-notification-3-line" ></i>
+            <div style="position: absolute; top: -3px; left: 18px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(alerts | filter:{seen: false}).length && alertCounter">
+        <div style="font-size: 13px; color: white;" > {{(alerts | filter:{seen: false}).length}}</div>
+    </div> 
+</button>
+
+       <button class="button button-clear" ng-class="{ 'barImage': btnBar }" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;">
+      <img src="{{userData.photo}}" width="40" height="40" style="border-radius: 50%;" />
   <div style="position: absolute; bottom: -5px; left: 25px; width: 15px; height: 15px; background-color: #d3d3d3; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
         <i class="icon ion-chevron-down" style="font-size: 8px; color: black; transform: scale(0.27);"></i>
     </div>
@@ -1227,12 +1338,15 @@ width: 155px;
        
         <ion-nav-buttons side="left">
           <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
-        </ion-nav-buttons>   
+        </ion-nav-buttons>  
+
+            
        
         <div class="dropdownContent" ng-show="isDropdownVisible" ng-click="$event.stopPropagation()">
      <div id="bannerRow">
       <div class="profileImageContainer">
-        <img src="{{userData.photo}}"  />
+     <div id="loading" ng-if="loadingProfile" style="height: 60px;"></div>
+        <img src="{{userData.photo}}"  ng-if="!loadingProfile"/>
       </div>
       <p class="profileName">{{userData.name}}</p>
       <p class="profileEmail">{{userData.mail}}</p>
@@ -1240,13 +1354,35 @@ width: 155px;
     <div class="dropdown-item" ng-click="goToStatus()">
       <i class="ion-ios-contact-outline"></i> Perfil
     </div>
-           <div class="dropdown-item" ng-click="goToStatus()">
+             <div class="dropdown-item" ng-click="goToStatus()">
       <i class="ion-card"></i> Pagos
     </div>
-     <div class="dropdown-item" ng-click="goToChat()">
+    <div class="dropdown-item" ng-click="goToChat()">
       <i class="ion-ios-chatboxes-outline"></i> Tutoría
     </div>
-  </div> 
+  </div>
+
+    <div class="dropdownContent" ng-show="dropdownChatVisible" ng-click="$event.stopPropagation()">
+  <div class="dropdown-item" 
+       ng-click="goToChat()" 
+       ng-if="(chats | filter:{read: false}).length > 0">
+    <i class="ri-feedback-line alertIcon"></i>
+    Tienes {{(chats | filter:{read: false}).length}} nuevos mensajes  
+  </div>
+  <span style="margin-left: 15px;" 
+        ng-if="(chats | filter:{read: false}).length == 0" ng-click="goToChat()"> 
+    No hay mensajes 
+  </span>
+</div>
+
+
+<div class="dropdownContent" ng-show="dropdownNotifVisible" ng-click="$event.stopPropagation()">
+   <div class="dropdown-item" ng-repeat="alert in alerts" style="color: {{alert.color}}">
+      <i class="{{alert.icon}} alertIcon" ></i> {{alert.subject}} 
+         <div style="font-size: 10px; position: absolute; margin-top: 30px;  color: gray;">Hace {{calculateDaysAgo(alert.date)}} días</div>
+    </div> 
+      <span style="margin-left: 15px;" ng-if="alerts.length == 0"> No hay alertas </span>
+  </div>  
         
     </ion-nav-bar>
 
@@ -1262,7 +1398,7 @@ width: 155px;
 
 
     <ion-content class="padding tabframe-container"> 
-        <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/achievements" frameborder="0" allowfullscreen ></iframe></div> 
+        <div class="iframe-container"><iframe src="https://www.mozartappcademy.com/achievements" frameborder="0" allowfullscreen ></iframe></div> 
     </ion-content> 
 
   </ion-view>
@@ -1274,7 +1410,7 @@ width: 155px;
  <script id="score.html" type="text/ng-template"> 
   <ion-view > 
     <ion-content class="padding"> 
-        <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/score" frameborder="0" allowfullscreen ></iframe></div> 
+        <div class="iframe-container"><iframe src="https://www.mozartappcademy.com/score" frameborder="0" allowfullscreen ></iframe></div> 
     </ion-content> 
   </ion-view> 
 </script>
@@ -1282,7 +1418,7 @@ width: 155px;
  <script id="achievements.html" type="text/ng-template"> 
   <ion-view > 
     <ion-content class="padding"> 
-        <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/achievements" frameborder="0" allowfullscreen ></iframe></div> 
+        <div class="iframe-container"><iframe src="https://www.mozartappcademy.com/achievements" frameborder="0" allowfullscreen ></iframe></div> 
     </ion-content> 
   </ion-view> 
 </script>
@@ -1294,12 +1430,81 @@ width: 155px;
         
 <script id="tabs.html" type="text/ng-template">
   <ion-view>
-    <ion-nav-bar class="bar-light">
-      <ion-nav-buttons side="left">
-        <button class="button button-clear" ng-click="goToMain()">
-          <i class="ri-arrow-left-s-line"></i> regresar
-        </button>
-      </ion-nav-buttons>
+   
+
+     <ion-nav-bar class="bar-light" >      
+        <ion-nav-buttons side="right">
+
+     <button class="button button-clear" ng-click="dropdownChat()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 18px;">
+<i class="ri-question-answer-line"></i>
+            <div style="position: absolute; top: -3px; left: 18px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(chats | filter:{read: false}).length && chatCounter">
+        <div style="font-size: 13px; color: white;"> {{(chats | filter:{read: false}).length}}</div>
+    </div>
+</button> 
+          
+     <button class="button button-clear" ng-click="dropdownNotif()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 25px;">
+  <i class="ri-notification-3-line" ></i>
+            <div style="position: absolute; top: -3px; left: 18px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(alerts | filter:{seen: false}).length && alertCounter">
+        <div style="font-size: 13px; color: white;" > {{(alerts | filter:{seen: false}).length}}</div>
+    </div> 
+</button>
+
+       <button class="button button-clear" ng-class="{ 'barImage': btnBar }" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;">
+      <img src="{{userData.photo}}" width="40" height="40" style="border-radius: 50%;" />
+  <div style="position: absolute; bottom: -5px; left: 25px; width: 15px; height: 15px; background-color: #d3d3d3; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
+        <i class="icon ion-chevron-down" style="font-size: 8px; color: black; transform: scale(0.27);"></i>
+    </div>
+    </button>
+  </ion-nav-buttons>
+       
+        <ion-nav-buttons side="left">
+          <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
+        </ion-nav-buttons>  
+
+            
+       
+        <div class="dropdownContent" ng-show="isDropdownVisible" ng-click="$event.stopPropagation()">
+     <div id="bannerRow">
+      <div class="profileImageContainer">
+     <div id="loading" ng-if="loadingProfile" style="height: 60px;"></div>
+        <img src="{{userData.photo}}"  ng-if="!loadingProfile"/>
+      </div>
+      <p class="profileName">{{userData.name}}</p>
+      <p class="profileEmail">{{userData.mail}}</p>
+    </div>
+    <div class="dropdown-item" ng-click="goToStatus()">
+      <i class="ion-ios-contact-outline"></i> Perfil
+    </div>
+             <div class="dropdown-item" ng-click="goToStatus()">
+      <i class="ion-card"></i> Pagos
+    </div>
+    <div class="dropdown-item" ng-click="goToChat()">
+      <i class="ion-ios-chatboxes-outline"></i> Tutoría
+    </div>
+  </div>
+
+    <div class="dropdownContent" ng-show="dropdownChatVisible" ng-click="$event.stopPropagation()">
+  <div class="dropdown-item" 
+       ng-click="goToChat()" 
+       ng-if="(chats | filter:{read: false}).length > 0">
+    <i class="ri-feedback-line alertIcon"></i>
+    Tienes {{(chats | filter:{read: false}).length}} nuevos mensajes  
+  </div>
+  <span style="margin-left: 15px;" 
+        ng-if="(chats | filter:{read: false}).length == 0" ng-click="goToChat()"> 
+    No hay mensajes 
+  </span>
+</div>
+
+
+<div class="dropdownContent" ng-show="dropdownNotifVisible" ng-click="$event.stopPropagation()">
+   <div class="dropdown-item" ng-repeat="alert in alerts" style="color: {{alert.color}}">
+      <i class="{{alert.icon}} alertIcon" ></i> {{alert.subject}} 
+         <div style="font-size: 10px; position: absolute; margin-top: 30px;  color: gray;">Hace {{calculateDaysAgo(alert.date)}} días</div>
+    </div> 
+      <span style="margin-left: 15px;" ng-if="alerts.length == 0"> No hay alertas </span>
+  </div>  
+        
     </ion-nav-bar>
     
 <div class="hintMsg"><i class="ri-information-2-line" style="font-size: 20px;"></i> Explora más funciones</div>
@@ -1313,7 +1518,7 @@ width: 155px;
     </ion-tabs>
 
     <ion-content class="padding tabframe-container"> 
-        <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/profile" frameborder="0" allowfullscreen ></iframe></div> 
+        <div class="iframe-container"><iframe src="https://www.mozartappcademy.com/profile" frameborder="0" allowfullscreen ></iframe></div> 
     </ion-content> 
 
   </ion-view>
@@ -1325,7 +1530,7 @@ width: 155px;
  <script id="theory.html" type="text/ng-template"> 
   <ion-view > 
     <ion-content class="padding"> 
-        <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/lessons" frameborder="0" allowfullscreen ></iframe></div> 
+        <div class="iframe-container"><iframe src="https://www.mozartappcademy.com/lessons" frameborder="0" allowfullscreen ></iframe></div> 
     </ion-content> 
   </ion-view> 
 </script>
@@ -1333,11 +1538,120 @@ width: 155px;
  <script id="practice.html" type="text/ng-template"> 
   <ion-view > 
     <ion-content class="padding"> 
-        <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/profile" frameborder="0" allowfullscreen ></iframe></div> 
+        <div class="iframe-container"><iframe src="https://www.mozartappcademy.com/profile" frameborder="0" allowfullscreen ></iframe></div> 
     </ion-content> 
   </ion-view> 
 </script>
 
+
+
+  <script id="solfeo.html" type="text/ng-template">
+    <ion-view>
+     <ion-nav-bar class="bar-light">
+      <ion-nav-buttons side="left">
+        <button class="button button-clear" ng-click="goToMain()">
+          <i class="ri-arrow-left-s-line"></i> regresar
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+      <ion-content>
+        <div class="iframe-container"><iframe src="https://www.mozartappcademy.com/courses/solfeo" frameborder="0" allowfullscreen ></iframe></div> 
+      </ion-content>
+    </ion-view>
+  </script>
+
+  
+  <script id="armonia.html" type="text/ng-template">
+    <ion-view>
+     <ion-nav-bar class="bar-light">
+      <ion-nav-buttons side="left">
+        <button class="button button-clear" ng-click="goToMain()">
+          <i class="ri-arrow-left-s-line"></i> regresar
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+      <ion-content>
+        <div class="iframe-container"><iframe src="https://www.mozartappcademy.com/courses/armonia" frameborder="0" allowfullscreen ></iframe></div> 
+      </ion-content>
+    </ion-view>
+  </script>
+
+
+       <script id="escalas.html" type="text/ng-template">
+    <ion-view>
+     <ion-nav-bar class="bar-light">
+      <ion-nav-buttons side="left">
+        <button class="button button-clear" ng-click="goToMain()">
+          <i class="ri-arrow-left-s-line"></i> regresar
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+      <ion-content>
+        <div class="iframe-container"><iframe src="https://www.mozartappcademy.com/courses/escalas" frameborder="0" allowfullscreen ></iframe></div> 
+      </ion-content>
+    </ion-view>
+  </script>
+
+      
+        <script id="lectura.html" type="text/ng-template">
+    <ion-view>
+     <ion-nav-bar class="bar-light">
+      <ion-nav-buttons side="left">
+        <button class="button button-clear" ng-click="goToMain()">
+          <i class="ri-arrow-left-s-line"></i> regresar
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+      <ion-content>
+        <div class="iframe-container"><iframe src="https://www.mozartappcademy.com/courses/lectura" frameborder="0" allowfullscreen ></iframe></div> 
+      </ion-content>
+    </ion-view>
+  </script>
+
+       <script id="biografias.html" type="text/ng-template">
+    <ion-view>
+     <ion-nav-bar class="bar-light">
+      <ion-nav-buttons side="left">
+        <button class="button button-clear" ng-click="goToMain()">
+          <i class="ri-arrow-left-s-line"></i> regresar
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+      <ion-content>
+        <div class="iframe-container"><iframe src="https://www.mozartappcademy.com/courses/biografias" frameborder="0" allowfullscreen ></iframe></div> 
+      </ion-content>
+    </ion-view>
+  </script>
+
+        <script id="historia.html" type="text/ng-template">
+    <ion-view>
+     <ion-nav-bar class="bar-light">
+      <ion-nav-buttons side="left">
+        <button class="button button-clear" ng-click="goToMain()">
+          <i class="ri-arrow-left-s-line"></i> regresar
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+      <ion-content>
+        <div class="iframe-container"><iframe src="https://www.mozartappcademy.com/courses/historia" frameborder="0" allowfullscreen ></iframe></div> 
+      </ion-content>
+    </ion-view>
+  </script>
+
+        <script id="avanzado.html" type="text/ng-template">
+    <ion-view>
+     <ion-nav-bar class="bar-light">
+      <ion-nav-buttons side="left">
+        <button class="button button-clear" ng-click="goToMain()">
+          <i class="ri-arrow-left-s-line"></i> regresar
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+      <ion-content>
+        <div class="iframe-container"><iframe src="https://www.mozartappcademy.com/courses/avanzado" frameborder="0" allowfullscreen ></iframe></div> 
+      </ion-content>
+    </ion-view>
+  </script>
     
         <script id="chat.html" type="text/ng-template">
     <ion-view >
@@ -1351,7 +1665,16 @@ width: 155px;
     </ion-nav-bar>
     
       <ion-content>
-        <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/chat" frameborder="0" allowfullscreen ></iframe></div> 
+ <section class="content" style="grid-template-columns: auto 360px; !important;">
+      <div class="left-content" >
+       <div class="iframe-container"><iframe id="chatFrame" src="www.mozartappcademy.com/chat2" frameborder="0" allowfullscreen></iframe></div>
+      </div>
+
+      <div class="right-content" style="width: 360px !important;">
+         <div class="iframe-container"><iframe src="https://www.mozartappcademy.com/profile" frameborder="0" allowfullscreen></iframe></div>
+      </div>
+ </section>
+
       </ion-content>
     </ion-view>
   </script>
@@ -1369,7 +1692,7 @@ width: 155px;
     </ion-nav-bar>
     
       <ion-content>
-        <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/payment" frameborder="0" allowfullscreen ></iframe></div> 
+        <div class="iframe-container"><iframe src="https://www.mozartappcademy.com/payment" frameborder="0" allowfullscreen ></iframe></div> 
       </ion-content>
     </ion-view>
   </script>
@@ -1382,8 +1705,22 @@ width: 155px;
       <ion-nav-bar class="bar-light" >      
         <ion-nav-buttons side="right">
 
-       <button class="button button-clear" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;">
-      <img src="{{userData.photo}}" width="35" height="35" style="border-radius: 50%;" />
+     <button class="button button-clear" ng-click="dropdownChat()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 18px;">
+<i class="ri-question-answer-line"></i>
+            <div style="position: absolute; top: -3px; left: 18px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(chats | filter:{read: false}).length && chatCounter">
+        <div style="font-size: 13px; color: white;"> {{(chats | filter:{read: false}).length}}</div>
+    </div>
+</button> 
+          
+     <button class="button button-clear" ng-click="dropdownNotif()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 25px;">
+  <i class="ri-notification-3-line" ></i>
+            <div style="position: absolute; top: -3px; left: 18px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(alerts | filter:{seen: false}).length && alertCounter">
+        <div style="font-size: 13px; color: white;" > {{(alerts | filter:{seen: false}).length}}</div>
+    </div> 
+</button>
+
+       <button class="button button-clear" ng-class="{ 'barImage': btnBar }" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;">
+      <img src="{{userData.photo}}" width="40" height="40" style="border-radius: 50%;" />
   <div style="position: absolute; bottom: -5px; left: 25px; width: 15px; height: 15px; background-color: #d3d3d3; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
         <i class="icon ion-chevron-down" style="font-size: 8px; color: black; transform: scale(0.27);"></i>
     </div>
@@ -1392,12 +1729,15 @@ width: 155px;
        
         <ion-nav-buttons side="left">
           <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
-        </ion-nav-buttons>   
+        </ion-nav-buttons>  
+
+            
        
         <div class="dropdownContent" ng-show="isDropdownVisible" ng-click="$event.stopPropagation()">
      <div id="bannerRow">
       <div class="profileImageContainer">
-        <img src="{{userData.photo}}"  />
+     <div id="loading" ng-if="loadingProfile" style="height: 60px;"></div>
+        <img src="{{userData.photo}}"  ng-if="!loadingProfile"/>
       </div>
       <p class="profileName">{{userData.name}}</p>
       <p class="profileEmail">{{userData.mail}}</p>
@@ -1405,19 +1745,41 @@ width: 155px;
     <div class="dropdown-item" ng-click="goToStatus()">
       <i class="ion-ios-contact-outline"></i> Perfil
     </div>
-        <div class="dropdown-item" ng-click="goToStatus()">
+             <div class="dropdown-item" ng-click="goToStatus()">
       <i class="ion-card"></i> Pagos
     </div>
     <div class="dropdown-item" ng-click="goToChat()">
       <i class="ion-ios-chatboxes-outline"></i> Tutoría
-    </div>       
+    </div>
   </div>
+
+    <div class="dropdownContent" ng-show="dropdownChatVisible" ng-click="$event.stopPropagation()">
+  <div class="dropdown-item" 
+       ng-click="goToChat()" 
+       ng-if="(chats | filter:{read: false}).length > 0">
+    <i class="ri-feedback-line alertIcon"></i>
+    Tienes {{(chats | filter:{read: false}).length}} nuevos mensajes  
+  </div>
+  <span style="margin-left: 15px;" 
+        ng-if="(chats | filter:{read: false}).length == 0" ng-click="goToChat()"> 
+    No hay mensajes 
+  </span>
+</div>
+
+
+<div class="dropdownContent" ng-show="dropdownNotifVisible" ng-click="$event.stopPropagation()">
+   <div class="dropdown-item" ng-repeat="alert in alerts" style="color: {{alert.color}}">
+      <i class="{{alert.icon}} alertIcon" ></i> {{alert.subject}} 
+         <div style="font-size: 10px; position: absolute; margin-top: 30px;  color: gray;">Hace {{calculateDaysAgo(alert.date)}} días</div>
+    </div> 
+      <span style="margin-left: 15px;" ng-if="alerts.length == 0"> No hay alertas </span>
+  </div>  
         
     </ion-nav-bar>
 
 
      <ion-content>
-  <div class="iframe-container"><iframe src="https://cubiculociencias.github.io/tallerdepiano/books" frameborder="0" allowfullscreen ></iframe></div> 
+  <div class="iframe-container"><iframe src="https://www.mozartappcademy.com/books" frameborder="0" allowfullscreen ></iframe></div> 
       </ion-content>
       
      
@@ -1622,6 +1984,62 @@ app
         }
       }
     }) 
+       .state('menu.solfeo', {
+      url: "/solfeo",
+      views: {
+        'menuContent': {
+          templateUrl: "solfeo.html"
+        }
+      }
+    })
+        .state('menu.armonia', {
+      url: "/armonia",
+      views: {
+        'menuContent': {
+          templateUrl: "armonia.html"
+        }
+      }
+    })
+        .state('menu.escalas', {
+      url: "/escalas",
+      views: {
+        'menuContent': {
+          templateUrl: "escalas.html"
+        }
+      }
+    })
+        .state('menu.lectura', {
+      url: "/lectura",
+      views: {
+        'menuContent': {
+          templateUrl: "lectura.html"
+        }
+      }
+    })
+        .state('menu.biografias', {
+      url: "/biografias",
+      views: {
+        'menuContent': {
+          templateUrl: "biografias.html"
+        }
+      }
+    })
+        .state('menu.historia', {
+      url: "/historia",
+      views: {
+        'menuContent': {
+          templateUrl: "historia.html"
+        }
+      }
+    })
+        .state('menu.avanzado', {
+      url: "/avanzado",
+      views: {
+        'menuContent': {
+          templateUrl: "avanzado.html"
+        }
+      }
+    }) 
  .state('menu.chat', {
       url: "/chat",
       views: {
@@ -1662,7 +2080,7 @@ app
 
     ; 
 
-  $urlRouterProvider.otherwise("menu/courses");
+  $urlRouterProvider.otherwise("menu/tab/theory");
   $ionicConfigProvider.tabs.position('bottom'); 
 })
 
@@ -1679,7 +2097,9 @@ app
             $(this).addClass('anim').css('animation-delay', (index * 0.1) + 's');
         });
     }, 10);
-    
+
+ 
+      
     $ionicSideMenuDelegate.toggleLeft();
       $scope.dropdownNotifVisible = false;
       $scope.isDropdownVisible = false;
@@ -1696,10 +2116,12 @@ app
   }) 
 
      $scope.isDropdownVisible = false;
+    $scope.btnBar = true;
     $scope.toggleDropdown = function() {
       $scope.isDropdownVisible = !$scope.isDropdownVisible;
       $scope.dropdownChatVisible = false;
       $scope.dropdownNotifVisible = false;
+        $scope.btnBar = false;
     };
     
  $scope.chatCounter = true;
@@ -1819,12 +2241,12 @@ $scope.closeModal = function () {
         if (response.data.status === "success") {
           localStorage.removeItem('TPtoken');
           $('.preloader').css({ 'display': 'none' });
-          window.location.href = 'https://cubiculociencias.github.io/tallerdepiano/';
+          window.location.href = 'https://www.mozartappcademy.com/';
         }
       })
       .catch(function(error) {
         $('.preloader').css({ 'display': 'none' });
-       window.location.href = 'https://cubiculociencias.github.io/tallerdepiano/';
+       window.location.href = 'https://www.mozartappcademy.com/';
       });
   };
 
@@ -2301,11 +2723,11 @@ $(window).on('load', function() {
       $('.mainSection').fadeIn('slow')  
     } else {
       localStorage.removeItem('TPtoken');
-     window.location.href = 'https://cubiculociencias.github.io/tallerdepiano/';
+     window.location.href = 'https://www.mozartappcademy.com/';
     }
   })
   } else {
-    window.location.href = 'https://cubiculociencias.github.io/tallerdepiano/';
+    window.location.href = 'https://www.mozartappcademy.com/';
   }
 });
 
