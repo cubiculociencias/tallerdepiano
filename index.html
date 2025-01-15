@@ -1,901 +1,1143 @@
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
-<link rel="icon" href="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V" type="image/x-icon">
-    <title>Mozart Appcademy</title>
-   
-    <meta name="google-signin-client_id" content="613538890545-o4p4ft7oji6uhimgh0inqn5l5cgv1gnm.apps.googleusercontent.com">
-   <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
- 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> 
-   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+<head>  
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+ <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
 </head>
 
 
+
+
 <style>
-    body {
-  background-color: #fff;
-  font-family: 'Karla', sans-serif; }
+ @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+:root {
+  --bg-body: rgb(245, 247, 255);
+  --primary-color: rgb(42, 51, 65);
+  --primary-hover-color: rgb(158, 161, 166);
+  --scrollbar-color: rgba(131, 135, 193, 0.4);
+  --card-bg-color: rgba(230, 231, 247, 0.1);
+  --pop-bg-color: rgb(245, 247, 255, 0.9);
+  --star-color: #ddcc14;
+  --border-color: rgba(131, 135, 193, 0.4);
+  --shadow-color: rgba(0, 0, 0, 0.05);
+  --accent-color: rgb(194, 33, 105);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+
+
+ul,
+ul li {
+  outline: 0;
+  list-style: none;
+}
+
+ul li a {
+  text-decoration: none;
+}
+
 
 
 h1 {
-    letter-spacing: -1px;
+  font-size: clamp(1rem, 4vw, 1.2rem) !important;
+  font-weight: 600 !important;
 }
 
-.strong-shadow {
-  color: white;
-  text-shadow: 1px 2px 3px black, 0px 8px 13px black, 0px 18px 23px black!important;  
+h2 {
+  font-size: clamp(0.9rem, 4vw, 1rem) !important;
+  font-weight: 600 !important;
 }
 
-.strong-white {
-  color: white;
-  text-shadow: 1px 2px 3px silver, 0px 8px 13px silver, 0px 18px 23px silver!important;  
-}
-
-
-.intro-section {
-  background-image: url(https://lh3.googleusercontent.com/d/1XBWyFeO4wVvB8jgYlGjywplnTQjiJJnw);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  padding: 75px 95px;
-  min-height: 100vh;
-  height: 100vh;
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-          flex-direction: column;
-  color: #ffffff; }
-  @media (max-width: 991px) {
-    .intro-section {
-      padding-left: 50px;
-      padding-rigth: 50px; } }
-  @media (max-width: 767px) {
-    .intro-section {
-      padding: 28px; } }
-  @media (max-width: 575px) {
-    .intro-section {
-      min-height: auto; display:none;}    
-}
-
-
-.brand-wrapper .logo {
-  height: 35px; }
-
-@media (min-width: 767px) {
-  .brand-wrapper {
-    margin-top: -35px; } }
-
-.intro-content-wrapper {
-  width: 410px;
-  max-width: 100%;
-  margin-top: 200px;
-  margin-bottom: auto; }
-  .intro-content-wrapper .intro-title {
-    font-size: 40px;
-    font-weight: bold;
-    margin-bottom: 17px; }
-  .intro-content-wrapper .intro-text {
-    font-size: 19px;
-    line-height: 1.37; }
-  .intro-content-wrapper .btn-read-more {
-    background-color: #fff;
-    padding: 7px 30px;
-    border-radius: 0;
-    font-size: 16px;
-    font-weight: bold;
-    color: #000; }
-    .intro-content-wrapper .btn-read-more:hover {
-      background-color: transparent;
-      border: 1px solid #fff;
-      color: #fff; }
-
-
-.intro-section-footer .footer-nav a {
-  font-size: 20px;
-  font-weight: bold;
-  color: inherit; }
-  @media (max-width: 767px) {
-    .intro-section-footer .footer-nav a {
-      font-size: 14px; } }
-  .intro-section-footer .footer-nav a + a {
-    margin-left: 30px; }
-
-.form-section {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-          justify-content: center; }
-  @media (max-width: 767px) {
-    .form-section {
-      padding: 35px; } }
-
-.login-wrapper {
-  width: 300px;
-  max-width: 100%; }
-  @media (max-width: 575px) {
-    .login-wrapper {
-      width: 100%; } }
-  .login-wrapper .form-control {
-    border: 0;
-    border-bottom: 1px solid #e7e7e7;
-    border-radius: 0;
-    font-size: 14px;
-    font-weight: bold;
-    padding: 15px 10px;
-    margin-bottom: 7px; }
-    .login-wrapper .form-control::-webkit-input-placeholder {
-      color: #b0adad; }
-    .login-wrapper .form-control::-moz-placeholder {
-      color: #b0adad; }
-    .login-wrapper .form-control:-ms-input-placeholder {
-      color: #b0adad; }
-    .login-wrapper .form-control::-ms-input-placeholder {
-      color: #b0adad; }
-    .login-wrapper .form-control::placeholder {
-      color: #b0adad; }
-
-.login-title {
-  font-size: 30px;
-  font-weight: bold;
-  margin-bottom: 30px; }
-
-.login-btn {
-  padding: 13px 30px;
-  background-color: #000;
-  border-radius: 0;
-  font-size: 20px;
-  font-weight: bold;
-  color: #fff; }
-  .login-btn:hover {
-    border: 1px solid #000;
-    background-color: transparent;
-    color: #000; }
-
-.forgot-password-link {
-  font-size: 14px;
-  color: #080808;
-  text-decoration: underline; }
-
-.social-login-title {
-  font-size: 15px;
-  color: #919aa3;
-  display: -webkit-box;
-  display: flex;
-  margin-bottom: 23px; }
-  .social-login-title::before, .social-login-title::after {
-    content: "";
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#f4f4f4), to(#f4f4f4));
-    background-image: linear-gradient(#f4f4f4, #f4f4f4);
-    -webkit-box-flex: 1;
-            flex-grow: 1;
-    background-size: calc(100% - 20px) 1px;
-    background-repeat: no-repeat; }
-  .social-login-title::before {
-    background-position: center left; }
-  .social-login-title::after {
-    background-position: center right; }
-
-.social-login-links {
-  text-align: center;
-  margin-bottom: 32px; }
-
-.social-login-link img {
-  width: 40px;
-  height: 40px;
-  -o-object-fit: contain;
-     object-fit: contain; }
-
-.social-login-link + .socia-login-link {
-  margin-left: 16px; }
-
-.login-wrapper-footer-text {
-  font-size: 14px;
-  text-align: center; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-.flex-flex {
-    display: flex;
-}
-.align-center {
-  align-items: center; 
-}
-.center-center {
-  align-items: center;
-  justify-content: center;
-}
-
-.flex-direction--column {
-    -ms-flex-direction: column;
-    flex-direction: column;
-}
-
-
-.padding-top--64 {
-  padding-top: 64px;
-}
-.padding-top--24 {
-  padding-top: 24px;
-}
-
-.padding-bottom--24 {
-  padding-bottom: 24px;
-}
-.padding-horizontal--48 {
-  padding: 48px;
-}
- 
-/* @media (max-width: 575px) {
-    .padding-horizontal--48 {
-  padding: 1px;
-} }*/
-.padding-bottom--15 {
-  padding-bottom: 15px;
-}
-
-
-.flex-justifyContent--center {
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-
-
-
-.footer-link span {
-  margin-top: 140px;
-    font-size: 14px;
-    text-align: center;
-}
-.listing a {
-    color: #697386;
-    font-weight: 600;
-    margin: 0 10px;
-}
-
-
-
-
- .login-container {
-            text-align: center;
-            max-width: 400px;
-   height: 60vh; 
-            margin: auto;
-            padding: 20px;
-            background-color: white;
-     
-   
-        }
-
-.logo-img {
-    max-width: 130px; 
-    height: auto; 
-    display: block; 
-  border-radius: 50%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-        .login-btn, .back-btn {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-.login-btn-icon{
-  margin-right: 5px; 
-  margin-top: -7px;
-  font-size: 22px;
-  float: left;
-}
-     
-       .login-btn-email, .g_id_signin {
-    /*width: 83%;*/
-    height: 40px;
-    border: 1px solid #dadce0;
-    border-radius: 4px;
-    background-color: #fff;
-    color: #3c4043;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    margin-top: 12px;
-}
-
-.login-btn-email:hover {
-    background-color: #f7f8f8;
-}
-
-.login-btn-email:focus {
-    outline: none;
-    box-shadow: 0 0 3px 2px rgba(66, 133, 244, 0.3);
-}
-      
-
-        .signup-link {
-
-           margin-top: 10px;
-
-        }
-
-        .signup-link a {
-            color: #1a73e8;
-            text-decoration: none;
-        }
-
-        .signup-link a:hover {
-            text-decoration: underline;
-        }
-
-      #whatsapp-login {
-            margin-top: 30px;
-            display: none;
-        }
-
-        #maillogin, #signupform {
-            margin-top: 20px;
-            display: none;
-        }
-
-        #login-options {
-            display: block;
-        }
-
-        .back-btn {
-            background-color: #f2f2f2;
-            color: #555;
-        }
-
-        .back-btn:hover {
-            background-color: #e0e0e0;
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-.showbox {
-  display: flex;
-    justify-content: center;
-    align-items: center;
- 
-}
-
-
-.loader {
+body {
   position: relative;
-  margin: 0px auto;
-  width: 100px;
-}
-.loader:before {
-  content: "";
-  display: block;
-  padding-top: 100%;
+  overflow: hidden;
 }
 
-.circular {
-  -webkit-animation: rotate 2s linear infinite;
-          animation: rotate 2s linear infinite;
-  height: 100%;
-  transform-origin: center center;
-  width: 100px;
-  position: absolute;
+/* MAIN MENU */
+
+.main-menu {
+  position: fixed;
   top: 0;
-  bottom: 0;
   left: 0;
-  right: 0;
-  margin: auto;
+  width: 180px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid var(--border-color);
+  padding: 12px 0 10px;
+  overflow: hidden;
+  font-family: inherit;
 }
 
-.path {
-  stroke-dasharray: 1, 200;
-  stroke-dashoffset: 0;
-  -webkit-animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
-          animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
-  stroke-linecap: round;
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
 }
 
-@-webkit-keyframes rotate {
-  100% {
-    transform: rotate(360deg);
+.user-info img {
+  max-width: 160px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 50%;
+  padding: 20px;
+}
+
+.user-info p {
+  color: var(--primary-color);
+  font-size: clamp(0.8rem, 3vw, 1rem);
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.3;
+  margin: -15px 0 30px;
+}
+
+
+/* CONTENT */
+
+.content {
+ 
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 100%;
+}
+
+.card {
+  padding: 20px 16px;
+  background-color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+    box-shadow:  0 5px 12px 0px rgba(0,0,0,0.3);
+}
+  
+  .card:hover{
+    transform: scale(1.02)
+  }
+
+/* LEFT CONTENT */
+
+.left-content {
+  padding: 25px 20px 40px;
+  color: var(--primary-color);
+  height: 100vh;
+  overflow: auto;
+}
+
+
+
+
+/* HEADER */
+
+.header {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.header-mobile,
+.header-tablet {
+  display: none;
+}
+
+.header-desktop {
+  display: block;
+}
+
+/* UPCOMING EVENTS */
+
+.upcoming-events h1 {
+  margin: 16px 0 10px;
+}
+
+.event-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 14px 0 20px;
+}
+
+.event-card {
+  display: grid;
+  grid-auto-flow: dense;
+  grid-template-rows: 2fr 0.8fr 0.5fr;
+  padding: 8px;
+}
+
+/* Event Header */
+
+.event-header {
+  position: relative;
+
+  margin-bottom: 2px;
+}
+
+.event-header img {
+  position: relative;
+  inset: 0;
+  width: 60px;
+  height: 60px;
+  margin-left: 15px; 
+  margin-top: 15px;
+  border-radius: 10px;
+
+  object-fit: cover;
+}
+
+.event-header p {
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  font-size: 12px;
+  color: rgb(240, 248, 255);
+  background-color: rgba(17, 16, 45, 0.6);
+  padding: 4px 6px;
+  border-radius: 3px;
+  box-shadow: 0 8px 20px rgba(74, 72, 72, 0.1);
+}
+
+.bx-heart,
+.bxs-heart {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 1.4rem;
+  color: rgb(240, 248, 255);
+  background-color: rgba(17, 16, 45, 0.6);
+  padding: 4px;
+  border-radius: 50%;
+  box-shadow: 0 8px 20px rgba(74, 72, 72, 0.1);
+}
+
+
+/* Event Content */
+
+.event-content {
+  height: 70px;
+  display: grid;
+  grid-auto-flow: dense;
+  grid-template-rows: 2fr 1fr;
+  padding: 6px 6px 12px ;
+}
+
+.event-content h2 {
+margin-top: -40px;
+  margin-left: 5px;
+  font-size: 14px !important;
+  line-height: 1.3;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+
+}
+
+.event-content p {
+  font-size: 12px !important;
+  color: #83838e;
+
+  opacity: 0.8;
+}
+
+.event-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px;
+}
+
+.event-footer p {
+  color: rgb(240, 248, 255);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 6px 10px;
+  border-radius: 50px;
+}
+
+/* Share Button Popup */
+
+.share {
+  position: relative;
+}
+
+
+/* REVIEWS */
+
+.reviews h1 {
+  margin: 60px 0 20px;
+}
+
+.review-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.review-card {
+  padding: 20px;
+}
+
+.review-card h2 {
+  margin-bottom: 8px;
+}
+
+.review-card p {
+  margin-top: 10px;
+  line-height: 1.5;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  @supports (-webkit-line-clamp: 3) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: initial;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
   }
 }
 
-@keyframes rotate {
-  100% {
-    transform: rotate(360deg);
+.ratings i {
+  color: var(--star-color);
+  font-size: 1.15rem;
+}
+
+/* RIGHT CONTENT */
+
+.right-content {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--border-color);
+  padding: 25px 20px;
+  color: var(--primary-color);
+  height: 100vh;
+  overflow: auto;
+}
+
+/* INTERACTION CONTROL */
+
+.interaction-control-mobile {
+  display: none;
+}
+
+.interaction-control {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.interactions {
+  justify-content: flex-end;
+  align-items: center;
+  gap: 25px;
+}
+
+.interactions i {
+  font-size: 1.25rem;
+  color: var(--primary-color);
+  user-select: none;
+}
+
+.notified {
+  position: relative;
+}
+
+.notified::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  right: -1px;
+  background-color: rgb(211, 17, 43);
+  width: 10px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+}
+
+.fa-envelope::after {
+  right: -4px;
+  background-color: rgb(48, 153, 36);
+}
+
+/* Light/Dark Mode */
+
+.mode-icon i {
+  color: var(--primary-color);
+  transform: translateY(2px);
+  transition: all 0.2s linear;
+  cursor: pointer;
+}
+
+.mode-icon i:hover {
+  color: var(--primary-hover-color);
+}
+
+.hidden {
+  display: none;
+}
+
+/* ANALYTICS */
+
+.analytics h1 {
+  margin-bottom: 24px;
+}
+
+/* Total Events */
+
+.total-events {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.event-number {
+  position: relative;
+  display: grid;
+  grid-auto-flow: dense;
+  grid-template-rows: 1fr 0.5fr;
+  width: 100%;
+  padding: 10px;
+}
+
+.event-number p {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: var(--accent-color);
+}
+
+.event-number i {
+  position: absolute;
+  right: 8px;
+  bottom: 6px;
+  font-size: 2.5rem;
+}
+
+/* Chart */
+
+.chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background: var(--card-bg-color);
+  border-radius: 8px;
+  border: 2px solid rgba(169, 150, 253, 0.5);
+  box-shadow: 0 7px 25px var(--shadow-color);
+  padding: 20px 15px;
+  margin: 20px 0;
+}
+
+.chart h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.chart ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  margin: 10px 0;
+}
+
+.chart ul li {
+  font-size: 0.8rem;
+  font-weight: 500;
+  background-color: var(--card-bg-color);
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
+  padding: 6px;
+  box-shadow: 0px 2px 3px 0px var(--shadow-color),
+    0px 1px 4px 0px var(--shadow-color), 0px 2px 1px -1px var(--shadow-color);
+}
+
+.chart .percentage {
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+/* CONTACTS */
+
+.contacts h1 {
+  margin: 20px 0;
+}
+
+.contact-status {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0;
+  border-bottom: 2px solid var(--border-color);
+  margin-bottom: 15px;
+}
+
+.contact-status:last-child {
+  border-bottom: unset;
+}
+
+.contact-activity {
+  display: flex;
+  align-items: center;
+  column-gap: 14px;
+}
+
+.contact-activity img {
+  max-width: 45px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.contact-activity i{
+  max-width: 45px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.contact-activity p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  padding-right: 10px;
+}
+
+.contact-activity p span {
+  font-weight: 700;
+  margin-left: 2px;
+}
+
+
+
+.contact-status small {
+  font-size: 0.8rem;
+  opacity: 0.5;
+  margin-left: auto;
+}
+
+/* SCROLLBAR STYLE */
+
+.left-content::-webkit-scrollbar,
+.right-content::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.left-content::-webkit-scrollbar-track,
+.right-content::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  border-radius: 0;
+}
+
+.left-content::-webkit-scrollbar-thumb,
+.right-content::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-color);
+  border-radius: 40px;
+}
+
+/* MEDIA QUERIES */
+
+@media (max-width: 1500px) {
+  .main-menu {
+    width: 100px;
+  }
+
+  .user-info img {
+    padding: 12px;
+  }
+
+  .user-info p {
+    line-height: 1.1;
+    margin: -5px 0 30px;
+  }
+
+  .nav-icon {
+    text-align: center;
+    transform: translateY(2px);
+  }
+
+  .nav-text {
+    display: none;
+  }
+
+2
+}
+
+@media (max-width: 1120px) {
+
+
+  .event-number i {
+    font-size: 2.2rem;
   }
 }
-@-webkit-keyframes dash {
-  0% {
-    stroke-dasharray: 1, 200;
-    stroke-dashoffset: 0;
+
+@media (max-width: 1120px) {
+  .search-box input {
+    width: 100%;
   }
-  50% {
-    stroke-dasharray: 89, 200;
-    stroke-dashoffset: -35px;
-  }
-  100% {
-    stroke-dasharray: 89, 200;
-    stroke-dashoffset: -124px;
+
+  .search-box i {
+    right: 2%;
   }
 }
-@keyframes dash {
-  0% {
-    stroke-dasharray: 1, 200;
-    stroke-dashoffset: 0;
+
+@media (max-width: 980px) {
+ 
+
+  .header-mobile,
+  .header-desktop {
+    display: none;
   }
-  50% {
-    stroke-dasharray: 89, 200;
-    stroke-dashoffset: -35px;
+
+  .header-tablet {
+    display: block;
   }
-  100% {
-    stroke-dasharray: 89, 200;
-    stroke-dashoffset: -124px;
-  }
-}
-@-webkit-keyframes color {
-  100%, 0% {
-    stroke: #d62d20;
-  }
-  40% {
-    stroke: #0057e7;
-  }
-  66% {
-    stroke: #008744;
-  }
-  80%, 90% {
-    stroke: #ffa700;
+
+  .chart {
+    padding: 20px 10px;
   }
 }
-@keyframes color {
-  100%, 0% {
-    stroke: #d62d20;
-  }
-  40% {
-    stroke: #0057e7;
-  }
-  66% {
-    stroke: #008744;
-  }
-  80%, 90% {
-    stroke: #ffa700;
+
+@media (max-width: 840px) {
+ 
+
+  .event-number i {
+    font-size: 2rem;
   }
 }
+
+@media (max-width: 825px) {
+  .left-content {
+    padding: 25px 20px 20px;
+  }
+
+  .review-container {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  body {
+    overflow: auto;
+  }
+
+  .main-menu {
+    width: 70px;
+  }
+
+  .user-info img {
+    max-width: 80px;
+  }
+
+  .user-info p {
+    line-height: 1.1;
+    margin: -10px 0 30px;
+  }
+
+  .nav-item a {
+    padding: 8px 0;
+  }
+
+  .content {
+
+    grid-template-columns: 100%;
+    grid-template-areas:
+      "leftContent"
+      "rightContent";
+    overflow: auto;
+  }
+
+  .left-content {
+    grid-area: leftContent;
+    height: auto;
+    overflow: unset;
+  }
+
+  .header-mobile,
+  .header-tablet {
+    display: none;
+  }
+
+  .header-desktop {
+    display: block;
+  }
+
+  .review-container {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .right-content {
+    grid-area: rightContent;
+    border-left: unset;
+    height: auto;
+    overflow: unset;
+  }
+
+  .search-and-check {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 20px;
+  }
+
+  .search-box {
+    flex-grow: 1;
+  }
+
+  .interaction-control {
+    display: none;
+  }
+
+  .interaction-control-mobile {
+    display: inline-flex;
+  }
+
+  .interactions {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 610px) {
+  .header-mobile,
+  .header-desktop {
+    display: none;
+  }
+
+  .header-tablet {
+    display: block;
+  }
+}
+
+@media (max-width: 550px) {
+
+  .user-info {
+    padding: 3px;
+  }
+
+  .header img {
+    aspect-ratio: 4/2;
+    height: 100%;
+  }
+
+  .search-and-check {
+    gap: 20px;
+  }
+
+  .interactions {
+    gap: 10px;
+  }
+
+  .interactions i {
+    font-size: 1.1rem;
+  }
+
+  .mode-icon i {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 460px) {
+  .header-tablet,
+  .header-desktop {
+    display: none;
+  }
+
+  .header-mobile {
+    display: block;
+  }
+
+  .bx-heart,
+  .bxs-heart {
+    font-size: 1.2rem;
+  }
+
+  .event-container {
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important;
+ }
+
+.card:hover{
+ background-color: white !important;
+}
+ .event-header p {
+  font-size: 9px;
+ }
+ .event-content  {
+   margin-top: 30px;
+    height: 20px;
+  }
+    .event-content h2{
+     font-size: 12px !important;
+  }
+   .event-content p{
+    margin-top: -20px;
+     font-size: 10px !important;
+  }
+ .event-footer{
+  display: none;
+ }
+}
+
+@media (max-width: 400px) {
+  .main-menu {
+    width: 60px;
+  }
+
+  .user-info {
+    padding: 0;
+  }
+
+  .nav-icon {
+    font-size: 0.9rem;
+  }
+
+ 
+
+  .review-container {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+
+}
+
+
+
+
+
+
+@media (max-width: 770px){
+  /*.analytics{
+    display: none;
+  }*/
+  .contacts{
+    display: none;
+  }
+  .reviews{
+     display: none;
+  }
+  .header{
+    display: none;
+  }
+  
+  .profile-user-data{
+    display: none;
+  }
+  .upcoming-events h1{
+    display: none;
+  }
+  .right-content{
+    margin-top: -40px;
+    background-color: rgb(245, 247, 255);
+  }
+  .event-footer{
+    margin-bottom: 7px;
+  }
+}
+
+
+ .custom-alert {
+            background-color: #FFF2CC; /* Fondo beige */
+            color: #333333; /* Texto oscuro */
+            padding: 30px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .custom-alert h1 {
+            font-size: clamp(1.5rem, 3vw, 2rem); /* Tamaño adaptable */
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .custom-alert p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .alert-image {
+            width: 100px; /* Ajusta el tamaño según el diseño */
+            margin-right: 20px;
+        }
+
+        .alert-button {
+            background-color: #357EDD; /* Azul del botón */
+            color: white;
+            border-radius: 6px;
+           font-size: 0.9rem;
+            padding: 8px 16px;
+            text-decoration: none;
+            font-weight: bold;
+         
+        }
+
+        .alert-button:hover {
+            background-color: #2b65b1;
+            color: white;
+          text-decoration: none;
+        }
+
+ 
 </style>
 
+<body >
+  <div ng-app="studentsApp" ng-controller="Controller1" >  
 
-<div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-6 col-md-7 intro-section">
-          <div class="brand-wrapper strong-shadow" >
-            <h1>Mozart Appcademy</h1>
-          </div>
-          <div class="intro-content-wrapper">
-        
-            <h1 class="intro-title strong-shadow">Bienvenido al mundo del Piano!</h1>
-            <p class="intro-text strong-shadow">En Mozart Appcademy, te ofrecemos clases adaptadas a tus necesidades y horarios, ya seas principiante o avanzado.</p>
-            <a href="https://www.mozartacademy.mx" class="btn btn-read-more" style="border-radius: 5px;">Más información</a>
-          </div>
-        <!--  <div class="intro-section-footer" style="margin-top: 40px;">
-            <na class="footer-nav strong-white">
-      <a href="https://www.facebook.com/mozartstudio.academy">Facebook</a> 
-<a href="https://www.instagram.com/mozart.academy_/" >Instagram</a> 
-<a href="https://www.youtube.com/@TallerdePiano" >YouTube</a> 
-            </na>
-          </div> -->
-        </div>
-        
-        
-        
-        
-         <div class="col-sm-6 col-md-5 box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9; ">
-       
+    <section class="content">
+      <div class="left-content">
+    
+
+        <div class="header">
+
+ <!--    <div class="alert custom-alert" role="alert" ng-if="userData.status == 'ACTIVO'">
+    <img src="https://lh3.googleusercontent.com/d/1KfDR_uzcyYuEmZ0eYHwzgt--c1rYNLz6" class="alert-image">
+    <div>
+        <h1>Bienvenido {{nameShort}}!</h1>
+        <p>Es un gusto tenerte de vuelta, es hora de sacar brillo a ese piano <i class="ri-hand-heart-line"></i>.</p>
+    </div>
+</div>  -->
            
-           
-          
-           
-          
-        <div class="formbg-outer" >
-          <div class="formbg">
-      
-              <div class="login-container d-flex flex-column justify-content-between min-vh-100">
-                
-              
-                 
-       <div id="login-options">
-           <img src="https://lh3.googleusercontent.com/d/1pVpnLFwe0O4bkItJI9H5jyvk1ViXF3yx"  class="logo-img my-3">
-    <h4 class="mt-3">Inicia sesión</h4>
-        
-<br><br><br>
-    <div class="flex-grow-1 d-flex flex-column justify-content-center align-items-center">
-      
-      
-      <div class="preloader showbox" style="display: none">
-    <div class="loader">
-        <svg class="circular" viewbox="25 25 50 50">
-          <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
-        </svg>
-     
-      </div>
-  </div> 
-      
-      
-      
-   <div class="buttons-container" >     
-        <div id="g_id_onload"
-            data-client_id="613538890545-o4p4ft7oji6uhimgh0inqn5l5cgv1gnm.apps.googleusercontent.com"
-            data-context="signup"
-            data-ux_mode="popup"
-            data-callback="handleCredentialResponse"
-            data-auto_prompt="false">
+    <div class="alert custom-alert" role="alert" ng-if="userData.status != 'ACTIVO' && userDataLoaded">
+    <img src="https://lh3.googleusercontent.com/d/1p5SQfC_8hNK_1O_jKzaepAlYyL6QG5nD" class="alert-image">
+    <div>
+        <h1>Busca tu plan ideal.</h1>
+        <p>Conoce más sobre nuestros planes de trabajo y escoge el ideal para ti.</p>
+        <a onclick="window.top.location.href='https://www.mozartappcademy.com/main#/menu/payment';" class="alert-button">información →</a> <br>
+    </div>
+</div>          
         </div>
 
-        <div id="sign" class="g_id_signin"
-            data-type="standard"
-            data-shape="rectangular"
-           data-theme="filled_blue"
-            data-text="signin_with"
-            data-size="large"
-            data-logo_alignment="left" onclick="showLoader()">
-        </div>
+        <div class="upcoming-events">
+
+           
+          <div class="event-container">
+
+
+      <!--      <div class="card event-card" onclick="window.top.location.href='https://www.mozartappcademy.com/main#/menu/tab/theory';">
+              <div class="event-header">
+                <img
+                  src="https://lh3.googleusercontent.com/d/1hehOXFySwwgHSYm5ND5NInQoosAscMvx"
+                  alt="" />
+                <p>Progreso: {{totalProgress}} %</p>
+      
+              </div>
+              <div class="event-content">
+                <h2>Taller de Piano</h2>
+                <p>Aprende los fundamentos teóricos y técnicos de una correcta ejecución.</p><br>
+              </div>
+          
+            </div>  -->
+
+
+             <div class="card event-card" onclick="window.top.location.href='https://www.mozartappcademy.com/main#/menu/solfeo';">
+              <div class="event-header">
+                <img src="https://lh3.googleusercontent.com/d/1B_IxvzjTkE-2F_WWsTkhHegGajrswoQr" />
+                <i class="bx bxs-heart ri-lock-2-fill like-btn"></i>
+              </div>
+              <div class="event-content">
+                <h2>Solfeo</h2>
+                <p >Identifica notación musical y entrena tu oido.</p><br>
+              </div>
+               <div class="event-footer">
+             <p style="background-color: silver">Nivel 1</p> 
+           </div>
+            </div>
+
+
+             <div class="card event-card" onclick="window.top.location.href='https://www.mozartappcademy.com/main#/menu/armonia';">
+              <div class="event-header">
+                <img src="https://lh3.googleusercontent.com/d/1sqfN5814Keycr5rVtqHDWgkgZXK146hF" />
+                <i class="bx bxs-heart ri-lock-2-fill like-btn"></i>
+              </div>
+              <div class="event-content">
+                <h2>Armonía</h2>
+                <p >Comprende el lenguaje musical tonal en su totalidad.</p><br>
+              </div>
+               <div class="event-footer">
+             <p style="background-color: silver">Nivel 2</p> 
+           </div>
+            </div>
+
+
+
+              <div class="card event-card" onclick="window.top.location.href='https://www.mozartappcademy.com/main#/menu/biografias';">
+              <div class="event-header">
+                <img src="https://lh3.googleusercontent.com/d/1qBSPqmPqcnh7W0Z7EGvIrml9XvvfLuoW" />
+                <i class="bx bxs-heart ri-lock-2-fill like-btn"></i>
+              </div>
+              <div class="event-content">
+                <h2>Biografías</h2>
+                <p >Conoce la vida y las obras de los músicos más influyentes de la historia.</p><br>
+              </div>
+               <div class="event-footer">
+             <p style="background-color: silver">Próximamente</p> 
+           </div>
+            </div>
+
+
+            <div class="card event-card" onclick="window.top.location.href='https://www.mozartappcademy.com/main#/menu/historia';">
+              <div class="event-header">
+                <img src="https://lh3.googleusercontent.com/d/1-A9oZ5hVHzA1WyhkUkIC4DnF1gYL1uto" />
+                <i class="bx bxs-heart ri-lock-2-fill like-btn"></i>
+              </div>
+              <div class="event-content">
+                <h2>Historia de la Música</h2>
+                <p >Explora la evolución de la música a través de los siglos.</p><br>
+              </div>
+               <div class="event-footer">
+             <p style="background-color: silver">Próximamente</p> 
+           </div>
+            </div>
+
+           
+ <div class="card event-card" onclick="window.top.location.href='https://www.mozartappcademy.com/main#/menu/escalas';">
+              <div class="event-header">
+                <img src="https://lh3.googleusercontent.com/d/1bHlibSZdmfcy0O3OtmpM1DC3Hq49tjr8" />
+                <i class="bx bxs-heart ri-lock-2-fill like-btn"></i>
+              </div>
+              <div class="event-content">
+                <h2>Escalas y Arpegios</h2>
+                <p >Desarrolla control y consistencia en cada tonalidad.</p><br>
+              </div>
+               <div class="event-footer">
+             <p style="background-color: silver">Plan Premium</p> 
+           </div>
+            </div>
+
+                <div class="card event-card" onclick="window.top.location.href='https://www.mozartappcademy.com/main#/menu/lectura';">
+              <div class="event-header">
+                <img src="https://lh3.googleusercontent.com/d/10OB7GYosbcANXqMyUxuiRkvZzIq_9Jvz" />
+                <i class="bx bxs-heart ri-lock-2-fill like-btn"></i>
+              </div>
+              <div class="event-content">
+                <h2>Lectura a primer vista</h2>
+                <p >Desarrolla la lectura fluida de partituras.</p><br>
+              </div>
+               <div class="event-footer">
+             <p style="background-color: silver">Plan Premium</p> 
+           </div>
+            </div>
+
+
+             <div class="card event-card" onclick="window.top.location.href='https://www.mozartappcademy.com/main#/menu/avanzado';">
+              <div class="event-header">
+                <img src="https://lh3.googleusercontent.com/d/1z3SvZ_B3VTvEgcCrW_Cscx1D1X5z8md6" />
+                <i class="bx bxs-heart ri-lock-2-fill like-btn"></i>
+              </div>
+              <div class="event-content">
+                <h2>Técnica Avanzada</h2>
+                <p >Desarrolla destreza motriz avanzada en el piano.</p><br>
+              </div>
+               <div class="event-footer">
+             <p style="background-color: silver">Plan Premium</p> 
+           </div>
+            </div>
+
+
 
  
-       <button class="login-btn login-btn-email" onclick="showWhatsappLogin()"><i class="ri-whatsapp-fill login-btn-icon" style=" color: green;"></i> <span >Acceder con WhatsApp</span></button>
-  <button class="login-btn login-btn-email" onclick="showMailLogin()" style="margin-top: -4px;"><i class="ri-mail-line login-btn-icon" ></i> Acceder con email</button>   
 
-         </div>
-    </div>
-
-  
-</div>
-                
-    <section id="whatsapp-login" style="display: none;">
-    <h4>Inicia sesión con WhatsApp</h4>
-   <div id="WA-error" class="alert alert-danger" style="display: none;">
-          Número no registrado, intenta otro método de inicio de sesión.
-        </div>
-      
-      <div class="input-group" style="margin-bottom: 30px; margin-top: 70px;">
-    <div class="input-group-prepend" >
-      <select id="country-code" class="custom-select">
-       <option value="+52">🇲🇽 +52</option>
-      <option value="+1">🇺🇸 +1</option>
-      <option value="+1">🇨🇦 +1</option>
-      <option value="+57">🇨🇴 +57</option>
-      <option value="+54">🇦🇷 +54</option>
-      </select>
-    </div>
-    <input type="text" inputmode="numeric" maxlength="10" pattern="[0-9]*" class="form-control" id="phone-login" autocomplete="off" placeholder="Número de teléfono" >
-  </div>
-         <button class="login-btn" onclick="WAlogin(this)">Enviar mensaje</button>
-    <button class="back-btn" onclick="showLoginOptions()">Atrás</button>
-</section> 
-
-
-        <section id="maillogin">
-            <h3>Acceder con email</h3>
-          
-           <div id="Mail-error" class="alert alert-danger" style="display: none;">
-          Cuenta no registrada.
-        </div>
-           <div id="Mail-success" class="alert alert-success" style="display: none;">
-          Registro exitoso. Revisa tu correo para obtener tu password y acceder a tu cuenta.
-        </div>
-          <br><br>
-         
-            <input type="email" id="email-login" placeholder="Ingresa tu email" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
-            <input type="password" id="password-login" placeholder="Ingresa tu password" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
-            <div class="signup-link mb-4">
-        <p>¿No tienes cuenta? <a href="#" onclick="showSignupForm()">Regístrate</a></p>
-    </div>
-            <button class="login-btn" onclick="Maillogin(this)">Iniciar sesión</button>
-            <button class="back-btn" onclick="showLoginOptions()">Atrás</button>
-        </section>
-
-        <section id="signupform">
-            <h3>Registro</h3>
-          <div id="User-error" class="alert alert-danger" style="display: none">
-          Tu correo ya está registrado.
-        </div>         
-          <br>
-            <input type="text" id="name-register" placeholder="Ingresa tu nombre completo" style="width: 100%; padding: 10px; margin-bottom: 10px; margin-top: 20px; border-radius: 5px; border: 1px solid #ccc;">
-            <input type="email" id="mail-register" placeholder="Ingresa tu email" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
-            <div class="input-group" style="width: 100%;  margin-bottom: 25px; border-radius: 5px; border: 1px solid #ccc;">
-    <div class="input-group-prepend" >
-      <select id="country-code" class="custom-select">
-       <option value="+52">🇲🇽 +52</option>
-      <option value="+1">🇺🇸 +1</option>
-      <option value="+1">🇨🇦 +1</option>
-      <option value="+57">🇨🇴 +57</option>
-      <option value="+54">🇦🇷 +54</option>
-      </select>
-    </div>
-    <input type="text" id="phone-register" inputmode="numeric" maxlength="10" pattern="[0-9]*" class="form-control" autocomplete="off" placeholder="Número de teléfono" >
-  </div>
      
-           <button class="login-btn" onclick="registration(this)">Registrarse</button>
-            <button class="back-btn" onclick="showLoginOptions()">Atrás</button>
-        </section>
-                
-    </div>
-      
-          </div>
-        <div class="footer-link ">
-          
-            <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
-              <span><a href="https://www.instagram.com/mozartappcademy/">@mozartappcademy</a></span>
-              <span><a href="https://wa.me/5215564926957">Contacto</a></span>
 
-            </div>
+       
           </div>
         </div>
-      </div>   
-      </div>
-    </div>
 
+ <!--       <div class="reviews">
+          <h1>Próximos eventos</h1>
+          <div class="review-container">
+           
+
+            <div class="card review-card">
+              <h2>Recital de fin de año</h2>
+              <div class="ratings">
+                <i class="bx bxs-star"></i>
+                <i class="bx bxs-star"></i>
+                <i class="bx bxs-star"></i>
+                <i class="bx bxs-star"></i>
+                <i class="bx bxs-star-half"></i>
+              </div>
+              <p>
+                Te invitamos a participar en nuestro próximo recital de fin de año programado para mitades de Diciembre del 2024. 
+              </p>
+            </div>
+
+             <div class="card review-card">
+              <h2>Periodo de vacaciones</h2>
+              <div class="ratings">
+                <i class="bx bxs-star"></i>
+                <i class="bx bxs-star"></i>
+                <i class="bx bxs-star"></i>
+                <i class="bx bx-star"></i>
+                <i class="bx bx-star"></i>
+              </div>
+              <p>
+                Tendremos un breve periodo de svacaciones a partir del 24 de Diciembre al 1 de Enero.
+              </p>
+            </div>
+
+          </div>
+        </div>   -->
+
+
+
+        
+  </body>
 
 
 
 
 <script>
-     function showWhatsappLogin() {
-    document.getElementById('login-options').style.display = 'none';
-    document.getElementById('whatsapp-login').style.display = 'block';
-}
+  
+  angular.module('studentsApp', [])
+  .controller('Controller1', ['$http', '$scope', function($http, $scope) {
+ $scope.userDataLoaded = false;
 
+  var requestData = { 
+    action: "getProfileData",
+    token: localStorage.getItem('TPtoken')
+  };
 
-function showMailLogin() {
-            document.getElementById('login-options').style.display = 'none';
-            document.getElementById('maillogin').style.display = 'block';
-            document.getElementById('signupform').style.display = 'none';
-        }
-
-        function showSignupForm() {
-            document.getElementById('login-options').style.display = 'none';
-            document.getElementById('signupform').style.display = 'block';
-            document.getElementById('maillogin').style.display = 'none';
-        }
-
-        function showLoginOptions() {
-            document.getElementById('maillogin').style.display = 'none';
-           document.getElementById('whatsapp-login').style.display = 'none'; document.getElementById('signupform').style.display = 'none';
-            document.getElementById('login-options').style.display = 'block';
-          
-   document.getElementById('WA-error').style.display = 'none';
-   document.getElementById('Mail-error').style.display = 'none';
-   document.getElementById('User-error').style.display = 'none';
-     
-        }
-
-
-  function handleCredentialResponse(response) {
-  const responsePayload = decodeJwtResponse(response.credential);
-
-    var name = responsePayload.name
-    var photo = responsePayload.picture
-    var email = responsePayload.email
-    showLoader();
-    var api = "https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec";
-
-  var validationData = {
-    redirect: "follow",
-    method: "POST",
+  var config = {
     headers: {
       "Content-Type": "text/plain;charset=utf-8"
     },
-    body: JSON.stringify({
-      action: "validateGoogleUser",
-      name: name,
-      email: email,
-      photo: photo,
-    })
+    followRedirects: true, 
   };
-
-  fetch(api, validationData)
-    .then(response => response.text())
-    .then(res => {
-      var validation = JSON.parse(res);
-      if (validation.status == "success") {
-        localStorage.setItem('TPtoken', validation.token);  
-       window.location.href = 'https://www.mozartappcademy.com/main'; 
-      } else {
-        alert('Error, intenta otro método de inicio de sesión');
-      }
+ 
+      
+   
+  $http.post('https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec', requestData, config)
+    .then(function(response) { 
+      $scope.userData = response.data;
+     $scope.totalProgress = parseFloat(($scope.userData.progress / 4).toFixed(1));
+      $scope.nameShort = $scope.userData.name.split(" ")[0]
+      $scope.userDataLoaded = true;
     })
-}
 
-
-
-function decodeJwtResponse(data) {
-  let tokens = data.split(".");
-  return JSON.parse(atob(tokens[1]))
-}
-
-
-function showLoader() {
-  $('.preloader').css({'display': 'block'});  
-  $('.buttons-container').css({'display': 'none'});  
-
-  setTimeout(function() {
-    $('.preloader').css({'display': 'none'});  
-    $('.buttons-container').css({'display': 'block'});  
-  }, 7000); // 10000 milisegundos = 10 segundos
-}
-
-
-function WAlogin(button) {
-  var phone = document.getElementById('phone-login').value;
-  //var code = document.getElementById('code-login').value;
-  var $button = $(button);
-  
-  if(phone != ""){
-
-  $button.html("<i class='fa fa-spinner fa-spin'></i> Cargando...");
-   setTimeout(function() {
-    document.getElementById('WA-error').style.display = 'block';
-     $button.html("Enviar mensaje");
-  }, 5000);
     
-  }else{
-    alert("Ingresa tu número")
-  }
-}
 
-
-
-function Maillogin(button) {
-  var email = document.getElementById('email-login').value;
-  var password = document.getElementById('password-login').value;
-  var $button = $(button);
+}]);
   
-  if(email != "" && password != "" ){
-  $button.html("<i class='fa fa-spinner fa-spin'></i> Cargando...");
-
-  var api = "https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec";
-
-  var validationData = {
-    redirect: "follow",
-    method: "POST",
-    headers: {
-      "Content-Type": "text/plain;charset=utf-8"
-    },
-    body: JSON.stringify({
-      action: "validateUser",
-      email: email,
-      password: password
-    })
-  };
-
-  fetch(api, validationData)
-    .then(response => response.text())
-    .then(res => {
-      var validation = JSON.parse(res);
-      if (validation.status == "success") {
-        localStorage.setItem('TPtoken', validation.token); 
-        window.location.href = 'https://www.mozartappcademy.com/main'; 
-      } else {
-        document.getElementById('Mail-error').style.display = 'block';    
-      }
-    document.getElementById('email-login').value = "";  
-    document.getElementById('password-login').value = "";
-    $button.html("Iniciar sesión");
-    })  
-  }else{
-    alert("Ingresa tus datos de acceso")
-  }
-}
 
 
 
-function registration(button) {
-  var name = document.getElementById('name-register').value;
-  var email = document.getElementById('mail-register').value;
-  var phone = document.getElementById('phone-register').value;
-  var $button = $(button);
   
-  if(name != "" && email != "" && phone != "" ){
-  $button.html("<i class='fa fa-spinner fa-spin'></i> Cargando...");
-
-  var api = "https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec";
-
-  var validationData = {
-    redirect: "follow",
-    method: "POST",
-    headers: {
-      "Content-Type": "text/plain;charset=utf-8"
-    },
-    body: JSON.stringify({
-      action: "registration",
-      name: name,
-      email: email,
-      phone: phone
-    })
-  };
-
-  fetch(api, validationData)
-    .then(response => response.text())
-    .then(res => {
-      var validation = JSON.parse(res);
-      document.getElementById('name-register').value = "";
-      document.getElementById('mail-register').value = "";
-      document.getElementById('phone-register').value = "";
-      if (validation.status == "success") {
-        showMailLogin()
-        document.getElementById('Mail-success').style.display = 'block'; 
-        setTimeout(function() {
-          document.getElementById('Mail-success').style.display = 'none';  
-        }, 4000);
-      } else if (validation.status == "registered") {
-        document.getElementById('User-error').style.display = 'block';       
-      }else{
-        alert("Ocurrio un error, contacta soporte")
-      }
-      document.getElementById('name-register').value = "";
-      document.getElementById('mail-register').value = "";
-      document.getElementById('phone-register').value = "";
-      $button.html("Registrarse");
-    })    
-  }else{
-    alert("Rellena todos los campos")
-  }
-}
-
-
-
-
-
- window.addEventListener('load', function() {
-      var googleButton = document.querySelector('.g_id_signin');
-      var otherButtons = document.querySelectorAll('.login-btn-email');
-
-      if (googleButton) {
-        var googleButtonWidth = googleButton.offsetWidth + 2;
-
-        otherButtons.forEach(function(button) {
-          button.style.width = googleButtonWidth + 'px';
-        });
-      }
-    });
-
-
-
-$(window).on('load', function() { 
-  var storedToken = localStorage.getItem('TPtoken');
-  if (storedToken) {
-    window.location.href = 'https://www.mozartappcademy.com/main'
-  } 
-});
 
 </script>
