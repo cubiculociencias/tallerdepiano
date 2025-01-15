@@ -1,0 +1,2399 @@
+
+<head>
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
+<link rel="icon" href="https://lh3.googleusercontent.com/d/1k9LA88h-FVVn9EeryBRVBrtc5tPl92CK" type="image/x-icon">
+    <title>Mozart Academy</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.nanoscroller/0.8.7/css/nanoscroller.min.css">
+ <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nanoscroller/0.8.7/javascripts/jquery.nanoscroller.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+
+</head>
+
+
+<style>
+
+
+
+.begin-container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;    /* Centra verticalmente */
+  height: 100vh; 
+  margin-top: 160px;
+  margin-left: -20px;
+}
+
+.begin {
+  border: 1px solid #e0e3eb;
+  border-radius: 5px;
+  font-size: 20px;
+  height: 50px;
+  width: 145px;
+  background: #007bff;
+  color: white;            /* Añadido para mejor contraste */
+  font-weight: 600;
+  padding: 10px 25px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.slider {
+  position: relative;
+  margin-left: -8px;
+  margin-top: -8px;
+  height: 100vh;
+  width: 100vw;
+  background: #777;
+  overflow: hidden;
+}
+.slider__wrap {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  transform: translateX(100vw);
+  top: 0%;
+  left: 0;
+  right: auto;
+  overflow: hidden;
+  transition: transform 450ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transform-origin: 0% 50%;
+  transition-delay: 450ms;
+  opacity: 0;
+}
+.slider__wrap--hacked {
+  opacity: 1;
+}
+.slider__back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: auto 100%;
+  background-position: center;
+  background-repeat: none;
+  transition: filter 450ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+.slider__inner {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: -5%;
+  right: 1%;
+  background-size: auto 133.3333%;
+  background-position: center;
+  background-repeat: none;
+  transform: scale(0.75);
+  transition: transform 450ms cubic-bezier(0.785, 0.135, 0.15, 0.86), box-shadow 450ms cubic-bezier(0.785, 0.135, 0.15, 0.86), opacity 450ms step-end;
+  opacity: 0;
+  box-shadow: 0 3vh 3vh rgba(0, 0, 0, 0);
+  box-sizing: border-box;
+}
+.slider__content {
+  position: relative;
+
+  width: auto;
+  transform: translateY(-50%);
+transform: scale(1.2);
+  font-family: "Heebo", sans-serif;
+  opacity: 0;
+  transition: opacity 450ms;
+}
+.slider__content h3 { 
+
+  font-size: 30px;
+}
+.slider__content h5 {
+  font-size: 23px;
+}
+
+.slider__slide {
+  position: absolute;
+  left: 0;
+  height: 100vh;
+  width: 111vw;
+  transition: transform 600ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition-delay: 600ms;
+  pointer-events: none;
+  z-index: 0;
+}
+.slider__slide--active {
+  transform: translatex(0%);
+  z-index: 2;
+}
+.slider__slide--active .slider__wrap {
+  transform: translateX(0);
+  transform-origin: 100% 50%;
+  opacity: 1;
+  -webkit-animation: none;
+          animation: none;
+}
+.slider__slide--active .slider__back {
+  filter: blur(1.5vh);
+  transition: filter 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition-delay: 900ms !important;
+}
+.slider__slide--active .slider__inner {
+  transform: scale(0.8);
+  box-shadow: 0 1vh 6vh rgba(0, 0, 0, 0.2);
+  pointer-events: auto;
+  opacity: 1;
+  transition: transform 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86), box-shadow 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86), opacity 1ms step-end;
+  transition-delay: 900ms;
+}
+.slider__slide--active .slider__content {
+  opacity: 1;
+  transition-delay: 1350ms;
+}
+.slider__slide:not(.slider__slide--active) .slider__wrap {
+  -webkit-animation-name: hack;
+          animation-name: hack;
+  -webkit-animation-duration: 900ms;
+          animation-duration: 900ms;
+  -webkit-animation-delay: 450ms;
+          animation-delay: 450ms;
+  -webkit-animation-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+          animation-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+@-webkit-keyframes hack {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(-100vw);
+    opacity: 1;
+  }
+  51% {
+    transform: translateX(-100vw);
+    opacity: 0;
+  }
+  52% {
+    transform: translateX(100vw);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(100vw);
+    opacity: 1;
+  }
+}
+@keyframes hack {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(-100vw);
+    opacity: 1;
+  }
+  51% {
+    transform: translateX(-100vw);
+    opacity: 0;
+  }
+  52% {
+    transform: translateX(100vw);
+    opacity: 0;
+  } 
+  100% {
+    transform: translateX(100vw);
+    opacity: 1;
+  }
+}
+.slider__slide:nth-child(1) .slider__back, .slider__slide:nth-child(1) .slider__inner {
+  background-image: url(https://lh3.googleusercontent.com/d/1fULd1JKA0gaJkgupWc9UWW8bNBYLEZQf);
+}
+.slider__slide:nth-child(2) .slider__back, .slider__slide:nth-child(2) .slider__inner {
+  background-image: url(https://lh3.googleusercontent.com/d/1WPV4G0xb_CQUMiiq9bby2C80hnvErplR);
+}
+
+
+   
+  
+  
+  
+  
+  
+  
+   :root {
+  --app-bg-color: #1C1D21;
+  --app-dark-color: #31353D;
+  --app-accent-color: #445878;
+  --app-alt-color: #92CDCF;
+  --app-light-color: #EEEFF7;
+}
+
+
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #444;
+  background-color: #f8f9fa;
+}
+
+.wrap {
+  background-color: white;
+  position: relative;
+  display: block;
+  height: 610px;
+  width: 365px;
+  margin: 10px auto;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.3);
+  /*border-radius: 5px;*/
+}
+
+.headbar {
+  width: calc(100% - 15px);
+    height: 60px;
+    color: black;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    font-size: 1.1em;
+    font-weight: 500;
+   margin-bottom: 20px;
+}
+
+.headbar .btnBack { 
+  margin-right: 15px;
+  cursor: pointer; 
+}
+
+.header {
+  width: 365px;
+  height: 150px; /*200px;*/
+  position: relative;
+  transition: all 0.8s ease-in-out;
+  background-image: linear-gradient(45deg, #445878 0%, #92CDCF 100%);
+  /*background: var(--app-accent-color);*/
+  transition: all 0.8s ease;
+}
+
+.header .bg,
+.header .filter {
+  position: absolute; 
+  width: 100%; 
+  height: 100vh;
+
+}
+
+.header .bg {
+  background-image: url(https://lh3.googleusercontent.com/d/1XBWyFeO4wVvB8jgYlGjywplnTQjiJJnw);
+  background-size: cover;
+  height: 170px;
+  opacity: 0;
+ margin-top: -20px;
+}
+
+.header .map {
+  width: 100%;
+  height: 100%;
+  background-image: url(https://lh3.googleusercontent.com/d/1HPnBwggEOYTcYvtN--zoqgx3zjaTMxh_);
+  /*background-position: -120px -120px;
+  background-size: 680px;*/
+  background-size: cover;
+  height: 170px;
+  transform: translateY(-20px);
+}
+
+.header .title {
+  display: none;
+  align-items: center;
+    justify-content: space-around;
+    font-size: 2em;
+    color: #fff;
+    height: 100%;
+}
+
+.title > div { z-index: 10; }
+.title span { 
+  display: inline-block;
+    font-weight: 400;
+    font-size: 1.2em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,.25); 
+}
+
+div.rotate span { animation: rotate .6s linear }
+div.rotate span:nth-child(2) { animation-delay: .1s }
+div.rotate span:nth-child(3) { animation-delay: .3s }
+
+@keyframes rotate {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
+.title .separator i {
+  transform: rotate(90deg);
+  font-size: .7em;
+}
+
+.content {
+  height: calc(100% - 210px);
+  background-color: transparent;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.8s ease;
+}
+
+.content > section {
+  position: relative;
+  width: 300%;
+  height: 100%;
+}
+
+.wrap[data-pos="0"] .content > section { transform: translateX(0) }
+.wrap[data-pos="1"] .content > section { transform: translateX(-365px) }
+.wrap[data-pos="2"] .content > section { transform: translateX(-730px) }
+
+.content > section > div { opacity: 0; }
+.wrap[data-pos="0"] .content > section > div:nth-child(1) { opacity: 1; transition: opacity .8s ease; }
+.wrap[data-pos="1"] .content > section > div:nth-child(2) { opacity: 1; transition: opacity .8s ease; }
+.wrap[data-pos="2"] .content > section > div:nth-child(3) { opacity: 1; transition: opacity .8s ease; }
+
+.wrap[data-pos="0"] .btnBack { display: none; }
+.wrap[data-pos="0"] .header .title { display: flex }
+.wrap[data-pos="0"] .header .bg { opacity: 1 }
+.wrap[data-pos="0"] .header .map { opacity: 0 }
+
+.wrap[data-pos="0"] .header { height: 140px }
+
+.wrap[data-pos="0"] .content {
+  height: calc(100% - 200px);
+  transition: all 0.8s ease;
+}
+
+.wrap[data-pos="1"] .content .list article .img,
+.wrap[data-pos="1"] .content .list article .info { 
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.wrap[data-pos="2"] .header { height: 0px }
+.wrap[data-pos="2"] .content { height: calc(100% - 60px);  margin-top: -20px;}
+
+.form, .list, .ticket {
+  float: left;
+  width: 33.33333%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  color: #e5e5e5;
+  position: relative;
+}
+
+.control {
+  position: relative;
+  top: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  color: black !important;
+  background: white; /*var(--app-bg-color);*/
+  border-bottom: solid 1px rgba(255, 255, 255, 0.05);
+  /*border-top: solid 1px rgba(0, 0, 0, 0.4);*/
+  transition: all .4s ease;
+}
+
+.control:last-child {
+  height: 55px;
+  border-bottom: none;
+  padding: 0;
+}
+
+/*Preview hack*/
+.control-head > * { float: left; }
+
+.control-head > i,
+.control > i {
+  font-size: 1.5em;
+  margin-left: 15px;
+}
+
+.control-head > div,
+.control > .control-item {
+  margin-left: 20px;
+}
+
+.control h6 { 
+  margin: 5px 0;
+  font-weight: 400;
+  font-size: 12px;
+  color: #71797E;
+}
+
+.control.open:nth-child(2) { top: -72px; }
+.control.open:nth-child(3) { top: -144px; }
+
+.control.open {
+  height: 100%;
+  transition: all .4s ease;
+}
+
+.control .control-head { 
+  display: flex; 
+  align-items: center;
+  margin-top: 5px; 
+  cursor: pointer;
+}
+
+.control .control-body { 
+  height: calc(100% - 72px);
+  margin-top: 20px;
+}
+
+.control.open .control-body { 
+  margin-top: 8px; 
+}
+
+.control.dateinput,
+.control.select { display: block; }
+
+.control .close {
+  display: none;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 20px;
+}
+.control.open .close {
+  display: block;
+  cursor: pointer;
+}
+
+/*** Begin Select Input ***/
+.select .nano { 
+  width: 304px;
+  height: 418px;
+  margin-left: 50px;
+}
+
+.select ul.select-index,
+.select ul.select-data {
+  margin: 0;
+  margin-top: 10px;
+  padding: 0;
+  list-style: none;
+}
+
+.select.open ul.select-data li {
+  opacity: 1;
+  transform: translateY(0);
+  transition: transform .6s ease;
+}
+.select ul.select-data li {
+  margin: 5px 0;
+  padding: 3px 15px;
+  font-size: .85em;
+  opacity: 0;
+  transform: translateY(700px);
+  transition: all .3s ease;
+  cursor: pointer;
+}
+
+.select ul.select-data li:hover,
+.select ul.select-data li.selected {
+  background-color: rgba(0,0,0, .4);
+}
+
+.select ul.select-data li.sep {
+  background-color: var(--app-accent-color);
+}
+
+.select ul.select-index {  
+  position: absolute;
+  left: 15px;
+}
+
+.select ul.select-index li {
+  margin: 8px 0;
+  padding: 2px 6px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: .9em;
+  background-color: var(--app-accent-color);
+  cursor: pointer;
+}
+
+/*** Begin Date Input ***/
+.dateinput .control-body {
+  opacity: 0;
+  transition: opacity .6s ease;
+}
+
+.dateinput.open .control-body {
+  opacity: 1;
+  transition: opacity .8s ease;
+}
+
+.dateinput .calendar {
+  margin-top: 10px;
+}
+
+.dateinput .calendar .month,
+.dateinput .calendar .week,
+.dateinput .calendar .days { 
+  display: flex; 
+  width: 100%;
+  padding: 5px; 
+}
+
+.dateinput .calendar .month { 
+  justify-content: space-around;
+  background-color: var(--app-accent-color);
+  color: white;
+  margin-left: -5px; 
+}
+
+.dateinput .calendar .week,
+.dateinput .calendar .days {
+  flex-wrap: wrap;
+}
+
+.dateinput .calendar .week span,
+.dateinput .calendar .days span {
+  width: 40px;
+  padding: 5px;
+  text-align: center;
+  font-weight: 300;
+  font-size: .85em;
+  position: relative;
+}
+
+.dateinput .calendar .week span {
+  color: black;
+  font-weight: 400;
+}
+
+.dateinput .calendar .days span:before {
+  content: "";
+  display: block;
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  left: 14px;
+  top: 3px;
+  border-radius: 1px;
+  background-color: transparent;
+  transition: all .4s ease;
+  cursor: pointer;
+}
+
+.dateinput .calendar .days span.checked:before {
+  background-color: rgba(68, 88, 120, 0.5);
+  border-radius: 50%;
+  transition: all .4s ease;
+   margin-top: -1px;
+
+}
+
+.dateinput .calendar .days span:first-child {
+  color: transparent;
+}
+
+.info-message { 
+  margin-top: 30px;
+    padding: 0 5px 0 15px;
+    font-weight: 400;
+    font-style: italic;
+  font-size: .75em;
+  color: red;
+  letter-spacing: .06em; 
+}
+.info-message  i {
+  margin-right: 5px;
+    font-size: 1.2em;
+}
+
+
+/*** Begin Radio Input ***/
+.radio label input[type="radio"] {  
+  display: none;
+}
+
+.radio label > span,
+.radio label > div {
+  cursor: pointer;
+  margin-right: 4px;
+  padding: 4px 8px;
+    border-radius: 3px;
+    background-color: transparent;
+    transition: background .4s ease;
+}
+
+.radio label input[type="radio"]:checked ~ span,
+.radio label input[type="radio"]:checked ~ div {
+  background-color: rgba(150, 150, 150, 0.4);
+  transition: background .4s ease;
+}
+
+.radio label > div { display: inline-block; text-align: center; margin-right: 30px; }
+.radio label > div small { display: block; font-size: .75em; }
+.radio label > div span { margin-right: 4px; }
+.radio label > div i { margin-left: 4px; }
+
+/*** Begin Spinner Input ***/
+.spinner {
+  height: 100%;
+  position: absolute;
+  right: 0;
+}
+.spinner button {
+  width: 42px;
+  height: 50%;
+  display: block;
+  padding: 5px;
+  border: none;
+  color: #fff;
+  background-color: var(--app-dark-color); 
+  outline: none;
+}
+
+.spinner button:first-child {
+  border-bottom: solid 1px #444;
+}
+
+.control > button {
+  width: 100%;
+  height: 100%;
+  padding: 10px 2px;
+  border: none;
+  border-radius: 2px;
+
+  background-color: rgba(0,0,0, .1);
+  outline: none;
+  text-transform: uppercase;
+}
+
+.control button:hover { background-color: rgba(0,0,0, .2); }
+
+.list article {
+  display: flex;
+    width: 100%;
+    height: 100px;
+    transition: all 0.4s ease;
+}
+
+.list article:nth-child(2n+1) {
+  background-color: rgba(229, 228, 226, 0.5);
+}
+
+.list article div.img {
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+  opacity: 0;
+  transform: translateX(-1000px);
+  transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.list article img {
+  width: 48px;
+    height: 48px;
+    
+}
+
+.list article .info {
+  padding: 10px;
+  width: 100%;
+  color: #31353D;
+  font-size: .8em;
+  position: relative;
+  opacity: 0;
+  transform: translateX(1000px);
+  transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.list article:nth-child(2) > div { transition-delay: .12s }
+.list article:nth-child(3) > div { transition-delay: .24s }
+.list article:nth-child(4) > div { transition-delay: .36s }
+.list article:nth-child(5) > div { transition-delay: .48s }
+
+
+.info span { display: block; }
+.info b { font-weight: 400; }
+.info .time {
+  color: #71797E;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.info .airline {
+  display: block;
+  font-size: 1.4em;
+}
+
+.info h5 {
+  margin: 0;
+  font-size: 1.4em;
+      font-weight: 500;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+.info h5 small {
+  color: #71797E;
+  font-size: .6em;
+}
+
+.ticket {
+  display: flex;
+  flex-direction: column;
+    justify-content: center;
+}
+
+.ticket section {
+  background-color: white;
+  color: #4A4A4A;
+  font-weight: 300;
+  height: 350px;
+  margin: 10px 20px;
+    border-radius: 2px;
+}
+
+.ticket .title {
+  display: flex;
+    justify-content: space-around;
+    margin: 15px 10px;
+}
+
+.ticket .title > div { text-align: center; }
+
+.ticket .title span {
+  font-size: 2em;
+  text-shadow: none;
+  display: block;
+}
+
+.ticket .title small { display: block; }
+
+.ticket .separator i { position: relative; top: 10px; }
+
+.ticket .row { 
+  display: flex;
+  justify-content: space-around;
+  width: calc(100% + 40px);
+  margin-top: 20px; 
+}
+
+.ticket .cell { 
+      width: 140px;
+}
+
+.ticket .cell small {
+  display: block;
+  color: #4A4A4A;
+  font-weight: 700;
+}
+
+.ticket .total {
+  margin: 25px 40px 0;
+    text-align: right;
+}
+
+.ticket .total span {
+  font-size: 1.7em;
+}
+
+.ticket .total small {
+  margin-right: 10px;
+  color: gray;
+}
+
+.ticket button {
+  height: 40px;
+  padding: 10px 2px;
+  margin: 10px 20px;
+  border: none;
+  border-radius: 2px;
+  background-color: rgba(0,0,0, .1);
+  outline: none;
+  color: #4A4A4A;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+  
+  .ticket button:hover {
+     background-color: rgba(0,0,0,.2);
+  }
+
+.ticket button i {
+  font-size: 16px;
+    margin-right: 5px;
+}
+
+.btnHome { background-color: #432; }
+
+/** Loader **/
+.loader,
+.loader:before,
+.loader:after {
+  border-radius: 50%;
+  width: 1.8em;
+  height: 1.8em;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation: load7 1.8s infinite ease-in-out;
+  animation: load7 1.8s infinite ease-in-out;
+}
+.loader {
+  display: none;
+  color: #ffffff;
+  font-size: 10px;
+  margin: 5px auto;
+  position: relative;
+  text-indent: -9999em;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+.loader:before,
+.loader:after {
+  content: '';
+  position: absolute;
+  top: 0;
+}
+.loader:before {
+  left: -3.5em;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.loader:after {
+  left: 3.5em;
+}
+@-webkit-keyframes load7 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0;
+  }
+}
+@keyframes load7 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0;
+  }
+}
+
+
+
+
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  outline: 0;
+  font-size: 1rem;
+  color: black !important;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+
+
+
+
+.form__field:focus {
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, #11998e, #38ef7d);
+  border-image-slice: 1;
+  color: black !important;
+}
+
+.form__field:focus ~ .form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  /*color: #11998e;*/
+  font-weight: 700;
+}
+  
+  .close2{
+    position: absolute; 
+    right: 15px; 
+    margin-top: 5px; 
+    border-radius: 5px;
+    background-color: #445878;
+    color: white;
+     cursor: pointer;
+    border: none;
+    padding: 10px 20px;
+  }
+  
+   .close2:hover{
+     background-color: #34425a !important;
+  }
+
+</style> 
+
+
+
+    <div class="slider">
+      <div class="slider__slide slider__slide--active" data-slide="1">
+        <div class="slider__wrap">
+          <div class="slider__back"></div>
+        </div>
+        <div class="slider__inner">
+          <div class="slider__content">
+            <div class="begin-container">
+              <button type="button" class="go-to-next begin"  style="margin-top: 20px; color: #fff;" onclick="nextSlide()">Comenzar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slider__slide" data-slide="2">
+        <div class="slider__wrap">
+          <div class="slider__back"></div>
+        </div>
+        <div class="slider__inner">
+          <div class="slider__content">
+            
+            
+            
+<div class="wrap" data-pos="0" style="height: 570px; margin-top: 20px;">
+    <div class="headbar">
+      <i class="zmdi zmdi-arrow-left btnBack"></i> <span>Formulario de registro</span>
+    </div>
+    <div class="header">
+      <div class="bg"></div>
+      <div class="filter"></div>
+
+      <div class="map"></div>
+    </div>
+
+    <div class="content" >
+      <section>
+        <div class="form" >
+      
+           <div class="control input-container">
+                        <i class="zmdi zmdi-account"></i>
+             <div class="control-item">
+               <div>
+             <h6>Nombre</h6>
+         <input type="text" name="name" class="form__field name" placeholder="Nombre completo" >
+                    </div>
+                  </div>
+             </div>
+          
+          
+            <div class="control input-container">
+                        <i class="zmdi zmdi-smartphone"></i>
+             <div class="control-item">
+               <div>
+             <h6>Teléfono</h6>
+                        <input type="text" inputmode="numeric" maxlength="10" pattern="[0-9]*" name="phone" class="form__field phone" placeholder="Número de teléfono">
+                 
+                    </div>
+                  </div>
+             </div>
+           
+          
+          <div class="control dateinput">
+            <div class="control-head">
+              <i class="zmdi zmdi-calendar"></i>
+              <span class="close"><i class="zmdi zmdi-close"></i></span>
+              <div class="control-item">
+                <h6>Fecha de tu primera clase</h6>
+                <span>Selecciona una fecha</span>
+              </div>
+            </div>
+            <div class="control-body">
+              <div class="info-message">
+                <i class="zmdi zmdi-info"></i>
+    
+              </div>
+              <div class="calendar">
+                <div class="month"> 
+                  <i class="zmdi zmdi-chevron-left"></i>
+                  <span>Month</span>
+                  <i class="zmdi zmdi-chevron-right"></i>
+                </div>
+                <div class="week">
+                  <span>D</span>
+                  <span>L</span>
+                  <span>Ma</span>
+                  <span>M</span>
+                  <span>J</span>
+                  <span>V</span>
+                  <span>S</span>
+                </div>
+                <div class="days"></div>
+                <button class="close2"> Cerrar </button>
+              </div>
+            </div>
+          </div>
+          
+          
+          
+          
+     <!--      <div class="control select">
+            <div class="control-head">
+              <i class="ri-time-fill"></i>
+              <span class="close"><i class="zmdi zmdi-close"></i></span>
+              <div>
+                <h6>Horario</h6>
+                <span class="airport-name" data-role="to">Escoge un día de la semana</span>
+              </div>      
+            </div>
+            <div class="control-body">
+              <ul class="select-index"></ul>
+              <div class="nano">
+                  <div class="nano-content">
+                    <ul class="select-data"></ul>
+                  </div>
+              </div>
+            </div>
+          </div>  -->
+          
+          
+          
+          <div class="control radio">
+            <i class="zmdi zmdi-collection-music"></i>
+            <div class="control-item">
+              <h6 style="margin-bottom: 8px">Membresía</h6>
+              <label>
+                <input type="radio" name="plan" value="Standard" checked="checked">
+                <span>Standard</span>
+              </label>
+              <label>
+                <input type="radio" name="plan" value="PRO">
+                <span>PRO</span>
+              </label>
+              <label>
+                <input type="radio" name="plan" value="PREMIUM">
+                <span>Premium</span>
+              </label>
+       <!--
+              <label>
+                <input type="radio" name="plan" value="Estudiante">
+                <span>Estudiante</span>
+              </label>
+       -->
+            </div>
+          </div>
+          <div class="control">
+            <button class="btnSearch">Continuar</button>
+          </div>
+
+        </div>
+        <div class="list">
+          <div class="nano">
+              <div class="nano-content">
+                        
+              </div>
+          </div>          
+        </div>
+         
+        <div class="ticket">
+          <section>
+            
+          </section>
+          <button class="btnBook">Agendar clase</button>
+          <!-- <button class="btnHome">BACK TO HOME</button> -->
+          <div class="loader">Cargando...</div>
+        </div>
+
+      </section>
+    </div>    
+  
+  </div>
+
+          
+          </div>
+        </div>
+      </div>
+
+   
+      
+   </div>
+
+
+
+
+<script>
+  
+  
+  
+   $(document).ready(function(){
+    for (var i = 1; i <= $('.slider__slide').length; i++) {
+      $('.slider__indicators').append('<div class="slider__indicator" data-slide="' + i + '"></div>')
+    }
+    setTimeout(function(){
+      $('.slider__wrap').addClass('slider__wrap--hacked');
+    }, 1000);
+  });
+
+  function goToSlide(number) {
+    $('.slider__slide').removeClass('slider__slide--active');
+    $('.slider__slide[data-slide=' + number + ']').addClass('slider__slide--active');
+  }
+
+  function nextSlide(){
+    var currentSlide = Number($('.slider__slide--active').data('slide'));
+    var totalSlides = $('.slider__slide').length;
+    currentSlide++;
+    if (currentSlide > totalSlides) {
+      currentSlide = 1;
+    }
+    goToSlide(currentSlide);
+  }
+
+  
+  
+  
+var flights = [
+    {
+        price: "450 MXN",
+        plan: "Standard",
+      date: "Miércoles",
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T11:00 AMS 2024-08-28T12:00"]
+    },
+    {
+        price: "450 MXN",
+        plan: "Standard",
+      date: "Miércoles",
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T12:00 AMS 2024-08-28T13:00"]
+    },
+    {
+        price: "450 MXN",
+        plan: "Standard",
+      date: "Miércoles",
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T14:00 AMS 2024-08-28T15:00"]
+    },
+    {
+        price: "450 MXN",
+        plan: "Standard",
+      date: "Miércoles",
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T15:00 AMS 2024-08-28T16:00"]
+    },
+    {
+        price: "450 MXN",
+        plan: "Standard",
+      date: "Miércoles",
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T16:00 AMS 2024-08-28T17:00"]
+    },
+    {
+        price: "450 MXN",
+        plan: "Standard",
+      date: "Miércoles",
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T17:00 AMS 2024-08-28T18:00"]
+    },
+    {
+        price: "450 MXN",
+        plan: "Standard",
+      date: "Miércoles",
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T18:00 AMS 2024-08-28T19:00"]
+    },
+    {
+        price: "450 MXN",
+        plan: "Standard",
+      date: "Jueves",
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-29T14:00 AMS 2024-08-29T15:00"]
+    },
+    {
+        price: "450 MXN",
+        plan: "Standard",
+      date: "Jueves",
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-29T15:00 AMS 2024-08-29T16:00"]
+    },
+    {
+        price: "450 MXN",
+        plan: "Standard",
+      date: "Jueves",
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-29T16:00 AMS 2024-08-29T17:00"]
+    },
+    {
+        price: "450 MXN",
+        plan: "Standard",
+      date: "Jueves",
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-29T17:00 AMS 2024-08-29T18:00"]
+    },
+    {
+        price: "450 MXN",
+        plan: "Standard",
+      date: "Jueves",
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-29T18:00 AMS 2024-08-29T19:00"]
+    }, {
+        price: "450 MXN",
+        plan: "Standard",
+      date: "Viernes",
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-30T11:00 AMS 2024-08-30T12:00"]
+    },
+    {
+        price: "450 MXN",
+        plan: "Standard",
+      date: "Viernes",
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-30T12:00 AMS 2024-08-30T13:00"]
+    },
+    {
+        price: "450 MXN",
+        plan: "Standard",
+      date: "Viernes",
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-30T13:00 AMS 2024-08-30T14:00"]
+    },
+    {
+        price: "450 MXN",
+        plan: "Standard",
+      date: "Viernes",
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-30T14:00 AMS 2024-08-30T15:00"]
+    },
+     {
+        price: "450 MXN",
+        plan: "Standard",
+      date: "Sábado",
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-31T10:00 AMS 2024-08-31T11:00"]
+    },{
+        price: "450 MXN",
+        plan: "Standard",
+      date: "Sábado",
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-31T11:00 AMS 2024-08-31T12:00"]
+    },{
+        price: "450 MXN",
+        plan: "Standard",
+      date: "Sábado",
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-31T12:00 AMS 2024-08-31T13:00"]
+    },{
+        price: "450 MXN",
+        plan: "Standard",
+      date: "Sábado",
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-31T14:00 AMS 2024-08-31T15:00"]
+    },{
+        price: "450 MXN",
+        plan: "Standard",
+      date: "Sábado",
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-31T15:00 AMS 2024-08-31T16:00"]
+    },{
+        price: "450 MXN",
+        plan: "Standard",
+      date: "Domingo",
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-09-01T09:00 AMS 2024-09-01T10:00"]
+    },{
+        price: "450 MXN",
+        plan: "Standard",
+      date: "Domingo",
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-09-01T10:00 AMS 2024-09-01T11:00"]
+    },{
+        price: "500 MXN",
+        plan: "Standard",
+      date: "Domingo",
+      discount: "",
+      msg: "Alta demanda",
+        carrier: "KL",
+        nodes: ["CDG 2024-09-01T11:00 AMS 2024-09-01T12:00"]
+    },{
+        price: "450 MXN",
+        plan: "Standard",
+      date: "Domingo",
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-09-01T12:00 AMS 2024-09-01T13:00"]
+    },{
+        price: "400 MXN",
+        plan: "Standard",
+      date: "Domingo",
+      special: 1,
+      discount: "$500",
+        carrier: "KL",
+        nodes: ["CDG 2024-09-01T12:00 AMS 2024-09-01T13:00"]
+    },
+
+
+    {
+        price: "750 MXN",
+        plan: "PRO",
+      date: "Miércoles",
+      discount: "$800",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T11:00 AMS 2024-08-28T12:00"]
+    },
+    {
+        price: "750 MXN",
+        plan: "PRO",
+      date: "Miércoles",
+      discount: "$800",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T12:00 AMS 2024-08-28T13:00"]
+    },
+    {
+        price: "750 MXN",
+        plan: "PRO",
+      date: "Miércoles",
+      discount: "$800",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T14:00 AMS 2024-08-28T15:00"]
+    },
+    {
+        price: "750 MXN",
+        plan: "PRO",
+      date: "Miércoles",
+      discount: "$800",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T15:00 AMS 2024-08-28T16:00"]
+    },
+    {
+        price: "750 MXN",
+        plan: "PRO",
+      date: "Miércoles",
+      discount: "$800",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T16:00 AMS 2024-08-28T17:00"]
+    },
+    {
+        price: "750 MXN",
+        plan: "PRO",
+      date: "Miércoles",
+      discount: "$800",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T17:00 AMS 2024-08-28T18:00"]
+    },
+    {
+        price: "750 MXN",
+        plan: "PRO",
+      date: "Miércoles",
+      discount: "$800",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T18:00 AMS 2024-08-28T19:00"]
+    },
+    {
+        price: "750 MXN",
+        plan: "PRO",
+      date: "Jueves",
+      discount: "$800",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-29T14:00 AMS 2024-08-29T15:00"]
+    },
+    {
+        price: "750 MXN",
+        plan: "PRO",
+      date: "Jueves",
+      discount: "$800",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-29T15:00 AMS 2024-08-29T16:00"]
+    },
+    {
+        price: "750 MXN",
+        plan: "PRO",
+      date: "Jueves",
+      discount: "$800",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-29T16:00 AMS 2024-08-29T17:00"]
+    },
+    {
+        price: "750 MXN",
+        plan: "PRO",
+      date: "Jueves",
+      discount: "$800",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-29T17:00 AMS 2024-08-29T18:00"]
+    },
+    {
+        price: "750 MXN",
+        plan: "PRO",
+      date: "Jueves",
+      discount: "$800",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-29T18:00 AMS 2024-08-29T19:00"]
+    }, {
+        price: "750 MXN",
+        plan: "PRO",
+      date: "Viernes",
+      discount: "$800",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-30T11:00 AMS 2024-08-30T12:00"]
+    },
+    {
+        price: "750 MXN",
+        plan: "PRO",
+      date: "Viernes",
+      discount: "$800",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-30T12:00 AMS 2024-08-30T13:00"]
+    },
+    {
+        price: "750 MXN",
+        plan: "PRO",
+      date: "Viernes",
+      discount: "$800",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-30T13:00 AMS 2024-08-30T14:00"]
+    },
+    {
+        price: "750 MXN",
+        plan: "PRO",
+      date: "Viernes",
+      discount: "$800",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-30T14:00 AMS 2024-08-30T15:00"]
+    },
+     {
+        price: "750 MXN",
+        plan: "PRO",
+      date: "Sábado",
+      discount: "$800",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-31T10:00 AMS 2024-08-31T11:00"]
+    },{
+        price: "750 MXN",
+        plan: "PRO",
+      date: "Sábado",
+      discount: "$800",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-31T11:00 AMS 2024-08-31T12:00"]
+    },{
+        price: "750 MXN",
+        plan: "PRO",
+      date: "Sábado",
+      discount: "$800",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-31T12:00 AMS 2024-08-31T13:00"]
+    },{
+        price: "750 MXN",
+        plan: "PRO",
+      date: "Sábado",
+      discount: "$800",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-31T14:00 AMS 2024-08-31T15:00"]
+    },{
+        price: "750 MXN",
+        plan: "PRO",
+      date: "Sábado",
+      discount: "$800",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-31T15:00 AMS 2024-08-31T16:00"]
+    },{
+        price: "750 MXN",
+        plan: "PRO",
+      date: "Domingo",
+      discount: "$800",
+        carrier: "KL",
+        nodes: ["CDG 2024-09-01T09:00 AMS 2024-09-01T10:00"]
+    },{
+        price: "750 MXN",
+        plan: "PRO",
+      date: "Domingo",
+      discount: "$800",
+        carrier: "KL",
+        nodes: ["CDG 2024-09-01T10:00 AMS 2024-09-01T11:00"]
+    },{
+        price: "800 MXN",
+        plan: "PRO",
+      date: "Domingo",
+      discount: "",
+      msg: "Alta demanda",
+        carrier: "KL",
+        nodes: ["CDG 2024-09-01T11:00 AMS 2024-09-01T12:00"]
+    },{
+        price: "750 MXN",
+        plan: "PRO",
+      date: "Domingo",
+      discount: "$800",
+        carrier: "KL",
+        nodes: ["CDG 2024-09-01T12:00 AMS 2024-09-01T13:00"]
+    },
+
+
+
+ {
+        price: "1350 MXN",
+        plan: "PREMIUM",
+      date: "Miércoles",
+      discount: "$1400",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T11:00 AMS 2024-08-28T12:00"]
+    },
+    {
+        price: "1350 MXN",
+        plan: "PREMIUM",
+      date: "Miércoles",
+      discount: "$1400",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T12:00 AMS 2024-08-28T13:00"]
+    },
+    {
+        price: "1350 MXN",
+        plan: "PREMIUM",
+      date: "Miércoles",
+      discount: "$1400",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T14:00 AMS 2024-08-28T15:00"]
+    },
+    {
+        price: "1350 MXN",
+        plan: "PREMIUM",
+      date: "Miércoles",
+      discount: "$1400",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T15:00 AMS 2024-08-28T16:00"]
+    },
+    {
+        price: "1350 MXN",
+        plan: "PREMIUM",
+      date: "Miércoles",
+      discount: "$1400",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T16:00 AMS 2024-08-28T17:00"]
+    },
+    {
+        price: "1350 MXN",
+        plan: "PREMIUM",
+      date: "Miércoles",
+      discount: "$1400",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T17:00 AMS 2024-08-28T18:00"]
+    },
+    {
+        price: "1350 MXN",
+        plan: "PREMIUM",
+      date: "Miércoles",
+      discount: "$1400",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T18:00 AMS 2024-08-28T19:00"]
+    },
+    {
+        price: "1350 MXN",
+        plan: "PREMIUM",
+      date: "Jueves",
+      discount: "$1400",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-29T14:00 AMS 2024-08-29T15:00"]
+    },
+    {
+        price: "1350 MXN",
+        plan: "PREMIUM",
+      date: "Jueves",
+      discount: "$1400",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-29T15:00 AMS 2024-08-29T16:00"]
+    },
+    {
+        price: "1350 MXN",
+        plan: "PREMIUM",
+      date: "Jueves",
+      discount: "$1400",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-29T16:00 AMS 2024-08-29T17:00"]
+    },
+    {
+        price: "1350 MXN",
+        plan: "PREMIUM",
+      date: "Jueves",
+      discount: "$1400",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-29T17:00 AMS 2024-08-29T18:00"]
+    },
+    {
+        price: "1350 MXN",
+        plan: "PREMIUM",
+      date: "Jueves",
+      discount: "$1400",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-29T18:00 AMS 2024-08-29T19:00"]
+    }, {
+        price: "1350 MXN",
+        plan: "PREMIUM",
+      date: "Viernes",
+      discount: "$1400",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-30T11:00 AMS 2024-08-30T12:00"]
+    },
+    {
+        price: "1350 MXN",
+        plan: "PREMIUM",
+      date: "Viernes",
+      discount: "$1400",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-30T12:00 AMS 2024-08-30T13:00"]
+    },
+    {
+        price: "1350 MXN",
+        plan: "PREMIUM",
+      date: "Viernes",
+      discount: "$1400",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-30T13:00 AMS 2024-08-30T14:00"]
+    },
+    {
+        price: "1350 MXN",
+        plan: "PREMIUM",
+      date: "Viernes",
+      discount: "$1400",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-30T14:00 AMS 2024-08-30T15:00"]
+    },
+     {
+        price: "1350 MXN",
+        plan: "PREMIUM",
+      date: "Sábado",
+      discount: "$1400",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-31T10:00 AMS 2024-08-31T11:00"]
+    },{
+        price: "1350 MXN",
+        plan: "PREMIUM",
+      date: "Sábado",
+      discount: "$1400",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-31T11:00 AMS 2024-08-31T12:00"]
+    },{
+        price: "1350 MXN",
+        plan: "PREMIUM",
+      date: "Sábado",
+      discount: "$1400",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-31T12:00 AMS 2024-08-31T13:00"]
+    },{
+        price: "1350 MXN",
+        plan: "PREMIUM",
+      date: "Sábado",
+      discount: "$1400",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-31T14:00 AMS 2024-08-31T15:00"]
+    },{
+        price: "1350 MXN",
+        plan: "PREMIUM",
+      date: "Sábado",
+      discount: "$1400",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-31T15:00 AMS 2024-08-31T16:00"]
+    },{
+        price: "1350 MXN",
+        plan: "PREMIUM",
+      date: "Domingo",
+      discount: "$1400",
+        carrier: "KL",
+        nodes: ["CDG 2024-09-01T09:00 AMS 2024-09-01T10:00"]
+    },{
+        price: "1350 MXN",
+        plan: "PREMIUM",
+      date: "Domingo",
+      discount: "$1400",
+        carrier: "KL",
+        nodes: ["CDG 2024-09-01T10:00 AMS 2024-09-01T11:00"]
+    },{
+        price: "1400 MXN",
+        plan: "PREMIUM",
+      date: "Domingo",
+      discount: "",
+      msg: "Alta demanda",
+        carrier: "KL",
+        nodes: ["CDG 2024-09-01T11:00 AMS 2024-09-01T12:00"]
+    },{
+        price: "1350 MXN",
+        plan: "PREMIUM",
+      date: "Domingo",
+      discount: "$1400",
+        carrier: "KL",
+        nodes: ["CDG 2024-09-01T12:00 AMS 2024-09-01T13:00"]
+    },
+
+
+
+/*
+    {
+        price: "350 MXN",
+        plan: "Estudiante",
+      date: "Miércoles",
+      discount: "$450",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T11:00 AMS 2024-08-28T12:00"]
+    },
+    {
+        price: "350 MXN",
+        plan: "Estudiante",
+      date: "Miércoles",
+      discount: "$450",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T12:00 AMS 2024-08-28T13:00"]
+    },
+    {
+        price: "350 MXN",
+        plan: "Estudiante",
+      date: "Miércoles",
+      discount: "$450",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T14:00 AMS 2024-08-28T15:00"]
+    },
+    {
+        price: "350 MXN",
+        plan: "Estudiante",
+      date: "Miércoles",
+      discount: "$450",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T15:00 AMS 2024-08-28T16:00"]
+    },
+    {
+        price: "350 MXN",
+        plan: "Estudiante",
+      date: "Miércoles",
+      discount: "$450",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T16:00 AMS 2024-08-28T17:00"]
+    },
+    {
+        price: "350 MXN",
+        plan: "Estudiante",
+      date: "Miércoles",
+      discount: "$450",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T17:00 AMS 2024-08-28T18:00"]
+    },
+    {
+        price: "350 MXN",
+        plan: "Estudiante",
+      date: "Miércoles",
+      discount: "$450",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-28T18:00 AMS 2024-08-28T19:00"]
+    },
+    {
+        price: "350 MXN",
+        plan: "Estudiante",
+      date: "Jueves",
+      discount: "$450",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-29T14:00 AMS 2024-08-29T15:00"]
+    },
+    {
+        price: "350 MXN",
+        plan: "Estudiante",
+      date: "Jueves",
+      discount: "$450",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-29T15:00 AMS 2024-08-29T16:00"]
+    },
+    {
+        price: "350 MXN",
+        plan: "Estudiante",
+      date: "Jueves",
+      discount: "$450",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-29T16:00 AMS 2024-08-29T17:00"]
+    },
+    {
+        price: "350 MXN",
+        plan: "Estudiante",
+      date: "Jueves",
+      discount: "$450",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-29T17:00 AMS 2024-08-29T18:00"]
+    },
+    {
+        price: "350 MXN",
+        plan: "Estudiante",
+      date: "Jueves",
+      discount: "$450",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-29T18:00 AMS 2024-08-29T19:00"]
+    }, 
+    {
+        price: "350 MXN",
+        plan: "Estudiante",
+      date: "Viernes",
+      discount: "$450",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-30T12:00 AMS 2024-08-30T13:00"]
+    },
+    {
+        price: "350 MXN",
+        plan: "Estudiante",
+      date: "Viernes",
+      discount: "$450",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-30T13:00 AMS 2024-08-30T14:00"]
+    },
+    {
+        price: "350 MXN",
+        plan: "Estudiante",
+      date: "Viernes",
+      discount: "$450",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-30T14:00 AMS 2024-08-30T15:00"]
+    },
+     {
+        price: "350 MXN",
+        plan: "Estudiante",
+      date: "Sábado",
+      discount: "$450",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-31T12:00 AMS 2024-08-31T13:00"]
+    },{
+        price: "350 MXN",
+        plan: "Estudiante",
+      date: "Sábado",
+      discount: "$450",
+        carrier: "KL",
+        nodes: ["CDG 2024-08-31T15:00 AMS 2024-08-31T16:00"]
+    },{
+        price: "350 MXN",
+        plan: "Estudiante",
+      date: "Domingo",
+      discount: "$450",
+        carrier: "KL",
+        nodes: ["CDG 2024-09-01T12:00 AMS 2024-09-01T13:00"]
+    }*/
+    
+];
+
+
+
+var thisIndex = 0;
+
+var carrier = {
+    "AF": "Air France",
+    "KL": "KLM Royal Dutch Airlines",
+    "BA": "British Airways"
+};
+
+var airports = [{"name":"Miércoles","city":"Vichy","country":"Día","IATA":"M11"},{"name":"Jueves","city":"Vichy","country":"Día","IATA":"M12"},{"name":"Viernes","city":"Vichy","country":"Día","IATA":"M14"},{"name":"Sábado","city":"Vichy","country":"Día","IATA":"M15"},{"name":"Domingo","city":"Vichy","country":"Día","IATA":"M16"}];
+
+(function () {
+  
+  var _airports = _.groupBy(airports, o => o.country),
+    selectIndex = [], 
+    selectData = [];
+
+  _.each(_airports, (countryList, countryName) => {
+    var firstLeter = countryName.split('')[0];
+    selectData.push(`<li class="sep" data-index="${firstLeter}">${countryName}</li>`);
+    selectIndex.push(`<li>${firstLeter}</li>`);
+
+    _.each(countryList, (airport, i) => {
+      selectData.push(`<li data-iata="${airport.IATA}" data-city="${airport.city}">
+        ${airport.IATA}, ${airport.name}</li>`);
+    });
+  });
+
+  $('.select ul.select-index').html(_.uniq(selectIndex).join(''));
+  $('.select ul.select-data').html(selectData.join(''));
+
+
+  // Calendar days
+var monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+// Obtener la fecha actual
+var currentDate = new Date();
+var currentMonth = currentDate.getMonth();
+var currentYear = currentDate.getFullYear();
+
+// Mostrar el nombre del mes actual
+$('.calendar .month span').text(monthNames[currentMonth]);
+
+// Obtener el primer día del mes (0 = Domingo, 1 = Lunes, etc.)
+var startDay = new Date(currentYear, currentMonth, 1).getDay();
+
+// Obtener el número de días en el mes actual
+var totalDays = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+// Renderizar los días de la semana vacíos antes del primer día del mes
+var daysRender = [];
+for (var i = 0; i < startDay; i++) {
+  daysRender.push('<span class="empty"></span>');
+}
+
+// Renderizar los días del mes
+for (var i = 1; i <= totalDays; i++) {
+  daysRender.push(`<span>${i}</span>`);
+}
+
+// Agregar los días al calendario
+$('.calendar .days').html(daysRender.join(''));
+
+// Opcional: Marcar el día actual
+var currentDay = currentDate.getDate();
+$('.calendar .days span').eq(startDay + currentDay - 1).addClass('checked');
+  
+  
+  
+   
+  
+  function renderCalendarDays(month, year) {
+  var daysContainer = $('.calendar .days');
+  daysContainer.empty();
+
+  var firstDay = new Date(year, month).getDay();
+  var daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  for (var i = 0; i < firstDay; i++) {
+    daysContainer.append('<span class="empty"></span>');
+  }
+
+  for (var day = 1; day <= daysInMonth; day++) {
+    daysContainer.append('<span>' + day + '</span>');
+  }
+
+  // Add click event to the days after rendering
+  $('.calendar .days span:not(.empty)').on('click', function(evt) {
+    var $this = $(evt.currentTarget),
+        day = evt.currentTarget.textContent;
+
+    $this.addClass('checked').siblings('span').removeClass('checked');
+
+    var date = new Date(currentYear, currentMonth, day);
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    var formattedDate = date.toLocaleDateString('es-ES', options);
+
+    // Exportar la fecha formateada
+    $('.dateinput .control-item span').eq(0).text(formattedDate);
+  });
+}
+
+function updateMonthLabel(month, year) {
+  var monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+  $('.calendar .month span').text(monthNames[month] + ' ' + year);
+}
+
+$('.zmdi-chevron-right').on('click', function() {
+  const nextMonth = currentDate.getMonth() + 1;
+
+  // Restringir al siguiente mes
+  if (currentMonth < nextMonth) {
+    currentMonth++;
+    if (currentMonth > 11) {
+      currentMonth = 0;
+      currentYear++;
+    }
+    updateMonthLabel(currentMonth, currentYear);
+    renderCalendarDays(currentMonth, currentYear);
+  }
+});
+
+$('.zmdi-chevron-left').on('click', function() {
+  const thisMonth = currentDate.getMonth();
+
+  // Restringir al mes actual
+  if (currentMonth > thisMonth) {
+    currentMonth--;
+    if (currentMonth < 0) {
+      currentMonth = 11;
+      currentYear--;
+    }
+    updateMonthLabel(currentMonth, currentYear);
+    renderCalendarDays(currentMonth, currentYear);
+  }
+});
+  
+  
+  
+
+  // Flight Results
+  doFlightsRender(true);
+
+
+  // Events
+  // Open inputs
+  $('.control:not(.open) .control-head').on('click', function(evt) {
+    $(evt.currentTarget).parent('.control').addClass('open');
+  });
+
+  $('.control .close').on('click', function(evt) {
+    var z = $(evt.currentTarget).closest('.control');
+    setTimeout(() => { z.removeClass('open') }, 50);
+  });
+  
+  $('.control .close2').on('click', function(evt) {
+    var z = $(evt.currentTarget).closest('.control');
+    setTimeout(() => { z.removeClass('open') }, 50);
+  });
+
+  // SpinnerInput add/substract action
+  $('.spinner button').on('click', function(evt) {
+    var isAdding = evt.currentTarget.getAttribute('data-action') == 'plus',
+      $input = $('input[name="passengers"]:checked'),
+      $control = $input.siblings('div').find('span'),
+      value = parseInt($control.text());
+
+    if(isAdding)
+      value++;
+    else if (value !== 0)
+      value--;
+
+    $control.text(value);
+  });
+
+  // SelectInput find index
+  $('.select-index').on('click', 'li', function(evt) {
+    var index = evt.currentTarget.textContent,
+      $nano = $(evt.currentTarget).parent('.select-index').siblings('.nano'),
+      el = $nano.find(`li.sep[data-index="${index}"]`)[0];
+
+    $nano.find('.nano-content').animate({ scrollTop: el.offsetTop }, 600);
+  });
+
+  // SelectInput set data
+  $('.select-data').on('click', 'li:not(.sep)', function(evt) {
+    var text = evt.currentTarget.textContent,
+      iata = evt.currentTarget.getAttribute('data-iata'),
+      $select = $(evt.currentTarget).closest('.select'),
+      $nameContainer = $select.find('.airport-name');
+
+    if($nameContainer.data('role') == 'from') {
+      var _iata = iata.split('');
+      var div = $('.header .fromPlace').addClass('rotate');
+      var span = $('.header .fromPlace span');
+      span.eq(0).text(_iata[0]);
+      span.eq(1).text(_iata[1]);
+      span.eq(2).text(_iata[2]);
+      setTimeout(() => div.removeClass('rotate'), 900);
+      //$('.xfrom').text(iata);
+    }
+    else {
+      var _iata = iata.split('');
+      var div = $('.header .toPlace').addClass('rotate');
+      var span = $('.header .toPlace span');
+      span.eq(0).text(_iata[0]);
+      span.eq(1).text(_iata[1]);
+      span.eq(2).text(_iata[2]);
+      setTimeout(() => div.removeClass('rotate'), 900);
+      //$('.xto').text(iata);
+    }
+
+    $nameContainer.text(text);
+    $select.toggleClass('open');
+
+    $(evt.currentTarget).addClass('selected').siblings('li').removeClass('selected');
+  });
+
+  // Date input
+  $('.calendar .days span').on('click', function(evt) {
+    var $this = $(evt.currentTarget),
+      day = evt.currentTarget.textContent;
+
+    $this.addClass('checked').siblings('span').removeClass('checked');
+
+    var currentMonth = new Date().getMonth(); 
+    var currentYear = new Date().getFullYear(); 
+    var date = new Date(currentYear, currentMonth, day);
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    var formattedDate = date.toLocaleDateString('es-ES', options);
+
+    // Exportar la fecha formateada
+    $('.dateinput .control-item span').eq(0).text(formattedDate);
+  });
+
+
+  $('.btnBack').on('click', function(evt) {
+    var wrap = document.querySelector('.wrap'),
+      index = parseInt(wrap.getAttribute('data-pos'));
+    
+    $('.ticket button.btnBook').text('Agendar clase');
+    wrap.setAttribute('data-pos', index - 1);
+  });
+
+  // Search button
+  $('.btnSearch').on('click', function(evt) {
+    var selectedDateText = $('.dateinput .control-item span').eq(0).text();
+     
+    if (selectedDateText === "Selecciona una fecha") {
+        alert("Por favor, seleccione la fecha de su primer clase para continuar");
+        return;
+    } 
+    
+    var selectedDay = selectedDateText.split(',')[0].trim().toLowerCase();
+    var name = $('.form__field.name').val()
+    var phone = $('.form__field.phone').val()
+   if (selectedDay === "domingo" ) {
+        // Renderizar mensaje de que la academia está cerrada
+        alert("No tenemos clases disponibles para el día Domingo. Por favor, seleccione otra fecha.");
+    }else if(name == ""){
+      alert("Ingresa tu nombre")
+    }else if (phone === "") {
+    alert("Por favor, ingresa tu número de teléfono.");
+    } else if (!/^\d{10}$/.test(phone)) {
+    alert("Por favor, ingresa los 10 digitos de tu número de telefono.");
+    } else {
+      const contentDiv = document.querySelector('.content');
+contentDiv.style.backgroundColor = 'white';
+        // Continuar con el renderizado de los vuelos
+        doFlightsRender(false);
+        setTimeout(() => {
+            document.querySelector('.wrap').setAttribute('data-pos', 1);
+        }, 50);
+    }
+  });
+
+  $('.ticket button').on('click', function(evt) {
+    var $button = $(evt.currentTarget);
+    var $loader = $('.loader').show();
+    $button.text('Agendando...');
+
+    setTimeout(() => {
+      $loader.hide();
+      $button.html('<i class="zmdi zmdi-check-circle"></i> Clase agendada');
+      $button.addClass('success');
+    }, 1200);
+     
+    var name = $('.form__field.name').val()
+  var phone = $('.form__field.phone').val()
+  var firstclass = $('.dateinput .control-item span').eq(0).text();
+  var plan = $('input[name="plan"]:checked').val();
+    var price = flights[thisIndex].price
+    var parts = flights[thisIndex].nodes[0].split(' ')
+  var start = new Date(parts[1])
+  var end = new Date(parts[3])
+  var daysOfWeek = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+  var dayName = daysOfWeek[start.getDay()];
+  var startTime = start.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: false });
+  var endTime = end.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: false });
+  var classtime = `${dayName} de ${startTime} a ${endTime} Hrs`
+  
+  var api = "https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec";
+
+  var validationData = {
+    redirect: "follow",
+    method: "POST",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    },
+    body: JSON.stringify({
+      action: "postForm",
+      name: name,
+      phone: phone,
+      date: firstclass,
+      classtime: classtime,    
+      plan: plan,
+      price: price   
+    })
+  };
+
+  fetch(api, validationData)
+    .then(response => response.text())
+    .then(res => {
+      var validation = JSON.parse(res);
+      if (validation.status == "success") {
+        setTimeout(function() {
+            window.location.href = 'https://www.mozartappcademy.com';
+        }, 3000);   
+      } 
+    })
+
+  });
+
+  // Select Flight
+  $('.list').on('click', 'article', function(evt) {
+    var index = parseInt(evt.currentTarget.getAttribute('data-index'))
+        thisIndex = index;
+      flight = flights[index];
+
+    var [from, t1, to, t2] = flight.nodes[0].split(' ');
+
+    var p = $('.radio.passengers label span'),
+      peopleTotal = 0,
+      people = _.map(p, function(el, i) {
+        var v = parseInt(el.textContent),
+          str = '';
+
+        if(i == 0 && v)
+          str = `${v} Adults`;
+        if(i == 1 && v)
+          str = `${v} Kids`;
+        if(i == 2 && v)
+          str = `${v} Elders`;
+        
+        peopleTotal += v;
+
+        return str;
+      });
+
+    from = $('.fromPlace span').text();
+    to = $('.toPlace span').text();
+
+    var time1 = new Date(t1), 
+      time2 = new Date(t2);
+    
+    var name = $('.form__field.name').val()
+    var firstclass = $('.dateinput .control-item span').eq(0).text();
+    var plan = $('input[name="plan"]:checked').val();
+    var day = firstclass.split(",")[0]
+    var flightRender = `
+    
+      <div class="row">
+        <div class="cell">
+          <small>Nombre</small><span>${name}</span>
+        </div>
+        <div class="cell">
+        </div>
+      </div>
+      <div class="row">
+        <div class="cell">
+          <small>Horario</small>
+          ${day} <br>
+          <span style="position: absolute">  ${time1.toLocaleTimeString().replace(':00','')} - 
+            ${time2.toLocaleTimeString().replace(':00','')}</span>
+        </div>
+        <div class="cell" >
+          <small>Plan</small><span>${plan}</span>
+        </div>
+      </div>
+      <div class="row" style="display: flex;">
+  <div class="cell" style="flex: 1; padding: 21px;">
+    <small>Fecha de primer clase</small> 
+    <span>${firstclass}</span>
+  </div>
+</div>
+      <div class="total" style="margin-top: 40px;">
+       <span style="text-decoration: line-through; font-size: 20px;">${flight.discount} MXN</span> <br>
+        <small>Total</small> <span>$${flight.price}</span>
+      </div>
+    `;
+
+    $('.ticket section').html(flightRender);
+    setTimeout(() => {
+      document.querySelector('.wrap').setAttribute('data-pos', 2);
+    }, 50);
+  });
+
+  // Init scroll
+  $(".nano").nanoScroller();
+
+
+  function doFlightsRender(isInit) {
+    
+  /*   var studentFlights = flights.filter(function(o) {
+       var firstclass = $('.dateinput .control-item span').eq(0).text();
+       var day = firstclass.split(",")[0]
+    var plan = $('input[name="plan"]:checked').val();
+       return o.date.toLowerCase() === day && o.plan === plan;
+    });*/
+    
+    var studentFlights = flights.filter(function(o, index) {
+    var firstclass = $('.dateinput .control-item span').eq(0).text();
+    var day = firstclass.split(",")[0];
+    var plan = $('input[name="plan"]:checked').val();
+    o.originalIndex = index; 
+    return o.date.toLowerCase() === day && o.plan === plan;
+  });
+    
+    var flightsRender = _.map(studentFlights, function(o, i) {
+      var sumText = "";
+      var [from, t1, to, t2] = o.nodes[0].split(' ');
+
+      var d1 = new Date(t1), 
+        d2 = new Date(t2);
+      
+
+      if(!isInit) {
+        var ppl = $('.radio.passengers label span'),
+          sum = parseInt(ppl.eq(0).text()) + parseInt(ppl.eq(1).text()) + parseInt(ppl.eq(2).text());
+
+        sumText = `${sum} people $${(o.price * sum).toFixed(2)}`;
+        from = $('.fromPlace span').text();
+        to = $('.toPlace span').text();
+      }
+
+      var img;
+      if(o.carrier == 'KL')
+        img = 'https://dl.dropbox.com/s/02ve5kn75rpo0s3/KL.png';
+      else if(o.carrier == 'BA')
+        img = 'https://dl.dropbox.com/s/6fpuy898zzuk7nn/BA.png';
+      else
+        img = 'https://dl.dropbox.com/s/dhmufay65yer2jz/AF.png';
+var demandText = "";
+
+if (o.discount === "") {
+  demandText = "<span style='color: red; font-size: 1.2em; position: absolute; margin-top: 30px;'>Alta demanda</span>";
+} else if (o.special === 1) {
+  demandText = "<span style='color: green; font-size: 1.2em; position: absolute; margin-top: 30px;'>Descuento especial</span>";
+}
+      
+      var priceColor;
+
+if (demandText.includes("Alta demanda")) {
+  priceColor = "red";
+} else if (demandText.includes("Descuento especial")) {
+  priceColor = "#28a745";
+} else {
+  priceColor = "#4A4A4A"; // Por defecto, negro
+}
+
+      return `<article data-index="${o.originalIndex}">
+      <!--  <div class="img">
+          <img src="${img}" alt="ualogo" />
+        </div> -->
+        <div class="info">
+        <span style='font-size: 14px;'>${o.date}</span>
+          <span class="time">Plan ${o.plan}</span>
+          <span class="airline">
+            ${d1.toLocaleTimeString().replace(':00','')} - 
+            ${d2.toLocaleTimeString().replace(':00','')}
+          </span>
+          
+          <!--<span>${carrier[o.carrier]} ${from} - ${to}</span>-->
+${demandText}
+          <h5 style='color: ${priceColor}'><small style='text-decoration: line-through; font-size: 15px;'>${o.discount}</small>  $${o.price} </h5>
+        </div>
+      </article>`;
+    });
+
+    $('.list .nano-content').html(flightsRender.join(''));
+  }
+
+})();
+
+</script>
