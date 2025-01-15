@@ -803,7 +803,7 @@ function Maillogin(button) {
     .then(res => {
       var validation = JSON.parse(res);
       if (validation.status == "success") {
-        localStorage.setItem('MStoken', validation.token); 
+        localStorage.setItem('TPtoken', validation.token); 
         window.location.href = 'https://www.mozartappcademy.com/main'; 
       } else {
         document.getElementById('Mail-error').style.display = 'block';    
