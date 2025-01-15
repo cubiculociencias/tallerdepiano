@@ -1,7 +1,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
-<link rel="icon" href="https://lh3.googleusercontent.com/d/16vmyfZfuuu5p9xT57X_CANKBjDTA-f-S" type="image/x-icon">
-    <title>Taller de Piano</title>
+<link rel="icon" href="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V" type="image/x-icon">
+    <title>Mozart Appcademy</title>
    
     <meta name="google-signin-client_id" content="613538890545-o4p4ft7oji6uhimgh0inqn5l5cgv1gnm.apps.googleusercontent.com">
    <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -37,7 +37,7 @@ h1 {
 
 
 .intro-section {
-  background-image: url(https://lh3.googleusercontent.com/d/1VoRvfiHUpjUJUhDmzvD02QhBWN0m0Lnh);
+  background-image: url(https://lh3.googleusercontent.com/d/1XBWyFeO4wVvB8jgYlGjywplnTQjiJJnw);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -493,27 +493,20 @@ h1 {
     stroke: #ffa700;
   }
 }
-
-
-   @media (min-width: 1000px){
-     .intro-content-wrapper{
-      margin-top: 260px ;
-    }
-  }
 </style>
 
 
 <div class="container-fluid">
       <div class="row">
         <div class="col-sm-6 col-md-7 intro-section">
-          <div class="brand-wrapper strong-shadow" style="margin-left: -30px;">
-            <h1>Taller de Piano</h1>
+          <div class="brand-wrapper strong-shadow" >
+            <h1>Mozart Appcademy</h1>
           </div>
-          <div class="intro-content-wrapper" style="margin-left: -30px;">
-        <br><br>
-            <h1 class="intro-title strong-shadow">Bienvenido al Taller de Piano!</h1>
-            <p class="intro-text strong-shadow">En este curso te guiaremos paso a paso para que adquieras una lectura fluida de partituras y en consecuencia limpieza en la interpretación de piezas. Inicia tu formación hoy!</p>
-          
+          <div class="intro-content-wrapper">
+        
+            <h1 class="intro-title strong-shadow">Bienvenido al mundo del Piano!</h1>
+            <p class="intro-text strong-shadow">En Mozart Appcademy, te ofrecemos clases adaptadas a tus necesidades y horarios, ya seas principiante o avanzado.</p>
+            <a href="https://www.mozartacademy.mx" class="btn btn-read-more" style="border-radius: 5px;">Más información</a>
           </div>
         <!--  <div class="intro-section-footer" style="margin-top: 40px;">
             <na class="footer-nav strong-white">
@@ -542,7 +535,7 @@ h1 {
               
                  
        <div id="login-options">
-           <img src="https://lh3.googleusercontent.com/d/12G4AuBpDZcg1LAiVq6gfNWShiB-2eXLB"  class="logo-img my-3">
+           <img src="https://lh3.googleusercontent.com/d/1pVpnLFwe0O4bkItJI9H5jyvk1ViXF3yx"  class="logo-img my-3">
     <h4 class="mt-3">Inicia sesión</h4>
         
 <br><br><br>
@@ -579,8 +572,8 @@ h1 {
         </div>
 
  
-    
-  <button class="login-btn login-btn-email" onclick="showMailLogin()" style="margin-top: 15px;"><i class="ri-mail-line login-btn-icon" ></i> Acceder con email</button>   
+       <button class="login-btn login-btn-email" onclick="showWhatsappLogin()"><i class="ri-whatsapp-fill login-btn-icon" style=" color: green;"></i> <span >Acceder con WhatsApp</span></button>
+  <button class="login-btn login-btn-email" onclick="showMailLogin()" style="margin-top: -4px;"><i class="ri-mail-line login-btn-icon" ></i> Acceder con email</button>   
 
          </div>
     </div>
@@ -588,7 +581,27 @@ h1 {
   
 </div>
                 
-
+    <!--   <section id="whatsapp-login" style="display: none;">
+    <h4>Inicia sesión con WhatsApp</h4>
+   <div id="WA-error" class="alert alert-danger" style="display: none;">
+          Número no registrado, intenta otro método de inicio de sesión.
+        </div>
+      
+      <div class="input-group" style="margin-bottom: 30px; margin-top: 70px;">
+    <div class="input-group-prepend" >
+      <select id="country-code" class="custom-select">
+       <option value="+52">🇲🇽 +52</option>
+      <option value="+1">🇺🇸 +1</option>
+      <option value="+1">🇨🇦 +1</option>
+      <option value="+57">🇨🇴 +57</option>
+      <option value="+54">🇦🇷 +54</option>
+      </select>
+    </div>
+    <input type="text" inputmode="numeric" maxlength="10" pattern="[0-9]*" class="form-control" id="phone-login" autocomplete="off" placeholder="Número de teléfono" >
+  </div>
+         <button class="login-btn" onclick="WAlogin(this)">Enviar mensaje</button>
+    <button class="back-btn" onclick="showLoginOptions()">Atrás</button>
+</section> -->
 
 
         <section id="maillogin">
@@ -604,9 +617,9 @@ h1 {
          
             <input type="email" id="email-login" placeholder="Ingresa tu email" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
             <input type="password" id="password-login" placeholder="Ingresa tu password" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
-     <!--       <div class="signup-link mb-4">
+            <div class="signup-link mb-4">
         <p>¿No tienes cuenta? <a href="#" onclick="showSignupForm()">Regístrate</a></p>
-    </div> -->
+    </div>
             <button class="login-btn" onclick="Maillogin(this)">Iniciar sesión</button>
             <button class="back-btn" onclick="showLoginOptions()">Atrás</button>
         </section>
@@ -639,6 +652,14 @@ h1 {
     </div>
       
           </div>
+        <div class="footer-link ">
+          
+            <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
+              <span><a href="https://www.instagram.com/mozartappcademy/">@mozartappcademy</a></span>
+              <span><a href="https://wa.me/5215564926957">Contacto</a></span>
+
+            </div>
+          </div>
         </div>
       </div>   
       </div>
@@ -649,6 +670,10 @@ h1 {
 
 
 <script>
+     function showWhatsappLogin() {
+    document.getElementById('login-options').style.display = 'none';
+    document.getElementById('whatsapp-login').style.display = 'block';
+}
 
 
 function showMailLogin() {
@@ -665,9 +690,10 @@ function showMailLogin() {
 
         function showLoginOptions() {
             document.getElementById('maillogin').style.display = 'none';
-document.getElementById('signupform').style.display = 'none';
+           document.getElementById('whatsapp-login').style.display = 'none'; document.getElementById('signupform').style.display = 'none';
             document.getElementById('login-options').style.display = 'block';
           
+   document.getElementById('WA-error').style.display = 'none';
    document.getElementById('Mail-error').style.display = 'none';
    document.getElementById('User-error').style.display = 'none';
      
@@ -703,11 +729,8 @@ document.getElementById('signupform').style.display = 'none';
       var validation = JSON.parse(res);
       if (validation.status == "success") {
         localStorage.setItem('TPtoken', validation.token);  
-       window.location.href = 'https://cubiculociencias.github.io/tallerdepiano/main'; 
-      }else if(validation.status == "newUser"){
-        localStorage.setItem('TPtoken', validation.token);  
-       window.location.href = 'https://cubiculociencias.github.io/tallerdepiano/main'; 
-      }else {
+       window.location.href = 'https://www.mozartappcademy.com/main'; 
+      } else {
         alert('Error, intenta otro método de inicio de sesión');
       }
     })
@@ -731,6 +754,24 @@ function showLoader() {
   }, 7000); // 10000 milisegundos = 10 segundos
 }
 
+
+function WAlogin(button) {
+  var phone = document.getElementById('phone-login').value;
+  //var code = document.getElementById('code-login').value;
+  var $button = $(button);
+  
+  if(phone != ""){
+
+  $button.html("<i class='fa fa-spinner fa-spin'></i> Cargando...");
+   setTimeout(function() {
+    document.getElementById('WA-error').style.display = 'block';
+     $button.html("Enviar mensaje");
+  }, 5000);
+    
+  }else{
+    alert("Ingresa tu número")
+  }
+}
 
 
 
@@ -763,7 +804,7 @@ function Maillogin(button) {
       var validation = JSON.parse(res);
       if (validation.status == "success") {
         localStorage.setItem('TPtoken', validation.token); 
-        window.location.href = 'https://cubiculociencias.github.io/tallerdepiano/main'; 
+        window.location.href = 'https://www.mozartappcademy.com/main'; 
       } else {
         document.getElementById('Mail-error').style.display = 'block';    
       }
@@ -855,7 +896,7 @@ function registration(button) {
 $(window).on('load', function() { 
   var storedToken = localStorage.getItem('TPtoken');
   if (storedToken) {
-    window.location.href = 'https://cubiculociencias.github.io/tallerdepiano/main'
+    window.location.href = 'https://www.mozartappcademy.com/main'
   } 
 });
 
