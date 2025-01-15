@@ -2695,3 +2695,45 @@ $scope.updateAvailableTimes = function() {
 
     </script>
 
+
+
+
+
+<script>
+$(window).on('load', function() { 
+  var storedToken = localStorage.getItem('TPtoken');
+  if (storedToken) {
+    var api = "https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec";
+
+    var validationData = {
+      redirect: "follow",
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify({
+        action: "validateToken",
+        token: storedToken
+      })
+    };
+
+  fetch(api, validationData)
+  .then(response => response.text())
+  .then(res => {
+    var validation = JSON.parse(res);
+    if (validation.status == "success") {
+      $('.preloader').css({'display':'none'})  
+      $('.mainSection').fadeIn('slow')  
+    } else {
+      localStorage.removeItem('TPtoken');
+     window.location.href = 'https://www.mozartappcademy.com/';
+    }
+  })
+  } else {
+    window.location.href = 'https://www.mozartappcademy.com/';
+  }
+});
+
+
+</script>
+
