@@ -655,7 +655,7 @@ h1 {
         <div class="footer-link ">
           
             <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
-              <span><a href="https://www.instagram.com/mozartappcademy/">@mozartappcademy</a></span>
+              <span><a href="https://www.instagram.com/mozart.app/">@mozart.app</a></span>
               <span><a href="https://wa.me/5215577676657">Contacto</a></span>
 
             </div>
@@ -729,7 +729,7 @@ function showMailLogin() {
       var validation = JSON.parse(res);
       if (validation.status == "success") {
         localStorage.setItem('TPtoken', validation.token);  
-       window.location.href = 'https://www.mozartappcademy.com/main'; 
+       window.location.href = 'https://www.mozart-app.com/main'; 
       } else {
         alert('Error, intenta otro método de inicio de sesión');
       }
@@ -804,7 +804,7 @@ function Maillogin(button) {
       var validation = JSON.parse(res);
       if (validation.status == "success") {
         localStorage.setItem('TPtoken', validation.token); 
-        window.location.href = 'https://www.mozartappcademy.com/main'; 
+        window.location.href = 'https://www.mozart-app.com/main'; 
       } else {
         document.getElementById('Mail-error').style.display = 'block';    
       }
@@ -896,7 +896,7 @@ function registration(button) {
 $(window).on('load', function() { 
   var storedToken = localStorage.getItem('TPtoken');
   if (storedToken) {
-    window.location.href = 'https://www.mozartappcademy.com/main'
+    window.location.href = 'https://www.mozart-app.com/main'
   } 
 });
 
