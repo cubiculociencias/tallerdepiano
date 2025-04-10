@@ -868,11 +868,50 @@ width: 155px;
     </div> 
 </button>
 
-       <button class="button button-clear" ng-class="{ 'barImage': btnBar }" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;">
-      <img src="{{userData.photo}}" width="40" height="40" style="border-radius: 50%;" />
-  <div style="position: absolute; bottom: -5px; left: 25px; width: 15px; height: 15px; background-color: #d3d3d3; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
-        <i class="icon ion-chevron-down" style="font-size: 8px; color: black; transform: scale(0.27);"></i>
-    </div>
+     <button class="button button-clear" ng-class="{ 'barImage': btnBar}" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" >
+  <div style="display: flex; align-items: center;" >    
+   
+  <div class="user-info" style="margin-top: -2px;">
+   <div style="font-size: 13px; font-weight: 600; color: #333;">{{userData.name}}</div>
+  <div style="font-size: 12px; color: #777; margin-top: -15px;" ng-if="userData.lvl == 0">Preparatorio</div>
+          <div style="font-size: 11px; color: #777; margin-top: -15px;" ng-if="userData.lvl != 0">Nivel {{userData.lvl}}</div>
+   </div>
+
+    <div style="position: relative; " class="profilImg">
+    
+      <div style="position: relative; width: 36px; height: 36px; margin-top: 4px; margin-left: 5px;">
+  <!-- Anillo exterior -->
+  <div style="
+    width: 36px;
+    height: 36px;
+    border: 1px solid #3ac5f2; /* color del anillo */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 2px #1e2b47; /* sombra tipo segundo anillo */
+  ">
+    <!-- Imagen de perfil -->
+    <img src="{{userData.photo}}" width="30" height="30" style="border-radius: 50%; border: 0.5px solid black;" />
+  </div>
+
+  <!-- Punto de estado -->
+  <div style="
+    position: absolute;
+    bottom: -3px;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    background-color: #5fff87; /* verde */
+    border: 2px solid #1e2b47; /* separador del fondo */
+    border-radius: 50%;
+  "></div>
+</div>
+
+
+   </div>
+   
+ </div>
     </button>
   </ion-nav-buttons>
        
@@ -1236,11 +1275,50 @@ width: 155px;
     </div> 
 </button>
 
-       <button class="button button-clear" ng-class="{ 'barImage': btnBar }" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;">
-      <img src="{{userData.photo}}" width="40" height="40" style="border-radius: 50%;" />
-  <div style="position: absolute; bottom: -5px; left: 25px; width: 15px; height: 15px; background-color: #d3d3d3; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
-        <i class="icon ion-chevron-down" style="font-size: 8px; color: black; transform: scale(0.27);"></i>
-    </div>
+      <button class="button button-clear" ng-class="{ 'barImage': btnBar}" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" >
+  <div style="display: flex; align-items: center;" >    
+   
+  <div class="user-info" style="margin-top: -2px;">
+   <div style="font-size: 13px; font-weight: 600; color: #333;">{{userData.name}}</div>
+  <div style="font-size: 12px; color: #777; margin-top: -15px;" ng-if="userData.lvl == 0">Preparatorio</div>
+          <div style="font-size: 11px; color: #777; margin-top: -15px;" ng-if="userData.lvl != 0">Nivel {{userData.lvl}}</div>
+   </div>
+
+    <div style="position: relative; " class="profilImg">
+    
+      <div style="position: relative; width: 36px; height: 36px; margin-top: 4px; margin-left: 5px;">
+  <!-- Anillo exterior -->
+  <div style="
+    width: 36px;
+    height: 36px;
+    border: 1px solid #3ac5f2; /* color del anillo */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 2px #1e2b47; /* sombra tipo segundo anillo */
+  ">
+    <!-- Imagen de perfil -->
+    <img src="{{userData.photo}}" width="30" height="30" style="border-radius: 50%; border: 0.5px solid black;" />
+  </div>
+
+  <!-- Punto de estado -->
+  <div style="
+    position: absolute;
+    bottom: -3px;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    background-color: #5fff87; /* verde */
+    border: 2px solid #1e2b47; /* separador del fondo */
+    border-radius: 50%;
+  "></div>
+</div>
+
+
+   </div>
+   
+ </div>
     </button>
   </ion-nav-buttons>
        
@@ -1506,11 +1584,50 @@ width: 155px;
     </div> 
 </button>
 
-       <button class="button button-clear" ng-class="{ 'barImage': btnBar }" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;">
-      <img src="{{userData.photo}}" width="40" height="40" style="border-radius: 50%;" />
-  <div style="position: absolute; bottom: -5px; left: 25px; width: 15px; height: 15px; background-color: #d3d3d3; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
-        <i class="icon ion-chevron-down" style="font-size: 8px; color: black; transform: scale(0.27);"></i>
-    </div>
+    <button class="button button-clear" ng-class="{ 'barImage': btnBar}" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" >
+  <div style="display: flex; align-items: center;" >    
+   
+  <div class="user-info" style="margin-top: -2px;">
+   <div style="font-size: 13px; font-weight: 600; color: #333;">{{userData.name}}</div>
+  <div style="font-size: 12px; color: #777; margin-top: -15px;" ng-if="userData.lvl == 0">Preparatorio</div>
+          <div style="font-size: 11px; color: #777; margin-top: -15px;" ng-if="userData.lvl != 0">Nivel {{userData.lvl}}</div>
+   </div>
+
+    <div style="position: relative; " class="profilImg">
+    
+      <div style="position: relative; width: 36px; height: 36px; margin-top: 4px; margin-left: 5px;">
+  <!-- Anillo exterior -->
+  <div style="
+    width: 36px;
+    height: 36px;
+    border: 1px solid #3ac5f2; /* color del anillo */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 2px #1e2b47; /* sombra tipo segundo anillo */
+  ">
+    <!-- Imagen de perfil -->
+    <img src="{{userData.photo}}" width="30" height="30" style="border-radius: 50%; border: 0.5px solid black;" />
+  </div>
+
+  <!-- Punto de estado -->
+  <div style="
+    position: absolute;
+    bottom: -3px;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    background-color: #5fff87; /* verde */
+    border: 2px solid #1e2b47; /* separador del fondo */
+    border-radius: 50%;
+  "></div>
+</div>
+
+
+   </div>
+   
+ </div>
     </button>
   </ion-nav-buttons>
        
@@ -1777,11 +1894,50 @@ width: 155px;
     </div> 
 </button>
 
-       <button class="button button-clear" ng-class="{ 'barImage': btnBar }" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;">
-      <img src="{{userData.photo}}" width="40" height="40" style="border-radius: 50%;" />
-  <div style="position: absolute; bottom: -5px; left: 25px; width: 15px; height: 15px; background-color: #d3d3d3; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
-        <i class="icon ion-chevron-down" style="font-size: 8px; color: black; transform: scale(0.27);"></i>
-    </div>
+     <button class="button button-clear" ng-class="{ 'barImage': btnBar}" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" >
+  <div style="display: flex; align-items: center;" >    
+   
+  <div class="user-info" style="margin-top: -2px;">
+   <div style="font-size: 13px; font-weight: 600; color: #333;">{{userData.name}}</div>
+  <div style="font-size: 12px; color: #777; margin-top: -15px;" ng-if="userData.lvl == 0">Preparatorio</div>
+          <div style="font-size: 11px; color: #777; margin-top: -15px;" ng-if="userData.lvl != 0">Nivel {{userData.lvl}}</div>
+   </div>
+
+    <div style="position: relative; " class="profilImg">
+    
+      <div style="position: relative; width: 36px; height: 36px; margin-top: 4px; margin-left: 5px;">
+  <!-- Anillo exterior -->
+  <div style="
+    width: 36px;
+    height: 36px;
+    border: 1px solid #3ac5f2; /* color del anillo */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 2px #1e2b47; /* sombra tipo segundo anillo */
+  ">
+    <!-- Imagen de perfil -->
+    <img src="{{userData.photo}}" width="30" height="30" style="border-radius: 50%; border: 0.5px solid black;" />
+  </div>
+
+  <!-- Punto de estado -->
+  <div style="
+    position: absolute;
+    bottom: -3px;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    background-color: #5fff87; /* verde */
+    border: 2px solid #1e2b47; /* separador del fondo */
+    border-radius: 50%;
+  "></div>
+</div>
+
+
+   </div>
+   
+ </div>
     </button>
   </ion-nav-buttons>
        
