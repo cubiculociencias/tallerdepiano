@@ -2304,7 +2304,7 @@ app
   });
  })       
 
-.controller('MenuCtrl', ['$http', '$scope', '$ionicSideMenuDelegate', '$ionicModal', 'SharedState', function($http, $scope, $ionicSideMenuDelegate, $ionicModal, SharedState) {
+.controller('MenuCtrl', ['$http', '$scope', '$ionicSideMenuDelegate', '$ionicModal', '$ionicHistory', 'SharedState', function($http, $scope, $ionicSideMenuDelegate, $ionicModal, $ionicHistory, SharedState) {
   $scope.toggleRight = function() {
     $('.item').removeClass('anim');
     setTimeout(function() {
@@ -2379,7 +2379,11 @@ app
   window.location.href = '#/menu/agenda';
 };
     $scope.goToMain = function() {
-   window.location.href = '#/main';
+   if ($ionicHistory.backView()) {
+        $ionicHistory.goBack();
+      } else {
+        window.location.href = '#/main';
+      }
 };
 
   $scope.isModalVisible = false;
