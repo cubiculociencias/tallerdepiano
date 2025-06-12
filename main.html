@@ -1206,7 +1206,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
     <ion-view>
            <ion-nav-bar class="bar-light" >     
        <ion-nav-buttons side="left">
-    <button class="button button-clear" ng-click="goToMain()">
+    <button class="button button-clear" ng-click="goBack()">
       <i class="ri-arrow-left-s-line"></i> regresar
     </button>
   </ion-nav-buttons>  
@@ -1926,7 +1926,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
 
      <ion-nav-bar class="bar-light">
       <ion-nav-buttons side="left">
-        <button class="button button-clear" ng-click="goToMain()">
+        <button class="button button-clear" ng-click="goBack()">
           <i class="ri-arrow-left-s-line"></i> regresar
         </button>
       </ion-nav-buttons>
@@ -2587,12 +2587,16 @@ $scope.goToAccount = function() {
   window.location.href = '#/menu/agenda';
 };
     $scope.goToMain = function() {
-   if ($ionicHistory.backView()) {
+   window.location.href = '#/main';
+};
+
+$scope.goBack = function() {
+     if ($ionicHistory.backView()) {
         $ionicHistory.goBack();
       } else {
         window.location.href = '#/main';
       }
-};
+    };
 
   $scope.isModalVisible = false;
 let deferredPrompt;
