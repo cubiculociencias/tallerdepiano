@@ -18,7 +18,7 @@
 
  <style>
 
- .itemDividerforitem {
+  .itemDividerforitem {
       border-color: #111;
       background-color: #444444;
       color: #fff;
@@ -502,21 +502,29 @@ ion-side-menu .list .item:hover {
     .tabframe-container{
       display: none;
     }
-      .right-content{
+      .contentHide{
      display: none !important;
   }
+    
   .content {
   grid-template-columns: 100% 0 !important;
   }
+   .content2 {
+  grid-template-columns: 0 100% !important;
+  }
+  .rWide{
+    width: 100% !important;
+  }
+
      #chatFrame{
-   height: 83vh !important;
-}
+   height: 84vh !important;
 }
 
-  .profilImg{
-    margin-top: -9px;
-    margin-left: -2px;
-  }
+      .user-info {
+      display: none;
+    }
+}
+
 
 @media (min-width: 850px) {
 .menubtn{
@@ -525,10 +533,13 @@ ion-side-menu .list .item:hover {
  .hintMsg{
         display: none;
     }
-
-.profilImg{
-    margin-left: 6px;
+    .profilImg{
+    margin-top: -9px;
+      margin-left: 6px;
   }
+     .user-info {
+      display: block;
+    }
 
 
     /*
@@ -714,10 +725,16 @@ width: 155px;
  #chatFrame{
      height: 90vh;
 }
-     
+ 
 .content {
   display: grid;
-  grid-template-columns: auto 330px; /* Deja que el lado izquierdo sea flexible */
+  grid-template-columns: auto 300px; /* Deja que el lado izquierdo sea flexible */
+  height: 92.5vh;
+}   
+
+.content2 {
+  display: grid;
+  grid-template-columns: auto 300px; /* Deja que el lado izquierdo sea flexible */
   height: 92.5vh;
 }   
 
@@ -731,12 +748,12 @@ width: 155px;
   display: flex;
   flex-direction: column;
   border: 1px solid #e1e8ed;
-  height: 100vh;
+  height: 85vh;
   overflow-y: auto;
   position: fixed; 
   right: 0;
     top: 15px;
-  width: 330px; 
+  width: 300px; 
 }
        
 
@@ -751,7 +768,7 @@ width: 155px;
     border-radius: 50%;
     border: 1px solid gray;
     animation: 1.5s linear 0s normal none infinite focuse;
-}
+} 
    
    @keyframes focuse {
   0% {
@@ -768,7 +785,83 @@ width: 155px;
     background-position: 0 0; }
   to {
     background-position: 40px 0; } }
+
+
+    .popup-custom .popup {
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    text-align: center;
+}
+
+.popup-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.popup-full-image {
+    max-width: 100%;
+    max-height: 60vh;
+    border-radius: 10px;
+}
+ 
+ 
+   .team-detail-background{
+     margin-bottom: 2px;
+   }
+.team-detail{
+  background: -webkit-radial-gradient(circle, #ccc, #000);
+   margin-top: 15px !important;
+}
+
+     .team-detail img{
+width: 200px; /* Ajusta según el tamaño deseado */
+  height: 200px; /* Igual que el ancho para mantener la proporción */
+  border-radius: 50%; /* Hace que la imagen sea redonda */
+  object-fit: cover; /* Asegura que la imagen rellene el círculo sin distorsión */
+  display: block;
+}
      
+.team-detail h2+p{
+  background-color:transparent;
+  color:#fff
+}
+.team-detail h2{
+    margin-top: 20px !important;
+  background-color:transparent;
+  color:#fff
+}
+
+
+
+.tab-item.team-detail-tab-item{
+  font-size:0.8em;
+  
+}
+.team-detail-tab-item .tab-heading{
+  position:relative;
+  top:-5px;
+  font-weight:bold;
+  color:#000
+}
+.team-detail-tab-item .tab-sub{
+  position:relative;
+  top:-40px;
+  display:block;
+  font-size:0.9em;
+}
+.team-detail div.team-country-tag {
+  background-color: #c0c0c0;
+  width: 96px;
+  height: 20px;
+  font-size: 0.7em;
+  border: 1px solid;
+  border-radius: 15px;
+    margin-top: 7px;
+  /* padding-left: 5px; */
+  text-align: center;
+}   
 </style>
 
 <body>
@@ -850,10 +943,12 @@ width: 155px;
 
 
 
+
  <script id="agenda.html" type="text/ng-template">
     <ion-view >
       
-    <ion-nav-bar class="bar-light" >      
+ 
+<ion-nav-bar class="bar-light" >      
         <ion-nav-buttons side="right">
 
      <button class="button button-clear" ng-click="dropdownChat()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 18px;">
@@ -870,7 +965,7 @@ width: 155px;
     </div> 
 </button>
 
-     <button class="button button-clear" ng-class="{ 'barImage': btnBar}" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" >
+      <button class="button button-clear" ng-class="{ 'barImage': btnBar}" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" >
   <div style="display: flex; align-items: center;" >    
    
   <div class="user-info" style="margin-top: -2px;">
@@ -915,6 +1010,9 @@ width: 155px;
    
  </div>
     </button>
+
+
+    
   </ion-nav-buttons>
        
         <ion-nav-buttons side="left">
@@ -938,10 +1036,9 @@ width: 155px;
       <div class="dropdown-item" ng-click="goToStatus()">
       <i class="ri-settings-3-line"></i> Configuración
     </div>
-    <div class="dropdown-item" ng-click="logout()">
+      <div class="dropdown-item" ng-click="logout()">
       <i class="ri-logout-box-r-line"></i> Salir
     </div>
-   
   </div>
 
     <div class="dropdownContent" ng-show="dropdownChatVisible" ng-click="$event.stopPropagation()">
@@ -961,110 +1058,17 @@ width: 155px;
 <div class="dropdownContent" ng-show="dropdownNotifVisible" ng-click="$event.stopPropagation()">
    <div class="dropdown-item" ng-repeat="alert in alerts" style="color: {{alert.color}}">
       <i class="{{alert.icon}} alertIcon" ></i> {{alert.subject}} 
-         <div style="font-size: 10px; position: absolute; margin-top: 30px;  color: gray;">Hace {{calculateDaysAgo(alert.date)}} días</div>
+         <div style="font-size: 10px; position: absolute; margin-top: 40px;  color: gray;">Hace {{calculateDaysAgo(alert.date)}} días</div>
     </div> 
       <span style="margin-left: 15px;" ng-if="alerts.length == 0"> No hay alertas </span>
   </div>  
         
     </ion-nav-bar>
 
-
-
-
-    
-      <ion-content>
-   <section class="content">
-      <div class="left-content">
-       <div class="iframe-container"><iframe id="agendaFrame" src="https://www.mozart-app.com/agenda" frameborder="0" allowfullscreen></iframe></div>
-        </div>
-
-
-        <div class="right-content " >
-  <div class="list">
-  
-          <ion-list > 
-    <div ng-if="userData.status != 'ACTIVO'">
-      <ion-item class="item-divider itemDividerforitem" >
-    Asistencias
-        </ion-item>
-      <ion-item class="item-icon-left">
-         <i class="icon ri-currency-fill" ></i>
-       Plan de pago
-        <p style="color: red">Pago pendiente </p>  
-          </ion-item>
-                 <ion-item class="item-icon-left item-icon-right" >
-<i class="icon ri-calendar-schedule-fill" ></i> Próximo pago
-         <p style="color: red">{{userData.nextpay}} </p>  
-          <i class="icon ri-arrow-left-double-fill slide-hint-left" style="margin-top: 35px;"></i>
-            <ion-option-button class="button-balanced"  onclick="window.top.location.href='https://www.mozart-app.com/main#/menu/payment';">Pagar</ion-option-button>
-                </ion-item>
-       </div>  
-
- <div ng-if="userData.status == 'ACTIVO'">           
-             <ion-item class="item-divider itemDividerforitem" >
-    Asistencias
-        </ion-item>
-            <ion-item class="item-icon-left" >
-      <i class="icon ri-calendar-event-fill" ></i> Horario de clase
-        <p>{{userData.classtime[0]}} <br> {{userData.classtime[1]}}</p>   
-        </ion-item>
-      <ion-item class="item-icon-left item-button-right">
-        <i class="icon ri-calendar-close-fill" ></i> Reposiciones
-         <button class="button button-dark" style="transform: scale(.8); margin-right: -5px; margin-top: 10px;" ng-click="showAlert()">
-            solicitar           
-          </button>
-         <p style="font-size: 10px;">Agenda con anticipación</p>    
-          </ion-item>
-           </div> 
-     </ion-list>   
-   
-   
-   
-    <!--  <ion-list ng-if="userData.status == 'ACTIVO' && userData.format == 'En línea por ZOOM'"> -->
-   <ion-list >
-             <ion-item class="item-divider itemDividerforitem">
-    Contacto
-        </ion-item>
-
-<ion-item class="item-icon-left item-icon-right">
-    <i class="icon ri-video-chat-fill" style="color: blue;"></i> Datos de ZOOM
-    <p> ID: 296 313 4430<br> Password: bartok</p>
-    <i class="icon ri-arrow-left-double-fill slide-hint-left" style="margin-top: 50px;"></i>
-    <ion-option-button class="button-positive" 
-        onclick="window.location.href='https://us02web.zoom.us/j/2963134430?pwd=Vzk3aTFCSTdDSFBoK1c1SVh4eEwwZz09';">
-        Ingresar
-    </ion-option-button>
-</ion-item>
-
-<ion-item class="item-icon-left item-icon-right">
-    <i class="icon ri-whatsapp-fill" style="color: green;"></i> Prof. Daniel
-    <p> 56 2736 2997</p>
-    <i class="icon ri-arrow-left-double-fill slide-hint-left" style="margin-top: 35px;"></i>
-    <ion-option-button class="button-balanced" 
-        onclick="window.location.href='https://wa.me/525627362997';">
-        Contactar
-    </ion-option-button>
-</ion-item>
-
-
-   
-     <ion-item class="item-divider itemDividerforitem">
-   Bajas
-        </ion-item>
-      <ion-item class="item-icon-left item-icon-right">
-        <i class="icon ri-close-circle-fill" style="color: red;"></i> Baja temporal
-      
-         <p style="font-size: 10px;">Expón el motivo de tu baja </p> 
-    <i class="icon ri-arrow-left-double-fill slide-hint-left" style="margin-top: 35px;" ng-if="userData.status != 'ACTIVO'"></i>
-   <ion-option-button class="button-assertive"  ng-click="showAlert2()">Solicitar</ion-option-button>
-          </ion-item>
-   </ion-list>
-
-
-         </div>
-  </div>
- </section>
+     <ion-content > 
+        <div class="iframe-container"><iframe src="https://www.mozart-app.com/agenda" frameborder="0" allowfullscreen></iframe></div>   
       </ion-content>
+     
     </ion-view>
 
   </script>
@@ -2294,6 +2298,15 @@ app
         }
       }
     })
+        .state('menu.account', {
+      url: "/account",
+      views: {
+        'menuContent': {
+          templateUrl: "account.html",
+          controller: 'accountCtrl'
+        }
+      }
+    })
     .state('menu.agenda', {
       url: "/agenda",
       views: {
@@ -2678,6 +2691,18 @@ $scope.closeModal = function () {
 };
       
     }])
+
+    .controller('accountCtrl', ['$scope', 'SharedState', function($scope, SharedState){
+  SharedState.getNum().then(function(data) {
+       $scope.userData = data.data;
+      $scope.userPlan = data.data.plan.split(" ")[0]
+  })
+ 
+      $scope.goToPayment = function() {
+  window.location.href = '#/menu/payment';
+}; 
+    }])
+
 
    .controller('agendaCtrl', ['$scope', 'SharedState', '$ionicPopup', function($scope, SharedState, $ionicPopup){
 
