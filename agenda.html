@@ -1,21 +1,179 @@
-
-
+ <head>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
  <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
  <script src="https://momentjs.com/downloads/moment.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.1/ui-bootstrap-tpls.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-calendar/1.0.0/calendar.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/lang-all.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/locale-all.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.4.0/dist/fullcalendar.min.css" rel="stylesheet"/>
 <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+</head>
 
 
-
- 
 <style>
-	/*!
+    body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif ;
+}
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:root {
+  --bg-body: rgb(245, 247, 255);
+  --primary-color: rgb(42, 51, 65);
+  --primary-hover-color: rgb(158, 161, 166);
+  --scrollbar-color: rgba(131, 135, 193, 0.4);
+  --card-bg-color: rgba(230, 231, 247, 0.1);
+  --pop-bg-color: rgb(245, 247, 255, 0.9);
+  --star-color: #ddcc14;
+  --border-color: rgba(131, 135, 193, 0.4);
+  --shadow-color: rgba(0, 0, 0, 0.05);
+  --accent-color: rgb(194, 33, 105);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+
+
+
+body {
+  position: relative;
+  background: var(--bg-body);
+  overflow: hidden;
+}
+
+/* MAIN MENU */
+
+
+
+.content {
+
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: auto 350px;
+}
+
+
+ /*
+.left-content {
+  color: var(--primary-color);
+  height: 100vh;
+  width: 100% !important;
+  overflow: auto;
+}
+*/
+
+
+/* RIGHT CONTENT */
+
+.right-content {
+  background-color: white;
+ position: fixed; 
+  display: flex;
+  flex-direction: column;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); 
+  color: var(--primary-color);
+  height: 100vh;
+ width: 350px; 
+ right: 0;
+  overflow: auto;
+}
+
+
+
+/* SCROLLBAR STYLE */
+
+.left-content::-webkit-scrollbar,
+.right-content::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.left-content::-webkit-scrollbar-track,
+.right-content::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  border-radius: 0;
+}
+
+.left-content::-webkit-scrollbar-thumb,
+.right-content::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-color);
+  border-radius: 40px;
+}
+
+/* MEDIA QUERIES */
+
+@media (min-width: 761px) {
+  .logContainer{
+    height: 180px !important;
+  }
+  }
+
+@media (max-width: 760px) {
+  .content {
+    grid-template-columns: 1fr; 
+  }
+
+  .right-content {
+    display: none; 
+  }
+
+  .left-content {
+    width: 100%; 
+    height: auto; 
+  }
+  .logContainer{
+    height: 500px !important;
+  }
+  .whatsContainer{
+    display: none;
+  }
+}
+
+  .iframe-container {
+            position: relative;
+            overflow: hidden;
+            max-width: 100%;
+            height: 100%;
+    
+        }
+
+        /* Estilo para hacer el iframe responsivo */
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+
+
+
+		/*!
  * FullCalendar v2.6.1 Stylesheet
  * Docs & License: https://fullcalendar.io/
  * (c) 2015 Adam Shaw
@@ -31,6 +189,16 @@
 }
 
 
+.fc-header-toolbar .fc-center {
+  display: none !important;
+}
+
+/* Mostrar el header derecho solo en pantallas pequeñas */
+@media (max-width: 768px) {
+  .fc-header-toolbar .fc-center  {
+    display: inline-block !important;
+  }
+}
 
 .fc-rtl {
 	text-align: right;
@@ -402,12 +570,13 @@ hr.fc-divider {
 	border-collapse: collapse;
 	border-spacing: 0;
 	font-size: 1em; /* normalize cross-browser */
+
 }
 
 .fc th {
 	text-align: center;
     padding: 10px !important;
-    background-color: #383c44;
+   background-color: #383c44;
   color: white;
 }
 .fc th,
@@ -417,6 +586,16 @@ hr.fc-divider {
 	padding: 0px;
 	vertical-align: top;
 }
+
+.fc td {
+  background-color: white;
+}
+
+.fc-other-month {
+  background-color: rgb(245, 247, 255) !important;
+
+}
+
 
 .fc td.fc-today {
 /* 	border-style: double;  */
@@ -1149,6 +1328,44 @@ be a descendant of the grid when it is being dragged.
 	border-bottom-color: transparent;
 }
 
+/* Estilo general de los días */
+.fc-list-heading-main {
+  font-size: 15px;
+  font-weight: bold;
+  color: #333;
+  padding: 10px 15px;
+}
+
+/* Día de la semana (derecha) */
+.fc-list-heading-alt {
+  font-size: 14px;
+  color: #666;
+  padding: 10px 15px;
+}
+
+.fc-listYear-view .fc-scroller {
+    height: 800px !important; 
+}
+
+/* 
+.fc-list-item {
+  font-weight: bold;
+  color: #444;
+  padding: 10px !important;
+}
+*/
+
+.fc-list-item-title {
+  color: #333;
+  padding: 10px 20px !important;
+    cursor: pointer !important;
+}
+
+/* Puntos de evento */
+.fc-event-dot {
+  margin: 7px !important;
+  background-color: #0fb;
+}
 
 
 
@@ -1233,151 +1450,29 @@ be a descendant of the grid when it is being dragged.
 }
 
 
-
-
-	
-
-.is-striped {
-  background-color: rgba(233, 200, 147, 0.2);
+.btnAtten{
+	margin-top: 20px; 
+	float: right; 
+	font-size: 18px;
 }
+	@media (min-width: 600px ){
+		.btnAtten{
 
-/* Table column sizing
-================================== */
-.date-cell {
-  width: 20%;
-}
-
-.topic-cell {
-  width: 41%;
-}
-
-.access-link-cell {
-  width: 13%;
-}
-
-.replay-link-cell {
-  width: 13%;
-}
-
-.pdf-cell {
-  width: 13%;
-}
-
-/* Apply styles
-================================== */
-.Rtable {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
-}
-.Rtable .Rtable-row {
-  width: 100%;
-  display: flex;
-}
-.Rtable .Rtable-row .Rtable-cell {
-  box-sizing: border-box;
-  flex-grow: 1;
-  padding: 0.8em 1.2em;
-  overflow: hidden;
-  list-style: none;
-}
-.Rtable .Rtable-row .Rtable-cell.column-heading {
-  background-color: #43BAC0;
-  color: white;
-  padding: 1em;
-}
-.Rtable .Rtable-row .Rtable-cell .Rtable-cell--heading {
-  display: none;
-}
-.Rtable .Rtable-row .Rtable-cell .Rtable-cell--content a {
-  font-size: 2em;
-  color: #333;
-}
-
-.date-content{
-   display: flex;
-  align-items: center;
-}
-
-.text-container {
-  margin-left: 10px;
-  display: flex;
-  flex-direction: column;
-}
- .webinar-date {
-  font-weight: 700;
-}
-
-
-
-
-/* Responsive
-==================================== */
-
-  .is-striped {
-    background-color: white;
-  }
-
-  .Rtable--collapse {
-    display: block;
-    width: 100%;
-    padding: 1em;
-    box-shadow: none;
-  }
-  .Rtable--collapse .Rtable-row {
-    box-sizing: border-box;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 2em;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
-  }
-  .Rtable--collapse .Rtable-row .Rtable-cell {
-    width: 100% !important;
-    display: flex;
-    align-items: center;
-  }
-  .Rtable--collapse .Rtable-row .Rtable-cell .Rtable-cell--heading {
-    display: inline-block;
-    flex: 1;
-    max-width: 120px;
-    min-width: 120px;
-    color: #43BAC0;
-    font-weight: 700;
-    border-right: 1px solid #ccc;
-    margin-right: 1em;
-  }
-  .Rtable--collapse .Rtable-row .Rtable-cell .Rtable-cell--content {
-    flex: 2;
-    padding-left: 1em;
-    
-  }
-  .Rtable--collapse .topic-cell {
-    background-color: #43BAC0;
-    color: white;
-    font-weight: 700;
-    order: -1;
-  }
-  .Rtable--collapse .topic-cell .Rtable-cell--content {
-    padding-left: 0 !important;
-  }
-  .Rtable--collapse .Rtable-row--head {
-    display: none;
-  }
-
-.no-flexbox .Rtable {
-  display: block;
-}
-.no-flexbox .Rtable.Rtable-cell {
-  width: 100%;
-}
+			display: none;
+		}
+	}
+  
 </style>
 
 
 
-<div ng-app="myApp">
-    <div ng-controller="Ctrl">
+
+<div ng-app="myApp" ng-controller="Ctrl" >  
+    <section class="content">
+      <div class="left-content">
+  <!--<div class="iframe-container" ><iframe src="https://app.mozartacademy.mx/lessons" frameborder="0"  allowfullscreen></iframe></div>-->
+        
+  
         <p></p>
       
  <div class="formLoader">
@@ -1387,7 +1482,7 @@ be a descendant of the grid when it is being dragged.
       <li></li>
     </ul>
 </div>
-        <div class="container">
+        <div >
             <!--             <div class="row">s
                 <h3 uib-tooltip-html="htmlTooltip" tooltip-placement="bottom">{{teste}}</h3>
             </div> -->
@@ -1395,56 +1490,17 @@ be a descendant of the grid when it is being dragged.
             <script type="text/ng-template" id="myModalContent.html">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
-                    <h3 class="modal-title">{{nome}}</h3>
+                    <h3 class="modal-title">Clase</h3>
                 </div>
                 <div class="modal-body">
-                   
-                  
-                  
-                  <div class="Rtable Rtable--5cols Rtable--collapse">
-    <div class="Rtable-row">
-        <div class="Rtable-cell topic-cell">
-        <div class="Rtable-cell--content title-content">Datos del evento</div>
-      </div>
-      <div class="Rtable-cell date-cell">
-        <div class="Rtable-cell--content date-content">
-         <a href="#0" > <i class="ri-calendar-schedule-fill"></i></a> 
-          <div class="text-container">
-          <span class="webinar-date">{{datZoom}}</span>{{timZoom}} </div>
-        </div>
-      </div> 
-         <div class="Rtable-cell replay-link-cell">
-        <div class="Rtable-cell--content date-content">
-         <a href="https://wa.me/{{whats}}" target="_blank"> <i class="ri-whatsapp-fill" style="color: green"></i></a> 
-           <div class="text-container" ng-if="isZoom">
-          <span class="webinar-date" >{{teacher}}</span>{{phone}}</div>
-
-
-         <div class="text-container" ng-if="!isZoom">
-          <span class="webinar-date">Taller de Piano</span>55 6492 6947</div>
-        </div>
-      </div>
-    
-      <div class="Rtable-cell access-link-cell" ng-if="isZoom">
-       <div class="Rtable-cell--content date-content">
-         <a href="https://us02web.zoom.us/j/2963134430?pwd=Vzk3aTFCSTdDSFBoK1c1SVh4eEwwZz09" target="_blank"> <i class="ri-video-chat-fill" style="color: #0B5CFF"></i></a> 
-          <div class="text-container">
-            Datos de sesión de ZOOM
-          <span class="webinar-date"> 398 094 289</span>password: bartok</div>
-        </div>
-      </div>
-              
-      <div class="Rtable-cell access-link-cell" ng-if="isPay">
-       <div class="Rtable-cell--content date-content">
-         <a href="#" target="_blank"> <i class="ri-bank-card-2-fill" style="color: #4267B2"></i></a> 
-          <a style="font-size: 15px; margin-left: 10px; text-decoration: underline; color: blue; font-weight: 500" href="https://cubiculociencias.github.io/tallerdepiano/main#/menu/payment" target="_blank">
-            Ir a datos de pago
-         </a>
-        </div>
-      </div>
-              
-    </div>
-  </div>
+                    <div class="text-center well">
+                    <p>
+                        <label for="nome">{{    nome   }}</label>
+                    </p>
+                    <p>
+                        <label for="nome">{{   gfExtenso    }}</label>
+                    </p>
+                </div>
                 
                 </div>
                 <div class="modal-footer">
@@ -1452,7 +1508,43 @@ be a descendant of the grid when it is being dragged.
                 </div>
             </script>
           
+          
+          
+            <script type="text/ng-template" id="bookpiano.html">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title">Agendar servicio</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center well">
+                    
+                    <p>
+             <label for="service">Servicio</label>
+  <select id="service" class="form-control" ng-model="selectedService" ng-change="updateDayList()">
+    <option value=""></option>
+    <option value="service1">{{opc1}}</option>
+    <option value="service2" ng-if="miss > 0">{{opc2}}</option>
+    <option value="service3" ng-if="delay > 0">{{opc3}}</option>
+  </select>
+        <label for="dayList" ng-if="selectedService">Dia</label>
+  <select id="dayList" class="form-control" ng-model="selectedDay" ng-change="updateHourList()" ng-options="day for day in days" >
+  </select>
+     <label for="hourList" ng-if="selectedDay && selectedService != 'service3'">Hora</label>
+  <select id="hourList" class="form-control" ng-model="selectedHour"  ng-change="logHour(selectedHour)" ng-if="selectedDay && selectedService != 'service3'" ng-options="hour for hour in hours">
 
+  </select>
+             </p>          
+                  
+                </div>
+               <span style="font-weight: 700;">Prácticas:  </span> Ilimitadas<br>
+  <span style="font-weight: 700;">Reposiciones:  </span> {{miss}}<br>
+               <span style="font-weight: 700;">Falta sin recargo:  </span> {{delay}}
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+                    <button class="btn btn-primary" type="button" ng-click="submitForm()">Solicitar</button>
+                </div>
+            </script>
           
             <!--   END  Modal Body     -->
             <div class="alert-success calAlert ng-scope" ng-show="alertMessage != undefined &amp;&amp; alertMessage != ''">
@@ -1466,23 +1558,42 @@ be a descendant of the grid when it is being dragged.
             </div>
         </div>
         <p></p>
+   <!--  <div class="col-md-12">
+           <button class="btn btn-default btnAtten" onclick="window.top.location.href='https://app.mozartacademy.mx/main#/menu/attendance';">Solicitar</button>
+        </div>  -->
+   
+        
+      </div>
 
-    </div>
-</div>
+      <div class="right-content">
+ 
+
+ <div select="renderCalender('myCalendar2');">
+                    <div class="calendar" ng-model="agendaSources" calendar="myCalendar2" ui-calendar="agendaConfig.calendar"></div>
+                </div>
+
+ 
+   </div> 
+   </section>  
+  
+ 
+ </div> 
+
+
 
 <script>
-	var app = angular.module('myApp', ['ui.bootstrap', 'ui.calendar']);
+		var app = angular.module('myApp', ['ui.bootstrap', 'ui.calendar']);
 
 app.controller('Ctrl', function($scope, $http, $uibModal, $log, $compile, uiCalendarConfig) {
     $scope.teste = "calendar";
 
-  
+ 
   
    var requestData = {
     action: "getBasicData",
     token: localStorage.getItem('TPtoken')
   };
- 
+
   var config = {
     headers: {
       "Content-Type": "text/plain;charset=utf-8"
@@ -1496,17 +1607,24 @@ app.controller('Ctrl', function($scope, $http, $uibModal, $log, $compile, uiCale
   
 
     $scope.eventSources = [$scope.events];
+    $scope.agendaSources = [$scope.events];
    if (uiCalendarConfig.calendars['myCalendar1']) {
      uiCalendarConfig.calendars['myCalendar1'].fullCalendar('removeEventSources');
      uiCalendarConfig.calendars['myCalendar1'].fullCalendar('addEventSource', $scope.events);
      uiCalendarConfig.calendars['myCalendar1'].fullCalendar('rerenderEvents');
     }
+   
+   if (uiCalendarConfig.calendars['myCalendar2']) {
+     uiCalendarConfig.calendars['myCalendar2'].fullCalendar('addEventSource', $scope.events);
+    }
+   
+   
    $(".formLoader").css("display", "none");
     $(".fc").css("filter", "none");
   })
 
    
-
+ 
   
  $scope.bookpiano = function() {
     var modalInstance2 = $uibModal.open({
@@ -1546,9 +1664,6 @@ app.controller('Ctrl', function($scope, $http, $uibModal, $log, $compile, uiCale
             resolve: {
                 items: function() {
                     return $scope.selected;
-                },
-                userData: function() {
-                    return $scope.userData;
                 }
             }
         });
@@ -1564,12 +1679,13 @@ app.controller('Ctrl', function($scope, $http, $uibModal, $log, $compile, uiCale
 
 
 
-    var currentLangCode = 'es-mx';
+
     $scope.uiConfig = {
         calendar: {
             defaultView: 'month',
             height: "auto",
-            lang: currentLangCode,
+            locale: "es",
+	    lang: "es-mx",
             eventTextColor: '#fff',
             eventBorderColor: 'white',
           
@@ -1578,7 +1694,7 @@ app.controller('Ctrl', function($scope, $http, $uibModal, $log, $compile, uiCale
                 return event.color; 
               }
                 
-            }, 
+            },
             eventBackgroundColor: 'LightSeaGreen',
             eventRender: function(event, element) {
                 element.find('.fc-time').text(""); 
@@ -1595,35 +1711,41 @@ app.controller('Ctrl', function($scope, $http, $uibModal, $log, $compile, uiCale
             
             header: {
                 left: 'title',
-                right: 'today prev,next'
+              center: 'month,listYear',
+                right: 'prev,next'
             },
             eventClick: $scope.alertOnEventClick
         }
     };
+  
+  
+  $scope.agendaConfig = {
+  calendar: {
+    defaultView: 'listYear',
+    editable: false,
+     height: 600,
+            locale: "es",
+	    lang: "es-mx",
+            eventTextColor: '#fff',
+            eventBorderColor: 'white',
+    header: {
+      left: '',
+      center: 'title',
+      right: ''
+    },
+    eventClick: $scope.alertOnEventClick
+  }
+};
 
 });
 
-app.controller('ModalInstanceCtrl', function($scope, $uibModalInstance, items, userData) {
+app.controller('ModalInstanceCtrl', function($scope, $uibModalInstance, items) {
 
     $scope.nome = items.title;
-    $scope.teacher = userData.teacher
-  $scope.phone = userData.tPhone
-  $scope.whats = userData.twPhone
     // Mudando formato como é mostrado DateTime no input
     $scope.ted = items.start;
     $scope.date = moment($scope.ted).format("DD-MM-YYYY HH:mm");
     $scope.gfExtenso = moment(items.start).format("dddd D MMMM YYYY, HH:mm a");
-  var gfParts = $scope.gfExtenso.split(",")
-  $scope.datZoom = gfParts[0]
-  $scope.timZoom = gfParts[1] 
-   
-$scope.isZoom = $scope.nome.includes("Clase");
-  $scope.isPay = $scope.nome.includes("pago");
-if(!$scope.isZoom){
-   $scope.teacher = "Taller de Piano"
-  $scope.phone = "55 6492 6947"
-  $scope.whats = "5215564926947"
-}
     // FIM Mudando formato como é mostrado DateTime no input
 
     $scope.items = items;
@@ -1643,5 +1765,299 @@ if(!$scope.isZoom){
 
 
 
+app.controller('bookCtrl', function($scope, $http, $uibModalInstance, items, userData, uiCalendarConfig) {
+   $scope.miss = userData.repositions;
+  $scope.delay = userData.skips;
 
+
+    $scope.cancel = function() {
+        $uibModalInstance.dismiss('cancel');
+    };
+  
+  
+  $scope.opc1 = "Agendar piano para práctica";
+  $scope.opc2 = "Agendar reposición de clase";
+  $scope.opc3 = "Solicitar falta sin recargo";
+
+  $scope.daysForPractice = [];
+  $scope.daysForService2 = [];
+  $scope.daysForService3 = [];
+  var now = new Date();
+  var hour = now.getHours();
+  
+  for(i=0; i<6;i++){ 
+    var day = newDate(i).split(" ")[0];
+    var limit = getLimit(day)
+     if(day === "Miércoles" || day === "Jueves" || day === "Viernes"){
+       if(i == 0 && hour < limit){
+         $scope.daysForPractice.push(newDate(i));
+       }else if(i>0){
+         $scope.daysForPractice.push(newDate(i));
+       }     
+    }
+  };
+
+  for(i=1; i<7;i++){ 
+    var day = newDate(i).split(" ")[0];
+    //dateR.toDateString() === now.toDateString()
+   if(day === "Miércoles" || day === "Jueves" || day === "Viernes" || day === "Sábado" || day === "Domingo"){
+        $scope.daysForService2.push(newDate(i));
+    }
+  };
+  
+  for(i=0;i<items.length;i++){
+    if(items[i].attendance === ""){
+      var date = new Date(items[i].start)
+      $scope.daysForService3.push(returnDateFormat(date))
+    }
+  }
+  
+  
+
+  var hoursForWeekday = ['14:00 a 15:00 Hrs', '15:00 a 16:00 Hrs', '16:00 a 17:00 Hrs', '17:00 a 18:00 Hrs', '18:00 a 19:00 Hrs'];
+  var hoursForFriday = ['11:00 a 12:00 Hrs', '12:00 a 13:00 Hrs', '13:00 a 14:00 Hrs'];
+  var hoursForSaturday = ['10:00 a 11:00 Hrs', '11:00 a 12:00 Hrs', '12:00 a 13:00 Hrs', '14:00 a 15:00 Hrs', '15:00 a 16:00 Hrs'];
+  var hoursForSunday = ['9:00 a 10:00 Hrs', '10:00 a 11:00 Hrs', '11:00 a 12:00 Hrs', '12:00 a 13:00 Hrs'];
+
+  $scope.updateDayList = function() {
+    if ($scope.selectedService === 'service1') {
+      $scope.days = $scope.daysForPractice;
+    } else if ($scope.selectedService === 'service2') {
+      $scope.days = $scope.daysForService2;
+    } else if ($scope.selectedService === 'service3') {
+      $scope.days = $scope.daysForService3;
+    } else {
+      $scope.days = [];
+    }
+    $scope.selectedDay = '';
+    $scope.selectedHour = '';
+  };
+
+   $scope.updateHourList = function() {
+    if ($scope.selectedService === 'service2' || $scope.selectedService === 'service1') {
+    if ($scope.selectedDay.split(" ")[0] === 'Miércoles' || $scope.selectedDay.split(" ")[0] === 'Jueves') {
+      $scope.hours = hoursForWeekday;
+      if($scope.selectedService === 'service1'){
+        if(now.getDay() == 3){
+          var filteredHours = hoursForWeekday.slice();
+          $scope.hours = filteredHours.splice(substractHour(3));
+        }else if(now.getDay() == 4) 
+          var filteredHours = hoursForWeekday.slice();
+          $scope.hours = filteredHours.splice(substractHour(3));
+      }
+    } else if($scope.selectedDay.split(" ")[0] === 'Viernes') {
+       $scope.hours = hoursForFriday;
+        if($scope.selectedService === 'service1' && now.getDay() == 5){
+          var filteredHours = hoursForWeekday.slice();
+          $scope.hours = filteredHours.splice(substractHour(3));
+        }
+    } else if($scope.selectedDay.split(" ")[0] === 'Sábado') {
+      $scope.hours = hoursForSaturday;
+    } else if($scope.selectedDay.split(" ")[0] === 'Domingo') {
+      $scope.hours = hoursForSunday;
+    };
+
+     $scope.selectedHour = '';
+   } else if ($scope.selectedService === 'service3') {
+     $scope.hours = [""]
+   }
+   
+  };
+  
+  $scope.logHour = function(hour) {
+    $scope.selectedHour = hour
+    };
+  
+  
+  function substractHour(tolerance){
+    var now = new Date();
+    var hour = now.getHours();
+
+    for (i = 17; i >= 14; i--) {
+      if (hour > i - tolerance) {
+        return i - 14 + 1; 
+      }
+    }
+  }
+  
+  function newDate (num){
+    const now = new Date();
+  const dat = new Date(now.getTime() + num*24*60*60*1000)
+  const options = { weekday: 'long', month: 'long', day: 'numeric' };
+    var dat2 = dat.toLocaleDateString("es-mx",options).replace(",","");
+    return dat2.charAt(0).toUpperCase() + dat2.slice(1);
+  };
+  
+  function returnDateFormat(date){
+    const dat = new Date(date);
+  const options = { weekday: 'long', month: 'long', day: 'numeric' };
+    var dat2 = dat.toLocaleDateString("es-mx",options).replace(",","");
+    return dat2.charAt(0).toUpperCase() + dat2.slice(1);
+  }
+  
+
+
+function getMonthIndex(month) {
+    var months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+    return months.indexOf(month.toLowerCase());
+};
+  
+  function getLimit(day){
+    if(day == 'Miércoles' || day == 'Jueves'){
+      return 17
+    }else if(day == 'Viernes'){
+      return 12
+    }
+  }
+
+
+
+
+    function dateToISO(dateString, timeString) {
+        var months = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+        var dateParts = dateString.split(' ');
+        var timeParts = timeString.split(' ');
+
+        var day = parseInt(dateParts[1]);
+        var month = months.indexOf(dateParts[3]);
+        var hour = parseInt(timeParts[0].split(':')[0]);
+
+        var date = new Date(2024, month, day, hour);
+        var offset = date.getTimezoneOffset();
+        date.setMinutes(date.getMinutes() - offset);
+        return date.toISOString();
+    }
+  
+  
+   $scope.submitForm = function() {
+    if ($scope.selectedDay && $scope.selectedHour) {
+     $scope.addEvent($scope.selectedService, $scope.selectedDay, $scope.selectedHour)
+      $uibModalInstance.close();
+      $scope.sendData($scope.selectedService)
+    }else if ($scope.selectedService == "service3" && $scope.selectedDay){
+      $scope.addExtension($scope.selectedDay)
+     $uibModalInstance.close();
+      $scope.sendData($scope.selectedService)
+    } else {
+      alert('Por favor, complete todos los campos requeridos.');
+    }
+  };
+     
+  
+  $scope.addEvent = function(service, dateString, timeString) {
+    if(service == "service1"){
+        var newEvent = {
+            title: "Práctica",
+            start: dateToISO(dateString, timeString),
+            color: "#33BEFF"
+        }    
+    }
+    else if(service == "service2"){
+        var newEvent = {
+            title: "Reposición",
+            start: dateToISO(dateString, timeString),
+            color: "orange",
+          attendance: ""
+        };        
+      userData.repositions = userData.repositions - 1
+    }
+
+    items.push(newEvent);
+        if (uiCalendarConfig.calendars['myCalendar1']) {
+            uiCalendarConfig.calendars['myCalendar1'].fullCalendar('removeEvents'); uiCalendarConfig.calendars['myCalendar1'].fullCalendar('addEventSource', items);     uiCalendarConfig.calendars['myCalendar1'].fullCalendar('rerenderEvents');
+        }
+    };
+  
+  
+   
+   $scope.addExtension = function(dateString) {
+    var n = parseInt(dateString.split(" ")[1])
+    var m = ""
+
+    for(i=0; i<items.length; i++){
+        m = parseInt(items[i].title.split(" ")[1])
+        if(m == n){ 
+          items[i].title = "Ausencia sin cobro",
+          items[i].color = "silver"
+        }else if(n<=m){
+          items[i].title = "Clase "+(m-1).toString()
+        }else if(items[i].title.split(" ")[1] == "pago"){
+          items[i].title = "Clase 8"
+          items[i].color = ""
+        }
+        if(items[i].title == "Clase 7" && n != 8){
+          var dat = new Date(items[i].start)
+          dat.setDate(dat.getDate() + 7)
+          items.push({
+            "title": "Próxima mensualidad",
+            "start": dat.toISOString(),
+            "color": "green"
+          })
+        }else if(items[i].title == "Clase 6" && n == 8){
+          var dat = new Date(items[i].start)
+          dat.setDate(dat.getDate() + 14)
+          items.push({
+            "title": "Próxima mensualidad",
+            "start": dat.toISOString(),
+            "color": "green"
+          })
+        }
+    }
+     if(items.length == 5){
+      items[4].title = "Clase 4"
+      var dat = new Date(items[4].start)
+          dat.setDate(dat.getDate() + 7)
+          items.push({
+            "title": "Próximo pago",
+            "start": dat.toISOString(),
+            "color": "green"
+          })
+    } 
+
+    userData.skips = userData.skips - 1
+        if (uiCalendarConfig.calendars['myCalendar1']) {
+            uiCalendarConfig.calendars['myCalendar1'].fullCalendar('removeEvents'); 
+            uiCalendarConfig.calendars['myCalendar1'].fullCalendar('addEventSource', items);     
+            uiCalendarConfig.calendars['myCalendar1'].fullCalendar('rerenderEvents');
+        }
+    };
+  
+  
+  
+   
+$scope.sendData = function(service){
+
+  if(service=='service3'){
+  var title = $scope.selectedDay
+  var requestData = {
+    action: "logDate",
+    token: localStorage.getItem('TPtoken'),
+     event: service,
+     title: title.split(" -")[0]
+  }; 
+  
+  }else{
+  var requestData = {
+    action: "logDate",
+    token: localStorage.getItem('TPtoken'),
+     event: service,
+     date: $scope.selectedDay, 
+     time: $scope.selectedHour
+  };
+  }
+ 
+  var config = {
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    },
+    followRedirects: true, 
+  }; 
+ $http.post('https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec', requestData, config)
+    .then(function(response) {
+  })
+  }
+
+
+	
+});
 </script>
