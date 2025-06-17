@@ -996,8 +996,8 @@ input[type="radio"]:checked + label.green-bg::after {
 
 #notification {
   position: absolute;
-  margin-top: -260px;
-  height: 250px;
+  margin-top: -380px;
+  height: 200px;
   width: 100%;
   border-radius: 10px;
   padding: 0 0 20px 0;
@@ -1011,6 +1011,7 @@ input[type="radio"]:checked + label.green-bg::after {
   font-size: 20px;
   font-weight: bold;
   color: #666;
+  text-shadow: 1px 1px 2px black;
 }
 
 #results {
@@ -1115,7 +1116,7 @@ input[type="radio"]:checked + label.green-bg::after {
     var(--tw-shadow, 0 0 #0000);
   --tw-ring-offset-color: #c7d2fe;
     z-index: 1000 !important;
-    position: absolute;
+   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -2297,13 +2298,16 @@ input[type="radio"]:checked + label.green-bg::after {
 
   <!-- Contenido del quiz (oculto inicialmente) -->
   <article id="quiz-content" class="quiz-started" style="display: none;">
+  <div id="blurWrapper">
     <div id="progress-container"><span id="progress"></span></div>
     <div id="stats">
       <p>Pregunta: <span id="questionNumber"></span></p> 
       <p>Puntaje: <span id="score"></span></p>
       <p>Tiempo: <span id="timer"></span></p>
     </div>
+  </div>
     <section id="answers"></section>
+
   </article>  
 
   <!-- Resultados del quiz (ocultos inicialmente) -->
@@ -5182,7 +5186,7 @@ var startButton = document.getElementById('start-quiz-btn');
   function displayQuestion() {
     let question = questions[questionIndex];
     let answers = document.getElementById("answers");
-    let output = `<h2 class="text-center bold">${currentQuestion}. ${question.question}</h2>`;
+    let output = `<div id="question-container"><h2 class="text-center bold">${currentQuestion}. ${question.question}</h2>`;
     
     // Añadir imagen si está disponible
     if (question.img) {
@@ -5190,15 +5194,21 @@ var startButton = document.getElementById('start-quiz-btn');
     }
     
     // Generar las respuestas
-    question.answers.forEach((answer, index) => {
-      output += `
-        <div class="answer">
-          <input type="radio" id="answer-${index + 1}" name="answers" value="${index + 1}">
-          <label for="answer-${index + 1}">
-            <span class="answer-number">${index + 1}.</span> ${answer}
-          </label>
-        </div>`;
-    });
+    output += `</div><div id="answers-container">`;
+
+// Generar las respuestas
+question.answers.forEach((answer, index) => {
+  output += `
+    <div class="answer">
+      <input type="radio" id="answer-${index + 1}" name="answers" value="${index + 1}">
+      <label for="answer-${index + 1}">
+        <span class="answer-number">${index + 1}.</span> ${answer}
+      </label>
+    </div>`;
+});
+
+// Cerrar el contenedor de respuestas
+output += `</div>`;
 
     answers.innerHTML = output; // Actualiza el contenedor de respuestas
   }
@@ -5246,8 +5256,11 @@ var startButton = document.getElementById('start-quiz-btn');
     let questionNumber = document.getElementById("questionNumber");
     questionNumber.textContent = `${currentQuestion}/${questions.length}`;
 
-      let container = document.getElementById("quiz-content");
-    container.style.filter = "none";
+
+    let container1 = document.getElementById("question-container");
+    let container2 = document.getElementById("blurWrapper");
+    container1.style.filter = "none";
+    container2.style.filter = "none";
 
     displayQuestion();
   }
@@ -5258,7 +5271,9 @@ var startButton = document.getElementById('start-quiz-btn');
     let rightAnswer = questions[questionIndex].correctAnswer;
     let answers = document.getElementsByName("answers");
     let progress = document.getElementById("progress");
-     let container = document.getElementById("quiz-content");
+    let container1 = document.getElementById("question-container");
+    let container2 = document.getElementById("blurWrapper");
+
 
     questionIsAnswered = 1;
 
@@ -5289,7 +5304,10 @@ var startButton = document.getElementById('start-quiz-btn');
     let button = document.createElement("button");
     button.classList.add("next-btn")
     button.style.backgroundColor = "#E6EAEF";
-   container.style.filter = "blur(5px)";
+   container1.style.filter = "blur(5px) brightness(0.3)";
+    container2.style.filter = "blur(5px)";
+
+   
 
     if (isLastQuestion()) {
       button.id = "show-results-btn";
