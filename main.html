@@ -884,7 +884,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
     
  <script id="menu.html" type="text/ng-template">
     <ion-side-menus >
-      <ion-side-menu side="left" width='280'  expose-aside-when="{{ exposeMenu ? 'large' : '' }}">
+      <ion-side-menu side="left" width='280'  expose-aside-when="large">
          
         <ion-content>
 
@@ -2607,7 +2607,7 @@ app
   });
  })       
 
-.controller('MenuCtrl', ['$http', '$scope',  '$state', '$ionicSideMenuDelegate', '$ionicModal', '$ionicHistory', 'SharedState', function($http, $scope,  $state, $ionicSideMenuDelegate, $ionicModal, $ionicHistory, SharedState) {
+.controller('MenuCtrl', ['$http', '$scope', '$rootScope', '$state', '$ionicSideMenuDelegate', '$ionicSideMenuDelegate', '$ionicModal', '$ionicHistory', 'SharedState', function($http, $scope,  $rootScope, $state, $ionicSideMenuDelegate, $ionicSideMenuDelegate, $ionicModal, $ionicHistory, SharedState) {
   $scope.toggleRight = function() {
     $('.item').removeClass('anim');
     setTimeout(function() {
@@ -2624,9 +2624,12 @@ app
       $scope.dropdownChatVisible = false;
 };
 
-    $scope.exposeMenu = $state.current.name !== 'menu.agenda';
+  $rootScope.$on('$stateChangeSuccess', function (event, toState) {
+  if (toState.name === 'menu.reel') {
+    $ionicSideMenuDelegate.$getByHandle('left').close();
+  }
+});
 
-   
 
     $scope.loadingProfile = true;
   SharedState.getNum().then(function(data) {
@@ -3242,6 +3245,8 @@ $scope.updateAvailableTimes = function() {
 
 
     </script>
+
+
 
 
 
