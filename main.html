@@ -884,7 +884,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
     
  <script id="menu.html" type="text/ng-template">
     <ion-side-menus >
-      <ion-side-menu side="left" width='280'  expose-aside-when="large">
+      <ion-side-menu side="left" width='280'  expose-aside-when="{{ isNotAgenda ? 'large' : '' }}">
          
         <ion-content>
 
@@ -2607,7 +2607,7 @@ app
   });
  })       
 
-.controller('MenuCtrl', ['$http', '$scope', '$ionicSideMenuDelegate', '$ionicModal', '$ionicHistory', 'SharedState', function($http, $scope, $ionicSideMenuDelegate, $ionicModal, $ionicHistory, SharedState) {
+.controller('MenuCtrl', ['$http', '$scope',  '$state', '$ionicSideMenuDelegate', '$ionicModal', '$ionicHistory', 'SharedState', function($http, $scope,  $state, $ionicSideMenuDelegate, $ionicModal, $ionicHistory, SharedState) {
   $scope.toggleRight = function() {
     $('.item').removeClass('anim');
     setTimeout(function() {
@@ -2623,6 +2623,8 @@ app
       $scope.isDropdownVisible = false;
       $scope.dropdownChatVisible = false;
 };
+
+     $scope.isNotAgenda = !$state.current.name.includes('menu.agenda');
 
     $scope.loadingProfile = true;
   SharedState.getNum().then(function(data) {
