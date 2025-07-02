@@ -888,7 +888,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
          
         <ion-content>
 
-      <div class="profile-user-data clearfix">
+      <div class="profile-user-data clearfix" href="#/menu/account" class="item" ng-class="(activeMenuClr=='account')?'menuSelectedColor':''" ng-click="activeMenuClr = 'account'; goToAccount()" style="cursor: pointer;" menu-toggle="left">
         <div id="loadingProfile" ng-if="loadingProfile" style="margin-top: 20px !important;"></div>
           <div class="circle">
               <img class="profile-pic" src="{{userData.photo}}">
@@ -912,7 +912,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
         </div>
      
  <ul class="list">
-           <a href="#/menu/tab/theory" class="item" ng-class="(activeMenuClr=='home')?'menuSelectedColor':''" ng-click="activeMenuClr = 'home'" menu-toggle="left"><i class="ri-presentation-line" ></i>&nbsp&nbspLecciones</a> 
+           <a href="#/menu/profile" class="item" ng-class="(activeMenuClr=='profile')?'menuSelectedColor':''" ng-click="activeMenuClr = 'profile'" menu-toggle="left"><i class="ri-presentation-line" ></i>&nbsp&nbspLecciones</a> 
        <a href="#/menu/library" class="item" ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" ng-click="activeMenuClr = 'library'" menu-toggle="left"><i class="ri-book-shelf-line" ></i>&nbsp&nbspRepertorio</a>
            <a href="#/menu/courses" class="item" ng-class="(activeMenuClr=='courses')?'menuSelectedColor':''" ng-click="activeMenuClr = 'courses'" menu-toggle="left"><i class="ri-music-ai-line" ></i>&nbsp&nbspDestreza</a> 
 <hr>
@@ -1184,12 +1184,118 @@ width: 200px; /* Ajusta según el tamaño deseado */
     <script id="profile.html" type="text/ng-template">
     <ion-view >
       
-     <ion-nav-bar class="bar-light" >     
-       <ion-nav-buttons side="left">
-    <button class="button button-clear" ng-click="goToMain()">
-      <i class="ri-arrow-left-s-line"></i> regresar
+     <ion-nav-bar class="bar-light" >      
+        <ion-nav-buttons side="right">
+
+     <button class="button button-clear" ng-click="dropdownChat()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 18px;">
+<i class="ri-question-answer-line"></i>
+            <div style="position: absolute; top: -3px; left: 18px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(chats | filter:{read: false}).length && chatCounter">
+        <div style="font-size: 13px; color: white;"> {{(chats | filter:{read: false}).length}}</div>
+    </div>
+</button> 
+          
+     <button class="button button-clear" ng-click="dropdownNotif()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 25px;">
+  <i class="ri-notification-3-line" ></i>
+            <div style="position: absolute; top: -3px; left: 18px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(alerts | filter:{seen: false}).length && alertCounter">
+        <div style="font-size: 13px; color: white;" > {{(alerts | filter:{seen: false}).length}}</div>
+    </div> 
+</button>
+
+      <button class="button button-clear" ng-class="{ 'barImage': btnBar}" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" >
+  <div style="display: flex; align-items: center;" >    
+   
+  <div class="user-info" style="margin-top: -2px;">
+   <div style="font-size: 13px; font-weight: 600; color: #333;">{{userData.name}}</div>
+  <div style="font-size: 12px; color: #777; margin-top: -15px;" ng-if="userData.lvl == 0">Preparatorio</div>
+          <div style="font-size: 11px; color: #777; margin-top: -15px;" ng-if="userData.lvl != 0">Nivel {{userData.lvl}}</div>
+   </div>
+
+    <div style="position: relative; " class="profilImg">
+    
+      <div style="position: relative; width: 36px; height: 36px; margin-top: 4px; margin-left: 5px;">
+  <!-- Anillo exterior -->
+  <div style="
+    width: 36px;
+    height: 36px;
+    border: 1px solid #3ac5f2; /* color del anillo */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 2px #1e2b47; /* sombra tipo segundo anillo */
+  ">
+    <!-- Imagen de perfil -->
+    <img src="{{userData.photo}}" width="30" height="30" style="border-radius: 50%; border: 0.5px solid black;" />
+  </div>
+
+  <!-- Punto de estado -->
+  <div style="
+    position: absolute;
+    bottom: -3px;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    background-color: #5fff87; /* verde */
+    border: 2px solid #1e2b47; /* separador del fondo */
+    border-radius: 50%;
+  "></div>
+</div>
+
+
+   </div>
+   
+ </div>
     </button>
-  </ion-nav-buttons>  
+  </ion-nav-buttons>
+       
+        <ion-nav-buttons side="left">
+          <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
+        </ion-nav-buttons>  
+
+            
+       
+        <div class="dropdownContent" ng-show="isDropdownVisible" ng-click="$event.stopPropagation()">
+     <div id="bannerRow">
+      <div class="profileImageContainer">
+     <div id="loading" ng-if="loadingProfile" style="height: 60px;"></div>
+        <img src="{{userData.photo}}"  ng-if="!loadingProfile"/>
+      </div>
+      <p class="profileName">{{userData.name}}</p>
+      <p class="profileEmail">{{userData.mail}}</p>
+    </div>
+    <div class="dropdown-item" ng-click="goToAccount()">
+      <i class="ion-ios-contact-outline"></i> Perfil
+    </div>
+      <div class="dropdown-item" ng-click="goToStatus()">
+      <i class="ri-settings-3-line"></i> Configuración
+    </div>
+    <div class="dropdown-item" ng-click="logout()">
+      <i class="ri-logout-box-r-line"></i> Salir
+    </div>
+  </div>
+
+    <div class="dropdownContent" ng-show="dropdownChatVisible" ng-click="$event.stopPropagation()">
+  <div class="dropdown-item" 
+       ng-click="goToChat()" 
+       ng-if="(chats | filter:{read: false}).length > 0">
+    <i class="ri-feedback-line alertIcon"></i>
+    Tienes {{(chats | filter:{read: false}).length}} nuevos mensajes  
+  </div>
+  <span style="margin-left: 15px;" 
+        ng-if="(chats | filter:{read: false}).length == 0" ng-click="goToChat()"> 
+    No hay mensajes 
+  </span>
+</div>
+
+
+<div class="dropdownContent" ng-show="dropdownNotifVisible" ng-click="$event.stopPropagation()">
+   <div class="dropdown-item" ng-repeat="alert in alerts" style="color: {{alert.color}}">
+      <i class="{{alert.icon}} alertIcon" ></i> {{alert.subject}} 
+         <div style="font-size: 10px; position: absolute; margin-top: 30px;  color: gray;">Hace {{calculateDaysAgo(alert.date)}} días</div>
+    </div> 
+      <span style="margin-left: 15px;" ng-if="alerts.length == 0"> No hay alertas </span>
+  </div>  
+        
     </ion-nav-bar>
       
       <ion-content > 
@@ -1588,19 +1694,11 @@ width: 200px; /* Ajusta según el tamaño deseado */
         
     </ion-nav-bar>
 
-<div class="hintMsg"><i class="ri-information-2-line" style="font-size: 20px;"></i> Explora más funciones</div>
-    <ion-tabs class="tabs-striped tabs-icon-top tabs-stable ">
-      <ion-tab title="Puntaje" icon="ri-line-chart-fill" href="#/menu/reel/score" class="pulseTab">
-        <ion-nav-view name="score-tab"></ion-nav-view>
-      </ion-tab>
-      <ion-tab title="Logros" icon="ri-trophy-fill" href="#/menu/reel/achievements">
-        <ion-nav-view name="achievements-tab"></ion-nav-view>
-      </ion-tab>
-    </ion-tabs>
+
 
 
     <ion-content class="padding"> 
-        <div class="iframe-container"><iframe src="https://www.mozart-app.com/comunity" frameborder="0" allowfullscreen ></iframe></div> 
+        <div class="iframe-container"><iframe src="https://www.mozart-app.com/landing" frameborder="0" allowfullscreen ></iframe></div> 
     </ion-content> 
 
   </ion-view>
@@ -1612,7 +1710,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
  <script id="score.html" type="text/ng-template"> 
   <ion-view > 
     <ion-content class="padding"> 
-        <div class="iframe-container"><iframe src="https://www.mozart-app.com/score" frameborder="0" allowfullscreen ></iframe></div> 
+        <div class="iframe-container"><iframe src="https://www.mozart-app.com/landing" frameborder="0" allowfullscreen ></iframe></div> 
     </ion-content> 
   </ion-view> 
 </script>
@@ -2500,7 +2598,7 @@ app
 
     ; 
 
-  $urlRouterProvider.otherwise("menu/tab/theory");
+  $urlRouterProvider.otherwise("menu/profile");
   $ionicConfigProvider.tabs.position('bottom'); 
 })
 
