@@ -2624,11 +2624,9 @@ app
       $scope.dropdownChatVisible = false;
 };
 
-    /*$scope.exposeMenu = $state.current.name !== 'menu.agenda';*/
+    $scope.exposeMenu = $state.current.name !== 'menu.agenda';
 
-   $scope.shouldExposeMenu = function() {
-  return $state.current.name !== 'menu.reel';
-};
+   
 
     $scope.loadingProfile = true;
   SharedState.getNum().then(function(data) {
