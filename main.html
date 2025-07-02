@@ -884,7 +884,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
     
  <script id="menu.html" type="text/ng-template">
     <ion-side-menus >
-      <ion-side-menu side="left" width='280'  expose-aside-when="{{ shouldExposeMenu() ? 'large' : '' }}">
+      <ion-side-menu side="left" width='280'  expose-aside-when="{{ exposeMenu ? 'large' : '' }}">
          
         <ion-content>
 
@@ -2623,6 +2623,8 @@ app
       $scope.isDropdownVisible = false;
       $scope.dropdownChatVisible = false;
 };
+
+    /*$scope.exposeMenu = $state.current.name !== 'menu.agenda';*/
 
    $scope.shouldExposeMenu = function() {
   return $state.current.name !== 'menu.reel';
