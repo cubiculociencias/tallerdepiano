@@ -884,7 +884,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
     
  <script id="menu.html" type="text/ng-template">
     <ion-side-menus >
-      <ion-side-menu side="left" width='280'  expose-aside-when="large">
+      <ion-side-menu side="left" width='280'  >
          
         <ion-content>
 
@@ -1016,7 +1016,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
   </ion-nav-buttons>
        
         <ion-nav-buttons side="left">
-          <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
+          <button class="button button-clear " ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
         </ion-nav-buttons>  
 
             
@@ -1249,7 +1249,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
   </ion-nav-buttons>
        
         <ion-nav-buttons side="left">
-          <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
+          <button class="button button-clear " ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
         </ion-nav-buttons>  
 
             
@@ -1501,7 +1501,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
   </ion-nav-buttons>
        
         <ion-nav-buttons side="left">
-          <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
+          <button class="button button-clear " ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
         </ion-nav-buttons>  
 
             
@@ -1645,7 +1645,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
   </ion-nav-buttons>
        
         <ion-nav-buttons side="left">
-          <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
+          <button class="button button-clear " ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
         </ion-nav-buttons>  
 
             
@@ -1797,7 +1797,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
   </ion-nav-buttons>
        
         <ion-nav-buttons side="left">
-          <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
+          <button class="button button-clear " ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
         </ion-nav-buttons>  
 
             
@@ -2106,7 +2106,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
   </ion-nav-buttons>
        
         <ion-nav-buttons side="left">
-          <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
+          <button class="button button-clear " ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
         </ion-nav-buttons>  
 
             
@@ -2237,7 +2237,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
   </ion-nav-buttons>
        
         <ion-nav-buttons side="left">
-          <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
+          <button class="button button-clear " ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
         </ion-nav-buttons>  
 
             
@@ -3237,43 +3237,3 @@ $scope.updateAvailableTimes = function() {
     </script>
 
 
-
-
-
-<script>
-$(window).on('load', function() { 
-  var storedToken = localStorage.getItem('TPtoken');
-  if (storedToken) {
-    var api = "https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec";
-
-    var validationData = {
-      redirect: "follow",
-      method: "POST",
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8"
-      },
-      body: JSON.stringify({
-        action: "validateToken",
-        token: storedToken
-      })
-    };
-
-  fetch(api, validationData)
-  .then(response => response.text())
-  .then(res => {
-    var validation = JSON.parse(res);
-    if (validation.status == "success") {
-      $('.preloader').css({'display':'none'})  
-      $('.mainSection').fadeIn('slow')  
-    } else {
-      localStorage.removeItem('TPtoken');
-     window.location.href = 'https://www.mozart-app.com/';
-    }
-  })
-  } else {
-    window.location.href = 'https://www.mozart-app.com/';
-  }
-});
-
-
-</script>
