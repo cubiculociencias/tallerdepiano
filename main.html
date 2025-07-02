@@ -884,7 +884,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
     
  <script id="menu.html" type="text/ng-template">
     <ion-side-menus >
-      <ion-side-menu side="left" width='280'  expose-aside-when="{{ isNotAgenda ? 'large' : '' }}">
+      <ion-side-menu side="left" width='280'  expose-aside-when="shouldExposeMenu">
          
         <ion-content>
 
@@ -2624,7 +2624,9 @@ app
       $scope.dropdownChatVisible = false;
 };
 
-     $scope.isNotAgenda = !$state.current.name.includes('menu.reel');
+   $scope.shouldExposeMenu = function() {
+  return $state.current.name !== 'menu.reel';
+};
 
     $scope.loadingProfile = true;
   SharedState.getNum().then(function(data) {
