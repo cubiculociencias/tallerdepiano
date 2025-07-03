@@ -1,49 +1,22 @@
- <head>
-  <title>Taller de piano</title>
+<head>
+<link rel="stylesheet" type="text/css" href="https://app.mozartacademy.mx/paymentstyle.css">
+    <title>Mozart Appcademy</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
- 
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js"></script>
-   <script src="https://pay.google.com/gp/p/js/pay.js"></script>
-<script src="https://js.braintreegateway.com/web/3.90.0/js/client.min.js"></script>
-<script src="https://js.braintreegateway.com/web/3.90.0/js/google-payment.min.js"></script>
+  <script src="https://unpkg.com/@paypal/paypal-js@2.0.0/dist/paypal.browser.min.js"></script>
+   
 </head>
 
-<style> 
-  *,
-*:after,
-*:before{
-  padding: 0;
-  margin:0;
-  box-sizing: border-box;
-}
-
-#app{
-  display: grid;
-  grid-template-columns: 10% 80% 10%;
-  margin: auto;
-}
-
-h1, h2, h3, h4, p , label, button{
-  font-family: BentonSans,Benton Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
-  color: #4a5568;
-}
-
-p, label{
-  color: #62748e;
-}
-
-.fs_xs{
-  font-size: 1.2rem;
-}
 
 
-.upper_case{
-  text-transform: uppercase;
-}
+
+<style>
+  
 
 
 
@@ -54,29 +27,7 @@ p, label{
   grid-column: 1/4;
 }
 
-.container{
-  max-width: 80%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  margin: auto;
-}
 
-.wrapper{
-  position: relative;
-  width: 100%;
-  align-self: stretch;
-}
-  .wrapper img{
-  max-width: 100%;
-  height: 230px;
-  object-fit: cover;
-  object-position: center;
-  background-color: #fff;
-  width: 100%;
-}
   .price{
     padding: 10px 20px; 
     margin-top: 170px; 
@@ -119,720 +70,663 @@ p, label{
 }
 
 
-
-input {
-  opacity: 0;
-  width: 0px;
-}
-
-input[type="radio"]:checked + .option{
-  background-color: #f7f3fb;
-  border: #79589f 1px solid;
-}
-
-input[type="radio"]:checked + .option h3{
-  color: #79589f;
-}
-
-
-
-@media screen and (max-width: 900px) {
-  .container{
-    grid-template-columns: repeat(2, 1fr)
-  }
-  .option{
-    grid-template-rows: 50% 50%;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  }
-}
-
-@media screen and (max-width: 760px) {
-  .container{
-    grid-template-columns: 1fr;
-  }
-}
   
-  .nav-pills .nav-link.active {
-    background-color: black;
+.nav-link.active {
+    background-color: black !important;
     color: white;
 }
   
-.whatsapp-button {
-  display: inline-flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 12px 20px;
-  background: #25D366;
-  text-align: left;
-  text-decoration: none;
-  font-family: sans-serif;
-  font-size: 16px;
-  line-height: 20px;
-  border-radius: 12px;
-  box-shadow: rgba(255, 255, 255, 0.25) 0 0 0 3px inset;
-  transition: 0.3s ease-out;
-}
-.whatsapp-button, .whatsapp-button:hover, .whatsapp-button:focus, .whatsapp-button:active {
-  color: #fff;
-  text-decoration: none;
-}
-.whatsapp-button:hover, .whatsapp-button:focus {
-  background: #22bf5b;
-}
-.whatsapp-button:focus {
-  outline: none;
-}
-.whatsapp-button:active {
-  background: #1ea951;
-  transition: none;
-}
-.whatsapp-button p {
-  margin: 0;
-}
-.whatsapp-button span {
-  display: block;
-  font-size: 14px;
-  line-height: 18px;
-}
-.whatsapp-button strong {
-  display: block;
-  font-weight: 700;
-}
-.whatsapp-button svg {
-  width: 36px;
-  height: 36px;
-  fill: currentcolor;
-  flex-shrink: 0;
-  margin-right: 8px;
-}
-  
-  
-  
-
-.uploader {
-  text-align: center;
-  display: block;
-  clear: both;
-  margin: 0 auto;
-  width: 100%;
-  max-width: 600px;
-}
-.uploader label {
-  float: left;
-  clear: both;
-  width: 100%;
-  padding: 2rem 1.5rem;
-  text-align: center;
-  background: #fff;
-  border-radius: 7px;
-  border: 3px solid #eee;
-  transition: all 0.2s ease;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-}
-.uploader label:hover {
-  border-color: #454cad;
-}
-.uploader label.hover {
-  border: 3px solid #454cad;
-  box-shadow: inset 0 0 0 6px #eee;
-}
-.uploader label.hover #start i.fa {
-  transform: scale(0.8);
-  opacity: 0.3;
-}
-.uploader #start {
-  float: left;
-  clear: both;
-  width: 100%;
-}
-.uploader #start.hidden {
-  display: none;
-}
-.uploader #start i.fa {
-  font-size: 50px;
-  margin-bottom: 1rem;
-  transition: all 0.2s ease-in-out;
-}
-.uploader #response {
-  float: left;
-  clear: both;
-  width: 100%;
-}
-.uploader #response.hidden {
-  display: none;
-}
-.uploader #response #messages {
-  margin-bottom: 0.5rem;
-}
-.uploader #file-image {
-  display: inline;
-  /*margin: 0 auto 0.5rem auto;
-  width: auto;
-  height: auto;
-  max-width: 100px;*/
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  object-position: center;
-  background-color: #fff;
-}
-.uploader #file-image.hidden {
-  display: none;
-}
-.uploader #notimage {
-  display: block;
-  float: left;
-  clear: both;
-  width: 100%;
-}
-.uploader #notimage.hidden {
-  display: none;
-}
 
 
-.uploader input[type=file] {
-  display: none;
-}
-.uploader div {
-  margin: 0 0 0.5rem 0;
-  color: #5f6982;
-}
-.uploader .btn {
-  display: inline-block;
-  margin: 0.5rem 0.5rem 1rem 0.5rem;
-  clear: both;
-  font-family: inherit;
-  font-weight: 700;
-  font-size: 14px;
-  text-decoration: none;
-  text-transform: initial;
+
+
+
+
+
+.paypal-button {
+  background-color: #ffc439; /* Color amarillo de PayPal */
+  color: #000; /* Color de texto negro */
   border: none;
-  border-radius: 0.2rem;
-  outline: none;
-  padding: 0 1rem;
-  height: 36px;
-  line-height: 36px;
-  color: #fff;
-  transition: all 0.2s ease-in-out;
-  box-sizing: border-box;
-  background: #454cad;
-  border-color: #454cad;
+  border-radius: 5px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.paypal-button:hover {
+  background-color: #ffb22d; /* Efecto hover */
+}
+
+.paypaltextContainer{
+  margin-left: -30px;
+}
+
+.paypalLogoContainer {
+  display: inline-flex;
+  align-items: center;
+}
+
+.paypalLogo {
+  position: absolute;
+  width: 80px; /* Ajusta el tamaño del logo según necesites */
+ margin-bottom: 7px;
+}
+
+.SubmitButton--incomplete{
+  cursor: not-allowed !important;
+}
+
+@media screen and (min-width:960px){
+  .PaymenyHeaderData{
+    margin-bottom: -8px !important;
+    margin-top: -8px !important;
+  }
 }
 </style>
 
-<div class="tab" style="display: none;" id="sendStatus">
-    <div class="container">
-<div class="wrapper" >
-        <input type="radio" name="option" id="production">
-        <label class="option" for="production">
-          <img src="https://lh3.googleusercontent.com/d/1Hv9WGtVuOhTwTcolJyMO7IIlZjjydQsU" />
-
-            <div class="details">
-              <div class="text">
-                <h4>Pago enviado</h4>
-                <p>Estamos validando tu pago. En breve serás notificado de aprobado y tendrás acceso al contenido.</p>
-           
-              </div>
-          </div>
-          </label>
-      </div>
-       </div>
-   </div>
-
-<main id=app>
-
-  <div class="tab">
-     <!--    <p class="fs_xs upper_case">Planes de Pago</p>  -->
-    <div class="container">
+<div id="root" ng-app="app" ng-controller="main"><div class="App-Container is-noBackground flex-container justify-content-center" data-testid="checkout-container"><div class="App App--multiItem"><div class="App-Overview">
+  
+  
+  <header class="Header"><div class="Header-content flex-container justify-content-space-between align-items-stretch"><div class="Header-business flex-item width-grow flex-container align-items-center"><div class="Header-merchantLogoWithLabel"><div class="HeaderImage HeaderImage--icon HeaderImage--iconFallback flex-item width-fixed flex-container justify-content-center align-items-center width-fixed"><img src="https://lh3.googleusercontent.com/d/1EP2I0BOMo_8mXsR9qqAv08PxjztZFaQ8" alt="icono" width="16" height="16">
+</div><h1 class="Header-businessLink-name Text Text-color--gray800 Text-fontSize--14 Text-fontWeight--500 Text--truncate">Mozart Appcademy</h1></div></div></div></header>
    
- <div class="wrapper">
-        <input type="radio" name="option" id="free">
-        <label class="option" for="free">
-          <img src="https://lh3.googleusercontent.com/d/1qIbUXsTSPmX6DyCnQTLmGhflYxaI4iOz" />
-            <h4 class="price">$450 MXN <span style="font-size: 13px;">/mes</span></h4>
-            <div class="details">
-              <div class="text">
-                <h4>Plan Standard</h4>
-     <p>1 hora de clase semanal.</p>
-    <p>Acceso a la App.</p>
-              </div>                           
-              <button class="detail_button" onclick="openClasstimeModal()">Horarios</button>
-               <button class="detail_button" onclick="openPaymentInfoModal(1)">Inscribir</button>
-          </div>
-          </label>
-      </div>
-      <div class="wrapper">
-        <input type="radio" name="option" id="production">
-        <label class="option" for="production">
-          <img src="https://lh3.googleusercontent.com/d/1UHjwR61Dwcbz3XnrrcJ9Y_c6hmMGr2Uh" alt="production" />
-          <h4 class="price">$750 MXN <span style="font-size: 13px;">/mes</span></h4>
-            <div class="details">
-              <div class="text">
-                <h4>Plan PRO</h4>
-            <p>2 horas de clase semanales.</p>
-    <p>Acceso a la App.</p>
-              </div>
-                           <button class="detail_button" onclick="openPaymentInfoModal(2)">Inscribir</button>
-          </div>
-          </label>
-      </div>
-      <div class="wrapper">
-        <input type="radio" name="option" id="advanced">
-        <label class="option" for="advanced">
-          <img src="https://lh3.googleusercontent.com/d/1W0dBQ1trjKR1LZ0ZAvnYvTL4y_5m-fF-" alt="advanced" />
-           <h4 class="price">$1350 MXN</h4>
-            <div class="details">
-              <div class="text">
-                <h4>Plan Premium</h4>
-            <p>4 horas de clase semanales.</p>
-    <p>Acceso a la App.</p>
-              </div>
-                          <button class="detail_button" onclick="openPaymentInfoModal(3)">Inscribir</button>
-          </div>
-          </label>
-      </div>
-  <!--    <div class="wrapper">
-        <input type="radio" name="option" id="enterprise">
-        <label class="option" for="enterprise">
-          <img src="https://www0.assets.heroku.com/packs/media/pricing-app/images/app-type-enterprise-gray-367216d90fe953edb719e498dee506e8.svg" alt="enterprise" />
-            <div class="details">
-              <div class="text">
-                <h3>Enterprise</h3>
-                <p class="pad-b1">Contact Sales for custom pricing</p>
-                <p>Apps that meet the control, compliance, and collaboration needs of large scale organizations.</p>
-              </div>
-              <button class="detail_button">Estimate</button>
-              <button class="detail_button active">Selected</button>
-          </div>
-          </label>
-      </div> -->
-    </div>
-  </div>
-</main>
-
-
-
-  <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true" >
-    <div class="modal-dialog " role="document" >
-       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-        <div class="modal-content" style="margin: 0;">
-  <div class="row">
-    <aside class="col-lg-12 mx-auto text-center">
-      <article class="card" >
-        <div class="card-body p-5">
-          
-           <h4>Completa tu pago</h4> <br>
-
-
-          <ul class="nav bg-light nav-pills rounded flex-column mb-3" role="tablist" >
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="pill" href="#nav-tab-card">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Paypal_2014_logo.png" style=" width: 22px; margin-bottom: 5px; "> Paypal</a>
-            </li>
-           <!--  <li class="nav-item">
-              <a class="nav-link" data-toggle="pill" href="#nav-tab-google">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/archive/c/c1/20210618182605%21Google_%22G%22_logo.svg" style=" width: 20px; margin-bottom: 5px; "> Google Pay</a>
-            </li> -->
-             <li class="nav-item">
-              <a class="nav-link" data-toggle="pill" href="#nav-tab-bank">
-             <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/Oxxo_Logo.svg" style=" width: 25px; margin-bottom: 5px;"> OXXO</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="pill" href="#nav-tab-bbva">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/BBVA_2019.svg" style=" width: 30px; margin-bottom: 5px; "> Transferencia</a>
-            </li>
-           
-          </ul>
-
-          <div class="tab-content" >
-            <div class="tab-pane fade" id="nav-tab-card" style="background-color: transparent;">
-              <!--<p class="alert alert-success">Some text success or error</p>-->
-              <p>Paypal is easiest way to pay online</p>
-              <p>
-           <!-- <form action="https://www.paypal.me/pianounam" method="post" target="_top"> https://www.paypal.com/cgi-bin/webscr
-      <input type="hidden" name="cmd" value="_s-xclick">
-      <input type="hidden" name="hosted_button_id" value="KR9QLWUCGB98U">
-      <input type="image" src="https://lh3.googleusercontent.com/d/1TRC42weedxBQ4r9XMtulM0VS4B11KfKj" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-    </form> -->
-              
-                <a href="https://www.paypal.me/pianounam" target="_blank">
-                  <img src="https://lh3.googleusercontent.com/d/1TRC42weedxBQ4r9XMtulM0VS4B11KfKj" border="0">
-                </a>
-              </p>
-             <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">Monto</h2>
-                                            <p class="amount" style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left"></p>
-              <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">Nombre</h2>
-                                            <p  style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left">Maria de los Remedios</p>
-                  <p style="color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left"><strong>Instrucciones: </strong>Accede a tu cuenta e ingresa el monto a pagar.</p> 
-            </div> <!-- tab-pane.// -->
-            
-            
-            
-            
-             <div class="tab-pane fade" id="nav-tab-google" style="background-color: transparent;">
-              <!--<p class="alert alert-success">Some text success or error</p>-->
-              <p>Paypal is easiest way to pay online</p>
-              <p>
-  
-               <div id="google-pay-button" style="background-color: red; display: contents;"><input type="image" src="https://raw.githubusercontent.com/google-pay/google-pay-button/1d25aa6162ad2330d3c9441ba7e6e2fb406f64c0/docs/images/google-pay-button.svg" ></div>
-              </p>
-              <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-            
-            </div> 
-            
-            
-            
-
-            <div class="tab-pane fade" id="nav-tab-bbva" style="background-color: transparent;">
-
-               <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">BANCO</h2>
-                                            <p style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left">BBVA - Bancomer</p>
-               <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">Número de Tarjeta</h2>
-                                            <p style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left;text-decoration: none;">5256 7821 7891 5792</p>
-               <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">CLABE</h2>
-                                            <p style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left;text-decoration: none;">0022 6090 3516 5075 21</p>
-               <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">Concepto</h2>
-                                            <p style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left">curso de piano</p>
-               <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">Monto</h2>
-                                            <p class="amount" style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left"></p>
-
-
-<br>
-              
-      <!--        <form id="file-upload-form" class="uploader">
-  <input id="file-upload" type="file" name="fileUpload" accept="image/*" />
-
-  <label for="file-upload" id="file-drag">
-    <img id="file-image" src="#" alt="Preview" class="hidden">
-    <div id="start2">
-      <i class="fa fa-download" aria-hidden="true"></i>
-      <div>Selecciona tu imagen</div>
-      <div id="notimage" class="hidden">Please select an image</div>
-      <span id="file-upload-btn" class="btn btn-primary">Seleccionar</span>
-    </div>
-    <div id="response" class="hidden">
-      <div id="messages"></div>
-    </div>
-     <input type="hidden" id="imageData">
-     <span id="file-send-btn" class="btn" data-dismiss="modal" style="display: none;" onclick="uploadImage()"> Enviar </span>  
-  </label> 
-                 
-</form> -->
+  <div class="OrderSummaryColumn"><div class="ProductSummary is-recurring"><div class="ProductSummary-productImageContainer" ><div class="ProductImage-container" ><img src="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V" alt="" class="ProductImage-image" fetchpriority="high"></div></div><div class="ProductSummary-info"><span class="ProductSummary-name Text Text-color--gray500 Text-fontSize--16 Text-fontWeight--500">Subscríbete a <span style="text-transform: uppercase;">{{course.type}}</span></span><div class="ProductSummary-amountsContainer"><div class="ProductSummary-totalsRead" style="opacity: 1;"><div class="ProductSummary-totalAmountContainer" style="opacity: 1;"><span class="ProductSummary-totalAmount Text Text-color--default Text-fontWeight--600 Text--tabularNumbers" id="ProductSummary-totalAmount" ><div class="ProductSummaryTotalAmount flex-container direction-row align-items-baseline wrap-wrap"><div class="mr2 flex-item width-fixed"><span class="CurrencyAmount">MX${{course.cost}}.00</span></div><div class="flex-item width-fixed"><span class="ProductSummaryTotalAmount-billingInterval Text Text-color--gray500 Text-fontSize--14"><div>por <br class="BillingIntervalBreak">mes</div></span></div></div></span></div><div class="AnimateSinglePresence"><div class="AnimateSinglePresenceItem"><div><div class="ProductSummary-amountsDescriptions" ></div></div></div></div></div></div><div class="ProductSummary-buttonsContainer" >
+    <select class="custom-select Button ProductSummary-actionButton Button--primary Button--md"  ng-model="selectedCourse" style="width: 180px;" ng-options="course.type for course in courses" ng-change="changeCourse()">
+  <option value="">Selecciona un curso</option>
+    </select> 
+</div></div></div>
     
-              <p style="color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left"><strong>Instrucciones: </strong>Para que podamos validar y registrar tu pago, debes enviar tu comprobante de pago a nuestro WhatsApp.</p>    
-              
-              
-                 <a class="whatsapp-button" href="https://wa.me/5215577676657" target="_blank">
-  <svg fill="#fff" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-    <path d="M.057,22,1.6,16.351a10.9,10.9,0,1,1,4.233,4.133L.057,22ZM6.1,18.51A9.04,9.04,0,1,0,3.59,16.066L2.674,19.41l3.43-.9ZM16.542,13.5c-.068-.114-.249-.182-.522-.318s-1.612-.8-1.862-.886-.431-.137-.613.137-.7.886-.863,1.068-.318.2-.59.068A7.435,7.435,0,0,1,9.9,12.217,8.2,8.2,0,0,1,8.386,10.33c-.159-.272-.017-.42.119-.556s.272-.318.409-.478a1.787,1.787,0,0,0,.275-.454.5.5,0,0,0-.023-.478c-.069-.136-.613-1.477-.84-2.022s-.446-.459-.613-.468l-.523-.009a1,1,0,0,0-.726.341A3.057,3.057,0,0,0,5.511,8.48,5.3,5.3,0,0,0,6.623,11.3a12.145,12.145,0,0,0,4.653,4.113,15.762,15.762,0,0,0,1.553.574,3.744,3.744,0,0,0,1.716.108,2.806,2.806,0,0,0,1.839-1.3,2.269,2.269,0,0,0,.159-1.3Z"/>
-  </svg>
-  <p>
-    <strong>WhatsApp</strong>
-    <span>Enviar comprobante</span>
-  </p>
-</a>
-              
-            </div>
-
-            <div class="tab-pane fade" id="nav-tab-bank" style="background-color: transparent;">
-                   <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">Presenta este QR al cajero del OXXO</h2>
-           
- <img src="https://lh3.googleusercontent.com/d/1_avjpaS-l-uLh9y2PqnwlSahTZS5F9-S" border="0" height="200px">
-         <br> 
-          
-               <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">Numero de Cuenta</h2>
-                                            <p style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left">0022 6090 3516 5075 21</p>
-               <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">Monto</h2>
-                                            <p class="amount" style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left"></p>
-          
-
-<br> 
-              
- <!--    <form id="file-upload-form" class="uploader">
-  <input id="file-upload" type="file" name="fileUpload" accept="image/*" />
-
-  <label for="file-upload" id="file-drag">
-    <img id="file-image" src="#" alt="Preview" class="hidden">
-    <div id="start2">
-      <i class="fa fa-download" aria-hidden="true"></i>
-      <div>Selecciona tu imagen</div>
-      <div id="notimage" class="hidden">Please select an image</div>
-      <span id="file-upload-btn" class="btn btn-primary">Seleccionar</span>
-    </div>
-    <div id="response" class="hidden">
-      <div id="messages"></div>
-    </div>
-     <input type="hidden" id="imageData">
-     <span id="file-send-btn" class="btn" data-dismiss="modal" style="display: none;" onclick="uploadImage()"> Enviar </span>  
-  </label> 
-                 
-</form>  -->
-                <p style="color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left"><strong>Instrucciones: </strong>Para que podamos validar y registrar tu pago, debes enviar tu comprobante de pago a nuestro WhatsApp.</p> 
-              
-                   <a class="whatsapp-button" href="https://wa.me/5215577676657" target="_blank">
-  <svg fill="#fff" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-    <path d="M.057,22,1.6,16.351a10.9,10.9,0,1,1,4.233,4.133L.057,22ZM6.1,18.51A9.04,9.04,0,1,0,3.59,16.066L2.674,19.41l3.43-.9ZM16.542,13.5c-.068-.114-.249-.182-.522-.318s-1.612-.8-1.862-.886-.431-.137-.613.137-.7.886-.863,1.068-.318.2-.59.068A7.435,7.435,0,0,1,9.9,12.217,8.2,8.2,0,0,1,8.386,10.33c-.159-.272-.017-.42.119-.556s.272-.318.409-.478a1.787,1.787,0,0,0,.275-.454.5.5,0,0,0-.023-.478c-.069-.136-.613-1.477-.84-2.022s-.446-.459-.613-.468l-.523-.009a1,1,0,0,0-.726.341A3.057,3.057,0,0,0,5.511,8.48,5.3,5.3,0,0,0,6.623,11.3a12.145,12.145,0,0,0,4.653,4.113,15.762,15.762,0,0,0,1.553.574,3.744,3.744,0,0,0,1.716.108,2.806,2.806,0,0,0,1.839-1.3,2.269,2.269,0,0,0,.159-1.3Z"/>
-  </svg>
-  <p>
-    <strong>WhatsApp</strong>
-    <span>Enviar comprobante</span>
-  </p>
-</a>
-              
-            </div> <!-- tab-pane.// -->
-          </div> <!-- tab-content .// -->
-
-        </div> <!-- card-body.// -->
-      </article> <!-- card.// -->
-
-    </aside> <!-- col.// -->
-  </div> <!-- row.// -->
- </div>
-    </div>
-</div>
-
-
-
-
- <div class="modal fade" id="classtimeModal" tabindex="-1" role="dialog" aria-labelledby="classtimeModal" aria-hidden="true" >
-    <div class="modal-dialog " role="document" >
-       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-        <div class="modal-content" style="margin: 0; background: transparent" >
-    <img src="https://lh3.googleusercontent.com/d/1KFJ39TsEQbC8aNhJoV-Dtga9h2JL5nTn" style=" width: auto; height; 180px; margin-bottom: 5px; "/>
-          
-      </div>
-      </div>
-   </div>
-
-
-<script> 
-   function openPaymentInfoModal(option) {
-   $('#profileModal').modal('show');  
-      if (option == 1) {
-        $('.amount').text('$450 MXN pesos');
-    } else if (option == 2) {
-        $('.amount').text('$750 MXN pesos');
-    } else if (option == 3) {
-        $('.amount').text('$1350 MXN pesos');
-    }
-}
-  
-   function openClasstimeModal() {
-   $('#classtimeModal').modal('show');  
-}
-  
+    <section data-testid="order-details" class="OrderDetails App-Overview-OrderDetails my6"><ul class="OrderDetails-items"><li class="OrderDetails-item" style="opacity: 1; transform: scale(1); height: auto; margin-bottom: 16px;"><div class="LineItem flex-container align-items-flex-start"><div class="LineItem-imageContainer mr4 flex-item width-fixed" ><img src="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V" alt="" class="LineItem-image"></div><div class="flex-container justify-content-space-between align-items-baseline wrap-wrap width-grow"><div class="flex-column-break" style="order: 2;"></div><div class="flex-column-break" style="order: 5;"></div><div class="LineItem-productName flex-item width-auto"  style="order: 0;"><span class="Text Text-color--default Text-fontSize--14 Text-fontWeight--500"><div class="ExpandableText false"><div  class="ExpandableText--truncated" style="-webkit-line-clamp: 2;">{{course.type}}</div></div></span></div><div class="flex-container direction-column wrap-wrap" style="width: 100%; order: 3;"><div class="LineItem-productDescription flex-item width-12" style="order: -1;"><div class="Text Text-color--gray400 Text-fontSize--12 Text-fontWeight--400"><div class="ExpandableText false"><div class="ExpandableText--truncated" style="-webkit-line-clamp: 2;">¡Incluye 3 horas de clase a la semana, plataforma didáctica, constancias de avance y más!</div></div></div></div><div class="flex-container direction-row wrap-wrap"><div class="LineItem-description flex-item width-grow" style="order: 3;"><span class="Text Text-color--gray400 Text-fontSize--12 Text-fontWeight--400"><div class="AdjustableQuantitySelector-hitBox">  <select class="Button AdjustableQuantitySelector Button--link Button--md" ng-model="selectedMonths" ng-change="changeMonth()" style="width: 40px;">
+    <option value="1">1 </option>
+    <option value="6">6 </option>
+  </select></div><span >Meses a pagar</span></span></div><div class="LineItem-amountDetail flex-item width-auto flex-container align-items-flex-end width-auto" style="order: 4;"><div class="flex-item width-auto flex-item-align-right"></div></div></div></div><div class="LineItem-tierBreakdown flex-item width-auto flex-item-align-left" style="order: 6;"><div class="flex-container" ></div></div><div class="flex-container Placeholder" style="opacity: 1;"><div class="ml2 flex-item width-fixed" style="order: 1;"><span class="Text Text-color--default Text-fontSize--14 Text-fontWeight--500 Text--tabularNumbers"><span class="CurrencyAmount">MX${{course.cost}}.00</span></span></div></div></div></div></li></ul><div class="OrderDetails-footer"></div></section>
+      
+    </div></div>
   
   
  
-  function ekUpload(){
-  function Init() {
+        <div class="App-Payment is-noBackground">
+          <main>
+            <div class="CheckoutPaymentForm">
+              <div style="height: 109px;">   
+                <div>
+                  <div class="PaymentRequestOrHeader" style="display: inherit; height: 109px;">
+                    <div class="AnimateSinglePresence">
+                      <div class="AnimateSinglePresenceItem">
+                 
+                  
+                          <div class="ButtonAndDividerContainer" style="display: block; opacity: 1; height: auto;">
+                            <div class="ButtonContainer">
+                              <div class="ButtonWrapper">
+   
+          <!--      <div id="paypal-button-container"></div>  -->
+                                
+                           <button class="paypal-button SubmitButton " type="submit" onclick="window.open('https://www.paypal.me/tallerdepiano/300', '_blank')">
+  <div class="SubmitButton-TextContainer">
+    <span class="SubmitButton-Text Text-fontWeight--500 paypaltextContainer" style="color: black;">Pagar con 
+      <div class="paypalLogoContainer">
+      <img src="https://lh3.googleusercontent.com/d/1JhlYpq0PokBC6R9CJg7QTrQmspUQaGap"  class="paypalLogo">
+    </div>
+    </span>
+  </div>
+</button>
 
-    console.log("Upload Initialised");
+                                
 
-    var fileSelect    = document.getElementById('file-upload'),
-        fileDrag      = document.getElementById('file-drag'),
-        submitButton  = document.getElementById('submit-button');
+                              </div>
+                            </div>
+        <!--  <br><br><br> -->  <br>
+                            <div class="Divider" >
+                              <hr>
+                              <p class="Divider-Text Text Text-color--gray400 Text-fontSize--14 Text-fontWeight--400"><span class="DividerText">Otros métodos de pago</span></p>
+                            </div>
+                          </div>     
+          
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> <!--  <br><br><br> -->  <br>
+              <form class="PaymentForm-form" novalidate="">
+                <div style="height: 540px;" id="paymentContainer">
+                  <div>
+                    <div style="opacity: 1;">
+                      <div class="App-Global-Fields flex-container spacing-16 direction-column wrap-wrap">
+                   
+                        <div class="flex-item width-12">
+                          <h2 class="PaymentMethod-Heading Text Text-color--gray800 Text-fontSize--16 Text-fontWeight--500">Método de pago</h2>
+                        </div>
+                      </div>
+                      <div class="PaymentMethodForm" style="opacity: 1; height: auto;">
+                        <div class="Tabs is-icontabs is-desktop">
+                          <div class="Tabs-Container">
+                            <div role="tablist" aria-orientation="horizontal" aria-label="Payment methods" class="Tabs-TabList">
+                              <div role="presentation" class="Tabs-TabListItemContainer Tabs-TabListItemContainer--is-selected">
+                                
+                                
+                                <button class="Tabs-TabListItem Tabs-TabListItem--is-selected" id="card-tab" role="tab" type="button" tabindex="0"  onclick="transferPay()">
+                                  <div class="Tabs-TabListItemContent">
+                                    <div class="Tabs-TabListPaymentMethod">
+                                      <div class="Tabs-TabListPaymentIcon"><img src="https://js.stripe.com/v3/fingerprinted/img/card-ce24697297bd3c6a00fdd2fb6f760f0d.svg" alt="" class="Icon Icon--md"></div>
+                                      <div class="Tabs-TabListPaymentLabel" data-text="Card">Transferencia</div>
+                                    </div>
+                                  </div>
+                                </button></div>
+                              <div role="presentation" class="Tabs-TabListItemContainer"><button class="Tabs-TabListItem" id="oxxo-tab"  role="tab" type="button"  tabindex="-1"  onclick="oxxoPay()">
+                                  <div class="Tabs-TabListItemContent" >
+                                    <div class="Tabs-TabListPaymentMethod">
+                                      <div class="Tabs-TabListPaymentIcon"><img src="https://upload.wikimedia.org/wikipedia/commons/6/66/Oxxo_Logo.svg" alt="" class="Icon Icon--md"></div>
+                                      <div class="Tabs-TabListPaymentLabel" data-text="OXXO">OXXO</div>
+                                    </div>
+                                  </div>
+                                </button>
+                                  
+                                
+                                
+                                </div>
+                            </div>
+                          </div>
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          <div class="Tabs-TabPanelContainer">
+                            <div style="opacity: 1; width: 100%; transform: none;">
+                              <div id="card-tab-panel" role="tabpanel" aria-labelledby="card-tab">
+              
+                                  <div class="PaymentForm-paymentMethodForm flex-container direction-column wrap-wrap" style="gap: 16px;">
+                                    <div class="flex-item width-12">
+                                      <div class="FormFieldGroup" data-qa="FormFieldGroup-cardForm">
+                                        <div class="FormFieldGroup-labelContainer flex-container justify-content-space-between"><label for="cardForm-fieldset"><span class="Text Text-color--gray600 Text-fontSize--13 Text-fontWeight--500">Datos de cuenta</span></label></div>
+                                        <fieldset class="FormFieldGroup-Fieldset" id="cardForm-fieldset">
+                                          <div class="FormFieldGroup-container">
+                                            <div class="FormFieldGroup-child FormFieldGroup-child--width-12 FormFieldGroup-childLeft FormFieldGroup-childRight FormFieldGroup-childTop">
+                                              <div class="FormFieldInput padding-right-90">
+                             <div class="SignUpForm-headerContainer">
+                                                  <div class="SignUpForm-header"><span class="SignUpForm-headerText Text Text-color--default">
+                                                      <div class="SignUpForm-labelHeader" style="opacity: 1;">CLABE interbancaria</div>
+                                                    <div class="SignUpForm-subLabel" id="link-registration-subheader-message">0022 6090 3516 507521</div>
+                                                   
+                                                    </span></div>
+                                                </div>
+                                                <div class="FormFieldInput-Icons" style="opacity: 1;">
+                                         
+                                                  <div style="transform: none;"><span class="FormFieldInput-IconsIcon is-visible"><img src="https://js.stripe.com/v3/fingerprinted/img/mastercard-4d8844094130711885b5e41b28c9848f.svg" alt="MasterCard" class="BrandIcon" loading="lazy" fetchpriority="low"><div class="SignUpForm-subLabel" style="margin-left: 5px;">Banamex</div></span>  </div>
+                                               
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="FormFieldGroup-child FormFieldGroup-child--width-6 FormFieldGroup-childLeft FormFieldGroup-childBottom">
+                                              <div class="FormFieldInput">
+                                                <div class="CheckoutInputContainer"><span class="InputContainer" data-max=""> <div class="CheckoutInput "> <div class="SignUpForm-labelHeader PaymenyHeaderData" style="opacity: 1; font-size: 13px !important; margin-bottom: -5px; margin-top: -5px;">Concepto</div>
+                                                    <div class="SignUpForm-subLabel " id="link-registration-subheader-message">Taller de piano</div> </div></span></div>
+                                              </div>
+                                            </div>
+                                            <div class="FormFieldGroup-child FormFieldGroup-child--width-6 FormFieldGroup-childRight FormFieldGroup-childBottom">
+                                             <div class="FormFieldInput">
+                                                <div class="CheckoutInputContainer"><span class="InputContainer" data-max=""> <div class="CheckoutInput "> <div class="SignUpForm-labelHeader PaymenyHeaderData" style="opacity: 1; font-size: 13px !important; margin-bottom: -5px; margin-top: -5px;">Beneficiario</div>
+                                                    <div class="SignUpForm-subLabel " id="link-registration-subheader-message">Maria de los Remedios</div> </div></span></div>
+                                              </div>
+                                            </div>
+                                            <div class="FieldError-container" style="opacity: 0; height: 0px; margin-top: 0px;"><span class="FieldError Text Text-color--red Text-fontSize--13"><span aria-hidden="true"></span></span></div>
+                                          </div>
+                                          <div class="FieldError-container" style="opacity: 0; height: 0px; margin-top: 0px;"><span class="FieldError Text Text-color--red Text-fontSize--13"><span aria-hidden="true"></span></span></div>
+                                        </fieldset>
+                                      </div>
+                                    </div>
+                                    <div class="InstallmentPlanOptionsForm InstallmentPlanOptionsForm-hidden flex-item width-12">
+                                      <div class="AnimateSinglePresence"></div>
+                                    </div>
+                       <!--             <div class="BillingInfoForm flex-item width-grow flex-container direction-column">
+                                      <div class="AnimateSinglePresence">
+                                        <div class="AnimateSinglePresenceItem">
+                                          <div>
+                                            <div class="BillingInfoForm-addressInput flex-item width-12" aria-hidden="false" style="margin-top: 0px;">
+                                              <div class="flex-container spacing-16 direction-column wrap-wrap">
+                                                <div class="flex-item width-12">
+                                                  <div class="FormFieldGroup" data-qa="FormFieldGroup-billingName">
+                                                    <div class="FormFieldGroup-labelContainer flex-container justify-content-space-between"><label for="billingName"><span class="Text Text-color--gray600 Text-fontSize--13 Text-fontWeight--500">Email</span></label></div>
+                                                    <div class="FormFieldGroup-Fieldset" id="billingName-fieldset">
+                                                      <div class="FormFieldGroup-container">
+                                                        <div class="FormFieldGroup-child FormFieldGroup-child--width-12 FormFieldGroup-childLeft FormFieldGroup-childRight FormFieldGroup-childTop FormFieldGroup-childBottom">
+                                               <div class="FormFieldInput">
+                                    <div class="CheckoutInputContainer"><span class="InputContainer" data-max=""><input class="CheckoutInput Input Input--empty" autocomplete="email" autocorrect="off" spellcheck="false" autocapitalize="none" id="email" name="email" type="text" inputmode="email" aria-invalid="false" aria-describedby="" data-1p-ignore="false" value=""></span></div>
+                                  </div>
+                                                        </div>
+                                                        <div class="FieldError-container" style="opacity: 0; height: 0px; margin-top: 0px;"><span class="FieldError Text Text-color--red Text-fontSize--13"><span aria-hidden="true"></span></span></div>
+                                                      </div>
+                                                      <div class="FieldError-container" style="opacity: 0; height: 0px; margin-top: 0px;"><span class="FieldError Text Text-color--red Text-fontSize--13"><span aria-hidden="true"></span></span></div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                            
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div> -->
+                                    <div class="SignUpForm-signUpFormContainer SignUpForm-signUpContainer--noCheckbox flex-item width-12">
+                                      <div class="AnimateSinglePresence">
+                                        <div class="AnimateSinglePresenceItem">
+                                          <div>
+                                            <div>
+                                              <div class="SignUpForm SignUpForm--expanded">
+                                                <div class="SignUpForm-headerContainer">
+                                                  <div class="SignUpForm-header"><span class="SignUpForm-headerText Text Text-color--default">
+                                                      <div class="SignUpForm-labelHeader" style="opacity: 1;">Securely save my information for 1-click checkout</div>
+                                                      <div class="SignUpForm-subLabel" id="link-registration-subheader-message">Enter your phone number to create a Link account and pay faster on IDIOMAS LD and everywhere Link is accepted.</div>
+                                                    </span></div>
+                                                </div>
+                                                <div class="AnimateSinglePresence">
+                                                  <div class="AnimateSinglePresenceItem SignUpForm-phoneInputAnimation">
+                                                    <div>
+                                                      <div class="PhoneNumberInput">
+                                                        <div class="PhoneNumberInput-inputWrapper">
+                                                          <div class="CheckoutInputContainer">
+                                                            <div class="CheckoutInputContainer-placeholderIcon CheckoutInput--hasPhoneNumberCountryCodeSelect">
+                                                              <div class="PhoneNumberCountryCodeSelect-wrapper">
+                                                                <div class="PhoneNumberCountryCodeSelect-flagIconContainer" id="flagContainer"><img class="p-FlagIcon PhoneNumberCountryCodeSelect-flagIcon" src="https://js.stripe.com/v3/fingerprinted/img/FlagIcon-MX-5e4d511837fa0f67785dc2246daaafe3.svg" alt="MX"></div>
+ 
+<select class="PhoneNumberCountryCodeSelect-select" id="countrySelect" onchange="updateFlagEmoji()">
+  <optgroup label="North America">
+    <option value="MX" data-emoji="🇲🇽">Mexico (+52)</option>
+    <option value="CA" data-emoji="🇨🇦">Canada (+1)</option>
+    <option value="US" data-emoji="🇺🇸">United States (+1)</option>
+  </optgroup>
 
-    fileSelect.addEventListener('change', fileSelectHandler, false);
+  <optgroup label="Central-South America">
+    <option value="AR" data-emoji="🇦🇷">Argentina (+54)</option>
+    <option value="BZ" data-emoji="🇧🇿">Belize (+501)</option>
+    <option value="BR" data-emoji="🇧🇷">Brazil (+55)</option>
+    <option value="CL" data-emoji="🇨🇱">Chile (+56)</option>
+    <option value="CO" data-emoji="🇨🇴">Colombia (+57)</option>
+    <option value="CR" data-emoji="🇨🇷">Costa Rica (+506)</option>
+    <option value="EC" data-emoji="🇪🇨">Ecuador (+593)</option>
+    <option value="SV" data-emoji="🇸🇻">El Salvador (+503)</option>
+    <option value="GT" data-emoji="🇬🇹">Guatemala (+502)</option>
+    <option value="HT" data-emoji="🇭🇹">Haiti (+509)</option>
+    <option value="HN" data-emoji="🇭🇳">Honduras (+504)</option>
+    <option value="NI" data-emoji="🇳🇮">Nicaragua (+505)</option>
+    <option value="PA" data-emoji="🇵🇦">Panama (+507)</option>
+    <option value="PY" data-emoji="🇵🇾">Paraguay (+595)</option>
+    <option value="PE" data-emoji="🇵🇪">Peru (+51)</option>
+    <option value="UY" data-emoji="🇺🇾">Uruguay (+598)</option>
+    <option value="VE" data-emoji="🇻🇪">Venezuela (+58)</option>
+  </optgroup>
 
-    // Is XHR2 available?
-    var xhr = new XMLHttpRequest();
-    if (xhr.upload) {
-      // File Drop
-      fileDrag.addEventListener('dragover', fileDragHover, false);
-      fileDrag.addEventListener('dragleave', fileDragHover, false);
-      fileDrag.addEventListener('drop', fileSelectHandler, false);
-    }
-  }
+  <optgroup label="Europe">
+    <option value="ES" data-emoji="🇪🇸">Spain (+34)</option>
+  </optgroup>
+</select>
+                                                  
+                                                                <svg class="InlineSVG Icon PhoneNumberCountryCodeSelect-chevron Icon--xs Icon--square" focusable="false" height="16" viewBox="0 0 16 16" width="16">
+                                                                  <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16" fill-rule="evenodd"></path>
+                                                                  <path d="M10.793 6.293 8 9.086 5.207 6.293a1 1 0 0 0-1.414 1.414l3.5 3.5a1 1 0 0 0 1.414 0l3.5-3.5a1 1 0 1 0-1.414-1.414" fill-rule="evenodd" fill="#ffff"></path>
+                                                                </svg>
+                                                              </div>
+                                                            </div><span class="InputContainer" data-max=""><input class="CheckoutInput PhoneNumberInput-input SignUpForm-phoneInput CheckoutInput--hasPlaceholderIcon CheckoutInput--hideNativeAutofill Input Input--empty" autocomplete="undefined" autocorrect="off" spellcheck="false" id="search-phoneNumber" name="phoneNumber" type="tel" aria-required="false" data-lpignore="true" data-form-type="other" aria-label="Phone number" placeholder="55 1234 5678" maxlength="14" value="" oninput="formatPhoneNumber(this)"></span>
+                                                          </div>
+                                                          <div class="PhoneNumberInput-dynamicIcons">
+                                                            <div class="Optional">Requerido</div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                            
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                  
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+           
+                              </div>
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                      <div id="oxxo-tab-panel" role="tabpanel" aria-labelledby="card-tab" style="display: none">
 
-  function fileDragHover(e) {
-    var fileDrag = document.getElementById('file-drag');
+      <div class="BillingInfoForm flex-item width-grow flex-container direction-column">
+                                      <div class="AnimateSinglePresence">
+                                        <div class="AnimateSinglePresenceItem">
+                                          <div>
+                                            <div class="BillingInfoForm-addressInput flex-item width-12" aria-hidden="false" style="margin-top: 0px;">
+                                              <div class="flex-container spacing-16 direction-column wrap-wrap">
+                                                <div class="flex-item width-12">
+                                                  <div class="FormFieldGroup" data-qa="FormFieldGroup-billingName">
+                                                    <div class="FormFieldGroup-labelContainer flex-container justify-content-space-between"><label for="billingName"><span class="Text Text-color--gray600 Text-fontSize--13 Text-fontWeight--500">Email</span></label></div>
+                                                    <div class="FormFieldGroup-Fieldset" id="billingName-fieldset">
+                                                      <div class="FormFieldGroup-container">
+                                                        <div class="FormFieldGroup-child FormFieldGroup-child--width-12 FormFieldGroup-childLeft FormFieldGroup-childRight FormFieldGroup-childTop FormFieldGroup-childBottom">
+                                               <div class="FormFieldInput">
+                                    <div class="CheckoutInputContainer"><span class="InputContainer" data-max=""><input class="CheckoutInput Input Input--empty" autocomplete="email" autocorrect="off" spellcheck="false" autocapitalize="none" id="email" name="email" type="text" inputmode="email" aria-invalid="false" aria-describedby="" data-1p-ignore="false" value=""></span></div>
+                                  </div>
+                                                        </div>
+                                                        <div class="FieldError-container" style="opacity: 0; height: 0px; margin-top: 0px;"><span class="FieldError Text Text-color--red Text-fontSize--13"><span aria-hidden="true"></span></span></div>
+                                                      </div>
+                                                      <div class="FieldError-container" style="opacity: 0; height: 0px; margin-top: 0px;"><span class="FieldError Text Text-color--red Text-fontSize--13"><span aria-hidden="true"></span></span></div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                            
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                               </div>
+                              
+                              
+                              
+                              
+                              
+                              
+                            </div>
+                          </div>
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                        </div>
+                      </div>
+                      <div class="PaymentForm-confirmPaymentContainer mt4 flex-item width-grow">
+                        <div class="ConfirmPayment">
+                          <div class="AnimateSinglePresence">
+                            <div class="AnimateSinglePresenceItem">
+                              <div class="flex-item width-12"></div>
+                            </div>
+                          </div>
+                          <div class="flex-item width-12"></div>
+                          <div class="flex-item width-12">
+          <button class="SubmitButton SubmitButton--incomplete " id="payBtn" type="submit" style="background-color: rgb(0, 116, 212); color: rgb(255, 255, 255); "  onclick="generateOrder()" status="waiting"> <!-- SubmitButton--clickable-->
+                              <div class="SubmitButton-Shimmer" style="background: linear-gradient(to right, rgba(0, 116, 212, 0) 0%, rgb(58, 139, 238) 50%, rgba(0, 116, 212, 0) 100%);"></div>
+                              <div class="SubmitButton-TextContainer"><span class="SubmitButton-Text SubmitButton-Text--current Text Text-color--default Text-fontWeight--500 Text--truncate" id="waitingStatus">Pagar <span class="CurrencyAmount">MX${{course.cost}}.00</span></span>
+                                <span class="SubmitButton-Text SubmitButton-Text--pre Text Text-color--default Text-fontWeight--500 Text--truncate"  id="processingStatus">Procesando...</span>
+                                
+                              </div>
+                          <div class="SubmitButton-IconContainer" style="margin-top: -5px;">
+                                <div class="SubmitButton-Icon SubmitButton-Icon--pre" id="payIco1">
+                                  <div>
+                                    <div class="Icon Icon--md Icon--square"><svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                                        <path d="M3 7V5a5 5 0 1 1 10 0v2h.5a1 1 0 0 1 1 1v6a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2V8a1 1 0 0 1 1-1zm5 2.5a1 1 0 0 0-1 1v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-1-1zM11 7V5a3 3 0 1 0-6 0v2z" fill="#ffffff" fill-rule="evenodd"></path>
+                                      </svg></div>
+                                  </div>
+                                </div>
+                                <div class="SubmitButton-Icon SubmitButton-SpinnerIcon SubmitButton-Icon--pre" id="payIco2">
+                                  <div>
+                                    <div class="Icon Icon--md Icon--square"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                                        <ellipse cx="12" cy="12" rx="10" ry="10" style="stroke: rgb(255, 255, 255);"></ellipse>
+                                      </svg></div>
+                                  </div>
+                                </div>
+                              </div>
+                     <!--         <div class="SubmitButton-CheckmarkIcon">
+                                <div>
+                                  <div class="Icon Icon--md"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="14" focusable="false">
+                                      <path d="M 0.5 6 L 8 13.5 L 21.5 0" fill="transparent" stroke-width="2" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg></div>
+                                </div>
+                              </div> -->
+                            </button></div>
+                   
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+ 
+              </form>
+            </div>
+          </main>
+          <footer class="App-Footer Footer">
+          
+            <div class="Footer-Links"><a class="Link Link--primary" href="https://stripe.com/legal/end-users" target="_blank" rel="noopener"><span class="Text Text-color--gray400 Text-fontSize--12 Text-fontWeight--400">Terms</span></a><a class="Link Link--primary" href="https://stripe.com/privacy" target="_blank" rel="noopener"><span class="Text Text-color--gray400 Text-fontSize--12 Text-fontWeight--400">Contact</span></a></div>
+          </footer>
+        </div>
+ 
+ 
+ 
+ </div></div></div>
 
-    e.stopPropagation();
-    e.preventDefault();
 
-    fileDrag.className = (e.type === 'dragover' ? 'hover' : 'modal-body file-upload');
-  }
 
-  function fileSelectHandler(e) {
-    // Fetch FileList object
-    var files = e.target.files || e.dataTransfer.files;
+<script>
+  var app = angular.module('app', []);
+app.controller('main', function($scope) {
+   $scope.courses = [
+    { type: 'Curso por ZOOM', cost: 300, description: '' },
+    { type: 'Curso Asíncrono', cost: 150, description: '' },
+    { type: 'Curso Avanzado', cost: 1500, description: '' }
+  ];
+  $scope.course = {
+    type: '',
+    cost: ''
+  };
+  $scope.changeCourse = function() {
+    $scope.course = $scope.selectedCourse;
+  };
+  
+  $scope.selectedMonths = 1; 
+  $scope.totalCost = 0;  
 
-    // Cancel event and hover styling
-    fileDragHover(e);
+  $scope.changeMonth = function() {
+    $scope.updateTotalCost();
+  };
 
-    // Process all File objects
-    for (var i = 0, f; f = files[i]; i++) {
-      parseFile(f);
-      convertFileToBase64(f);
-    }
-  }
+ 
+  $scope.updateTotalCost = function() {  
+      $scope.selectedCourse.cost = $scope.selectedCourse.cost * $scope.selectedMonths;
+  };
+})
+
+
+
+
+function transferPay() {
+  // Quitar la clase is-selected del botón OXXO y agregarla al botón de Transferencia
+  document.getElementById("oxxo-tab").classList.remove("Tabs-TabListItem--is-selected");
+  document.getElementById("card-tab").classList.add("Tabs-TabListItem--is-selected");
+  document.getElementById("paymentContainer").style.height = "540px";
+
+  // Mostrar el panel de Transferencia y ocultar el panel de OXXO con animación
+  $('#oxxo-tab-panel').slideUp();
+  $('#card-tab-panel').slideDown();
+}
+
+function oxxoPay() {
+  // Quitar la clase is-selected del botón de Transferencia y agregarla al botón OXXO
+  document.getElementById("card-tab").classList.remove("Tabs-TabListItem--is-selected");
+  document.getElementById("oxxo-tab").classList.add("Tabs-TabListItem--is-selected");
+  document.getElementById("paymentContainer").style.height = "320px";
+
+  // Mostrar el panel de OXXO y ocultar el panel de Transferencia con animación
+  $('#card-tab-panel').slideUp();
+  $('#oxxo-tab-panel').slideDown();
+}
+
+ function generateOrder(){
+   if(document.getElementById("payBtn").getAttribute("status") == "ready"){
+     document.getElementById("waitingStatus").classList.remove("SubmitButton-Text--current");
+   document.getElementById("waitingStatus").classList.add("SubmitButton-Text--pre");
+   document.getElementById("processingStatus").classList.remove("SubmitButton-Text--pre");
     
-    function convertFileToBase64(file) {
-    var reader = new FileReader();
-    reader.onloadend = function() {
-      var base64image = reader.result.split(',')[1];
-      document.getElementById("imageData").value = base64image;
-    };
-    reader.readAsDataURL(file);
-  }
+     document.getElementById("processingStatus").classList.add("SubmitButton-Text--current");
 
-  // Output
-  function output(msg) {
-    // Response
-    var m = document.getElementById('messages');
-    m.innerHTML = msg;
-  }
-
-  function parseFile(file) {
-
-    console.log(file.name);
-    output(
-      '<br><strong style="font-size: 12px;">' + encodeURI(file.name) + '</strong>'
-    );
+     document.getElementById("payIco1").classList.remove("SubmitButton-Icon--current");
+    document.getElementById("payIco2").classList.remove("SubmitButton-Icon--pre");
     
-    // var fileType = file.type;
-    // console.log(fileType);
-    var imageName = file.name;
+     document.getElementById("payIco2").classList.add("SubmitButton-Icon--current");
+   }
+  } 
 
-    var isGood = (/\.(?=gif|jpg|png|jpeg)/gi).test(imageName);
-    if (isGood) {
-      //document.getElementById('start2').classList.add("hidden");
-      document.getElementById('start2').style.display = 'none';
-      document.getElementById('response').classList.remove("hidden");
-       document.getElementById('file-send-btn').style.display = 'block';
-      document.getElementById('notimage').classList.add("hidden");
-      // Thumbnail Preview
-      document.getElementById('file-image').classList.remove("hidden");
-      document.getElementById('file-image').src = URL.createObjectURL(file);
+ 
+
+ function formatPhoneNumber(input) {
+    // Solo permitir números y eliminar espacios
+    let phoneNumber = input.value.replace(/\D/g, '');
+   
+
+    // Limitar el número de dígitos a 10
+    if (phoneNumber.length > 10) {
+      phoneNumber = phoneNumber.slice(0, 10);
+    }else if(phoneNumber.length == 10){
+       document.getElementById("payBtn").classList.remove("SubmitButton--incomplete");
+  document.getElementById("payBtn").classList.add("SubmitButton--clickable");
+      document.getElementById("payIco1").classList.remove("SubmitButton-Icon--pre");
+  document.getElementById("payIco1").classList.add("SubmitButton-Icon--current");
+      document.getElementById("payBtn").setAttribute("status", "ready")
+    }else{
+      document.getElementById("payBtn").classList.remove("SubmitButton--clickable");
+  document.getElementById("payBtn").classList.add("SubmitButton--incomplete");
+       document.getElementById("payIco1").classList.remove("SubmitButton-Icon--current");
+  document.getElementById("payIco1").classList.add("SubmitButton-Icon--pre");
+       document.getElementById("payBtn").setAttribute("status", "")
     }
-    else {
-      document.getElementById('file-image').classList.add("hidden");
-      document.getElementById('notimage').classList.remove("hidden");
-      document.getElementById('start2').classList.remove("hidden");
-      document.getElementById('response').classList.add("hidden");
-      document.getElementById("file-upload-form").reset();
-    }
+
+    // Aplicar formato: 55 1234 5678
+    let formattedPhoneNumber = phoneNumber;
+    if (phoneNumber.length > 6) {
+      formattedPhoneNumber = phoneNumber.replace(/(\d{2})(\d{4})(\d{0,4})/, '$1 $2 $3');
+    } else if (phoneNumber.length > 2) {
+      formattedPhoneNumber = phoneNumber.replace(/(\d{2})(\d{0,4})/, '$1 $2');
+    } 
+
+    // Establecer el valor formateado en el input
+    input.value = formattedPhoneNumber;
   }
 
 
-  // Check for the various File API support.
-  if (window.File && window.FileList && window.FileReader) {
-    Init();
-  } else {
-    document.getElementById('file-drag').style.display = 'none';
+ 
+
+function updateFlagEmoji() {
+    const select = document.getElementById("countrySelect");
+    const flagContainer = document.getElementById("flagContainer");
+
+    // Obtiene el emoji desde el atributo data-emoji de la opción seleccionada
+    const selectedOption = select.options[select.selectedIndex];
+    const emoji = selectedOption.getAttribute("data-emoji");
+    flagContainer.textContent = emoji;
+  document.getElementById("flagContainer").style.marginLeft = "-5px";
+  }
+
+
+
+
+/*
+const clientId = "sb";
+const components = "buttons";
+let buttons;
+
+function cleanupBeforeReload() {
+  if (buttons) {
+    buttons.close();
   }
 }
-ekUpload();
-  
-  
-  function uploadImage() {
-    var base64Data = document.getElementById("imageData").value;
-   /*  if (base64Data) {
-        // Aquí envías el `base64Data` a tu servidor
-        var requestData = {
-            action: "postPaymentImage",
-            token: localStorage.getItem('MStoken'),
-            blob: base64Data
-        };
 
-        var config = {
-            headers: {
-                "Content-Type": "text/plain;charset=utf-8"
-            },
-            followRedirects: true, 
-        };
-
-        $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData, config)
-            .then(function(response) {
-                document.getElementById("imageData").value = '';
-            })
-            .catch(function(error) {
-                console.error("Error uploading audio:", error);
+function loadAndRender(transactionType) {
+  if (transactionType === "order") {
+    window
+      .paypalLoadScript({
+        "client-id": clientId,
+        vault: false,
+        components
+      })
+      .then(() => {
+        render({
+        /*  onClick: function(data, actions) {
+            document.getElementById("paymentContainer").style.display = "none";
+          }
+               });
+      });
+  } else {
+    window
+      .paypalLoadScript({
+        "client-id": clientId,
+        vault: true,
+        intent: "subscription",
+        components
+      })
+      .then(() => {
+        render({
+          style: {
+            shape: "rect",
+            color: "gold",
+            layout: "vertical",
+            label: "subscribe"
+          },
+          createSubscription: function (data, actions) {
+            return actions.subscription.create({
+              plan_id: "P-3RX065706M3469222L5IFM4I"
             });
-    } else {
-        console.log("No audio data to upload.");
-    }*/
-    document.getElementById("app").style.display = "none";
-    document.getElementById("sendStatus").style.display = "block";
+          },
+          
+          onClick: function(data, actions) {
+            alert("Ingrese datos de tarjeta");
+          }
+          
+          
+        }); 
+      });
   }
-  
-  
-  var button = document.querySelector('#google-pay-button');
-var paymentsClient = new google.payments.api.PaymentsClient({
-  environment: 'TEST' // Or 'PRODUCTION'
-});
+}
 
-braintree.client.create({
-  authorization: 'sandbox_d52wbnyb_7t5bdrz6q6fys95x'
-}, function (clientErr, clientInstance) {
-  braintree.googlePayment.create({
-    client: clientInstance,
-    googlePayVersion: 2
-    //googleMerchantId: 'merchant-id-from-google' // Optional in sandbox; if set in sandbox, this value must be a valid production Google Merchant ID
-  }, function (googlePaymentErr, googlePaymentInstance) {
-    paymentsClient.isReadyToPay({
-      // see https://developers.google.com/pay/api/web/reference/object#IsReadyToPayRequest
-      apiVersion: 2,
-      apiVersionMinor: 0,
-      allowedPaymentMethods: googlePaymentInstance.createPaymentDataRequest().allowedPaymentMethods,
-      existingPaymentMethodRequired: true // Optional
-    }).then(function(response) {
-      if (response.result) {
-        button.addEventListener('click', function (event) {
-          event.preventDefault();
+const debounce = (func, wait) => {
+  let timeout;
 
-          var paymentDataRequest = googlePaymentInstance.createPaymentDataRequest({
-            transactionInfo: {
-              currencyCode: 'USD',
-              totalPriceStatus: 'FINAL',
-              totalPrice: '10.00' // Your amount
-            }
-          });
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
 
-          // We recommend collecting billing address information, at minimum
-          // billing postal code, and passing that billing postal code with all
-          // Google Pay card transactions as a best practice.
-          // See all available options at https://developers.google.com/pay/api/web/reference/object
-          var cardPaymentMethod = paymentDataRequest.allowedPaymentMethods[0];
-          cardPaymentMethod.parameters.billingAddressRequired = true;
-          cardPaymentMethod.parameters.billingAddressParameters = {
-            format: 'FULL',
-            phoneNumberRequired: true
-          };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};
 
-          paymentsClient.loadPaymentData(paymentDataRequest).then(function(paymentData) {
-            googlePaymentInstance.parseResponse(paymentData, function (err, result) {
-              if (err) {
-                // Handle parsing error
-                console.log(err.message);
-              }
-  console.log(result);
-              // Send result.nonce to your server
-              // result.type may be either "AndroidPayCard" or "PayPalAccount", and
-              // paymentData will contain the billingAddress for card payments
-            });
-          }).catch(function (err) {
-            // Handle errors
-            console.log(err.message);
-          });
-        });
-      }
-    }).catch(function (err) {
-      // Handle errors
-      console.log(err.message);
-    });
+const debouncedLoadAndRender = debounce(loadAndRender, 500);
+
+function onClickCallback(event) {
+  cleanupBeforeReload();
+  debouncedLoadAndRender(event.target.value);
+}
+
+
+
+function render(options) {
+  buttons = paypal.Buttons(options);
+  buttons.render("#paypal-button-container").catch((err) => {
+    console.warn(
+      "Warning - Caught an error when attempting to render component",
+      err
+    );
   });
+}
 
-  // Set up other Braintree components
-});
+loadAndRender("order");
+
+*/
 </script>
