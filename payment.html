@@ -1,1904 +1,838 @@
-<html>
-
-<head>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
-<link rel="icon" href="https://lh3.googleusercontent.com/d/1k9LA88h-FVVn9EeryBRVBrtc5tPl92CK" type="image/x-icon">
-    <title>Mozart Academy</title>
-
-  
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  
-   <link rel="stylesheet" href="https://unpkg.com/swiper@9.2.4/swiper-bundle.min.css">
-   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
-  
-   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
-
+ <head>
+  <title>Taller de piano</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+ 
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js"></script>
+   <script src="https://pay.google.com/gp/p/js/pay.js"></script>
+<script src="https://js.braintreegateway.com/web/3.90.0/js/client.min.js"></script>
+<script src="https://js.braintreegateway.com/web/3.90.0/js/google-payment.min.js"></script>
 </head>
-  
 
-<style>
-
-  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
-  
-  body {
-  position: relative;
+<style> 
+  *,
+*:after,
+*:before{
+  padding: 0;
+  margin:0;
+  box-sizing: border-box;
 }
+
+#app{
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+  margin: auto;
+}
+
+h1, h2, h3, h4, p , label, button{
+  font-family: BentonSans,Benton Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+  color: #4a5568;
+}
+
+p, label{
+  color: #62748e;
+}
+
+.fs_xs{
+  font-size: 1.2rem;
+}
+
+
+.upper_case{
+  text-transform: uppercase;
+}
+
+
+
+.tab{
+  background-color: #f7fafc;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+  grid-column: 1/4;
+}
+
+.container{
+  max-width: 80%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  margin: auto;
+}
+
+.wrapper{
+  position: relative;
+  width: 100%;
+  align-self: stretch;
+}
+  .wrapper img{
+  max-width: 100%;
+  height: 230px;
+  object-fit: cover;
+  object-position: center;
+  background-color: #fff;
+  width: 100%;
+}
+  .price{
+    padding: 10px 20px; 
+    margin-top: 170px; 
+    position: absolute; 
+    color: white; 
+    text-shadow: 1px 2px 3px black, 0px 8px 13px black, 0px 18px 23px black!important; 
+  }
+.option{
+  border: rgba(0, 0, 0, 0.08) 1px solid;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #edf2f7;
+  transition: all 500ms ease-in-out;
+  overflow: hidden;
+  height: 100%;
+}
+
+.option:hover{
+ box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+
+
+.details{
+  padding: 1rem;
+  margin-bottom: -20px;
+}
+
+.detail_button{
+  cursor: pointer;
+  background-color: transparent;
+  color: #62748e;
+  font-weight: 500;
+  border: 1px solid #62748e;
+  border-radius: 5px;
+  padding: .5rem;
+  margin-top: 1rem;
+}
+
+
 
 input {
-  background-color: white !important;
-  color: black !important;
-  margin-bottom: 5px;
+  opacity: 0;
+  width: 0px;
 }
-  
-  select{
-    background-color:  white!important;
-  color: black !important;
-    margin-bottom: 5px;
+
+input[type="radio"]:checked + .option{
+  background-color: #f7f3fb;
+  border: #79589f 1px solid;
+}
+
+input[type="radio"]:checked + .option h3{
+  color: #79589f;
+}
+
+
+
+@media screen and (max-width: 900px) {
+  .container{
+    grid-template-columns: repeat(2, 1fr)
   }
-
-#playstore-logo {
-  width: 200px!important;
-  margin: 6%!important;
+  .option{
+    grid-template-rows: 50% 50%;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
 }
 
+@media screen and (max-width: 760px) {
+  .container{
+    grid-template-columns: 1fr;
+  }
+}
   
-
-
-.card {
-  background-color: white !important;
+  .nav-pills .nav-link.active {
+    background-color: black;
+    color: white;
 }
-
-
-
-.cardp {
-  perspective: 150rem;
-  -moz-perspective: 150rem;
-  position: relative;
-  width: 50%;
-  transition: all ease-in-out 400ms;
-  cursor: pointer;
+  
+.whatsapp-button {
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 12px 20px;
+  background: #25D366;
+  text-align: left;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  border-radius: 12px;
+  box-shadow: rgba(255, 255, 255, 0.25) 0 0 0 3px inset;
+  transition: 0.3s ease-out;
 }
-
-.cardp:hover {
-  transform: scale(1.05);
-}
-
-.cardp:active {
-  transform: translateY(-1px);
-}
-
-.card__side {
-  transition: all 0.8s ease;
-  color: black;
-  font-size: 2rem;
-  position: absolute;
-  top: 0;
-  left: -10px;
-  height: 20vh;
-  width: 20vh;
-  backface-visibility: hidden;
-  box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.4);
-  border-radius: 50%;
-}
-
-.card__side--front {
-  background-color: whiite;
-  position: relative;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.card__side--back {
-  background-color: white;
-  transform: rotateY(180deg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.showGreen {
-  transform: rotateY(-180deg);
-}
-
-.showRed {
-  transform: rotateY(0);
-}
-
-.text-box {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  width: 100%;
-  font-size: 24;
-  font-weight: 700;
-}
-
-
-#front-1 {
-  background-image: 
-    url("https://lh3.googleusercontent.com/d/1GGIRHZ6w7Hl-u51og30iqCpOkT3Xc8EC");
-}
-
-#back-1 {
-  background-image: 
-    url("https://lh3.googleusercontent.com/d/1wvSFXvMlQKbyYvqV6L0oFefKFtW0D3lq");
-}
-
-
-
-
-footer {
-  background: black;
-  padding: 15px;
-  position: static!important;
-}
-
-hr {
-  border-top: 1px solid #888!important;
-  border-bottom: 1px solid rgba(0,0,0,0.2)!important;
-}
-
-#services{
-  text-align: center!important;
-  margin-top: 3%!important;
-  margin-bottom: 3%!important;
-}
-
-
-
-.video-background {
-  text-align: center;
-  margin-top: 55px;
-  background: #000;
-  position: relative; /* Cambiado de 'fixed' a 'relative' para limitar su tamaño */
-  height: 500px; /* Ajusta la altura al tamaño deseado */width: 100%;
-  overflow: hidden;
-  z-index: -1;
-}
-
-.video-foreground,
-.video-background iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-#vidtop-content {
-  top: 0;
-  color: #fff;
-}
-
-.vid-info {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 33%;
-  background: rgba(0,0,0,0.3);
-  color: #fff;
-  padding: 1rem;
-  font-family: Avenir, Helvetica, sans-serif;
-}
-
-.vid-info h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-top: 0;
-  line-height: 1.2;
-}
-
-.vid-info a {
-  display: block;
+.whatsapp-button, .whatsapp-button:hover, .whatsapp-button:focus, .whatsapp-button:active {
   color: #fff;
   text-decoration: none;
-  background: rgba(0,0,0,0.5);
-  transition: .6s background;
-  border-bottom: none;
-  margin: 1rem auto;
-  text-align: center;
 }
-
-@media (min-aspect-ratio: 16/9) {
-  .video-foreground {
-    height: 300%;
-    top: -100%;
-  }
+.whatsapp-button:hover, .whatsapp-button:focus {
+  background: #22bf5b;
 }
-
-@media (max-aspect-ratio: 16/9) {
-  .video-foreground {
-    width: 300%;
-    left: -100%;
-  }
+.whatsapp-button:focus {
+  outline: none;
 }
-
-@media all and (max-width: 600px) {
-  .vid-info {
-    width: 50%;
-    padding: .5rem;
-  }
-  .vid-info h1 {
-    margin-bottom: .2rem;
-  }
+.whatsapp-button:active {
+  background: #1ea951;
+  transition: none;
 }
-
-@media all and (max-width: 500px) {
-  .vid-info .acronym {
-    display: none;
-  }
+.whatsapp-button p {
+  margin: 0;
 }
-
-
-
-#fashion {
-  position: absolute;
-  min-height: 90vh;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
+.whatsapp-button span {
+  display: block;
+  font-size: 14px;
+  line-height: 18px;
 }
-
-#fashion h2 { 
-  font-family: Century Schoolbook, Century Schoolbook L, Georgia, serif;
-  font-size: 12vmin;
-  text-align: center;
-  margin: 2rem 3rem 0;
-  mix-blend-mode: overlay;
-  color: #fff;
-  font-weight: 100;
-}
-  
-  
-
-
-.strong-shadow {
-  text-shadow: 1px 2px 3px black, 0px 8px 13px black, 0px 18px 23px black!important;  
-}
-
- .nav-item{
-    font-size: 14.2px;
-    margin: 0 10px;
-     font-family: 'Poppins', sans-serif;
-   font-weight: 400;
-  }
- .nav-item a{
-     color: black !important;
-  }
- .nav-item a:hover{
-   color: #0162ff !important;
-  }
-  .nav-item a.active{
-   color: #0162ff !important;
-  } 
-
-
-
-.row--center{
-  max-width: 1000px;
-  margin: 0 auto;
-}
-.row--margin{
-  margin-top:45px;
-}
-
-.row__title{
-  text-align: center;
-  font-size: 26px;
-  font-weight: 400;
-  margin-top: 0px;
-}
-
-.row__sub{
-  text-align: center;
-  font-size: 18px;
-  font-weight: 400;
-  margin: 0px; 
-  color: black;
-}
-
-   .swiper-container-main{
-     box-shadow:  0 4px 8px 0px rgba(0,0,0,0.2);
-  }
-  
-  .card-deck .card{
-     box-shadow:  0 4px 8px 0px rgba(0,0,0,0.2);
-  }
-
-
-.price-box{
-  padding: 0px 25px;  
-}
-
-.price-box__wrap{
-  background-color: white !important;;
-  border-radius:6px;
-  box-shadow:  0 4px 8px 0px rgba(0,0,0,0.2); /*0px 22px 20px -10px rgba(0, 0, 0,0.2)*/
-  padding: 35px 35px 40px 35px;
-  text-align:center;
-  transition: all 0.4s;
-  -webkit-transition: all 0.4s;
-  -moz-transition: all 0.4s;
-  -ms-transition: all 0.4s;
-  -o-transition: all 0.4s;
-}
-
-.price-box__img{
-  display: inline-block;
-}
-
-.price-box__img{
-  width:130px;
-  height:130px;
-  border-radius: 15%;
-  margin-bottom: 2.5vw;
-  background-position: center;
-    background-size:cover;
-  background-repeat:no-repeat;
-}
-
-
-
-.price-box--purple .price-box__img{
-  background-image: url("https://lh3.googleusercontent.com/d/1W0dBQ1trjKR1LZ0ZAvnYvTL4y_5m-fF-");
-
-}
-
-
-.price-box--violet .price-box__img{
-  background-image: url("https://lh3.googleusercontent.com/d/1UHjwR61Dwcbz3XnrrcJ9Y_c6hmMGr2Uh");
-
-}
-
-.price-box--blue .price-box__img{
-  background-image: url("https://lh3.googleusercontent.com/d/1qIbUXsTSPmX6DyCnQTLmGhflYxaI4iOz");
-
-}
-
-.price-box__title{
-  font-size:22px;
-  letter-spacing:1px;
-  margin-bottom:4px;
-}
-
-.price-box__people{
-  font-size:12px;
-  color:black;
-  font-weight: 300;
-  letter-spacing:1px;
-}
-.price-box__discount{
-  font-size: 28px;
+.whatsapp-button strong {
+  display: block;
   font-weight: 700;
-  margin-top: 20px;
-  margin-bottom: 0;
 }
-
-.price-box__dollar {
-    font-size: 18px;
-    font-weight: 400;
-    vertical-align: top;
-    margin-right: 4px;
+.whatsapp-button svg {
+  width: 36px;
+  height: 36px;
+  fill: currentcolor;
+  flex-shrink: 0;
+  margin-right: 8px;
 }
+  
+  
+  
 
-.price-box--purple .price-box__dollar{
-  color: #8a3aff;
+.uploader {
+  text-align: center;
+  display: block;
+  clear: both;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 600px;
 }
-
-.price-box--violet .price-box__dollar{
-  color: #6f79ff;
+.uploader label {
+  float: left;
+  clear: both;
+  width: 100%;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  background: #fff;
+  border-radius: 7px;
+  border: 3px solid #eee;
+  transition: all 0.2s ease;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
-
-.price-box--blue .price-box__dollar{
-  color: #3a9fff;
+.uploader label:hover {
+  border-color: #454cad;
 }
-
-.price-box__discount--light{
-  font-weight: 400;
-  font-size: 20px;
-  margin-left: 3px;
+.uploader label.hover {
+  border: 3px solid #454cad;
+  box-shadow: inset 0 0 0 6px #eee;
 }
-
-.price-box__price {
-    margin-top: 3px;
-    font-size: 15px;
-    color: #8198ae;
-    letter-spacing: 1px;
-    margin-bottom: 0;
-    font-weight: 300;
-
+.uploader label.hover #start i.fa {
+  transform: scale(0.8);
+  opacity: 0.3;
 }
-
-.price-box__feat {
-    margin-top: 30px;
-    font-size: 16px;
+.uploader #start {
+  float: left;
+  clear: both;
+  width: 100%;
 }
-
-.price-box__list {
-    text-align: left;
-    padding-left: 30px;
-    margin: 0;
-    list-style: none;
+.uploader #start.hidden {
+  display: none;
 }
-
-.price-box__list-el{
-  position: relative;
-  margin-bottom: 8px;
-  font-weight: 300;
+.uploader #start i.fa {
+  font-size: 50px;
+  margin-bottom: 1rem;
+  transition: all 0.2s ease-in-out;
 }
-
-.price-box__list-el:before{
-  content: "✓";
-  position: absolute;
-  left: -25px;
-  font-size: 18px;
-  top: -4px;
+.uploader #response {
+  float: left;
+  clear: both;
+  width: 100%;
 }
-
-.price-box--purple .price-box__list-el:before{
-  color: #8a3aff;
+.uploader #response.hidden {
+  display: none;
 }
-
-.price-box--violet .price-box__list-el:before{
-  color: #6f79ff;
+.uploader #response #messages {
+  margin-bottom: 0.5rem;
 }
-
-.price-box--blue .price-box__list-el:before{
-  color: #3a9fff;
-}
-
-.price-box__wrap:hover {
-  backface-visibility: hidden;
-  transform: scale(1.05, 1.05);
-  box-shadow: 0px 30px 18px -8px rgba(0, 0, 0,0.1);
-}
-
-
-
-
-
-
-.price-box__wrap:hover .btn {
-  box-shadow: 0px 25px 18px -6px rgba(0, 0, 0,0.2);
-}
-
-.btn--revert{
-    background-color:transparent;
-    color: #8198ae;
-    box-shadow: none;
-    border:1px solid #c9d9e9;
-}
-
-.btn--revert:hover{
-    background-color:transparent;
-    color: #1f4568;
-    box-shadow: none;
-    border:1px solid #8198ae;
-}
-
-
-.btn--purple {
-    background-color: #8a3aff;
-}
-
-.btn--purple:hover{
-    background-color: #b284f6;
-}
-
-.btn--violet {
-    background-color: #6f79ff;
-}
-.btn--violet:hover {
-    background-color: #878ef3;
-}
-
-.btn--blue {
-    background-color: #3a9fff;
-}
-.btn--blue:hover {
-    background-color: #63b2fc;
-}
-.btn--width{
-  width: 120px;
-}
-
-.btn--white{
+.uploader #file-image {
+  display: inline;
+  /*margin: 0 auto 0.5rem auto;
+  width: auto;
+  height: auto;
+  max-width: 100px;*/
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  object-position: center;
   background-color: #fff;
-  border: 1px solid #ededed;
-  color: #8198ae;
 }
-
-.btn--white:hover{
-  background-color: #fff;
-  color: #8198ae;
+.uploader #file-image.hidden {
+  display: none;
 }
-
-.price-box__btn {
-    position: absolute;
-    bottom: -17px;
-    left: 50%;
-    margin-left: -55px;
+.uploader #notimage {
+  display: block;
+  float: left;
+  clear: both;
+  width: 100%;
 }
-
-.row__sub--light{
-  color: #aec0d2;
-}
-.item__img{
-  width:25px;
-  margin-right:10px;
-}
-
-.sect{
-  padding: 40px 0;
-  position: relative;
-
+.uploader #notimage.hidden {
+  display: none;
 }
 
 
-.contact-info{
-  background-image: url("https://i.ibb.co/yQT891P/Copia-de-Whats-App-Image-2023-01-05-at-14-43-22-2.jpg");
-  background-position: center; 
-  background-repeat: no-repeat; 
-  background-size: contain;
+.uploader input[type=file] {
+  display: none;
 }
-
-
-
-.footer__title{
-  font-size: 18px;
-
-display: inline-block;
-line-height: 18px;
-vertical-align: middle;
-  color:#3a9fff;
+.uploader div {
+  margin: 0 0 0.5rem 0;
+  color: #5f6982;
 }
-
-.footer__light{
-   color:#fff;
-}
-
-
-.isoc {
-  vertical-align: 0.6em;
-}
-
-
-  .modal-container {
-    position: fixed;
-    display: table;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    transform: scale(0);
-    
-  }
-  
-
-  .modal-container.four {
-     z-index: 10;
-    transform: scale(1);
-  }
-
-  .modal-container.four .modal-background .modal {
-    animation: blowUpModal 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-  }
-  .modal-container.four + body {
-    z-index: 1;
-    animation: blowUpContent 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-  }
-  .modal-container.four.out .modal-background .modal {
-    animation: blowUpModalTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-  }
-  .modal-container.four.out + body {
-    animation: blowUpContentTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-  }
-
-  .modal-container .modal-background {
-    display: table-cell;
-    background: rgba(0, 0, 0, 0.8);
-    text-align: center;
-    vertical-align: middle;
-  }
-  .modal-container .modal-background .modal {
-    padding: 50px;
-    display: inline-block;
-    border-radius: 3px;
-    font-weight: 300;
-    position: relative;
-  }
-  
-  
-  
-
-  @keyframes blowUpContent {
-    0% {
-      transform: scale(1);
-      opacity: 1;
-    }
-    99.9% {
-      transform: scale(2);
-      opacity: 0;
-    }
-    100% {
-      transform: scale(0);
-    }
-  }
-  @keyframes blowUpContentTwo {
-    0% {
-      transform: scale(2);
-      opacity: 0;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
-  @keyframes blowUpModal {
-    0% {
-      transform: scale(0);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-  @keyframes blowUpModalTwo {
-    0% {
-      transform: scale(1);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(0);
-      opacity: 0;
-    }
-  }
-
-  .modal-hidden .modal-background {
-    background: transparent;
-  }
-  
-  
-  
-
-
-.social-bar {
-    display: flex;
-   /* border-radius: 10px;
-    background: black;
-    box-shadow: 0 0 60px rgba(93, 70, 232, 0.15);
-  border: 1px solid#ebe9e9;*/
-  transform: scale(0.8) translate(0, 1px);
-  margin-botom: -100px;
-   
-}
-
-
-.social-icons a {
-    border-radius: 50px;
-    color: #3f345f;
-    display: inline-flex; /* Cambia inline-block a inline-flex */
-    align-items: center;  /* Centra verticalmente */
-    justify-content: center;  /* Centra horizontalmente */
-    height: 50px;
-    width: 50px;
-    box-shadow: 0 5px 25px rgba(93, 70, 232, 0.15);
-    margin: 10px 10px;
-    font-size: 22px;
-}
-
-
-
-
-.slider-nav-item:before {
-    position: absolute;
-    content: "";
-    height: calc(100% + 16px);
-    width: calc(100% + 16px);
-    top: -8px;
-    left: -8px;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    animation: 1.5s linear 0s normal none infinite focuse;
-}
-
-
-
-/*socil*/
-.slider-nav{
-        display: flex;
-}
-
-.process-scetion .slider-nav-item {
-    position: relative;
-    flex-grow: 0;
-    flex-shrink: 0;
-    border-radius: 50%;
-    text-align: center;
-  box-shadow:0 0 0 1px rgba(255,255,255,0.4);
-    cursor: pointer;
-    transition: all .4s ease;
-    color: #fff;
-    text-decoration: none;
-}
-  .process-scetion .slider-nav-item:hover {
-    opacity:0.7;
-  }
-.slider-nav-item:before
-{
-        position: absolute;
-    content: "";
-    height: calc(100% + 16px);
-    width: calc(100% + 16px);
-    top: -8px;
-    left: -8px;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    animation: 1.5s linear 0s normal none infinite focuse;
-}
-
-    .process-scetion .slider-nav-item:after {
-      position: absolute;
-      top: 50%;
-      left: 100%;
-      height: 2px;
-      content: '';
-      width: 100%;
-     
-      z-index: 0;
-      animation: slide 1s linear infinite; }
-    .process-scetion .slider-nav-item:last-child:after {
-      display: none; }
-    .process-scetion .slider-nav-item .ikon {
-      font-size: 50px;
-      line-height: 80px; }
-
-
-   
-      .process-scetion .slider-nav-item.active:before {
-        position: absolute;
-        content: "";
-        height: calc(100% + 16px);
-        width: calc(100% + 16px);
-        top: -8px;
-        left: -8px;
-        border-radius: 50%;
-        border: 1px solid rgba(255, 255, 255, 0.8);
-        animation: 1.5s linear 0s normal none infinite focuse; }
-
-@keyframes focuse {
-  0% {
-    transform: scale(0.8);
-    opacity: 1; }
-  75% {
-    transform: scale(1.2);
-    opacity: 0; }
-  100% {
-    transform: scale(1.2);
-    opacity: 0; } }
-@keyframes slide {
-  from {
-    background-position: 0 0; }
-  to {
-    background-position: 40px 0; } }
-
-
-
-
-@-webkit-keyframes jello-horizontal {
-  0% {
-    -webkit-transform: scale3d(1, 1, 1);
-            transform: scale3d(1, 1, 1);
-  }
-  30% {
-    -webkit-transform: scale3d(1.25, 0.75, 1);
-            transform: scale3d(1.25, 0.75, 1);
-  }
-  40% {
-    -webkit-transform: scale3d(0.75, 1.25, 1);
-            transform: scale3d(0.75, 1.25, 1);
-  }
-  50% {
-    -webkit-transform: scale3d(1.15, 0.85, 1);
-            transform: scale3d(1.15, 0.85, 1);
-  }
-  65% {
-    -webkit-transform: scale3d(0.95, 1.05, 1);
-            transform: scale3d(0.95, 1.05, 1);
-  }
-  75% {
-    -webkit-transform: scale3d(1.05, 0.95, 1);
-            transform: scale3d(1.05, 0.95, 1);
-  }
-  100% {
-    -webkit-transform: scale3d(1, 1, 1);
-            transform: scale3d(1, 1, 1);
-  }
-}
-@keyframes jello-horizontal {
-  0% {
-    -webkit-transform: scale3d(1, 1, 1);
-            transform: scale3d(1, 1, 1);
-  }
-  30% {
-    -webkit-transform: scale3d(1.25, 0.75, 1);
-            transform: scale3d(1.25, 0.75, 1);
-  }
-  40% {
-    -webkit-transform: scale3d(0.75, 1.25, 1);
-            transform: scale3d(0.75, 1.25, 1);
-  }
-  50% {
-    -webkit-transform: scale3d(1.15, 0.85, 1);
-            transform: scale3d(1.15, 0.85, 1);
-  }
-  65% {
-    -webkit-transform: scale3d(0.95, 1.05, 1);
-            transform: scale3d(0.95, 1.05, 1);
-  }
-  75% {
-    -webkit-transform: scale3d(1.05, 0.95, 1);
-            transform: scale3d(1.05, 0.95, 1);
-  }
-  100% {
-    -webkit-transform: scale3d(1, 1, 1);
-            transform: scale3d(1, 1, 1);
-  }
-}
-
-
-.jello-horizontal {
-  -webkit-animation: jello-horizontal 0.9s both;
-          animation: jello-horizontal 0.9s both;
-}
-
-.social-bar a:hover i
-{
-  -webkit-animation: jello-horizontal 0.9s both;
-          animation: jello-horizontal 0.9s both;
-}
-
-
-  
-  
-  
-
-
-.swiper-slide-img:hover {
+.uploader .btn {
+  display: inline-block;
+  margin: 0.5rem 0.5rem 1rem 0.5rem;
+  clear: both;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  text-transform: initial;
+  border: none;
+  border-radius: 0.2rem;
+  outline: none;
+  padding: 0 1rem;
+  height: 36px;
+  line-height: 36px;
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
+  background: #454cad;
+  border-color: #454cad;
   cursor: pointer;
 }
-
-.gallery-thumbs .swiper-slide img:hover, .swiper-slide img:hover  {
-    cursor: pointer;
-}
-
-
-  .swiper-pagination-bullet {
-  background: black; /* Cambia el color de las bolitas a blanco */
-}
-
-.swiper-button-prev {
-  position: absolute;
-  transform: translateX(-40%) scale(0.7);
-  color: black;
-}
-
-.swiper-button-prev:focus {
-  outline: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-.swiper-button-next {
-  position: absolute;
-  transform: translateX(40%) scale(0.7);
-  color: black;
-  font-weight: 900;
-
-}
-
-.swiper-button-next:focus {
-  outline: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-
-
-
-
-
-
-@media screen and (min-width:800px){
-    #youtube {
-    height: 150px;
-  }
-   .jumbotron{    
-    height: 550px;;
-     background-position: center;
-    margin-top: 5px;
-  }
-}
-
-@media screen and (min-width:1000px){
-     #youtube {
-    height: 200px;
-  }
-}
-
-
-@media screen and (min-width:1024px){
-
-    .contact-info{
-      
-        height: 250px;
-  display: flex;
-  align-items: flex-end;
-    }
-    
-
-  .card__side{
-    top: -20px;
-    left: 30px;
-      height: 30vh;
-  width: 30vh;
-  }
-  
-   .modal-container .modal-background .modal img{
-      width: 55%;
-      height: auto;
-  }
-  
-  input {
-  margin-bottom: 10px;
-}
-  
-  select{
-    margin-bottom: 10px;
-  }
-  
-  /*.modal-container .modal-background .modal card{
-    max-width: 300px;
-  }*/
-  
-  .form-insc{
-    max-width: 750px;
-  }
-
-
-  #drive{
-    height: 480px;
-    width: 380px;
-    margin-top: 30px;
-  }
- }  
-
- @media screen and (min-width:1200px){
-    #youtube {
-    height: 250px;
-  }
-}
-  
-
-@media screen and (max-width:1024px){
-  .collapse{
- display: none;
-}
-  .navbar-toggle {
-    margin: 0;
-    display: inline-block;
-    margin-right: 10px;
-    margin-top: 10px;
-}
-  .header__container{
-    width: 100%;
-    padding: 0;
-  }
-  .header__menu {
-    width: 100%;
-}
-  .header{
-    background-color:#fff; 
-    padding: 0;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 4;
-  }
-  .header__logo{
-    padding: 12px 20px 12px 20px;
-  }
-  .header__el {
-    display: block;
-    padding: 10px 20px;
-    border-top: 1px solid #ededed;
-}
-  
-  .header .btn--white, .header .btn--white:hover{
-    padding: 0;
-    border: 0;
-    box-shadow: none;
-    color:#fff;
-    background-color:transparent;
-  }
-  .header__el--blue{
-    background-color:#3a9fff;
-  }
-  
-   .modal-container .modal-background .modal img{
-      width: 60%;
-      height: auto;
-  }
-  
-  .form-insc{
-    max-width: 700px;
-  }
-
-  #drive{
-    height: 480px;
-    width: 380px;
-    margin-top: 30px;
-  }
-   
-}
-
-
-@media screen and (max-width:991px){
-  .price-box {
-    padding: 0px 10px;
-  }
-  .item__content {
-    height: auto;
-}
-
-}
-
-@media screen and (max-width:767px) {
-
- .price-box__title {
-    font-size: 18px;
-    margin-top: 10px;
-}
-  .price-box__img {
-    width: 90px;
-    height: 90px;
-  }
-  .price-box__wrap {
-    padding: 20px 20px 30px 20px;
-  }
-  .price-box__people {
-    font-size: 10px;
-    font-weight: 400;
-  }
-  .price-box__discount {
-    font-size: 22px;
-  }
-  .price-box__price {
-    font-size: 12px;
-  }
-  .price-box__feat {
-      margin-top: 15px;
-      font-size: 14px;
-  }
-  .price-box__list-el {
-    font-size: 12px;
-    margin-bottom: 5px;
-} 
-    .btn {
-    font-size: 12px;
-    margin-left: 5px;
-}
-  .btn--width {
-    width: 100px;
-}
-  .footer {
-    padding: 25px 0;
-  }
-  
-
-  
-   .modal-container .modal-background .modal img{
-      width: 80%;
-      height: auto;
-  }
-
-#youtube {
-    height: 105px;
-  }
-
-  .navbar{
-    margin-left: -15px;
-  }
-  
-}
-
-
-@media screen and (max-width:575px) {
-   .price-box {
-    padding: 0 35px;
-     margin-bottom: 50px;
-  }
-  
- .price-box__title {
-    font-size:25px;
-  letter-spacing:1px;
-  margin-bottom:4px;
-}
-  .price-box__img {
-    width:130px;
-  height:130px;
-  }
-  .price-box__wrap {
-  border-radius:6px;
-  box-shadow:  0 4px 8px 0px rgba(0,0,0,0.2); /*0px 22px 20px -10px rgba(0, 0, 0,0.2)*/
-  padding: 35px 35px 40px 35px;
-  text-align:center;
-  transition: all 0.4s;
-  -webkit-transition: all 0.4s;
-  -moz-transition: all 0.4s;
-  -ms-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  }
-  .price-box__people{
-  font-size:12px;
-}
-.price-box__discount{
-  font-size: 30px;
-  font-weight: 700;
-  margin-top: 20px;
-  margin-bottom: 0;
-}
-  .price-box__price{
-    font-size: 15px;
-  }
-  .price-box__feat {
-    margin-top: 30px;
-    font-size: 18px;
-}
-
-.price-box__list-el{
-  position: relative;
-  margin-bottom: 8px;
-  font-weight: 300;
-  font-size: 15px;
-}
-  .btn--width{
-  width: 120px;
-  font-size: 14px;
-}
-  
- 
-
-.card__side{
-    top: -20px;
-    
-      height: 16vh;
-  width: 16vh;
-  }
-
-   .modal-container .modal-background .modal img{
-      width: 100%;
-      height: auto;
-  }
-
-  #youtube {
-    height: 280px;
-  }
-   #drive{
-    height: 400px;
-    width: 100%;
-  }
-  
-  .img-resize{
-    display: none;
-  }
-
-
-}
-
-
-
-@media screen and (max-width:340px){
-  .reduce{
-    font-size: 26px;
-  }
-  .price-box {
-    padding: 0px 20px;
-     margin-bottom: 40px;
-  }
-
-  .footer {
-    padding: 15px 0;
-  }
-  .footer__img {
-    width: 15px;
-  }
-  .contact-info{
-  background-size: contain;
-}
-  .footer__title {
-    font-size: 16px;
-    margin-left: 5px;
-  }
-  .sect {
-    padding: 20px 0;
-  }
-  .sect--padding-top{
-    padding-top: 80px;
-  }
-  .row__sub {
-    font-size: 16px;
-   }
-  .row__title {
-    font-size: 20px;
-    margin-bottom: 5px;
-   }
-  .price-box__title {
-    font-size: 18px;
-    margin-top: 10px;
-}
-  .price-box__img {
-    width: 100px;
-    height: 100px;
-  }
-  .price-box__wrap {
-    padding: 20px 20px 30px 20px;
-  }
-  .price-box__people {
-    font-size: 10px;
-    font-weight: 400;
-  }
-  .price-box__discount {
-    font-size: 22px;
-  }
-  .price-box__price {
-    font-size: 12px;
-  }
-  .price-box__feat {
-      margin-top: 15px;
-      font-size: 14px;
-  }
-  .price-box__list-el {
-    font-size: 12px;
-    margin-bottom: 5px;
-}
-  .site__title {
-    font-size: 24px;
-}
-  .site__subtitle {
-    font-size: 18px;
-    margin: 10px 0 20px 0;
-  }
-  .site__img {
-    margin-top: 30px;
-  }
-  .row--margin {
-    margin-top: 30px;
-}
-  .btn {
-    font-size: 12px;
-    padding: 8px 8px;
-}
-  .btn--width {
-    width: 100px;
-}
- 
-  .text-box {
-  width: 80%;
-  font-size: 18px;
-  font-weight: 500;
-}
-  
-  #youtube {
-    height: 200px;
-  }
-  
-
-  
-
-}
-  
-  @media (max-height: 500px) {
-     .modal-container .modal-background .modal .card{
-      transform: scale(0.9) translate(0,-35px);
-  }
-}
-  
- 
 </style>
-  
-<body >
 
- <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-light fixed-top text-dark" style="box-shadow:  0 4px 8px 0px rgba(0,0,0,0.2);">
-    <a class="navbar-brand" href="/" style="color: black; font-weight: 500; font-size: 18px; margin-left: 15px;  font-family: 'Poppins', sans-serif"> <img src="https://lh3.googleusercontent.com/d/1EP2I0BOMo_8mXsR9qqAv08PxjztZFaQ8" width="35" height="35" style="margin-right: 10px; border-radius: 50%;"/>Mozart Academy</a>
-    <button class="navbar-toggler btn bg-dark" type="button" data-toggle="collapse" data-target="#myNavbar" aria-controls="myNavbar" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="myNavbar" style="margin-right: 10px;">
-      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="/land" >Inicio <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="" >ABRSM</a>
-        </li>
-         <li class="nav-item">
-          <a class="nav-link" href="/forum" >Modalidades</a>
-        </li>
-         <li class="nav-item">
-          <a class="nav-link" href="/payment" >Inscripciones</a>
-        </li>
-          <li class="nav-item">
-          <a class="nav-link" href="/forum" >Foro</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/forum" >Contacto</a>
-        </li>
-        
-      </ul>
-
-          <div class="form-inline my-2 my-lg-0" style="float: right; margin-left: 10px;">
-     
-       <a href="https://app.mozartacademy.mx" ><button class="btn btn-outline-dark my-2 my-sm-0"  >Inicia sesión</button></a>
-      </div>
-
-    </div>
-  </nav>
-<br><br><br>
-
-
-
-<div class="swiper gallery-thumbs">
-  <div class="swiper-wrapper">
-  </div>       
-</div>  
-
-  <div class="sect" >
-    <div class="container" id="payment">
-
-      <div class="container text-center">
-        <h1>Planes de pago</h1>
-     <p>Todos nuestros costos varían de acuerdo a la demanda del horario.
- <br>Consulta la disponibilidad y costo de cada horario.</p>
-      </div>
-     <div class="row row--center row--margin">
-      
- <!-- First -->
-<div class="col-md-4 col-sm-4 price-box price-box--blue">
-          <div class="swiper swiper-container-main">
-    <div class="swiper-wrapper">
-
-
-
-
-      <div class="swiper-slide">
-        <div class="price-box__wrap">
-          <div class="price-box__img"></div>
-          <h1 class="price-box__title">
-          Plan Standard
-          </h1>
-  <p class="price-box__people">
-         Clases Presenciales
-          </p>
-          <h2 class="price-box__discount">
-            <span class="price-box__dollar">$</span>450<span class="price-box__discount--light">/mes</span>
-          </h2>
-          <h3 class="price-box__price" style="text-decoration: line-through;">
-           $500/mes
-          </h3>
-          <p class="price-box__feat">
-            Servicios
-          </p>
-          <ul class="price-box__list">
-            <li class="price-box__list-el">4 clases de 1 hora</li>
-            <li class="price-box__list-el">1 clase a la semana</li>
-          <li class="price-box__list-el">Acceso a la app</li>
-<br>
-          </ul>
-        <!---    <a class="btn btn--blue btn--width button" style="color: white;" data-modal="modal3">Agendar</a> --->
-          <a class="btn btn--blue btn--width button" style="color: white;" href="https://www.mozartacademy.mx/form">Agendar</a>
-        </div>
-      </div>
-
-
-<div class="swiper-slide">
-        <div class="price-box__wrap">
-          <div class="price-box__img"></div>
-          <h1 class="price-box__title">
-          Plan Standard
-          </h1>
- <p class="price-box__people">
-     Clases en Línea
-          </p>
-          <h2 class="price-box__discount">
-            <span class="price-box__dollar">$</span>300<span class="price-box__discount--light">/mes</span>
-          </h2>
-          <h3 class="price-box__price">
-           Más barato que flowkey y udemy
-          </h3>
-          <p class="price-box__feat">
-            Servicios
-          </p>
-          <ul class="price-box__list">
-          <li class="price-box__list-el">4 clases de 1 hora en ZOOM</li>
-            <li class="price-box__list-el">1 clase a la semana</li>
-          <li class="price-box__list-el">Acceso a la app</li>
-<br>
-          </ul>
-      
-         <!---   <a class="btn btn--violet btn--width button" style="color: white;" data-modal="modal4">Agendar</a> --->
-         
-          
-           <a class="btn btn--blue btn--width button" style="color: white;"  href="https://app.mozartacademy.mx">Acceder</a>
-        </div>
-      </div>
-
-
-
-
- <div class="swiper-slide">
-        <div class="price-box__wrap">
-          <div class="price-box__img"></div>
-          <h1 class="price-box__title">
-           Plan Standard
-          </h1>
- <p class="price-box__people">
-            Clases híbridas
-          </p>
-          <h2 class="price-box__discount">
-            <span class="price-box__dollar">$</span>300<span class="price-box__discount--light">/mes</span>
-          </h2>
-          <p class="price-box__feat">
-            Servicios
-          </p>
-          <ul class="price-box__list">
-            <li class="price-box__list-el">2 Clases por ZOOM</li>
-            <li class="price-box__list-el">1 Clase presencial</li>
-          <li class="price-box__list-el">Acceso a la plataforma</li>
-              <li class="price-box__list-el">Asesoría personalizada en línea</li>
-<br>
-          </ul>
-      
-            <a class="btn btn--blue btn--width button" style="color: white;" href="https://wa.me/5215577676657">Agendar</a>   
-        </div>
-      </div>
-
-
-
-
-
-
-
-     </div> 
-
-
-       <div class="swiper-pagination"></div>
-    <!-- Add Pagination -->
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-
-</div>
-</div>
-      
-
-      <!-- second -->
-
-        <div class="col-md-4 col-sm-4 price-box price-box--violet">
-          <div class="swiper swiper-container-main">
-    <div class="swiper-wrapper">
-      
-
-
-      
-
-
-    <div class="swiper-slide">
-        <div class="price-box__wrap">
-          <div class="price-box__img"></div>
-          <h1 class="price-box__title">
-         Plan PRO <i class="ri-verified-badge-fill " style="color: #20a2f1"></i>
-          </h1>
-  <p class="price-box__people">
-         Clases Presenciales
-          </p>
-          <h2 class="price-box__discount">
-            <span class="price-box__dollar">$</span>750<span class="price-box__discount--light">/mes</span>
-          </h2>
-          <h3 class="price-box__price" style="text-decoration: line-through;">
-           $850/mes
-          </h3>
-          <p class="price-box__feat">
-            Servicios
-          </p>
-          <ul class="price-box__list">
-            <li class="price-box__list-el">4 clases de 1 hora</li>
-            <li class="price-box__list-el">1 clase a la semana</li>
-          <li class="price-box__list-el">Acceso a la app</li>
-<br>
-          </ul>
-        <!---    <a class="btn btn--blue btn--width button" style="color: white;" data-modal="modal3">Agendar</a> --->
-          <a class="btn btn--violet btn--width button" style="color: white;" href="https://www.mozartacademy.mx/form">Agendar</a>
-        </div>
-      </div>
-
-
-<div class="swiper-slide">
-        <div class="price-box__wrap">
-          <div class="price-box__img"></div>
-          <h1 class="price-box__title">
-         Plan PRO <i class="ri-verified-badge-fill " style="color: #20a2f1"></i>
-          </h1>
- <p class="price-box__people">
-     Clases en Línea
-          </p>
-          <h2 class="price-box__discount">
-            <span class="price-box__dollar">$</span>300<span class="price-box__discount--light">/mes</span>
-          </h2>
-          <h3 class="price-box__price">
-           Más barato que flowkey y udemy
-          </h3>
-          <p class="price-box__feat">
-            Servicios
-          </p>
-          <ul class="price-box__list">
-          <li class="price-box__list-el">4 clases de 1 hora en ZOOM</li>
-            <li class="price-box__list-el">1 clase a la semana</li>
-          <li class="price-box__list-el">Acceso a la app</li>
-<br>
-          </ul>
-      
-         <!---   <a class="btn btn--violet btn--width button" style="color: white;" data-modal="modal4">Agendar</a> --->
-         
-          
-           <a class="btn btn--violet btn--width button" style="color: white;"  href="https://app.mozartacademy.mx">Acceder</a>
-        </div>
-      </div>
-
-
-
-
- <div class="swiper-slide">
-        <div class="price-box__wrap">
-          <div class="price-box__img"></div>
-          <h1 class="price-box__title">
-           Plan PRO <i class="ri-verified-badge-fill " style="color: #20a2f1"></i>
-          </h1>
- <p class="price-box__people">
-            Clases híbridas
-          </p>
-          <h2 class="price-box__discount">
-            <span class="price-box__dollar">$</span>300<span class="price-box__discount--light">/mes</span>
-          </h2>
-          <p class="price-box__feat">
-            Servicios
-          </p>
-          <ul class="price-box__list">
-            <li class="price-box__list-el">2 Clases por ZOOM</li>
-            <li class="price-box__list-el">1 Clase presencial</li>
-          <li class="price-box__list-el">Acceso a la plataforma</li>
-              <li class="price-box__list-el">Asesoría personalizada en línea</li>
-<br>
-          </ul>
-      
-            <a class="btn btn--violet btn--width button" style="color: white;" href="https://wa.me/5215577676657">Agendar</a>   
-        </div>
-      </div>
-
-
-
-
-     </div> 
-
-
-       <div class="swiper-pagination"></div>
-    <!-- Add Pagination -->
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-
-</div>
-    
-      </div>
-
-
-
-
-
-      <!-- Third-->    
-
-
-       <div class="col-md-4 col-sm-4 price-box price-box--purple">
-          <div class="swiper swiper-container-main">
-    <div class="swiper-wrapper">
-
-
-
-
-
-
-     <div class="swiper-slide">
-        <div class="price-box__wrap">
-          <div class="price-box__img"></div>
-          <h1 class="price-box__title">
-        Plan Premium <i class="ri-vip-crown-fill" style="color: orange; text-shadow: 0 0 10px orange;"></i>
-          </h1>
-  <p class="price-box__people">
-         Clases Presenciales
-          </p>
-          <h2 class="price-box__discount">
-            <span class="price-box__dollar">$</span>1350<span class="price-box__discount--light">/mes</span>
-          </h2>
-          <h3 class="price-box__price" style="text-decoration: line-through;">
-           $2400/mes
-          </h3>
-          <p class="price-box__feat">
-            Servicios
-          </p>
-          <ul class="price-box__list">
-            <li class="price-box__list-el">16 horas de clase</li>
-            <li class="price-box__list-el">2 clases de 2 horas por semana</li>
-          <li class="price-box__list-el">Acceso a la app</li>
-<li class="price-box__list-el">Asesoría en línea</li>
-<br>
-          </ul>
-        <!---    <a class="btn btn--purple btn--width button" style="color: white;" data-modal="modal3">Agendar</a> --->
-          <a class="btn btn--purple btn--width button" style="color: white;" href="https://www.mozar.studio/registro">Agendar</a>
-        </div>
-      </div>
-
-
-<div class="swiper-slide">
-        <div class="price-box__wrap">
-          <div class="price-box__img"></div>
-          <h1 class="price-box__title">
-         Plan Premium <i class="ri-vip-crown-fill" style="color: orange; text-shadow: 0 0 10px orange;"></i>
-          </h1>
- <p class="price-box__people">
-     Clases en Línea
-          </p>
-          <h2 class="price-box__discount">
-            <span class="price-box__dollar">$</span>300<span class="price-box__discount--light">/mes</span>
-          </h2>
-          <h3 class="price-box__price">
-           Más barato que flowkey y udemy
-          </h3>
-          <p class="price-box__feat">
-            Servicios
-          </p>
-          <ul class="price-box__list">
-          <li class="price-box__list-el">4 clases de 1 hora en ZOOM</li>
-            <li class="price-box__list-el">1 clase a la semana</li>
-          <li class="price-box__list-el">Acceso a la app</li>
-<br>
-          </ul>
-      
-         <!---   <a class="btn btn--violet btn--width button" style="color: white;" data-modal="modal4">Agendar</a> --->
-         
-          
-           <a class="btn btn--purple btn--width button" style="color: white;"  href="https://app.mozartacademy.mx">Acceder</a>
-        </div>
-      </div>
-
-
-
-
- <div class="swiper-slide">
-        <div class="price-box__wrap">
-          <div class="price-box__img"></div>
-          <h1 class="price-box__title">
-           Plan Premium <i class="ri-vip-crown-fill" style="color: orange; text-shadow: 0 0 10px orange;"></i>
-          </h1>
- <p class="price-box__people">
-            Clases híbridas
-          </p>
-          <h2 class="price-box__discount">
-            <span class="price-box__dollar">$</span>300<span class="price-box__discount--light">/mes</span>
-          </h2>
-          <p class="price-box__feat">
-            Servicios
-          </p>
-          <ul class="price-box__list">
-            <li class="price-box__list-el">2 Clases por ZOOM</li>
-            <li class="price-box__list-el">1 Clase presencial</li>
-          <li class="price-box__list-el">Acceso a la plataforma</li>
-              <li class="price-box__list-el">Asesoría personalizada en línea</li>
-<br>
-          </ul>
-      
-            <a class="btn btn--purple btn--width button" style="color: white;" href="https://wa.me/5215577676657">Agendar</a>   
-        </div>
-      </div>
-
-
-
-
-
-     </div> 
-
-
-       <div class="swiper-pagination"></div>
-    <!-- Add Pagination -->
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-
-</div>
-    
-      </div>
-
- <!-- End-->
-
-    
-    </div>
-  </div>
-  </div>
-
-
- 
-  
-  <section class="trial-block shadow3" style="background-color: #202830; color: white">
-     <div class="text-center" > <br>  
-            <button class="btn btn-outline-light mb-2" id="redirectButton">Más información</button>
-          </div>
-             <div class="social-overlap process-scetion ">
-              <div class="container">
-                  <div class="row justify-content-center">
-                          <div class="social-bar">
-                              <div class="social-icons text-center">
-                                 
-                                  
-                <a href="https://www.facebook.com/mozartacademy.mx" class="slider-nav-item"><i class="ri-facebook-fill"></i></a>
-                                
-                                 
-               <a href="https://www.instagram.com/mozart.academy_/"  class="slider-nav-item"><i class="ri-instagram-line"></i></a>
-                                 
-                                  <a href="https://www.youtube.com/@mozart.academy" class="slider-nav-item"><i class="ri-youtube-fill"></i></a>
-                                 <a href="https://maps.app.goo.gl/Jhf1sMdnQ7QRA3RP9"  class="slider-nav-item"><i class="ri-map-pin-line"></i></a> <!-- https://twitter.com/m0zart_studio -->
-                                  <a href="https://wa.me/5215577676657"  class="slider-nav-item"><i class="ri-whatsapp-line"></i></a>
-                             
-                              </div>
-                          </div>
-                  </div>
+<div class="tab" style="display: none;" id="sendStatus">
+    <div class="container">
+<div class="wrapper" >
+        <input type="radio" name="option" id="production">
+        <label class="option" for="production">
+          <img src="https://lh3.googleusercontent.com/d/1Hv9WGtVuOhTwTcolJyMO7IIlZjjydQsU" />
+
+            <div class="details">
+              <div class="text">
+                <h4>Pago enviado</h4>
+                <p>Estamos validando tu pago. En breve serás notificado de aprobado y tendrás acceso al contenido.</p>
+           
               </div>
-          </div>   
-</section>
-  
-  
+          </div>
+          </label>
+      </div>
+       </div>
+   </div>
 
-  <footer class="fixed-bottom">
-      <div class="col-md-2 col-xs-6">
-       <h1 class="footer__title">Mozart<span class="footer__light"> Academy</span></h1>   
-      </div> 
-  </footer>
+<main id=app>
 
-
-  
-  
-  <div id="modal1" class="modal-container modal-hidden">
-  <div class="modal-background">
-    <div class="modal"> 
-     
-
-    <iframe id="drive" src=" https://drive.google.com/file/d/1O2vidBGrC8lWRg9Z6uyi9eqfGtJtCbVX/preview" frameborder="0" ></iframe>
-
+  <div class="tab">
+     <!--    <p class="fs_xs upper_case">Planes de Pago</p>  -->
+    <div class="container">
+   
+ <div class="wrapper">
+        <input type="radio" name="option" id="free">
+        <label class="option" for="free">
+          <img src="https://lh3.googleusercontent.com/d/1qIbUXsTSPmX6DyCnQTLmGhflYxaI4iOz" />
+            <h4 class="price">$450 MXN <span style="font-size: 13px;">/mes</span></h4>
+            <div class="details">
+              <div class="text">
+                <h4>Plan Standard</h4>
+     <p>1 hora de clase semanal.</p>
+    <p>Acceso a la App.</p>
+              </div>                           
+              <button class="detail_button" onclick="openClasstimeModal()">Horarios</button>
+               <button class="detail_button" onclick="openPaymentInfoModal(1)">Inscribir</button>
+          </div>
+          </label>
+      </div>
+      <div class="wrapper">
+        <input type="radio" name="option" id="production">
+        <label class="option" for="production">
+          <img src="https://lh3.googleusercontent.com/d/1UHjwR61Dwcbz3XnrrcJ9Y_c6hmMGr2Uh" alt="production" />
+          <h4 class="price">$750 MXN <span style="font-size: 13px;">/mes</span></h4>
+            <div class="details">
+              <div class="text">
+                <h4>Plan PRO</h4>
+            <p>2 horas de clase semanales.</p>
+    <p>Acceso a la App.</p>
+              </div>
+                           <button class="detail_button" onclick="openPaymentInfoModal(2)">Inscribir</button>
+          </div>
+          </label>
+      </div>
+      <div class="wrapper">
+        <input type="radio" name="option" id="advanced">
+        <label class="option" for="advanced">
+          <img src="https://lh3.googleusercontent.com/d/1W0dBQ1trjKR1LZ0ZAvnYvTL4y_5m-fF-" alt="advanced" />
+           <h4 class="price">$1350 MXN</h4>
+            <div class="details">
+              <div class="text">
+                <h4>Plan Premium</h4>
+            <p>4 horas de clase semanales.</p>
+    <p>Acceso a la App.</p>
+              </div>
+                          <button class="detail_button" onclick="openPaymentInfoModal(3)">Inscribir</button>
+          </div>
+          </label>
+      </div>
+  <!--    <div class="wrapper">
+        <input type="radio" name="option" id="enterprise">
+        <label class="option" for="enterprise">
+          <img src="https://www0.assets.heroku.com/packs/media/pricing-app/images/app-type-enterprise-gray-367216d90fe953edb719e498dee506e8.svg" alt="enterprise" />
+            <div class="details">
+              <div class="text">
+                <h3>Enterprise</h3>
+                <p class="pad-b1">Contact Sales for custom pricing</p>
+                <p>Apps that meet the control, compliance, and collaboration needs of large scale organizations.</p>
+              </div>
+              <button class="detail_button">Estimate</button>
+              <button class="detail_button active">Selected</button>
+          </div>
+          </label>
+      </div> -->
     </div>
   </div>
+</main>
+
+
+
+  <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true" >
+    <div class="modal-dialog " role="document" >
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        <div class="modal-content" style="margin: 0;">
+  <div class="row">
+    <aside class="col-lg-12 mx-auto text-center">
+      <article class="card" >
+        <div class="card-body p-5">
+          
+           <h4>Completa tu pago</h4> <br>
+
+
+          <ul class="nav bg-light nav-pills rounded flex-column mb-3" role="tablist" >
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="pill" href="#nav-tab-card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Paypal_2014_logo.png" style=" width: 22px; margin-bottom: 5px; "> Paypal</a>
+            </li>
+           <!--  <li class="nav-item">
+              <a class="nav-link" data-toggle="pill" href="#nav-tab-google">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/archive/c/c1/20210618182605%21Google_%22G%22_logo.svg" style=" width: 20px; margin-bottom: 5px; "> Google Pay</a>
+            </li> -->
+             <li class="nav-item">
+              <a class="nav-link" data-toggle="pill" href="#nav-tab-bank">
+             <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/Oxxo_Logo.svg" style=" width: 25px; margin-bottom: 5px;"> OXXO</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="pill" href="#nav-tab-bbva">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/BBVA_2019.svg" style=" width: 30px; margin-bottom: 5px; "> Transferencia</a>
+            </li>
+           
+          </ul>
+
+          <div class="tab-content" >
+            <div class="tab-pane fade" id="nav-tab-card" style="background-color: transparent;">
+              <!--<p class="alert alert-success">Some text success or error</p>-->
+              <p>Paypal is easiest way to pay online</p>
+              <p>
+           <!-- <form action="https://www.paypal.me/pianounam" method="post" target="_top"> https://www.paypal.com/cgi-bin/webscr
+      <input type="hidden" name="cmd" value="_s-xclick">
+      <input type="hidden" name="hosted_button_id" value="KR9QLWUCGB98U">
+      <input type="image" src="https://lh3.googleusercontent.com/d/1TRC42weedxBQ4r9XMtulM0VS4B11KfKj" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+    </form> -->
+              
+                <a href="https://www.paypal.me/pianounam" target="_blank">
+                  <img src="https://lh3.googleusercontent.com/d/1TRC42weedxBQ4r9XMtulM0VS4B11KfKj" border="0">
+                </a>
+              </p>
+             <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">Monto</h2>
+                                            <p class="amount" style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left"></p>
+              <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">Nombre</h2>
+                                            <p  style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left">Maria de los Remedios</p>
+                  <p style="color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left"><strong>Instrucciones: </strong>Accede a tu cuenta e ingresa el monto a pagar.</p> 
+            </div> <!-- tab-pane.// -->
+            
+            
+            
+            
+             <div class="tab-pane fade" id="nav-tab-google" style="background-color: transparent;">
+              <!--<p class="alert alert-success">Some text success or error</p>-->
+              <p>Paypal is easiest way to pay online</p>
+              <p>
+  
+               <div id="google-pay-button" style="background-color: red; display: contents;"><input type="image" src="https://raw.githubusercontent.com/google-pay/google-pay-button/1d25aa6162ad2330d3c9441ba7e6e2fb406f64c0/docs/images/google-pay-button.svg" ></div>
+              </p>
+              <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </p>
+            
+            </div> 
+            
+            
+            
+
+            <div class="tab-pane fade" id="nav-tab-bbva" style="background-color: transparent;">
+
+               <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">BANCO</h2>
+                                            <p style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left">BBVA - Bancomer</p>
+               <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">Número de Tarjeta</h2>
+                                            <p style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left;text-decoration: none;">5256 7821 7891 5792</p>
+               <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">CLABE</h2>
+                                            <p style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left;text-decoration: none;">0022 6090 3516 5075 21</p>
+               <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">Concepto</h2>
+                                            <p style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left">curso de piano</p>
+               <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">Monto</h2>
+                                            <p class="amount" style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left"></p>
+
+
+<br>
+              
+      <!--        <form id="file-upload-form" class="uploader">
+  <input id="file-upload" type="file" name="fileUpload" accept="image/*" />
+
+  <label for="file-upload" id="file-drag">
+    <img id="file-image" src="#" alt="Preview" class="hidden">
+    <div id="start2">
+      <i class="fa fa-download" aria-hidden="true"></i>
+      <div>Selecciona tu imagen</div>
+      <div id="notimage" class="hidden">Please select an image</div>
+      <span id="file-upload-btn" class="btn btn-primary">Seleccionar</span>
+    </div>
+    <div id="response" class="hidden">
+      <div id="messages"></div>
+    </div>
+     <input type="hidden" id="imageData">
+     <span id="file-send-btn" class="btn" data-dismiss="modal" style="display: none;" onclick="uploadImage()"> Enviar </span>  
+  </label> 
+                 
+</form> -->
+    
+              <p style="color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left"><strong>Instrucciones: </strong>Para que podamos validar y registrar tu pago, debes enviar tu comprobante de pago a nuestro WhatsApp.</p>    
+              
+              
+                 <a class="whatsapp-button" href="https://wa.me/5215577676657" target="_blank">
+  <svg fill="#fff" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <path d="M.057,22,1.6,16.351a10.9,10.9,0,1,1,4.233,4.133L.057,22ZM6.1,18.51A9.04,9.04,0,1,0,3.59,16.066L2.674,19.41l3.43-.9ZM16.542,13.5c-.068-.114-.249-.182-.522-.318s-1.612-.8-1.862-.886-.431-.137-.613.137-.7.886-.863,1.068-.318.2-.59.068A7.435,7.435,0,0,1,9.9,12.217,8.2,8.2,0,0,1,8.386,10.33c-.159-.272-.017-.42.119-.556s.272-.318.409-.478a1.787,1.787,0,0,0,.275-.454.5.5,0,0,0-.023-.478c-.069-.136-.613-1.477-.84-2.022s-.446-.459-.613-.468l-.523-.009a1,1,0,0,0-.726.341A3.057,3.057,0,0,0,5.511,8.48,5.3,5.3,0,0,0,6.623,11.3a12.145,12.145,0,0,0,4.653,4.113,15.762,15.762,0,0,0,1.553.574,3.744,3.744,0,0,0,1.716.108,2.806,2.806,0,0,0,1.839-1.3,2.269,2.269,0,0,0,.159-1.3Z"/>
+  </svg>
+  <p>
+    <strong>WhatsApp</strong>
+    <span>Enviar comprobante</span>
+  </p>
+</a>
+              
+            </div>
+
+            <div class="tab-pane fade" id="nav-tab-bank" style="background-color: transparent;">
+                   <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">Presenta este QR al cajero del OXXO</h2>
+           
+ <img src="https://lh3.googleusercontent.com/d/1_avjpaS-l-uLh9y2PqnwlSahTZS5F9-S" border="0" height="200px">
+         <br> 
+          
+               <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">Numero de Cuenta</h2>
+                                            <p style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left">0022 6090 3516 5075 21</p>
+               <h2 class="info-header" style="Margin:0;Margin-bottom:10px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-variant:all-small-caps;font-weight:600;line-height:1.230769231;margin:0;margin-bottom:0;padding:0;padding-bottom:0;padding-top:10px;text-align:left;word-wrap:normal">Monto</h2>
+                                            <p class="amount" style="Margin:0;Margin-bottom:15px;color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left"></p>
+          
+
+<br> 
+              
+ <!--    <form id="file-upload-form" class="uploader">
+  <input id="file-upload" type="file" name="fileUpload" accept="image/*" />
+
+  <label for="file-upload" id="file-drag">
+    <img id="file-image" src="#" alt="Preview" class="hidden">
+    <div id="start2">
+      <i class="fa fa-download" aria-hidden="true"></i>
+      <div>Selecciona tu imagen</div>
+      <div id="notimage" class="hidden">Please select an image</div>
+      <span id="file-upload-btn" class="btn btn-primary">Seleccionar</span>
+    </div>
+    <div id="response" class="hidden">
+      <div id="messages"></div>
+    </div>
+     <input type="hidden" id="imageData">
+     <span id="file-send-btn" class="btn" data-dismiss="modal" style="display: none;" onclick="uploadImage()"> Enviar </span>  
+  </label> 
+                 
+</form>  -->
+                <p style="color:#231f20;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;font-weight:400;line-height:1.375;margin:0;margin-bottom:15px;padding:0;text-align:left"><strong>Instrucciones: </strong>Para que podamos validar y registrar tu pago, debes enviar tu comprobante de pago a nuestro WhatsApp.</p> 
+              
+                   <a class="whatsapp-button" href="https://wa.me/5215577676657" target="_blank">
+  <svg fill="#fff" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <path d="M.057,22,1.6,16.351a10.9,10.9,0,1,1,4.233,4.133L.057,22ZM6.1,18.51A9.04,9.04,0,1,0,3.59,16.066L2.674,19.41l3.43-.9ZM16.542,13.5c-.068-.114-.249-.182-.522-.318s-1.612-.8-1.862-.886-.431-.137-.613.137-.7.886-.863,1.068-.318.2-.59.068A7.435,7.435,0,0,1,9.9,12.217,8.2,8.2,0,0,1,8.386,10.33c-.159-.272-.017-.42.119-.556s.272-.318.409-.478a1.787,1.787,0,0,0,.275-.454.5.5,0,0,0-.023-.478c-.069-.136-.613-1.477-.84-2.022s-.446-.459-.613-.468l-.523-.009a1,1,0,0,0-.726.341A3.057,3.057,0,0,0,5.511,8.48,5.3,5.3,0,0,0,6.623,11.3a12.145,12.145,0,0,0,4.653,4.113,15.762,15.762,0,0,0,1.553.574,3.744,3.744,0,0,0,1.716.108,2.806,2.806,0,0,0,1.839-1.3,2.269,2.269,0,0,0,.159-1.3Z"/>
+  </svg>
+  <p>
+    <strong>WhatsApp</strong>
+    <span>Enviar comprobante</span>
+  </p>
+</a>
+              
+            </div> <!-- tab-pane.// -->
+          </div> <!-- tab-content .// -->
+
+        </div> <!-- card-body.// -->
+      </article> <!-- card.// -->
+
+    </aside> <!-- col.// -->
+  </div> <!-- row.// -->
+ </div>
+    </div>
 </div>
+
+
+
+
+ <div class="modal fade" id="classtimeModal" tabindex="-1" role="dialog" aria-labelledby="classtimeModal" aria-hidden="true" >
+    <div class="modal-dialog " role="document" >
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        <div class="modal-content" style="margin: 0; background: transparent" >
+    <img src="https://lh3.googleusercontent.com/d/1KFJ39TsEQbC8aNhJoV-Dtga9h2JL5nTn" style=" width: auto; height; 180px; margin-bottom: 5px; "/>
+          
+      </div>
+      </div>
+   </div>
+
+
+<script> 
+   function openPaymentInfoModal(option) {
+   $('#profileModal').modal('show');  
+      if (option == 1) {
+        $('.amount').text('$450 MXN pesos');
+    } else if (option == 2) {
+        $('.amount').text('$750 MXN pesos');
+    } else if (option == 3) {
+        $('.amount').text('$1350 MXN pesos');
+    }
+}
+  
+   function openClasstimeModal() {
+   $('#classtimeModal').modal('show');  
+}
   
   
+  
+ 
+  function ekUpload(){
+  function Init() {
 
+    console.log("Upload Initialised");
 
+    var fileSelect    = document.getElementById('file-upload'),
+        fileDrag      = document.getElementById('file-drag'),
+        submitButton  = document.getElementById('submit-button');
 
+    fileSelect.addEventListener('change', fileSelectHandler, false);
 
-   
-</div>
+    // Is XHR2 available?
+    var xhr = new XMLHttpRequest();
+    if (xhr.upload) {
+      // File Drop
+      fileDrag.addEventListener('dragover', fileDragHover, false);
+      fileDrag.addEventListener('dragleave', fileDragHover, false);
+      fileDrag.addEventListener('drop', fileSelectHandler, false);
+    }
+  }
 
-</body>
+  function fileDragHover(e) {
+    var fileDrag = document.getElementById('file-drag');
 
-  <script>
-    $(".navbar-nav>li>a").on("click", function() {
-  $(".navbar-collapse").collapse("hide");
-});
+    e.stopPropagation();
+    e.preventDefault();
 
-document.getElementById('redirectButton').addEventListener('click', function() {
-  window.location.href = 'https://wa.me/5215577676657?text=Hola,%20me%20interesa%20recibir%20informaci%C3%B3n%20acerca%20de%20las%20clases%20de%20piano%20%F0%9F%8E%B9'; 
-});
+    fileDrag.className = (e.type === 'dragover' ? 'hover' : 'modal-body file-upload');
+  }
 
-function toggleCard() {
-    const frontSide = document.getElementById("front-1");
-    const backSide = document.getElementById("back-1");
-    if (frontSide.classList.contains("showGreen")) {
-      frontSide.classList.remove("showGreen");
-      backSide.classList.remove("showRed");
-    } else {
-      frontSide.classList.add("showGreen");
-      backSide.classList.add("showRed");
+  function fileSelectHandler(e) {
+    // Fetch FileList object
+    var files = e.target.files || e.dataTransfer.files;
+
+    // Cancel event and hover styling
+    fileDragHover(e);
+
+    // Process all File objects
+    for (var i = 0, f; f = files[i]; i++) {
+      parseFile(f);
+      convertFileToBase64(f);
     }
   }
     
-$(document).ready(function() {
-  $('.button').click(function() {
-    var modalId = $(this).data('modal');
-    $('#' + modalId).removeClass('modal-hidden').addClass('four');
-    $('body').addClass('modal-active');
-  });
-
-  $('.modal-container').click(function() {
-    $(this).addClass('out');
-    $('body').removeClass('modal-active');
-    var modal = $(this);
-    setTimeout(function() {
-      modal.removeClass('four out').addClass('modal-hidden');
-    }, 500); // Ajusta el tiempo según la duración de tu animación
-  });
-  
-  $('.form-insc').click(function(event) {
-                event.stopPropagation();
-            });
-});
-    
-    
-    
-<!-- Initialize Swiper -->
-var galleryThumbs = new Swiper('.gallery-thumbs', {
-
-});
-
-
-var swiper = new Swiper('.swiper-container-main', {
-  autoHeight: true, //enable auto height
-
-  //runCallbacksOnInit: true,
-  observer: true,
-  observeParents: true,
-  observeChildren: true,
-  spaceBetween: 0,
-
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-  },
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-  loop: true,
-  preloadImages: false,
-  // Enable lazy loading
-  lazy: true,
-  lazy: {
-    loadPrevNext: true,
-  },
-
-  keyboard: {
-    enabled: true,
-  },
-
-  effect: 'coverflow',
-  coverflowEffect: {
-    rotate: 60,
-    slideShadows: false,
-  },
-  loop: true,
-  thumbs: {
-    swiper: galleryThumbs
+    function convertFileToBase64(file) {
+    var reader = new FileReader();
+    reader.onloadend = function() {
+      var base64image = reader.result.split(',')[1];
+      document.getElementById("imageData").value = base64image;
+    };
+    reader.readAsDataURL(file);
   }
 
+  // Output
+  function output(msg) {
+    // Response
+    var m = document.getElementById('messages');
+    m.innerHTML = msg;
+  }
+
+  function parseFile(file) {
+
+    console.log(file.name);
+    output(
+      '<br><strong style="font-size: 12px;">' + encodeURI(file.name) + '</strong>'
+    );
+    
+    // var fileType = file.type;
+    // console.log(fileType);
+    var imageName = file.name;
+
+    var isGood = (/\.(?=gif|jpg|png|jpeg)/gi).test(imageName);
+    if (isGood) {
+      //document.getElementById('start2').classList.add("hidden");
+      document.getElementById('start2').style.display = 'none';
+      document.getElementById('response').classList.remove("hidden");
+       document.getElementById('file-send-btn').style.display = 'block';
+      document.getElementById('notimage').classList.add("hidden");
+      // Thumbnail Preview
+      document.getElementById('file-image').classList.remove("hidden");
+      document.getElementById('file-image').src = URL.createObjectURL(file);
+    }
+    else {
+      document.getElementById('file-image').classList.add("hidden");
+      document.getElementById('notimage').classList.remove("hidden");
+      document.getElementById('start2').classList.remove("hidden");
+      document.getElementById('response').classList.add("hidden");
+      document.getElementById("file-upload-form").reset();
+    }
+  }
+
+
+  // Check for the various File API support.
+  if (window.File && window.FileList && window.FileReader) {
+    Init();
+  } else {
+    document.getElementById('file-drag').style.display = 'none';
+  }
+}
+ekUpload();
+  
+  
+  function uploadImage() {
+    var base64Data = document.getElementById("imageData").value;
+   /*  if (base64Data) {
+        // Aquí envías el `base64Data` a tu servidor
+        var requestData = {
+            action: "postPaymentImage",
+            token: localStorage.getItem('MStoken'),
+            blob: base64Data
+        };
+
+        var config = {
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            followRedirects: true, 
+        };
+
+        $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData, config)
+            .then(function(response) {
+                document.getElementById("imageData").value = '';
+            })
+            .catch(function(error) {
+                console.error("Error uploading audio:", error);
+            });
+    } else {
+        console.log("No audio data to upload.");
+    }*/
+    document.getElementById("app").style.display = "none";
+    document.getElementById("sendStatus").style.display = "block";
+  }
+  
+  
+  var button = document.querySelector('#google-pay-button');
+var paymentsClient = new google.payments.api.PaymentsClient({
+  environment: 'TEST' // Or 'PRODUCTION'
 });
-    
 
-    
+braintree.client.create({
+  authorization: 'sandbox_d52wbnyb_7t5bdrz6q6fys95x'
+}, function (clientErr, clientInstance) {
+  braintree.googlePayment.create({
+    client: clientInstance,
+    googlePayVersion: 2
+    //googleMerchantId: 'merchant-id-from-google' // Optional in sandbox; if set in sandbox, this value must be a valid production Google Merchant ID
+  }, function (googlePaymentErr, googlePaymentInstance) {
+    paymentsClient.isReadyToPay({
+      // see https://developers.google.com/pay/api/web/reference/object#IsReadyToPayRequest
+      apiVersion: 2,
+      apiVersionMinor: 0,
+      allowedPaymentMethods: googlePaymentInstance.createPaymentDataRequest().allowedPaymentMethods,
+      existingPaymentMethodRequired: true // Optional
+    }).then(function(response) {
+      if (response.result) {
+        button.addEventListener('click', function (event) {
+          event.preventDefault();
 
-  </script>
+          var paymentDataRequest = googlePaymentInstance.createPaymentDataRequest({
+            transactionInfo: {
+              currencyCode: 'USD',
+              totalPriceStatus: 'FINAL',
+              totalPrice: '10.00' // Your amount
+            }
+          });
 
-</html>
+          // We recommend collecting billing address information, at minimum
+          // billing postal code, and passing that billing postal code with all
+          // Google Pay card transactions as a best practice.
+          // See all available options at https://developers.google.com/pay/api/web/reference/object
+          var cardPaymentMethod = paymentDataRequest.allowedPaymentMethods[0];
+          cardPaymentMethod.parameters.billingAddressRequired = true;
+          cardPaymentMethod.parameters.billingAddressParameters = {
+            format: 'FULL',
+            phoneNumberRequired: true
+          };
+
+          paymentsClient.loadPaymentData(paymentDataRequest).then(function(paymentData) {
+            googlePaymentInstance.parseResponse(paymentData, function (err, result) {
+              if (err) {
+                // Handle parsing error
+                console.log(err.message);
+              }
+  console.log(result);
+              // Send result.nonce to your server
+              // result.type may be either "AndroidPayCard" or "PayPalAccount", and
+              // paymentData will contain the billingAddress for card payments
+            });
+          }).catch(function (err) {
+            // Handle errors
+            console.log(err.message);
+          });
+        });
+      }
+    }).catch(function (err) {
+      // Handle errors
+      console.log(err.message);
+    });
+  });
+
+  // Set up other Braintree components
+});
+</script>
