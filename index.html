@@ -888,7 +888,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
          
         <ion-content>
 
-      <div class="profile-user-data clearfix" class="item" ng-click="goToReel()" style="cursor: pointer;" menu-toggle="left">
+      <div class="profile-user-data clearfix" class="item" ng-click="goToLanding()" style="cursor: pointer;" menu-toggle="left">
         <div id="loadingProfile" ng-if="loadingProfile" style="margin-top: 20px !important;"></div>
           <div class="circle">
               <img class="profile-pic" src="https://lh3.googleusercontent.com/d/1BzW7uNt3h6Q--lSj8SNoEQ-YdJwlCuoB">
@@ -2827,8 +2827,8 @@ app
 $scope.goToAccount = function() {
   window.location.href = '#/menu/account';
 };
-      $scope.goToAgenda = function() {
-  window.location.href = '#/menu/agenda';
+      $scope.goToLanding = function() {
+  window.location.href = '#';
 };
       $scope.goToReel = function() {
   window.location.href = '#/menu/reel';
