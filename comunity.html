@@ -11,6 +11,7 @@
 <style>
   article{
   background-color: #f5f6f6 !important;
+    color: black !important;
 }
 input{
   background-color: white !important;
@@ -143,13 +144,47 @@ dialog{
     stroke: #ffa700;
   }
 }
+  
+  @media (max-width: 600px){
+    .hidemobile{
+      display: none !important;
+    }
+  }
+
+  .input-group {
+  display: flex;
+  align-items: center; /* Centra verticalmente los elementos */
+  gap: 10px; /* Espacio entre imagen e input */
+}
+
+ .form-control {
+  flex: 1; /* Input ocupa todo el espacio disponible */
+  border: none; /* Sin borde */
+  border-radius: 20px; /* Bordes redondeados */
+  padding: 10px 15px; /* Espaciado interno */
+  font-size: 16px; /* Tamaño de la fuente */
+  outline: none; /* Sin contorno */
+  box-shadow: none; /* Sin sombra */
+}
+.infoProf {
+  border-radius: 16px;
+  position: absolute;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  font-size: 13px;
+  width: 200px;
+  background: white;
+  z-index: 100;
+}
+.liked {
+    color: red;
+}
 </style>
 
 <body style="background-color: white;" ng-app="postApp" ng-controller="postController">
 
   <main class="responsive">
     <div class="grid">
-      <section class="s12 m12 l8">
+      <section class="s12 m8 l8" ng-if="!selectedPostForComments">
         <article class="no-elevate large-round">
           <div class="row"><img class="circle small" src="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V"/>
             <div class="max">
@@ -165,12 +200,11 @@ dialog{
             </button>
           </div>
         </article>
-        <nav class="scroll">
-          <button class="chip"><i>rocket</i><span>Best</span></button>
-          <button class="chip"><i>local_fire_department</i><span>Hot</span></button>
+      <nav  style="justify-content: center; flex-wrap: wrap; ">
+          <button class="chip" ng-click="filterPosts('youtube')"><i>local_fire_department</i><span>Trending</span></button>
+                    <button class="chip"><i>arrow_circle_up</i><span>Top</span></button>
           <button class="chip"><i>news</i><span>New</span></button>
-          <button class="chip"><i>arrow_circle_up</i><span>Top</span></button>
-          <button class="chip"><i>trending_up</i><span>Rising</span></button>
+
         </nav>
         
           <div class="showbox" ng-if="userDataLoaded">
@@ -181,54 +215,153 @@ dialog{
       </div>
     </div> 
         
-         <article class="no-elevate round" ng-repeat="post in filteredData.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
-          <div class="row top-align">
-            <div>
-              <nav class="vertical no-space grey-text center-align">
-                <button class="transparent circle"><i>thumb_up</i></button>
-                <div>Votar</div>
-                <button class="transparent circle"><i>thumb_down</i></button>
-              </nav>
-            </div>
+         <article class="no-elevate round" ng-repeat="post in filteredData.slice(0, itemsPerPage)">
+          <div class="row top-align" >
             <div class="max" >
               
               
-              <div >
-                <div class="row"><img class="circle small" ng-src="{{post.photo}}"/>
+             
+                
+                 <div class="row" ng-click="toggleProfileInfo(post.id); $event.preventDefault()"> <img class="circle small" ng-src="{{post.photo}}"/>  
+            <div><b>   <label style="font-size: 14px;"><a href="#" >{{post.user}}</a></label></b>
+              <div>   <label class="grey-text">Nivel 1  ● hace {{calculateTimeAgo(post.date)}}</label></div>
+
+              <div class="infoProf "
+         style="margin-top: 5px; padding: 8px;"
+         ng-if="showProfileInfo[post.id]">
+      <i class="ri-user-line"></i> {{post.user}}<br>
+      <small>Email: {{post.email}}</small><br>
+      <small>Plan: {{post.plan}}</small>
+    </div>
+            </div>
+          </div>
+                
+   
+                
+                <div class="row">
                   <div class="max">
                     <h6 class="no-margin">{{post.id}}</h6>
-                      <label class="grey-text">Posteado por <a href="#" >{{post.user}}</a> hace {{calculateTimeAgo(post.date)}}</label>
+                 
                   </div>
                 </div>  
                 <div class="medium-space"></div>
                 
-                <div ng-if="post.type == 'text'">{{post.url}}
+                 <div style="display: flex; justify-content: center;">
+                    <iframe width="100%" height="{{post.height}}" ng-src="{{trustAsResourceUrl(post.url)}}" frameborder="0" ng-class="{'youtubeframe': post.type == 'youtube'}"></iframe>
+                   </div>
+
+                <div ng-if="post.type == 'text'" >{{post.url}}
               </div>
                 <a  ng-if="post.type == 'link'" class="row link" href="{{post.url}}" target="_blank"><span>{{post.url}}</span><i>link</i></a>
                 
-                <a ng-if="post.type == 'img'" href="{{post.url}}" target="_blank"><img class="responsive round" ng-src="{{post.url}}"/></a>
+                <a ng-if="post.type == 'img'" href="{{post.url}}" target="_blank"><img class="responsive" style="border-radius: 10px;" ng-src="{{post.url}}"/></a>
                 
-                <iframe width="100%" height="{{post.height}}" ng-src="{{trustAsResourceUrl(post.url)}}" frameborder="0" ng-class="{'youtubeframe': post.type == 'youtube'}"></iframe>
                 
-            </div>
+                
+           
+
+                <div class="row" style="display: flex; justify-content: space-between;">
+                  <div>
+                  <button class="transparent circle" ng-click="newLike($index, post)">
+    <i ng-if="post.likes.includes(user)" class="ri-heart-fill liked"></i>
+    <i ng-if="!post.likes.includes(user)" class="ri-heart-line"></i>
+    {{post.likes.length}}
+</button>
+           <button class="transparent circle" ng-click="openComments(post); " ><i>chat_bubble</i>{{post.comments.length}}</button>
+         </div>
+
+<button class="chip" ><i>share</i><span>Share</span></button>
+             </div>
               
               
               
           </div>
+            
         </article>
         
         
-      
-      
-       
+
+  <nav style="justify-content: center; flex-wrap: wrap; ">
+  <button class="chip" ng-click="loadMorePosts()" ng-if="itemsPerPage < filteredData.length">
+    Cargar más posts
+  </button>
+    <br><br>
+</nav>
       </section>
-      <section class="s12 m12 l4">
+
+
+    <div ng-if="selectedPostForComments"  class="s12 m12 l8">
+  <div class="row ">
+    <button class="chip" ng-click="backToFeed()">
+      ← Volver
+    </button>
+  </div>
+
+  <article class="no-elevate round" >
+          <div class="row top-align">
+            <div class="max" >
+              <div >
+                 <div class="row"> <img class="circle small" ng-src="{{selectedPostForComments.photo}}"/>  
+            <div><b>   <label style="font-size: 14px;"><a href="#" >{{selectedPostForComments.user}}</a></label></b>
+              <div>   <label class="grey-text">Nivel 1  ● hace {{calculateTimeAgo(selectedPostForComments.date)}}</label></div>
+            </div>
+          </div>
+                <div class="row">
+                  <div class="max">
+                    <h6 class="no-margin">{{selectedPostForComments.id}}</h6>
+                  </div>
+                </div>  
+                <div class="medium-space"></div>
+                
+                <div ng-if="selectedPostForComments.type == 'text'" >{{selectedPostForComments.url}}
+              </div>
+                <a  ng-if="selectedPostForComments.type == 'link'" class="row link" href="{{post.url}}" target="_blank"><span>{{selectedPostForComments.url}}</span><i>link</i></a>
+                <a ng-if="selectedPostForComments.type == 'img'" href="{{post.url}}" target="_blank"><img class="responsive" style="border-radius: 10px;" ng-src="{{selectedPostForComments.url}}"/></a>
+                <iframe width="100%" height="{{selectedPostForComments.height}}" ng-src="{{trustAsResourceUrl(selectedPostForComments.url)}}" frameborder="0" ng-class="{'youtubeframe': selectedPostForComments.type == 'youtube'}"></iframe>
+            </div> 
+          </div>  
+        </article>
+  <section class="p">
+
+     <div class="input-group">
+    <img 
+      src="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V" 
+      style="width: 40px; height: 40px; border-radius: 50%;"
+    >
+    <input 
+      type="text" 
+      class="form-control" 
+      placeholder="Escribe tu respuesta" 
+     id="form-control"
+      ng-model="newText"
+    >
+        <button class="responsive" style="width: 60px !important;">Responder</button>
+  </div>
+    <br>
+   
+    <div ng-if="selectedPostForComments.comments.length > 0" ng-repeat="comment in selectedPostForComments.comments">
+     <div class="row"><img class="circle small" src="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V"/>
+            <div><b>{{comment.user}}</b>
+              <div> {{comment.comment}}</div>
+            </div>
+          </div>
+       <hr style="color: #E5E4E2; opacity: 0.5; margin-top: 5px; margin-bottom: 5px;">
+    </div>
+    <div class="card p mb" ng-if=" selectedPostForComments.comments.length === 0">
+     Aún no hay comentarios.
+    </div>
+  </section>
+</div>
+
+      
+      <section class="s12 m4 l4 hidemobile" >
         <article class="no-elevate round">
           <div class="row"><i>trophy</i>
             <div><b>Mozart Premium</b>
-              <div>The best Mozart Academy experience</div>
+           
             </div>
           </div>
+             <div>The best Mozart Academy experience</div>
           <nav>
             <button class="responsive">Try Now</button>
           </nav>
@@ -276,7 +409,7 @@ dialog{
             <label>Title</label>
           </div>
           <div class="field border label extra textarea">
-            <textarea></textarea>
+            <textarea ng-model="newText"></textarea>
             <label>Text (optional)</label>
           </div>
         </div>
@@ -310,7 +443,7 @@ dialog{
       <footer class="fixed">
         <nav class="right-align">
           <button class="border" data-ui="#dialog-post">Cancel</button>
-          <button data-ui="#dialog-post">Confirm</button>
+          <button data-ui="#dialog-post" ng-click="newPost(newText)">Confirm</button>
         </nav>
       </footer>
     </dialog>
@@ -343,7 +476,7 @@ var app = angular.module('postApp', [])
         'Accept': 'application/json'
       } 
     }).then(function(response) {
-      $scope.data = response.data.posts; 
+      $scope.data = shuffleArray(response.data.posts); 
        $scope.profileData = response.data.profiles
       $scope.filterPosts('all');
       $scope.updatePagination();
@@ -361,7 +494,30 @@ var app = angular.module('postApp', [])
      
            
     });
-   
+
+
+ $scope.loadMorePosts = function () {
+  $scope.itemsPerPage += 5;
+};
+
+      function shuffleArray(array) {
+  const shuffled = array.slice(); // copia del array original
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+    $scope.selectedPostForComments = null;
+
+$scope.openComments = function(post) {
+  $scope.selectedPostForComments = post;
+};
+
+$scope.backToFeed = function() {
+  $scope.selectedPostForComments = null;
+};
    
     $scope.lvlColor = function(lvl){
   if(lvl == 0){
@@ -422,6 +578,10 @@ $scope.isButton = true;
 };
 
 
+$scope.showProfileInfo = {};
+$scope.toggleProfileInfo = function(postId) {
+  $scope.showProfileInfo[postId] = !$scope.showProfileInfo[postId];
+};
 
    
       
@@ -490,31 +650,7 @@ $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7
     $scope.currentPage = 1;
   };
 
-  $scope.getPages = function() {
-    var pages = [];
-    for (var i = 1; i <= $scope.totalPages; i++) {
-      pages.push(i);
-    }
-    return pages;
-  };
 
-  $scope.setPage = function(page) {
-    if (page >= 1 && page <= $scope.totalPages) {
-      $scope.currentPage = page;
-    }
-  };
-
-  $scope.prevPage = function() {
-    if ($scope.currentPage > 1) {
-      $scope.currentPage--;
-    }
-  };
-
-  $scope.nextPage = function() {
-    if ($scope.currentPage < $scope.totalPages) {
-      $scope.currentPage++;
-    }
-  };
 
   $scope.filterPosts = function(type) {
     $scope.filter = type;
@@ -595,25 +731,25 @@ $scope.openModal = function(post) {
    $scope.dangerButtonActive = []; 
 
 $scope.newLike = function(index, post) {
-    if (!$scope.dangerButtonActive[index]) {
-        confetti({
-            particleCount: 150,
-            spread: 60
-        }); 
-        $scope.dangerButtonActive[index] = true;
-      $scope.sendLike(post.id)
-    } 
+  
     $scope.selectedPost = post;
-    var selectedDataItem = $scope.data.find(item => item.id === $scope.selectedPost.id);
+    var selectedDataItem = $scope.data.find(item => item.id === post.id);
 
     if (selectedDataItem) {
-        // Verifica si el usuario ya ha dado "like"
-        if (!selectedDataItem.likes.includes($scope.user)) {
-            // Agrega el nuevo "like" al arreglo de likes
+        const userIndex = selectedDataItem.likes.indexOf($scope.user);
+
+        if (userIndex === -1) {
+            // Si no ha dado like, lo agregamos
             selectedDataItem.likes.push($scope.user);
-        } 
+        } else {
+            // Si ya dio like, lo quitamos
+            selectedDataItem.likes.splice(userIndex, 1);
+        }
     }
 };
+   
+   
+
    
    
 $scope.calculateTimeAgo = function(alertDate) {
