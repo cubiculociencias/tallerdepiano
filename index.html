@@ -2512,14 +2512,14 @@ app
 
    $stateProvider
     .state('menu', {
-      url: "/menu",
+      url: "",
       abstract: true,
       templateUrl: "menu.html",
       controller: 'MenuCtrl'
     })
   
    .state('menu.home', {
-      url: "/",
+      url: "",
       views: {
         'menuContent': {
           templateUrl: "home.html"
@@ -2736,9 +2736,9 @@ app
 
 
 
-    ; 
+    ;  
 
-  $urlRouterProvider.otherwise("menu/");
+  $urlRouterProvider.otherwise("");
   $ionicConfigProvider.tabs.position('bottom'); 
 })
 
