@@ -2008,12 +2008,53 @@ class="js-trigger-video-modal" onclick="toggle_video_modal(this)" style="color: 
   
   angular.module('studentsApp', [])
   .controller('Controller1', ['$http', '$scope', '$sce', '$timeout', '$interval', function($http, $scope, $sce, $timeout, $interval) {
-   $scope.userData = [];
-  $scope.today = new Date()
+   $scope.userData = response.data;
+    $scope.messages = JSON.parse($scope.userData.messages)
+      $scope.userDataLoaded = true;
+     $scope.userLevel = $scope.getLevel($scope.userData.lvl)
+      $scope.lsn = $scope.userData.lsn
+ $scope.history = $scope.userData.lessons
+      $scope.startAnimation = function() {
+        $('.progress-bar').animate({
+          width: $scope.userData.progress + '%'
+        }, 500); 
+      };
+    $scope.picture = $scope.userData.photo
+  
+     angular.element(document).ready(function() {
+    angular.element(".upload-image").on('click', function() {
+      angular.element(".imageData").click();
+    })
+     
+      angular.element(".upload-camera").on('click', function() {
+      angular.element(".cameraInput").click();
+    })
+     
+     angular.element(".imageData").on('change', function() {
+      readURL(this);
+    });
+     
+     angular.element(".cameraInput").on('change', function() {
+      readURL(this);
+    });
+     
+     
+  })
 
- $scope.lsn=2;
-     $scope.lvl=0;
-     $scope.userDataLoaded = true;
+         
+    
+    })
+    
+     $scope.getLevel = function(lvl){
+  if(lvl == 0){
+     return "Nivel Preparatorio"
+  }else{
+    return "Nivel "+lvl.toString()
+  }
+}
+    }
+    
+   getData()
     
     $scope.dateToString = function(fechaOriginal){
   const partesFecha = fechaOriginal.split('/');
