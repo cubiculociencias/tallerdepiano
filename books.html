@@ -356,7 +356,7 @@ background-color: rgba(0, 0, 0, 0.5);
 </div>
   
   <div class="mhn-slide owl-carousel">
-    <div class="mhn-item" ng-repeat="manual in manuals" ng-click="showPreview(manual, lvl, lsn)">
+    <div class="mhn-item" ng-repeat="manual in pieces" ng-click="showPreview(manual, lvl, lsn)">
       <div class="mhn-inner">
        <div class="lock-icon" ng-if="!datosCargados || manual.lvl > lvl || (manual.lvl == lvl && manual.lsn >= lsn)">
   <i class="ri-lock-fill"></i>
@@ -371,7 +371,7 @@ background-color: rgba(0, 0, 0, 0.5);
 </div>
   
    <div class="mhn-slide owl-carousel">
-    <div class="mhn-item" ng-repeat="manual in manuals" ng-click="marcarPreferencia()">
+    <div class="mhn-item" ng-repeat="manual in repertoire" ng-click="marcarPreferencia()">
       <div class="mhn-inner">
         <div class="lock-icon" ng-if="!lvl || !lsn || manual.lvl > lvl || (manual.lvl == lvl && manual.lsn >= lsn)">
   <i class="ri-lock-fill"></i>
@@ -404,9 +404,9 @@ background-color: rgba(0, 0, 0, 0.5);
     </div>
 
     <div class="action-buttons">
-      <button ng-click="openPlayer(selectedManual)">Play </button>
-      <button class="noDisplay">Play (MIDI)</button>
-      <button  ng-click="openPDF(selectedManual.pdf)" >PDF</button>
+      <button ng-click="openPlayer(selectedManual)">Abrir </button>
+     <!-- <button class="noDisplay">Play (MIDI)</button>  -->
+      <button  ng-click="openPDF(selectedManual.pdf)" >Descargar</button>
     </div>
   </div>
 </div>
@@ -468,6 +468,40 @@ angular.module('books', [])
       {'title': 'Nivel 3','subtitle': 'Unidad 3','background': 'https://lh3.googleusercontent.com/d/1P0azVqQgJKBr6B7rJQlCQIFfAELWUiif', 'pdf': '', 'lvl': 2, lsn: 7},
      
     ];
+
+
+  $scope.pieces = [ 
+      {'title': 'Ode to Joy - var3','subtitle': 'L.V. Beethoven','background': 'https://lh3.googleusercontent.com/d/1Ad2scs9x1sxc_mx8L35NVUFk_0vj6hej', 'pdf': 'https://drive.google.com/file/d/1Ad2scs9x1sxc_mx8L35NVUFk_0vj6hej/preview', 'lvl': 0, lsn: 2},
+      {'title': 'Trumpet Voluntary','subtitle': 'Jeremiah Clarke','background': 'https://lh3.googleusercontent.com/d/1CR1bbjDnL3wzmeb0AM6hkt6D4G8VunTd', 'pdf': 'https://drive.google.com/file/d/1CR1bbjDnL3wzmeb0AM6hkt6D4G8VunTd/preview', 'lvl': 0, lsn: 6},
+      {'title': 'Old German Dance','subtitle': 'Michael Praetorius','background': 'https://lh3.googleusercontent.com/d/1JWJdVevaq7Oj2k4IxQ-2Zi7MP123vM_4', 'pdf': 'https://drive.google.com/file/d/1JWJdVevaq7Oj2k4IxQ-2Zi7MP123vM_4/preview', 'lvl': 0, lsn: 7},
+      {'title': 'Waltz','subtitle': 'Carl Czerny','background': 'https://lh3.googleusercontent.com/d/18-2Gfm_kZSGnSMe-dadCUnWlypbwxMsh', 'pdf': 'https://drive.google.com/file/d/18-2Gfm_kZSGnSMe-dadCUnWlypbwxMsh/preview', 'lvl': 0, lsn: 9},
+      {'title': 'Bagpipe','subtitle': 'Anonymous','background': 'https://lh3.googleusercontent.com/d/1iaC23Nv4CSXuQ5YPCLEIR_EUxqhs6pKj', 'pdf': 'https://drive.google.com/file/d/1iaC23Nv4CSXuQ5YPCLEIR_EUxqhs6pKj/preview', 'lvl': 0, lsn: 10},
+      {'title': 'Sonatina','subtitle': 'C.H. Wilton','background': 'https://lh3.googleusercontent.com/d/12In24V0ux173hjL_Q1zA6zvyUq57J38P', 'pdf': 'https://drive.google.com/file/d/12In24V0ux173hjL_Q1zA6zvyUq57J38P/preview', 'lvl': 0, lsn: 12},
+       {'title': 'March I','subtitle': 'D. Gottlob Türk','background': 'https://lh3.googleusercontent.com/d/1AIV_VAPNh_dFbsJH6VRbyx6GcDQEffSi', 'pdf': 'https://drive.google.com/file/d/1AIV_VAPNh_dFbsJH6VRbyx6GcDQEffSi/preview', 'lvl': 1, lsn: 2},
+      {'title': 'March II','subtitle': 'D. Gottlob Türk','background': 'https://lh3.googleusercontent.com/d/1Z_uQb4Vu5nI4nj4jjR6oNL-Xfsx27Bys', 'pdf': 'https://drive.google.com/file/d/1Z_uQb4Vu5nI4nj4jjR6oNL-Xfsx27Bys/preview', 'lvl': 1, lsn: 2},
+      {'title': 'Minuet','subtitle': 'A. Reinagle','background': 'https://lh3.googleusercontent.com/d/1Y2pG3Y3gf8_Y7RGBtBCb3wCHcYDCz2Mf', 'pdf': 'https://drive.google.com/file/d/1Y2pG3Y3gf8_Y7RGBtBCb3wCHcYDCz2Mf/preview', 'lvl': 1, lsn: 3},
+       {'title': 'Promenade','subtitle': 'A. Reinagle','background': 'https://lh3.googleusercontent.com/d/13kGxg8iUnBphTYoIotCalNkcJgcW_T12', 'pdf': 'https://drive.google.com/file/d/13kGxg8iUnBphTYoIotCalNkcJgcW_T12/preview', 'lvl': 1, lsn: 4},
+      {'title': 'Sonatina in C','subtitle': 'Cornelius Gurlitt','background': 'https://lh3.googleusercontent.com/d/1zUDSm_eKBu830fBpJg_l3pKHswkmV0RM', 'pdf': 'https://drive.google.com/file/d/1zUDSm_eKBu830fBpJg_l3pKHswkmV0RM/preview', 'lvl': 1, lsn: 5},
+      {'title': 'March in F','subtitle': 'D. Gottlob Türk','background': 'https://lh3.googleusercontent.com/d/1xoG80Ob1e2-d2_Vun_v_UrKJPJkrbFdM', 'pdf': 'https://drive.google.com/file/d/1xoG80Ob1e2-d2_Vun_v_UrKJPJkrbFdM/preview', 'lvl': 1, lsn: 6},
+       {'title': 'The Old Windmill','subtitle': 'Dunhill','background': 'https://lh3.googleusercontent.com/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt', 'pdf': 'https://drive.google.com/file/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt/preview', 'lvl': 1, lsn: 6},
+
+        {'title': 'Allemande','subtitle': 'J.H. Schein','background': 'https://lh3.googleusercontent.com/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt', 'pdf': 'https://drive.google.com/file/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt/preview', 'lvl': 2, lsn: 1},
+          {'title': 'Andante','subtitle': 'F. Beyer','background': 'https://lh3.googleusercontent.com/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt', 'pdf': 'https://drive.google.com/file/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt/preview', 'lvl': 2, lsn: 2},
+            {'title': 'Aria in F','subtitle': 'J.S. Bach','background': 'https://lh3.googleusercontent.com/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt', 'pdf': 'https://drive.google.com/file/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt/preview', 'lvl': 2, lsn: 3},
+
+             {'title': 'Sonatina in C','subtitle': 'Frank Lynes','background': 'https://lh3.googleusercontent.com/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt', 'pdf': 'https://drive.google.com/file/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt/preview', 'lvl': 2, lsn: 7},
+          {'title': 'Gigue in G','subtitle': 'G. P. Telemann','background': 'https://lh3.googleusercontent.com/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt', 'pdf': 'https://drive.google.com/file/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt/preview', 'lvl': 2, lsn: 9}, 
+     
+    ];
+
+
+
+  $scope.repertoire = [ 
+     
+     
+    ];
+
+
 
     var requestData = {
     action: "getBasicData",
