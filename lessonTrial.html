@@ -2008,7 +2008,28 @@ class="js-trigger-video-modal" onclick="toggle_video_modal(this)" style="color: 
   
   angular.module('studentsApp', [])
   .controller('Controller1', ['$http', '$scope', '$sce', '$timeout', '$interval', function($http, $scope, $sce, $timeout, $interval) {
-   $scope.userData = response.data;
+   $scope.userData = [];
+  $scope.userDataLoaded = false;
+  $scope.today = new Date()
+
+   function getData(){
+  var requestData = { 
+    action: "getProfileData",
+    token: localStorage.getItem('MStoken')
+  };
+
+  var config = {
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    },
+    followRedirects: true, 
+  };
+ 
+      
+   
+  $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData, config)
+    .then(function(response) { 
+      $scope.userData = response.data;
     $scope.messages = JSON.parse($scope.userData.messages)
       $scope.userDataLoaded = true;
      $scope.userLevel = $scope.getLevel($scope.userData.lvl)
