@@ -10,6 +10,688 @@
 
 
 
+<style>
+
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+  
+
+
+
+
+
+.row--center{
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.row--margin{
+  margin-top:45px;
+}
+
+.row__title{
+  text-align: center;
+  font-size: 26px;
+  font-weight: 400;
+  margin-top: 0px;
+}
+
+.row__sub{
+  text-align: center;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0px; 
+  color: black;
+}
+
+   .swiper-container-main{
+     box-shadow:  0 4px 8px 0px rgba(0,0,0,0.2);
+  }
+  
+  .card-deck .card{
+     box-shadow:  0 4px 8px 0px rgba(0,0,0,0.2);
+  }
+
+
+.price-box{
+  padding: 0px 25px;  
+}
+
+.price-box__wrap{
+  background-color: white !important;;
+  border-radius:6px;
+  box-shadow:  0 4px 8px 0px rgba(0,0,0,0.2); /*0px 22px 20px -10px rgba(0, 0, 0,0.2)*/
+  padding: 35px 35px 40px 35px;
+  text-align:center;
+  transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  -ms-transition: all 0.4s;
+  -o-transition: all 0.4s;
+}
+
+.price-box__img{
+  display: inline-block;
+}
+
+.price-box__img{
+  width:130px;
+  height:130px;
+  border-radius: 15%;
+  margin-bottom: 2.5vw;
+  background-position: center;
+    background-size:cover;
+  background-repeat:no-repeat;
+}
+
+
+
+.price-box--purple .price-box__img{
+  background-image: url("https://lh3.googleusercontent.com/d/1W0dBQ1trjKR1LZ0ZAvnYvTL4y_5m-fF-");
+
+}
+
+
+.price-box--violet .price-box__img{
+  background-image: url("https://lh3.googleusercontent.com/d/1UHjwR61Dwcbz3XnrrcJ9Y_c6hmMGr2Uh");
+
+}
+
+.price-box--blue .price-box__img{
+  background-image: url("https://lh3.googleusercontent.com/d/1qIbUXsTSPmX6DyCnQTLmGhflYxaI4iOz");
+
+}
+
+.price-box__title{
+  font-size:22px;
+  letter-spacing:1px;
+  margin-bottom:4px;
+}
+
+.price-box__people{
+  font-size:12px;
+  color:black;
+  font-weight: 300;
+  letter-spacing:1px;
+}
+.price-box__discount{
+  font-size: 28px;
+  font-weight: 700;
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+.price-box__dollar {
+    font-size: 18px;
+    font-weight: 400;
+    vertical-align: top;
+    margin-right: 4px;
+}
+
+.price-box--purple .price-box__dollar{
+  color: #8a3aff;
+}
+
+.price-box--violet .price-box__dollar{
+  color: #6f79ff;
+}
+
+.price-box--blue .price-box__dollar{
+  color: #3a9fff;
+}
+
+.price-box__discount--light{
+  font-weight: 400;
+  font-size: 20px;
+  margin-left: 3px;
+}
+
+.price-box__price {
+    margin-top: 3px;
+    font-size: 15px;
+    color: #8198ae;
+    letter-spacing: 1px;
+    margin-bottom: 0;
+    font-weight: 300;
+
+}
+
+.price-box__feat {
+    margin-top: 30px;
+    font-size: 16px;
+}
+
+.price-box__list {
+    text-align: left;
+    padding-left: 30px;
+    margin: 0;
+    list-style: none;
+}
+
+.price-box__list-el{
+  position: relative;
+  margin-bottom: 8px;
+  font-weight: 300;
+}
+
+.price-box__list-el:before{
+  content: "✓";
+  position: absolute;
+  left: -25px;
+  font-size: 18px;
+  top: -4px;
+}
+
+.price-box--purple .price-box__list-el:before{
+  color: #8a3aff;
+}
+
+.price-box--violet .price-box__list-el:before{
+  color: #6f79ff;
+}
+
+.price-box--blue .price-box__list-el:before{
+  color: #3a9fff;
+}
+
+.price-box__wrap:hover {
+  backface-visibility: hidden;
+  transform: scale(1.05, 1.05);
+  box-shadow: 0px 30px 18px -8px rgba(0, 0, 0,0.1);
+}
+
+
+
+
+
+
+.price-box__wrap:hover .btn {
+  box-shadow: 0px 25px 18px -6px rgba(0, 0, 0,0.2);
+}
+
+.btn--revert{
+    background-color:transparent;
+    color: #8198ae;
+    box-shadow: none;
+    border:1px solid #c9d9e9;
+}
+
+.btn--revert:hover{
+    background-color:transparent;
+    color: #1f4568;
+    box-shadow: none;
+    border:1px solid #8198ae;
+}
+
+
+.btn--purple {
+    background-color: #8a3aff;
+}
+
+.btn--purple:hover{
+    background-color: #b284f6;
+}
+
+.btn--violet {
+    background-color: #6f79ff;
+}
+.btn--violet:hover {
+    background-color: #878ef3;
+}
+
+.btn--blue {
+    background-color: #3a9fff;
+}
+.btn--blue:hover {
+    background-color: #63b2fc;
+}
+.btn--width{
+  width: 120px;
+}
+
+.btn--white{
+  background-color: #fff;
+  border: 1px solid #ededed;
+  color: #8198ae;
+}
+
+.btn--white:hover{
+  background-color: #fff;
+  color: #8198ae;
+}
+
+.price-box__btn {
+    position: absolute;
+    bottom: -17px;
+    left: 50%;
+    margin-left: -55px;
+}
+
+.row__sub--light{
+  color: #aec0d2;
+}
+.item__img{
+  width:25px;
+  margin-right:10px;
+}
+
+.sect{
+  padding: 40px 0;
+  position: relative;
+
+}
+
+
+.contact-info{
+  background-image: url("https://i.ibb.co/yQT891P/Copia-de-Whats-App-Image-2023-01-05-at-14-43-22-2.jpg");
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: contain;
+}
+
+
+
+
+
+@media screen and (min-width:800px){
+    #youtube {
+    height: 150px;
+  }
+   .jumbotron{    
+    height: 550px;;
+     background-position: center;
+    margin-top: 5px;
+  }
+}
+
+@media screen and (min-width:1000px){
+     #youtube {
+    height: 200px;
+  }
+}
+
+
+@media screen and (min-width:1024px){
+
+    .contact-info{
+      
+        height: 250px;
+  display: flex;
+  align-items: flex-end;
+    }
+    
+
+  .card__side{
+    top: -20px;
+    left: 30px;
+      height: 30vh;
+  width: 30vh;
+  }
+  
+   .modal-container .modal-background .modal img{
+      width: 55%;
+      height: auto;
+  }
+  
+  input {
+  margin-bottom: 10px;
+}
+  
+  select{
+    margin-bottom: 10px;
+  }
+  
+  /*.modal-container .modal-background .modal card{
+    max-width: 300px;
+  }*/
+  
+  .form-insc{
+    max-width: 750px;
+  }
+
+
+  #drive{
+    height: 480px;
+    width: 380px;
+    margin-top: 30px;
+  }
+ }  
+
+ @media screen and (min-width:1200px){
+    #youtube {
+    height: 250px;
+  }
+}
+  
+
+@media screen and (max-width:1024px){
+  .collapse{
+ display: none;
+}
+  .navbar-toggle {
+    margin: 0;
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+  .header__container{
+    width: 100%;
+    padding: 0;
+  }
+  .header__menu {
+    width: 100%;
+}
+  .header{
+    background-color:#fff; 
+    padding: 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 4;
+  }
+  .header__logo{
+    padding: 12px 20px 12px 20px;
+  }
+  .header__el {
+    display: block;
+    padding: 10px 20px;
+    border-top: 1px solid #ededed;
+}
+  
+  .header .btn--white, .header .btn--white:hover{
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    color:#fff;
+    background-color:transparent;
+  }
+  .header__el--blue{
+    background-color:#3a9fff;
+  }
+  
+   .modal-container .modal-background .modal img{
+      width: 60%;
+      height: auto;
+  }
+  
+  .form-insc{
+    max-width: 700px;
+  }
+
+  #drive{
+    height: 480px;
+    width: 380px;
+    margin-top: 30px;
+  }
+   
+}
+
+
+@media screen and (max-width:991px){
+  .price-box {
+    padding: 0px 10px;
+  }
+  .item__content {
+    height: auto;
+}
+
+}
+
+@media screen and (max-width:767px) {
+
+ .price-box__title {
+    font-size: 18px;
+    margin-top: 10px;
+}
+  .price-box__img {
+    width: 90px;
+    height: 90px;
+  }
+  .price-box__wrap {
+    padding: 20px 20px 30px 20px;
+  }
+  .price-box__people {
+    font-size: 10px;
+    font-weight: 400;
+  }
+  .price-box__discount {
+    font-size: 22px;
+  }
+  .price-box__price {
+    font-size: 12px;
+  }
+  .price-box__feat {
+      margin-top: 15px;
+      font-size: 14px;
+  }
+  .price-box__list-el {
+    font-size: 12px;
+    margin-bottom: 5px;
+} 
+    .btn {
+    font-size: 12px;
+    margin-left: 5px;
+}
+  .btn--width {
+    width: 100px;
+}
+  .footer {
+    padding: 25px 0;
+  }
+  
+
+  
+   .modal-container .modal-background .modal img{
+      width: 80%;
+      height: auto;
+  }
+
+#youtube {
+    height: 105px;
+  }
+
+  .navbar{
+    margin-left: -15px;
+  }
+  
+}
+
+
+@media screen and (max-width:575px) {
+   .price-box {
+    padding: 0 35px;
+     margin-bottom: 50px;
+  }
+  
+ .price-box__title {
+    font-size:25px;
+  letter-spacing:1px;
+  margin-bottom:4px;
+}
+  .price-box__img {
+    width:130px;
+  height:130px;
+  }
+  .price-box__wrap {
+  border-radius:6px;
+  box-shadow:  0 4px 8px 0px rgba(0,0,0,0.2); /*0px 22px 20px -10px rgba(0, 0, 0,0.2)*/
+  padding: 35px 35px 40px 35px;
+  text-align:center;
+  transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  -ms-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  }
+  .price-box__people{
+  font-size:12px;
+}
+.price-box__discount{
+  font-size: 30px;
+  font-weight: 700;
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+  .price-box__price{
+    font-size: 15px;
+  }
+  .price-box__feat {
+    margin-top: 30px;
+    font-size: 18px;
+}
+
+.price-box__list-el{
+  position: relative;
+  margin-bottom: 8px;
+  font-weight: 300;
+  font-size: 15px;
+}
+  .btn--width{
+  width: 120px;
+  font-size: 14px;
+}
+  
+ 
+
+.card__side{
+    top: -20px;
+    
+      height: 16vh;
+  width: 16vh;
+  }
+
+   .modal-container .modal-background .modal img{
+      width: 100%;
+      height: auto;
+  }
+
+  #youtube {
+    height: 280px;
+  }
+   #drive{
+    height: 400px;
+    width: 100%;
+  }
+  
+  .img-resize{
+    display: none;
+  }
+
+
+}
+
+
+
+@media screen and (max-width:340px){
+  .reduce{
+    font-size: 26px;
+  }
+  .price-box {
+    padding: 0px 20px;
+     margin-bottom: 40px;
+  }
+
+  .footer {
+    padding: 15px 0;
+  }
+  .footer__img {
+    width: 15px;
+  }
+  .contact-info{
+  background-size: contain;
+}
+  .footer__title {
+    font-size: 16px;
+    margin-left: 5px;
+  }
+  .sect {
+    padding: 20px 0;
+  }
+  .sect--padding-top{
+    padding-top: 80px;
+  }
+  .row__sub {
+    font-size: 16px;
+   }
+  .row__title {
+    font-size: 20px;
+    margin-bottom: 5px;
+   }
+  .price-box__title {
+    font-size: 18px;
+    margin-top: 10px;
+}
+  .price-box__img {
+    width: 100px;
+    height: 100px;
+  }
+  .price-box__wrap {
+    padding: 20px 20px 30px 20px;
+  }
+  .price-box__people {
+    font-size: 10px;
+    font-weight: 400;
+  }
+  .price-box__discount {
+    font-size: 22px;
+  }
+  .price-box__price {
+    font-size: 12px;
+  }
+  .price-box__feat {
+      margin-top: 15px;
+      font-size: 14px;
+  }
+  .price-box__list-el {
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+  .site__title {
+    font-size: 24px;
+}
+  .site__subtitle {
+    font-size: 18px;
+    margin: 10px 0 20px 0;
+  }
+  .site__img {
+    margin-top: 30px;
+  }
+  .row--margin {
+    margin-top: 30px;
+}
+  .btn {
+    font-size: 12px;
+    padding: 8px 8px;
+}
+  .btn--width {
+    width: 100px;
+}
+ 
+  .text-box {
+  width: 80%;
+  font-size: 18px;
+  font-weight: 500;
+}
+  
+  #youtube {
+    height: 200px;
+  }
+  
+
+  
+
+}
+  
+  @media (max-height: 500px) {
+     .modal-container .modal-background .modal .card{
+      transform: scale(0.9) translate(0,-35px);
+  }
+}
+  
+ 
+</style>
+  
 <body >
 
 
