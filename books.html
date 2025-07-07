@@ -657,8 +657,7 @@ angular.module('books', [])
     .then(function(response) { 
       $scope.lvl = response.data.lvl;
      $scope.lsn = response.data.lsn;
-    $scope.repertoire = JSON.parse(response.data.repertoire);
-     
+
     $scope.datosCargados = true;
       
 $(function(){
