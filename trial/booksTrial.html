@@ -1,0 +1,638 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.carousel.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+
+
+<style>
+  body{font-family:Roboto,'Open Sans',sans-serif}
+
+.mhn-slide .mhn-item{width:100%;padding:10px}
+.mhn-slide .mhn-inner{width:100%;box-shadow:0 2px 10px 0 rgba(0,0,0,.16),0 2px 5px 0 rgba(0,0,0,.26);border-radius:3px;transition: transform 0.4s ease;}
+  
+  .mhn-item:hover .mhn-inner {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+}
+
+.mhn-slide .mhn-text{text-align:center;padding:0 10px}
+.mhn-slide .mhn-text h4{font-weight:700;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+.mhn-slide .mhn-text p{max-height:4.5em;overflow:hidden}
+.mhn-slide .owl-stage-outer{z-index:1}
+.mhn-slide .owl-nav{color:#333;position:absolute;top:0;left:0;right:0;bottom:0}
+.mhn-slide .owl-nav svg{color:currentColor}
+.mhn-slide .owl-nav .disabled{display:none}
+.mhn-slide .owl-prev,
+.mhn-slide .owl-next{
+  top:110px;
+  z-index:2;
+  width:40px;
+  height:40px;
+  padding:8px;
+  margin-top:-20px;
+  position:absolute;
+  border-radius:50%;
+  background-color:#fff;
+  box-shadow:0 4px 4px rgba(0,0,0,.3),0 0 4px rgba(0,0,0,.2)
+}
+.mhn-slide .owl-prev{left:-10px}
+.mhn-slide .owl-next{right:-10px}
+  
+  .carousel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 15px 10px;
+}
+
+.carousel-header h2 {
+  font-size: 1.4em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.carousel-header .arrow {
+  font-size: 1.1em;
+  color: silver;
+}
+
+  
+  
+  .preview-modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.preview-backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+}
+
+.preview-content {
+  position: relative;
+  max-width: 340px;
+  background: #111;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  color: white;
+  z-index: 1;
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+.cover-large {
+  width: 100%;
+  border-radius: 2px;
+  margin-bottom: 1rem;
+}
+
+.close-btn {
+  position: absolute;
+  top: 1.7rem;
+  right: 1.7rem;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.close-btn:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+.collection {
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #aaa;
+  margin-bottom: 0.25rem;
+}
+
+.separator {
+  border: none;
+  height: 1px;
+  background: #888;
+  width: 70%;
+  margin: 0.5rem auto 1rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.author {
+  font-size: 1rem;
+  color: #ccc;
+  margin-top: 0.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.action-buttons button {
+  background: #444;
+  color: white;
+  padding: 0.75rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+  
+   .noDisplay{display: none;}
+
+.secondary {
+  background: transparent;
+  border: 1px solid #555;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+  
+  .custom-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1050;
+  display: flex;
+background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(7px);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  z-index: 1040;
+}
+
+  .lock-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: rgba(0, 0, 0, 0.6); /* gris claro translúcido */
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.lock-icon i {
+  font-size: 16px;
+  color: white;
+}
+
+.grade-badge{
+    position: absolute;
+  bottom: 15px;
+  left: 15px;
+  background-color: rgba(0, 0, 0, 0.6); /* gris claro translúcido */
+  padding: 0px 7px 0px 7px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  font-size: 12px;
+  color: white;
+}
+
+
+  @media (min-width: 768px) {
+  .preview-content {
+    max-width: 700px !important;
+    display: flex;
+    flex-direction: row;
+    padding: 2rem;
+   
+    gap: 2rem;
+  }
+    
+    
+
+  .cover-large {
+    width: 40% !important;
+    height: auto;
+    margin-bottom: 0;
+    border-radius: 8px;
+  }
+
+  .right-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .text-content {
+    margin-top: 1.5rem;
+  }
+    
+    .text-content .title{
+      margin-top: 20px !important;
+       text-align: left;
+      font-size: 20px;
+    }
+    
+    .text-content .author{
+      margin-top: 5px !important;
+       text-align: left;
+      font-size: 15px;
+    }
+
+  .separator {
+    margin: 0.5rem 0 1rem 0;
+    width: 100%;
+  }
+
+  .action-buttons {
+    margin-bottom: 3rem;
+    flex-direction: column;
+    gap: 0.8rem !important;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .action-buttons button {
+    flex: 1 1 auto;
+  }
+  
+  .noDisplay{display: block !important;}
+}
+
+
+   .player-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .player-header {
+    padding: 4px;
+    background: #f5f5f5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .player-container {
+    flex: 1;
+    width: 100%;
+  }
+  
+  .player-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  
+</style>
+
+<div class="container" ng-app="books" ng-controller="main">
+  
+  
+
+    <div class="carousel-header">
+  <h2>Piezas  </h2>
+</div>
+  
+  <div class="mhn-slide owl-carousel">
+    <div class="mhn-item" ng-repeat="manual in pieces" ng-click="showPreview(manual, lvl, lsn)">
+      <div class="mhn-inner">
+       <div class="lock-icon" ng-if="!datosCargados || manual.lvl > lvl || (manual.lvl == lvl && manual.lsn >= lsn)">
+  <i class="ri-lock-fill"></i>
+</div> 
+
+ <div class="grade-badge">
+ {{manual.grade}}
+</div> 
+        <img ng-src="{{manual.background}}">
+      </div>
+    </div>
+  </div>
+  
+<div class="carousel-header">
+  <h2>Manuales   </h2>
+</div>
+
+  
+  <div class="mhn-slide owl-carousel">
+    <div class="mhn-item" ng-repeat="manual in manuals" ng-click="showPreview(manual, lvl, lsn)">
+     <!-- <h4>{{manual.level}}</h4>
+          <p>{{manual.block}}</p>  -->
+      <div class="mhn-inner">
+       <div class="lock-icon" ng-if="!datosCargados || manual.lvl > lvl || (manual.lvl == lvl && manual.lsn >= lsn)">
+  <i class="ri-lock-fill"></i>
+        </div>
+        
+         <div class="lock-icon" ng-if="!datosCargados || manual.lvl > lvl || (manual.lvl == lvl && manual.lsn >= lsn)">
+  <i class="ri-lock-fill"></i>
+        </div>
+        <img ng-src="{{manual.background}}">
+      </div>
+    </div>
+  </div>
+  
+
+  
+  <div class="carousel-header">
+  <h2>Piezas finales  </h2>
+</div>
+  
+   <div class="mhn-slide owl-carousel">
+    <div class="mhn-item" ng-repeat="manual in repertoire" ng-click="showPreview2(manual)">
+      <div class="mhn-inner">
+       
+<div class="grade-badge">
+ {{manual.grade}}
+</div> 
+        <img ng-src="{{manual.background}}">
+      </div>
+    </div>
+  </div>
+  
+  
+  <br><br>
+ 
+  
+  
+<div class="preview-modal" ng-show="selectedManual">
+  <div class="preview-backdrop"></div>
+
+   <div class="preview-content">
+  <button class="close-btn" ng-click="selectedManual = null">✕</button>
+  
+  <img class="cover-large" ng-src="{{selectedManual.background}}" />
+
+  <div class="right-column">
+    <div class="text-content">
+      <p class="collection">Mozart Academy</p>
+      <hr class="separator">
+      <h2 class="title">{{selectedManual.title}}</h2>
+      <p class="author">{{selectedManual.subtitle}}</p>
+    </div>
+
+    <div class="action-buttons">
+      <button ng-click="openPlayer(selectedManual)">Abrir </button>
+     <!-- <button class="noDisplay">Play (MIDI)</button>  -->
+      <button  ng-click="openPDF(selectedManual.pdf)" >Descargar</button>
+    </div>
+  </div>
+</div>
+
+  
+</div>
+
+
+
+
+  
+     <div class="player-modal" ng-show="showPlayer">
+    <div class="player-header">
+      <button class="close-btn" style="margin-top: -10px;" ng-click="showPlayer = false">✕</button>
+      <h4>{{currentManual.title}}</h4>
+    </div>
+    <div class="player-container">
+      <iframe ng-src="{{trustSrc(currentManual.pdf)}}" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+  
+    <div class="modal fade in custom-modal" ng-show="showPreferencias" style="display: block;" tabindex="-1">
+    <div class="modal-backdrop fade in" ng-click="showPreferencias = false"></div>
+    <div class="modal-wrapper">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content text-center">
+          <div class="modal-body">
+            <button type="button" class="close" ng-click="showPreferencias = false">×</button>
+            <h4>Avanza en las actividades para acceder a más contenido</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+</div>
+
+<script>
+  
+
+angular.module('books', [])
+.controller('main', ['$http', '$scope', '$sce', function($http, $scope, $sce){
+  
+  
+ $scope.manuals = [ 
+      {'title': 'Nivel Preparatorio','subtitle': 'Unidad 1','background': 'https://lh3.googleusercontent.com/d/1rFNza9NDinXOb0OOG3pTEYx8IYWygNKF', 'pdf': 'https://drive.google.com/file/d/1rFNza9NDinXOb0OOG3pTEYx8IYWygNKF/preview', 'lvl': 0, lsn: 0},
+      {'title': 'Nivel Preparatorio','subtitle': 'Unidad 2','background': 'https://lh3.googleusercontent.com/d/15qT2ccd4PkQC82qc-ig831qaqQo5gzbu', 'pdf': 'https://drive.google.com/file/d/15qT2ccd4PkQC82qc-ig831qaqQo5gzbu/preview', 'lvl': 0, lsn: 5},
+      {'title': 'Nivel Preparatorio','subtitle': 'Unidad 3','background': 'https://lh3.googleusercontent.com/d/1VVBfT4V3nfwekluTQcyepmm4-5XIFxis', 'pdf': 'https://drive.google.com/file/d/1VVBfT4V3nfwekluTQcyepmm4-5XIFxis/preview', 'lvl': 0, lsn: 9},
+      {'title': 'Nivel 1','subtitle': 'Unidad 1','background': 'https://lh3.googleusercontent.com/d/1sHsaDQvii8ApRIkpsN5h0e9yyRYg5tvY', 'pdf': 'https://drive.google.com/file/d/1sHsaDQvii8ApRIkpsN5h0e9yyRYg5tvY/preview', 'lvl': 1, lsn: 0},
+      {'title': 'Nivel 1','subtitle': 'Unidad 2','background': 'https://lh3.googleusercontent.com/d/12FwPz8DZqkRoeulbvXTzbMtcbQ4nE_xE', 'pdf': 'https://drive.google.com/file/d/12FwPz8DZqkRoeulbvXTzbMtcbQ4nE_xE/preview', 'lvl': 1, lsn: 4},
+      {'title': 'Nivel 1','subtitle': 'Unidad 3','background': 'https://lh3.googleusercontent.com/d/1tU1TzeczlheibtMLqucEYYpgvzkZ-48Q', 'pdf': 'https://drive.google.com/file/d/1tU1TzeczlheibtMLqucEYYpgvzkZ-48Q/preview', 'lvl': 1, lsn: 7},
+       {'title': 'Nivel 2','subtitle': 'Unidad 1','background': 'https://lh3.googleusercontent.com/d/1Ms7bmUV955rU5IzdgN4mcLhAe7KJYWWK', 'pdf': 'https://drive.google.com/file/d/1Ms7bmUV955rU5IzdgN4mcLhAe7KJYWWK/preview', 'lvl': 2, lsn: 0},
+      {'title': 'Nivel 2','subtitle': 'Unidad 2','background': 'https://lh3.googleusercontent.com/d/1AfEgtD_m-bSWmmZJXaxujlfTc6ehSDBJ', 'pdf': 'https://drive.google.com/file/d/1AfEgtD_m-bSWmmZJXaxujlfTc6ehSDBJ/preview', 'lvl': 2, lsn: 4},
+      {'title': 'Nivel 2','subtitle': 'Unidad 3','background': 'https://lh3.googleusercontent.com/d/1FHx4_pSIiA04oDAFhT4NM15D56unpRpw', 'pdf': 'https://drive.google.com/file/d/1FHx4_pSIiA04oDAFhT4NM15D56unpRpw/preview', 'lvl': 2, lsn: 7},
+       {'title': 'Nivel 3','subtitle': 'Unidad 1','background': 'https://lh3.googleusercontent.com/d/1P0azVqQgJKBr6B7rJQlCQIFfAELWUiif', 'pdf': 'https://drive.google.com/file/d/1P0azVqQgJKBr6B7rJQlCQIFfAELWUiif/preview', 'lvl': 2, lsn: 0},
+      {'title': 'Nivel 3','subtitle': 'Unidad 2','background': 'https://lh3.googleusercontent.com/d/1i-4cAu9BGFDN7kzoMFQAMKjp2vGzkKCs', 'pdf': 'https://drive.google.com/file/d/1i-4cAu9BGFDN7kzoMFQAMKjp2vGzkKCs/preview', 'lvl': 2, lsn: 4},
+      {'title': 'Nivel 3','subtitle': 'Unidad 3','background': 'https://lh3.googleusercontent.com/d/1P0azVqQgJKBr6B7rJQlCQIFfAELWUiif', 'pdf': '', 'lvl': 2, lsn: 7},
+     
+    ];
+
+
+  $scope.pieces = [ 
+      {'title': 'Ode to Joy - var3','subtitle': 'L.V. Beethoven','background': 'https://lh3.googleusercontent.com/d/1Ad2scs9x1sxc_mx8L35NVUFk_0vj6hej', 'pdf': 'https://drive.google.com/file/d/1Ad2scs9x1sxc_mx8L35NVUFk_0vj6hej/preview', 'lvl': 0, 'lsn': 0, 'grade': 'Preparatory'},
+      {'title': 'Trumpet Voluntary','subtitle': 'Jeremiah Clarke','background': 'https://lh3.googleusercontent.com/d/1CR1bbjDnL3wzmeb0AM6hkt6D4G8VunTd', 'pdf': 'https://drive.google.com/file/d/1CR1bbjDnL3wzmeb0AM6hkt6D4G8VunTd/preview', 'lvl': 0, 'lsn': 6, 'grade': 'Preparatory'},
+      {'title': 'Old German Dance','subtitle': 'Michael Praetorius','background': 'https://lh3.googleusercontent.com/d/1JWJdVevaq7Oj2k4IxQ-2Zi7MP123vM_4', 'pdf': 'https://drive.google.com/file/d/1JWJdVevaq7Oj2k4IxQ-2Zi7MP123vM_4/preview', 'lvl': 0, 'lsn': 7, 'grade': 'Preparatory'},
+      {'title': 'Waltz','subtitle': 'Carl Czerny','background': 'https://lh3.googleusercontent.com/d/18-2Gfm_kZSGnSMe-dadCUnWlypbwxMsh', 'pdf': 'https://drive.google.com/file/d/18-2Gfm_kZSGnSMe-dadCUnWlypbwxMsh/preview', 'lvl': 0, 'lsn': 9, 'grade': 'Preparatory'},
+      {'title': 'Bagpipe','subtitle': 'Anonymous','background': 'https://lh3.googleusercontent.com/d/1iaC23Nv4CSXuQ5YPCLEIR_EUxqhs6pKj', 'pdf': 'https://drive.google.com/file/d/1iaC23Nv4CSXuQ5YPCLEIR_EUxqhs6pKj/preview', 'lvl': 0, 'lsn': 10, 'grade': 'Preparatory'},
+      {'title': 'Sonatina','subtitle': 'C.H. Wilton','background': 'https://lh3.googleusercontent.com/d/12In24V0ux173hjL_Q1zA6zvyUq57J38P', 'pdf': 'https://drive.google.com/file/d/12In24V0ux173hjL_Q1zA6zvyUq57J38P/preview', 'lvl': 0, 'lsn': 12, 'grade': 'Preparatory'},
+       {'title': 'March I','subtitle': 'D. Gottlob Türk','background': 'https://lh3.googleusercontent.com/d/1AIV_VAPNh_dFbsJH6VRbyx6GcDQEffSi', 'pdf': 'https://drive.google.com/file/d/1AIV_VAPNh_dFbsJH6VRbyx6GcDQEffSi/preview', 'lvl': 1, 'lsn': 2, 'grade': 'Preparatory'},
+      {'title': 'March II','subtitle': 'D. Gottlob Türk','background': 'https://lh3.googleusercontent.com/d/1Z_uQb4Vu5nI4nj4jjR6oNL-Xfsx27Bys', 'pdf': 'https://drive.google.com/file/d/1Z_uQb4Vu5nI4nj4jjR6oNL-Xfsx27Bys/preview', 'lvl': 1, 'lsn': 2, 'grade': 'Preparatory'},
+      {'title': 'Minuet','subtitle': 'A. Reinagle','background': 'https://lh3.googleusercontent.com/d/1Y2pG3Y3gf8_Y7RGBtBCb3wCHcYDCz2Mf', 'pdf': 'https://drive.google.com/file/d/1Y2pG3Y3gf8_Y7RGBtBCb3wCHcYDCz2Mf/preview', 'lvl': 1, 'lsn': 3, 'grade': 'Preparatory'},
+       {'title': 'Promenade','subtitle': 'A. Reinagle','background': 'https://lh3.googleusercontent.com/d/1S1IwsNd6pzbUUpLONCjHC39GssguknES', 'pdf': 'https://drive.google.com/file/d/1S1IwsNd6pzbUUpLONCjHC39GssguknES/preview', 'lvl': 1, 'lsn': 4, 'grade': 'Preparatory'},
+      {'title': 'Sonatina in C','subtitle': 'Cornelius Gurlitt','background': 'https://lh3.googleusercontent.com/d/1zUDSm_eKBu830fBpJg_l3pKHswkmV0RM', 'pdf': 'https://drive.google.com/file/d/1zUDSm_eKBu830fBpJg_l3pKHswkmV0RM/preview', 'lvl': 1, 'lsn': 5, 'grade': 'Grade 1'},
+      {'title': 'March in F','subtitle': 'D. Gottlob Türk','background': 'https://lh3.googleusercontent.com/d/1xoG80Ob1e2-d2_Vun_v_UrKJPJkrbFdM', 'pdf': 'https://drive.google.com/file/d/1xoG80Ob1e2-d2_Vun_v_UrKJPJkrbFdM/preview', 'lvl': 1, 'lsn': 6, 'grade': 'Grade 1'},
+       {'title': 'The Old Windmill','subtitle': 'Dunhill','background': 'https://lh3.googleusercontent.com/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt', 'pdf': 'https://drive.google.com/file/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt/preview', 'lvl': 1, 'lsn': 6, 'grade': 'Grade 1'},
+
+        {'title': 'Allemande','subtitle': 'J.H. Schein','background': 'https://lh3.googleusercontent.com/d/1m27dxSoHVEsMSplzIc2QYi_Ettm9LZhn', 'pdf': 'https://drive.google.com/file/d/1m27dxSoHVEsMSplzIc2QYi_Ettm9LZhn/preview', 'lvl': 2, 'lsn': 1, 'grade': 'Grade 1'},
+          {'title': 'Andante','subtitle': 'F. Beyer','background': 'https://lh3.googleusercontent.com/d/1LSa0lIkuOzU4fhgZr2r4kpgOyRlA2zgj', 'pdf': 'https://drive.google.com/file/d/1LSa0lIkuOzU4fhgZr2r4kpgOyRlA2zgj/preview', 'lvl': 2, 'lsn': 2, 'grade': 'Grade 1'},
+            {'title': 'Aria in F','subtitle': 'J.S. Bach','background': 'https://lh3.googleusercontent.com/d/1gW1tqwKgzmn-UZAmbK4ElCrJ8oRdN3yU', 'pdf': 'https://drive.google.com/file/d/1gW1tqwKgzmn-UZAmbK4ElCrJ8oRdN3yU/preview', 'lvl': 2, 'lsn': 3, 'grade': 'Grade 1'},
+
+             {'title': 'Sonatina in C','subtitle': 'Frank Lynes','background': 'https://lh3.googleusercontent.com/d/13kGxg8iUnBphTYoIotCalNkcJgcW_T12', 'pdf': 'https://drive.google.com/file/d/13kGxg8iUnBphTYoIotCalNkcJgcW_T12/preview', 'lvl': 2, 'lsn': 7, 'grade': 'Grade 2'},
+          {'title': 'Gigue in G','subtitle': 'G. P. Telemann','background': 'https://lh3.googleusercontent.com/d/1r1b7hkZU9jOb_Q37DMQmIYbdyqKovNjZ', 'pdf': 'https://drive.google.com/file/d/1r1b7hkZU9jOb_Q37DMQmIYbdyqKovNjZ/preview', 'lvl': 2, 'lsn': 9, 'grade': 'Grade 2'}, 
+     
+    ];
+
+
+
+  $scope.repertoire = []
+
+
+
+    var requestData = {
+    action: "getBasicData",
+    token: "U2FsdGVkX1/fYgLo+iwNOZ5tzmbZBDwmgbHkDIwyNcN0LwZmLS4gOGwY7YakQ/GO"
+      //localStorage.getItem('MStoken')
+  };
+
+  var config = {
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    } 
+  };
+           
+  $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData, config)
+    .then(function(response) { 
+      $scope.lvl = response.data.lvl;
+     $scope.lsn = response.data.lsn;
+    $scope.datosCargados = true;
+      
+
+    })  
+
+
+     $scope.openPDF = function(URL) {
+      const regex = /\/d\/([^\/]+)\//;
+    const matches = URL.match(regex);
+    var id = matches ? matches[1] : null;
+     var url = "https://drive.google.com/file/d/"+id+"/view"
+    window.open(url, '_blank');
+  };
+  
+ /*   $scope.openPDF = function(URL) {
+    window.open(URL, '_blank');
+  }; */
+  
+ $scope.selectedManual = null;
+  $scope.showPlayer = false;
+  $scope.currentManual = null;
+
+$scope.showPreview = function(manual, lvl, lsn) {
+  if (lvl == null || lsn == null) {
+    // Si los datos aún no se han cargado del servidor
+    $scope.marcarPreferencia();
+    return;
+  }
+ 
+  if (manual.lvl > lvl || (manual.lvl == lvl && manual.lsn >= lsn)) {
+    $scope.marcarPreferencia();
+  } else {
+    $scope.selectedManual = manual;
+  }
+};
+
+  
+  $scope.showPreview2 = function(manual) {
+    $scope.selectedManual = manual;
+};
+  
+   $scope.openPlayer = function(manual) {
+    $scope.currentManual = manual;
+    $scope.showPlayer = true;
+  };
+  
+  $scope.trustSrc = function(src) {
+    return $sce.trustAsResourceUrl(src);
+  };
+
+  
+  $scope.showPreferencias = false;
+
+$scope.marcarPreferencia = function () {
+  $scope.showPreferencias = true;
+  setTimeout(function () {
+    $scope.$apply(function () {
+      $scope.showPreferencias = false;
+    });
+  }, 2500);
+};
+
+  
+
+  $(function(){
+  $('.mhn-slide').owlCarousel({
+    nav:true,
+    //loop:true,
+    slideBy: 1,
+    rewind:false,
+
+    responsive: {
+    0: {
+      items: 3,
+      stagePadding: 20,
+      margin: -5    
+    },
+    600: {
+      items: 4,
+      stagePadding: 40
+    },
+    1000: {
+      items: 5,
+      stagePadding: 60
+    }
+  },
+    smartSpeed:70,
+    
+    navText:['<svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg>','<svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg>']
+  });
+});
+  
+}])
+
+</script>
