@@ -232,6 +232,21 @@ background-color: rgba(0, 0, 0, 0.5);
   color: white;
 }
 
+.grade-badge{
+    position: absolute;
+  bottom: 15px;
+  left: 15px;
+  background-color: rgba(0, 0, 0, 0.6); /* gris claro translúcido */
+  padding: 0px 7px 0px 7px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  font-size: 12px;
+  color: white;
+}
+
 
   @media (min-width: 768px) {
   .preview-content {
@@ -327,14 +342,150 @@ background-color: rgba(0, 0, 0, 0.5);
     border: none;
   }
   
+  .showbox {
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.loader {
+  position: relative;
+  margin: 0px auto;
+  width: 100px;
+}
+.loader:before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+
+.circular {
+  -webkit-animation: rotate 2s linear infinite;
+          animation: rotate 2s linear infinite;
+  height: 100%;
+  transform-origin: center center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.path {
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  -webkit-animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+          animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  stroke-linecap: round;
+}
+
+@-webkit-keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
+@-webkit-keyframes color {
+  100%, 0% {
+    stroke: #d62d20;
+  }
+  40% {
+    stroke: #0057e7;
+  }
+  66% {
+    stroke: #008744;
+  }
+  80%, 90% {
+    stroke: #ffa700;
+  }
+}
+@keyframes color {
+  100%, 0% {
+    stroke: #d62d20;
+  }
+  40% {
+    stroke: #0057e7;
+  }
+  66% {
+    stroke: #008744;
+  }
+  80%, 90% {
+    stroke: #ffa700;
+  }
+}
+  
+  
 </style>
 
 <div class="container" ng-app="books" ng-controller="main">
   
+   <div class="showbox" ng-if="!datosCargados">
+      <div class="loader">
+        <svg class="circular" viewbox="25 25 50 50">
+          <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
+        </svg>
+      </div>
+    </div>
   
+  
+  <div ng-if="datosCargados">
+    <div class="carousel-header">
+  <h2>Piezas  </h2>
+</div>
+  
+  <div class="mhn-slide owl-carousel">
+    <div class="mhn-item" ng-repeat="manual in pieces" ng-click="showPreview(manual, lvl, lsn)">
+      <div class="mhn-inner">
+       <div class="lock-icon" ng-if="!datosCargados || manual.lvl > lvl || (manual.lvl == lvl && manual.lsn >= lsn)">
+  <i class="ri-lock-fill"></i>
+</div> 
+
+ <div class="grade-badge">
+ {{manual.grade}}
+</div> 
+        <img ng-src="{{manual.background}}">
+      </div>
+    </div>
+  </div>
   
 <div class="carousel-header">
-  <h2>Manuales  <span class="arrow">&gt;</span> </h2>
+  <h2>Manuales   </h2>
 </div>
 
   
@@ -346,37 +497,28 @@ background-color: rgba(0, 0, 0, 0.5);
        <div class="lock-icon" ng-if="!datosCargados || manual.lvl > lvl || (manual.lvl == lvl && manual.lsn >= lsn)">
   <i class="ri-lock-fill"></i>
         </div>
-        <img ng-src="{{manual.background}}">
-      </div>
-    </div>
-  </div>
-  
-  <div class="carousel-header">
-  <h2>Piezas  <span class="arrow">&gt;</span> </h2>
-</div>
-  
-  <div class="mhn-slide owl-carousel">
-    <div class="mhn-item" ng-repeat="manual in pieces" ng-click="showPreview(manual, lvl, lsn)">
-      <div class="mhn-inner">
-       <div class="lock-icon" ng-if="!datosCargados || manual.lvl > lvl || (manual.lvl == lvl && manual.lsn >= lsn)">
+        
+         <div class="lock-icon" ng-if="!datosCargados || manual.lvl > lvl || (manual.lvl == lvl && manual.lsn >= lsn)">
   <i class="ri-lock-fill"></i>
-</div> 
+        </div>
         <img ng-src="{{manual.background}}">
       </div>
     </div>
   </div>
   
+
+  
   <div class="carousel-header">
-  <h2>Repertorio  <span class="arrow">&gt;</span> </h2>
+  <h2>Piezas finales  </h2>
 </div>
   
    <div class="mhn-slide owl-carousel">
-    <div class="mhn-item" ng-repeat="manual in repertoire" ng-click="marcarPreferencia()">
+    <div class="mhn-item" ng-repeat="manual in repertoire" ng-click="showPreview2(manual)">
       <div class="mhn-inner">
-        <div class="lock-icon" ng-if="!lvl || !lsn || manual.lvl > lvl || (manual.lvl == lvl && manual.lsn >= lsn)">
-  <i class="ri-lock-fill"></i>
-</div>
-
+       
+<div class="grade-badge">
+ {{manual.grade}}
+</div> 
         <img ng-src="{{manual.background}}">
       </div>
     </div>
@@ -444,7 +586,7 @@ background-color: rgba(0, 0, 0, 0.5);
 
   
 </div>
-
+</div>
 
 <script>
   
@@ -471,35 +613,32 @@ angular.module('books', [])
 
 
   $scope.pieces = [ 
-      {'title': 'Ode to Joy - var3','subtitle': 'L.V. Beethoven','background': 'https://lh3.googleusercontent.com/d/1Ad2scs9x1sxc_mx8L35NVUFk_0vj6hej', 'pdf': 'https://drive.google.com/file/d/1Ad2scs9x1sxc_mx8L35NVUFk_0vj6hej/preview', 'lvl': 0, lsn: 2},
-      {'title': 'Trumpet Voluntary','subtitle': 'Jeremiah Clarke','background': 'https://lh3.googleusercontent.com/d/1CR1bbjDnL3wzmeb0AM6hkt6D4G8VunTd', 'pdf': 'https://drive.google.com/file/d/1CR1bbjDnL3wzmeb0AM6hkt6D4G8VunTd/preview', 'lvl': 0, lsn: 6},
-      {'title': 'Old German Dance','subtitle': 'Michael Praetorius','background': 'https://lh3.googleusercontent.com/d/1JWJdVevaq7Oj2k4IxQ-2Zi7MP123vM_4', 'pdf': 'https://drive.google.com/file/d/1JWJdVevaq7Oj2k4IxQ-2Zi7MP123vM_4/preview', 'lvl': 0, lsn: 7},
-      {'title': 'Waltz','subtitle': 'Carl Czerny','background': 'https://lh3.googleusercontent.com/d/18-2Gfm_kZSGnSMe-dadCUnWlypbwxMsh', 'pdf': 'https://drive.google.com/file/d/18-2Gfm_kZSGnSMe-dadCUnWlypbwxMsh/preview', 'lvl': 0, lsn: 9},
-      {'title': 'Bagpipe','subtitle': 'Anonymous','background': 'https://lh3.googleusercontent.com/d/1iaC23Nv4CSXuQ5YPCLEIR_EUxqhs6pKj', 'pdf': 'https://drive.google.com/file/d/1iaC23Nv4CSXuQ5YPCLEIR_EUxqhs6pKj/preview', 'lvl': 0, lsn: 10},
-      {'title': 'Sonatina','subtitle': 'C.H. Wilton','background': 'https://lh3.googleusercontent.com/d/12In24V0ux173hjL_Q1zA6zvyUq57J38P', 'pdf': 'https://drive.google.com/file/d/12In24V0ux173hjL_Q1zA6zvyUq57J38P/preview', 'lvl': 0, lsn: 12},
-       {'title': 'March I','subtitle': 'D. Gottlob Türk','background': 'https://lh3.googleusercontent.com/d/1AIV_VAPNh_dFbsJH6VRbyx6GcDQEffSi', 'pdf': 'https://drive.google.com/file/d/1AIV_VAPNh_dFbsJH6VRbyx6GcDQEffSi/preview', 'lvl': 1, lsn: 2},
-      {'title': 'March II','subtitle': 'D. Gottlob Türk','background': 'https://lh3.googleusercontent.com/d/1Z_uQb4Vu5nI4nj4jjR6oNL-Xfsx27Bys', 'pdf': 'https://drive.google.com/file/d/1Z_uQb4Vu5nI4nj4jjR6oNL-Xfsx27Bys/preview', 'lvl': 1, lsn: 2},
-      {'title': 'Minuet','subtitle': 'A. Reinagle','background': 'https://lh3.googleusercontent.com/d/1Y2pG3Y3gf8_Y7RGBtBCb3wCHcYDCz2Mf', 'pdf': 'https://drive.google.com/file/d/1Y2pG3Y3gf8_Y7RGBtBCb3wCHcYDCz2Mf/preview', 'lvl': 1, lsn: 3},
-       {'title': 'Promenade','subtitle': 'A. Reinagle','background': 'https://lh3.googleusercontent.com/d/13kGxg8iUnBphTYoIotCalNkcJgcW_T12', 'pdf': 'https://drive.google.com/file/d/13kGxg8iUnBphTYoIotCalNkcJgcW_T12/preview', 'lvl': 1, lsn: 4},
-      {'title': 'Sonatina in C','subtitle': 'Cornelius Gurlitt','background': 'https://lh3.googleusercontent.com/d/1zUDSm_eKBu830fBpJg_l3pKHswkmV0RM', 'pdf': 'https://drive.google.com/file/d/1zUDSm_eKBu830fBpJg_l3pKHswkmV0RM/preview', 'lvl': 1, lsn: 5},
-      {'title': 'March in F','subtitle': 'D. Gottlob Türk','background': 'https://lh3.googleusercontent.com/d/1xoG80Ob1e2-d2_Vun_v_UrKJPJkrbFdM', 'pdf': 'https://drive.google.com/file/d/1xoG80Ob1e2-d2_Vun_v_UrKJPJkrbFdM/preview', 'lvl': 1, lsn: 6},
-       {'title': 'The Old Windmill','subtitle': 'Dunhill','background': 'https://lh3.googleusercontent.com/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt', 'pdf': 'https://drive.google.com/file/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt/preview', 'lvl': 1, lsn: 6},
+      {'title': 'Ode to Joy - var3','subtitle': 'L.V. Beethoven','background': 'https://lh3.googleusercontent.com/d/1Ad2scs9x1sxc_mx8L35NVUFk_0vj6hej', 'pdf': 'https://drive.google.com/file/d/1Ad2scs9x1sxc_mx8L35NVUFk_0vj6hej/preview', 'lvl': 0, 'lsn': 0, 'grade': 'Preparatory'},
+      {'title': 'Trumpet Voluntary','subtitle': 'Jeremiah Clarke','background': 'https://lh3.googleusercontent.com/d/1CR1bbjDnL3wzmeb0AM6hkt6D4G8VunTd', 'pdf': 'https://drive.google.com/file/d/1CR1bbjDnL3wzmeb0AM6hkt6D4G8VunTd/preview', 'lvl': 0, 'lsn': 6, 'grade': 'Preparatory'},
+      {'title': 'Old German Dance','subtitle': 'Michael Praetorius','background': 'https://lh3.googleusercontent.com/d/1JWJdVevaq7Oj2k4IxQ-2Zi7MP123vM_4', 'pdf': 'https://drive.google.com/file/d/1JWJdVevaq7Oj2k4IxQ-2Zi7MP123vM_4/preview', 'lvl': 0, 'lsn': 7, 'grade': 'Preparatory'},
+      {'title': 'Waltz','subtitle': 'Carl Czerny','background': 'https://lh3.googleusercontent.com/d/18-2Gfm_kZSGnSMe-dadCUnWlypbwxMsh', 'pdf': 'https://drive.google.com/file/d/18-2Gfm_kZSGnSMe-dadCUnWlypbwxMsh/preview', 'lvl': 0, 'lsn': 9, 'grade': 'Preparatory'},
+      {'title': 'Bagpipe','subtitle': 'Anonymous','background': 'https://lh3.googleusercontent.com/d/1iaC23Nv4CSXuQ5YPCLEIR_EUxqhs6pKj', 'pdf': 'https://drive.google.com/file/d/1iaC23Nv4CSXuQ5YPCLEIR_EUxqhs6pKj/preview', 'lvl': 0, 'lsn': 10, 'grade': 'Preparatory'},
+      {'title': 'Sonatina','subtitle': 'C.H. Wilton','background': 'https://lh3.googleusercontent.com/d/12In24V0ux173hjL_Q1zA6zvyUq57J38P', 'pdf': 'https://drive.google.com/file/d/12In24V0ux173hjL_Q1zA6zvyUq57J38P/preview', 'lvl': 0, 'lsn': 12, 'grade': 'Preparatory'},
+       {'title': 'March I','subtitle': 'D. Gottlob Türk','background': 'https://lh3.googleusercontent.com/d/1AIV_VAPNh_dFbsJH6VRbyx6GcDQEffSi', 'pdf': 'https://drive.google.com/file/d/1AIV_VAPNh_dFbsJH6VRbyx6GcDQEffSi/preview', 'lvl': 1, 'lsn': 2, 'grade': 'Preparatory'},
+      {'title': 'March II','subtitle': 'D. Gottlob Türk','background': 'https://lh3.googleusercontent.com/d/1Z_uQb4Vu5nI4nj4jjR6oNL-Xfsx27Bys', 'pdf': 'https://drive.google.com/file/d/1Z_uQb4Vu5nI4nj4jjR6oNL-Xfsx27Bys/preview', 'lvl': 1, 'lsn': 2, 'grade': 'Preparatory'},
+      {'title': 'Minuet','subtitle': 'A. Reinagle','background': 'https://lh3.googleusercontent.com/d/1Y2pG3Y3gf8_Y7RGBtBCb3wCHcYDCz2Mf', 'pdf': 'https://drive.google.com/file/d/1Y2pG3Y3gf8_Y7RGBtBCb3wCHcYDCz2Mf/preview', 'lvl': 1, 'lsn': 3, 'grade': 'Preparatory'},
+       {'title': 'Promenade','subtitle': 'A. Reinagle','background': 'https://lh3.googleusercontent.com/d/1S1IwsNd6pzbUUpLONCjHC39GssguknES', 'pdf': 'https://drive.google.com/file/d/1S1IwsNd6pzbUUpLONCjHC39GssguknES/preview', 'lvl': 1, 'lsn': 4, 'grade': 'Preparatory'},
+      {'title': 'Sonatina in C','subtitle': 'Cornelius Gurlitt','background': 'https://lh3.googleusercontent.com/d/1zUDSm_eKBu830fBpJg_l3pKHswkmV0RM', 'pdf': 'https://drive.google.com/file/d/1zUDSm_eKBu830fBpJg_l3pKHswkmV0RM/preview', 'lvl': 1, 'lsn': 5, 'grade': 'Grade 1'},
+      {'title': 'March in F','subtitle': 'D. Gottlob Türk','background': 'https://lh3.googleusercontent.com/d/1xoG80Ob1e2-d2_Vun_v_UrKJPJkrbFdM', 'pdf': 'https://drive.google.com/file/d/1xoG80Ob1e2-d2_Vun_v_UrKJPJkrbFdM/preview', 'lvl': 1, 'lsn': 6, 'grade': 'Grade 1'},
+       {'title': 'The Old Windmill','subtitle': 'Dunhill','background': 'https://lh3.googleusercontent.com/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt', 'pdf': 'https://drive.google.com/file/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt/preview', 'lvl': 1, 'lsn': 6, 'grade': 'Grade 1'},
 
-        {'title': 'Allemande','subtitle': 'J.H. Schein','background': 'https://lh3.googleusercontent.com/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt', 'pdf': 'https://drive.google.com/file/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt/preview', 'lvl': 2, lsn: 1},
-          {'title': 'Andante','subtitle': 'F. Beyer','background': 'https://lh3.googleusercontent.com/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt', 'pdf': 'https://drive.google.com/file/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt/preview', 'lvl': 2, lsn: 2},
-            {'title': 'Aria in F','subtitle': 'J.S. Bach','background': 'https://lh3.googleusercontent.com/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt', 'pdf': 'https://drive.google.com/file/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt/preview', 'lvl': 2, lsn: 3},
+        {'title': 'Allemande','subtitle': 'J.H. Schein','background': 'https://lh3.googleusercontent.com/d/1m27dxSoHVEsMSplzIc2QYi_Ettm9LZhn', 'pdf': 'https://drive.google.com/file/d/1m27dxSoHVEsMSplzIc2QYi_Ettm9LZhn/preview', 'lvl': 2, 'lsn': 1, 'grade': 'Grade 1'},
+          {'title': 'Andante','subtitle': 'F. Beyer','background': 'https://lh3.googleusercontent.com/d/1LSa0lIkuOzU4fhgZr2r4kpgOyRlA2zgj', 'pdf': 'https://drive.google.com/file/d/1LSa0lIkuOzU4fhgZr2r4kpgOyRlA2zgj/preview', 'lvl': 2, 'lsn': 2, 'grade': 'Grade 1'},
+            {'title': 'Aria in F','subtitle': 'J.S. Bach','background': 'https://lh3.googleusercontent.com/d/1gW1tqwKgzmn-UZAmbK4ElCrJ8oRdN3yU', 'pdf': 'https://drive.google.com/file/d/1gW1tqwKgzmn-UZAmbK4ElCrJ8oRdN3yU/preview', 'lvl': 2, 'lsn': 3, 'grade': 'Grade 1'},
 
-             {'title': 'Sonatina in C','subtitle': 'Frank Lynes','background': 'https://lh3.googleusercontent.com/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt', 'pdf': 'https://drive.google.com/file/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt/preview', 'lvl': 2, lsn: 7},
-          {'title': 'Gigue in G','subtitle': 'G. P. Telemann','background': 'https://lh3.googleusercontent.com/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt', 'pdf': 'https://drive.google.com/file/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt/preview', 'lvl': 2, lsn: 9}, 
+             {'title': 'Sonatina in C','subtitle': 'Frank Lynes','background': 'https://lh3.googleusercontent.com/d/13kGxg8iUnBphTYoIotCalNkcJgcW_T12', 'pdf': 'https://drive.google.com/file/d/13kGxg8iUnBphTYoIotCalNkcJgcW_T12/preview', 'lvl': 2, 'lsn': 7, 'grade': 'Grade 2'},
+          {'title': 'Gigue in G','subtitle': 'G. P. Telemann','background': 'https://lh3.googleusercontent.com/d/1r1b7hkZU9jOb_Q37DMQmIYbdyqKovNjZ', 'pdf': 'https://drive.google.com/file/d/1r1b7hkZU9jOb_Q37DMQmIYbdyqKovNjZ/preview', 'lvl': 2, 'lsn': 9, 'grade': 'Grade 2'}, 
      
     ];
 
 
 
-  $scope.repertoire = [ 
-     
-     
-    ];
+  $scope.repertoire = []
 
 
 
@@ -511,62 +650,17 @@ angular.module('books', [])
   var config = {
     headers: {
       "Content-Type": "text/plain;charset=utf-8"
-    }
+    } 
   };
            
   $http.post('https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec', requestData, config)
     .then(function(response) { 
       $scope.lvl = response.data.lvl;
      $scope.lsn = response.data.lsn;
+    $scope.repertoire = JSON.parse(response.data.repertoire);
+     
     $scope.datosCargados = true;
-    })  
-  
-    $scope.openPDF = function(URL) {
-    window.open(URL, '_blank');
-  };
-  
- $scope.selectedManual = null;
-  $scope.showPlayer = false;
-  $scope.currentManual = null;
-
-$scope.showPreview = function(manual, lvl, lsn) {
-  if (lvl == null || lsn == null) {
-    // Si los datos aún no se han cargado del servidor
-    $scope.marcarPreferencia();
-    return;
-  }
- 
-  if (manual.lvl > lvl || (manual.lvl == lvl && manual.lsn >= lsn)) {
-    $scope.marcarPreferencia();
-  } else {
-    $scope.selectedManual = manual;
-  }
-};
-
-  
-   $scope.openPlayer = function(manual) {
-    $scope.currentManual = manual;
-    $scope.showPlayer = true;
-  };
-  
-  $scope.trustSrc = function(src) {
-    return $sce.trustAsResourceUrl(src);
-  };
-
-  
-  $scope.showPreferencias = false;
-
-$scope.marcarPreferencia = function () {
-  $scope.showPreferencias = true;
-  setTimeout(function () {
-    $scope.$apply(function () {
-      $scope.showPreferencias = false;
-    });
-  }, 2500);
-};
-
-  
-  
+      
 $(function(){
   $('.mhn-slide').owlCarousel({
     nav:true,
@@ -594,6 +688,67 @@ $(function(){
     navText:['<svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg>','<svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg>']
   });
 });
+    })  
+
+
+     $scope.openPDF = function(URL) {
+      const regex = /\/d\/([^\/]+)\//;
+    const matches = URL.match(regex);
+    var id = matches ? matches[1] : null;
+     var url = "https://drive.google.com/file/d/"+id+"/view"
+    window.open(url, '_blank');
+  };
+  
+ /*   $scope.openPDF = function(URL) {
+    window.open(URL, '_blank');
+  }; */
+  
+ $scope.selectedManual = null;
+  $scope.showPlayer = false;
+  $scope.currentManual = null;
+
+$scope.showPreview = function(manual, lvl, lsn) {
+  if (lvl == null || lsn == null) {
+    // Si los datos aún no se han cargado del servidor
+    $scope.marcarPreferencia();
+    return;
+  }
+ 
+  if (manual.lvl > lvl || (manual.lvl == lvl && manual.lsn >= lsn)) {
+    $scope.marcarPreferencia();
+  } else {
+    $scope.selectedManual = manual;
+  }
+};
+
+  
+  $scope.showPreview2 = function(manual) {
+    $scope.selectedManual = manual;
+};
+  
+   $scope.openPlayer = function(manual) {
+    $scope.currentManual = manual;
+    $scope.showPlayer = true;
+  };
+  
+  $scope.trustSrc = function(src) {
+    return $sce.trustAsResourceUrl(src);
+  };
+
+  
+  $scope.showPreferencias = false;
+
+$scope.marcarPreferencia = function () {
+  $scope.showPreferencias = true;
+  setTimeout(function () {
+    $scope.$apply(function () {
+      $scope.showPreferencias = false;
+    });
+  }, 2500);
+};
+
+  
+
   
   
 }])
