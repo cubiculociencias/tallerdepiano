@@ -1,616 +1,732 @@
-<!DOCTYPE html>
-<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actualizar a Premium</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #fff;
-            color: #000;
-            line-height: 1.4;
-        }
-
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background-color: rgba(255, 255, 255, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .modal {
-            background-color: #fff;
-            border-radius: 16px;
-            width: 90%;
-            max-width: 1000px;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            border: 1px solid #ddd;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: none;
-            border: none;
-            color: #000;
-            font-size: 20px;
-            cursor: pointer;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: background-color 0.2s;
-        }
-
-        .close-btn:hover {
-            background-color: #f0f0f0;
-        }
-
-        .header {
-            text-align: center;
-            padding: 60px 40px 40px;
-        }
-
-        .title {
-            font-size: 36px;
-            font-weight: bold;
-            margin-bottom: 16px;
-            letter-spacing: -0.02em;
-        }
-
-        .subtitle {
-            color: #5b7083;
-            font-size: 15px;
-            line-height: 1.5;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .subtitle a {
-            color: #1d9bf0;
-            text-decoration: underline;
-        }
-
-        .billing-toggle {
-            display: flex;
-            justify-content: center;
-            margin: 40px 0;
-            gap: 0;
-            background-color: #f0f0f0;
-            border-radius: 50px;
-            padding: 4px;
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .toggle-btn {
-            padding: 8px 24px;
-            background: none;
-            border: none;
-            color: #5b7083;
-            cursor: pointer;
-            border-radius: 50px;
-            font-size: 15px;
-            font-weight: 600;
-            transition: all 0.2s;
-            position: relative;
-        }
-
-        .toggle-btn.active {
-            background-color: #fff;
-            color: #000;
-        }
-
-        .best-offer {
-            position: absolute;
-            top: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #00ba7c;
-            color: #fff;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 700;
-            white-space: nowrap;
-        }
-
-        .pricing-cards {
-            display: flex;
-            gap: 16px;
-            padding: 0 40px;
-            justify-content: center;
-            flex-wrap: wrap;
-            padding-bottom: 200px; /* Increased padding */
-        }
-
-        .card {
-            background-color: #f7f7f7;
-            border-radius: 16px;
-            padding: 32px 24px;
-            flex: 1;
-            max-width: 300px;
-            min-width: 280px;
-            border: 2px solid transparent;
-            transition: all 0.2s;
-            cursor: pointer; /* Added pointer cursor */
-        }
-
-        .card.premium {
-            border-color: #1d9bf0;
-            background-color: #e6f5ff;
-        }
-
-        .card-header {
-            margin-bottom: 24px;
-        }
-
-        .plan-name {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .price {
-            font-size: 32px;
-            font-weight: 800;
-            margin-bottom: 4px;
-        }
-
-        .price-period {
-            color: #5b7083;
-            font-size: 15px;
-        }
-
-        .savings {
-            color: #00ba7c;
-            font-size: 13px;
-            font-weight: 700;
-            margin-top: 4px;
-        }
-
-        .annual-price {
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid #eee;
-        }
-
-        .annual-price .price {
-            font-size: 24px;
-        }
-
-        .annual-label {
-            color: #5b7083;
-            font-size: 13px;
-        }
-
-        .features {
-            list-style: none;
-            margin-bottom: 32px;
-        }
-
-        .feature {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 12px;
-            font-size: 15px;
-            line-height: 1.4;
-        }
-
-        .feature::before {
-            content: "✓";
-            color: #00ba7c;
-            font-weight: bold;
-            margin-right: 12px;
-            margin-top: 2px;
-            flex-shrink: 0;
-        }
-
-        .radio-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .radio-input {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            border: 2px solid #ccd6dd;
-            position: relative;
-            pointer-events: none; /* Prevents separate click on radio */
-        }
-
-        .radio-input.checked {
-            border-color: #1d9bf0;
-            background-color: #1d9bf0;
-        }
-
-        .radio-input.checked::after {
-            content: "✓";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .cta-section {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #fff;
-            padding: 20px 40px;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-            border-top: 1px solid #eee;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .cta-content {
-            display: grid; /* Use grid for layout */
-            grid-template-columns: 1fr auto;
-            align-items: center;
-            gap: 20px;
-            width: 100%;
-            max-width: 900px;
-        }
-
-        .selected-price-container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        
-        .selected-plan-name {
-            font-size: 16px;
-            font-weight: 700;
-        }
-
-        .selected-price {
-            font-size: 28px;
-            font-weight: 800;
-            margin-top: 4px;
-        }
-
-        .selected-price-period {
-            color: #5b7083;
-            font-size: 15px;
-        }
-
-        .cta-right-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #f7f9f9;
-            padding: 16px;
-            border-radius: 16px;
-        }
-
-        .subscribe-btn {
-            background-color: #000;
-            color: #fff;
-            border: none;
-            padding: 16px 32px;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            width: 100%;
-            max-width: 300px;
-            transition: all 0.2s;
-            margin-bottom: 12px;
-        }
-
-        .subscribe-btn:hover {
-            background-color: #333;
-        }
-
-        .terms {
-            font-size: 13px;
-            color: #5b7083;
-            line-height: 1.4;
-            max-width: 400px;
-            text-align: center;
-        }
-
-        .terms a {
-            color: #1d9bf0;
-            text-decoration: underline;
-        }
-
-        .reopen-button-container {
-            display: none;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .reopen-button {
-            background-color: #1d9bf0;
-            color: #fff;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 50px;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .modal {
-                width: 95%;
-                margin: 20px;
-            }
-            
-            .header {
-                padding: 40px 20px 20px;
-            }
-            
-            .title {
-                font-size: 28px;
-            }
-            
-            .pricing-cards {
-                flex-direction: column;
-                padding: 0 20px;
-                gap: 12px;
-                padding-bottom: 220px; /* Adjusted padding */
-            }
-            
-            .card {
-                max-width: none;
-                min-width: auto;
-            }
-            
-            .cta-section {
-                padding: 16px 20px;
-            }
-
-            .cta-content {
-                grid-template-columns: 1fr;
-                gap: 16px;
-                justify-items: center;
-            }
-
-            .selected-price-container {
-                align-items: center;
-                margin: 0;
-            }
-        }
-    </style>
+<link rel="stylesheet" type="text/css" href="https://app.mozartacademy.mx/paymentstyle.css">
+    <title>Mozart Appcademy</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/@paypal/paypal-js@2.0.0/dist/paypal.browser.min.js"></script>
+   
 </head>
-<body>
-    <div class="modal-overlay">
-        <div class="modal">
-            <button class="close-btn" onclick="closeModal()">×</button>
-            
-            <div class="header">
-                <h1 class="title">Actualizar a Premium</h1>
-                <p class="subtitle">
-                    Disfruta de una experiencia mejorada, herramientas exclusivas para creadores, verificación y seguridad de primer nivel.<br>
-                    (Las organizaciones deben <a href="#">registrarse aquí</a>)
-                </p>
-            </div>
 
-            <div class="billing-toggle">
-                <button class="toggle-btn" onclick="switchBilling('annual')">Anual</button>
-                <button class="toggle-btn active" onclick="switchBilling('monthly')">
-                    Mensual
-                    <span class="best-offer">Mejor oferta</span>
-                </button>
-            </div>
 
-            <div class="pricing-cards">
-                <div class="card" onclick="selectPlan('basic')">
-                    <div class="radio-container">
-                        <h3 class="plan-name">Básico</h3>
-                        <div class="radio-input"></div>
+
+
+<style>
+  
+
+
+
+.tab{
+  background-color: #f7fafc;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+  grid-column: 1/4;
+}
+
+
+  .price{
+    padding: 10px 20px; 
+    margin-top: 170px; 
+    position: absolute; 
+    color: white; 
+    text-shadow: 1px 2px 3px black, 0px 8px 13px black, 0px 18px 23px black!important; 
+  }
+.option{
+  border: rgba(0, 0, 0, 0.08) 1px solid;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #edf2f7;
+  transition: all 500ms ease-in-out;
+  overflow: hidden;
+  height: 100%;
+}
+
+.option:hover{
+ box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+
+
+.details{
+  padding: 1rem;
+  margin-bottom: -20px;
+}
+
+.detail_button{
+  cursor: pointer;
+  background-color: transparent;
+  color: #62748e;
+  font-weight: 500;
+  border: 1px solid #62748e;
+  border-radius: 5px;
+  padding: .5rem;
+  margin-top: 1rem;
+}
+
+
+  
+.nav-link.active {
+    background-color: black !important;
+    color: white;
+}
+  
+
+
+
+
+
+
+
+.paypal-button {
+  background-color: #ffc439; /* Color amarillo de PayPal */
+  color: #000; /* Color de texto negro */
+  border: none;
+  border-radius: 5px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.paypal-button:hover {
+  background-color: #ffb22d; /* Efecto hover */
+}
+
+.paypaltextContainer{
+  margin-left: -30px;
+}
+
+.paypalLogoContainer {
+  display: inline-flex;
+  align-items: center;
+}
+
+.paypalLogo {
+  position: absolute;
+  width: 80px; /* Ajusta el tamaño del logo según necesites */
+ margin-bottom: 7px;
+}
+
+.SubmitButton--incomplete{
+  cursor: not-allowed !important;
+}
+
+@media screen and (min-width:960px){
+  .PaymenyHeaderData{
+    margin-bottom: -8px !important;
+    margin-top: -8px !important;
+  }
+}
+</style>
+
+<div id="root" ng-app="app" ng-controller="main"><div class="App-Container is-noBackground flex-container justify-content-center" data-testid="checkout-container"><div class="App App--multiItem"><div class="App-Overview">
+  
+  
+  <header class="Header"><div class="Header-content flex-container justify-content-space-between align-items-stretch"><div class="Header-business flex-item width-grow flex-container align-items-center"><div class="Header-merchantLogoWithLabel"><div class="HeaderImage HeaderImage--icon HeaderImage--iconFallback flex-item width-fixed flex-container justify-content-center align-items-center width-fixed"><img src="https://lh3.googleusercontent.com/d/1EP2I0BOMo_8mXsR9qqAv08PxjztZFaQ8" alt="icono" width="16" height="16">
+</div><h1 class="Header-businessLink-name Text Text-color--gray800 Text-fontSize--14 Text-fontWeight--500 Text--truncate">Mozart Appcademy</h1></div></div></div></header>
+   
+  <div class="OrderSummaryColumn"><div class="ProductSummary is-recurring"><div class="ProductSummary-productImageContainer" ><div class="ProductImage-container" ><img src="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V" alt="" class="ProductImage-image" fetchpriority="high"></div></div><div class="ProductSummary-info"><span class="ProductSummary-name Text Text-color--gray500 Text-fontSize--16 Text-fontWeight--500">Subscríbete a <span style="text-transform: uppercase;">{{course.type}}</span></span><div class="ProductSummary-amountsContainer"><div class="ProductSummary-totalsRead" style="opacity: 1;"><div class="ProductSummary-totalAmountContainer" style="opacity: 1;"><span class="ProductSummary-totalAmount Text Text-color--default Text-fontWeight--600 Text--tabularNumbers" id="ProductSummary-totalAmount" ><div class="ProductSummaryTotalAmount flex-container direction-row align-items-baseline wrap-wrap"><div class="mr2 flex-item width-fixed"><span class="CurrencyAmount">MX${{course.cost}}.00</span></div><div class="flex-item width-fixed"><span class="ProductSummaryTotalAmount-billingInterval Text Text-color--gray500 Text-fontSize--14"><div>por <br class="BillingIntervalBreak">mes</div></span></div></div></span></div><div class="AnimateSinglePresence"><div class="AnimateSinglePresenceItem"><div><div class="ProductSummary-amountsDescriptions" ></div></div></div></div></div></div><div class="ProductSummary-buttonsContainer" >
+    <select class="custom-select Button ProductSummary-actionButton Button--primary Button--md"  ng-model="selectedCourse" style="width: 180px;" ng-options="course.type for course in courses" ng-change="changeCourse()">
+  <option value="">Selecciona un curso</option>
+    </select> 
+</div></div></div>
+    
+    <section data-testid="order-details" class="OrderDetails App-Overview-OrderDetails my6"><ul class="OrderDetails-items"><li class="OrderDetails-item" style="opacity: 1; transform: scale(1); height: auto; margin-bottom: 16px;"><div class="LineItem flex-container align-items-flex-start"><div class="LineItem-imageContainer mr4 flex-item width-fixed" ><img src="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V" alt="" class="LineItem-image"></div><div class="flex-container justify-content-space-between align-items-baseline wrap-wrap width-grow"><div class="flex-column-break" style="order: 2;"></div><div class="flex-column-break" style="order: 5;"></div><div class="LineItem-productName flex-item width-auto"  style="order: 0;"><span class="Text Text-color--default Text-fontSize--14 Text-fontWeight--500"><div class="ExpandableText false"><div  class="ExpandableText--truncated" style="-webkit-line-clamp: 2;">{{course.type}}</div></div></span></div><div class="flex-container direction-column wrap-wrap" style="width: 100%; order: 3;"><div class="LineItem-productDescription flex-item width-12" style="order: -1;"><div class="Text Text-color--gray400 Text-fontSize--12 Text-fontWeight--400"><div class="ExpandableText false"><div class="ExpandableText--truncated" style="-webkit-line-clamp: 2;">¡Incluye 3 horas de clase a la semana, plataforma didáctica, constancias de avance y más!</div></div></div></div><div class="flex-container direction-row wrap-wrap"><div class="LineItem-description flex-item width-grow" style="order: 3;"><span class="Text Text-color--gray400 Text-fontSize--12 Text-fontWeight--400"><div class="AdjustableQuantitySelector-hitBox">  <select class="Button AdjustableQuantitySelector Button--link Button--md" ng-model="selectedMonths" ng-change="changeMonth()" style="width: 40px;">
+    <option value="1">1 </option>
+    <option value="6">6 </option>
+  </select></div><span >Meses a pagar</span></span></div><div class="LineItem-amountDetail flex-item width-auto flex-container align-items-flex-end width-auto" style="order: 4;"><div class="flex-item width-auto flex-item-align-right"></div></div></div></div><div class="LineItem-tierBreakdown flex-item width-auto flex-item-align-left" style="order: 6;"><div class="flex-container" ></div></div><div class="flex-container Placeholder" style="opacity: 1;"><div class="ml2 flex-item width-fixed" style="order: 1;"><span class="Text Text-color--default Text-fontSize--14 Text-fontWeight--500 Text--tabularNumbers"><span class="CurrencyAmount">MX${{course.cost}}.00</span></span></div></div></div></div></li></ul><div class="OrderDetails-footer"></div></section>
+      
+    </div></div>
+  
+  
+ 
+        <div class="App-Payment is-noBackground">
+          <main>
+            <div class="CheckoutPaymentForm">
+              <div style="height: 109px;">   
+                <div>
+                  <div class="PaymentRequestOrHeader" style="display: inherit; height: 109px;">
+                    <div class="AnimateSinglePresence">
+                      <div class="AnimateSinglePresenceItem">
+                 
+                  
+                          <div class="ButtonAndDividerContainer" style="display: block; opacity: 1; height: auto;">
+                            <div class="ButtonContainer">
+                              <div class="ButtonWrapper">
+   
+          <!--      <div id="paypal-button-container"></div>  -->
+                                
+                           <button class="paypal-button SubmitButton " type="submit" onclick="window.open('https://www.paypal.me/tallerdepiano/300', '_blank')">
+  <div class="SubmitButton-TextContainer">
+    <span class="SubmitButton-Text Text-fontWeight--500 paypaltextContainer" style="color: black;">Pagar con 
+      <div class="paypalLogoContainer">
+      <img src="https://lh3.googleusercontent.com/d/1JhlYpq0PokBC6R9CJg7QTrQmspUQaGap"  class="paypalLogo">
+    </div>
+    </span>
+  </div>
+</button>
+
+                                
+
+                              </div>
+                            </div>
+        <!--  <br><br><br> -->  <br>
+                            <div class="Divider" >
+                              <hr>
+                              <p class="Divider-Text Text Text-color--gray400 Text-fontSize--14 Text-fontWeight--400"><span class="DividerText">Otros métodos de pago</span></p>
+                            </div>
+                          </div>     
+          
+                      </div>
                     </div>
-                    <div class="card-header">
-                        <div class="price monthly-price">33,50 MXN <span class="price-period">/ mes</span></div>
-                        <div class="price annual-price-display" style="display: none;">350,00 MXN <span class="price-period">/ año</span></div>
-                        <div class="savings">AHORRA UN 16%</div>
-                    </div>
-                   <ul class="features">
-                        <li class="feature">Aplicación de boost a respuesta corta</li>
-                        <li class="feature">Carpetas de Elementos guardados</li>
-                        <li class="feature">Pestañas Destacadas</li>
-                    </ul>
+                  </div>
                 </div>
-
-                <div class="card premium" onclick="selectPlan('premium')">
-                    <div class="radio-container">
-                        <h3 class="plan-name">Premium</h3>
-                        <div class="radio-input checked"></div>
-                    </div>
-                    <div class="card-header">
-                        <div class="price monthly-price">89,00 MXN <span class="price-period">/ mes</span></div>
-                        <div class="price annual-price-display" style="display: none;">1.068,00 MXN <span class="price-period">/ año</span></div>
-                        <div class="savings">AHORRA UN 16%</div>
-                    </div>
-                    <div style="margin-bottom: 16px;">
-                        <div style="font-size: 15px; margin-bottom: 12px;">Todas las funciones del plan Básico y</div>
-                    </div>
-                    <ul class="features">
-                        <li class="feature">Mitad de anuncios en Para ti y Siguiendo</li>
-                        <li class="feature">Respuestas prioritarias</li>
-                        <li class="feature">Bookmarks organizados</li>
-                        <li class="feature">Editar posts</li>
-                    </ul>
-                </div>
-
-                <div class="card" onclick="selectPlan('premium-plus')">
-                    <div class="radio-container">
-                        <h3 class="plan-name">Premium+</h3>
-                        <div class="radio-input"></div>
-                    </div>
-                    <div class="card-header">
-                        <div class="price monthly-price">665,83 MXN <span class="price-period">/ mes</span></div>
-                        <div class="price annual-price-display" style="display: none;">7.990,00 MXN <span class="price-period">/ año</span></div>
-                        <div class="savings">AHORRA UN 17%</div>
-                    </div>
-                    <div style="margin-bottom: 16px;">
-                        <div style="font-size: 15px; margin-bottom: 12px;">Todas las funciones del plan Premium y</div>
-                    </div>
-                    <ul class="features">
-                        <li class="feature">Totalmente sin anuncios</li>
-                        <li class="feature">Aplicación de boost a respuesta larga</li>
-                        <li class="feature">Análisis de contenido avanzados</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="cta-section">
-                <div class="cta-content">
-                    <div class="selected-price-container">
-                        <div class="selected-plan-name">Premium</div>
-                        <div class="selected-price" id="selected-price-amount">89,00 MXN</div>
-                        <div class="selected-price-period" id="selected-price-period">/ mes</div>
-                    </div>
-                    <div class="cta-right-box">
-                        <button class="subscribe-btn" onclick="subscribe()">Suscribirse y pagar</button>
-                        <div class="terms">
-                            Si te suscribes, aceptas los <a href="#">Términos de servicio del comprador</a>. Las suscripciones se renuevan automáticamente hasta que se cancelan. 
-                            <a href="#">Cancelar en cualquier momento</a>, al menos 24 horas antes de la renovación para evitar cargos adicionales. Administra tu suscripción a través de la plataforma en la que te suscribiste.
+              </div> <!--  <br><br><br> -->  <br>
+              <form class="PaymentForm-form" novalidate="">
+                <div style="height: 540px;" id="paymentContainer">
+                  <div>
+                    <div style="opacity: 1;">
+                      <div class="App-Global-Fields flex-container spacing-16 direction-column wrap-wrap">
+                   
+                        <div class="flex-item width-12">
+                          <h2 class="PaymentMethod-Heading Text Text-color--gray800 Text-fontSize--16 Text-fontWeight--500">Método de pago</h2>
                         </div>
+                      </div>
+                      <div class="PaymentMethodForm" style="opacity: 1; height: auto;">
+                        <div class="Tabs is-icontabs is-desktop">
+                          <div class="Tabs-Container">
+                            <div role="tablist" aria-orientation="horizontal" aria-label="Payment methods" class="Tabs-TabList">
+                              <div role="presentation" class="Tabs-TabListItemContainer Tabs-TabListItemContainer--is-selected">
+                                
+                                
+                                <button class="Tabs-TabListItem Tabs-TabListItem--is-selected" id="card-tab" role="tab" type="button" tabindex="0"  onclick="transferPay()">
+                                  <div class="Tabs-TabListItemContent">
+                                    <div class="Tabs-TabListPaymentMethod">
+                                      <div class="Tabs-TabListPaymentIcon"><img src="https://js.stripe.com/v3/fingerprinted/img/card-ce24697297bd3c6a00fdd2fb6f760f0d.svg" alt="" class="Icon Icon--md"></div>
+                                      <div class="Tabs-TabListPaymentLabel" data-text="Card">Transferencia</div>
+                                    </div>
+                                  </div>
+                                </button></div>
+                              <div role="presentation" class="Tabs-TabListItemContainer"><button class="Tabs-TabListItem" id="oxxo-tab"  role="tab" type="button"  tabindex="-1"  onclick="oxxoPay()">
+                                  <div class="Tabs-TabListItemContent" >
+                                    <div class="Tabs-TabListPaymentMethod">
+                                      <div class="Tabs-TabListPaymentIcon"><img src="https://upload.wikimedia.org/wikipedia/commons/6/66/Oxxo_Logo.svg" alt="" class="Icon Icon--md"></div>
+                                      <div class="Tabs-TabListPaymentLabel" data-text="OXXO">OXXO</div>
+                                    </div>
+                                  </div>
+                                </button>
+                                  
+                                
+                                
+                                </div>
+                            </div>
+                          </div>
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          <div class="Tabs-TabPanelContainer">
+                            <div style="opacity: 1; width: 100%; transform: none;">
+                              <div id="card-tab-panel" role="tabpanel" aria-labelledby="card-tab">
+              
+                                  <div class="PaymentForm-paymentMethodForm flex-container direction-column wrap-wrap" style="gap: 16px;">
+                                    <div class="flex-item width-12">
+                                      <div class="FormFieldGroup" data-qa="FormFieldGroup-cardForm">
+                                        <div class="FormFieldGroup-labelContainer flex-container justify-content-space-between"><label for="cardForm-fieldset"><span class="Text Text-color--gray600 Text-fontSize--13 Text-fontWeight--500">Datos de cuenta</span></label></div>
+                                        <fieldset class="FormFieldGroup-Fieldset" id="cardForm-fieldset">
+                                          <div class="FormFieldGroup-container">
+                                            <div class="FormFieldGroup-child FormFieldGroup-child--width-12 FormFieldGroup-childLeft FormFieldGroup-childRight FormFieldGroup-childTop">
+                                              <div class="FormFieldInput padding-right-90">
+                             <div class="SignUpForm-headerContainer">
+                                                  <div class="SignUpForm-header"><span class="SignUpForm-headerText Text Text-color--default">
+                                                      <div class="SignUpForm-labelHeader" style="opacity: 1;">CLABE interbancaria</div>
+                                                    <div class="SignUpForm-subLabel" id="link-registration-subheader-message">0022 6090 3516 507521</div>
+                                                   
+                                                    </span></div>
+                                                </div>
+                                                <div class="FormFieldInput-Icons" style="opacity: 1;">
+                                         
+                                                  <div style="transform: none;"><span class="FormFieldInput-IconsIcon is-visible"><img src="https://js.stripe.com/v3/fingerprinted/img/mastercard-4d8844094130711885b5e41b28c9848f.svg" alt="MasterCard" class="BrandIcon" loading="lazy" fetchpriority="low"><div class="SignUpForm-subLabel" style="margin-left: 5px;">Banamex</div></span>  </div>
+                                               
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="FormFieldGroup-child FormFieldGroup-child--width-6 FormFieldGroup-childLeft FormFieldGroup-childBottom">
+                                              <div class="FormFieldInput">
+                                                <div class="CheckoutInputContainer"><span class="InputContainer" data-max=""> <div class="CheckoutInput "> <div class="SignUpForm-labelHeader PaymenyHeaderData" style="opacity: 1; font-size: 13px !important; margin-bottom: -5px; margin-top: -5px;">Concepto</div>
+                                                    <div class="SignUpForm-subLabel " id="link-registration-subheader-message">Taller de piano</div> </div></span></div>
+                                              </div>
+                                            </div>
+                                            <div class="FormFieldGroup-child FormFieldGroup-child--width-6 FormFieldGroup-childRight FormFieldGroup-childBottom">
+                                             <div class="FormFieldInput">
+                                                <div class="CheckoutInputContainer"><span class="InputContainer" data-max=""> <div class="CheckoutInput "> <div class="SignUpForm-labelHeader PaymenyHeaderData" style="opacity: 1; font-size: 13px !important; margin-bottom: -5px; margin-top: -5px;">Beneficiario</div>
+                                                    <div class="SignUpForm-subLabel " id="link-registration-subheader-message">Maria de los Remedios</div> </div></span></div>
+                                              </div>
+                                            </div>
+                                            <div class="FieldError-container" style="opacity: 0; height: 0px; margin-top: 0px;"><span class="FieldError Text Text-color--red Text-fontSize--13"><span aria-hidden="true"></span></span></div>
+                                          </div>
+                                          <div class="FieldError-container" style="opacity: 0; height: 0px; margin-top: 0px;"><span class="FieldError Text Text-color--red Text-fontSize--13"><span aria-hidden="true"></span></span></div>
+                                        </fieldset>
+                                      </div>
+                                    </div>
+                                    <div class="InstallmentPlanOptionsForm InstallmentPlanOptionsForm-hidden flex-item width-12">
+                                      <div class="AnimateSinglePresence"></div>
+                                    </div>
+                       <!--             <div class="BillingInfoForm flex-item width-grow flex-container direction-column">
+                                      <div class="AnimateSinglePresence">
+                                        <div class="AnimateSinglePresenceItem">
+                                          <div>
+                                            <div class="BillingInfoForm-addressInput flex-item width-12" aria-hidden="false" style="margin-top: 0px;">
+                                              <div class="flex-container spacing-16 direction-column wrap-wrap">
+                                                <div class="flex-item width-12">
+                                                  <div class="FormFieldGroup" data-qa="FormFieldGroup-billingName">
+                                                    <div class="FormFieldGroup-labelContainer flex-container justify-content-space-between"><label for="billingName"><span class="Text Text-color--gray600 Text-fontSize--13 Text-fontWeight--500">Email</span></label></div>
+                                                    <div class="FormFieldGroup-Fieldset" id="billingName-fieldset">
+                                                      <div class="FormFieldGroup-container">
+                                                        <div class="FormFieldGroup-child FormFieldGroup-child--width-12 FormFieldGroup-childLeft FormFieldGroup-childRight FormFieldGroup-childTop FormFieldGroup-childBottom">
+                                               <div class="FormFieldInput">
+                                    <div class="CheckoutInputContainer"><span class="InputContainer" data-max=""><input class="CheckoutInput Input Input--empty" autocomplete="email" autocorrect="off" spellcheck="false" autocapitalize="none" id="email" name="email" type="text" inputmode="email" aria-invalid="false" aria-describedby="" data-1p-ignore="false" value=""></span></div>
+                                  </div>
+                                                        </div>
+                                                        <div class="FieldError-container" style="opacity: 0; height: 0px; margin-top: 0px;"><span class="FieldError Text Text-color--red Text-fontSize--13"><span aria-hidden="true"></span></span></div>
+                                                      </div>
+                                                      <div class="FieldError-container" style="opacity: 0; height: 0px; margin-top: 0px;"><span class="FieldError Text Text-color--red Text-fontSize--13"><span aria-hidden="true"></span></span></div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                            
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div> -->
+                                    <div class="SignUpForm-signUpFormContainer SignUpForm-signUpContainer--noCheckbox flex-item width-12">
+                                      <div class="AnimateSinglePresence">
+                                        <div class="AnimateSinglePresenceItem">
+                                          <div>
+                                            <div>
+                                              <div class="SignUpForm SignUpForm--expanded">
+                                                <div class="SignUpForm-headerContainer">
+                                                  <div class="SignUpForm-header"><span class="SignUpForm-headerText Text Text-color--default">
+                                                      <div class="SignUpForm-labelHeader" style="opacity: 1;">Securely save my information for 1-click checkout</div>
+                                                      <div class="SignUpForm-subLabel" id="link-registration-subheader-message">Enter your phone number to create a Link account and pay faster on IDIOMAS LD and everywhere Link is accepted.</div>
+                                                    </span></div>
+                                                </div>
+                                                <div class="AnimateSinglePresence">
+                                                  <div class="AnimateSinglePresenceItem SignUpForm-phoneInputAnimation">
+                                                    <div>
+                                                      <div class="PhoneNumberInput">
+                                                        <div class="PhoneNumberInput-inputWrapper">
+                                                          <div class="CheckoutInputContainer">
+                                                            <div class="CheckoutInputContainer-placeholderIcon CheckoutInput--hasPhoneNumberCountryCodeSelect">
+                                                              <div class="PhoneNumberCountryCodeSelect-wrapper">
+                                                                <div class="PhoneNumberCountryCodeSelect-flagIconContainer" id="flagContainer"><img class="p-FlagIcon PhoneNumberCountryCodeSelect-flagIcon" src="https://js.stripe.com/v3/fingerprinted/img/FlagIcon-MX-5e4d511837fa0f67785dc2246daaafe3.svg" alt="MX"></div>
+ 
+<select class="PhoneNumberCountryCodeSelect-select" id="countrySelect" onchange="updateFlagEmoji()">
+  <optgroup label="North America">
+    <option value="MX" data-emoji="🇲🇽">Mexico (+52)</option>
+    <option value="CA" data-emoji="🇨🇦">Canada (+1)</option>
+    <option value="US" data-emoji="🇺🇸">United States (+1)</option>
+  </optgroup>
+
+  <optgroup label="Central-South America">
+    <option value="AR" data-emoji="🇦🇷">Argentina (+54)</option>
+    <option value="BZ" data-emoji="🇧🇿">Belize (+501)</option>
+    <option value="BR" data-emoji="🇧🇷">Brazil (+55)</option>
+    <option value="CL" data-emoji="🇨🇱">Chile (+56)</option>
+    <option value="CO" data-emoji="🇨🇴">Colombia (+57)</option>
+    <option value="CR" data-emoji="🇨🇷">Costa Rica (+506)</option>
+    <option value="EC" data-emoji="🇪🇨">Ecuador (+593)</option>
+    <option value="SV" data-emoji="🇸🇻">El Salvador (+503)</option>
+    <option value="GT" data-emoji="🇬🇹">Guatemala (+502)</option>
+    <option value="HT" data-emoji="🇭🇹">Haiti (+509)</option>
+    <option value="HN" data-emoji="🇭🇳">Honduras (+504)</option>
+    <option value="NI" data-emoji="🇳🇮">Nicaragua (+505)</option>
+    <option value="PA" data-emoji="🇵🇦">Panama (+507)</option>
+    <option value="PY" data-emoji="🇵🇾">Paraguay (+595)</option>
+    <option value="PE" data-emoji="🇵🇪">Peru (+51)</option>
+    <option value="UY" data-emoji="🇺🇾">Uruguay (+598)</option>
+    <option value="VE" data-emoji="🇻🇪">Venezuela (+58)</option>
+  </optgroup>
+
+  <optgroup label="Europe">
+    <option value="ES" data-emoji="🇪🇸">Spain (+34)</option>
+  </optgroup>
+</select>
+                                                  
+                                                                <svg class="InlineSVG Icon PhoneNumberCountryCodeSelect-chevron Icon--xs Icon--square" focusable="false" height="16" viewBox="0 0 16 16" width="16">
+                                                                  <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16" fill-rule="evenodd"></path>
+                                                                  <path d="M10.793 6.293 8 9.086 5.207 6.293a1 1 0 0 0-1.414 1.414l3.5 3.5a1 1 0 0 0 1.414 0l3.5-3.5a1 1 0 1 0-1.414-1.414" fill-rule="evenodd" fill="#ffff"></path>
+                                                                </svg>
+                                                              </div>
+                                                            </div><span class="InputContainer" data-max=""><input class="CheckoutInput PhoneNumberInput-input SignUpForm-phoneInput CheckoutInput--hasPlaceholderIcon CheckoutInput--hideNativeAutofill Input Input--empty" autocomplete="undefined" autocorrect="off" spellcheck="false" id="search-phoneNumber" name="phoneNumber" type="tel" aria-required="false" data-lpignore="true" data-form-type="other" aria-label="Phone number" placeholder="55 1234 5678" maxlength="14" value="" oninput="formatPhoneNumber(this)"></span>
+                                                          </div>
+                                                          <div class="PhoneNumberInput-dynamicIcons">
+                                                            <div class="Optional">Requerido</div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                            
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                  
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+           
+                              </div>
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                      <div id="oxxo-tab-panel" role="tabpanel" aria-labelledby="card-tab" style="display: none">
+
+      <div class="BillingInfoForm flex-item width-grow flex-container direction-column">
+                                      <div class="AnimateSinglePresence">
+                                        <div class="AnimateSinglePresenceItem">
+                                          <div>
+                                            <div class="BillingInfoForm-addressInput flex-item width-12" aria-hidden="false" style="margin-top: 0px;">
+                                              <div class="flex-container spacing-16 direction-column wrap-wrap">
+                                                <div class="flex-item width-12">
+                                                  <div class="FormFieldGroup" data-qa="FormFieldGroup-billingName">
+                                                    <div class="FormFieldGroup-labelContainer flex-container justify-content-space-between"><label for="billingName"><span class="Text Text-color--gray600 Text-fontSize--13 Text-fontWeight--500">Email</span></label></div>
+                                                    <div class="FormFieldGroup-Fieldset" id="billingName-fieldset">
+                                                      <div class="FormFieldGroup-container">
+                                                        <div class="FormFieldGroup-child FormFieldGroup-child--width-12 FormFieldGroup-childLeft FormFieldGroup-childRight FormFieldGroup-childTop FormFieldGroup-childBottom">
+                                               <div class="FormFieldInput">
+                                    <div class="CheckoutInputContainer"><span class="InputContainer" data-max=""><input class="CheckoutInput Input Input--empty" autocomplete="email" autocorrect="off" spellcheck="false" autocapitalize="none" id="email" name="email" type="text" inputmode="email" aria-invalid="false" aria-describedby="" data-1p-ignore="false" value=""></span></div>
+                                  </div>
+                                                        </div>
+                                                        <div class="FieldError-container" style="opacity: 0; height: 0px; margin-top: 0px;"><span class="FieldError Text Text-color--red Text-fontSize--13"><span aria-hidden="true"></span></span></div>
+                                                      </div>
+                                                      <div class="FieldError-container" style="opacity: 0; height: 0px; margin-top: 0px;"><span class="FieldError Text Text-color--red Text-fontSize--13"><span aria-hidden="true"></span></span></div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                            
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                               </div>
+                              
+                              
+                              
+                              
+                              
+                              
+                            </div>
+                          </div>
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                        </div>
+                      </div>
+                      <div class="PaymentForm-confirmPaymentContainer mt4 flex-item width-grow">
+                        <div class="ConfirmPayment">
+                          <div class="AnimateSinglePresence">
+                            <div class="AnimateSinglePresenceItem">
+                              <div class="flex-item width-12"></div>
+                            </div>
+                          </div>
+                          <div class="flex-item width-12"></div>
+                          <div class="flex-item width-12">
+          <button class="SubmitButton SubmitButton--incomplete " id="payBtn" type="submit" style="background-color: rgb(0, 116, 212); color: rgb(255, 255, 255); "  onclick="generateOrder()" status="waiting"> <!-- SubmitButton--clickable-->
+                              <div class="SubmitButton-Shimmer" style="background: linear-gradient(to right, rgba(0, 116, 212, 0) 0%, rgb(58, 139, 238) 50%, rgba(0, 116, 212, 0) 100%);"></div>
+                              <div class="SubmitButton-TextContainer"><span class="SubmitButton-Text SubmitButton-Text--current Text Text-color--default Text-fontWeight--500 Text--truncate" id="waitingStatus">Pagar <span class="CurrencyAmount">MX${{course.cost}}.00</span></span>
+                                <span class="SubmitButton-Text SubmitButton-Text--pre Text Text-color--default Text-fontWeight--500 Text--truncate"  id="processingStatus">Procesando...</span>
+                                
+                              </div>
+                          <div class="SubmitButton-IconContainer" style="margin-top: -5px;">
+                                <div class="SubmitButton-Icon SubmitButton-Icon--pre" id="payIco1">
+                                  <div>
+                                    <div class="Icon Icon--md Icon--square"><svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                                        <path d="M3 7V5a5 5 0 1 1 10 0v2h.5a1 1 0 0 1 1 1v6a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2V8a1 1 0 0 1 1-1zm5 2.5a1 1 0 0 0-1 1v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-1-1zM11 7V5a3 3 0 1 0-6 0v2z" fill="#ffffff" fill-rule="evenodd"></path>
+                                      </svg></div>
+                                  </div>
+                                </div>
+                                <div class="SubmitButton-Icon SubmitButton-SpinnerIcon SubmitButton-Icon--pre" id="payIco2">
+                                  <div>
+                                    <div class="Icon Icon--md Icon--square"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                                        <ellipse cx="12" cy="12" rx="10" ry="10" style="stroke: rgb(255, 255, 255);"></ellipse>
+                                      </svg></div>
+                                  </div>
+                                </div>
+                              </div>
+                     <!--         <div class="SubmitButton-CheckmarkIcon">
+                                <div>
+                                  <div class="Icon Icon--md"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="14" focusable="false">
+                                      <path d="M 0.5 6 L 8 13.5 L 21.5 0" fill="transparent" stroke-width="2" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg></div>
+                                </div>
+                              </div> -->
+                            </button></div>
+                   
+                        </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
+ 
+              </form>
             </div>
+          </main>
+          <footer class="App-Footer Footer">
+          
+            <div class="Footer-Links"><a class="Link Link--primary" href="https://stripe.com/legal/end-users" target="_blank" rel="noopener"><span class="Text Text-color--gray400 Text-fontSize--12 Text-fontWeight--400">Terms</span></a><a class="Link Link--primary" href="https://stripe.com/privacy" target="_blank" rel="noopener"><span class="Text Text-color--gray400 Text-fontSize--12 Text-fontWeight--400">Contact</span></a></div>
+          </footer>
         </div>
-    </div>
+ 
+ 
+ 
+ </div></div></div>
 
-    <div class="reopen-button-container">
-        <button class="reopen-button" onclick="openModal()">Volver a abrir el modal</button>
-    </div>
 
-    <script>
-        const pricingData = {
-            'basic': {
-                name: 'Básico',
-                monthly: { amount: '33,50 MXN', period: '/ mes' },
-                annual: { amount: '350,00 MXN', period: '/ año' }
-            },
-            'premium': {
-                name: 'Premium',
-                monthly: { amount: '89,00 MXN', period: '/ mes' },
-                annual: { amount: '1.068,00 MXN', period: '/ año' }
-            },
-            'premium-plus': {
-                name: 'Premium+',
-                monthly: { amount: '665,83 MXN', period: '/ mes' },
-                annual: { amount: '7.990,00 MXN', period: '/ año' }
-            }
-        };
 
-        let selectedPlan = 'premium';
-        let billingType = 'monthly';
+<script>
+  var app = angular.module('app', []);
+app.controller('main', function($scope) {
+   $scope.courses = [
+    { type: 'Curso por ZOOM', cost: 300, description: '' },
+    { type: 'Curso Asíncrono', cost: 150, description: '' },
+    { type: 'Curso Avanzado', cost: 1500, description: '' }
+  ];
+  $scope.course = {
+    type: '',
+    cost: ''
+  };
+  $scope.changeCourse = function() {
+    $scope.course = $scope.selectedCourse;
+  };
+  
+  $scope.selectedMonths = 1; 
+  $scope.totalCost = 0;  
 
-        document.addEventListener('DOMContentLoaded', () => {
-            selectPlan('premium');
-            switchBilling('monthly');
-        });
+  $scope.changeMonth = function() {
+    $scope.updateTotalCost();
+  };
 
-        function openModal() {
-            document.querySelector('.modal-overlay').style.display = 'flex';
-            document.querySelector('.reopen-button-container').style.display = 'none';
-        }
+ 
+  $scope.updateTotalCost = function() {  
+      $scope.selectedCourse.cost = $scope.selectedCourse.cost * $scope.selectedMonths;
+  };
+})
 
-        function closeModal() {
-            document.querySelector('.modal-overlay').style.display = 'none';
-            document.querySelector('.reopen-button-container').style.display = 'block';
-        }
 
-        function selectPlan(plan) {
-            selectedPlan = plan;
-            
-            document.querySelectorAll('.radio-input').forEach(input => {
-                input.classList.remove('checked');
+
+
+function transferPay() {
+  // Quitar la clase is-selected del botón OXXO y agregarla al botón de Transferencia
+  document.getElementById("oxxo-tab").classList.remove("Tabs-TabListItem--is-selected");
+  document.getElementById("card-tab").classList.add("Tabs-TabListItem--is-selected");
+  document.getElementById("paymentContainer").style.height = "540px";
+
+  // Mostrar el panel de Transferencia y ocultar el panel de OXXO con animación
+  $('#oxxo-tab-panel').slideUp();
+  $('#card-tab-panel').slideDown();
+}
+
+function oxxoPay() {
+  // Quitar la clase is-selected del botón de Transferencia y agregarla al botón OXXO
+  document.getElementById("card-tab").classList.remove("Tabs-TabListItem--is-selected");
+  document.getElementById("oxxo-tab").classList.add("Tabs-TabListItem--is-selected");
+  document.getElementById("paymentContainer").style.height = "320px";
+
+  // Mostrar el panel de OXXO y ocultar el panel de Transferencia con animación
+  $('#card-tab-panel').slideUp();
+  $('#oxxo-tab-panel').slideDown();
+}
+
+ function generateOrder(){
+   if(document.getElementById("payBtn").getAttribute("status") == "ready"){
+     document.getElementById("waitingStatus").classList.remove("SubmitButton-Text--current");
+   document.getElementById("waitingStatus").classList.add("SubmitButton-Text--pre");
+   document.getElementById("processingStatus").classList.remove("SubmitButton-Text--pre");
+    
+     document.getElementById("processingStatus").classList.add("SubmitButton-Text--current");
+
+     document.getElementById("payIco1").classList.remove("SubmitButton-Icon--current");
+    document.getElementById("payIco2").classList.remove("SubmitButton-Icon--pre");
+    
+     document.getElementById("payIco2").classList.add("SubmitButton-Icon--current");
+   }
+  } 
+
+ 
+
+ function formatPhoneNumber(input) {
+    // Solo permitir números y eliminar espacios
+    let phoneNumber = input.value.replace(/\D/g, '');
+   
+
+    // Limitar el número de dígitos a 10
+    if (phoneNumber.length > 10) {
+      phoneNumber = phoneNumber.slice(0, 10);
+    }else if(phoneNumber.length == 10){
+       document.getElementById("payBtn").classList.remove("SubmitButton--incomplete");
+  document.getElementById("payBtn").classList.add("SubmitButton--clickable");
+      document.getElementById("payIco1").classList.remove("SubmitButton-Icon--pre");
+  document.getElementById("payIco1").classList.add("SubmitButton-Icon--current");
+      document.getElementById("payBtn").setAttribute("status", "ready")
+    }else{
+      document.getElementById("payBtn").classList.remove("SubmitButton--clickable");
+  document.getElementById("payBtn").classList.add("SubmitButton--incomplete");
+       document.getElementById("payIco1").classList.remove("SubmitButton-Icon--current");
+  document.getElementById("payIco1").classList.add("SubmitButton-Icon--pre");
+       document.getElementById("payBtn").setAttribute("status", "")
+    }
+
+    // Aplicar formato: 55 1234 5678
+    let formattedPhoneNumber = phoneNumber;
+    if (phoneNumber.length > 6) {
+      formattedPhoneNumber = phoneNumber.replace(/(\d{2})(\d{4})(\d{0,4})/, '$1 $2 $3');
+    } else if (phoneNumber.length > 2) {
+      formattedPhoneNumber = phoneNumber.replace(/(\d{2})(\d{0,4})/, '$1 $2');
+    } 
+
+    // Establecer el valor formateado en el input
+    input.value = formattedPhoneNumber;
+  }
+
+
+ 
+
+function updateFlagEmoji() {
+    const select = document.getElementById("countrySelect");
+    const flagContainer = document.getElementById("flagContainer");
+
+    // Obtiene el emoji desde el atributo data-emoji de la opción seleccionada
+    const selectedOption = select.options[select.selectedIndex];
+    const emoji = selectedOption.getAttribute("data-emoji");
+    flagContainer.textContent = emoji;
+  document.getElementById("flagContainer").style.marginLeft = "-5px";
+  }
+
+
+
+
+/*
+const clientId = "sb";
+const components = "buttons";
+let buttons;
+
+function cleanupBeforeReload() {
+  if (buttons) {
+    buttons.close();
+  }
+}
+
+function loadAndRender(transactionType) {
+  if (transactionType === "order") {
+    window
+      .paypalLoadScript({
+        "client-id": clientId,
+        vault: false,
+        components
+      })
+      .then(() => {
+        render({
+        /*  onClick: function(data, actions) {
+            document.getElementById("paymentContainer").style.display = "none";
+          }
+               });
+      });
+  } else {
+    window
+      .paypalLoadScript({
+        "client-id": clientId,
+        vault: true,
+        intent: "subscription",
+        components
+      })
+      .then(() => {
+        render({
+          style: {
+            shape: "rect",
+            color: "gold",
+            layout: "vertical",
+            label: "subscribe"
+          },
+          createSubscription: function (data, actions) {
+            return actions.subscription.create({
+              plan_id: "P-3RX065706M3469222L5IFM4I"
             });
-            
-            document.querySelectorAll('.card').forEach(card => {
-                card.classList.remove('premium');
-            });
-            
-            const cards = document.querySelectorAll('.card');
-            const radioInputs = document.querySelectorAll('.radio-input');
-            
-            if (plan === 'basic') {
-                radioInputs[0].classList.add('checked');
-                cards[0].classList.add('premium');
-            } else if (plan === 'premium') {
-                radioInputs[1].classList.add('checked');
-                cards[1].classList.add('premium');
-            } else if (plan === 'premium-plus') {
-                radioInputs[2].classList.add('checked');
-                cards[2].classList.add('premium');
-            }
-            
-            updateCtaPrice();
-        }
+          },
+          
+          onClick: function(data, actions) {
+            alert("Ingrese datos de tarjeta");
+          }
+          
+          
+        }); 
+      });
+  }
+}
 
-        function switchBilling(type) {
-            billingType = type;
-            
-            document.querySelectorAll('.toggle-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            const monthlyPrices = document.querySelectorAll('.monthly-price');
-            const annualPrices = document.querySelectorAll('.annual-price-display');
+const debounce = (func, wait) => {
+  let timeout;
 
-            const bestOfferSpan = document.querySelector('.best-offer');
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
 
-            if (type === 'annual') {
-                document.querySelectorAll('.toggle-btn')[0].classList.add('active');
-                bestOfferSpan.style.display = 'none';
-                
-                monthlyPrices.forEach(price => price.style.display = 'none');
-                annualPrices.forEach(price => price.style.display = 'inline');
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};
 
-            } else { // monthly
-                document.querySelectorAll('.toggle-btn')[1].classList.add('active');
-                bestOfferSpan.style.display = 'inline-block';
-                
-                monthlyPrices.forEach(price => price.style.display = 'inline');
-                annualPrices.forEach(price => price.style.display = 'none');
-            }
+const debouncedLoadAndRender = debounce(loadAndRender, 500);
 
-            updateCtaPrice();
-        }
+function onClickCallback(event) {
+  cleanupBeforeReload();
+  debouncedLoadAndRender(event.target.value);
+}
 
-        function updateCtaPrice() {
-            const priceData = pricingData[selectedPlan][billingType];
-            document.getElementById('selected-price-amount').textContent = priceData.amount;
-            document.getElementById('selected-price-period').textContent = priceData.period;
-            document.querySelector('.selected-plan-name').textContent = pricingData[selectedPlan].name;
-        }
 
-        function subscribe() {
-            alert(`¡Gracias por suscribirte al plan ${selectedPlan} con facturación ${billingType}!`);
-        }
-    </script>
-</body>
-</html>
+
+function render(options) {
+  buttons = paypal.Buttons(options);
+  buttons.render("#paypal-button-container").catch((err) => {
+    console.warn(
+      "Warning - Caught an error when attempting to render component",
+      err
+    );
+  });
+}
+
+loadAndRender("order");
+
+*/
+</script>
