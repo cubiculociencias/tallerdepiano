@@ -14,18 +14,6 @@
 
 
 <style>
-    body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif ;
-}
-  
-
-
-
-
-
-
-
-
 
 
 
@@ -64,6 +52,7 @@ body {
   position: relative;
   background: var(--bg-body);
   overflow: hidden;
+   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif ;
 }
 
 /* MAIN MENU */
@@ -71,21 +60,17 @@ body {
 
 
 .content {
-
   min-height: 100vh;
   display: grid;
-  grid-template-columns: auto 350px;
+  grid-template-columns: auto 360px;
 }
 
 
- /*
+ 
 .left-content {
-  color: var(--primary-color);
-  height: 100vh;
-  width: 100% !important;
-  overflow: auto;
+   padding-top: 20px;
 }
-*/
+
 
 
 /* RIGHT CONTENT */
@@ -96,10 +81,11 @@ body {
   display: flex;
   flex-direction: column;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); 
-  color: var(--primary-color);
   height: 100vh;
- width: 350px; 
+ width: 360px; 
  right: 0;
+ padding: 10px;
+ padding-top: 20px;
   overflow: auto;
 }
 
@@ -145,7 +131,8 @@ body::-webkit-scrollbar-thumb {
 
   .left-content {
     width: 100%; 
-    height: auto; 
+    height: auto;
+   padding: 15px;
   }
   .logContainer{
     height: 500px !important;
@@ -173,7 +160,7 @@ body::-webkit-scrollbar-thumb {
 
 
 
-		/*!
+    /*!
  * FullCalendar v2.6.1 Stylesheet
  * Docs & License: https://fullcalendar.io/
  * (c) 2015 Adam Shaw
@@ -181,10 +168,10 @@ body::-webkit-scrollbar-thumb {
 @import url(https://fonts.googleapis.com/css?family=Quicksand);
 
 .fc {
-	direction: ltr;
-	text-align: left;
+  direction: ltr;
+  text-align: left;
   filter: blur(2px);
-	max-width: 500px;
+  max-width: 500px;
   margin: auto;
 }
 
@@ -201,11 +188,11 @@ body::-webkit-scrollbar-thumb {
 }
 
 .fc-rtl {
-	text-align: right;
+  text-align: right;
 }
 
 body .fc { /* extra precedence to overcome jqui */
-	font-size: 1em;
+  font-size: 1em;
     color: gray;
     font-family: 'Quicksand', sans-serif;
     
@@ -222,42 +209,42 @@ body .fc { /* extra precedence to overcome jqui */
 .fc-unthemed .fc-divider,
 .fc-unthemed .fc-row,
 .fc-unthemed .fc-popover {
-	border-color: #ddd;
+  border-color: #ddd;
 }
 
 .fc-unthemed .fc-popover {
-	background-color: #fff;
+  background-color: #fff;
 }
 
 .fc-unthemed .fc-divider,
 .fc-unthemed .fc-popover .fc-header {
-	background: #eee;
+  background: #eee;
 }
 
 .fc-unthemed .fc-popover .fc-header .fc-close {
-	color: #666;
+  color: #666;
 }
 /* Marcar o dia de HOJE */
 .fc-unthemed .fc-today {
-	background: #ffffcc;
+  background: #ffffcc;
 }
 
 .fc-highlight { /* when user is selecting cells */
-	background: #bce8f1;
-	opacity: .3;
-	filter: alpha(opacity=30); /* for IE */
+  background: #bce8f1;
+  opacity: .3;
+  filter: alpha(opacity=30); /* for IE */
 }
 
 .fc-bgevent { /* default look for background events */
     background: #e4faeb;
-/* 	background: rgb(143, 223, 130); */
-	opacity: .3;
-	filter: alpha(opacity=30); /* for IE */
+/*  background: rgb(143, 223, 130); */
+  opacity: .3;
+  filter: alpha(opacity=30); /* for IE */
 }
 
 .fc-nonbusiness { /* default look for non-business-hours areas */
-	/* will inherit .fc-bgevent's styles */
-	background: #d7d7d7;
+  /* will inherit .fc-bgevent's styles */
+  background: #d7d7d7;
 }
 
 
@@ -265,89 +252,89 @@ body .fc { /* extra precedence to overcome jqui */
 --------------------------------------------------------------------------------------------------*/
 
 .fc-icon {
-	display: inline-block;
-	width: 1em;
-	height: 1em;
-	line-height: 1em;
-	font-size: 1em;
-	text-align: center;
-	overflow: hidden;
-	font-family: "Courier New", Courier, monospace;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  font-size: 1em;
+  text-align: center;
+  overflow: hidden;
+  font-family: "Courier New", Courier, monospace;
 
-	/* don't allow browser text-selection */
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	}
+  /* don't allow browser text-selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  }
 
 /*
 Acceptable font-family overrides for individual icons:
-	"Arial", sans-serif
-	"Times New Roman", serif
+  "Arial", sans-serif
+  "Times New Roman", serif
 
 NOTE: use percentage font sizes or else old IE chokes
 */
 
 .fc-icon:after {
-	position: relative;
-	margin: 0 -1em; /* ensures character will be centered, regardless of width */
+  position: relative;
+  margin: 0 -1em; /* ensures character will be centered, regardless of width */
 }
 
 .fc-icon-left-single-arrow:after {
-	content: "\02039";
-	font-weight: bold;
-	font-size: 200%;
-	top: -7%;
-	left: 3%;
+  content: "\02039";
+  font-weight: bold;
+  font-size: 200%;
+  top: -7%;
+  left: 3%;
 }
 
 .fc-icon-right-single-arrow:after {
-	content: "\0203A";
-	font-weight: bold;
-	font-size: 200%;
-	top: -7%;
-	left: -3%;
+  content: "\0203A";
+  font-weight: bold;
+  font-size: 200%;
+  top: -7%;
+  left: -3%;
 }
 
 .fc-icon-left-double-arrow:after {
-	content: "\000AB";
-	font-size: 160%;
-	top: -7%;
+  content: "\000AB";
+  font-size: 160%;
+  top: -7%;
 }
 
 .fc-icon-right-double-arrow:after {
-	content: "\000BB";
-	font-size: 160%;
-	top: -7%;
+  content: "\000BB";
+  font-size: 160%;
+  top: -7%;
 }
 
 .fc-icon-left-triangle:after {
-	content: "\25C4";
-	font-size: 125%;
-	top: 3%;
-	left: -2%;
+  content: "\25C4";
+  font-size: 125%;
+  top: 3%;
+  left: -2%;
 }
 
 .fc-icon-right-triangle:after {
-	content: "\25BA";
-	font-size: 125%;
-	top: 3%;
-	left: 2%;
+  content: "\25BA";
+  font-size: 125%;
+  top: 3%;
+  left: 2%;
 }
 
 .fc-icon-down-triangle:after {
-	content: "\25BC";
-	font-size: 125%;
-	top: 2%;
+  content: "\25BC";
+  font-size: 125%;
+  top: 2%;
 }
 
 .fc-icon-x:after {
-	content: "\000D7";
-	font-size: 200%;
-	top: 6%;
+  content: "\000D7";
+  font-size: 200%;
+  top: 6%;
 }
 
 
@@ -355,99 +342,99 @@ NOTE: use percentage font sizes or else old IE chokes
 --------------------------------------------------------------------------------------------------*/
 
 .fc button {
-	/* force height to include the border and padding */
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
+  /* force height to include the border and padding */
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 
-	/* dimensions */
-	margin: 0;
-	height: 2.1em;
-	padding: 0 .6em;
+  /* dimensions */
+  margin: 0;
+  height: 2.1em;
+  padding: 0 .6em;
 
-	/* text & cursor */
-	font-size: 1em; /* normalize */
-	white-space: nowrap;
-	cursor: pointer;
+  /* text & cursor */
+  font-size: 1em; /* normalize */
+  white-space: nowrap;
+  cursor: pointer;
 }
 
 /* Firefox has an annoying inner border */
 .fc button::-moz-focus-inner { margin: 0; padding: 0; }
-	
+  
 .fc-state-default { /* non-theme */
-	border: 1px solid;
+  border: 1px solid;
 }
 
 .fc-state-default.fc-corner-left { /* non-theme */
-	border-top-left-radius: 4px;
-	border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
 }
 
 .fc-state-default.fc-corner-right { /* non-theme */
-	border-top-right-radius: 4px;
-	border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 /* icons in buttons */
 
 .fc button .fc-icon { /* non-theme */
-	position: relative;
-	top: -0.05em; /* seems to be a good adjustment across browsers */
-	margin: 0 .2em;
-	vertical-align: middle;
+  position: relative;
+  top: -0.05em; /* seems to be a good adjustment across browsers */
+  margin: 0 .2em;
+  vertical-align: middle;
 }
-	
+  
 /*
   button states
   borrowed from twitter bootstrap (https://twitter.github.com/bootstrap/)
 */
 
 .fc-state-default {
-	background-color: #f5f5f5;
-	background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
-	background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
-	background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
-	background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
-	background-repeat: repeat-x;
-	border-color: #e6e6e6 #e6e6e6 #bfbfbf;
-	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-	color: #333;
-	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  background-color: #f5f5f5;
+  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+  background-repeat: repeat-x;
+  border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  color: #333;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .fc-state-hover,
 .fc-state-down,
 .fc-state-active,
 .fc-state-disabled {
-	color: #333333;
-	background-color: #e6e6e6;
+  color: #333333;
+  background-color: #e6e6e6;
 }
 
 .fc-state-hover {
-	color: #333333;
-	text-decoration: none;
-	background-position: 0 -15px;
-	-webkit-transition: background-position 0.1s linear;
-	   -moz-transition: background-position 0.1s linear;
-	     -o-transition: background-position 0.1s linear;
-	        transition: background-position 0.1s linear;
+  color: #333333;
+  text-decoration: none;
+  background-position: 0 -15px;
+  -webkit-transition: background-position 0.1s linear;
+     -moz-transition: background-position 0.1s linear;
+       -o-transition: background-position 0.1s linear;
+          transition: background-position 0.1s linear;
 }
 
 .fc-state-down,
 .fc-state-active {
-	background-color: #cccccc;
-	background-image: none;
-	box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+  background-color: #cccccc;
+  background-image: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .fc-state-disabled {
-	cursor: default;
-	background-image: none;
-	opacity: 0.65;
-	filter: alpha(opacity=65);
-	box-shadow: none;
+  cursor: default;
+  background-image: none;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  box-shadow: none;
 }
 
 
@@ -455,7 +442,7 @@ NOTE: use percentage font sizes or else old IE chokes
 --------------------------------------------------------------------------------------------------*/
 
 .fc-button-group {
-	display: inline-block;
+  display: inline-block;
 }
 
 /*
@@ -464,12 +451,12 @@ previous button's border...
 */
 
 .fc .fc-button-group > * { /* extra precedence b/c buttons have margin set to zero */
-	float: left;
-	margin: 0 0 0 -1px;
+  float: left;
+  margin: 0 0 0 -1px;
 }
 
 .fc .fc-button-group > :first-child { /* same */
-	margin-left: 0;
+  margin-left: 0;
 }
 
 
@@ -477,48 +464,48 @@ previous button's border...
 --------------------------------------------------------------------------------------------------*/
 
 .fc-popover {
-	position: absolute;
-	box-shadow: 0 2px 6px rgba(0,0,0,.15);
+  position: absolute;
+  box-shadow: 0 2px 6px rgba(0,0,0,.15);
 }
 
 .fc-popover .fc-header { /* TODO: be more consistent with fc-head/fc-body */
-	padding: 2px 4px;
+  padding: 2px 4px;
 }
 
 .fc-popover .fc-header .fc-title {
-	margin: 0 2px;
+  margin: 0 2px;
 }
 
 .fc-popover .fc-header .fc-close {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .fc-ltr .fc-popover .fc-header .fc-title,
 .fc-rtl .fc-popover .fc-header .fc-close {
-	float: left;
+  float: left;
 }
 
 .fc-rtl .fc-popover .fc-header .fc-title,
 .fc-ltr .fc-popover .fc-header .fc-close {
-	float: right;
+  float: right;
 }
 
 /* unthemed */
 
 .fc-unthemed .fc-popover {
-	border-width: 1px;
-	border-style: solid;
+  border-width: 1px;
+  border-style: solid;
 }
 
 .fc-unthemed .fc-popover .fc-header .fc-close {
-	font-size: .9em;
-	margin-top: 2px;
+  font-size: .9em;
+  margin-top: 2px;
 }
 
 /* jqui themed */
 
 .fc-popover > .ui-widget-header + .ui-widget-content {
-	border-top: 0; /* where they meet, let the header have the border */
+  border-top: 0; /* where they meet, let the header have the border */
 }
 
 
@@ -526,38 +513,38 @@ previous button's border...
 --------------------------------------------------------------------------------------------------*/
 
 .fc-divider {
-	border-style: solid;
-	border-width: 1px;
+  border-style: solid;
+  border-width: 1px;
 }
 
 hr.fc-divider {
-	height: 0;
-	margin: 0;
-	padding: 0 0 2px; /* height is unreliable across browsers, so use padding */
-	border-width: 1px 0;
+  height: 0;
+  margin: 0;
+  padding: 0 0 2px; /* height is unreliable across browsers, so use padding */
+  border-width: 1px 0;
 }
 
 .fc-clear {
-	clear: both;
+  clear: both;
 }
 
 .fc-bg,
 .fc-bgevent-skeleton,
 .fc-highlight-skeleton,
 .fc-helper-skeleton {
-	/* these element should always cling to top-left/right corners */
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
+  /* these element should always cling to top-left/right corners */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 .fc-bg {
-	bottom: 0; /* strech bg to bottom edge */
+  bottom: 0; /* strech bg to bottom edge */
 }
 
 .fc-bg table {
-	height: 100%; /* strech bg to bottom edge */
+  height: 100%; /* strech bg to bottom edge */
 }
 
 
@@ -565,26 +552,26 @@ hr.fc-divider {
 --------------------------------------------------------------------------------------------------*/
 
 .fc table {
-	width: 100%;
-	table-layout: fixed;
-	border-collapse: collapse;
-	border-spacing: 0;
-	font-size: 1em; /* normalize cross-browser */
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 1em; /* normalize cross-browser */
 
 }
 
 .fc th {
-	text-align: center;
+  text-align: center;
     padding: 10px !important;
    background-color: #383c44;
   color: white;
 }
 .fc th,
 .fc td {
-	border-style: solid;
-	border-width: 1px;
-	padding: 0px;
-	vertical-align: top;
+  border-style: solid;
+  border-width: 1px;
+  padding: 0px;
+  vertical-align: top;
 }
 
 .fc td {
@@ -598,7 +585,7 @@ hr.fc-divider {
 
 
 .fc td.fc-today {
-/* 	border-style: double;  */
+/*  border-style: double;  */
 }
 
 
@@ -606,23 +593,23 @@ hr.fc-divider {
 --------------------------------------------------------------------------------------------------*/
 
 .fc .fc-row { /* extra precedence to overcome themes w/ .ui-widget-content forcing a 1px border */
-	/* no visible border by default. but make available if need be (scrollbar width compensation) */
-	border-style: solid;
-	border-width: 0;
+  /* no visible border by default. but make available if need be (scrollbar width compensation) */
+  border-style: solid;
+  border-width: 0;
 }
 
 .fc-row table {
-	/* don't put left/right border on anything within a fake row.
-	   the outer tbody will worry about this */
-	border-left: 0 hidden transparent;
-	border-right: 0 hidden transparent;
+  /* don't put left/right border on anything within a fake row.
+     the outer tbody will worry about this */
+  border-left: 0 hidden transparent;
+  border-right: 0 hidden transparent;
 
-	/* no bottom borders on rows */
-	border-bottom: 0 hidden transparent; 
+  /* no bottom borders on rows */
+  border-bottom: 0 hidden transparent; 
 }
 
 .fc-row:first-child table {
-	border-top: 0 hidden transparent; /* no top border on first row */
+  border-top: 0 hidden transparent; /* no top border on first row */
 }
 
 
@@ -630,37 +617,37 @@ hr.fc-divider {
 --------------------------------------------------------------------------------------------------*/
 
 .fc-row {
-	position: relative;
+  position: relative;
 }
 
 .fc-row .fc-bg {
-	z-index: 1;
+  z-index: 1;
 }
 
 /* highlighting cells & background event skeleton */
 
 .fc-row .fc-bgevent-skeleton,
 .fc-row .fc-highlight-skeleton {
-	bottom: 0; /* stretch skeleton to bottom of row */
+  bottom: 0; /* stretch skeleton to bottom of row */
 }
 
 .fc-row .fc-bgevent-skeleton table,
 .fc-row .fc-highlight-skeleton table {
-	height: 100%; /* stretch skeleton to bottom of row */
+  height: 100%; /* stretch skeleton to bottom of row */
 }
 
 .fc-row .fc-highlight-skeleton td,
 .fc-row .fc-bgevent-skeleton td {
-	border-color: transparent;
+  border-color: transparent;
 }
 
 .fc-row .fc-bgevent-skeleton {
-	z-index: 2;
+  z-index: 2;
 
 }
 
 .fc-row .fc-highlight-skeleton {
-	z-index: 3;
+  z-index: 3;
 }
 
 /*
@@ -669,29 +656,29 @@ temporary rendered events).
 */
 
 .fc-row .fc-content-skeleton {
-	position: relative;
-	z-index: 4;
-	padding-bottom: 2px; /* matches the space above the events */
+  position: relative;
+  z-index: 4;
+  padding-bottom: 2px; /* matches the space above the events */
 }
 
 .fc-row .fc-helper-skeleton {
-	z-index: 5;
+  z-index: 5;
 }
 
 .fc-row .fc-content-skeleton td,
 .fc-row .fc-helper-skeleton td {
-	/* see-through to the background below */
-	background: none; /* in case <td>s are globally styled */
-	border-color: transparent;
+  /* see-through to the background below */
+  background: none; /* in case <td>s are globally styled */
+  border-color: transparent;
 
-	/* don't put a border between events and/or the day number */
-	border-bottom: 0;
+  /* don't put a border between events and/or the day number */
+  border-bottom: 0;
 }
 
 .fc-row .fc-content-skeleton tbody td, /* cells with events inside (so NOT the day number cell) */
 .fc-row .fc-helper-skeleton tbody td {
-	/* don't put a border between event cells */
-	border-top: 0;
+  /* don't put a border between event cells */
+  border-top: 0;
 }
 
 
@@ -699,14 +686,14 @@ temporary rendered events).
 --------------------------------------------------------------------------------------------------*/
 
 .fc-scroller { /* this class goes on elements for guaranteed vertical scrollbars */
-	overflow-y: scroll;
-	overflow-x: hidden;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .fc-scroller > * { /* we expect an immediate inner element */
-	position: relative; /* re-scope all positions */
-	width: 100%; /* hack to force re-sizing this inner element when scrollbars appear/disappear */
-	overflow: hidden; /* don't let negative margins or absolute positioning create further scroll */
+  position: relative; /* re-scope all positions */
+  width: 100%; /* hack to force re-sizing this inner element when scrollbars appear/disappear */
+  overflow: hidden; /* don't let negative margins or absolute positioning create further scroll */
 }
 
 
@@ -714,22 +701,22 @@ temporary rendered events).
 --------------------------------------------------------------------------------------------------*/
 
 .fc-event {
-	position: relative; /* for resize handle and other inner positioning */
-	display: block; /* make the <a> tag block */
-	font-size: .85em;
-	line-height: 1.3;
-/* 	border-radius: 1px; */
-	border: 1px solid #3a87ad; /* default BORDER color */
-	background-color: #e4faeb; /* default BACKGROUND color */
-	font-weight: normal; /* undo jqui's ui-widget-header bold */
+  position: relative; /* for resize handle and other inner positioning */
+  display: block; /* make the <a> tag block */
+  font-size: .85em;
+  line-height: 1.3;
+/*  border-radius: 1px; */
+  border: 1px solid #3a87ad; /* default BORDER color */
+  background-color: #e4faeb; /* default BACKGROUND color */
+  font-weight: normal; /* undo jqui's ui-widget-header bold */
 }
 
 /* overpower some of bootstrap's and jqui's styles on <a> tags */
 .fc-event,
 .fc-event:hover,
 .ui-widget .fc-event {
-	color: #fff; /* default TEXT color */
-	text-decoration: none; /* if <a> has an href */
+  color: #fff; /* default TEXT color */
+  text-decoration: none; /* if <a> has an href */
   cursor: pointer;
 }
 
@@ -737,24 +724,24 @@ temporary rendered events).
 
 .fc-not-allowed, /* causes a "warning" cursor. applied on body */
 .fc-not-allowed .fc-event { /* to override an event's custom cursor */
-	cursor: not-allowed;
+  cursor: not-allowed;
 }
 
 .fc-event .fc-bg { /* the generic .fc-bg already does position */
-	z-index: 1;
-	background: #fff;
-	opacity: .25;
-	filter: alpha(opacity=25); /* for IE */
+  z-index: 1;
+  background: #fff;
+  opacity: .25;
+  filter: alpha(opacity=25); /* for IE */
 }
 
 .fc-event .fc-content {
-	position: relative;
-	z-index: 2;
+  position: relative;
+  z-index: 2;
 }
 
 .fc-event .fc-resizer {
-	position: absolute;
-	z-index: 3;
+  position: absolute;
+  z-index: 3;
 }
 
 
@@ -765,30 +752,30 @@ temporary rendered events).
 
 .fc-ltr .fc-h-event.fc-not-start,
 .fc-rtl .fc-h-event.fc-not-end {
-	margin-left: 0;
-	border-left-width: 0;
-	padding-left: 1px; /* replace the border with padding */
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
+  margin-left: 0;
+  border-left-width: 0;
+  padding-left: 1px; /* replace the border with padding */
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .fc-ltr .fc-h-event.fc-not-end,
 .fc-rtl .fc-h-event.fc-not-start {
-	margin-right: 0;
-	border-right-width: 0;
-	padding-right: 1px; /* replace the border with padding */
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
+  margin-right: 0;
+  border-right-width: 0;
+  padding-right: 1px; /* replace the border with padding */
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 /* resizer */
 
 .fc-h-event .fc-resizer { /* positioned it to overcome the event's borders */
-	top: -1px;
-	bottom: -1px;
-	left: -1px;
-	right: -1px;
-	width: 5px;
+  top: -1px;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+  width: 5px;
 }
 
 /* left resizer  */
@@ -798,8 +785,8 @@ temporary rendered events).
 .fc-rtl .fc-h-event .fc-end-resizer,
 .fc-rtl .fc-h-event .fc-end-resizer:before,
 .fc-rtl .fc-h-event .fc-end-resizer:after {
-	right: auto; /* ignore the right and only use the left */
-	cursor: w-resize;
+  right: auto; /* ignore the right and only use the left */
+  cursor: w-resize;
 }
 
 /* right resizer */
@@ -809,8 +796,8 @@ temporary rendered events).
 .fc-rtl .fc-h-event .fc-start-resizer,
 .fc-rtl .fc-h-event .fc-start-resizer:before,
 .fc-rtl .fc-h-event .fc-start-resizer:after {
-	left: auto; /* ignore the left and only use the right */
-	cursor: e-resize;
+  left: auto; /* ignore the left and only use the right */
+  cursor: e-resize;
 }
 
 
@@ -821,24 +808,24 @@ be a descendant of the grid when it is being dragged.
 */
 
 .fc-day-grid-event {
-	margin: 1px 2px 0; /* spacing between events and edges */
-	padding: 0 1px;
+  margin: 1px 2px 0; /* spacing between events and edges */
+  padding: 0 1px;
 }
 
 
 .fc-day-grid-event .fc-content { /* force events to be one-line tall */
-	white-space: nowrap;
-	overflow: hidden;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .fc-day-grid-event .fc-time {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 .fc-day-grid-event .fc-resizer { /* enlarge the default hit area */
-	left: -3px;
-	right: -3px;
-	width: 7px;
+  left: -3px;
+  right: -3px;
+  width: 7px;
 }
 
 
@@ -848,33 +835,33 @@ be a descendant of the grid when it is being dragged.
 /* "more" link that represents hidden events */
 
 a.fc-more {
-	margin: 1px 3px;
-	font-size: .85em;
-	cursor: pointer;
-	text-decoration: none;
+  margin: 1px 3px;
+  font-size: .85em;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 a.fc-more:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 .fc-limited { /* rows and cells that are hidden because of a "more" link */
-	display: none;
+  display: none;
 }
 
 /* popover that appears when "more" link is clicked */
 
 .fc-day-grid .fc-row {
-	z-index: 1; /* make the "more" popover one higher than this */
+  z-index: 1; /* make the "more" popover one higher than this */
 }
 
 .fc-more-popover {
-	z-index: 2;
-	width: 220px;
+  z-index: 2;
+  width: 220px;
 }
 
 .fc-more-popover .fc-event-container {
-	padding: 10px;
+  padding: 10px;
 }
 
 
@@ -882,69 +869,69 @@ a.fc-more:hover {
 --------------------------------------------------------------------------------------------------*/
 
 .fc-now-indicator {
-	position: absolute;
-	border: 0 solid red;
+  position: absolute;
+  border: 0 solid red;
 }
 
 /* Toolbar
 --------------------------------------------------------------------------------------------------*/
 
 .fc-toolbar {
-	text-align: center;
-	margin-bottom: 1em;
+  text-align: center;
+  margin-bottom: 1em;
 }
 
 .fc-toolbar .fc-left {
-	float: left;
+  float: left;
 }
 
 .fc-toolbar .fc-right {
-	float: right;
+  float: right;
 }
 
 .fc-toolbar .fc-center {
-	display: inline-block;
+  display: inline-block;
 }
 
 /* the things within each left/right/center section */
 .fc .fc-toolbar > * > * { /* extra precedence to override button border margins */
-	float: left;
-	margin-left: .75em;
+  float: left;
+  margin-left: .75em;
 }
 
 /* the first thing within each left/center/right section */
 .fc .fc-toolbar > * > :first-child { /* extra precedence to override button border margins */
-	margin-left: 0;
+  margin-left: 0;
 }
-	
+  
 /* title text */
 
 .fc-toolbar h2 {
-	margin: 0;
+  margin: 0;
 }
 
 /* button layering (for border precedence) */
 
 .fc-toolbar button {
-	position: relative;
+  position: relative;
 }
 
 .fc-toolbar .fc-state-hover,
 .fc-toolbar .ui-state-hover {
-	z-index: 2;
+  z-index: 2;
 }
-	
+  
 .fc-toolbar .fc-state-down {
-	z-index: 3;
+  z-index: 3;
 }
 
 .fc-toolbar .fc-state-active,
 .fc-toolbar .ui-state-active {
-	z-index: 4;
+  z-index: 4;
 }
 
 .fc-toolbar button:focus {
-	z-index: 5;
+  z-index: 5;
 }
 
 
@@ -956,15 +943,15 @@ a.fc-more:hover {
 .fc-view-container *,
 .fc-view-container *:before,
 .fc-view-container *:after {
-	-webkit-box-sizing: content-box;
-	   -moz-box-sizing: content-box;
-	        box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
 }
 
 .fc-view, /* scope positioning and z-index's for everything within the view */
 .fc-view > table { /* so dragged elements can be above the view's main element */
-	position: relative;
-	z-index: 1;
+  position: relative;
+  z-index: 1;
 }
 
 /* BasicView
@@ -974,82 +961,82 @@ a.fc-more:hover {
 
 .fc-basicWeek-view .fc-content-skeleton,
 .fc-basicDay-view .fc-content-skeleton {
-	/* we are sure there are no day numbers in these views, so... */
-	padding-top: 1px; /* add a pixel to make sure there are 2px padding above events */
-	padding-bottom: 1em; /* ensure a space at bottom of cell for user selecting/clicking */
+  /* we are sure there are no day numbers in these views, so... */
+  padding-top: 1px; /* add a pixel to make sure there are 2px padding above events */
+  padding-bottom: 1em; /* ensure a space at bottom of cell for user selecting/clicking */
 }
 
 .fc-basic-view .fc-body .fc-row {
-	min-height: 4em; /* ensure that all rows are at least this tall */
+  min-height: 4em; /* ensure that all rows are at least this tall */
 }
 
 /* a "rigid" row will take up a constant amount of height because content-skeleton is absolute */
 
 .fc-row.fc-rigid {
-	overflow: hidden;
+  overflow: hidden;
 }
 
 .fc-row.fc-rigid .fc-content-skeleton {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 /* week and day number styling */
 
 .fc-basic-view .fc-week-number,
 .fc-basic-view .fc-day-number {
-	padding: 0 2px;
+  padding: 0 2px;
 }
 
 .fc-basic-view td.fc-week-number span,
 .fc-basic-view td.fc-day-number {
-	padding-top: 2px;
-	padding-bottom: 2px;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 
 .fc-basic-view .fc-week-number {
-	text-align: center;
+  text-align: center;
 }
 
 .fc-basic-view .fc-week-number span {
-	/* work around the way we do column resizing and ensure a minimum width */
-	display: inline-block;
-	min-width: 1.25em;
+  /* work around the way we do column resizing and ensure a minimum width */
+  display: inline-block;
+  min-width: 1.25em;
 }
 
 .fc-ltr .fc-basic-view .fc-day-number {
-	text-align: right;
+  text-align: right;
 }
 
 .fc-rtl .fc-basic-view .fc-day-number {
-	text-align: left;
+  text-align: left;
 }
 
 .fc-day-number.fc-other-month {
-	opacity: 0.3;
-	filter: alpha(opacity=30); /* for IE */
-	/* opacity with small font can sometimes look too faded
-	   might want to set the 'color' property instead
-	   making day-numbers bold also fixes the problem */
+  opacity: 0.3;
+  filter: alpha(opacity=30); /* for IE */
+  /* opacity with small font can sometimes look too faded
+     might want to set the 'color' property instead
+     making day-numbers bold also fixes the problem */
 }
 
 /* AgendaView all-day area
 --------------------------------------------------------------------------------------------------*/
 
 .fc-agenda-view .fc-day-grid {
-	position: relative;
-	z-index: 2; /* so the "more.." popover will be over the time grid */
+  position: relative;
+  z-index: 2; /* so the "more.." popover will be over the time grid */
 }
 
 .fc-agenda-view .fc-day-grid .fc-row {
-	min-height: 3em; /* all-day section will never get shorter than this */
+  min-height: 3em; /* all-day section will never get shorter than this */
 }
 
 .fc-agenda-view .fc-day-grid .fc-row .fc-content-skeleton {
-	padding-top: 1px; /* add a pixel to make sure there are 2px padding above events */
-	padding-bottom: 1em; /* give space underneath events for clicking/selecting days */
+  padding-top: 1px; /* add a pixel to make sure there are 2px padding above events */
+  padding-bottom: 1em; /* give space underneath events for clicking/selecting days */
 }
 
 
@@ -1057,21 +1044,21 @@ a.fc-more:hover {
 --------------------------------------------------------------------------------------------------*/
 
 .fc .fc-axis { /* .fc to overcome default cell styles */
-	vertical-align: middle;
-	padding: 0 4px;
-	white-space: nowrap;
+  vertical-align: middle;
+  padding: 0 4px;
+  white-space: nowrap;
 }
 
 .fc-ltr .fc-axis {
-	text-align: right;
+  text-align: right;
 }
 
 .fc-rtl .fc-axis {
-	text-align: left;
+  text-align: left;
 }
 
 .ui-widget td.fc-axis {
-	font-weight: normal; /* overcome jqui theme making it bold */
+  font-weight: normal; /* overcome jqui theme making it bold */
 }
 
 
@@ -1080,69 +1067,69 @@ a.fc-more:hover {
 
 .fc-time-grid-container, /* so scroll container's z-index is below all-day */
 .fc-time-grid { /* so slats/bg/content/etc positions get scoped within here */
-	position: relative;
-	z-index: 1;
+  position: relative;
+  z-index: 1;
 }
 
 .fc-time-grid {
-	min-height: 100%; /* so if height setting is 'auto', .fc-bg stretches to fill height */
+  min-height: 100%; /* so if height setting is 'auto', .fc-bg stretches to fill height */
 }
 
 .fc-time-grid table { /* don't put outer borders on slats/bg/content/etc */
-	border: 0 hidden transparent;
+  border: 0 hidden transparent;
 }
 
 .fc-time-grid > .fc-bg {
-	z-index: 1;
+  z-index: 1;
 }
 
 .fc-time-grid .fc-slats,
 .fc-time-grid > hr { /* the <hr> AgendaView injects when grid is shorter than scroller */
-	position: relative;
-	z-index: 2;
+  position: relative;
+  z-index: 2;
 }
 
 .fc-time-grid .fc-content-col {
-	position: relative; /* because now-indicator lives directly inside */
+  position: relative; /* because now-indicator lives directly inside */
 }
 
 .fc-time-grid .fc-content-skeleton {
-	position: absolute;
-	z-index: 3;
-	top: 0;
-	left: 0;
-	right: 0;
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 /* divs within a cell within the fc-content-skeleton */
 
 .fc-time-grid .fc-business-container {
-	position: relative;
-	z-index: 1;
+  position: relative;
+  z-index: 1;
 }
 
 .fc-time-grid .fc-bgevent-container {
-	position: relative;
-	z-index: 2;
+  position: relative;
+  z-index: 2;
 }
 
 .fc-time-grid .fc-highlight-container {
-	position: relative;
-	z-index: 3;
+  position: relative;
+  z-index: 3;
 }
 
 .fc-time-grid .fc-event-container {
-	position: relative;
-	z-index: 4;
+  position: relative;
+  z-index: 4;
 }
 
 .fc-time-grid .fc-now-indicator-line {
-	z-index: 5;
+  z-index: 5;
 }
 
 .fc-time-grid .fc-helper-container { /* also is fc-event-container */
-	position: relative;
-	z-index: 6;
+  position: relative;
+  z-index: 6;
 }
 
 
@@ -1150,16 +1137,16 @@ a.fc-more:hover {
 --------------------------------------------------------------------------------------------------*/
 
 .fc-time-grid .fc-slats td {
-	height: 1.5em;
-	border-bottom: 0; /* each cell is responsible for its top border */
+  height: 1.5em;
+  border-bottom: 0; /* each cell is responsible for its top border */
 }
 
 .fc-time-grid .fc-slats .fc-minor td {
-	border-top-style: dotted;
+  border-top-style: dotted;
 }
 
 .fc-time-grid .fc-slats .ui-widget-content { /* for jqui theme */
-	background: none; /* see through to fc-bg */
+  background: none; /* see through to fc-bg */
 }
 
 
@@ -1167,14 +1154,14 @@ a.fc-more:hover {
 --------------------------------------------------------------------------------------------------*/
 
 .fc-time-grid .fc-highlight-container { /* a div within a cell within the fc-highlight-skeleton */
-	position: relative; /* scopes the left/right of the fc-highlight to be in the column */
+  position: relative; /* scopes the left/right of the fc-highlight to be in the column */
 }
 
 .fc-time-grid .fc-highlight {
-	position: absolute;
-	left: 0;
-	right: 0;
-	/* top and bottom will be in by JS */
+  position: absolute;
+  left: 0;
+  right: 0;
+  /* top and bottom will be in by JS */
 }
 
 
@@ -1182,23 +1169,23 @@ a.fc-more:hover {
 --------------------------------------------------------------------------------------------------*/
 
 .fc-ltr .fc-time-grid .fc-event-container { /* space on the sides of events for LTR (default) */
-	margin: 0 2.5% 0 2px;
+  margin: 0 2.5% 0 2px;
 }
 
 .fc-rtl .fc-time-grid .fc-event-container { /* space on the sides of events for RTL */
-	margin: 0 2px 0 2.5%;
+  margin: 0 2px 0 2.5%;
 }
 
 .fc-time-grid .fc-event,
 .fc-time-grid .fc-bgevent {
-	position: absolute;
-	z-index: 1; /* scope inner z-index's */
+  position: absolute;
+  z-index: 1; /* scope inner z-index's */
 }
 
 .fc-time-grid .fc-bgevent {
-	/* background events always span full width */
-	left: 0;
-	right: 0;
+  /* background events always span full width */
+  left: 0;
+  right: 0;
 }
 
 
@@ -1206,23 +1193,23 @@ a.fc-more:hover {
 --------------------------------------------------------------------------------------------------*/
 
 .fc-v-event.fc-not-start { /* events that are continuing from another day */
-	/* replace space made by the top border with padding */
-	border-top-width: 0;
-	padding-top: 1px;
+  /* replace space made by the top border with padding */
+  border-top-width: 0;
+  padding-top: 1px;
 
-	/* remove top rounded corners */
-	border-top-left-radius: 0;
-	border-top-right-radius: 0;
+  /* remove top rounded corners */
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 .fc-v-event.fc-not-end {
-	/* replace space made by the top border with padding */
-	border-bottom-width: 0;
-	padding-bottom: 1px;
+  /* replace space made by the top border with padding */
+  border-bottom-width: 0;
+  padding-bottom: 1px;
 
-	/* remove bottom rounded corners */
-	border-bottom-left-radius: 0;
-	border-bottom-right-radius: 0;
+  /* remove bottom rounded corners */
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 
@@ -1233,67 +1220,67 @@ be a descendant of the grid when it is being dragged.
 */
 
 .fc-time-grid-event {
-	overflow: hidden; /* don't let the bg flow over rounded corners */
+  overflow: hidden; /* don't let the bg flow over rounded corners */
 }
 
 .fc-time-grid-event .fc-time,
 .fc-time-grid-event .fc-title {
-	padding: 0 1px;
+  padding: 0 1px;
 }
 
 .fc-time-grid-event .fc-time {
-	font-size: .85em;
-	white-space: nowrap;
+  font-size: .85em;
+  white-space: nowrap;
 }
 
 /* short mode, where time and title are on the same line */
 
 .fc-time-grid-event.fc-short .fc-content {
-	/* don't wrap to second line (now that contents will be inline) */
-	white-space: nowrap;
+  /* don't wrap to second line (now that contents will be inline) */
+  white-space: nowrap;
 }
 
 .fc-time-grid-event.fc-short .fc-time,
 .fc-time-grid-event.fc-short .fc-title {
-	/* put the time and title on the same line */
-	display: inline-block;
-	vertical-align: top;
+  /* put the time and title on the same line */
+  display: inline-block;
+  vertical-align: top;
 }
 
 .fc-time-grid-event.fc-short .fc-time span {
-	display: none; /* don't display the full time text... */
+  display: none; /* don't display the full time text... */
 }
 
 .fc-time-grid-event.fc-short .fc-time:before {
-	content: attr(data-start); /* ...instead, display only the start time */
+  content: attr(data-start); /* ...instead, display only the start time */
 }
 
 .fc-time-grid-event.fc-short .fc-time:after {
-	content: "\000A0-\000A0"; /* seperate with a dash, wrapped in nbsp's */
+  content: "\000A0-\000A0"; /* seperate with a dash, wrapped in nbsp's */
 }
 
 .fc-time-grid-event.fc-short .fc-title {
-	font-size: .85em; /* make the title text the same size as the time */
-	padding: 0; /* undo padding from above */
+  font-size: .85em; /* make the title text the same size as the time */
+  padding: 0; /* undo padding from above */
 }
 
 /* resizer */
 
 .fc-time-grid-event .fc-resizer {
-	left: 0;
-	right: 0;
-	bottom: 0;
-	height: 8px;
-	overflow: hidden;
-	line-height: 8px;
-	font-size: 11px;
-	font-family: monospace;
-	text-align: center;
-	cursor: s-resize;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 8px;
+  overflow: hidden;
+  line-height: 8px;
+  font-size: 11px;
+  font-family: monospace;
+  text-align: center;
+  cursor: s-resize;
 }
 
 .fc-time-grid-event .fc-resizer:after {
-	content: "=";
+  content: "=";
 }
 
 
@@ -1301,31 +1288,31 @@ be a descendant of the grid when it is being dragged.
 --------------------------------------------------------------------------------------------------*/
 
 .fc-time-grid .fc-now-indicator-line {
-	border-top-width: 1px;
-	left: 0;
-	right: 0;
+  border-top-width: 1px;
+  left: 0;
+  right: 0;
 }
 
 /* arrow on axis */
 
 .fc-time-grid .fc-now-indicator-arrow {
-	margin-top: -5px; /* vertically center on top coordinate */
+  margin-top: -5px; /* vertically center on top coordinate */
 }
 
 .fc-ltr .fc-time-grid .fc-now-indicator-arrow {
-	left: 0;
-	/* triangle pointing right... */
-	border-width: 5px 0 5px 6px;
-	border-top-color: transparent;
-	border-bottom-color: transparent;
+  left: 0;
+  /* triangle pointing right... */
+  border-width: 5px 0 5px 6px;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
 }
 
 .fc-rtl .fc-time-grid .fc-now-indicator-arrow {
-	right: 0;
-	/* triangle pointing left... */
-	border-width: 5px 6px 5px 0;
-	border-top-color: transparent;
-	border-bottom-color: transparent;
+  right: 0;
+  /* triangle pointing left... */
+  border-width: 5px 6px 5px 0;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
 }
 
 /* Estilo general de los días */
@@ -1344,7 +1331,7 @@ be a descendant of the grid when it is being dragged.
 }
 
 .fc-listYear-view .fc-scroller {
-    height: 800px !important; 
+    height: 450px !important; 
 }
 
 /* 
@@ -1363,8 +1350,9 @@ be a descendant of the grid when it is being dragged.
 
 /* Puntos de evento */
 .fc-event-dot {
-  margin: 7px !important;
-  background-color: #0fb;
+margin: 4px 10px !important;
+  background-color: transparent !important;
+  color:  transparent !important;
 }
 
 
@@ -1451,16 +1439,22 @@ be a descendant of the grid when it is being dragged.
 
 
 .btnAtten{
-	margin-top: 20px; 
-	float: right; 
-	font-size: 18px;
+  margin-top: 20px; 
+  float: right; 
+  font-size: 18px;
 }
-	@media (min-width: 600px ){
-		.btnAtten{
+  @media (min-width: 600px ){
+    .btnAtten{
 
-			display: none;
-		}
-	}
+      display: none;
+    }
+  }
+
+   @media (max-width: 500px ){
+    body{
+        margin-top: 20px;
+    }
+  }
   
 </style>
 
@@ -1486,6 +1480,9 @@ be a descendant of the grid when it is being dragged.
             <!--             <div class="row">s
                 <h3 uib-tooltip-html="htmlTooltip" tooltip-placement="bottom">{{teste}}</h3>
             </div> -->
+
+
+
             <!--     Modal Body     -->
             <script type="text/ng-template" id="myModalContent.html">
                 <div class="modal-header">
@@ -1500,51 +1497,35 @@ be a descendant of the grid when it is being dragged.
                     <p>
                         <label for="nome">{{   gfExtenso    }}</label>
                     </p>
+               <h3 class="panel-title" ng-if="status === 'finalizada'" style="color: grey;">
+                <i class="ri-check-line"></i> Finalizada
+            </h3>
+            
+            <h3 class="panel-title" ng-if="status === 'hoy'" style="color: #007bff;">
+                <i class="ri-time-line"></i> Hoy
+            </h3>
+
+            <h3 class="panel-title" ng-if="status === 'pendiente'" >
+                <i class="ri-time-line"></i> Pendiente
+                <span style="font-weight: normal; font-size: 0.9em;">
+                    (faltan {{ diasFaltantes }} 
+                    <span ng-if="diasFaltantes > 1">días</span>
+                    <span ng-if="diasFaltantes === 1">día</span>)
+                </span>
+            </h3>
                 </div>
                 
                 </div>
                 <div class="modal-footer">
+   
+
                     <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
                 </div>
             </script>
           
-          
-          
-            <script type="text/ng-template" id="bookpiano.html">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
-                    <h3 class="modal-title">Agendar servicio</h3>
-                </div>
-                <div class="modal-body">
-                    <div class="text-center well">
-                    
-                    <p>
-             <label for="service">Servicio</label>
-  <select id="service" class="form-control" ng-model="selectedService" ng-change="updateDayList()">
-    <option value=""></option>
-    <option value="service1">{{opc1}}</option>
-    <option value="service2" ng-if="miss > 0">{{opc2}}</option>
-    <option value="service3" ng-if="delay > 0">{{opc3}}</option>
-  </select>
-        <label for="dayList" ng-if="selectedService">Dia</label>
-  <select id="dayList" class="form-control" ng-model="selectedDay" ng-change="updateHourList()" ng-options="day for day in days" >
-  </select>
-     <label for="hourList" ng-if="selectedDay && selectedService != 'service3'">Hora</label>
-  <select id="hourList" class="form-control" ng-model="selectedHour"  ng-change="logHour(selectedHour)" ng-if="selectedDay && selectedService != 'service3'" ng-options="hour for hour in hours">
+      
 
-  </select>
-             </p>          
-                  
-                </div>
-               <span style="font-weight: 700;">Prácticas:  </span> Ilimitadas<br>
-  <span style="font-weight: 700;">Reposiciones:  </span> {{miss}}<br>
-               <span style="font-weight: 700;">Falta sin recargo:  </span> {{delay}}
-                </div>
-                <div class="modal-footer">
-                  <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
-                    <button class="btn btn-primary" type="button" ng-click="submitForm()">Solicitar</button>
-                </div>
-            </script>
+         
           
             <!--   END  Modal Body     -->
             <div class="alert-success calAlert ng-scope" ng-show="alertMessage != undefined &amp;&amp; alertMessage != ''">
@@ -1561,8 +1542,8 @@ be a descendant of the grid when it is being dragged.
    <!--  <div class="col-md-12">
            <button class="btn btn-default btnAtten" onclick="window.top.location.href='https://app.mozartacademy.mx/main#/menu/attendance';">Solicitar</button>
         </div>  -->
-   
-        
+  
+         
       </div>
 
       <div class="right-content">
@@ -1582,7 +1563,7 @@ be a descendant of the grid when it is being dragged.
 
 
 <script>
-		var app = angular.module('myApp', ['ui.bootstrap', 'ui.calendar']);
+    var app = angular.module('myApp', ['ui.bootstrap', 'ui.calendar']);
 
 app.controller('Ctrl', function($scope, $http, $uibModal, $log, $compile, uiCalendarConfig) {
     $scope.teste = "calendar";
@@ -1590,8 +1571,9 @@ app.controller('Ctrl', function($scope, $http, $uibModal, $log, $compile, uiCale
  
   
    var requestData = {
-    action: "getBasicData",
-    token: localStorage.getItem('TPtoken')
+    action: "getUserData",
+  // token: "U2FsdGVkX1+pTAJ/i/vnElIrTlT7VjKJ6kuzk2FlnAIkGq9xl29aZsKgbGygQIfF"
+    token: localStorage.getItem('MStoken')
   };
 
   var config = {
@@ -1600,7 +1582,7 @@ app.controller('Ctrl', function($scope, $http, $uibModal, $log, $compile, uiCale
     },
     followRedirects: true, 
   };
- $http.post('https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec', requestData, config)
+ $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData, config)
     .then(function(response) {
     $scope.userData = response.data;
     $scope.events = JSON.parse($scope.userData.agenda)
@@ -1625,21 +1607,8 @@ app.controller('Ctrl', function($scope, $http, $uibModal, $log, $compile, uiCale
 
    
  
-  
- $scope.bookpiano = function() {
-    var modalInstance2 = $uibModal.open({
-      templateUrl: 'bookpiano.html',
-      controller: 'bookCtrl',
-      resolve: {
-                items: function() {
-                    return $scope.events;
-                },
-                userData: function() {
-                    return $scope.userData;
-                }
-            }
-    });
-  };
+
+
 
     /* Render Tooltip
     $scope.eventRender = function(event, element, view) {
@@ -1654,7 +1623,7 @@ app.controller('Ctrl', function($scope, $http, $uibModal, $log, $compile, uiCale
         $scope.selected = date;
         // Modal
 
-        $scope.animationsEnabled = true;
+        $scope.animationsEnabled = true; 
 
         var modalInstance = $uibModal.open({
             animation: $scope.animationsEnabled,
@@ -1662,9 +1631,12 @@ app.controller('Ctrl', function($scope, $http, $uibModal, $log, $compile, uiCale
             controller: 'ModalInstanceCtrl',
             size: size,
             resolve: {
-                items: function() {
+               selected: function() {
                     return $scope.selected;
-                }
+                },
+              items: function() {
+                    return $scope.events;
+                },
             }
         });
 
@@ -1682,36 +1654,58 @@ app.controller('Ctrl', function($scope, $http, $uibModal, $log, $compile, uiCale
 
     $scope.uiConfig = {
         calendar: {
-            defaultView: 'month',
-            height: "auto",
+            defaultView: 'listYear',
+            height: 450,
             locale: "es",
-	    lang: "es-mx",
+      lang: "es-mx",
             eventTextColor: '#fff',
             eventBorderColor: 'white',
-          
-            eventBackgroundColor: function(event) {
-              if(event.color){
-                return event.color; 
-              }
-                
-            },
             eventBackgroundColor: 'LightSeaGreen',
+
             eventRender: function(event, element) {
-                element.find('.fc-time').text(""); 
-              if (event.start < new Date()) { 
-                if(event.attendance === 1){
-                     element.append('<i class="ri-check-line" style="position: absolute; top: -30px;  color: green; font-size: 20px; font-weight: 700;"></i>'); 
-                }else if(event.attendance === 0){
-                  element.append('<i class="ri-close-line" style="position: absolute; top: -30px;  color: red; font-size: 20px; font-weight: 700;"></i>'); 
-               }
-                 
-                };
-             
-            },
+            // No mostrar la hora en la vista de lista
+            element.find('.fc-time').text(""); 
+            
+            // Obtener el elemento del título para modificarlo
+            var titleElement = element.find('.fc-list-item-title'); 
+            
+            // Comprobar si la fecha del evento ya pasó
+            if (event.start < new Date()) { 
+                // 1. Aplicar estilos de finalizado al título
+                titleElement.css({
+                    'color': 'silver',
+                    'text-decoration': 'line-through'
+                });
+
+                // 2. Anexar el texto "Finalizado"
+                titleElement.find('a').append(' - Finalizada');
+
+                // 3. Agregar un ícono de check
+                var dotElement = element.find('.fc-list-item-marker');
+                dotElement.empty().append('<i class="ri-check-line" style="color: grey; font-size: 22px; font-weight: 700; margin-left: 4px; margin-top: 7px"></i>');
+            }else {
+                // --- NUEVO: Lógica para eventos FUTUROS ---
+                var now = moment().startOf('day');
+                var eventDate = moment(event.start).startOf('day');
+                var diasFaltantes = eventDate.diff(now, 'days');
+
+                var textoFaltante = '';
+                if (diasFaltantes === 0) {
+                    textoFaltante = ' (Hoy)';
+                } else if (diasFaltantes === 1) {
+                    textoFaltante = ' (Falta 1 día)';
+                } else {
+                    textoFaltante = ` (Faltan ${diasFaltantes} días)`;
+                }
+                
+                  var dotElement = element.find('.fc-list-item-marker');
+                dotElement.empty().append('<i class="ri-time-line" style="color: grey; font-size: 21px; font-weight: 500; margin-left: 4px; margin-top: 10px !important"></i>');
+                titleElement.find('a').append(textoFaltante);
+            }
+        },
             
             header: {
                 left: 'title',
-              center: 'month,listYear',
                 right: 'prev,next'
             },
             eventClick: $scope.alertOnEventClick
@@ -1721,17 +1715,34 @@ app.controller('Ctrl', function($scope, $http, $uibModal, $log, $compile, uiCale
   
   $scope.agendaConfig = {
   calendar: {
-    defaultView: 'listYear',
+    defaultView: 'month',
     editable: false,
-     height: 600,
+     height: 430,
             locale: "es",
-	    lang: "es-mx",
+      lang: "es-mx",
             eventTextColor: '#fff',
             eventBorderColor: 'white',
+  
+            eventBackgroundColor: 'LightSeaGreen',
+
+             eventRender: function(event, element) {
+            // Elimina la hora del evento en la vista de mes
+            element.find('.fc-time').text(""); 
+
+            // 2. Si el evento ya pasó, cambia el color directamente aquí.
+            // Esto es compatible con FullCalendar v3.
+            if (event.start < new Date()) {
+                element.css('background-color', 'silver');
+                element.css('border-color', 'silver'); // Cambia también el borde para que coincida
+                
+       
+            }
+        },
+          
     header: {
-      left: '',
-      center: 'title',
-      right: ''
+      left: 'title',
+      center: '',
+      right: 'prev,next'
     },
     eventClick: $scope.alertOnEventClick
   }
@@ -1739,23 +1750,32 @@ app.controller('Ctrl', function($scope, $http, $uibModal, $log, $compile, uiCale
 
 });
 
-app.controller('ModalInstanceCtrl', function($scope, $uibModalInstance, items) {
+app.controller('ModalInstanceCtrl', function($scope, $uibModal, $uibModalInstance, items, selected) {
+    $scope.selected = selected;
+    $scope.nome = selected.title;
+    
+    // Formateo de fechas con Moment.js
+    $scope.gfExtenso = moment(selected.start).format("dddd D MMMM YYYY, HH:mm a");
 
-    $scope.nome = items.title;
-    // Mudando formato como é mostrado DateTime no input
-    $scope.ted = items.start;
-    $scope.date = moment($scope.ted).format("DD-MM-YYYY HH:mm");
-    $scope.gfExtenso = moment(items.start).format("dddd D MMMM YYYY, HH:mm a");
-    // FIM Mudando formato como é mostrado DateTime no input
+    // --- LÓGICA PARA DETERMINAR EL ESTADO DE LA CLASE ---
+    var now = moment().startOf('day'); // Fecha actual al inicio del día
+    var eventDate = moment(selected.start).startOf('day'); // Fecha del evento al inicio del día
 
-    $scope.items = items;
-
-    $scope.selected = {
-        item: $scope.items[0]
-    };
+    if (eventDate.isBefore(now)) {
+        // La fecha ya aconteció
+        $scope.status = 'finalizada';
+    } else if (eventDate.isSame(now)) {
+        // La fecha es hoy
+        $scope.status = 'hoy';
+    } else {
+        // La fecha es en el futuro
+        $scope.status = 'pendiente';
+        $scope.diasFaltantes = eventDate.diff(now, 'days');
+    }
+    // --- FIN DE LA LÓGICA DE ESTADO ---
 
     $scope.ok = function() {
-        $uibModalInstance.close($scope.selected.item);
+        $uibModalInstance.close();
     };
 
     $scope.cancel = function() {
@@ -1763,301 +1783,4 @@ app.controller('ModalInstanceCtrl', function($scope, $uibModalInstance, items) {
     };
 });
 
-
-
-app.controller('bookCtrl', function($scope, $http, $uibModalInstance, items, userData, uiCalendarConfig) {
-   $scope.miss = userData.repositions;
-  $scope.delay = userData.skips;
-
-
-    $scope.cancel = function() {
-        $uibModalInstance.dismiss('cancel');
-    };
-  
-  
-  $scope.opc1 = "Agendar piano para práctica";
-  $scope.opc2 = "Agendar reposición de clase";
-  $scope.opc3 = "Solicitar falta sin recargo";
-
-  $scope.daysForPractice = [];
-  $scope.daysForService2 = [];
-  $scope.daysForService3 = [];
-  var now = new Date();
-  var hour = now.getHours();
-  
-  for(i=0; i<6;i++){ 
-    var day = newDate(i).split(" ")[0];
-    var limit = getLimit(day)
-     if(day === "Miércoles" || day === "Jueves" || day === "Viernes"){
-       if(i == 0 && hour < limit){
-         $scope.daysForPractice.push(newDate(i));
-       }else if(i>0){
-         $scope.daysForPractice.push(newDate(i));
-       }     
-    }
-  };
-
-  for(i=1; i<7;i++){ 
-    var day = newDate(i).split(" ")[0];
-    //dateR.toDateString() === now.toDateString()
-   if(day === "Miércoles" || day === "Jueves" || day === "Viernes" || day === "Sábado" || day === "Domingo"){
-        $scope.daysForService2.push(newDate(i));
-    }
-  };
-  
-  for(i=0;i<items.length;i++){
-    if(items[i].attendance === ""){
-      var date = new Date(items[i].start)
-      $scope.daysForService3.push(returnDateFormat(date))
-    }
-  }
-  
-  
-
-  var hoursForWeekday = ['14:00 a 15:00 Hrs', '15:00 a 16:00 Hrs', '16:00 a 17:00 Hrs', '17:00 a 18:00 Hrs', '18:00 a 19:00 Hrs'];
-  var hoursForFriday = ['11:00 a 12:00 Hrs', '12:00 a 13:00 Hrs', '13:00 a 14:00 Hrs'];
-  var hoursForSaturday = ['10:00 a 11:00 Hrs', '11:00 a 12:00 Hrs', '12:00 a 13:00 Hrs', '14:00 a 15:00 Hrs', '15:00 a 16:00 Hrs'];
-  var hoursForSunday = ['9:00 a 10:00 Hrs', '10:00 a 11:00 Hrs', '11:00 a 12:00 Hrs', '12:00 a 13:00 Hrs'];
-
-  $scope.updateDayList = function() {
-    if ($scope.selectedService === 'service1') {
-      $scope.days = $scope.daysForPractice;
-    } else if ($scope.selectedService === 'service2') {
-      $scope.days = $scope.daysForService2;
-    } else if ($scope.selectedService === 'service3') {
-      $scope.days = $scope.daysForService3;
-    } else {
-      $scope.days = [];
-    }
-    $scope.selectedDay = '';
-    $scope.selectedHour = '';
-  };
-
-   $scope.updateHourList = function() {
-    if ($scope.selectedService === 'service2' || $scope.selectedService === 'service1') {
-    if ($scope.selectedDay.split(" ")[0] === 'Miércoles' || $scope.selectedDay.split(" ")[0] === 'Jueves') {
-      $scope.hours = hoursForWeekday;
-      if($scope.selectedService === 'service1'){
-        if(now.getDay() == 3){
-          var filteredHours = hoursForWeekday.slice();
-          $scope.hours = filteredHours.splice(substractHour(3));
-        }else if(now.getDay() == 4) 
-          var filteredHours = hoursForWeekday.slice();
-          $scope.hours = filteredHours.splice(substractHour(3));
-      }
-    } else if($scope.selectedDay.split(" ")[0] === 'Viernes') {
-       $scope.hours = hoursForFriday;
-        if($scope.selectedService === 'service1' && now.getDay() == 5){
-          var filteredHours = hoursForWeekday.slice();
-          $scope.hours = filteredHours.splice(substractHour(3));
-        }
-    } else if($scope.selectedDay.split(" ")[0] === 'Sábado') {
-      $scope.hours = hoursForSaturday;
-    } else if($scope.selectedDay.split(" ")[0] === 'Domingo') {
-      $scope.hours = hoursForSunday;
-    };
-
-     $scope.selectedHour = '';
-   } else if ($scope.selectedService === 'service3') {
-     $scope.hours = [""]
-   }
-   
-  };
-  
-  $scope.logHour = function(hour) {
-    $scope.selectedHour = hour
-    };
-  
-  
-  function substractHour(tolerance){
-    var now = new Date();
-    var hour = now.getHours();
-
-    for (i = 17; i >= 14; i--) {
-      if (hour > i - tolerance) {
-        return i - 14 + 1; 
-      }
-    }
-  }
-  
-  function newDate (num){
-    const now = new Date();
-  const dat = new Date(now.getTime() + num*24*60*60*1000)
-  const options = { weekday: 'long', month: 'long', day: 'numeric' };
-    var dat2 = dat.toLocaleDateString("es-mx",options).replace(",","");
-    return dat2.charAt(0).toUpperCase() + dat2.slice(1);
-  };
-  
-  function returnDateFormat(date){
-    const dat = new Date(date);
-  const options = { weekday: 'long', month: 'long', day: 'numeric' };
-    var dat2 = dat.toLocaleDateString("es-mx",options).replace(",","");
-    return dat2.charAt(0).toUpperCase() + dat2.slice(1);
-  }
-  
-
-
-function getMonthIndex(month) {
-    var months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
-    return months.indexOf(month.toLowerCase());
-};
-  
-  function getLimit(day){
-    if(day == 'Miércoles' || day == 'Jueves'){
-      return 17
-    }else if(day == 'Viernes'){
-      return 12
-    }
-  }
-
-
-
-
-    function dateToISO(dateString, timeString) {
-        var months = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
-        var dateParts = dateString.split(' ');
-        var timeParts = timeString.split(' ');
-
-        var day = parseInt(dateParts[1]);
-        var month = months.indexOf(dateParts[3]);
-        var hour = parseInt(timeParts[0].split(':')[0]);
-
-        var date = new Date(2024, month, day, hour);
-        var offset = date.getTimezoneOffset();
-        date.setMinutes(date.getMinutes() - offset);
-        return date.toISOString();
-    }
-  
-  
-   $scope.submitForm = function() {
-    if ($scope.selectedDay && $scope.selectedHour) {
-     $scope.addEvent($scope.selectedService, $scope.selectedDay, $scope.selectedHour)
-      $uibModalInstance.close();
-      $scope.sendData($scope.selectedService)
-    }else if ($scope.selectedService == "service3" && $scope.selectedDay){
-      $scope.addExtension($scope.selectedDay)
-     $uibModalInstance.close();
-      $scope.sendData($scope.selectedService)
-    } else {
-      alert('Por favor, complete todos los campos requeridos.');
-    }
-  };
-     
-  
-  $scope.addEvent = function(service, dateString, timeString) {
-    if(service == "service1"){
-        var newEvent = {
-            title: "Práctica",
-            start: dateToISO(dateString, timeString),
-            color: "#33BEFF"
-        }    
-    }
-    else if(service == "service2"){
-        var newEvent = {
-            title: "Reposición",
-            start: dateToISO(dateString, timeString),
-            color: "orange",
-          attendance: ""
-        };        
-      userData.repositions = userData.repositions - 1
-    }
-
-    items.push(newEvent);
-        if (uiCalendarConfig.calendars['myCalendar1']) {
-            uiCalendarConfig.calendars['myCalendar1'].fullCalendar('removeEvents'); uiCalendarConfig.calendars['myCalendar1'].fullCalendar('addEventSource', items);     uiCalendarConfig.calendars['myCalendar1'].fullCalendar('rerenderEvents');
-        }
-    };
-  
-  
-   
-   $scope.addExtension = function(dateString) {
-    var n = parseInt(dateString.split(" ")[1])
-    var m = ""
-
-    for(i=0; i<items.length; i++){
-        m = parseInt(items[i].title.split(" ")[1])
-        if(m == n){ 
-          items[i].title = "Ausencia sin cobro",
-          items[i].color = "silver"
-        }else if(n<=m){
-          items[i].title = "Clase "+(m-1).toString()
-        }else if(items[i].title.split(" ")[1] == "pago"){
-          items[i].title = "Clase 8"
-          items[i].color = ""
-        }
-        if(items[i].title == "Clase 7" && n != 8){
-          var dat = new Date(items[i].start)
-          dat.setDate(dat.getDate() + 7)
-          items.push({
-            "title": "Próxima mensualidad",
-            "start": dat.toISOString(),
-            "color": "green"
-          })
-        }else if(items[i].title == "Clase 6" && n == 8){
-          var dat = new Date(items[i].start)
-          dat.setDate(dat.getDate() + 14)
-          items.push({
-            "title": "Próxima mensualidad",
-            "start": dat.toISOString(),
-            "color": "green"
-          })
-        }
-    }
-     if(items.length == 5){
-      items[4].title = "Clase 4"
-      var dat = new Date(items[4].start)
-          dat.setDate(dat.getDate() + 7)
-          items.push({
-            "title": "Próximo pago",
-            "start": dat.toISOString(),
-            "color": "green"
-          })
-    } 
-
-    userData.skips = userData.skips - 1
-        if (uiCalendarConfig.calendars['myCalendar1']) {
-            uiCalendarConfig.calendars['myCalendar1'].fullCalendar('removeEvents'); 
-            uiCalendarConfig.calendars['myCalendar1'].fullCalendar('addEventSource', items);     
-            uiCalendarConfig.calendars['myCalendar1'].fullCalendar('rerenderEvents');
-        }
-    };
-  
-  
-  
-   
-$scope.sendData = function(service){
-
-  if(service=='service3'){
-  var title = $scope.selectedDay
-  var requestData = {
-    action: "logDate",
-    token: localStorage.getItem('TPtoken'),
-     event: service,
-     title: title.split(" -")[0]
-  }; 
-  
-  }else{
-  var requestData = {
-    action: "logDate",
-    token: localStorage.getItem('TPtoken'),
-     event: service,
-     date: $scope.selectedDay, 
-     time: $scope.selectedHour
-  };
-  }
- 
-  var config = {
-    headers: {
-      "Content-Type": "text/plain;charset=utf-8"
-    },
-    followRedirects: true, 
-  }; 
- $http.post('https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec', requestData, config)
-    .then(function(response) {
-  })
-  }
-
-
-	
-});
 </script>
