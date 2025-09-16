@@ -437,7 +437,7 @@
         .then(res => {
           var validation = JSON.parse(res);
           if (validation.status == "success") {
-            localStorage.setItem('MStoken', validation.token);
+            localStorage.setItem('TPtoken', validation.token);
             window.location.href = 'https://www.mozart-app.com/main';
           } else {
             alert('Error, intenta otro método de inicio de sesión');
@@ -501,7 +501,7 @@
             .then(res => {
               var validation = JSON.parse(res);
               if (validation.status == "success") {
-                localStorage.setItem('MStoken', validation.token);
+                localStorage.setItem('TPtoken', validation.token);
                 window.location.href = 'https://www.mozart-app.com/main';
                 $('#WAcode').hide();
                 $('#phone-login').val("");
@@ -536,7 +536,7 @@
           .then(res => {
             var validation = JSON.parse(res);
             if (validation.status == "success") {
-              localStorage.setItem('MStoken', validation.token);
+              localStorage.setItem('TPtoken', validation.token);
               window.location.href = 'https://www.mozart-app.com/main';
             } else {
               $('#Mail-error').show().delay(5000).fadeOut();
@@ -589,7 +589,7 @@
       // Inicializar mostrando solo la primera vista
       showLoginOptions();
 
-      var storedToken = localStorage.getItem('MStoken');
+      var storedToken = localStorage.getItem('TPtoken');
       if (storedToken) {
         // Redireccionar si ya existe un token
         window.location.href = 'https://www.mozart-app.com/main'
