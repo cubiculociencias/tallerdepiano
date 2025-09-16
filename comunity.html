@@ -8,8 +8,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
 <script src="https://www.modelsofidentity.com/colosal/js/smoothscroll.js"></script>
 
+
+
+ <script src="https://cdn.jsdelivr.net/npm/tone@14.7.58"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@magenta/music@1.23.1/es6/core.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/focus-visible@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html-midi-player@1.5.0"></script>
+
 <style>
-  article{
+   article{
   background-color: #f5f6f6 !important;
     color: black !important;
 }
@@ -20,7 +27,7 @@ input{
 dialog{
   background-color: #f5f6f6 !important;
 }
-
+ 
 
 
   @media (min-width: 500px) {  
@@ -145,11 +152,7 @@ dialog{
   }
 }
   
-  @media (max-width: 600px){
-    .hidemobile{
-      display: none !important;
-    }
-  }
+
 
   .input-group {
   display: flex;
@@ -172,851 +175,1059 @@ dialog{
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   font-size: 13px;
   width: 200px;
+  top: 30px;
+  left: 40px;
+  padding: 8px;
   background: white;
   z-index: 100;
 }
 .liked {
     color: red;
 }
+
+
+ 
+ /* Estilos para el thumbnail */
+.midi-thumbnail-container {
+  margin: 15px 0;
+  cursor: pointer;
+  width: 100%;
+  max-width: 400px;
+}
+
+.midi-thumbnail {
+  position: relative;
+  height: 180px;
+  background: linear-gradient(135deg, #4a6fa5 0%, #166088 100%);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  overflow: hidden;
+}
+
+.play-button {
+  width: 60px;
+  height: 60px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+.play-button i {
+  font-size: 30px;
+  margin-left: 5px;
+}
+
+.midi-thumbnail:hover .play-button {
+  transform: scale(1.1);
+  background: rgba(255,255,255,0.3);
+}
+
+/* Estilos del modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-content {
+  background: white;
+  width: 90%;
+  max-width: 800px;
+  border-radius: 15px;
+  padding: 20px;
+  position: relative;
+}
+
+
+
+/* Estilos del reproductor en el modal */
+#mainMidiPlayer {
+  width: 100%;
+
+}
+
+#mainMidiVisualizer {
+  width: 100%;
+  height: 200px;
+  margin-top: 15px;
+}
+
+
+ 
+/* MODAL MIDI - ESTILOS COMPLETOS */
+.midi-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4.5px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+} 
+
+.midi-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.midi-modal-container {
+  width: 90%;
+  max-width: 700px;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  transform: translateY(20px);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.midi-modal-overlay.active .midi-modal-container {
+  transform: translateY(0);
+}
+
+.midi-modal-header {
+  padding: 20px 20px 0 20px;
+  border-bottom: 1px solid #3a3a4a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.midi-modal-title {
+  margin: 0;
+  color: black;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.midi-modal-user {
+  margin: 0;
+  color: black;
+  font-size: 0.9rem;
+  font-weight: 400;
+  margin-top: 5px;
+}
+
+.midi-modal-close {
+  background: none;
+  border: none;
+  color: #a0a0c0;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  margin-top: -10px;
+}
+
+.midi-modal-close:hover {
+  color: black;
+}
+
+.midi-modal-body {
+  padding: 25px;
+}
+
+ .midi-info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Reproductor MIDI personalizado */
+.midi-player-wrapper {
+  margin-bottom: 20px;
+  border-radius: 12px;
+  padding: 15px;
+}
+
+/* Visualizador MIDI */
+.midi-visualizer-wrapper {
+  height: 200px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 15px;
+  position: relative;
+}
+
+
+/* Efecto de onda animado (opcional) */
+.wave-effect {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(74, 111, 165, 0.6), 
+    transparent);
+  animation: wave 2s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes wave {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+
+#mainMidiVisualizer {
+  display: flex;
+  justify-content: center;
+  transform: scale(0.5);
+}
+
+@media (max-width: 600px){
+    #mainMidiVisualizer {
+  transform: scale(0.4);
+}
+}
+
+@media (max-width: 470px){
+    #mainMidiVisualizer {
+  transform: scale(0.3);
+}
+}
+
+
+
+/* Poll Container - Twitter Style */
+.poll-container {
+    padding: 12px 0;
+    background-color: transparent;
+}
+
+.poll-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.vote-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    min-height: 44px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    padding: 0 12px;
+}
+
+.vote-row:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* Poll Option Styling */
+.poll-option {
+    flex-grow: 1;
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 7px 0;
+}
+
+.poll-option-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    border-radius: 4px;
+}
+
+.poll-option-bg.voted {
+    background-color: rgba(29, 155, 240, 0.1);
+}
+
+.poll-option-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(29, 155, 240, 0.2);
+    border-radius: 4px;
+    transition: width 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+    width: 0;
+}
+
+.poll-option-text {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.option-name {
+    font-size: 15px;
+    color: #0F1419;
+}
+
+.option-percent {
+    font-size: 15px;
+    color: #0F1419;
+}
+
+/* Vote Button - Twitter Style */
+.poll-vote-button {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin-left: 12px;
+}
+
+.vote-circle {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #536471;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.vote-row:hover .vote-circle {
+    border-color: #1D9BF0;
+}
+
+/* Poll Footer */
+.poll-footer {
+    font-size: 13px;
+    color: #536471;
+    margin-top: 4px;
+    padding: 0 12px;
+}
+
+.poll-option-bg.selected-option {
+    border: 2px solid #91b9ff;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-weight: bold;
+    color: #000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: border 0.2s ease, background 0.2s ease;
+}
+
+
+
+/* =====================================
+   New CSS - Before Voting State
+   ===================================== */
+.poll-container:not(.poll-voted) .poll-list {
+    gap: 7px; /* Increased gap for spacing */
+}
+
+.poll-container:not(.poll-voted) .vote-row {
+    justify-content: center;
+    border: 1px solid #1D9BF0; /* Blue border */
+    border-radius: 9999px; /* Pill-shaped corners */
+    background-color: transparent; /* Blue background */
+}
+
+.poll-container:not(.poll-voted) .vote-row:hover {
+    background-color:rgba(29, 155, 240, 0.1);
+}
+
+.poll-container:not(.poll-voted) .poll-option-bg,
+.poll-container:not(.poll-voted) .poll-option-bar,
+.poll-container:not(.poll-voted) .poll-vote-button,
+.poll-container:not(.poll-voted) .option-percent,
+.poll-container:not(.poll-voted) .poll-footer {
+    display: none !important;
+}
+
+.poll-container:not(.poll-voted) .poll-option-text {
+    position: static;
+    z-index: 1;
+    width: auto;
+    padding: 0;
+}
+
+.poll-container:not(.poll-voted) .option-name {
+    color: #1D9BF0; /* White text */
+    font-size: 15px;
+    font-weight: 600; /* Bold text */
+}
+
+.poll-container:not(.poll-voted) .poll-option {
+    flex-grow: 0;
+    height: auto;
+    padding: 0;
+}
+
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user-name a {
+  /* Estilo para el nombre de usuario */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1rem; /* Aproximadamente 16px, similar a la imagen */
+  font-weight: 500; /* Negrita similar a la imagen */
+  color: #000; /* Color del texto */
+  text-decoration: none; /* Elimina el subrayado del enlace */
+}
+
+.post-time label {
+  /* Estilo para la fecha/hora */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 0.875rem; /* Aproximadamente 14px */
+  font-weight: 300; /* Normal */
+  color: gray !important;
+}
+
+.imgHead{
+  width: 50px !important;
+  height: 50px !important;
+}
+
+.textContent{
+  margin-top: -15px;
+  margin-bottom: 20px !important;
+  font-size: 1.1rem; /* Aproximadamente 16px, similar a la imagen */
+  font-weight: 450; 
+}
+
+  @media (max-width: 978px){
+    .hidemobile{
+      display: none !important;
+    }
+  }
+
+  .chip.active {
+    background-color: #e0e0e0; /* Or any color you prefer */
+    color: #000;
+}
+
+/* This targets Material Icons to make them appear filled */
+.chip.active i {
+    font-variation-settings: 'FILL' 1;
+}
 </style>
 
 <body style="background-color: white;" ng-app="postApp" ng-controller="postController">
 
-  <main class="responsive">
-    <div class="grid">
-      <section class="s12 m8 l8" ng-if="!selectedPostForComments">
-        <article class="no-elevate large-round">
-          <div class="row"><img class="circle small" src="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V"/>
-            <div class="max">
-              <div class="field fill round">
-                <input placeholder="Create Post" onclick="ui('#dialog-post')"/>
-              </div>
-            </div>
-            <button class="transparent circle" onclick="ui('#dialog-post')"><i>image</i>
-              <div class="tooltip bottom">Create Media Post</div>
-            </button>
-            <button class="transparent circle" onclick="ui('#dialog-post')"><i>link</i>
-              <div class="tooltip bottom">Create Link Post</div>
-            </button>
-          </div>
-        </article>
-      <nav  style="justify-content: center; flex-wrap: wrap; ">
-          <button class="chip" ng-click="filterPosts('youtube')"><i>local_fire_department</i><span>Trending</span></button>
-                    <button class="chip"><i>arrow_circle_up</i><span>Top</span></button>
-          <button class="chip"><i>news</i><span>New</span></button>
+    <main class="responsive">
+        <div class="grid">
+            <section class="s12 m12 l8" ng-if="!selectedPostForComments">
+                <article class="no-elevate large-round">
+                    <div class="row">
+                        <img class="circle small" src="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V" />
+                        <div class="max">
+                            <div class="field fill round">
+                                <input placeholder="Create Post" ng-model="newText2" />
+                            </div>
+                        </div>
+                        <button class="transparent circle" ng-click="openImagePostDialog()">
+                            <i>image</i>
+                            <div class="tooltip bottom">Create Media Post</div>
+                        </button>
+                        <button ng-click="newPost(newText2)">Post</button>
+                    </div>
+                </article>
+         <nav style="justify-content: center; flex-wrap: wrap;">
+            <button class="chip" ng-class="{'active': filter === 'all'}" ng-click="filterPosts('all')"><i>explore</i><span>Explore</span></button>
 
-        </nav>
-        
-          <div class="showbox" ng-if="userDataLoaded">
-      <div class="loader">
-        <svg class="circular" viewbox="25 25 50 50">
-          <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
-        </svg>
-      </div>
-    </div> 
-        
-         <article class="no-elevate round" ng-repeat="post in filteredData.slice(0, itemsPerPage)">
-          <div class="row top-align" >
-            <div class="max" >
-              
-              
-             
-                
-                 <div class="row" ng-click="toggleProfileInfo(post.id); $event.preventDefault()"> <img class="circle small" ng-src="{{post.photo}}"/>  
-            <div><b>   <label style="font-size: 14px;"><a href="#" >{{post.user}}</a></label></b>
-              <div>   <label class="grey-text">Nivel 1  ● hace {{calculateTimeAgo(post.date)}}</label></div>
-
-              <div class="infoProf "
-         style="margin-top: 5px; padding: 8px;"
-         ng-if="showProfileInfo[post.id]">
-      <i class="ri-user-line"></i> {{post.user}}<br>
-      <small>Email: {{post.email}}</small><br>
-      <small>Plan: {{post.plan}}</small>
-    </div>
-            </div>
-          </div>
-                
-   
-                
-                <div class="row">
-                  <div class="max">
-                    <h6 class="no-margin">{{post.id}}</h6>
-                 
-                  </div>
-                </div>  
-                <div class="medium-space"></div>
-                
-                 <div style="display: flex; justify-content: center;">
-                    <iframe width="100%" height="{{post.height}}" ng-src="{{trustAsResourceUrl(post.url)}}" frameborder="0" ng-class="{'youtubeframe': post.type == 'youtube'}"></iframe>
-                   </div>
-
-                <div ng-if="post.type == 'text'" >{{post.url}}
-              </div>
-                <a  ng-if="post.type == 'link'" class="row link" href="{{post.url}}" target="_blank"><span>{{post.url}}</span><i>link</i></a>
-                
-                <a ng-if="post.type == 'img'" href="{{post.url}}" target="_blank"><img class="responsive" style="border-radius: 10px;" ng-src="{{post.url}}"/></a>
-                
-                
-                
-           
-
-                <div class="row" style="display: flex; justify-content: space-between;">
-                  <div>
-                  <button class="transparent circle" ng-click="newLike($index, post)">
-    <i ng-if="post.likes.includes(user)" class="ri-heart-fill liked"></i>
-    <i ng-if="!post.likes.includes(user)" class="ri-heart-line"></i>
-    {{post.likes.length}}
-</button>
-           <button class="transparent circle" ng-click="openComments(post); " ><i>chat_bubble</i>{{post.comments.length}}</button>
-         </div>
-
-<button class="chip" ><i>share</i><span>Share</span></button>
-             </div>
-              
-              
-              
-          </div>
+            <button class="chip" ng-class="{'active': filter === 'midi'}" ng-click="filterPosts('midi')"><i>piano</i><span>Piano</span></button>
             
-        </article>
-        
-        
-
-  <nav style="justify-content: center; flex-wrap: wrap; ">
-  <button class="chip" ng-click="loadMorePosts()" ng-if="itemsPerPage < filteredData.length">
-    Cargar más posts
-  </button>
-    <br><br>
-</nav>
-      </section>
-
-
-    <div ng-if="selectedPostForComments"  class="s12 m12 l8">
-  <div class="row ">
-    <button class="chip" ng-click="backToFeed()">
-      ← Volver
-    </button>
-  </div>
-
-  <article class="no-elevate round" >
-          <div class="row top-align">
-            <div class="max" >
-              <div >
-                 <div class="row"> <img class="circle small" ng-src="{{selectedPostForComments.photo}}"/>  
-            <div><b>   <label style="font-size: 14px;"><a href="#" >{{selectedPostForComments.user}}</a></label></b>
-              <div>   <label class="grey-text">Nivel 1  ● hace {{calculateTimeAgo(selectedPostForComments.date)}}</label></div>
-            </div>
-          </div>
-                <div class="row">
-                  <div class="max">
-                    <h6 class="no-margin">{{selectedPostForComments.id}}</h6>
-                  </div>
-                </div>  
-                <div class="medium-space"></div>
-                
-                <div ng-if="selectedPostForComments.type == 'text'" >{{selectedPostForComments.url}}
-              </div>
-                <a  ng-if="selectedPostForComments.type == 'link'" class="row link" href="{{post.url}}" target="_blank"><span>{{selectedPostForComments.url}}</span><i>link</i></a>
-                <a ng-if="selectedPostForComments.type == 'img'" href="{{post.url}}" target="_blank"><img class="responsive" style="border-radius: 10px;" ng-src="{{selectedPostForComments.url}}"/></a>
-                <iframe width="100%" height="{{selectedPostForComments.height}}" ng-src="{{trustAsResourceUrl(selectedPostForComments.url)}}" frameborder="0" ng-class="{'youtubeframe': selectedPostForComments.type == 'youtube'}"></iframe>
-            </div> 
-          </div>  
-        </article>
-  <section class="p">
-
-     <div class="input-group">
-    <img 
-      src="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V" 
-      style="width: 40px; height: 40px; border-radius: 50%;"
-    >
-    <input 
-      type="text" 
-      class="form-control" 
-      placeholder="Escribe tu respuesta" 
-     id="form-control"
-      ng-model="newText"
-    >
-        <button class="responsive" style="width: 60px !important;">Responder</button>
-  </div>
-    <br>
-   
-    <div ng-if="selectedPostForComments.comments.length > 0" ng-repeat="comment in selectedPostForComments.comments">
-     <div class="row"><img class="circle small" src="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V"/>
-            <div><b>{{comment.user}}</b>
-              <div> {{comment.comment}}</div>
-            </div>
-          </div>
-       <hr style="color: #E5E4E2; opacity: 0.5; margin-top: 5px; margin-bottom: 5px;">
-    </div>
-    <div class="card p mb" ng-if=" selectedPostForComments.comments.length === 0">
-     Aún no hay comentarios.
-    </div>
-  </section>
-</div>
-
-      
-      <section class="s12 m4 l4 hidemobile" >
-        <article class="no-elevate round">
-          <div class="row"><i>trophy</i>
-            <div><b>Mozart Premium</b>
-           
-            </div>
-          </div>
-             <div>The best Mozart Academy experience</div>
-          <nav>
-            <button class="responsive">Try Now</button>
-          </nav>
-        </article>
-        <article class="no-elevate round">
-          <h6>Home</h6>
-          <p>Your personal frontpage. Come here to check in with your favorite communities.</p>
-          <div class="medium-divider"></div>
-          <nav class="vertical">
-            <button class="responsive">Crear Post</button>
-            <button class="responsive border">Create Community</button>
-          </nav>
-        </article>
-        <article class="no-elevate round">
-          <h6>Recent Posts</h6>
-          <nav class="drawer max no-padding"><a class="small-round"><img class="small" src="https://styles.redditmedia.com/t5_3htkz/styles/communityIcon_5gn47dhdp4o31.png"/>
-              <div class="max wrap">
-                <div>How do I disabled all A11y messages? They are annoying</div>
-                <label class="grey-text">5 points - 15 comments - 3h</label>
-              </div></a><a class="small-round"><img class="small" src="https://styles.redditmedia.com/t5_3htkz/styles/communityIcon_5gn47dhdp4o31.png"/>
-              <div class="max wrap">
-                <div>"The golden rule of assertions"</div>
-                <label class="grey-text">4 points - 10 comments - 3h</label>
-              </div></a><a class="small-round"><img class="small" src="https://styles.redditmedia.com/t5_3htkz/styles/communityIcon_5gn47dhdp4o31.png"/>
-              <div class="max wrap">
-                <div>Cheers to Craft Design: Beer CSS - A Lightweight Material Design Framework</div>
-                <label class="grey-text">3 points - 4 comments - 3h</label>
-              </div></a></nav>
-        </article>
-      </section>
-    </div>
-    <dialog id="dialog-post">
-      <nav class="wrap">
-        <h6>Create a post</h6>
-      
-      </nav>
-      <div class="space"></div>
-      <div class="medium-height large-width">
-        <div class="tabs scroll left-align m l"><a class="active" data-ui="#post"><i>news</i><span>Post</span></a><a data-ui="#image-video"><i>image</i><span>Image &amp; Video</span></a><a data-ui="#link"><i>link</i><span>Link</span></a><a class="grey-text"><i>insert_chart</i><span>Pool</span></a></div>
-        <div class="space"></div>
-        <div class="page bottom active" id="post">
-         
-          <div class="field border label">
-            <input/>
-            <label>Title</label>
-          </div>
-          <div class="field border label extra textarea">
-            <textarea ng-model="newText"></textarea>
-            <label>Text (optional)</label>
-          </div>
-        </div>
-        <div class="page bottom" id="image-video">
-        
-          <div class="row">
-            <div class="max">
-              <div class="field border label">
-                <input/>
-                <label>Title</label>
-              </div>
-            </div>
-            <button><span>Select a file</span>
-              <input type="file"/>
-            </button>
-          </div>
-        </div>
-        <div class="page bottom" id="link">
-      
-          <div class="field border label">
-            <input/>
-            <label>Title</label>
-          </div>
-          <div class="field border label">
-            <textarea></textarea>
-            <label>Url</label>
-          </div>
-        </div>
-        <div class="page bottom" id="pool"></div>
-      </div>
-      <footer class="fixed">
-        <nav class="right-align">
-          <button class="border" data-ui="#dialog-post">Cancel</button>
-          <button data-ui="#dialog-post" ng-click="newPost(newText)">Confirm</button>
+            <button class="chip" ng-class="{'active': filter === 'user'}" ng-click="filterPosts('user')"><i>article</i><span>My Posts</span></button>
+            
+            <button class="chip" ng-class="{'active': filter === 'saved'}" ng-click="filterPosts('saved')"><i>bookmark</i><span>Saved</span></button>
         </nav>
-      </footer>
-    </dialog>
-  </main>
+                <div class="showbox" ng-if="userDataLoaded">
+                    <div class="loader">
+                        <svg class="circular" viewbox="25 25 50 50">
+                            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
+                        </svg>
+                    </div>
+                </div>
+                <article class="no-elevate round" ng-repeat="post in filteredData.slice(0, itemsPerPage)">
+                    <div class="row top-align">
+                        <div class="max">
+                            <div class="row" ng-click="toggleProfileInfo(post.header); $event.preventDefault()">
+                                <img class="circle small imgHead" ng-src="{{post.photo}}" />
+                                <div class="user-info">
+                                    <div class="user-name">
+                                        <a href="#">{{post.user}}</a>
+                                    </div>
+                                    <div class="post-time">
+                                        <label>{{calculateTimeAgo(post.date)}}</label>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <div class="medium-space"></div>
+                            <div ng-if="post.type == 'text'" class="textContent">{{post.url}}</div>
+
+                            <div style="display: flex; justify-content: center;">
+                                <a class="midi-thumbnail-container" ng-if="post.type == 'img'" ng-click="openComments(post)" style="cursor: pointer;">
+                                    <img class="responsive" style="border-radius: 10px;" ng-src="{{post.url}}" />
+                                </a>
+                            </div>
+
+                            <div style="display: flex; justify-content: center;" ng-if="post.type == 'midi'">
+                                <div class="midi-thumbnail-container">
+                                    <div class="midi-thumbnail" ng-click="openMidiModal(post)">
+                                        <div class="play-button">
+                                            <i class="ri-play-fill"></i>
+                                        </div>
+                                        <div class="midi-info">
+                                            <h5>{{post.header || 'Composición MIDI'}}</h5>
+                                            <p>Haz clic para reproducir</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="poll-container" ng-if="post.type == 'poll'" ng-class="{'poll-voted': post.userHasVoted}">
+                              <div class="poll-voter">
+                                  <h4 class="textContent">{{post.url}}</h4>
+                                  <div class="poll-list">
+                                      <div class="vote-row" ng-repeat="opt in post.likes" ng-click="addVote(post, opt, $index)" ng-class="{'selected-option': opt.votedByCurrentUser}">
+                                          <div class="poll-option">
+                                              <div class="poll-option-bg" ng-class="{ 'voted': post.userHasVoted, 'selected-option': post.userHasVoted && opt.votedByCurrentUser }"></div>
+                                              <div class="poll-option-bar" ng-if="post.userHasVoted" ng-style="{'width': calculatePercentage(post, opt) + '%'}"></div>
+                                              <div class="poll-option-text">
+                                                  <span class="option-name">{{opt.name}} <i ng-if="opt.votedByCurrentUser" class="ri-checkbox-circle-line" style="margin-top: -2px; font-size: 20px"></i></span>
+                                                  <span class="option-percent" ng-show="post.userHasVoted">{{calculatePercentage(post, opt)}}%</span>
+                                              </div>
+                                          </div>
+                                          <div class="poll-vote-button" ng-show="!post.userHasVoted">
+                                              <div class="vote-circle"></div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="poll-footer" ng-show="post.userHasVoted">
+                                      {{getTotalVotes(post)}} votes
+                                  </div>
+                              </div>
+                          </div>
+
+                            <div class="row" style="display: flex; justify-content: space-between;" ng-if="post.type != 'poll'">
+                                <div>
+                                  <button class="transparent circle" ng-click="newLike($index, post)">
+                                    <i ng-if="isPostLiked(post)" class="ri-heart-fill liked"></i>
+                                    <i ng-if="!isPostLiked(post)" class="ri-heart-line"></i>
+                                    {{post.likes.length}}
+                                      </button>
+                                    <button class="transparent circle" ng-click="openComments(post);"><i>chat_bubble</i>{{post.comments.length}}</button>
+                                </div>
+                                <button class="chip" ng-click="toggleSave(post)">
+                                    <i ng-class="{'ri-bookmark-fill': isPostSaved(post), 'ri-bookmark-line': !isPostSaved(post)}"></i>
+                                    <span>{{ isPostSaved(post) ? 'Saved' : 'Save' }}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <nav style="justify-content: center; flex-wrap: wrap; ">
+                    <button class="chip" ng-click="loadMorePosts()" ng-if="itemsPerPage < filteredData.length">
+                        Cargar más posts
+                    </button>
+                    <br><br>
+                </nav>
+            </section>
+
+            <div class="midi-modal-overlay" ng-class="{'active': midiModalOpen}">
+                <div class="midi-modal-container">
+                    <div class="midi-modal-header">
+                        <h4 class="midi-modal-title">{{currentMidi.header || 'Reproductor MIDI'}}
+                            <p class="midi-modal-user">{{currentMidi.user}}</p><br>
+                        </h4>
+                        <button class="midi-modal-close" ng-click="closeMidiModal()">
+                            <i class="ri-close-line"></i>
+                        </button>
+                    </div>
+                    <div class="midi-modal-body">
+                        <div class="midi-player-wrapper">
+                            <midi-player id="mainMidiPlayer" sound-font visualizer="#mainMidiVisualizer"></midi-player>
+                        </div>
+                        <div class="midi-visualizer-wrapper">
+                            <div class="wave-effect"></div>
+                            <midi-visualizer id="mainMidiVisualizer" type="waterfall"></midi-visualizer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-if="selectedPostForComments" class="s12 m12 l8">
+                <div class="row ">
+                    <button class="chip" ng-click="backToFeed()">
+                        ← Volver
+                    </button>
+                </div>
+                <article class="no-elevate round">
+                    <div class="row top-align">
+                        <div class="max">
+                            <div>
+                                <div class="row" ng-click="toggleProfileInfo(selectedPostForComments.header); $event.preventDefault()">
+                                    <img class="circle small imgHead" ng-src="{{selectedPostForComments.photo}}" />
+                                    <div class="user-info">
+                                        <div class="user-name">
+                                            <a href="#">{{selectedPostForComments.user}}</a>
+                                        </div>
+                                        <div class="post-time">
+                                            <label>{{calculateTimeAgo(selectedPostForComments.date)}}</label>
+                                        </div>
+                                    </div>
+                                  
+                                </div>
+                                <div class="medium-space"></div>
+                                <div ng-if="selectedPostForComments.type == 'text'" class="textContent" style="margin-bottom: 30px !important">{{selectedPostForComments.url}}</div>
+
+                                <a ng-if="selectedPostForComments.type == 'img'" ng-click="openComments(selectedPostForComments)" style="cursor: pointer;">
+                                    <img class="responsive" style="border-radius: 10px;" ng-src="{{selectedPostForComments.url}}" />
+                                </a>
+
+                                <div style="display: flex; justify-content: center;" ng-if="selectedPostForComments.type == 'midi'">
+                                    <div class="midi-thumbnail-container">
+                                        <div class="midi-thumbnail" ng-click="openMidiModal(selectedPostForComments)">
+                                            <div class="play-button">
+                                                <i class="ri-play-fill"></i>
+                                            </div>
+                                            <div class="midi-info">
+                                                <h5>{{selectedPostForComments.header || 'Composición MIDI'}}</h5>
+                                                <p>Haz clic para reproducir</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <section class="p">
+                    <div class="input-group">
+                        <img src="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V" style="width: 40px; height: 40px; border-radius: 50%;">
+                        <input type="text" class="form-control" placeholder="Escribe tu respuesta" id="form-control" ng-model="newCommentText">
+                        <button class="responsive" style="width: 60px !important;" ng-click="addComment(newCommentText)">Responder</button>
+                    </div>
+                    <br>
+                    <div ng-if="selectedPostForComments.comments.length > 0" ng-repeat="comment in selectedPostForComments.comments">
+                        <div class="row">
+                            <img class="circle small" src="https://lh3.googleusercontent.com/d/1h0PAuatp8mguH19cso6wh19mjMVa0K5V" />
+                            <div style="color: black !important;"><b>{{comment.user}}</b>
+                                <div>{{comment.comment}}</div>
+                            </div>
+                        </div>
+                        <hr style="color: #E5E4E2; opacity: 0.5; margin-top: 5px; margin-bottom: 5px;">
+                    </div>
+                    <div class="card p mb" ng-if=" selectedPostForComments.comments.length === 0">
+                        Aún no hay comentarios.
+                    </div>
+                </section>
+            </div>
+
+            <section class="s12 m4 l4 hide-on-medium-and-down">
+              
+
+                <article class="no-elevate round hidemobile">
+                    <h6>Recent Posts</h6>
+                    <nav class="drawer max no-padding" ng-repeat="post in data | orderBy:'-date':true | limitTo:4">
+                        <a class="small-round" style="margin-top: -10px; cursor: pointer;" ng-click="openComments(post)">
+                            <div class="row">
+                                <img class="circle small" ng-src="{{post.photo}}" />
+                                <div class="user-info">
+                                    <div class="user-name">
+                                        <div>{{post.user}}</div>
+                                    </div>
+                                    <div class="post-time" style="margin-top: -6px;">
+                                        <label style="font-size: 11px;">hace {{calculateTimeAgo(post.date)}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                        </a>
+                        <hr>
+                    </nav>
+                </article>
+            </section>
+        </div>
+        
+        <dialog id="dialog-post">
+                <div class="modal-content" style="padding: 20px; text-align: center;">
+                    <h5>Crear Post con Imagen</h5>
+                    <div class="field textarea label border extra">
+                        <textarea ng-model="newImagePost.header" placeholder="Escribe algo sobre la imagen..."></textarea>
+       
+                    </div>
+                    <img ng-if="imagePreview" ng-src="{{imagePreview}}" class="responsive" style="max-height: 300px; border-radius: 8px; margin-top: 10px;" />
+                    <br><br>
+                    <input type="file" id="imageUpload" accept="image/*" onchange="angular.element(this).scope().handleFileSelect(this.files)" style="display: none;">
+                    <button onclick="document.getElementById('imageUpload').click()">
+                        <i class="ri-upload-2-line"></i> Seleccionar Imagen
+                    </button>
+                    <div class="row" style="justify-content: flex-end; margin-top: 20px;">
+                        <button class="red" onclick="ui('#dialog-post')">Cancelar</button>
+                        <button ng-click="createImagePost()" ng-disabled="!imagePreview || !newImagePost.header">Publicar</button>
+                    </div>
+                </div>
+            </dialog>
+    </main>
 </body>
 
 
-
 <script>
-
- 
-var app = angular.module('postApp', [])
- app.controller('postController', ['$scope', '$http', '$interval', '$sce', '$timeout', function($scope, $http, $interval, $sce, $timeout) {
-    $scope.trustAsResourceUrl = function(url) {
+ var app = angular.module('postApp', [])
+app.controller('postController', ['$scope', '$http', '$interval', '$sce', '$timeout', function ($scope, $http, $interval, $sce, $timeout) {
+    $scope.trustAsResourceUrl = function (url) {
         return $sce.trustAsResourceUrl(url);
     };
-   $scope.userDataLoaded = true
-     $scope.data = [];
-  $scope.filteredData = [];
-  $scope.currentPage = 1;
-  $scope.itemsPerPage = 6;
-  $scope.totalPages = 1;
+    $scope.userDataLoaded = true
+    $scope.data = [];
+    $scope.filteredData = [];
+    $scope.currentPage = 1;
+    $scope.itemsPerPage = 6;
+    $scope.totalPages = 1;
 
- 
-    $http({
-      method: 'GET',
-      url: 'https://script.google.com/macros/s/AKfycbxN34IjjTFdUaPKeyLFI5-VCzDcBznvBB96B1IbWLAlSbqjISYOTK08Z07XrC2xDuwV/exec',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      } 
-    }).then(function(response) {
-      $scope.data = shuffleArray(response.data.posts); 
-       $scope.profileData = response.data.profiles
-      $scope.filterPosts('all');
-      $scope.updatePagination();
-      $scope.userDataLoaded = false
-       
-      $scope.feed = response.data.feed;
-
-      
-       $scope.data.forEach(post => {
-        if (post.type === 'poll') {
-            processPollData(post);
+    var requestData = {
+        action: "getPosts",
+    };
+    var config = {
+        headers: {
+            "Content-Type": "text/plain;charset=utf-8"
         }
+    };
+    $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData, config)
+        .then(function (response) {
+           let posts = response.data;
+        $scope.data = shuffleArray(posts);
+        $scope.filterPosts('all');
+        $scope.updatePagination();
+        $scope.userDataLoaded = false
+        $scope.data.forEach(post => {
+            if (post.type === 'poll') {
+                // Check if the current user's name is in any option's user list
+                post.userHasVoted = post.likes.some(opt => opt.users.includes($scope.user));
+            }
+        });
     });
-      
-     
-           
+
+
+      $scope.user = "Anonimo"
+      $scope.userImg = "https://lh3.googleusercontent.com/d/1CWImzia2Z8LdK-VxeMKK22oa7387Ktwj=s96-c"
+    var requestData2 = {
+    action: "getUserData",
+    token: localStorage.getItem('MStoken')
+    //  token: "U2FsdGVkX1+pTAJ/i/vnElIrTlT7VjKJ6kuzk2FlnAIkGq9xl29aZsKgbGygQIfF"
+  };
+  $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData2, config)
+        .then(function (response) {
+         $scope.user = response.data.name.split(' ').slice(0, 2).join(' ');
+         $scope.userImg = response.data.photo;
     });
 
 
- $scope.loadMorePosts = function () {
-  $scope.itemsPerPage += 5;
-};
 
-      function shuffleArray(array) {
-  const shuffled = array.slice(); // copia del array original
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-}
+    $scope.loadMorePosts = function () {
+        $scope.itemsPerPage += 5;
+    };
+
+    function shuffleArray(array) {
+        const shuffled = array.slice();
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+    }
 
     $scope.selectedPostForComments = null;
 
-$scope.openComments = function(post) {
-  $scope.selectedPostForComments = post;
-};
-
-$scope.backToFeed = function() {
-  $scope.selectedPostForComments = null;
-};
-   
-    $scope.lvlColor = function(lvl){
-  if(lvl == 0){
-    return "#F44336"
-  }else if(lvl == 1){
-    return "#9024dc"
-  }else if(lvl == 2){
-    return "#1894cc"
-  }else if(lvl == 3){
-    return "#489454"
-  }else if(lvl == 4){
-    return "#f0ac14"
-  }else if(lvl == 5){
-    return "#485cb4"
-  }else if(lvl == 6){
-    return "#08949c"
-  }
-}     
-     
-$scope.getEvent = function(task){
-  if(task.split(" ")[0] == "Nivel"){
-    return " ha subido de nivel"
-  }else{
-    return " ha entregado"
-  }
-}
-     
-     
-     $scope.getLevel = function(lvl){
-  if(lvl == 0){
-     return "Nivel Preparatorio"
-  }else{
-    return "Nivel "+lvl.toString()
-  }
-}
-   
-   function processPollData(post) {
-    post.totalVotes = post.likes.reduce((total, opt) => total + opt.votes.length, 0);
-    post.likes.forEach(opt => {
-        opt.pct = post.totalVotes > 0 ? (opt.votes.length / post.totalVotes) * 100 : 0;
-    });
-}
-   
-$scope.isButton = true;
-
- $scope.addVote = function(post, opt) {
-    if ($scope.isButton) {
-        $scope.isButton = false;
-      
-        opt.votes.push("Usuario");
-        processPollData(post);
-        opt.animate = false;
-       post.likes.forEach(option => {
-         option.isButton = false; 
-         option.animate = true; 
-            });
-    } 
-};
-
-
-$scope.showProfileInfo = {};
-$scope.toggleProfileInfo = function(postId) {
-  $scope.showProfileInfo[postId] = !$scope.showProfileInfo[postId];
-};
-
-   
-      
-    $scope.user = "@anonimo"
-
- var requestData = { 
-        action: "getUserName",
-        token: localStorage.getItem('MStoken')
+    $scope.openComments = function (post) {
+        $scope.selectedPostForComments = post;
+        // Scroll to top for better UX
+        window.scrollTo(0, 0);
     };
 
-    var config = { 
-        headers: {
-            "Content-Type": "text/plain;charset=utf-8"
-        }
+    $scope.backToFeed = function () {
+        $scope.selectedPostForComments = null;
     };
 
-$http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData, config)
-    .then(function(response) {
-      $scope.user = response.data
-    }); 
-
-   
-   
-     $scope.sendLike = function(postid){
- var requestData = {
-        action: "newLike",
-        token: localStorage.getItem('MStoken'),
-        postid: postid
-    };
-
-    var config = {
-        headers: {
-            "Content-Type": "text/plain;charset=utf-8"
-        }
-    };
-
- $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData, config)
-    .then(function(response) {
-    });
-}
-
-
-
-    $scope.sendComment = function(postid, comment){
- var requestData = {
-        action: "newComment",
-        token: localStorage.getItem('MStoken'),
-        comment: comment,
-        postid: postid
-    };
-
-    var config = {
-        headers: {
-            "Content-Type": "text/plain;charset=utf-8"
-        }
-    };
- $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData, config)
-    .then(function(response) {
-    });
-}
-   
-   
-
-  $scope.updatePagination = function() {
-    $scope.totalPages = Math.ceil($scope.filteredData.length / $scope.itemsPerPage);
-    $scope.currentPage = 1;
-  };
-
-
-
-  $scope.filterPosts = function(type) {
-    $scope.filter = type;
-   
-    if (type === 'all') {
-      $scope.filteredData = $scope.data;
-    }else if(type === 'both'){
-      $scope.filteredData = $scope.data.filter(function(post) {
-        return post.type === 'text' || post.type === 'poll';
-      });
-      
-    } else {
-      $scope.filteredData = $scope.data.filter(function(post) {
-        return post.type === type;
-      });
-    }
-   
   
-     $timeout(function() {
+  
+    $scope.addComment = function (commentText) {
+   
+    if (!$scope.selectedPostForComments || !commentText) {
+        return;
+    }
+
+    var newComment = {
+        user: $scope.user,
+        photo: $scope.userImg, // Agrega la foto del usuario
+        comment: commentText
+    };
+
+    // Añade el comentario localmente para actualización instantánea
+    if (!$scope.selectedPostForComments.comments) {
+        $scope.selectedPostForComments.comments = [];
+    }
+    $scope.selectedPostForComments.comments.push(newComment);
+    document.getElementById('form-control').value = '';
+   };
+
+
+    // In your controller
+    $scope.userVoted = false;
+    $scope.currentUser = "user10"; // Replace with actual current user
+    $scope.calculatePercentage = function (post, option) {
+        const totalVotes = post.likes.reduce((sum, opt) => sum + opt.users.length, 0);
+        if (totalVotes === 0) return 0;
+        return Math.round((option.users.length / totalVotes) * 100);
+    };
+    $scope.getTotalVotes = function (post) {
+        return post.likes.reduce((sum, opt) => sum + opt.users.length, 0);
+    };
+    $scope.addVote = function (post, option, index) {
+        if (post.userHasVoted) return;
+
+        option.users.push($scope.currentUser);
+        option.votedByCurrentUser = true;
+        $scope.userVoted = true;
+        post.likes.forEach((opt, i) => {
+            if (i === index) {
+                opt.animate = true;
+            }
+        });
+        $scope.sendVote(post.header, option.name);
+    };
+    $scope.currentMidi = null;
+    $scope.midiModalOpen = false;
+    $scope.openMidiModal = function (post) {
+        $scope.currentMidi = post;
+        $scope.midiModalOpen = true;
+        $timeout(function () {
+            const player = document.getElementById('mainMidiPlayer');
+            const visualizer = document.getElementById('mainMidiVisualizer');
+            if (player && visualizer) {
+                player.setAttribute('src', post.url);
+                visualizer.setAttribute('src', post.url);
+                if (player.player) {
+                    player.player.stop();
+                    player.player.loadMIDI(post.url);
+                }
+            }
+        }, 100);
+    };
+    $scope.closeMidiModal = function () {
+        const player = document.getElementById('mainMidiPlayer');
+        if (player && player.player) {
+            player.player.stop();
+        }
+        $scope.midiModalOpen = false;
+        $scope.currentMidi = null;
+    };
+
+
+    $scope.updatePagination = function () {
+        $scope.totalPages = Math.ceil($scope.filteredData.length / $scope.itemsPerPage);
+        $scope.currentPage = 1;
+    };
+    $scope.filterPosts = function (type) {
+        $scope.filter = type;
+        if (type === 'all') {
+            $scope.filteredData = $scope.data;
+        } else if (type === 'user') {
+            $scope.filteredData = $scope.data.filter(function (post) {
+                return post.user === $scope.user;
+            });
+        }  else if (type === 'saved') {
+            $scope.filteredData = $scope.data.filter(post => $scope.isPostSaved(post));
+        } else {
+            $scope.filteredData = $scope.data.filter(function (post) {
+                return post.type === type;
+            });
+        }
+        $timeout(function () {
             $('.post').hide().fadeIn(400);
         }, 100);
-    $scope.updatePagination();
-  };
-
-
-   
-$scope.openModal = function(post) {
-    $scope.selectedPost = post;
-    var userInput = prompt("Agregar comentario:");
-
-    if (userInput !== null) {
-        var newComment = { user: $scope.user, comment: userInput };
-        
-        // Encuentra el objeto correspondiente en $scope.data
-        var selectedDataItem = $scope.data.find(item => item.id === $scope.selectedPost.id);
-        if (selectedDataItem) {
-            // Agrega el nuevo comentario al arreglo de comentarios
-            selectedDataItem.comments.push(newComment);
-          $scope.sendComment(post.id, userInput)
+        $scope.updatePagination();
+    };
+    $scope.openModal = function (post) {
+        $scope.selectedPost = post;
+        var userInput = prompt("Agregar comentario:");
+        if (userInput !== null) {
+            var newComment = {
+                user: $scope.user,
+                comment: userInput
+            };
+            var selectedDataItem = $scope.data.find(item => item.header === $scope.selectedPost.header);
+            if (selectedDataItem) {
+                selectedDataItem.comments.push(newComment);
+                $scope.sendComment(post.header, userInput)
+            }
         }
+    };
+    $scope.newPost = function (data) {
+        var post = {
+            "user": $scope.user,
+            "type": "text",
+            "photo": $scope.userImg,
+            "url": data,
+            "date": new Date(),
+            "likes": [],
+            "comments": [],
+            "saved": []
+        }
+        $scope.data.unshift(post)
+        $scope.newText2 = "";
     }
+    $scope.dangerButtonActive = [];
+    $scope.newLike = function (index, post) {
+        if (!post.likes) {
+        post.likes = []; // Ensure likes array exists
+    }
+
+    // Find the index of the like from the current user
+    const userLikeIndex = post.likes.findIndex(like => like.user === $scope.user);
+
+    if (userLikeIndex === -1) {
+        // If not found, add the like
+        post.likes.push({ user: $scope.user });
+    } else {
+        // If found, remove it
+        post.likes.splice(userLikeIndex, 1);
+    }
+    };
+    $scope.isPostLiked = function(post) {
+    if (!post || !post.likes) {
+        return false;
+    }
+    // Check if any object in the likes array has a user property matching the current user
+    return post.likes.some(like => like.user === $scope.user);
 };
-   
-   
-   
-    $scope.newPost = function(data) {
-      let ytVideoURL = $('#ytVideoURL').attr('ytVideoURL');
-      
-      if(ytVideoURL){
-        var post =  {
-    "user": "Test",
-    "type": "youtube",
-           "height": 150,
-    "url": ytVideoURL,
-    "date": [1], 
-    "likes": [],
-     "comments": []  
+    $scope.calculateTimeAgo = function (alertDate) {
+        const alertDateObj = new Date(alertDate);
+        const today = new Date();
+        const timeDiff = Math.abs(today - alertDateObj);
+        const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+        if (days > 0) {
+            return `${days} día(s)`;
+        } else if (hours > 0) {
+            return `${hours} hora(s)`;
+        } else {
+            return `${minutes} minuto(s)`;
         }
-      }else{
-           var post =  {
-          "user": "Test",
-          "type": "text",
-             "height": 0,
-          "url": data,
-          "date": [1], 
-          "likes": [],
-           "comments": []  
+    };
+
+
+
+    $scope.isPostSaved = function(post) {
+        if (!post.saved) return false;
+        return post.saved.some(s => s.user === $scope.user);
+    };
+
+    $scope.toggleSave = function(post) {
+        if (!post.saved) {
+            post.saved = []; // Inicializa el array si no existe
         }
-     }
-    $scope.data.unshift(post)
-      $scope.newText = ""; 
-       $('#video-details').html('');
-     $('#ytVideoURL').attr('ytVideoURL', '');
-}
-   
-
-
-   $scope.dangerButtonActive = []; 
-
-$scope.newLike = function(index, post) {
-  
-    $scope.selectedPost = post;
-    var selectedDataItem = $scope.data.find(item => item.id === post.id);
-
-    if (selectedDataItem) {
-        const userIndex = selectedDataItem.likes.indexOf($scope.user);
+        
+        const userIndex = post.saved.findIndex(s => s.user === $scope.user);
 
         if (userIndex === -1) {
-            // Si no ha dado like, lo agregamos
-            selectedDataItem.likes.push($scope.user);
+            post.saved.push({ user: $scope.user });
         } else {
-            // Si ya dio like, lo quitamos
-            selectedDataItem.likes.splice(userIndex, 1);
+            post.saved.splice(userIndex, 1);
         }
-    }
-};
-   
-   
 
-   
-   
-$scope.calculateTimeAgo = function(alertDate) {
-  const alertDateObj = new Date(alertDate);
-  const today = new Date(); // Fecha actual
-  const timeDiff = Math.abs(today - alertDateObj); // Diferencia en milisegundos
-
-  const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24)); // Días completos
-  const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); // Horas restantes
-  const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60)); // Minutos restantes
-
-  if (days > 0) {
-    return `${days} día(s)`;
-  } else if (hours > 0) {
-    return `${hours} hora(s)`;
-  } else {
-    return `${minutes} minuto(s)`;
-  }
-};
-
-
- 
-
-   $scope.currentSection = '#about';
-   $scope.handleButtonClick = function(section) {
-        $scope.currentSection = section;
+        // Aquí harías una llamada HTTP para persistir el cambio en el backend
     };
-   $scope.handleUserProfile = function(username) {
-      $scope.currentMain = username;
-     if(username != "Mozart Appcademy"){
-        $('#profileModal').modal('show');
-     }
-     
-    }; 
-    
-   
-   $scope.youtubeModal = function() {
-      $('#youtubeModal').modal('show');
+
+    // MODIFICACIÓN 5.3: Funciones para crear un post con imagen
+    $scope.newImagePost = { header: '' };
+    $scope.imagePreview = null;
+
+    $scope.openImagePostDialog = function() {
+        // Resetea el formulario al abrir
+        $scope.newImagePost = { header: '' };
+        $scope.imagePreview = null;
+        document.getElementById('imageUpload').value = null; // Limpia el input file
+        ui('#dialog-post'); // Abre el diálogo
     };
+
+    $scope.handleFileSelect = function(files) {
+        if (files && files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $scope.$apply(function() {
+                    $scope.imagePreview = e.target.result; // Muestra la previsualización
+                });
+            };
+            reader.readAsDataURL(files[0]);
+        }
+    };
+
+    $scope.createImagePost = function() {
+        if (!$scope.imagePreview || !$scope.newImagePost.header) {
+            alert("Por favor, selecciona una imagen y añade una descripción.");
+            return;
+        }
+
+        var post = {
+            "user": $scope.user,
+            "type": "img",
+            "photo": $scope.userImg,
+            "header": $scope.newImagePost.header,
+            "url": $scope.imagePreview, // URL en Base64 de la imagen
+            "date": new Date().toISOString(),
+            "likes": [],
+            "comments": [{
+            user: $scope.user,
+            photo: $scope.userImg,
+            comment: $scope.newImagePost.header
+            }],
+            "saved": []
+        };
+
+        $scope.data.unshift(post); // Añade el nuevo post al inicio del feed
+        $scope.filterPosts($scope.filter || 'all'); // Refresca el filtro actual
+
+        
+        ui('#dialog-post'); // Cierra el diálogo
+    };
+  
  
-   
-     $scope.filterByLevel = function(lsn) {
-    return function(entry) {
-    return entry.index <= lsn;
-  };
-};
-
-
-   
 }]);
-
-
-
-
-  $(document).ready(function () {
-  // Inicializa fancybox
-  $(".fancybox").fancybox();
-
-  // Evita que el formulario recargue la página
-  $('#search-form').submit(function (e) {
-    e.preventDefault();
-  });
-
-$('#results').on('click', '.select-video', function (e) {
-  e.preventDefault();
-
-  // Obtiene los datos del video seleccionado
-  let videoTitle = $(this).data('title');
-  let videoUrl = $(this).data('url');
-  let videoThumbnail = $(this).data('thumb');
-
-
-  // Actualiza el atributo ytVideoURL con la URL del video
-  $('#ytVideoURL').attr('ytVideoURL', videoUrl);
-
-    $('#video-details').html(`
-    <div class="video-info" style="position: relative; display: inline-block;">
-      <img src="${videoThumbnail}" style="width: 120px; height: 90px; margin-right: 10px;">
-      <span>${videoTitle}</span>
-       <button 
-  class="remove-youtube-btn" 
-  style="
-    position: absolute; 
-    top: -5px; 
-    right: -5px; 
-    background: red; 
-    color: white; 
-    border: none; 
-    border-radius: 50%; 
-    width: 20px; 
-    height: 20px; 
-    font-size: 15px; 
-    cursor: pointer; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center;"
->
-  <i class="ri-close-fill" style="font-weight: 700; line-height: 0;"></i>
-</button>
-    </div>
-  `);
-
-  $('#video-details').on('click', '.remove-youtube-btn', function () {
-  $('#video-details').html('');
-  $('#ytVideoURL').attr('ytVideoURL', '');
-});
-  
-  // Cierra el modal
-  $('#youtubeModal').modal('hide');
-  $('#results').html('');
-   $('#query').val('');
-});
-
-
-  
-   $('#uploadBtn').on('click', function () {
-    $('#uploadImage').click();
-  });
-
-  // Maneja la subida de imagen
-  $('#uploadImage').on('change', function (event) {
-    let file = event.target.files[0]; // Obtén el archivo
-    if (file) {
-      let reader = new FileReader();
-
-      // Convierte el archivo a Base64
-      reader.onload = function (e) {
-        let base64Image = e.target.result;
-
-        // Muestra la imagen en el contenedor #img-details
-       $('#img-details').html(`
-  <div class="uploaded-img-container" style="position: relative; display: inline-block;">
-    <img src="${base64Image}" alt="Uploaded Image" style="max-width: 100px; max-height: 100px; border: 1px solid #ccc; border-radius: 5px;">
-   <button 
-  class="remove-image-btn" 
-  style="
-    position: absolute; 
-    top: -5px; 
-    right: -5px; 
-    background: red; 
-    color: white; 
-    border: none; 
-    border-radius: 50%; 
-    width: 20px; 
-    height: 20px; 
-    font-size: 15px; 
-    cursor: pointer; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center;"
->
-  <i class="ri-close-fill" style="font-weight: 700; line-height: 0;"></i>
-</button>
-
-  </div>
-`);
-
-        // Guarda el Base64 en el atributo imgData
-        $('#imgData').attr('imgData', base64Image);
-      };
-
-      // Lee el archivo como Base64
-      reader.readAsDataURL(file);
-    }
-  });
-  
-  
-  $('#img-details').on('click', '.remove-image-btn', function () {
-  // Limpia el contenedor de imagen
-  $('#img-details').html('');
-  // Limpia el atributo imgData
-  $('#imgData').attr('imgData', '');
-});
- 
-}); 
-
-function search() {
-  // Limpia resultados anteriores
-  $('#results').html('');
-
-  // Obtén el valor del input
-  let q = $('#query').val();
-
- 
-  $.get(
-    "https://www.googleapis.com/youtube/v3/search",
-    {
-      part: 'snippet, id',
-      q: q,
-      type: 'video', 
-      key: 'AIzaSyBRfk0b73-DtIk7UNdpItlZHlmMtNcVsUA'
-    },
-    function (data) {
-      $.each(data.items, function (i, item) {
-        // Genera el HTML de cada resultado
-        let output = getOutput(item);
-
-        // Añade los resultados al DOM
-        $('#results').append(output);
-      });
-    }
-  );
-   
-  /*
-    var api = "https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec";
-
-    var validationData = {
-      redirect: "follow",
-      method: "POST",
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8"
-      },
-      body: JSON.stringify({
-        action: "youtubeApi",
-        q: q 
-      }),
-      credentials: "omit"
-    };
-
-  fetch(api, validationData)
-  .then(response => response.text())
-  .then(res => {
-    var validation = JSON.parse(res);
-    validation.forEach(item => {
-          $('#results').append(getOutput(item));
-        });
-  })
-*/
-
-  
-  
-  
-}
-
-function getOutput(item) {
-  // Extrae información del video
-  let videoId = item.id.videoId;
-  let title = item.snippet.title;
-  let description = item.snippet.description;
-  let thumb = item.snippet.thumbnails.high.url;
-  let channelTitle = item.snippet.channelTitle;
-
-  // Construye el HTML de salida con atributos data-* para los datos
-  let output = `
-    <li>
-      <div class="list-left">
-        <img src="${thumb}" alt="${title}">
-      </div>
-      <div class="list-right">
-        <h3 style="font-size: 15px;">
-          <a 
-            href="#" 
-            class="select-video" 
-            data-title="${title}" 
-            data-url="https://www.youtube.com/embed/${videoId}"
-            data-thumb="${thumb}"
-            >
-            ${title}
-          </a>
-        </h3>
-        <small>por <span class="cTitle">${channelTitle}</span></small>
-        <p style="font-size: 10px;">${description}</p>
-      </div>
-    </li>
-    <div class="clearfix"></div>
-  `;
-
-  return output;
-}
-</script>
+</script> 
