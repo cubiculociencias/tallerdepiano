@@ -2351,8 +2351,9 @@ input[type="radio"]:checked + label.green-bg::after {
 var app = angular.module('materializeApp', ['ui.materialize']);
 app.factory('SharedState', function($http, $q) {
   var requestData = {
-    action: "getBasicData",
-    token: localStorage.getItem('TPtoken')
+    action: "getUserData",
+  //  token: localStorage.getItem('MStoken')
+  token: "U2FsdGVkX1+pTAJ/i/vnElIrTlT7VjKJ6kuzk2FlnAIkGq9xl29aZsKgbGygQIfF"
   };
 
   var config = {
@@ -2364,16 +2365,11 @@ app.factory('SharedState', function($http, $q) {
   var getNum = function() {
     var deferred = $q.defer();
 
-    $http.post('https://script.google.com/macros/s/AKfycbzuRdRbf_Yy-JUEUm4E2qzvWLm6hquJNhqEGEKecOPLowyjBJU8SS_wQ57W2--XobEA/exec', requestData, config)
+    $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData, config)
       .then(function(response) {
         deferred.resolve({
-          lvl: response.data.lvl,
-          lsn: response.data.lsn,
-          progress: response.data.progress,
-          lssons: response.data.lessons,
+          stage: response.data.stage,
           status: response.data.status,
-          history: response.data.history,
-          counterLvl: response.data.counterLvl
         });
       }, function(error) {
         deferred.reject(error);
@@ -2391,10 +2387,9 @@ app.factory('SharedState', function($http, $q) {
 
   .controller('lvlMenu', ["$scope", "SharedState", function($scope, SharedState){ 
       SharedState.getNum().then(function(data) {
-        $scope.lvl = data.lvl;
-      $scope.progress = data.progress;
+      var stage = JSON.parse(data.stage)
+        $scope.lvl = stage.lvl;
      $scope.status = data.status;
-      $scope.counter = data.counterLvl[0]
         
         if(data.lvl == 1){
           $('ul.tabs').tabs('select_tab', 'test2');
@@ -2411,15 +2406,12 @@ app.factory('SharedState', function($http, $q) {
 .controller('levelP', ["$scope", "SharedState", function($scope, SharedState) {
     $scope.loading = true;
   
-  
+
     SharedState.getNum().then(function(data) {
-    $scope.lsn = data.lsn;
-      $scope.lvl = data.lvl;
-      $scope.progress = data.progress;
-      $scope.counter = data.counterLvl[0]
+    var stage = JSON.parse(data.stage)
+    $scope.lsn = stage.lsn;
+      $scope.lvl = stage.lvl;
       $scope.status = data.status;
-      $scope.currentlsns = filterCurrent(data.lssons);
-       $scope.history = data.history;
       $scope.loading = false;
   })
 
@@ -3068,14 +3060,12 @@ app.factory('SharedState', function($http, $q) {
   }])
 
 .controller('level1', ["$scope", "SharedState", function($scope, SharedState) {
-     SharedState.getNum().then(function(data) {
-    $scope.lsn = data.lsn;
-      $scope.lvl = data.lvl;
-      $scope.progress = data.progress;
-      $scope.counter = data.counterLvl[1]
+      SharedState.getNum().then(function(data) {
+    var stage = JSON.parse(data.stage)
+    $scope.lsn = stage.lsn;
+      $scope.lvl = stage.lvl;
       $scope.status = data.status;
-      $scope.currentlsns = filterCurrent(data.lssons);
-       $scope.history = data.history;
+      $scope.loading = false;
   })
 
 
@@ -3699,14 +3689,12 @@ app.factory('SharedState', function($http, $q) {
 
  
 .controller('level2', ["$scope", "SharedState", function($scope, SharedState) {
-    SharedState.getNum().then(function(data) {
-    $scope.lsn = data.lsn;
-      $scope.lvl = data.lvl;
-      $scope.progress = data.progress;
-      $scope.counter = data.counterLvl[2]
+      SharedState.getNum().then(function(data) {
+    var stage = JSON.parse(data.stage)
+    $scope.lsn = stage.lsn;
+      $scope.lvl = stage.lvl;
       $scope.status = data.status;
-      $scope.currentlsns = filterCurrent(data.lssons);
-       $scope.history = data.history;
+      $scope.loading = false;
   })
 
 
