@@ -3586,8 +3586,8 @@ var app = angular.module('materializeApp', ['ui.materialize']);
 app.factory('SharedState', function($http, $q) {
   var requestData = {
     action: "getUserData",
-  //  token: localStorage.getItem('MStoken')
-    token: "U2FsdGVkX1/pI1bZ0ubPnMIbtexAViX2jWJbRcC96D2QsP6GULGhs1YxuPWTKn4L"
+    token: localStorage.getItem('MStoken')
+   // token: "U2FsdGVkX1/pI1bZ0ubPnMIbtexAViX2jWJbRcC96D2QsP6GULGhs1YxuPWTKn4L"
   };
 
   var config = {
