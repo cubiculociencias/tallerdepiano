@@ -5876,13 +5876,9 @@ function newSize() {
  
 .controller('level2', ["$scope", "SharedState", function($scope, SharedState) {
     SharedState.getNum().then(function(data) {
-    $scope.lsn = data.lsn;
-      $scope.lvl = data.lvl;
-      $scope.progress = data.progress;
-      $scope.counter = data.counterLvl[2]
+    $scope.lsn = data.stage.lsn;
+      $scope.lvl = data.stage.lvl;
       $scope.status = data.status;
-      $scope.currentlsns = filterCurrent(data.lssons);
-       $scope.history = data.history;
   })
 
 
