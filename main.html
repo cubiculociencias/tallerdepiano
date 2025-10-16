@@ -19,6 +19,11 @@
  <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+        <script src="https://cdn.jsdelivr.net/npm/tone@14.7.58"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@magenta/music@1.23.1/es6/core.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/focus-visible@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html-midi-player@1.5.0"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js" charset="utf-8"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css" rel="stylesheet" type="text/css"> 
@@ -158,6 +163,9 @@ ion-side-menu .item:hover i {
   transform: scale(1.1); /* Agrandar ligeramente el ícono */
 }
 
+ion-side-menu .item:hover img {
+  transform: scale(1.1); /* Agrandar ligeramente el ícono */
+}
 
 ion-side-menu .list .item:hover {
   background-color: #f5f6f6; /* Fondo hover */
@@ -171,38 +179,6 @@ font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
   color: #1F2937 !important;
 }
 
-.card{
-  font-family: 'Nunito', sans-serif;
-    border-radius: 4px;
-    background: #fff;
-    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
-      transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
-  padding: 14px 80px 18px 36px;
-  cursor: pointer;
-  height: 120px;
-  align-items: center; 
-   display: flex; 
-  text-decoration: none; 
-}
-
-
-.card:hover{
-     transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
-}
-
-.list .card h3{
-  font-weight: 600;
-  font-size: 1.7rem;
-  
-}
-
-.card img{
-  position: absolute;
-  top: 20px;
-  right: 15px;
-  max-height: 120px;
-}
 
 
 
@@ -250,179 +226,7 @@ font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 
 
 
-   .drive{
-    height: 450px;
-    width: 100%;
-  }
-  
-  .modal-container {
-    position: fixed;
-    display: table;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    transform: scale(0);
-    z-index: 1;
-  }
 
-  .modal-container.four {
-    z-index: 0;
-    transform: scale(1);
-  }
-
-  .modal-container.four .modal-background .modalDoc {
-    animation: blowUpModal 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-  }
-  .modal-container.four + body {
-    z-index: 1;
-    animation: blowUpContent 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-  }
-  .modal-container.four.out .modal-background .modalDoc {
-    animation: blowUpModalTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-  }
-  .modal-container.four.out + body {
-    animation: blowUpContentTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-  }
-
-  .modal-container .modal-background {
-    display: table-cell;
-    background: rgba(0, 0, 0, 0.8);
-    text-align: center;
-    vertical-align: middle;
-  }
-  .modal-container .modal-background .modalDoc {
-    padding: 50px;
-    display: inline-block;
-    border-radius: 3px;
-    font-weight: 300;
-    position: relative;
-  }
-
-.close-modal {
-    display: block;
-    position: absolute;
-  top: 40px;
-    right: 20px;
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: bold;
-    color: #fff;
-}
-
-  @keyframes blowUpContent {
-    0% {
-      transform: scale(1);
-      opacity: 1;
-    }
-    99.9% {
-      transform: scale(2);
-      opacity: 0;
-    }
-    100% {
-      transform: scale(0);
-    }
-  }
-  @keyframes blowUpContentTwo {
-    0% {
-      transform: scale(2);
-      opacity: 0;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
-  @keyframes blowUpModal {
-    0% {
-      transform: scale(0);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-  @keyframes blowUpModalTwo {
-    0% {
-      transform: scale(1);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(0);
-      opacity: 0;
-    }
-  }
-
-
-
-
-
-
-     
-      .modal {
-      display: none;
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.4);
-      padding-top: 60px;
-    }
-
-    .modal-content {
-      background-color: #fefefe;
-      margin: 5% auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 80%;
-      max-width: 300px;
-    }
-
-    .close {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .add-to-btn {
-      background-color: #E02D44;
-      color: white;
-      border: none;
-      outline: none;
-      font-weight: bold;
-      width: 100%;
-      height: 50px;
-    }
- 
-#myModal {
-    display: block; 
-  }
-
-   
-.ionic-spinner {
-  border: 4px solid rgba(0, 0, 0, 0.2);
-  border-top: 4px solid #333;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
-  margin: auto;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
 
    .anim {
     position: relative;
@@ -560,6 +364,7 @@ font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 .menubtn{
     display: none;
   }
+
  .hintMsg{
         display: none;
     }
@@ -950,8 +755,8 @@ width: 200px; /* Ajusta según el tamaño deseado */
 }
 
 .message-avatar img {
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -1061,6 +866,9 @@ width: 200px; /* Ajusta según el tamaño deseado */
   position: relative;
 }
 
+.notif-item:hover {
+    background: whitesmoke;
+}
 
 
 .notif-icon {
@@ -1444,351 +1252,22 @@ width: 200px; /* Ajusta según el tamaño deseado */
 }
 
 
-    :root {
-      --primary: #4a6fa5;
-      --primary-dark: #3a5982;
-      --primary-light: #6b8cbe;
-      --secondary: #ff9e4a;
-      --secondary-dark: #e08530;
-      --success: #4caf50;
-      --danger: #ff6b6b;
-      --warning: #ffc107;
-      --dark: #2c3e50;
-      --light: #f5f7fa;
-      --gray: #78909c;
-      --white: #ffffff;
-      --card-shadow: 0 8px 25px rgba(0,0,0,0.1);
-      --button-shadow: 0 5px 15px rgba(0,0,0,0.15);
-    }
-    
-   
-    
-
-    .banner-header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    width: 100%; 
-    height: 110px;
-    overflow: hidden;
-    will-change: transform, opacity;
-}
-
-.banner-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-    
-    .piano-content {
-       background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-      min-height: 100vh;
-      padding-bottom: 2px;
-      padding-top: 13px !important; 
-    }
-    
-    .dashboard {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-      padding: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding-top: 120px;
-    }
-    
-    @media (min-width: 800px) {
-      .dashboard {
-        grid-template-columns: 1fr 1fr;
-      }
-      
-      .full-width {
-        grid-column: 1 / -1;
-      }
-    }
-    
- .card2, .card3 {
-            background: white;
-            border-radius: 16px;
-            margin-top: 10px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-            border: 1px solid #e5e5e7;
-            overflow: hidden;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
-
-        .card2:hover, .card3:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
-        }
-
-        .card-header {
-            padding: 20px 24px;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-        }
-
-        .card-header h2 {
-            margin: 0;
-            font-size: 18px;
-            font-weight: 600;
-            color: #2c3e50;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .card-body {
-            padding: 24px;
-        }
-
-     
-
- .status-card {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            padding: 24px;
-        }
-
-        .status-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            flex-shrink: 0;
-        }
-
-        .status-icon.connected {
-            background: linear-gradient(135deg, #4caf50, #45a049);
-            color: white;
-        }
-
-        .status-icon.disconnected {
-            background: linear-gradient(135deg, #ff6b6b, #e53e3e);
-            color: white;
-        }
-
-        .status-icon.connecting {
-            background: linear-gradient(135deg, #ffc107, #e0a800);
-            color: white;
-        }
-
-        .status-info {
-            flex: 1;
-        }
-
-        .status-info h3 {
-            margin: 0 0 8px 0;
-            font-weight: 600;
-            font-size: 18px;
-            color: #2c3e50;
-        }
-
-        .status-info p {
-            margin: 0;
-            color: #78909c;
-            font-size: 14px;
-        }
-
-  .connection-button {
-            margin: 0;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            height: 48px;
-            transition: all 0.2s ease;
-            border: none;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 0 20px;
-            flex-wrap: wrap;
-            text-align: center;
-            color: white;
-        }
-
-        .connection-button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .connection-button.connected {
-            background: linear-gradient(135deg, #ff6b6b, #e53935);
-        }
-
-        .connection-button.disconnected {
-            background: linear-gradient(135deg, #4caf50, #45a049);
-        }
-
-        .connection-button.connecting {
-            background: linear-gradient(135deg, #ffc107, #e0a800);
-            opacity: 0.9;
-        }
+ 
 
 
-
-
-  .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-top: 16px;
-        }
-
-        .stat-item {
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 20px 16px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            transition: all 0.2s ease;
-        }
-
-        .stat-item:hover {
-            background: #f1f5f9;
-            transform: translateY(-1px);
-        }
-
-        .stat-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            margin-bottom: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-
-        .stat-icon.mic.muted {
-            background: #78909c;
-            color: white;
-        }
-
-        .stat-icon.mic {
-            background: linear-gradient(135deg, #ff6b6b, #e53935);
-            color: white;
-        }
-
-        .stat-icon.video {
-            background: linear-gradient(135deg, #42a5f5, #1976d2);
-            color: white;
-        }
-
-        .stat-icon.connection {
-            background: linear-gradient(135deg, #ffc107, #e0a800);
-            color: white;
-        }
-
-        .stat-value {
-            font-weight: 600;
-            font-size: 16px;
-            margin-bottom: 4px;
-            color: #2c3e50;
-        }
-
-        .stat-label {
-            font-size: 13px;
-            color: #78909c;
-        }
-
-        .task-item {
-            display: flex;
-            align-items: center;
-            padding: 16px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            transition: all 0.2s ease;
-        }
-
-        .task-item:hover {
-            background: rgba(248, 250, 252, 0.5);
-            margin: 0 -16px;
-            padding: 16px;
-            border-radius: 8px;
-        }
-
-        .task-item:last-child {
-            border-bottom: none;
-        }
-
-        .task-item.completed .task-title {
-            text-decoration: line-through;
-            color: #78909c;
-        }
-
-        .task-check {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 16px;
-            cursor: pointer;
-            color: #78909c;
-            flex-shrink: 0;
-            transition: all 0.2s ease;
-        }
-
-        .task-check:hover {
-            color: #4caf50;
-            transform: scale(1.1);
-        }
-
-        .task-item.completed .task-check {
-            color: #4caf50;
-        }
-
-        .task-content {
-            flex: 1;
-        }
-
-        .task-title {
-            font-size: 15px;
-            font-weight: 500;
-            color: #2c3e50;
-            margin-bottom: 4px;
-        }
-
-        .task-date {
-            font-size: 13px;
-            color: #78909c;
-        }
-
-        .task-item.completed .task-date {
-            color: #4caf50;
-        }
 
         .schedule-item {
             display: flex;
             align-items: center;
-            padding: 16px 0;
+            padding: 10px 0;
             border-bottom: 1px solid rgba(0,0,0,0.05);
             transition: all 0.2s ease;
         }
 
         .schedule-item:hover {
             background: rgba(248, 250, 252, 0.5);
-            margin: 0 -16px;
-            padding: 16px;
+            margin: 0 -12px;
+            padding: 10px;
             border-radius: 8px;
         }
 
@@ -1802,8 +1281,8 @@ width: 200px; /* Ajusta según el tamaño deseado */
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 54px;
-    height: 54px;
+    width: 47px;
+    height: 47px;
     background: linear-gradient(135deg, #4a6fa5, #3a5982); /* Fondo original azul */
     border-radius: 12px;
     color: white; /* Texto blanco original */
@@ -1915,208 +1394,9 @@ width: 200px; /* Ajusta según el tamaño deseado */
             transform: scale(1.05);
         }
 
-        .achievements-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-
-        .achievement-item {
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 20px 16px;
-            text-align: center;
-            transition: all 0.2s ease;
-            border: 1px solid #e2e8f0;
-        }
-
-        .achievement-item.unlocked {
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            border: 1px solid #e5e5e7;
-            cursor: pointer;
-        }
-
-        .achievement-item.locked {
-            opacity: 0.6;
-            filter: grayscale(0.8);
-        }
-
-        .achievement-item.unlocked:hover {
-            transform: scale(1.03);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-
-        .achievement-icon {
-            width: 54px;
-            height: 54px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 12px;
-            font-size: 24px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .achievement-item.unlocked .achievement-icon {
-            background: linear-gradient(135deg, #4a6fa5, #3a5982);
-            color: white;
-        }
-
-        .achievement-item.locked .achievement-icon {
-            background: #e2e8f0;
-            color: #78909c;
-            box-shadow: none;
-        }
-
-        .achievement-title {
-            font-size: 13px;
-            font-weight: 500;
-            color: #2c3e50;
-        }
-
-        .teacher-profile {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 16px;
-        }
-
-        .teacher-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #4a6fa5, #3a5982);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            box-shadow: 0 4px 12px rgba(74, 111, 165, 0.2);
-        }
-
-        .teacher-info h3 {
-            margin: 0 0 4px 0;
-            font-size: 18px;
-            font-weight: 600;
-            color: #2c3e50;
-        }
-
-        .teacher-info p {
-            margin: 0;
-            color: #78909c;
-            font-size: 14px;
-        }
-
-        .class-details {
-            background: #f8fafc;
-            padding: 16px;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .detail-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
-        }
-
-        .detail-row:last-child {
-            margin-bottom: 0;
-        }
-
-        .detail-label {
-            font-weight: 600;
-            color: #2c3e50;
-        }
-
-        .detail-value {
-            color: #4a6fa5;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .dashboard {
-                padding: 16px;
-                padding-top: 120px;
-                gap: 16px;
-            }
-            
-            .card-header {
-                padding: 16px 20px;
-            }
-            
-            .card-body {
-                padding: 20px;
-            }
-            
-            .status-card {
-                padding: 20px;
-                gap: 16px;
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .achievements-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .status-card {
-                flex-direction: column;
-                text-align: center;
-                gap: 16px;
-            }
-            
-            .status-icon {
-                width: 54px;
-                height: 54px;
-                font-size: 22px;
-            }
-            
-            .connection-button i {
-                display: none;
-            }
-        }
 
 
 
-.instruction-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.instruction-list li {
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-}
-
-.instruction-list li:last-child {
-    border-bottom: none;
-}
-
-.instruction-list .number {
-    background: var(--primary-light);
-    color: var(--white);
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px; /* 0.8rem -> 12.8px */
-    font-weight: 600;
-    flex-shrink: 0;
-}
 
 .message-preview {
     display: flex;
@@ -2137,18 +1417,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
     background: #f1f5f9;
 }
 
-.preview-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--white);
-    font-weight: 600;
-    flex-shrink: 0;
-}
+
 
 .preview-content {
     flex: 1;
@@ -2186,78 +1455,13 @@ width: 200px; /* Ajusta según el tamaño deseado */
     background: #f8fafc;
 }
 
-.floating-buttons {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.floating-btn {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    box-shadow: var(--button-shadow);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    border: none;
-    font-size: 22px; /* 1.4rem -> 22.4px */
-    position: relative;
-}
-
-.floating-btn:active {
-    transform: scale(0.95);
-}
-
-.floating-btn.chat {
-    background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
-    color: var(--white);
-}
-
-.floating-btn.mic {
-    background: linear-gradient(135deg, var(--danger) 0%, #ff6b6b 100%);
-    box-shadow: 0 0 15px #ff6b6b;
-    color: var(--white);
-}
-
-.floating-btn.mic.muted {
-    background: linear-gradient(135deg, var(--gray) 0%, #546e7a 100%);
-    box-shadow: none; 
-}
-
-.floating-btn.video {
-    background: linear-gradient(135deg, #42a5f5 0%, #1976d2 100%);
-    color: var(--white);
-}
-
-.chat-badge {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background: var(--danger);
-    color: white;
-    border-radius: 50%;
-    width: 22px;
-    height: 22px;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
 
 .video-container {
     position: fixed;
     top: 80px;
     left: 20px;
     width: 300px;
-    height: 170px;
+    height: 180px;
     background: #000;
     border-radius: 12px;
     border: 3px solid var(--primary);
@@ -2292,8 +1496,8 @@ width: 200px; /* Ajusta según el tamaño deseado */
 
 .video-controls {
     position: absolute;
-    top: 8px;
-    right: 8px;
+    top: 2px;
+    right: 2px;
     z-index: 999;
     background: rgba(0,0,0,0.7);
     border-radius: 8px;
@@ -2316,7 +1520,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
     margin: 0;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 16px; /* 1rem -> 16px */
+    font-size: 13px; /* 1rem -> 16px */
     transition: background 0.2s ease;
 }
 
@@ -2331,243 +1535,36 @@ width: 200px; /* Ajusta según el tamaño deseado */
     pointer-events: none;
 }
 
-.custom-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    padding-top: 60px;
-    background: rgba(0,0,0,0.6);
-    z-index: 1001;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(5px);
-}
-
-.custom-modal.show {
-    display: flex;
-}
-
-.modal-content3 {
-    margin: 2% auto;
-    background: white;
-    width: 90%;
-    max-width: 500px;
-    height: 70%;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    animation: modalSlideIn 0.3s ease;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.25);
-    overflow: hidden;
-}
-
-@keyframes modalSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-30px) scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-.modal-header {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    color: white;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.modal-header h3 {
-    margin: 0;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.modal-header .button-clear {
-    color: white;
-    opacity: 0.8;
-    font-size: 24px; /* 1.5rem -> 24px */
-    transition: opacity 0.2s ease;
-}
-
-.modal-header .button-clear:hover {
-    opacity: 1;
-}
-
-.modal-body {
-    flex: 1;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-
-.chat-messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 20px;
-    background: #fafafa;
-}
-
-.message-item {
-    margin-bottom: 15px;
-    padding: 12px 16px;
-    border-radius: 18px;
-    max-width: 80%;
-    word-wrap: break-word;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    animation: messageAppear 0.3s ease;
-}
-
-@keyframes messageAppear {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.message-item.own {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    color: white;
-    margin-left: auto;
-    text-align: right;
-    border-bottom-right-radius: 5px;
-}
-
-.message-item.other {
-    background: white;
-    color: #333;
-    border-bottom-left-radius: 5px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-.message-sender {
-    font-size: 12px;
-    font-weight: bold;
-    margin-bottom: 5px;
-    opacity: 0.9;
-}
-
-.message-time {
-    font-size: 10px;
-    opacity: 0.7;
-    margin-top: 5px;
-}
-
-.chat-input {
-    display: flex;
-    padding: 15px;
-    border-top: 1px solid #e0e0e0;
-    background: white;
-    align-items: center;
-}
-
-.chat-input input {
-    flex: 1;
-    border: 1px solid #e0e0e0;
-    border-radius: 24px;
-    padding: 12px 20px;
-    margin-right: 10px;
-    outline: none;
-    transition: border-color 0.3s ease;
-    font-size: 16px; /* 1rem -> 16px */
-}
-
-.chat-input input:focus {
-    border-color: var(--primary);
-}
-
-.chat-input .button {
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    box-shadow: 0 3px 10px rgba(74, 111, 165, 0.3);
-    transition: all 0.2s ease;
-}
-
-.chat-input .button:active {
-    transform: scale(0.95);
-}
-
-.no-select {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
 
 /* Mejoras responsivas */
 @media (max-width: 768px) {
-  
-    
     .video-container {
-        width: 220px;
-        height: 130px;
         left: 15px;
         top: 70px;
     }
-    
-    .floating-btn {
-        width: 55px;
-        height: 55px;
-        font-size: 19px; /* 1.2rem -> 19.2px */
-    }
-    
-    .floating-buttons {
-        bottom: 20px;
-        right: 20px;
-    }
-    
-    .modal-content3 {
-        width: 95%;
-        height: 85%;
-        border-radius: 16px;
-    }
-    
-    .modal-header {
-        padding: 15px;
-    }
-    
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
+
+     .video-container.fullscreen video { 
+        width: 100%;
+        height: 100%;
+        object-fit: contain; 
+        object-position: center;
+        background-color: #000; 
+      }
+
 }
 
 @media (max-width: 480px) {
     .video-container {
-        width: 180px;
-        height: 110px;
+        width: 250px;
+        height: 150px;
     }
+
+    .video-control-btn{
+        font-size: 10px;
+      }
     
-    .status-card {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-    }
-    
-    .status-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 24px; /* 1.5rem -> 24px */
-    }
+
+   
 }
 
 
@@ -2714,6 +1711,205 @@ width: 200px; /* Ajusta según el tamaño deseado */
     letter-spacing: -0.5px !important;
 }
 
+
+
+/* Estilos del modal y animación (sin cambios) */
+.custom-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  padding-top: 60px;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1001;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+}
+
+.custom-modal.show {
+  display: flex;
+}
+
+.modal-content3 {
+  margin: 2% auto;
+  background: white;
+  width: 95%;
+  height: 85%;
+  max-width: 400px;
+  max-height: 500px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  animation: modalSlideIn 0.3s ease;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* --- INICIO DE CAMBIOS --- */
+
+/* Encabezado del chat - CORREGIDO */
+.modal-header3 {
+  background: white;
+  color: #1a1a1a;
+
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;    
+  justify-content: space-between !important; 
+  align-items: center;   
+}
+
+.modal-header3 h3 {
+  margin: 0;
+  margin-left: 8px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+   font-size: 18px;
+  gap: 10px;
+}
+
+
+.modal-header3 .button-clear {
+  color: #1a1a1a !important;
+  font-size: 20px;
+  background: transparent; /* Sin fondo */
+  border: none;       
+  padding: 0;         
+  cursor: pointer;   
+  flex-shrink: 0;     
+}
+
+
+
+.modal-body {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Contenedor de mensajes */
+.chat-messages2 {
+  flex: 1;
+  overflow-y: auto;
+
+  background: white; /* Fondo blanco como en la imagen */
+}
+
+/* Estilo general para cada burbuja de mensaje */
+.message-item {
+  display: inline-block; /* Permite que el ancho se ajuste al contenido */
+  clear: both; /* Asegura que cada mensaje esté en su propia línea */
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  border-radius: 20px; /* Bordes bien redondeados */
+  max-width: 75%;
+  word-wrap: break-word;
+  box-shadow: none; /* Sin sombra para un look plano */
+  animation: messageAppear 0.3s ease;
+}
+
+@keyframes messageAppear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tus mensajes (derecha) */
+.message-item.own {
+  background: #1DA1F2; /* Azul sólido (similar a Twitter) */
+  color: white;
+  float: right; /* Alineado a la derecha */
+}
+
+/* Mensajes de otros (izquierda) */
+.message-item.other {
+  background: #f0f2f5; /* Gris claro */
+  color: #333;
+  float: left; /* Alineado a la izquierda */
+}
+
+/* Ocultamos el nombre del remitente para un look de chat 1-a-1 */
+.message-sender {
+  display: none;
+}
+
+/* Estilo para la hora del mensaje */
+.message-time {
+  font-size: 11px;
+  opacity: 0.8;
+  margin-top: 4px;
+  display: block; /* Asegura que esté en una nueva línea dentro de la burbuja */
+  text-align: right; /* Alinea la hora a la derecha dentro de la burbuja */
+}
+
+/* Área para escribir el mensaje */
+.chat-input2 {
+  display: flex;
+  gap: 8px;
+  padding: 10px ;
+  border-top: 1px solid #eee;
+  background: white;
+  align-items: center;
+}
+
+.chat-input2 input {
+  flex: 1;
+  padding: 8px 12px !important;
+  border: 1px solid #ddd !important;
+  border-radius: 20px;
+  outline: none;
+}
+
+.chat-input2 button {
+  border-radius: 50%;
+  width: 35px ;
+  height: 35px ;
+  padding: 14px ;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: black !important; /* Mismo azul que los mensajes */
+  color: white;
+  box-shadow: none; /* Sin sombra */
+  transition: background-color 0.2s ease;
+}
+
+.chat-input2 .button:hover {
+  background: #0c85d0; /* Un azul un poco más oscuro al pasar el cursor */
+}
+
+.chat-input2 .button:active {
+  transform: scale(0.95);
+}
+
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
      /* Estilos para el nuevo formato de fecha y hora */
 .schedule-info-detailed {
@@ -2895,6 +2091,9 @@ width: 200px; /* Ajusta según el tamaño deseado */
 
 /* Responsivo */
 @media (max-width: 480px) {
+    .chatIco{
+        display: none;
+    }
   .schedule-action-wrapper {
     gap: 8px;
     padding: 6px;
@@ -2931,77 +2130,243 @@ width: 200px; /* Ajusta según el tamaño deseado */
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
- .online-badge {
+
+.headIcon {
+    margin-top: 4px;
+ width: 38px;
+  height: 38px;
+  border-radius: 50% !important; /* Esto lo hace circular */
+  background-color: #e4e6eb !important;
+
+  color: #050505 !important;
+  transition: background-color 0.2s ease-in-out !important;
+}
+
+
+
+.headIcon:hover {
+  background-color: #d8dbdf !important;
+}
+
+/* Estilo para resaltar toda la fila del recordatorio de pago */
+.notif-item.pay-day-highlight {
+    background-color: #f6ffed; /* Un verde muy claro */
+    border-left: 3px solid #52c41a; /* Borde izquierdo verde */
+}
+
+/* Estilo para el contenedor del ícono de pago a la izquierda */
+.schedule-date.schedule-date-payday {
+    background: linear-gradient(135deg, #73d13d, #52c41a);
+    color: white;
+}
+
+/* Centra el ícono de dólar dentro de su contenedor */
+.payday-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 24px;
+}
+
+
+
+     
+
+      :root {
+            --primary-blue: #007bff;
+            --hover-blue: #0056b3;
+            --status-red: #dc3545;
+            --status-green: #28a745;
+            --light-bg: #ffffff;
+            --light-border: #dee2e6;
+            --dark-text: #212529;
+            --muted-text: #6c757d;
+            --body-bg: #f1f3f5;
+        }
+
+     
+
+        .top-bar {
+            height: 55px;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
             display: flex;
             align-items: center;
-            gap: 8px;
-            background: white;
+            justify-content: space-between;
+          margin-top: 15px;
+            padding: 0 20px;
+            border-bottom: 1px solid var(--light-border);
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .status-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+.status-indicator-wrapper {
+    position: relative;
+    width: 15px;
+    height: 15px;
+    /* Se alinea con el texto del estatus */
+    margin-top: 2px;
+}
+
+       .status-icon {
+    width: 15px; /* Ajusta el tamaño */
+    height: 15px; /* Ajusta el tamaño */
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    /* Asegura que esté por encima de las animaciones */
+    position: relative;
+    z-index: 10;
+}
+
+        .status-icon.disconnected { background-color: var(--status-red); }
+        .status-icon.connecting { background-color: #fd7e14; animation: pulse 1.5s infinite; }
+        .status-icon.connected {background-color: #34d399; }
+
+.status-ring {
+    width: 15px;
+    height: 15px;
+    background-color: #86efac; /* Verde claro de tu ejemplo */
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Tu código para la animación de pulso */
+.status-pulse {
+    width: 15px;
+    height: 15px;
+    background-color: #34d399; /* Verde principal */
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    /* Retraso para que no se superponga exactamente con el anillo */
+    animation-delay: -1s;
+}
+
+
+        .status-text .title { font-size: 15px; font-weight: 600; margin: 0; line-height: 1.2; }
+        .status-text .subtitle { font-size: 12px; color: var(--muted-text); margin: 0; line-height: 1.2; }
+
+        .controls-container { display: flex; align-items: center; gap: 15px; }
+
+        #connectBtn {
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
             padding: 8px 16px;
-            border-radius: 50px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            border: 1px solid #e5e7eb;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.2s ease, opacity 0.3s;
         }
+        #connectBtn:hover { background-color: var(--hover-blue); }
+        #connectBtn:disabled { background-color: #555; cursor: not-allowed; opacity: 0.7; }
 
-        .status-indicator {
-            position: relative;
-            width: 12px;
-            height: 12px;
-        }
+        .connected-controls { display: flex; gap: 15px; }
 
-        .status-dot {
-            width: 12px;
-            height: 12px;
-            background-color: #10b981;
+        .icon-btn {
+         background-color: #e5e7eb;
+            border: none;
+            color: var(--muted-text);
+            cursor: pointer;
+            padding: 5px;
             border-radius: 50%;
-            position: absolute;
-            top: 0;
-            left: 0;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s, color 0.2s;
+            position: relative; /* Para el badge de chat */
+        }
+        .icon-btn:hover { background-color: var(--light-border); color: var(--dark-text); }
+        .icon-btn i { font-size: 18px; }
+
+        /* Estilo para el botón de micrófono muteado */
+        .icon-btn.muted i {
+            color: var(--status-red);
         }
 
-        .status-pulse {
-            width: 12px;
-            height: 12px;
-            background-color: #34d399;
+        #disconnectBtn {   background-color: var(--muted-text);
+            color: #e5e7eb;
+}
+        #disconnectBtn:hover { background-color: #c82333; color: white; }
+        
+        /* Estilo para el badge de chat */
+        .chat-badge {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            background-color: var(--status-red);
+            color: white;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+            font-size: 11px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--light-bg);
         }
 
-        .status-ring {
-            width: 12px;
-            height: 12px;
-            background-color: #86efac;
-            border-radius: 50%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
 
-        .status-text {
-            font-size: 14px;
-            font-weight: 500;
-            color: #374151;
-            margin: 0;
-        }
+#micBtn.icon-btn {
+    background-color: #e5e7eb; /* Un gris claro y neutro */
+    color: var(--muted-text);
+}
+#micBtn.icon-btn:hover {
+    background-color: #d1d5db; /* Un gris un poco más oscuro al pasar el ratón */
+}
 
-        @keyframes ping {
-            75%, 100% {
-                transform: scale(2);
-                opacity: 0;
-            }
-        }
+/* Estilo para el micrófono ABIERTO/ROJO con resplandor */
+#micBtn.icon-btn.mic-active {
+    background-color: var(--status-red);
+    color: white;
+    /* La animación de resplandor */
+    animation: mic-glow 1.5s ease-in-out infinite alternate;
+}
+#micBtn.icon-btn.mic-active:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el ratón */
+}
+
+
+/* --- 3. KEYFRAMES (Añade los que te falten) --- */
+
+@keyframes ping {
+    75%, 100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
 
         @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.5;
-            }
+            0% { transform: scale(0.6); opacity: 0.3; }
+            50% { transform: scale(1.3); opacity: 1; }
+            100% { transform: scale(0.6); opacity: 0.3; }
         }
+
+/* Keyframe para el resplandor del micrófono */
+@keyframes mic-glow {
+    from {
+        box-shadow: 0 0 2px 0px rgba(220, 53, 69, 0.5);
+    }
+    to {
+        box-shadow: 0 0 8px 4px rgba(220, 53, 69, 0.5);
+    }
+}
 
 </style>
 
@@ -3032,23 +2397,24 @@ width: 200px; /* Ajusta según el tamaño deseado */
    <!--   <div class="profile-user-data clearfix" ng-if="userData.status == 'ACTIVO'">
     
           <div class="circle">
-              <img class="profile-pic" src="{{userData.photo}}">
+                <img class="profile-pic" src="https://lh3.googleusercontent.com/d/1gA-HKzQXWksHNg8jCbUveFUXoE3jfip_">
+              
           </div>
-          <div class="main-data" style="margin-top: 12px;" ng-if="!loadingProfile">
-            <h4 class="userLvl">{{userData.name}}</h4>
-
-        <div class="pull-left planTag"> <i class="ri-progress-8-line" style="color: #28a745; text-shadow: 0 0 10px #28a745; margin-right: 4px" ng-if="userData.status == 'ACTIVO'"></i> <i class="ri-lock-2-fill" style="margin-right: 4px" ng-if="userData.status != 'ACTIVO'"></i>  {{userData.status}} </div>
+          <div class="main-data" style="margin-top: 12px; " ng-if="!loadingProfile">
+            <h4 class="userLvl">Plan PRO <i class="ri-vip-crown-line" style="color: orange; text-shadow: 0 0 10px orange; margin-right: 4px" ></i></h4>
 
 
-            <br>
+
+
+       
         <div class="userLvl" ng-if="userData.lvl == 0"> Nivel Preparatorio </div>
           <div class="userLvl" ng-if="userData.lvl != 0"> Nivel {{userLvl}} </div>
         <div class="progress">
-          <div class="progress-bar" style="background-color: {{userData.color}};" role="progressbar" aria-valuemin="0" aria-valuemax="100" ng-style="{width: userData.progress + '%'}" ng-init="startAnimation()"></div>
+          <div class="progress-bar" style="background-color: {{userData.color}};" role="progressbar" aria-valuemin="0" aria-valuemax="100" ng-style="{width: userProgress + '%'}" ng-init="startAnimation()"></div>
         </div>
           </div>  
-        </div>
-     -->
+        </div> -->
+     
 
 
   <div class="profile-user-data clearfix" >
@@ -3065,17 +2431,22 @@ width: 200px; /* Ajusta según el tamaño deseado */
                      
    
        
-    <a href="#/menu/lessons" class="item" ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" ng-click="activeMenuClr = 'lessons'" menu-toggle="left"><i class="ri-presentation-line" ></i>&nbsp&nbspLecciones</a>  
-      <a href="#/menu/livestream" class="item" ng-class="(activeMenuClr=='livestream')?'menuSelectedColor':''" ng-click="activeMenuClr = 'livestream'" menu-toggle="left"><i class="ri-live-line"></i>&nbsp&nbspLive Sessions</a>  
+    <a href="#/menu/lessons" class="item" ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" ng-click="activeMenuClr = 'lessons'" menu-toggle="left"><i class="ri-presentation-line" ></i>&nbsp&nbspClassroom</a>   
+     <hr>
+ <a href="#/menu/workspace" class="item" ng-class="(activeMenuClr=='workspace')?'menuSelectedColor':''" ng-click="activeMenuClr = 'workspace'" menu-toggle="left"><i class="ri-macbook-line"></i>&nbsp&nbspWorkspace</a>   
+   <a href="#/menu/library" class="item" ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" ng-click="activeMenuClr = 'library'" menu-toggle="left"><i class="ri-book-read-line" ></i>&nbsp&nbspReader</a>    
+ 
+          <a href="#/menu/finder" class="item" ng-class="(activeMenuClr=='finder')?'menuSelectedColor':''" ng-click="activeMenuClr = 'finder'" menu-toggle="left"><img src="https://lh3.googleusercontent.com/d/1vMHUODAn781r96RNhefO3HWZrqtMM_0u=s96-c" style="height: 21px; width: 21px; margin-left: 1px; margin-right: 9px">&nbsp&nbspPlayer</a>  
+
          <hr>
-         <a href="#/menu/library" class="item" ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" ng-click="activeMenuClr = 'library'" menu-toggle="left"><i class="ri-book-shelf-line" ></i>&nbsp&nbspRepertorio</a>
-    <a href="#/menu/recordings" class="item" ng-class="(activeMenuClr=='recordings')?'menuSelectedColor':''" ng-click="activeMenuClr = 'recordings'" menu-toggle="left"><i class="ri-radio-button-line"></i>&nbsp&nbspGrabaciones</a>      
- <hr>
-     <a href="#/menu/reel" class="item" ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" ng-click="activeMenuClr = 'reel'" menu-toggle="left"><i class="ri-award-fill"></i>&nbsp&nbspMozart Gallery</a>  
+
+     <a href="#/menu/reel" class="item" ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" ng-click="activeMenuClr = 'reel'" menu-toggle="left"><i class="ri-earth-line"></i>&nbsp&nbspMozart Now</a>  
+
 
 <!--
+               <a href="#/menu/recordings" class="item" ng-class="(activeMenuClr=='recordings')?'menuSelectedColor':''" ng-click="activeMenuClr = 'recordings'" menu-toggle="left"><i class="ri-record-circle-line"></i>&nbsp&nbspRecordings</a>
       <a href="#/menu/courses" class="item" ng-class="(activeMenuClr=='courses')?'menuSelectedColor':''" ng-click="activeMenuClr = 'courses'" menu-toggle="left"><i class="ri-aed-line"></i>&nbsp&nbspPráctica</a>  
-<a href="#/menu/finder" class="item" ng-class="(activeMenuClr=='finder')?'menuSelectedColor':''" ng-click="activeMenuClr = 'finder'" menu-toggle="left"><i class="ri-search-line"></i>&nbsp&nbspBuscador</a>
+
      -->
     
           </ul>
@@ -3084,7 +2455,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
         </ion-content>
  <ion-footer-bar style="z-index: 999 !important;">
          <button class="button button-royal pull-left" ng-if="isMobile" ng-click="installApp()" ><i class="ri-download-cloud-2-line" ></i> Descargar</button>
-  <button class="button pull-right" ng-click=""><i class="icon ri-question-line"></i>Ayuda</button>
+  <button class="button pull-right" ng-click="dropdownChat()"><i class="icon ri-question-line"></i>Ayuda</button>
 </ion-footer-bar>
 
       </ion-side-menu>
@@ -3104,30 +2475,44 @@ width: 200px; /* Ajusta según el tamaño deseado */
     <ion-view >
       
  
-  <ion-nav-bar class="bar-light" >      
+   <ion-nav-bar class="bar-light" >      
         <ion-nav-buttons side="right">
 
-     <button class="button button-clear" ng-click="dropdownChat()" style="font-size: 20px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 20px;" ng-if="userData.status == 'ACTIVO'">
-<i class="ri-gemini-line"></i>
-            <div style="position: absolute; top: -3px; left: 18px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(chats | filter:{read: false}).length && chatCounter">
+      <button class="button button-clear headIcon chatIco" ng-click="dropdownChat()" style="font-size: 20px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" ng-if="userData.status == 'ACTIVO'">
+    <i class="ri-chat-3-fill"></i>
+            <div style="position: absolute; top: -3px; left: 27px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(chats | filter:{read: false}).length && chatCounter">
         <div style="font-size: 13px; color: white;"> {{(chats | filter:{read: false}).length}}</div>
     </div>
-</button> 
-          
-   
+</button>  
+
+ <button class="button button-clear headIcon" ng-click="dropdownCalendar()" style="font-size: 20px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" ng-if="userData.status == 'ACTIVO'">
+  <i class="ri-booklet-fill"></i>
+</button>  
+      
+    <button class="button button-clear headIcon" ng-click="dropdownNotif()" style="font-size: 19px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" ng-if="userData.status == 'ACTIVO'">
+  <i class="ri-notification-3-fill" ></i>
+            <div style="position: absolute; top: -3px; left: 27px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(alerts | filter:{seen: false}).length && alertCounter">
+        <div style="font-size: 13px; color: white;" > {{(alerts | filter:{seen: false}).length}}</div>
+    </div> 
+</button>
 
  <button  class="upgrade-btn-modern" ng-click="goToPayment()" ng-if="userData.status != 'ACTIVO'">
             Upgrade
           </button>
 
 
-  <button class="button button-clear" ng-class="{ 'barImage': btnBar}" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" >
-  <div style="display: flex; align-items: center;" >    
-      <div style="position: relative; " class="profilImg">
-       <img class="profile-avatar2" src="{{userData.photo}}" width="30" height="30" />
-      </div>
-   </div>
-  </button>
+ <button class="button button-clear" ng-class="{ 'barImage': btnBar}" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;">
+    <div style="display: flex; align-items: center;">
+     <!--   <div class="user-info" style="text-align: right; margin-right: 5px; margin-left: -7px" ng-if="userData.status == 'ACTIVO'">
+                    <div style="font-size: 13px; font-weight: 600; color: #333; line-height: 1.2;">{{userData.name}}</div>
+                    <div style="font-size: 11px; color: #777; line-height: 1.1;" ng-if="userLvl == 0">Preparatorio</div>
+                    <div style="font-size: 11px; color: #777; line-height: 1.1;" ng-if="userLvl != 0">Nivel {{userLvl}}</div>
+        </div> -->
+ <div style="position: relative;" class="profilImg">
+            <img class="profile-avatar2" src="{{userData.photo}}" width="30" height="30" />
+        </div>
+    </div>
+</button>  
 
 
     
@@ -3136,14 +2521,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
 
         <ion-nav-buttons side="left">
           <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
-             <div class="online-badge" ng-show="webrtc.connectionStatus !== 'disconnected'">
-            <div class="status-indicator">
-                <div class="status-dot"></div>
-                <div class="status-pulse"></div>
-                <div class="status-ring"></div>
-            </div>
-            <span class="status-text">Online</span>
-        </div>
+           
         </ion-nav-buttons>  
 
        
@@ -3189,16 +2567,16 @@ width: 200px; /* Ajusta según el tamaño deseado */
       <button class="close-dropdown" ng-click="dropdownChat()">
       <i class="ri-close-line"></i>
     </button>
-    <h4>Amadeus 2.1</h4>
-    <p>Asistente Inteligente</p>
+    <h4>Asistente Inteligente</h4>
+    <p>Chat de Soporte</p>
   </div>
   
   <div class="chat-messages" id="chatMessages1">
-    
+
     
     <div class="message" ng-repeat="message in chats" ng-class="{'bot-message': message.sender === 'admin', 'user-message': message.sender === 'client'}">
       <div class="message-avatar" ng-if="message.sender === 'admin'">
-        <img src="https://lh3.googleusercontent.com/d/1Muzocba--A_soQyO7BXemMbx6GOU2-AK=s96-c">
+        <img src="https://lh3.googleusercontent.com/d/1Ictc2BUbVwBHBZE2LMkVYfJOvGfPWycV">
       </div>
       <div class="message-content">
         <p>{{message.content}}</p>
@@ -3219,13 +2597,125 @@ width: 200px; /* Ajusta según el tamaño deseado */
            ng-model="newMessage" 
            placeholder="Escribe tu mensaje..." 
            id="inputMessage1"
-           ng-keyup="$event.keyCode === 13 && sendMessage(newMessage)">
-    <button ng-click="sendMessage(newMessage)">
+           ng-keyup="$event.keyCode === 13 && sendChat(newMessage)">
+    <button ng-click="sendChat(newMessage)">
       <i class="ri-send-plane-2-fill"></i>
     </button>
   </div>
 </div>
+
+
+<div class="dropdownContent notif-dropdown" ng-show="dropdownNotifVisible" ng-click="$event.stopPropagation()">
+  <div class="notif-header">
+           <button class="close-dropdown" ng-click="dropdownNotif()">
+      <i class="ri-close-line"></i>
+    </button>
+    <h4>Notificaciones</h4>
+  
+  </div>
+  
+  <div class="notif-list" ng-if="alerts.length > 0">
+    <div class="notif-item" ng-repeat="alert in alerts | orderBy:'-date'" >
+      <div class="notif-icon" style="background: {{alert.color}}20; color: {{alert.color}}">
+        <i class="{{alert.icon}}"></i>
+      </div>
+      <div class="notif-content">
+        <div class="notif-title">{{alert.subject}}</div>
+        <div class="notif-desc">{{alert.message || 'Mensaje de notificación'}}</div>
+        <div class="notif-time">
+          <i class="ri-time-line"></i> {{calculateTimeAgo(alert.date)}}
+        </div>
+      </div>
+      <div class="notif-actions">
+        <button class="notif-action-btn" ng-click="deleteNotif(alert)">
+<i class="ri-delete-bin-line"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="empty-notifs" ng-if="alerts.length === 0">
+    <i class="ri-notification-off-line"></i>
+    <p>No hay notificaciones</p>
+  </div>
+  
+  <div class="notif-footer" ng-if="alerts.length > 0">
+    <button class="view-all" ng-click="deleteAllNotif()">
+      Eliminar todas las notificaciones
+    </button>
+  </div>
+</div>
+
+
+<div class="dropdownContent notif-dropdown" ng-show="dropdownCalendarVisible" ng-click="$event.stopPropagation()">
+    
+    <div class="notif-header">
+        <button class="close-dropdown" ng-click="dropdownCalendar()">
+            <i class="ri-close-line"></i>
+        </button>
+        <h4>Agenda</h4>
+    </div>
+
+   <div class="notif-list" ng-if="agenda.length > 0">
+    <div class="notif-item" 
+         ng-repeat="item in agenda"
+         ng-class="{
+             'next-class-highlight': item.isNextClass, 
+             'past-item-dimmed': item.isPast,
+             'pay-day-highlight': item.isPayDay
+         }">
+        
+        <div class="schedule-date" ng-class="{
+            'schedule-date-past': item.isPast && !item.isPayDay,
+            'schedule-date-inactive': !item.isNextClass && !item.isPast && !item.isPayDay,
+            'schedule-date-payday': item.isPayDay
+        }">
+            <div ng-if="item.isPayDay" class="payday-icon-wrapper">
+               <i class="ri-refund-line"></i>
+            </div>
+       
+                <div class="schedule-day" ng-if="!item.isPayDay">{{ item.start | date:'EEE' }}</div>
+                <div class="schedule-number" ng-if="!item.isPayDay">{{ item.start | date:'d' }}</div>
+    
+        </div>
+
+        <div class="notif-content">
+            <div ng-if="!item.isPayDay">
+                <div class="notif-title" ng-class="{'text-strikethrough': item.isPast}">
+                    {{ item.start | date:'EEEE, d \'de\' MMMM' }}
+                </div>
+                <div class="notif-desc" ng-if="!item.isPast">
+                    <i class="ri-time-line"></i> {{ item.start | date:'HH:mm':'UTC' }} a {{ item.end | date:'HH:mm':'UTC' }} Hrs
+                </div>
+                <div class="notif-time">
+                    <span ng-if="item.isPast">Finalizada</span>
+                    <span ng-if="item.isNextClass" class="next-class-label">Próxima clase - {{ item.daysLeft }}</span>
+                    <span ng-if="!item.isPast && !item.isNextClass">Pendiente</span>
+                </div>
+            </div>
+            
+            <div ng-if="item.isPayDay" ng-click="goToPayment()">
+                <div class="notif-title">Próximo pago</div>
+                <div class="notif-desc" ng-if="!item.isPast">
+                    {{ item.start | date:'EEEE, d \'de\' MMMM' }}
+                </div>
+                 <div class="notif-desc" ng-if="item.isPast">
+                   Realiza tu pago para seguir disfrutando del curso.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div class="empty-notifs" ng-if="agenda.length === 0">
+        <i class="ri-calendar-close-line"></i>
+        <p>No hay clases programadas</p>
+    </div>
+</div>
+        
     </ion-nav-bar>
+
 
      <ion-content > 
         <div class="iframe-container"><iframe src="https://www.mozart-app.com/recordings" frameborder="0" allowfullscreen></iframe></div>   
@@ -3464,33 +2954,47 @@ width: 200px; /* Ajusta según el tamaño deseado */
 
 
 
-      <script id="livestream.html" type="text/ng-template">
+      <script id="workspace.html" type="text/ng-template">
     <ion-view >
  
-      <ion-nav-bar class="bar-light" >      
+       <ion-nav-bar class="bar-light" >      
         <ion-nav-buttons side="right">
 
-     <button class="button button-clear" ng-click="dropdownChat()" style="font-size: 20px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 20px;" ng-if="userData.status == 'ACTIVO'">
-<i class="ri-gemini-line"></i>
-            <div style="position: absolute; top: -3px; left: 18px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(chats | filter:{read: false}).length && chatCounter">
+     <button class="button button-clear headIcon chatIco" ng-click="dropdownChat()" style="font-size: 20px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" ng-if="userData.status == 'ACTIVO'">
+    <i class="ri-chat-3-fill"></i>
+            <div style="position: absolute; top: -3px; left: 27px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(chats | filter:{read: false}).length && chatCounter">
         <div style="font-size: 13px; color: white;"> {{(chats | filter:{read: false}).length}}</div>
     </div>
-</button> 
-          
-   
+</button>  
+
+ <button class="button button-clear headIcon" ng-click="dropdownCalendar()" style="font-size: 20px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" ng-if="userData.status == 'ACTIVO'">
+  <i class="ri-booklet-fill"></i>
+</button>  
+      
+    <button class="button button-clear headIcon" ng-click="dropdownNotif()" style="font-size: 19px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" ng-if="userData.status == 'ACTIVO'">
+  <i class="ri-notification-3-fill" ></i>
+            <div style="position: absolute; top: -3px; left: 27px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(alerts | filter:{seen: false}).length && alertCounter">
+        <div style="font-size: 13px; color: white;" > {{(alerts | filter:{seen: false}).length}}</div>
+    </div> 
+</button>
 
  <button  class="upgrade-btn-modern" ng-click="goToPayment()" ng-if="userData.status != 'ACTIVO'">
             Upgrade
           </button>
 
 
-  <button class="button button-clear" ng-class="{ 'barImage': btnBar}" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" >
-  <div style="display: flex; align-items: center;" >    
-      <div style="position: relative; " class="profilImg">
-       <img class="profile-avatar2" src="{{userData.photo}}" width="30" height="30" />
-      </div>
-   </div>
-  </button>
+ <button class="button button-clear" ng-class="{ 'barImage': btnBar}" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;">
+    <div style="display: flex; align-items: center;">
+     <!--   <div class="user-info" style="text-align: right; margin-right: 5px; margin-left: -7px" ng-if="userData.status == 'ACTIVO'">
+                    <div style="font-size: 13px; font-weight: 600; color: #333; line-height: 1.2;">{{userData.name}}</div>
+                    <div style="font-size: 11px; color: #777; line-height: 1.1;" ng-if="userLvl == 0">Preparatorio</div>
+                    <div style="font-size: 11px; color: #777; line-height: 1.1;" ng-if="userLvl != 0">Nivel {{userLvl}}</div>
+        </div> -->
+ <div style="position: relative;" class="profilImg">
+            <img class="profile-avatar2" src="{{userData.photo}}" width="30" height="30" />
+        </div>
+    </div>
+</button>  
 
 
     
@@ -3499,14 +3003,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
 
         <ion-nav-buttons side="left">
           <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
-             <div class="online-badge" ng-show="webrtc.connectionStatus !== 'disconnected'">
-            <div class="status-indicator">
-                <div class="status-dot"></div>
-                <div class="status-pulse"></div>
-                <div class="status-ring"></div>
-            </div>
-            <span class="status-text">Online</span>
-        </div>
+        
         </ion-nav-buttons>  
 
        
@@ -3552,16 +3049,16 @@ width: 200px; /* Ajusta según el tamaño deseado */
       <button class="close-dropdown" ng-click="dropdownChat()">
       <i class="ri-close-line"></i>
     </button>
-    <h4>Amadeus 2.1</h4>
-    <p>Asistente Inteligente</p>
+     <h4>Asistente Inteligente</h4>
+    <p>Chat de Soporte</p>
   </div>
   
-  <div class="chat-messages" id="chatMessages1">
-    
+  <div class="chat-messages" id="chatMessages2">
+
     
     <div class="message" ng-repeat="message in chats" ng-class="{'bot-message': message.sender === 'admin', 'user-message': message.sender === 'client'}">
       <div class="message-avatar" ng-if="message.sender === 'admin'">
-        <img src="https://lh3.googleusercontent.com/d/1Muzocba--A_soQyO7BXemMbx6GOU2-AK=s96-c">
+        <img src="https://lh3.googleusercontent.com/d/1Ictc2BUbVwBHBZE2LMkVYfJOvGfPWycV">
       </div>
       <div class="message-content">
         <p>{{message.content}}</p>
@@ -3581,247 +3078,197 @@ width: 200px; /* Ajusta según el tamaño deseado */
     <input type="text" 
            ng-model="newMessage" 
            placeholder="Escribe tu mensaje..." 
-           id="inputMessage1"
-           ng-keyup="$event.keyCode === 13 && sendMessage(newMessage)">
-    <button ng-click="sendMessage(newMessage)">
+           id="inputMessage2"
+           ng-keyup="$event.keyCode === 13 && sendChat(newMessage)">
+    <button ng-click="sendChat(newMessage)">
       <i class="ri-send-plane-2-fill"></i>
     </button>
   </div>
 </div>
 
 
+<div class="dropdownContent notif-dropdown" ng-show="dropdownNotifVisible" ng-click="$event.stopPropagation()">
+  <div class="notif-header">
+           <button class="close-dropdown" ng-click="dropdownNotif()">
+      <i class="ri-close-line"></i>
+    </button>
+    <h4>Notificaciones</h4>
+  
+  </div>
+  
+  <div class="notif-list" ng-if="alerts.length > 0">
+    <div class="notif-item" ng-repeat="alert in alerts | orderBy:'-date'" >
+      <div class="notif-icon" style="background: {{alert.color}}20; color: {{alert.color}}">
+        <i class="{{alert.icon}}"></i>
+      </div>
+      <div class="notif-content">
+        <div class="notif-title">{{alert.subject}}</div>
+        <div class="notif-desc">{{alert.message || 'Mensaje de notificación'}}</div>
+        <div class="notif-time">
+          <i class="ri-time-line"></i> {{calculateTimeAgo(alert.date)}}
+        </div>
+      </div>
+      <div class="notif-actions">
+        <button class="notif-action-btn" ng-click="deleteNotif(alert)">
+<i class="ri-delete-bin-line"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="empty-notifs" ng-if="alerts.length === 0">
+    <i class="ri-notification-off-line"></i>
+    <p>No hay notificaciones</p>
+  </div>
+  
+  <div class="notif-footer" ng-if="alerts.length > 0">
+    <button class="view-all" ng-click="deleteAllNotif()">
+      Eliminar todas las notificaciones
+    </button>
+  </div>
+</div>
 
+
+<div class="dropdownContent notif-dropdown" ng-show="dropdownCalendarVisible" ng-click="$event.stopPropagation()">
+    
+    <div class="notif-header">
+        <button class="close-dropdown" ng-click="dropdownCalendar()">
+            <i class="ri-close-line"></i>
+        </button>
+        <h4>Agenda</h4>
+    </div>
+
+   <div class="notif-list" ng-if="agenda.length > 0">
+    <div class="notif-item" 
+         ng-repeat="item in agenda"
+         ng-class="{
+             'next-class-highlight': item.isNextClass, 
+             'past-item-dimmed': item.isPast,
+             'pay-day-highlight': item.isPayDay
+         }">
+        
+        <div class="schedule-date" ng-class="{
+            'schedule-date-past': item.isPast && !item.isPayDay,
+            'schedule-date-inactive': !item.isNextClass && !item.isPast && !item.isPayDay,
+            'schedule-date-payday': item.isPayDay
+        }">
+            <div ng-if="item.isPayDay" class="payday-icon-wrapper">
+               <i class="ri-refund-line"></i>
+            </div>
+       
+                <div class="schedule-day" ng-if="!item.isPayDay">{{ item.start | date:'EEE' }}</div>
+                <div class="schedule-number" ng-if="!item.isPayDay">{{ item.start | date:'d' }}</div>
+    
+        </div>
+
+  <div class="notif-content">
+            <div ng-if="!item.isPayDay">
+                <div class="notif-title" ng-class="{'text-strikethrough': item.isPast}">
+                    {{ item.start | date:'EEEE, d \'de\' MMMM' }}
+                </div>
+                <div class="notif-desc" ng-if="!item.isPast">
+                    <i class="ri-time-line"></i> {{ item.start | date:'HH:mm':'UTC' }} a {{ item.end | date:'HH:mm':'UTC' }} Hrs
+                </div>
+                <div class="notif-time">
+                    <span ng-if="item.isPast">Finalizada</span>
+                    <span ng-if="item.isNextClass" class="next-class-label">Próxima clase - {{ item.daysLeft }}</span>
+                    <span ng-if="!item.isPast && !item.isNextClass">Pendiente</span>
+                </div>
+            </div>
+            
+            <div ng-if="item.isPayDay" ng-click="goToPayment()">
+                <div class="notif-title">Próximo pago</div>
+                <div class="notif-desc" ng-if="!item.isPast">
+                    {{ item.start | date:'EEEE, d \'de\' MMMM' }}
+                </div>
+                 <div class="notif-desc" ng-if="item.isPast">
+                   Realiza tu pago para seguir disfrutando del curso.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+    <div class="empty-notifs" ng-if="agenda.length === 0">
+        <i class="ri-calendar-close-line"></i>
+        <p>No hay clases programadas</p>
+    </div>
+</div>
         
     </ion-nav-bar>
 
 
 
-   <ion-content class="piano-content" >
-
-
-     <div class="banner-header" >
-        <img src="https://lh3.googleusercontent.com/d/1qLFPKJY7v6-OqU9Sh452RBr90GzbipgI"  class="banner-image">
+   <ion-content  style="overflow-y: hidden !important;">
+     <header class="top-bar">
+    <div class="status-container">
+         <div class="status-indicator-wrapper">
+        <div class="status-icon" ng-class="{
+            'disconnected': webrtc.connectionStatus === 'disconnected' && !isConnecting, 
+            'connecting': isConnecting || webrtc.connectionStatus === 'isConnecting', 
+            'connected': webrtc.connectionStatus === 'connected'
+        }"></div>
+        
+        <div ng-if="webrtc.connectionStatus === 'connected'">
+            <div class="status-ring"></div>
+            <div class="status-pulse"></div>
+        </div>
+    </div>
+        <div class="status-text">
+            <p class="title">{{ getStatusMessage() }}</p>
+             <p class="subtitle" ng-if="webrtc.connectionStatus === 'connected'">Conexión estable con el profesor</p>
+              <p class="subtitle" ng-if="webrtc.connectionStatus === 'disconnected'">No conectado a ninguna clase</p>
+              <p class="subtitle" ng-if="isConnecting">Esperando aprobación del profesor</p>
+        </div>
     </div>
 
-
-      <div class="dashboard" >
-        <!-- Estado de Conexión -->
-        <div class="card3 full-width">
-          <div class="status-card">
-            <div class="status-icon" ng-class="getConnectionClass()">
-              <i class="fas" ng-class="{'fa-wifi': webrtc.connectionStatus === 'connected', 'fa-plug': webrtc.connectionStatus === 'disconnected', 'fa-sync-alt fa-spin': isConnecting}"></i>
-            </div>
-            <div class="status-info">
-              <h3>{{ getStatusMessage() }}</h3>
-              <p ng-if="webrtc.connectionStatus === 'connected'">Conexión estable con el profesor</p>
-              <p ng-if="webrtc.connectionStatus === 'disconnected'">No conectado a ninguna clase</p>
-              <p ng-if="isConnecting">Estableciendo conexión...</p>
-            </div>
-            <button class="button connection-button" 
-                    ng-class="getConnectionButtonClass()"
-                    ng-click="toggleConnection()"
+    <div class="controls-container">
+        
+        <div id="disconnectedControls" ng-show="webrtc.connectionStatus === 'disconnected'">
+            <button id="connectBtn" 
+                    ng-click="toggleConnection()" 
                     ng-disabled="isConnecting">
-              <i class="fas" ng-class="{'fa-plug': webrtc.connectionStatus === 'disconnected', 'fa-times': webrtc.connectionStatus === 'connected', 'fa-sync-alt fa-spin': isConnecting}"></i>
-              {{getConnectionButtonText()}}
+                {{ getConnectionButtonText() }}
             </button>
-          </div>
         </div>
 
-
-
-             <!-- Información del profesor -->
-        <div class="card2" >
-          <div class="card-header">
-            <h2><i class="fas fa-user-graduate"></i> Información de la Clase</h2>
-          </div>
-          <div class="card-body">
-            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
-             <div style="width: 60px; height: 60px; border-radius: 50%; overflow: hidden;">
-      <img src="https://lh3.googleusercontent.com/d/1XFRs3zvx5aao-PnGH3g1k2ehG28RUTIL"style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-              <div>
-                <h3 style="margin: 0 0 5px 0;">Profesor Sergio</h3>
-                <p style="margin: 0; color: var(--gray);">Clase de Piano</p>
-              </div>
-            </div>
+      <!--  <div id="connectedControls" class="connected-controls" ng-show="webrtc.connectionStatus !== 'disconnected'"> -->
+        <div id="connectedControls" class="connected-controls" ng-if="webrtc.connectionStatus === 'connected'"> 
             
-            <div style="background: #f8fafc; padding: 12px; border-radius: 12px;">
-              <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                <div style="font-weight: 600;">Duración:</div>
-                <div>60 minutos</div>
-              </div>
-              <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                <div style="font-weight: 600;">Tema:</div>
-                <div ng-if="userDataLevel.lvl === 0">Nivel Preparatorio - Lección {{userDataLevel.lsn}}</div>
-                  <div ng-if="userDataLevel.lvl !== 0">Nivel {{userDataLevel.lvl}} - Lección {{userDataLevel.lsn}}</div>
-              </div>
-              <div style="display: flex; justify-content: space-between;">
-                <div style="font-weight: 600;">Contacto:</div>
-                <div>55 7767 6657</div>
-              </div>
-            </div>
-          </div>
+           <button id="micBtn" class="icon-btn" 
+        title="Micrófono"
+        ng-click="toggleMicrophone()"
+        ng-class="{'mic-active': !webrtc.isMuted}"> <i class="fas" ng-class="{'fa-microphone': !webrtc.isMuted, 'fa-microphone-slash': webrtc.isMuted}"></i>
+</button>
+
+  <button class="icon-btn" title="Video" ng-click="toggleVideo()">
+                <i class="fas" ng-class="{'fa-video-slash': !showVideo, 'fa-video': showVideo}"></i>
+            </button>
+
+            <button class="icon-btn" title="Chat" ng-click="openChat()">
+                <i class="fas fa-comment-dots"></i>
+                <span class="chat-badge" ng-show="webrtc.unreadMessages > 0">
+                    {{ webrtc.unreadMessages > 9 ? '9+' : webrtc.unreadMessages }}
+                </span>
+            </button>
+            
+            <button id="disconnectBtn" class="icon-btn" title="Desconectar" ng-click="disconnect()">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
-        
-        <!-- Estadísticas de conexión -->
-        <div class="card2" ng-show="webrtc.isConnectedToTeacher()">
-          <div class="card-header">
-            <h2><i class="fas fa-chart-line"></i> Estado de Conexión</h2>
-          </div>
-          <div class="card-body">
-            <div class="stats-grid">
-              <div class="stat-item">
-                <div class="stat-icon mic" ng-class="{'muted': webrtc.isMuted}">
-                  <i class="fas" ng-class="{'fa-microphone': !webrtc.isMuted, 'fa-microphone-slash': webrtc.isMuted}"></i>
-                </div>
-                <div class="stat-value">{{webrtc.isMuted ? 'Silenciado' : 'Activo'}}</div>
-                <div class="stat-label">Micrófono</div>
-              </div>
-              
-              <div class="stat-item">
-                <div class="stat-icon video">
-                  <i class="fas" ng-class="{'fa-video': webrtc.isVideoVisible, 'fa-video-slash': !webrtc.isVideoVisible}"></i>
-                </div>
-                <div class="stat-value">{{webrtc.isVideoVisible ? 'Disponible' : 'No disponible'}}</div>
-                <div class="stat-label">Video</div>
-              </div>
-              
-              <div class="stat-item">
-                <div class="stat-icon connection">
-                  <i class="fas fa-signal"></i>
-                </div>
-                <div class="stat-value">Estable</div>
-                <div class="stat-label">Conexión</div>
-              </div>
-              
-              <div class="stat-item">
-                <div class="stat-icon" style="background: rgba(74, 111, 165, 0.15); color: #4a6fa5;">
-                  <i class="fas fa-clock"></i>
-                </div>
-                <div class="stat-value">15:42</div>
-                <div class="stat-label">Tiempo de clase</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-        
-        <!-- Calendario -->
-   <div class="card2" ng-show="!webrtc.isConnectedToTeacher()">
-  <div class="card-header">
-    <h2><i class="fas fa-calendar-alt"></i> Próximas Clases</h2>
-  </div>
-  <div class="card-body" style=" padding-top: 5px; max-height: 320px; overflow-y: auto; position: relative;" id="card-schedule">
-    <div class="schedule-item" ng-repeat="item in userAgenda"  ng-if="item.title !== 'Próximo pago'" id="{{ item.isNextClass ? 'next-class-item' : '' }}">
-      <div class="schedule-date" ng-class="{
-       'schedule-date-past': item.isPast,
-       'schedule-date-inactive': !item.isNextClass && !item.isPast
-     }">
-        <div class="schedule-day">{{ item.start | date:'EEE' }}</div>
-        <div class="schedule-number">{{ item.start | date:'d' }}</div>
-      </div>
-
-
-      <!-- <div class="schedule-info-detailed">
-        <div class="schedule-title">{{ item.title }}</div>
-        <div class="schedule-full-date">{{ item.start | date:'EEEE, d \'de\' MMMM' }}</div>
-        
-        <div class="schedule-time-range">
-        <i class="ri-time-line"></i>  {{ item.start | date:'HH:mm':'UTC' }} a {{ item.end | date:'HH:mm':'UTC' }} Hrs
-        </div>
-      </div>  -->
-
-
-      <div class="schedule-info-detailed">
-    <div class="schedule-title" 
-         ng-class="{
-           'text-strikethrough': item.isPast,
-           'shadow-text': item.isNextClass
-         }">
-        {{ item.start | date:'EEEE, d \'de\' MMMM' }}
     </div>
+</header>
 
-    <div class="schedule-full-date" ng-if="!item.isPast">
-        <i class="ri-time-line"></i> {{ item.start | date:'HH:mm':'UTC' }} a {{ item.end | date:'HH:mm':'UTC' }} Hrs
-    </div>
-
-    <div class="schedule-time-range">
-        <span ng-if="item.isPast">Finalizada</span>
-        <span ng-if="item.isNextClass" style="color: black; text-shadow: 0 0 3px silver;  font-weight: 500;">Próxima clase</span>
-        <span ng-if="!item.isPast && !item.isNextClass">Pendiente</span>
-    </div>
-</div>
+  <div class="iframe-container2" style=" padding-top: 3px !important;"><iframe src="https://www.mozart-app.com/books3" frameborder="0" allowfullscreen ></iframe> </div> 
+      </ion-content>
 
 
-        <div class="schedule-action-wrapper" >
-        <button class="schedule-btn" ng-if="item.isNextClass" ng-class="{'active': item.isNextClass}">
-          <span >
-            <i  ng-if="item.isNextClass" class="fas fa-bell"></i>
-          </span>
-        </button>
-      </div>
-
-
-    </div>
-
-  </div>
-</div>
-
-
-<!--
-<div class="card2" ng-show="!webrtc.isConnectedToTeacher()">
-  <div class="card-header">
-    <h2><i class="fas fa-trophy"></i> Mis Logros</h2>
-  </div>
-  <div class="card-body">
-    <div class="achievements-grid">
-      <div class="achievement-item unlocked">
-        <div class="achievement-icon">
-          <i class="fas ri-calendar-check-line"></i>
-        </div>
-        <div class="achievement-title">Asistencia</div>
-      </div>
-      <div class="achievement-item unlocked">
-        <div class="achievement-icon">
-          <i class="fas ri-flashlight-line"></i>
-        </div>
-        <div class="achievement-title">Puntualidad</div>
-      </div>
-      <div class="achievement-item locked">
-        <div class="achievement-icon">
-          <i class="fas ri-file-check-line"></i>
-        </div>
-        <div class="achievement-title">Trabajo en casa</div>
-      </div>
-      <div class="achievement-item locked">
-        <div class="achievement-icon">
-          <i class="fas ri-file-marked-line"></i>
-        </div>
-        <div class="achievement-title">Trabajo en clase</div>
-      </div>
-    </div>
-  </div>
-</div>
--->
-
-
-
-
-
-    
-      </div>
-      
-      <!-- Espacio inferior -->
-     <div class="livestreamBottomSpace"></div> 
-      
-    </ion-content>
-    
     <!-- Contenedor de Video Draggable -->
-<!--    <div id="videoContainer" 
+     <div id="videoContainer" 
          class="video-container" 
-         ng-show="showVideo"
+        ng-show="showVideo"
          ng-class="{'fullscreen': isFullscreen, 'dragging': isDragging}">
       <div class="video-controls">
         <button class="video-control-btn" ng-click="toggleFullscreen()" title="Pantalla Completa">
@@ -3836,46 +3283,22 @@ width: 200px; /* Ajusta según el tamaño deseado */
              autoplay 
              playsinline>
       </video>
-    </div>  -->
-    
-    <!-- Botones Flotantes -->
-    <div class="floating-buttons">
-      <!-- Botón de Chat -->
-      <button class="button floating-btn chat" 
-              ng-click="openChat()" ng-show="webrtc.connectionStatus !== 'disconnected'">
-        <i class="fas fa-comment-dots"></i>
-        <span class="chat-badge" ng-show="webrtc.unreadMessages > 0">
-          {{webrtc.unreadMessages > 9 ? '9+' : webrtc.unreadMessages}}
-        </span>
-      </button>
-      
-      <!-- Botón de Micrófono -->
-      <button class="button floating-btn mic"
-              ng-class="{'muted': webrtc.isMuted}"
-              ng-click="toggleMicrophone()"
-              ng-show="webrtc.connectionStatus !== 'disconnected'">
-        <i class="fas" ng-class="{'fa-microphone': !webrtc.isMuted, 'fa-microphone-slash': webrtc.isMuted}"></i>
-      </button>
-      
-      <!-- Botón de Video -->
-      <button class="button floating-btn video"
-              ng-click="toggleVideo()"
-              ng-show="webrtc.connectionStatus !== 'disconnected'">
-        <i class="fas" ng-class="{'fa-video': !showVideo, 'fa-video-slash': showVideo}"></i>
-      </button>
-    </div>
+    </div> 
+
+
+
     
     <!-- Modal de Chat Personalizado -->
     <div id="chatModal" class="custom-modal" ng-class="{'show': showChatModal}">
       <div class="modal-content3">
-        <div class="modal-header">
+        <div class="modal-header3">
           <h3><i class="fas fa-comments"></i> Chat con el Profesor</h3>
           <button class="button button-clear" ng-click="closeChat()">
             <i class="fas fa-times"></i>
           </button>
         </div>
         <div class="modal-body">
-          <div id="chatContainer" class="chat-messages">
+          <div id="chatContainer" class="chat-messages2">
             <div ng-repeat="message in webrtc.chatMessages track by $index" 
                  class="message-item"
                  ng-class="{'own': message.isOwn, 'other': !message.isOwn}">
@@ -3884,18 +3307,21 @@ width: 200px; /* Ajusta según el tamaño deseado */
               <div class="message-time">{{formatTime(message.timestamp)}}</div>
             </div>
           </div>
-          <div class="chat-input">
+          <div class="chat-input2">
             <input type="text" 
+                   id="chatMsg2"
                    ng-model="chatMessage"
                    placeholder="Escribe tu mensaje..."
-                   ng-keypress="($event.which === 13) && sendMessage()">
-            <button class="button button-positive" ng-click="sendMessage()">
-              <i class="fas fa-paper-plane"></i>
+                   ng-keypress="($event.which === 13) && sendMessage(chatMessage)">
+            <button  ng-click="sendMessage(chatMessage)">
+           <i class="ri-send-plane-2-fill"></i>
             </button>
           </div>
         </div>
       </div>
     </div>
+
+
     </ion-view>
   </script>  
 
@@ -3908,30 +3334,45 @@ width: 200px; /* Ajusta según el tamaño deseado */
         
 <script id="lessons.html" type="text/ng-template">
   <ion-view>
-      <ion-nav-bar class="bar-light" >      
+        <ion-nav-bar class="bar-light" >      
         <ion-nav-buttons side="right">
 
-     <button class="button button-clear" ng-click="dropdownChat()" style="font-size: 20px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 20px;" ng-if="userData.status == 'ACTIVO'">
-<i class="ri-gemini-line"></i>
-            <div style="position: absolute; top: -3px; left: 18px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(chats | filter:{read: false}).length && chatCounter">
+      <button class="button button-clear headIcon chatIco" ng-click="dropdownChat()" style="font-size: 20px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" ng-if="userData.status == 'ACTIVO'">
+    <i class="ri-chat-3-fill"></i>
+            <div style="position: absolute; top: -3px; left: 27px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(chats | filter:{read: false}).length && chatCounter">
         <div style="font-size: 13px; color: white;"> {{(chats | filter:{read: false}).length}}</div>
     </div>
-</button> 
-          
-   
+</button>  
+
+
+  <button class="button button-clear headIcon" ng-click="dropdownCalendar()" style="font-size: 20px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" ng-if="userData.status == 'ACTIVO'">
+  <i class="ri-booklet-fill"></i>
+</button>  
+      
+    <button class="button button-clear headIcon" ng-click="dropdownNotif()" style="font-size: 19px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" ng-if="userData.status == 'ACTIVO'">
+  <i class="ri-notification-3-fill" ></i>
+            <div style="position: absolute; top: -3px; left: 27px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(alerts | filter:{seen: false}).length && alertCounter">
+        <div style="font-size: 13px; color: white;" > {{(alerts | filter:{seen: false}).length}}</div>
+    </div> 
+</button>
 
  <button  class="upgrade-btn-modern" ng-click="goToPayment()" ng-if="userData.status != 'ACTIVO'">
             Upgrade
           </button>
 
 
-  <button class="button button-clear" ng-class="{ 'barImage': btnBar}" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" >
-  <div style="display: flex; align-items: center;" >    
-      <div style="position: relative; " class="profilImg">
-       <img class="profile-avatar2" src="{{userData.photo}}" width="30" height="30" />
-      </div>
-   </div>
-  </button>
+ <button class="button button-clear" ng-class="{ 'barImage': btnBar}" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;">
+    <div style="display: flex; align-items: center;">
+     <!--   <div class="user-info" style="text-align: right; margin-right: 5px; margin-left: -7px" ng-if="userData.status == 'ACTIVO'">
+                    <div style="font-size: 13px; font-weight: 600; color: #333; line-height: 1.2;">{{userData.name}}</div>
+                    <div style="font-size: 11px; color: #777; line-height: 1.1;" ng-if="userLvl == 0">Preparatorio</div>
+                    <div style="font-size: 11px; color: #777; line-height: 1.1;" ng-if="userLvl != 0">Nivel {{userLvl}}</div>
+        </div> -->
+ <div style="position: relative;" class="profilImg">
+            <img class="profile-avatar2" src="{{userData.photo}}" width="30" height="30" />
+        </div>
+    </div>
+</button>  
 
 
     
@@ -3940,14 +3381,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
 
         <ion-nav-buttons side="left">
           <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
-             <div class="online-badge" ng-show="webrtc.connectionStatus !== 'disconnected'">
-            <div class="status-indicator">
-                <div class="status-dot"></div>
-                <div class="status-pulse"></div>
-                <div class="status-ring"></div>
-            </div>
-            <span class="status-text">Online</span>
-        </div>
+           
         </ion-nav-buttons>  
 
        
@@ -3993,16 +3427,16 @@ width: 200px; /* Ajusta según el tamaño deseado */
       <button class="close-dropdown" ng-click="dropdownChat()">
       <i class="ri-close-line"></i>
     </button>
-    <h4>Amadeus 2.1</h4>
-    <p>Asistente Inteligente</p>
+    <h4>Asistente Inteligente</h4>
+    <p>Chat de Soporte</p>
   </div>
   
-  <div class="chat-messages" id="chatMessages1">
-    
+  <div class="chat-messages" id="chatMessages3">
+
     
     <div class="message" ng-repeat="message in chats" ng-class="{'bot-message': message.sender === 'admin', 'user-message': message.sender === 'client'}">
       <div class="message-avatar" ng-if="message.sender === 'admin'">
-        <img src="https://lh3.googleusercontent.com/d/1Muzocba--A_soQyO7BXemMbx6GOU2-AK=s96-c">
+        <img src="https://lh3.googleusercontent.com/d/1Ictc2BUbVwBHBZE2LMkVYfJOvGfPWycV">
       </div>
       <div class="message-content">
         <p>{{message.content}}</p>
@@ -4022,18 +3456,130 @@ width: 200px; /* Ajusta según el tamaño deseado */
     <input type="text" 
            ng-model="newMessage" 
            placeholder="Escribe tu mensaje..." 
-           id="inputMessage1"
-           ng-keyup="$event.keyCode === 13 && sendMessage(newMessage)">
-    <button ng-click="sendMessage(newMessage)">
+           id="inputMessage3"
+           ng-keyup="$event.keyCode === 13 && sendChat(newMessage)">
+    <button ng-click="sendChat(newMessage)">
       <i class="ri-send-plane-2-fill"></i>
     </button>
   </div>
 </div>
 
 
+<div class="dropdownContent notif-dropdown" ng-show="dropdownNotifVisible" ng-click="$event.stopPropagation()">
+  <div class="notif-header">
+           <button class="close-dropdown" ng-click="dropdownNotif()">
+      <i class="ri-close-line"></i>
+    </button>
+    <h4>Notificaciones</h4>
+  
+  </div>
+  
+  <div class="notif-list" ng-if="alerts.length > 0">
+    <div class="notif-item" ng-repeat="alert in alerts | orderBy:'-date'" >
+      <div class="notif-icon" style="background: {{alert.color}}20; color: {{alert.color}}">
+        <i class="{{alert.icon}}"></i>
+      </div>
+      <div class="notif-content">
+        <div class="notif-title">{{alert.subject}}</div>
+        <div class="notif-desc">{{alert.message || 'Mensaje de notificación'}}</div>
+        <div class="notif-time">
+          <i class="ri-time-line"></i> {{calculateTimeAgo(alert.date)}}
+        </div>
+      </div>
+      <div class="notif-actions">
+        <button class="notif-action-btn" ng-click="deleteNotif(alert)">
+<i class="ri-delete-bin-line"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="empty-notifs" ng-if="alerts.length === 0">
+    <i class="ri-notification-off-line"></i>
+    <p>No hay notificaciones</p>
+  </div>
+  
+  <div class="notif-footer" ng-if="alerts.length > 0">
+    <button class="view-all" ng-click="deleteAllNotif()">
+      Eliminar todas las notificaciones
+    </button>
+  </div>
+</div>
+
+
+
+<div class="dropdownContent notif-dropdown" ng-show="dropdownCalendarVisible" ng-click="$event.stopPropagation()">
+    
+    <div class="notif-header">
+        <button class="close-dropdown" ng-click="dropdownCalendar()">
+            <i class="ri-close-line"></i>
+        </button>
+        <h4>Agenda</h4>
+    </div>
+
+   <div class="notif-list" ng-if="agenda.length > 0">
+    <div class="notif-item" 
+         ng-repeat="item in agenda"
+         ng-class="{
+             'next-class-highlight': item.isNextClass, 
+             'past-item-dimmed': item.isPast,
+             'pay-day-highlight': item.isPayDay
+         }">
+        
+        <div class="schedule-date" ng-class="{
+            'schedule-date-past': item.isPast && !item.isPayDay,
+            'schedule-date-inactive': !item.isNextClass && !item.isPast && !item.isPayDay,
+            'schedule-date-payday': item.isPayDay
+        }">
+            <div ng-if="item.isPayDay" class="payday-icon-wrapper">
+               <i class="ri-refund-line"></i>
+            </div>
+       
+                <div class="schedule-day" ng-if="!item.isPayDay">{{ item.start | date:'EEE' }}</div>
+                <div class="schedule-number" ng-if="!item.isPayDay">{{ item.start | date:'d' }}</div>
+    
+        </div>
+
+  <div class="notif-content">
+            <div ng-if="!item.isPayDay">
+                <div class="notif-title" ng-class="{'text-strikethrough': item.isPast}">
+                    {{ item.start | date:'EEEE, d \'de\' MMMM' }}
+                </div>
+                <div class="notif-desc" ng-if="!item.isPast">
+                    <i class="ri-time-line"></i> {{ item.start | date:'HH:mm':'UTC' }} a {{ item.end | date:'HH:mm':'UTC' }} Hrs
+                </div>
+                <div class="notif-time">
+                    <span ng-if="item.isPast">Finalizada</span>
+                    <span ng-if="item.isNextClass" class="next-class-label">Próxima clase - {{ item.daysLeft }}</span>
+                    <span ng-if="!item.isPast && !item.isNextClass">Pendiente</span>
+                </div>
+            </div>
+            
+            <div ng-if="item.isPayDay" ng-click="goToPayment()">
+                <div class="notif-title">Próximo pago</div>
+                <div class="notif-desc" ng-if="!item.isPast">
+                    {{ item.start | date:'EEEE, d \'de\' MMMM' }}
+                </div>
+                 <div class="notif-desc" ng-if="item.isPast">
+                   Realiza tu pago para seguir disfrutando del curso.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+    <div class="empty-notifs" ng-if="agenda.length === 0">
+        <i class="ri-calendar-close-line"></i>
+        <p>No hay clases programadas</p>
+    </div>
+</div>
+  
 
         
     </ion-nav-bar>
+
 
 
     <ion-content > 
@@ -4054,30 +3600,44 @@ width: 200px; /* Ajusta según el tamaño deseado */
 <script id="reel.html" type="text/ng-template">
   <ion-view>
       
-       <ion-nav-bar class="bar-light" >      
+        <ion-nav-bar class="bar-light" >      
         <ion-nav-buttons side="right">
 
-     <button class="button button-clear" ng-click="dropdownChat()" style="font-size: 20px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 20px;" ng-if="userData.status == 'ACTIVO'">
-<i class="ri-gemini-line"></i>
-            <div style="position: absolute; top: -3px; left: 18px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(chats | filter:{read: false}).length && chatCounter">
+     <button class="button button-clear headIcon chatIco" ng-click="dropdownChat()" style="font-size: 20px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" ng-if="userData.status == 'ACTIVO'">
+    <i class="ri-chat-3-fill"></i>
+            <div style="position: absolute; top: -3px; left: 27px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(chats | filter:{read: false}).length && chatCounter">
         <div style="font-size: 13px; color: white;"> {{(chats | filter:{read: false}).length}}</div>
     </div>
-</button> 
-          
-   
+</button>  
+
+ <button class="button button-clear headIcon" ng-click="dropdownCalendar()" style="font-size: 20px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" ng-if="userData.status == 'ACTIVO'">
+  <i class="ri-booklet-fill"></i>
+</button>  
+      
+    <button class="button button-clear headIcon" ng-click="dropdownNotif()" style="font-size: 19px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" ng-if="userData.status == 'ACTIVO'">
+  <i class="ri-notification-3-fill" ></i>
+            <div style="position: absolute; top: -3px; left: 27px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(alerts | filter:{seen: false}).length && alertCounter">
+        <div style="font-size: 13px; color: white;" > {{(alerts | filter:{seen: false}).length}}</div>
+    </div> 
+</button>
 
  <button  class="upgrade-btn-modern" ng-click="goToPayment()" ng-if="userData.status != 'ACTIVO'">
             Upgrade
           </button>
 
 
-  <button class="button button-clear" ng-class="{ 'barImage': btnBar}" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" >
-  <div style="display: flex; align-items: center;" >    
-      <div style="position: relative; " class="profilImg">
-       <img class="profile-avatar2" src="{{userData.photo}}" width="30" height="30" />
-      </div>
-   </div>
-  </button>
+ <button class="button button-clear" ng-class="{ 'barImage': btnBar}" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;">
+    <div style="display: flex; align-items: center;">
+     <!--   <div class="user-info" style="text-align: right; margin-right: 5px; margin-left: -7px" ng-if="userData.status == 'ACTIVO'">
+                    <div style="font-size: 13px; font-weight: 600; color: #333; line-height: 1.2;">{{userData.name}}</div>
+                    <div style="font-size: 11px; color: #777; line-height: 1.1;" ng-if="userLvl == 0">Preparatorio</div>
+                    <div style="font-size: 11px; color: #777; line-height: 1.1;" ng-if="userLvl != 0">Nivel {{userLvl}}</div>
+        </div> -->
+ <div style="position: relative;" class="profilImg">
+            <img class="profile-avatar2" src="{{userData.photo}}" width="30" height="30" />
+        </div>
+    </div>
+</button>  
 
 
     
@@ -4086,14 +3646,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
 
         <ion-nav-buttons side="left">
           <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
-             <div class="online-badge" ng-show="webrtc.connectionStatus !== 'disconnected'">
-            <div class="status-indicator">
-                <div class="status-dot"></div>
-                <div class="status-pulse"></div>
-                <div class="status-ring"></div>
-            </div>
-            <span class="status-text">Online</span>
-        </div>
+           
         </ion-nav-buttons>  
 
        
@@ -4139,16 +3692,16 @@ width: 200px; /* Ajusta según el tamaño deseado */
       <button class="close-dropdown" ng-click="dropdownChat()">
       <i class="ri-close-line"></i>
     </button>
-    <h4>Amadeus 2.1</h4>
-    <p>Asistente Inteligente</p>
+    <h4>Asistente Inteligente</h4>
+    <p>Chat de Soporte</p>
   </div>
   
-  <div class="chat-messages" id="chatMessages1">
-    
+  <div class="chat-messages" id="chatMessages4">
+
     
     <div class="message" ng-repeat="message in chats" ng-class="{'bot-message': message.sender === 'admin', 'user-message': message.sender === 'client'}">
       <div class="message-avatar" ng-if="message.sender === 'admin'">
-        <img src="https://lh3.googleusercontent.com/d/1Muzocba--A_soQyO7BXemMbx6GOU2-AK=s96-c">
+        <img src="https://lh3.googleusercontent.com/d/1Ictc2BUbVwBHBZE2LMkVYfJOvGfPWycV">
       </div>
       <div class="message-content">
         <p>{{message.content}}</p>
@@ -4168,19 +3721,126 @@ width: 200px; /* Ajusta según el tamaño deseado */
     <input type="text" 
            ng-model="newMessage" 
            placeholder="Escribe tu mensaje..." 
-           id="inputMessage1"
-           ng-keyup="$event.keyCode === 13 && sendMessage(newMessage)">
-    <button ng-click="sendMessage(newMessage)">
+           id="inputMessage4"
+           ng-keyup="$event.keyCode === 13 && sendChat(newMessage)">
+    <button ng-click="sendChat(newMessage)">
       <i class="ri-send-plane-2-fill"></i>
     </button>
   </div>
 </div>
 
 
+<div class="dropdownContent notif-dropdown" ng-show="dropdownNotifVisible" ng-click="$event.stopPropagation()">
+  <div class="notif-header">
+           <button class="close-dropdown" ng-click="dropdownNotif()">
+      <i class="ri-close-line"></i>
+    </button>
+    <h4>Notificaciones</h4>
+  
+  </div>
+  
+  <div class="notif-list" ng-if="alerts.length > 0">
+    <div class="notif-item" ng-repeat="alert in alerts | orderBy:'-date'" >
+      <div class="notif-icon" style="background: {{alert.color}}20; color: {{alert.color}}">
+        <i class="{{alert.icon}}"></i>
+      </div>
+      <div class="notif-content">
+        <div class="notif-title">{{alert.subject}}</div>
+        <div class="notif-desc">{{alert.message || 'Mensaje de notificación'}}</div>
+        <div class="notif-time">
+          <i class="ri-time-line"></i> {{calculateTimeAgo(alert.date)}}
+        </div>
+      </div>
+      <div class="notif-actions">
+        <button class="notif-action-btn" ng-click="deleteNotif(alert)">
+<i class="ri-delete-bin-line"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="empty-notifs" ng-if="alerts.length === 0">
+    <i class="ri-notification-off-line"></i>
+    <p>No hay notificaciones</p>
+  </div>
+  
+  <div class="notif-footer" ng-if="alerts.length > 0">
+    <button class="view-all" ng-click="deleteAllNotif()">
+      Eliminar todas las notificaciones
+    </button>
+  </div>
+</div>
 
+
+<div class="dropdownContent notif-dropdown" ng-show="dropdownCalendarVisible" ng-click="$event.stopPropagation()">
+    
+    <div class="notif-header">
+        <button class="close-dropdown" ng-click="dropdownCalendar()">
+            <i class="ri-close-line"></i>
+        </button>
+        <h4>Agenda</h4>
+    </div>
+
+   <div class="notif-list" ng-if="agenda.length > 0">
+    <div class="notif-item" 
+         ng-repeat="item in agenda"
+         ng-class="{
+             'next-class-highlight': item.isNextClass, 
+             'past-item-dimmed': item.isPast,
+             'pay-day-highlight': item.isPayDay
+         }">
+        
+        <div class="schedule-date" ng-class="{
+            'schedule-date-past': item.isPast && !item.isPayDay,
+            'schedule-date-inactive': !item.isNextClass && !item.isPast && !item.isPayDay,
+            'schedule-date-payday': item.isPayDay
+        }">
+            <div ng-if="item.isPayDay" class="payday-icon-wrapper">
+               <i class="ri-refund-line"></i>
+            </div>
+       
+                <div class="schedule-day" ng-if="!item.isPayDay">{{ item.start | date:'EEE' }}</div>
+                <div class="schedule-number" ng-if="!item.isPayDay">{{ item.start | date:'d' }}</div>
+    
+        </div>
+
+  <div class="notif-content">
+            <div ng-if="!item.isPayDay">
+                <div class="notif-title" ng-class="{'text-strikethrough': item.isPast}">
+                    {{ item.start | date:'EEEE, d \'de\' MMMM' }}
+                </div>
+                <div class="notif-desc" ng-if="!item.isPast">
+                    <i class="ri-time-line"></i> {{ item.start | date:'HH:mm':'UTC' }} a {{ item.end | date:'HH:mm':'UTC' }} Hrs
+                </div>
+                <div class="notif-time">
+                    <span ng-if="item.isPast">Finalizada</span>
+                    <span ng-if="item.isNextClass" class="next-class-label">Próxima clase - {{ item.daysLeft }}</span>
+                    <span ng-if="!item.isPast && !item.isNextClass">Pendiente</span>
+                </div>
+            </div>
+            
+            <div ng-if="item.isPayDay" ng-click="goToPayment()">
+                <div class="notif-title">Próximo pago</div>
+                <div class="notif-desc" ng-if="!item.isPast">
+                    {{ item.start | date:'EEEE, d \'de\' MMMM' }}
+                </div>
+                 <div class="notif-desc" ng-if="item.isPast">
+                   Realiza tu pago para seguir disfrutando del curso.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+    <div class="empty-notifs" ng-if="agenda.length === 0">
+        <i class="ri-calendar-close-line"></i>
+        <p>No hay clases programadas</p>
+    </div>
+</div>
         
     </ion-nav-bar>
-
 
     <ion-content > 
       <!-- achievements -->
@@ -4244,19 +3904,23 @@ width: 200px; /* Ajusta según el tamaño deseado */
    <script id="finder.html" type="text/ng-template">
     <ion-view >
 
-     <ion-nav-bar class="bar-light" >      
+       <ion-nav-bar class="bar-light" >      
         <ion-nav-buttons side="right">
 
-     <button class="button button-clear" ng-click="dropdownChat()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 18px;" ng-if="userData.status == 'ACTIVO'">
-<i class="ri-chat-ai-line"></i>
-            <div style="position: absolute; top: -3px; left: 8px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(chats | filter:{read: false}).length && chatCounter">
+     <button class="button button-clear headIcon chatIco" ng-click="dropdownChat()" style="font-size: 20px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" ng-if="userData.status == 'ACTIVO'">
+    <i class="ri-chat-3-fill"></i>
+            <div style="position: absolute; top: -3px; left: 27px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(chats | filter:{read: false}).length && chatCounter">
         <div style="font-size: 13px; color: white;"> {{(chats | filter:{read: false}).length}}</div>
     </div>
-</button> 
-          
-     <button class="button button-clear" ng-click="dropdownNotif()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 25px;" ng-if="userData.status == 'ACTIVO'">
-  <i class="ri-notification-3-line" ></i>
-            <div style="position: absolute; top: -3px; left: 18px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(alerts | filter:{seen: false}).length && alertCounter">
+</button>  
+
+ <button class="button button-clear headIcon" ng-click="dropdownCalendar()" style="font-size: 20px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" ng-if="userData.status == 'ACTIVO'">
+  <i class="ri-booklet-fill"></i>
+</button>  
+      
+    <button class="button button-clear headIcon" ng-click="dropdownNotif()" style="font-size: 19px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" ng-if="userData.status == 'ACTIVO'">
+  <i class="ri-notification-3-fill" ></i>
+            <div style="position: absolute; top: -3px; left: 27px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(alerts | filter:{seen: false}).length && alertCounter">
         <div style="font-size: 13px; color: white;" > {{(alerts | filter:{seen: false}).length}}</div>
     </div> 
 </button>
@@ -4265,14 +3929,18 @@ width: 200px; /* Ajusta según el tamaño deseado */
             Upgrade
           </button>
 
-
-  <button class="button button-clear" ng-class="{ 'barImage': btnBar}" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" >
-  <div style="display: flex; align-items: center;" >    
-      <div style="position: relative; " class="profilImg">
-       <img class="profile-avatar2" src="{{userData.photo}}" width="30" height="30" />
-      </div>
-   </div>
-  </button>
+ <button class="button button-clear" ng-class="{ 'barImage': btnBar}" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;">
+    <div style="display: flex; align-items: center;">
+     <!--   <div class="user-info" style="text-align: right; margin-right: 5px; margin-left: -7px" ng-if="userData.status == 'ACTIVO'">
+                    <div style="font-size: 13px; font-weight: 600; color: #333; line-height: 1.2;">{{userData.name}}</div>
+                    <div style="font-size: 11px; color: #777; line-height: 1.1;" ng-if="userLvl == 0">Preparatorio</div>
+                    <div style="font-size: 11px; color: #777; line-height: 1.1;" ng-if="userLvl != 0">Nivel {{userLvl}}</div>
+        </div> -->
+ <div style="position: relative;" class="profilImg">
+            <img class="profile-avatar2" src="{{userData.photo}}" width="30" height="30" />
+        </div>
+    </div>
+</button>  
 
 
     
@@ -4281,6 +3949,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
 
         <ion-nav-buttons side="left">
           <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
+            
         </ion-nav-buttons>  
 
        
@@ -4326,16 +3995,16 @@ width: 200px; /* Ajusta según el tamaño deseado */
       <button class="close-dropdown" ng-click="dropdownChat()">
       <i class="ri-close-line"></i>
     </button>
-    <h4>Amadeus 2.1</h4>
-    <p>Asistente Inteligente</p>
+    <h4>Asistente Inteligente</h4>
+    <p>Chat de Soporte</p>
   </div>
   
-  <div class="chat-messages" id="chatMessages1">
-    
+  <div class="chat-messages" id="chatMessages5">
+
     
     <div class="message" ng-repeat="message in chats" ng-class="{'bot-message': message.sender === 'admin', 'user-message': message.sender === 'client'}">
       <div class="message-avatar" ng-if="message.sender === 'admin'">
-        <img src="https://lh3.googleusercontent.com/d/1Muzocba--A_soQyO7BXemMbx6GOU2-AK=s96-c">
+        <img src="https://lh3.googleusercontent.com/d/1Ictc2BUbVwBHBZE2LMkVYfJOvGfPWycV">
       </div>
       <div class="message-content">
         <p>{{message.content}}</p>
@@ -4355,9 +4024,9 @@ width: 200px; /* Ajusta según el tamaño deseado */
     <input type="text" 
            ng-model="newMessage" 
            placeholder="Escribe tu mensaje..." 
-           id="inputMessage1"
-           ng-keyup="$event.keyCode === 13 && sendMessage(newMessage)">
-    <button ng-click="sendMessage(newMessage)">
+           id="inputMessage5"
+           ng-keyup="$event.keyCode === 13 && sendChat(newMessage)">
+    <button ng-click="sendChat(newMessage)">
       <i class="ri-send-plane-2-fill"></i>
     </button>
   </div>
@@ -4404,12 +4073,81 @@ width: 200px; /* Ajusta según el tamaño deseado */
     </button>
   </div>
 </div>
+
+<div class="dropdownContent notif-dropdown" ng-show="dropdownCalendarVisible" ng-click="$event.stopPropagation()">
+    
+    <div class="notif-header">
+        <button class="close-dropdown" ng-click="dropdownCalendar()">
+            <i class="ri-close-line"></i>
+        </button>
+        <h4>Agenda</h4>
+    </div>
+
+   <div class="notif-list" ng-if="agenda.length > 0">
+    <div class="notif-item" 
+         ng-repeat="item in agenda"
+         ng-class="{
+             'next-class-highlight': item.isNextClass, 
+             'past-item-dimmed': item.isPast,
+             'pay-day-highlight': item.isPayDay
+         }">
+        
+        <div class="schedule-date" ng-class="{
+            'schedule-date-past': item.isPast && !item.isPayDay,
+            'schedule-date-inactive': !item.isNextClass && !item.isPast && !item.isPayDay,
+            'schedule-date-payday': item.isPayDay
+        }">
+            <div ng-if="item.isPayDay" class="payday-icon-wrapper">
+               <i class="ri-refund-line"></i>
+            </div>
+       
+                <div class="schedule-day" ng-if="!item.isPayDay">{{ item.start | date:'EEE' }}</div>
+                <div class="schedule-number" ng-if="!item.isPayDay">{{ item.start | date:'d' }}</div>
+    
+        </div>
+
+  <div class="notif-content">
+            <div ng-if="!item.isPayDay">
+                <div class="notif-title" ng-class="{'text-strikethrough': item.isPast}">
+                    {{ item.start | date:'EEEE, d \'de\' MMMM' }}
+                </div>
+                <div class="notif-desc" ng-if="!item.isPast">
+                    <i class="ri-time-line"></i> {{ item.start | date:'HH:mm':'UTC' }} a {{ item.end | date:'HH:mm':'UTC' }} Hrs
+                </div>
+                <div class="notif-time">
+                    <span ng-if="item.isPast">Finalizada</span>
+                    <span ng-if="item.isNextClass" class="next-class-label">Próxima clase - {{ item.daysLeft }}</span>
+                    <span ng-if="!item.isPast && !item.isNextClass">Pendiente</span>
+                </div>
+            </div>
+            
+            <div ng-if="item.isPayDay" ng-click="goToPayment()">
+                <div class="notif-title">Próximo pago</div>
+                <div class="notif-desc" ng-if="!item.isPast">
+                    {{ item.start | date:'EEEE, d \'de\' MMMM' }}
+                </div>
+                 <div class="notif-desc" ng-if="item.isPast">
+                   Realiza tu pago para seguir disfrutando del curso.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+    <div class="empty-notifs" ng-if="agenda.length === 0">
+        <i class="ri-calendar-close-line"></i>
+        <p>No hay clases programadas</p>
+    </div>
+</div>
         
     </ion-nav-bar>
 
 
+
      <ion-content>
-  <div class="iframe-container"><iframe src="https://app.mozartacademy.mx/bookfinder" frameborder="0" allowfullscreen ></iframe></div> 
+  <div class="iframe-container"><iframe src="https://www.mozart-app.com/bookfinder" frameborder="0" allowfullscreen ></iframe></div> 
       </ion-content>
       
        
@@ -4419,34 +4157,52 @@ width: 200px; /* Ajusta según el tamaño deseado */
   </script>  
 
 
+
+
+
+
     
    <script id="library.html" type="text/ng-template">
     <ion-view >
 
-     <ion-nav-bar class="bar-light" >      
+       <ion-nav-bar class="bar-light" >      
         <ion-nav-buttons side="right">
 
-     <button class="button button-clear" ng-click="dropdownChat()" style="font-size: 20px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 20px;" ng-if="userData.status == 'ACTIVO'">
-<i class="ri-gemini-line"></i>
-            <div style="position: absolute; top: -3px; left: 18px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(chats | filter:{read: false}).length && chatCounter">
+      <button class="button button-clear headIcon chatIco" ng-click="dropdownChat()" style="font-size: 20px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" ng-if="userData.status == 'ACTIVO'">
+    <i class="ri-chat-3-fill"></i>
+            <div style="position: absolute; top: -3px; left: 27px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(chats | filter:{read: false}).length && chatCounter">
         <div style="font-size: 13px; color: white;"> {{(chats | filter:{read: false}).length}}</div>
     </div>
-</button> 
-          
-   
+</button>  
+
+ <button class="button button-clear headIcon" ng-click="dropdownCalendar()" style="font-size: 20px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" ng-if="userData.status == 'ACTIVO'">
+  <i class="ri-booklet-fill"></i>
+</button>  
+      
+    <button class="button button-clear headIcon" ng-click="dropdownNotif()" style="font-size: 19px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" ng-if="userData.status == 'ACTIVO'">
+  <i class="ri-notification-3-fill" ></i>
+            <div style="position: absolute; top: -3px; left: 27px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(alerts | filter:{seen: false}).length && alertCounter">
+        <div style="font-size: 13px; color: white;" > {{(alerts | filter:{seen: false}).length}}</div>
+    </div> 
+</button>
 
  <button  class="upgrade-btn-modern" ng-click="goToPayment()" ng-if="userData.status != 'ACTIVO'">
             Upgrade
           </button>
 
 
-  <button class="button button-clear" ng-class="{ 'barImage': btnBar}" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" >
-  <div style="display: flex; align-items: center;" >    
-      <div style="position: relative; " class="profilImg">
-       <img class="profile-avatar2" src="{{userData.photo}}" width="30" height="30" />
-      </div>
-   </div>
-  </button>
+ <button class="button button-clear" ng-class="{ 'barImage': btnBar}" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;">
+    <div style="display: flex; align-items: center;">
+     <!--   <div class="user-info" style="text-align: right; margin-right: 5px; margin-left: -7px" ng-if="userData.status == 'ACTIVO'">
+                    <div style="font-size: 13px; font-weight: 600; color: #333; line-height: 1.2;">{{userData.name}}</div>
+                    <div style="font-size: 11px; color: #777; line-height: 1.1;" ng-if="userLvl == 0">Preparatorio</div>
+                    <div style="font-size: 11px; color: #777; line-height: 1.1;" ng-if="userLvl != 0">Nivel {{userLvl}}</div>
+        </div> -->
+ <div style="position: relative;" class="profilImg">
+            <img class="profile-avatar2" src="{{userData.photo}}" width="30" height="30" />
+        </div>
+    </div>
+</button>  
 
 
     
@@ -4455,14 +4211,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
 
         <ion-nav-buttons side="left">
           <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
-             <div class="online-badge" ng-show="webrtc.connectionStatus !== 'disconnected'">
-            <div class="status-indicator">
-                <div class="status-dot"></div>
-                <div class="status-pulse"></div>
-                <div class="status-ring"></div>
-            </div>
-            <span class="status-text">Online</span>
-        </div>
+            
         </ion-nav-buttons>  
 
        
@@ -4508,16 +4257,16 @@ width: 200px; /* Ajusta según el tamaño deseado */
       <button class="close-dropdown" ng-click="dropdownChat()">
       <i class="ri-close-line"></i>
     </button>
-    <h4>Amadeus 2.1</h4>
-    <p>Asistente Inteligente</p>
+    <h4>Asistente Inteligente</h4>
+    <p>Chat de Soporte</p>
   </div>
   
-  <div class="chat-messages" id="chatMessages1">
-    
+  <div class="chat-messages" id="chatMessages6">
+
     
     <div class="message" ng-repeat="message in chats" ng-class="{'bot-message': message.sender === 'admin', 'user-message': message.sender === 'client'}">
       <div class="message-avatar" ng-if="message.sender === 'admin'">
-        <img src="https://lh3.googleusercontent.com/d/1Muzocba--A_soQyO7BXemMbx6GOU2-AK=s96-c">
+        <img src="https://lh3.googleusercontent.com/d/1Ictc2BUbVwBHBZE2LMkVYfJOvGfPWycV">
       </div>
       <div class="message-content">
         <p>{{message.content}}</p>
@@ -4537,108 +4286,130 @@ width: 200px; /* Ajusta según el tamaño deseado */
     <input type="text" 
            ng-model="newMessage" 
            placeholder="Escribe tu mensaje..." 
-           id="inputMessage1"
-           ng-keyup="$event.keyCode === 13 && sendMessage(newMessage)">
-    <button ng-click="sendMessage(newMessage)">
+           id="inputMessage6"
+           ng-keyup="$event.keyCode === 13 && sendChat(newMessage)">
+    <button ng-click="sendChat(newMessage)">
       <i class="ri-send-plane-2-fill"></i>
     </button>
   </div>
 </div>
 
 
+<div class="dropdownContent notif-dropdown" ng-show="dropdownNotifVisible" ng-click="$event.stopPropagation()">
+  <div class="notif-header">
+           <button class="close-dropdown" ng-click="dropdownNotif()">
+      <i class="ri-close-line"></i>
+    </button>
+    <h4>Notificaciones</h4>
+  
+  </div>
+  
+  <div class="notif-list" ng-if="alerts.length > 0">
+    <div class="notif-item" ng-repeat="alert in alerts | orderBy:'-date'" >
+      <div class="notif-icon" style="background: {{alert.color}}20; color: {{alert.color}}">
+        <i class="{{alert.icon}}"></i>
+      </div>
+      <div class="notif-content">
+        <div class="notif-title">{{alert.subject}}</div>
+        <div class="notif-desc">{{alert.message || 'Mensaje de notificación'}}</div>
+        <div class="notif-time">
+          <i class="ri-time-line"></i> {{calculateTimeAgo(alert.date)}}
+        </div>
+      </div>
+      <div class="notif-actions">
+        <button class="notif-action-btn" ng-click="deleteNotif(alert)">
+<i class="ri-delete-bin-line"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="empty-notifs" ng-if="alerts.length === 0">
+    <i class="ri-notification-off-line"></i>
+    <p>No hay notificaciones</p>
+  </div>
+  
+  <div class="notif-footer" ng-if="alerts.length > 0">
+    <button class="view-all" ng-click="deleteAllNotif()">
+      Eliminar todas las notificaciones
+    </button>
+  </div>
+</div>
 
+<div class="dropdownContent notif-dropdown" ng-show="dropdownCalendarVisible" ng-click="$event.stopPropagation()">
+    
+    <div class="notif-header">
+        <button class="close-dropdown" ng-click="dropdownCalendar()">
+            <i class="ri-close-line"></i>
+        </button>
+        <h4>Agenda</h4>
+    </div>
+
+   <div class="notif-list" ng-if="agenda.length > 0">
+    <div class="notif-item" 
+         ng-repeat="item in agenda"
+         ng-class="{
+             'next-class-highlight': item.isNextClass, 
+             'past-item-dimmed': item.isPast,
+             'pay-day-highlight': item.isPayDay
+         }">
+        
+        <div class="schedule-date" ng-class="{
+            'schedule-date-past': item.isPast && !item.isPayDay,
+            'schedule-date-inactive': !item.isNextClass && !item.isPast && !item.isPayDay,
+            'schedule-date-payday': item.isPayDay
+        }">
+            <div ng-if="item.isPayDay" class="payday-icon-wrapper">
+               <i class="ri-refund-line"></i>
+            </div>
+       
+                <div class="schedule-day" ng-if="!item.isPayDay">{{ item.start | date:'EEE' }}</div>
+                <div class="schedule-number" ng-if="!item.isPayDay">{{ item.start | date:'d' }}</div>
+    
+        </div>
+
+  <div class="notif-content">
+            <div ng-if="!item.isPayDay">
+                <div class="notif-title" ng-class="{'text-strikethrough': item.isPast}">
+                    {{ item.start | date:'EEEE, d \'de\' MMMM' }}
+                </div>
+                <div class="notif-desc" ng-if="!item.isPast">
+                    <i class="ri-time-line"></i> {{ item.start | date:'HH:mm':'UTC' }} a {{ item.end | date:'HH:mm':'UTC' }} Hrs
+                </div>
+                <div class="notif-time">
+                    <span ng-if="item.isPast">Finalizada</span>
+                    <span ng-if="item.isNextClass" class="next-class-label">Próxima clase - {{ item.daysLeft }}</span>
+                    <span ng-if="!item.isPast && !item.isNextClass">Pendiente</span>
+                </div>
+            </div>
+            
+            <div ng-if="item.isPayDay" ng-click="goToPayment()">
+                <div class="notif-title">Próximo pago</div>
+                <div class="notif-desc" ng-if="!item.isPast">
+                    {{ item.start | date:'EEEE, d \'de\' MMMM' }}
+                </div>
+                 <div class="notif-desc" ng-if="item.isPast">
+                   Realiza tu pago para seguir disfrutando del curso.
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+
+    <div class="empty-notifs" ng-if="agenda.length === 0">
+        <i class="ri-calendar-close-line"></i>
+        <p>No hay clases programadas</p>
+    </div>
+</div>
         
     </ion-nav-bar>
 
-
      <ion-content >
-  <div class="iframe-container2"><iframe src="https://www.mozart-app.com/books" frameborder="0" allowfullscreen ></iframe></div> 
-
-   
-      </ion-content>
-      
-     <div id="videoContainer" 
-         class="video-container" 
-         ng-show="showVideo"
-         ng-class="{'fullscreen': isFullscreen, 'dragging': isDragging}">
-      <div class="video-controls">
-        <button class="video-control-btn" ng-click="toggleFullscreen()" title="Pantalla Completa">
-          <i class="fas" ng-class="{'fa-expand': !isFullscreen, 'fa-compress': isFullscreen}"></i>
-        </button>
-        <button class="video-control-btn" ng-click="toggleVideo()" title="Ocultar Video">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      <video id="remoteVideo" 
-             class="remote-video" 
-             autoplay 
-             playsinline>
-      </video>
-    </div> 
-
-
-
-
-      <!-- Botones Flotantes -->
-    <div class="floating-buttons" style="margin-bottom: 20px !important">
-      <!-- Botón de Chat -->
-      <button class="button floating-btn chat" 
-              ng-click="openChat()" ng-show="webrtc.connectionStatus !== 'disconnected'">
-        <i class="fas fa-comment-dots"></i>
-        <span class="chat-badge" ng-show="webrtc.unreadMessages > 0">
-          {{webrtc.unreadMessages > 9 ? '9+' : webrtc.unreadMessages}}
-        </span>
-      </button>
-      
-      <!-- Botón de Micrófono -->
-      <button class="button floating-btn mic"
-              ng-class="{'muted': webrtc.isMuted}"
-              ng-click="toggleMicrophone()"
-              ng-show="webrtc.connectionStatus !== 'disconnected'">
-        <i class="fas" ng-class="{'fa-microphone': !webrtc.isMuted, 'fa-microphone-slash': webrtc.isMuted}"></i>
-      </button>
-      
-      <!-- Botón de Video -->
-      <button class="button floating-btn video"
-              ng-click="toggleVideo()"
-              ng-show="webrtc.connectionStatus !== 'disconnected'">
-        <i class="fas" ng-class="{'fa-video': !showVideo, 'fa-video-slash': showVideo}"></i>
-      </button>
-    </div>
-    
-    <!-- Modal de Chat Personalizado -->
-    <div id="chatModal" class="custom-modal" ng-class="{'show': showChatModal}">
-      <div class="modal-content3">
-        <div class="modal-header">
-          <h3><i class="fas fa-comments"></i> Chat con el Profesor</h3>
-          <button class="button button-clear" ng-click="closeChat()">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div id="chatContainer" class="chat-messages">
-            <div ng-repeat="message in webrtc.chatMessages track by $index" 
-                 class="message-item"
-                 ng-class="{'own': message.isOwn, 'other': !message.isOwn}">
-              <div class="message-sender">{{message.sender}}</div>
-              <div class="message-text">{{message.message}}</div>
-              <div class="message-time">{{formatTime(message.timestamp)}}</div>
-            </div>
-          </div>
-          <div class="chat-input">
-            <input type="text" 
-                   ng-model="chatMessage"
-                   placeholder="Escribe tu mensaje..."
-                   ng-keypress="($event.which === 13) && sendMessage()">
-            <button class="button button-positive" ng-click="sendMessage()">
-              <i class="fas fa-paper-plane"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-     
+  <div class="iframe-container2"><iframe src="https://www.mozart-app.com/books2" frameborder="0" allow="fullscreen midi"></iframe></div> 
+   </ion-content>
+ 
     </ion-view>
   </script>   
 
@@ -4646,40 +4417,6 @@ width: 200px; /* Ajusta según el tamaño deseado */
 
 
 
-
-
-
-
-
-
-
-
-
-  <script id="modal.html" type="text/ng-template">
-    <ion-modal-view>
-        <ion-header-bar class="bar bar-header bar-positive">
-          <h1 class="title">New Contact</h1>
-          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
-        </ion-header-bar>
-        <ion-content class="padding">
-          <div class="list">
-            <label class="item item-input">
-              <span class="input-label">First Name</span>
-              <input ng-model="newUser.firstName" type="text">
-            </label>
-            <label class="item item-input">
-              <span class="input-label">Last Name</span>
-              <input ng-model="newUser.lastName" type="text">
-            </label>
-            <label class="item item-input">
-              <span class="input-label">Email</span>
-              <input ng-model="newUser.email" type="text">
-            </label>
-            <button class="button button-full button-positive" ng-click="createContact(newUser)">Create</button>
-          </div>
-        </ion-content>
-      </ion-modal-view>
-  </script>  
   </div>
 </div>
 
@@ -4710,7 +4447,7 @@ app
   var requestData = {
     action: "getUserData",
     token: localStorage.getItem('MStoken')
-  //  token: "U2FsdGVkX1+pTAJ/i/vnElIrTlT7VjKJ6kuzk2FlnAIkGq9xl29aZsKgbGygQIfF"
+  // token: "U2FsdGVkX1+pTAJ/i/vnElIrTlT7VjKJ6kuzk2FlnAIkGq9xl29aZsKgbGygQIfF"
   };
 
   var config = {
@@ -4794,6 +4531,8 @@ app
       self.isMuted = false;
       self.isVideoVisible = false;
       self.unreadMessages = 0;
+     // self.chatMessages = [];
+
       self.chatMessages = [];
       
       
@@ -4844,8 +4583,9 @@ app
               if (self.connectionStatus === 'isConnecting') {
                   self.disconnect();
                   self.addMessage('Sistema', 'Tiempo de espera de conexión agotado. El profesor no respondió.');
+                  window.location.reload();
               }
-          }, 40000); // 40 segundos
+          }, 15000); // 40 segundos
 
           deferred.resolve();
           $rootScope.$apply();
@@ -4929,8 +4669,7 @@ app
             });
           }
           
-          self.updateStatus('connected', 'Conectado con el profesor');
-          self.addMessage('Sistema', 'Conectado con el profesor. Ya puedes comunicarte.');
+          self.updateStatus('connected', 'Conectado');
           $rootScope.$apply();
         });
         
@@ -5115,6 +4854,7 @@ app
       }
     })
 
+
       .state('menu.agenda', {
       url: "/agenda",
       views: {
@@ -5123,12 +4863,11 @@ app
         }
       }
     }) 
-     .state('menu.livestream', {
-      url: "/livestream",
+     .state('menu.workspace', {
+      url: "/workspace",
       views: {
         'menuContent': {
-          templateUrl: "livestream.html",
-          controller: 'livestreamCtrl'
+          templateUrl: "workspace.html"
         }
       }
     }) 
@@ -5162,17 +4901,6 @@ app
     })
  
    
-     .state('menu.books', {
-      url: "/books",
-      views: {
-        'menuContent': {
-          templateUrl: "books.html"
-        }
-      }
-    })
-
-   
-
 
 
     ; 
@@ -5259,7 +4987,7 @@ app
 
       $scope.getStatusMessage = function() {
         if ($scope.isConnecting) {
-            return 'Esperando aprobación del profesor';
+            return 'Estableciendo conexión...';
         } else {
             return $scope.webrtc.statusMessage;
         }
@@ -5291,16 +5019,22 @@ app
       };
       
       // Enviar mensaje
-      $scope.sendMessage = function() {
-        if (!$scope.chatMessage.trim()) return;
-        
-        var message = $scope.chatMessage.trim();
-        $scope.chatMessage = '';
-        
+      $scope.sendMessage = function(msg) {
+        if (!msg.trim()) return;
+        var message = msg.trim();
+
         WebRTCService.sendMessage(message)
           .catch(function(error) {
             alert(error);
           });
+
+        var input1 = document.getElementById('chatMsg1');
+        var input2 = document.getElementById('chatMsg2');
+        input1.value = '';         
+        input1.placeholder = '';
+        input2.value = '';         
+        input2.placeholder = '';
+
       };
       
       // Mostrar/Ocultar video
@@ -5446,7 +5180,7 @@ $scope.dragTouch = function(event) {
         if ($scope.isConnecting) {
           return 'Conectando...';
         }
-        return $scope.webrtc.connectionStatus === 'connected' ? 'Desconectar' : 'Conectar con el profesor';
+        return $scope.webrtc.connectionStatus === 'connected' ? 'Desconectar' : 'Conectarse';
       };
       
       // Obtener clase del botón de conexión
@@ -5577,17 +5311,74 @@ $scope.dragTouch = function(event) {
     $ionicSideMenuDelegate.toggleLeft();
       $scope.isDropdownVisible = false;
       $scope.dropdownChatVisible = false;
+      $scope.dropdownNotifVisible = false;
+      $scope.dropdownCalendarVisible = false;
 };
 
     $scope.loadingProfile = true;
+    var ahora = new Date();
+    var proximaClaseEncontrada = false;
   SharedState.getNum().then(function(data) {
        $scope.userData = data.data;
       var userLvl = JSON.parse($scope.userData.stage)
        $scope.userLvl = userLvl.lvl;
+    /*   $scope.userProgress = userLvl.lsn *10
        $scope.userPlan = data.data.plan.split(" ")[0];
-      $scope.userNameShort = data.data.name.split(" ")[0];
-      $scope.chats = JSON.parse(data.data.messages);
+      $scope.userNameShort = data.data.name.split(" ")[0];*/
+      $scope.chats = JSON.parse($scope.userData.messages);
+      $scope.alerts = JSON.parse($scope.userData.alerts);
+      $scope.agenda = JSON.parse($scope.userData.agenda);
       $scope.loadingProfile = false;
+
+     // Asegúrate de que tu agenda esté ordenada por fecha antes de procesarla
+$scope.agenda.sort((a, b) => new Date(a.start) - new Date(b.start));
+
+var ahora = new Date();
+var proximaClaseEncontrada = false;
+
+$scope.agenda.forEach(function(item) {
+    var fechaInicio = new Date(item.start);
+
+    if (item.title === 'Próximo pago') {
+        item.isPayDay = true;
+        item.isNextClass = false;
+        item.isPast = fechaInicio < ahora;
+    } else {
+        item.isPayDay = false;
+        var fechaFin = new Date(fechaInicio);
+        fechaFin.setHours(fechaFin.getHours() + 1);
+        item.end = fechaFin;
+        item.isPast = fechaInicio < ahora;
+
+        if (!proximaClaseEncontrada && !item.isPast) {
+            item.isNextClass = true;
+            proximaClaseEncontrada = true;
+
+            // --- LÓGICA PARA "DAYS LEFT" ---
+            var hoy = new Date();
+            hoy.setHours(0, 0, 0, 0); // Medianoche de hoy para una comparación precisa
+
+            var fechaClase = new Date(item.start);
+            fechaClase.setHours(0, 0, 0, 0); // Medianoche del día de la clase
+
+            var diffMs = fechaClase.getTime() - hoy.getTime();
+            // Usamos Math.round para manejar correctamente la zona horaria
+            var diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
+
+            if (diffDays === 0) {
+                item.daysLeft = 'Es Hoy';
+            } else if (diffDays === 1) {
+                item.daysLeft = 'Es Mañana';
+            } else if (diffDays > 1) {
+                item.daysLeft = 'Faltan ' + diffDays + ' días';
+            }
+            // --- FIN DE LA LÓGICA ---
+        } else {
+            item.isNextClass = false;
+        }
+    }
+});
+
   }) 
 
      $scope.isDropdownVisible = false;
@@ -5595,16 +5386,20 @@ $scope.dragTouch = function(event) {
     $scope.toggleDropdown = function() {
       $scope.isDropdownVisible = !$scope.isDropdownVisible;
       $scope.dropdownChatVisible = false;
+      $scope.dropdownNotifVisible = false;
+      $scope.dropdownCalendarVisible = false;
         $scope.btnBar = false;
     };
     
  $scope.chatCounter = true;
-
+ $scope.alertCounter = true;
     
     $scope.dropdownChatVisible = false;
     $scope.dropdownChat = function() {
       $scope.dropdownChatVisible = !$scope.dropdownChatVisible;
       $scope.isDropdownVisible = false;
+      $scope.dropdownNotifVisible = false;
+      $scope.dropdownCalendarVisible = false;
       $scope.chatCounter = false;  
 
       $timeout(function() {
@@ -5613,7 +5408,42 @@ $scope.dragTouch = function(event) {
       
     };
 
+     $scope.dropdownNotifVisible = false;
+    $scope.dropdownNotif = function() {
+      $scope.dropdownNotifVisible = !$scope.dropdownNotifVisible;
+      $scope.isDropdownVisible = false;
+      $scope.dropdownChatVisible = false;
+      $scope.dropdownCalendarVisible = false;
+      $scope.alertCounter = false;  
+    };
 
+
+     $scope.dropdownCalendarVisible = false;
+    $scope.dropdownCalendar = function() {
+      $scope.dropdownCalendarVisible = !$scope.dropdownCalendarVisible;
+      $scope.isDropdownVisible = false;
+      $scope.dropdownChatVisible = false;
+       $scope.dropdownNotifVisible = false;
+      $scope.alertCounter = false;  
+
+
+    };
+
+
+
+
+$scope.deleteNotif = function(alertToDelete) {
+  const index = $scope.alerts.indexOf(alertToDelete);
+  if (index !== -1) {
+    $scope.alerts.splice(index, 1);
+  }
+};
+
+// Eliminar todas las notificaciones
+$scope.deleteAllNotif = function() {
+  if (!$scope.alerts.length) return;
+    $scope.alerts = [];
+};
 
 
 $scope.calculateTimeAgo = function(alertDate) {
@@ -5645,7 +5475,7 @@ $scope.calculateTimeAgo = function(alertDate) {
 
 
 
-  $scope.sendMessage = function(newMessage) {
+  $scope.sendChat = function(newMessage) {
     if (!newMessage || newMessage.trim() === '') {
       return; // No enviar mensajes vacíos
     }
@@ -5723,6 +5553,7 @@ $timeout(function() {
 
 
   };
+
 
 
 function scrollAllChatsToBottom() {
@@ -5931,62 +5762,6 @@ $scope.installApp = function () {
     }])
 
 
-       .controller('livestreamCtrl', function($scope, SharedState, $timeout){
-       var ahora = new Date();
-    var proximaClaseEncontrada = false;
-
-
-  SharedState.getNum().then(function(data) {
-    $scope.userDataLevel = JSON.parse(data.data.stage);
-     $scope.userAgenda = JSON.parse(data.data.agenda);
-      // Procesamos cada item de la agenda
-    $scope.userAgenda.forEach(function(item) {
-        var fechaInicio = new Date(item.start);
-
-        // 1. Calculamos y añadimos la hora de fin (inicio + 1 hora)
-        var fechaFin = new Date(fechaInicio);
-        fechaFin.setHours(fechaFin.getHours() + 1);
-        item.end = fechaFin; // Añadimos la propiedad 'end' al objeto
-
-        item.isPast = fechaInicio < ahora;
-
-        // 2. Buscamos la primera clase futura para marcarla como la "próxima"
-         if (!proximaClaseEncontrada && !item.isPast && item.title !== 'Próximo pago') {
-            item.isNextClass = true;
-            proximaClaseEncontrada = true;
-        } else {
-            item.isNextClass = false;
-        }
-    });
-
-        scrollToNextClass();
-  })
-
-  function scrollToNextClass() {
-    $timeout(function() {
-        var container = document.getElementById('card-schedule'); // o 'agenda-container'
-        var targetElement = document.getElementById('next-class-item');
-  
-        if (container && targetElement) {
-            
-            // --- CÁLCULO MODIFICADO ---
-            var containerHeight = container.clientHeight;
-            var elementHeight = targetElement.clientHeight;
-
-            // Usamos el cálculo robusto de la respuesta anterior
-            var relativeOffsetTop = targetElement.getBoundingClientRect().top - container.getBoundingClientRect().top + container.scrollTop;
-
-            // NUEVO CÁLCULO: Alinea la parte inferior del elemento con la parte inferior del contenedor.
-            var newScrollTop = relativeOffsetTop + elementHeight - containerHeight;
-
-            container.scrollTop = newScrollTop;
-        }
-    }, 0);
-}
-
-
-
-})
 
     .controller('statisticsCtrl', function($scope, $timeout){
    
@@ -6147,37 +5922,7 @@ $scope.installApp = function () {
 
   })
 
-  /* .controller('livestreamCtrl', ['$scope', 'SharedState', 'WebRTCService', function($scope,  SharedState, WebRTCService){
-  SharedState.getNum().then(function(data) {
-       $scope.userData = data.data;
-  })
-
-  $scope.service = WebRTCService;
-
-  // Functions for the view
-  $scope.openChatModal = function() {
-    $scope.isChatOpen = true;
-    WebRTCService.unreadCount = 0;
-  };
-  
-  $scope.closeChatModal = function() {
-    $scope.isChatOpen = false;
-  };
-
-  $scope.sendMessage = function() {
-    if (!$scope.chatInput) return;
-    WebRTCService.sendMessage($scope.chatInput);
-    $scope.chatInput = "";
-  };
-
-  // Initialize the service when the controller loads
-  WebRTCService.init();
-
-  
-
-    }])*/
-
-
+ 
  
 
     </script>
