@@ -1,0 +1,1729 @@
+
+<html lang="es" ng-app="pianoApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piano Quest Pro</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <style>
+        /* CSS Básico - Sin cambios, excepto por el nuevo botón de regreso */
+        :root {
+            --bg-color: #f0f2f5;
+            --main-content-bg: #ffffff;
+            --text-color: #333333;
+            --sidebar-bg: #f5f5f5;
+            --sidebar-text: #212529;
+            --header-bg: #212529;
+            --header-text: #ffffff;
+            --lesson-header-bg: #f8f9fa;
+            --lesson-header-hover: #e2e6ea;
+            --primary-accent: #6f42c1;
+            --success-green: #28a745;
+            --danger-red: #dc3545;
+            --modal-bg: rgba(0,0,0,0.5);
+            --modal-content-bg: #ffffff;
+            --medium-gray: #adb5bd;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-color);
+             background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            height: 100vh;
+            overflow: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        #levelSelector, #pianoApp {
+            height: 100%;
+        }
+
+      /*  #levelSelector {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 40px 20px;
+            overflow-y: auto;
+        }*/
+
+      #levelSelector {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 100px;
+    
+    /* --- AÑADE ESTA LÍNEA --- */
+    padding: 120px 0 0 0; /* 120px arriba, 0 en los demás lados */
+}
+
+        .level-container {
+    display: grid;
+    grid-template-columns: 230px 1fr; /* Columna principal flexible y columna derecha fija */
+    gap: 15px; /* Espacio entre las columnas */
+    max-width: 1200px; /* Aumentamos el ancho máximo para que quepan bien */
+    width: 100%;
+    padding: 20px; /* Añadimos padding para que el contenido no pegue a los bordes */
+
+  
+}
+        .level-header {
+            background: var(--sidebar-bg);
+            color: var(--sidebar-text);
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .level-header h1 { font-size: 2.2rem; margin-bottom: 12px; }
+        .level-header p { font-size: 1.1rem; opacity: 0.9; }
+        .levels-grid {
+            display: grid;
+            grid-template-columns: 1fr; padding: 10px 20px;
+            gap: 20px;
+        }
+      
+
+
+
+.level-card-left {
+    padding: 5px 7px;
+    flex-shrink: 0; /* Evita que se encoja */
+    width: 30%; /* Ancho del panel izquierdo */
+    display: flex;
+    background-color: ;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+  /*  background-color: rgba(111, 66, 193, 0.3); */
+}
+
+
+
+/* 4. Panel derecho (claro) */
+.level-card-right {
+    padding: 5px 7px;
+    flex-grow: 1; /* Ocupa el espacio restante */
+    display: flex;
+    flex-direction: column;
+}
+
+
+        .level-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .level-number {
+            width: 40px; height: 40px; background: var(--primary-accent);
+            color: white; border-radius: 50%; font-weight: 600; font-size: 1.1rem;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .level-title { font-size: 1.3rem; font-weight: 600; color: var(--text-color); }
+        .level-description { color: var(--text-color); opacity: 0.8; font-size: 0.95rem; line-height: 1.5; margin-bottom: 16px; }
+        .level-duration { color: var(--primary-accent); font-size: 0.85rem; font-weight: 500; display: flex; align-items: center; gap: 6px; }
+        .level-duration::before { content: '⏱️'; }
+        .continue-btn-container { margin: 30px; margin-top: 0; text-align: center; }
+        .continue-btn {
+            background: var(--primary-accent); color: white;
+            padding: 16px 40px; border: none; border-radius: 8px;
+            font-size: 1.1rem; font-weight: 600; cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.6; pointer-events: none;
+        }
+
+        .continue-btn2 {
+            background: var(--primary-accent); color: white;
+            bottom: 0;
+            right: 0;
+            width: 130px;
+            padding: 16px 40px; border: none; border-radius: 8px;
+            font-size: 1.1rem; font-weight: 600; cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.6; pointer-events: none;
+        }
+
+        .continue-btn.active { opacity: 1; pointer-events: all; }
+        .continue-btn:hover.active { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(111, 66, 193, 0.3); }
+
+        /* ============================================= */
+        /* == ESTILOS PARA LA APP DE PIANO ============= */
+        /* ============================================= */
+         #pianoApp { display: flex; flex-direction: column; }
+        .app-header { display: none; }
+        .app-container { display: flex; flex: 1; overflow: hidden; }
+        .menu-toggle-btn { display: none; position: fixed; top: 10px; left: 15px; background: var(--sidebar-bg); color: var(--sidebar-text); border: none; font-size: 1.5rem; cursor: pointer; z-index: 1002; width: 45px; height: 45px; border-radius: 50%; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        .sidebar { width: 320px; background-color: var(--sidebar-bg); color: var(--sidebar-text); display: flex; flex-direction: column; padding: 20px; flex-shrink: 0; border-left: 1px solid var(--lesson-header-bg); }
+        .main-content { flex-grow: 1; background-color: var(--main-content-bg); display: flex;   flex-direction: column;}
+        #content-iframe { width: 100%; height: 100%; border: none; }
+        .user-profile { display: flex; align-items: center; margin-bottom: 25px; }
+        .user-avatar { width: 50px; height: 50px; border-radius: 50%; background-color: var(--primary-accent); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: bold; margin-right: 15px; }
+        .user-info .name { font-size: 1.1rem; font-weight: 600; }
+        .user-info .plan { font-size: 0.8rem; color: #adb5bd; }
+        .progress-bar { width: 100%; height: 11px; background-color: var(--lesson-header-bg); border-radius: 4px; overflow: hidden; margin-bottom: 30px; }
+        .progress-fill { height: 100%; background-color: var(--primary-accent); width: 0%; transition: width 0.5s ease-in-out; }
+        .lessons-container { flex-grow: 1; overflow-y: auto; }
+        .lesson-header { display: flex; align-items: center; border: 1px solid var(--medium-gray); font-weight: bold; font-size: 1rem; padding: 12px; background-color: var(--lesson-header-bg); border-radius: 5px; margin-bottom: 5px; transition: background-color 0.2s; }
+        .lesson-header.unlocked { cursor: pointer; }
+        .lesson-header.unlocked:hover { background-color: var(--lesson-header-hover); }
+        .lesson-header.completed { background-color: #E8E8E8; color: black; border-color: var(--success-green);}
+       /*  .lesson-header.completed { background-color: gray; color: white; border-color: var(--success-green);}*/
+        .lesson-header .icon { font-size: 1.2rem; margin-right: 10px; }
+        .tasks-list { list-style: none; padding-left: 15px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
+        .tasks-list.expanded { max-height: 500px; }
+        .task-item { display: flex; align-items: center; padding: 10px 5px; font-size: 0.95rem; opacity: 0.7; border-radius: 4px; cursor: pointer; transition: all 0.2s; }
+        .task-item:hover { background-color: var(--lesson-header-hover); }
+        .task-item.is-viewing { background-color: rgba(111, 66, 193, 0.08); }
+        .task-item.active { opacity: 1; font-weight: bold; background-color: rgba(111, 66, 193, 0.2); border-left: 3px solid var(--primary-accent); padding-left: 10px; }
+        .task-item.completed { opacity: 1; }
+        .task-item.completed .task-title { text-decoration: line-through; }
+        .task-status { width: 15px; height: 15px; border-radius: 50%; border: 2px solid var(--medium-gray); margin-right: 10px; flex-shrink: 0; }
+        .task-item.active .task-status { border-color: var(--primary-accent); }
+        .task-item.completed .task-status { background-color: var(--success-green); border-color: var(--success-green); }
+        .task-interaction-icon { cursor: pointer; margin-left: auto; font-size: 1.5rem; z-index: 2; }
+        #recordingIndicator { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: var(--danger-red); color: white; padding: 8px 15px; border-radius: 20px; display: flex; align-items: center; gap: 8px; z-index: 1020; box-shadow: 0 4px 15px rgba(0,0,0,0.3); font-weight: 500; }
+       #recordingIndicator::before { content: ''; position: absolute; inset: 0; background-color: var(--danger-red); border-radius: 20px; z-index: -1; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { transform: scale(0.95); opacity: 0.7; } 70% { transform: scale(1.1); opacity: 0; } 100% { transform: scale(0.95); opacity: 0; } }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--modal-bg); display: none; align-items: center; justify-content: center; z-index: 1010; }
+        .modal-content { background: var(--modal-content-bg); padding: 20px; border-radius: 8px; width: 90%; max-width: 640px; text-align: center; }
+        #audio-playback { width: 100%; margin: 15px 0; }
+        .modal-buttons { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin-bottom: 15px; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .modal-button { padding: 10px 20px; border: none; border-radius: 5px; background-color: var(--primary-accent); color: white; font-size: 1rem; cursor: pointer; }
+        .modal-button.delete { background-color: var(--danger-red); }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
+        .quiz-option { padding: 12px; border: 1px solid var(--medium-gray); color: var(--text-color); background-color: transparent; border-radius: 5px; cursor: pointer; }
+        .quiz-option:hover { background-color: var(--lesson-header-hover); }
+        .confetti { position: fixed; width: 10px; height: 10px; opacity: 0; animation: confetti-fall 5s ease-out forwards; }
+        @keyframes confetti-fall { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
+
+        /* Estilos del nuevo botón "Regresar" */
+      
+
+        @media (max-width: 800px) {
+            .levels-grid { grid-template-columns: 1fr; padding: 30px 20px; }
+            .level-header { padding: 30px 20px; }
+            .level-header h1 { font-size: 1.8rem; }
+            .app-header {
+                display: flex; align-items: center; justify-content: center; /* Centrado */
+                padding: 0 15px; height: 45px;
+                position: fixed; top: 0; width: 100%; z-index: 999;
+                background-color: var(--header-bg);
+            }
+            
+
+            .menu-toggle-btn { display: flex; align-items: center; justify-content: center; top: 50px; left: 15px; right: auto; } /* Ajustado a la derecha */
+            .sidebar { position: fixed; top: 0; right: 0; height: 100%; width: 300px; max-width: 80%; z-index: 1001; transform: translateX(100%); transition: transform 0.3s ease-in-out; border-left: 1px solid var(--lesson-header-bg); border-right: none; }
+            .sidebar.is-open { transform: translateX(0); }
+            .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; }
+            .sidebar-overlay.is-active { opacity: 1; visibility: visible; }
+        }
+
+
+
+        
+.player-header {
+    padding: 6px 15px;
+    background: #f5f5f5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    flex-wrap: wrap;
+}
+
+.player-tools {
+    display: flex;
+    gap: 10px;
+     margin-left: auto;
+}
+
+.tool-btn {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.tool-btn:hover {
+    background: #f0f0f0;
+}
+
+.tool-btn i {
+    font-size: 16px;
+}
+
+.progress-display {
+  padding: 1px 10px;
+  background: #f9f9f9;
+  border-bottom: 1px solid #eee;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: nowrap;
+}
+
+.progress-bar-container {
+  flex: 1;
+  min-width: 0;
+  padding-right: 15px;
+}
+
+.time-displays-container {
+  display: flex;
+  gap: 5px;
+  margin-right: 7px;
+}
+
+.time-display {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 60px;
+}
+
+.time-display .label {
+  font-size: 11px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-right: -10px;
+}
+
+.time-display .value {
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+
+}
+
+
+.progress-bar {
+
+  overflow: hidden;
+  height: 24px;
+  width: 130px;
+  background: #e0e0e0;
+  border-radius: 4px;
+}
+
+
+.progress-fill {
+    height: 24px;
+    background: #AA336A; /* Green for the filled part */
+    border-radius: 2px;
+    transition: width 0.3s ease;
+    display: block;
+}
+
+.player-container {
+    flex: 1;
+    width: 100%;
+    min-height: 0; /* Para que el iframe no desborde */
+}
+
+.player-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Estilo para metrónomo activo */
+.metronome-active {
+    background: #ffeb3b !important;
+    border-color: #ffc107 !important;
+}
+
+/* Estilo para grabación activa */
+.recording-active {
+    background: #ffebee !important;
+    border-color: #ef9a9a !important;
+    color: #f44336 !important;
+}
+
+.recording-active i {
+    color: #f44336 !important;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+
+
+.close-btn2 {
+
+  top: 1.7rem;
+  right: 1.7rem;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.close-btn2:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+@media(max-width: 550px){
+  .mobile{
+    display: none;
+  }
+    .player-header {
+    justify-content: space-between; /* Fuerza los elementos restantes a los extremos */
+  }
+  
+  .player-tools {
+    margin-left: auto; /* Empuja a la derecha */
+  }
+}
+
+
+/* Efecto vidrio para métricas en móvil */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Contenedor de métricas para móvil */
+.mobile-metrics {
+  display: flex;
+  justify-content: space-around;
+  margin-top: -30px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.metric-item {
+  display: flex;
+  flex-direction: column;
+
+  padding: 0 10px;
+}
+
+.metric-value {
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
+}
+
+.metric-label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 4px;
+}
+
+
+
+  
+  
+.tool-btn.active {
+  background: white;
+  border-color: #bdbdbd;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+}
+.recording-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+}
+
+.left-controls {
+  display: flex;
+  gap: 8px;
+  margin-right: auto; /* Empuja todo a la izquierda */
+}
+
+.right-controls {
+  display: flex;
+  gap: 8px;
+  margin-left: auto; /* Empuja todo a la derecha */
+}
+
+.metronome-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bpm-control {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  padding: 4px 8px;
+}
+
+.bpm-buttons {
+  display: flex;
+}
+
+.bpm-btn {
+  background: transparent;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.bpm-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.bpm-label {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 14px;
+  min-width: 50px;
+  text-align: center;
+}
+
+/* Estilos para estados activos */
+.record-btn.active {
+  color: #f44336;
+  animation: pulse 1.5s infinite;
+}
+
+.metronome-btn.active {
+  color: #FF9800;
+  animation: pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+  from { opacity: 1; }
+  to { opacity: 0.7; }
+}
+  
+  
+  .record-btn.active {
+  color: #f44336;
+  animation: pulse 1.5s infinite;
+}
+
+
+/*
+.banner-header {
+    width: 98vw;          
+    max-width: 1200px;   
+    height: 150px;       
+    margin: 0 auto;      
+    margin-top: 5px;
+    border-radius: 16px;
+    overflow: hidden;     
+}
+*/
+
+.banner-header {
+    /* --- PROPIEDADES MODIFICADAS Y NUEVAS --- */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    
+    /* --- PROPIEDADES QUE SE MANTIENEN --- */
+    width: 100%;  /* Asegúrate que sea 100% y no 98vw */
+    height: 110px;
+    overflow: hidden;
+    will-change: transform, opacity;
+}
+
+.banner-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+.pending-tasks {
+    background-color: var(--main-content-bg);
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    height: fit-content; /* Se ajusta a la altura de su contenido */
+}
+.pending-tasks h4 {
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+.pending-tasks ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.pending-tasks li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.task-icon {
+    font-size: 1.5rem;
+    color: var(--primary-accent);
+    margin-right: 15px;
+}
+.task-info span {
+    display: block;
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+.task-info .info {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.view-all-tasks {
+    display: block;
+    margin-top: 10px;
+    text-align: right;
+    font-size: 0.9rem;
+    color: var(--primary-accent);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Importante: Hacerlo responsivo en pantallas pequeñas */
+@media (max-width: 900px) {
+    .level-container {
+        grid-template-columns: 1fr; /* Apila las columnas una sobre otra */
+    }
+    .pending-tasks {
+        order: -1; /* Mueve las tareas pendientes arriba de los niveles en móvil */
+    }
+}
+
+
+/* Dentro de tu etiqueta <style> */
+
+@media (max-width: 900px) {
+    /* 1. Ocultamos el panel de tareas pendientes en móvil */
+    .pending-tasks {
+        display: none; 
+    }
+
+    /* 2. Ajustamos el contenedor para que muestre una única columna */
+    .level-container {
+        grid-template-columns: 1fr; /* Forzamos una sola columna */
+        gap: 0; /* Eliminamos el espacio, ya que solo hay una columna visible */
+        padding: 10px; /* Reducimos el padding en pantallas pequeñas */
+    }
+}
+
+
+         .level-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e5e7;
+
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .level-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .level-number {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #8B5CF6, #A855F7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+        }
+
+        .level-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .level-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 8px;
+        }
+
+        .level-description {
+            color: #6e6e73;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .level-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .time-icon {
+            width: 16px;
+            height: 16px;
+            opacity: 0.6;
+        }
+
+        .time-text {
+            color: #8B5CF6;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .progress-container2 {
+            width: 190px;
+            height: 10px;
+            background: #f0f0f0;
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar2 {
+            height: 100%;
+            background: linear-gradient(90deg, #8B5CF6, #A855F7);
+            border-radius: 2px;
+            width: 0%;
+            animation: fillProgress 2s ease-out forwards;
+            position: relative;
+        }
+
+        .progress-bar2::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 6px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 2px;
+            opacity: 0;
+            animation: shimmer 2s ease-out forwards;
+        }
+
+        @keyframes fillProgress {
+            from { width: 0%; }
+            to { width: 25%; }
+        }
+
+        @keyframes shimmer {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* Estados interactivos */
+        .level-card:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Responsive */
+        @media (max-width: 550px) { 
+        .level-card {
+               transform: scale(0.9);
+         }
+          .level-description {
+            font-size: 13px;
+          }
+            
+          .level-title {
+            font-size: 22px;
+        }
+         
+        .level-card:hover {
+            transform: scale(0.92);
+        }
+
+          .level-container {
+        padding: 1px; 
+          }
+
+           .levels-grid {
+            padding: 10px 10px;
+            gap: 2px;
+        }
+      }
+      
+           .lockLvlIco{
+  position: absolute;
+  font-size: 20px;
+  right: 15px;
+  top: 15px;
+}
+
+
+.unit-separator {
+    font-weight: bold;
+    color: #a0a0a0;
+    padding: 15px 20px 5px;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    letter-spacing: 1px;
+    background-color: #f0f2f5; /* Un color de fondo sutil */
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    margin-top: 10px;
+}
+
+.unit-separator:first-child {
+    margin-top: 0;
+    border-top: none;
+}
+    </style>
+</head>
+<body ng-controller="PianoController" >
+
+     <div class="banner-header" ng-show="currentView === 'levelSelector'">
+        <img src="https://lh3.googleusercontent.com/d/1vn_w1YjLx9qaEkuQ6bfRNoYvLCvK_l-Z"  class="banner-image">
+    </div>
+    
+    <div id="levelSelector" ng-show="currentView === 'levelSelector'" >
+        <div class="level-container" >
+
+              <div class="pending-tasks">
+        <h4>Tareas Pendientes</h4>
+        <ul>
+            <li>
+                <div class="task-icon"><i class="ri-quill-pen-line"></i></div>
+                <div class="task-info">
+                    <span>Lección 2</span>
+                    <div class="info">Quiz de Postura</div>
+                </div>
+            </li>
+            <li>
+                <div class="task-icon"><i class="ri-mic-line"></i></div>
+                <div class="task-info">
+                    <span>Lección 3</span>
+                    <div class="info">Graba tu melodía</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+           
+
+            <div class="levels-grid">
+               
+
+             
+
+
+                <div class="level-card" ng-repeat="level in levels" 
+                   ng-click="selectLevel(level); startApp()"
+                   ng-class="{'selected': selectedLevel.id === level.id}" >
+        <div class="card-content">
+          <div class="lockLvlIco" ng-if="currentLevelIndex < level.id"><i class="ri-lock-fill"></i> </div>
+           <div class="level-number" ng-if="level.id === 0">P</div>
+            <div class="level-number" ng-if="level.id !== 0">{{level.id}}</div>
+            <div class="level-info">
+                <h2 class="level-title">{{level.title}}</h2>
+                <p class="level-description">
+                  {{level.description}}
+                </p>
+                <div class="level-meta">
+                    <svg class="time-icon" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                    </svg>
+                    <span class="time-text">~{{level.duration}}</span>
+                </div>
+                <div class="progress-container2">
+                    <div class="progress-bar2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+            </div>
+
+
+         <!--     <div class="continue-btn-container">
+                <button class="continue-btn" ng-class="{'active': selectedLevel}" ng-click="startApp()">Iniciar</button>
+            </div>  -->
+        </div>
+    </div>
+
+    <div id="pianoApp" ng-show="currentView === 'app'">
+    
+        <button id="menu-toggle" class="menu-toggle-btn" ng-click="toggleSidebar()"><i class="ri-menu-line"></i></button>
+        <div class="app-container">
+
+
+            <main class="main-content">
+                  <div class="player-header">
+      <button class="tool-btn" id="back-to-levels-btn" ng-click="showLevelSelector()"><i class="ri-arrow-left-line"></i></button>
+      
+        <div class="progress-info">
+
+          <div class="recording-indicator" ng-show="isRecording2">
+    <div class="recording-dot"></div>
+    <span>Grabando...</span>
+  </div>
+
+ <div class="recording-controls">
+
+  <!-- Controles izquierdos -->
+  <div class="left-controls">
+  
+   
+  </div>
+  <!-- Controles derechos -->
+  <div class="right-controls">
+    <audio id="metronomeAudio" src="https://dashboard.mozartacademy.mx/media/metronom.mp3" loop style="display: none;"></audio>
+     <button class="tool-btn" id="mobile-task-icon" ng-bind-html="getMobileTaskIcon()">
+    </button>
+   <div class="metronome-control">
+  <button class="tool-btn metronome-btn" ng-click="toggleMetronome()" ng-class="{'active': metronomeActive}">
+    <i class="ri-timer-flash-line"></i>
+  </button>
+  <div class="bpm-control">
+    <button class="bpm-btn" ng-mousedown="adjustBPM(-1, $event)" ng-touchstart="adjustBPM(-1, $event)">
+      <i class="ri-subtract-line"></i>
+    </button>
+    <span class="bpm-label">{{metronomeBPM}} BPM</span>
+    <button class="bpm-btn" ng-mousedown="adjustBPM(1, $event)" ng-touchstart="adjustBPM(1, $event)">
+      <i class="ri-add-line"></i>
+    </button>
+  </div>
+</div>
+  </div>
+</div>
+  </div>   
+</div>
+                <iframe id="content-iframe" ng-src="{{ currentTaskUrl | trustAsResourceUrl }}" title="Contenido principal"></iframe>
+            </main>
+
+
+
+            <aside class="sidebar" ng-class="{'is-open': sidebarOpen}">
+                <div class="user-profile">
+                   <div class="user-avatar" ng-if="selectedLevel.id === 0">P</div>
+                    <div class="user-avatar" ng-if="selectedLevel.id !== 0">{{selectedLevel.id}}</div>
+                    
+                    <div class="user-info">
+                        <div class="name">{{selectedLevel.title}}</div>
+                        <div class="plan">Unidad  {{lessons[currentLessonIndex].unit || ''}}</div>
+                    </div>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width: {{progress}}%;"></div></div>
+                <div class="lessons-container">
+
+                    <div class="unit-separator" 
+                         ng-repeat-start="lesson in lessons" 
+                         ng-if="$index === 0 || lessons[$index - 1].unit !== lesson.unit">
+                        Unidad {{lesson.unit}}
+                    </div>
+                                 
+                      <div class="lesson-item" ng-repeat-end data-lesson-index="{{$index}}">
+                        <div class="lesson-header" 
+                             ng-class="{
+                                'completed': lesson.completed, 
+                                'unlocked': $index === 0 || lessons[$index - 1].completed,
+                                'locked': $index > 0 && !lessons[$index - 1].completed
+                             }"
+                             ng-click="toggleLesson(lesson)">
+                            <i class="icon" ng-class="{'ri-lock-fill': $index > 0 && !lessons[$index - 1].completed}"></i>
+                            <span>{{lesson.title}}</span>
+                        </div>
+                        <ul class="tasks-list" ng-class="{'expanded': lesson.expanded}">
+                            <li class="task-item" 
+                                ng-repeat="task in lesson.tasks" 
+                                ng-click="viewTask($parent.$index, $index)"
+                                ng-class="{
+                                    'completed': task.completed,
+                                    'active': currentLessonIndex === $parent.$index && currentTaskIndex === $index,
+                                    'is-viewing': viewingLessonIndex === $parent.$index && viewingTaskIndex === $index
+                                }">
+                                <div class="task-status"></div>
+                                <span class="task-title">{{task.title}}</span>
+                                <i class="task-interaction-icon {{task.iconClass}}" ng-if="task.iconClass" ng-click="handleTaskInteraction($event, $parent.$index, $index)"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+        </div>
+        <div class="modal-overlay" id="modalOverlay" ng-style="{'display': modal.show ? 'flex' : 'none'}">
+            <div class="modal-content" id="modalContent" ng-bind-html="modal.content"></div>
+        </div>
+        <div class="sidebar-overlay" id="sidebarOverlay" ng-class="{'is-active': sidebarOpen}" ng-click="toggleSidebar()"></div>
+        <div id="recordingIndicator" style="display: none;"> 
+            <i class="ri-mic-fill"></i>
+             <span>Grabando...</span>
+        </div>
+    </div>
+
+<script>
+const app = angular.module('pianoApp', []);
+
+// Filtro de seguridad para poder usar URLs dinámicas en ng-src
+app.filter('trustAsResourceUrl', ['$sce', function($sce) {
+    return function(val) {
+        return $sce.trustAsResourceUrl(val);
+    };
+}]);
+
+app.controller('PianoController', function($scope, $sce, $timeout) {
+
+    // =============================================
+    // == DATOS Y ESTADO DE LA APLICACIÓN
+    // =============================================
+    $scope.currentView = 'levelSelector';
+$scope.levels = [
+    { 
+        id: 0, 
+        title: 'Nivel Preparatorio', 
+        description: 'Empieza desde cero. Aprenderás la postura, las notas y tus primeras melodías simples.', 
+        duration: '~2 horas',
+        // Aquí anidamos las lecciones correspondientes a este nivel
+        lessons: [
+            {
+                title: "Lección 1: Fundamentos",
+                unit: 1,
+                tasks: [
+                    { type: 'video', title: "Postura correcta de manos", videoId: "Q4r5gnfAtzs", contentUrl: "https://drive.google.com/file/d/1s5bZw8XCq5cHPcDgOniZSqwpmc6xcKYG/preview", iconClass: 'ri-play-circle-line' },
+                    { type: 'quiz', title: "Quiz de Postura", question: "¿Qué forma deben tener tus manos sobre el piano?", options: ["Planas como panqueques", "Como si sostuvieras una pelota", "Tensas y rectas"], correctAnswer: 1, contentUrl: "https://app.mozartacademy.mx/xml2?file=kuhlau-op20-n1.musicxml", iconClass: 'ri-question-line' },
+                    { type: 'record', title: "Graba tu primera melodía", contentUrl: "https://app.mozartacademy.mx/grandstaff", iconClass: 'ri-mic-line' }
+                ]
+            },
+             {
+                title: "Lección 2: GrandStaff",
+                unit: 1,
+                tasks: [
+                    { type: 'video', title: "Entendiendo las Negras", videoId: "ec4ZRGMYgrY", contentUrl: "https://drive.google.com/file/d/1s5bZw8XCq5cHPcDgOniZSqwpmc6xcKYG/preview", iconClass: 'ri-play-circle-line' },
+                    { type: 'note', title: "Toca la nota Si", key: 'B', contentUrl: "https://app.mozartacademy.mx/books2/page/10" },
+                    { type: 'note', title: "Toca la nota Sol", key: 'G', contentUrl: "https://app.mozartacademy.mx/grandstaff" }
+                ]
+            },
+            {
+                title: "Lección 3: Dirección",
+                unit: 1,
+                tasks: [
+                    { type: 'video', title: "Entendiendo las Negras", videoId: "ec4ZRGMYgrY", contentUrl: "https://drive.google.com/file/d/1s5bZw8XCq5cHPcDgOniZSqwpmc6xcKYG/preview", iconClass: 'ri-play-circle-line' },
+                    { type: 'note', title: "Toca la nota Si", key: 'B', contentUrl: "https://app.mozartacademy.mx/books2/page/10" },
+                    { type: 'note', title: "Toca la nota Sol", key: 'G', contentUrl: "https://app.mozartacademy.mx/grandstaff" }
+                ]
+            },
+            {
+                title: "Lección 4: Intervalos",
+                unit: 1,
+                tasks: [
+                    { type: 'video', title: "Entendiendo las Negras", videoId: "ec4ZRGMYgrY", contentUrl: "https://drive.google.com/file/d/1s5bZw8XCq5cHPcDgOniZSqwpmc6xcKYG/preview", iconClass: 'ri-play-circle-line' },
+                    { type: 'note', title: "Toca la nota Si", key: 'B', contentUrl: "https://app.mozartacademy.mx/books2/page/10" },
+                    { type: 'note', title: "Toca la nota Sol", key: 'G', contentUrl: "https://app.mozartacademy.mx/grandstaff" }
+                ]
+            },
+            {
+                title: "Lección 5: Frases",
+                unit: 2,
+                tasks: [
+                    { type: 'video', title: "Entendiendo las Negras", videoId: "ec4ZRGMYgrY", contentUrl: "https://drive.google.com/file/d/1s5bZw8XCq5cHPcDgOniZSqwpmc6xcKYG/preview", iconClass: 'ri-play-circle-line' },
+                    { type: 'note', title: "Toca la nota Si", key: 'B', contentUrl: "https://app.mozartacademy.mx/books2/page/10" },
+                    { type: 'note', title: "Toca la nota Sol", key: 'G', contentUrl: "https://app.mozartacademy.mx/grandstaff" }
+                ]
+            },
+            {
+                title: "Lección 6: Acordes",
+                unit: 2,
+                tasks: [
+                    { type: 'video', title: "Entendiendo las Negras", videoId: "ec4ZRGMYgrY", contentUrl: "https://drive.google.com/file/d/1s5bZw8XCq5cHPcDgOniZSqwpmc6xcKYG/preview", iconClass: 'ri-play-circle-line' },
+                    { type: 'note', title: "Toca la nota Si", key: 'B', contentUrl: "https://app.mozartacademy.mx/books2/page/10" },
+                    { type: 'note', title: "Toca la nota Sol", key: 'G', contentUrl: "https://app.mozartacademy.mx/grandstaff" }
+                ]
+            },
+             {
+                title: "Lección 7: Corcheas",
+                unit: 2,
+                tasks: [
+                    { type: 'video', title: "Entendiendo las Negras", videoId: "ec4ZRGMYgrY", contentUrl: "https://drive.google.com/file/d/1s5bZw8XCq5cHPcDgOniZSqwpmc6xcKYG/preview", iconClass: 'ri-play-circle-line' },
+                    { type: 'note', title: "Toca la nota Si", key: 'B', contentUrl: "https://app.mozartacademy.mx/books2/page/10" },
+                    { type: 'note', title: "Toca la nota Sol", key: 'G', contentUrl: "https://app.mozartacademy.mx/grandstaff" }
+                ]
+            },
+             {
+                title: "Lección 8: C Position",
+                unit: 3,
+                tasks: [
+                    { type: 'video', title: "Entendiendo las Negras", videoId: "ec4ZRGMYgrY", contentUrl: "https://drive.google.com/file/d/1s5bZw8XCq5cHPcDgOniZSqwpmc6xcKYG/preview", iconClass: 'ri-play-circle-line' },
+                    { type: 'note', title: "Toca la nota Si", key: 'B', contentUrl: "https://app.mozartacademy.mx/books2/page/10" },
+                    { type: 'note', title: "Toca la nota Sol", key: 'G', contentUrl: "https://app.mozartacademy.mx/grandstaff" }
+                ]
+            },
+            {
+                title: "Lección 9: G Position",
+                unit: 3,
+                tasks: [
+                    { type: 'video', title: "Entendiendo las Negras", videoId: "ec4ZRGMYgrY", contentUrl: "https://drive.google.com/file/d/1s5bZw8XCq5cHPcDgOniZSqwpmc6xcKYG/preview", iconClass: 'ri-play-circle-line' },
+                    { type: 'note', title: "Toca la nota Si", key: 'B', contentUrl: "https://app.mozartacademy.mx/books2/page/10" },
+                    { type: 'note', title: "Toca la nota Sol", key: 'G', contentUrl: "https://app.mozartacademy.mx/grandstaff" }
+                ]
+            },
+            {
+                title: "Lección 10: Tie",
+                unit: 3,
+                tasks: [
+                    { type: 'video', title: "Entendiendo las Negras", videoId: "ec4ZRGMYgrY", contentUrl: "https://drive.google.com/file/d/1s5bZw8XCq5cHPcDgOniZSqwpmc6xcKYG/preview", iconClass: 'ri-play-circle-line' },
+                    { type: 'note', title: "Toca la nota Si", key: 'B', contentUrl: "https://app.mozartacademy.mx/books2/page/10" },
+                    { type: 'note', title: "Toca la nota Sol", key: 'G', contentUrl: "https://app.mozartacademy.mx/grandstaff" }
+                ]
+            },
+        ]
+    },
+    { 
+        id: 1, 
+        title: 'Nivel 1', 
+        description: 'Construye sobre lo básico con escalas, acordes simples y lectura de partituras inicial.', 
+        duration: '~4 horas',
+        lessons: [
+             {
+                title: "Lección 1: Escalas Mayores",
+                unit: 1,
+                tasks: [
+                    { type: 'video', title: "Postura correcta de manos", videoId: "Q4r5gnfAtzs", contentUrl: "https://drive.google.com/file/d/1s5bZw8XCq5cHPcDgOniZSqwpmc6xcKYG/preview", iconClass: 'ri-play-circle-line' },
+                    { type: 'quiz', title: "Quiz de Postura", question: "¿Qué forma deben tener tus manos sobre el piano?", options: ["Planas como panqueques", "Como si sostuvieras una pelota", "Tensas y rectas"], correctAnswer: 1, contentUrl: "https://admin.mozartacademy.mx/edit2", iconClass: 'ri-question-line' },
+                    { type: 'record', title: "Graba tu primera melodía", contentUrl: "https://app.mozartacademy.mx/grandstaff", iconClass: 'ri-mic-line' }
+                ]
+            },
+             {
+                title: "Lección 2: Tonalidad de G",
+                unit: 1,
+                tasks: [
+                    { type: 'video', title: "Entendiendo las Negras", videoId: "ec4ZRGMYgrY", contentUrl: "https://drive.google.com/file/d/1s5bZw8XCq5cHPcDgOniZSqwpmc6xcKYG/preview", iconClass: 'ri-play-circle-line' },
+                    { type: 'note', title: "Toca la nota Si", key: 'B', contentUrl: "https://app.mozartacademy.mx/books2/page/10" },
+                    { type: 'note', title: "Toca la nota Sol", key: 'G', contentUrl: "https://app.mozartacademy.mx/grandstaff" }
+                ]
+            },
+            {
+                title: "Lección 3: Pentaescalas",
+                unit: 1,
+                tasks: [
+                    { type: 'video', title: "Entendiendo las Negras", videoId: "ec4ZRGMYgrY", contentUrl: "https://drive.google.com/file/d/1s5bZw8XCq5cHPcDgOniZSqwpmc6xcKYG/preview", iconClass: 'ri-play-circle-line' },
+                    { type: 'note', title: "Toca la nota Si", key: 'B', contentUrl: "https://app.mozartacademy.mx/books2/page/10" },
+                    { type: 'note', title: "Toca la nota Sol", key: 'G', contentUrl: "https://app.mozartacademy.mx/grandstaff" }
+                ]
+            },
+            {
+                title: "Lección 4: Cambio de Posición",
+                unit: 2,
+                tasks: [
+                    { type: 'video', title: "Entendiendo las Negras", videoId: "ec4ZRGMYgrY", contentUrl: "https://drive.google.com/file/d/1s5bZw8XCq5cHPcDgOniZSqwpmc6xcKYG/preview", iconClass: 'ri-play-circle-line' },
+                    { type: 'note', title: "Toca la nota Si", key: 'B', contentUrl: "https://app.mozartacademy.mx/books2/page/10" },
+                    { type: 'note', title: "Toca la nota Sol", key: 'G', contentUrl: "https://app.mozartacademy.mx/grandstaff" }
+                ]
+            },
+            {
+                title: "Lección 5: Intervalos de 6ta",
+                unit: 2,
+                tasks: [
+                    { type: 'video', title: "Entendiendo las Negras", videoId: "ec4ZRGMYgrY", contentUrl: "https://drive.google.com/file/d/1s5bZw8XCq5cHPcDgOniZSqwpmc6xcKYG/preview", iconClass: 'ri-play-circle-line' },
+                    { type: 'note', title: "Toca la nota Si", key: 'B', contentUrl: "https://app.mozartacademy.mx/books2/page/10" },
+                    { type: 'note', title: "Toca la nota Sol", key: 'G', contentUrl: "https://app.mozartacademy.mx/grandstaff" }
+                ]
+            },
+            {
+                title: "Lección 6: Tonalidad de F",
+                unit: 2,
+                tasks: [
+                    { type: 'video', title: "Entendiendo las Negras", videoId: "ec4ZRGMYgrY", contentUrl: "https://drive.google.com/file/d/1s5bZw8XCq5cHPcDgOniZSqwpmc6xcKYG/preview", iconClass: 'ri-play-circle-line' },
+                    { type: 'note', title: "Toca la nota Si", key: 'B', contentUrl: "https://app.mozartacademy.mx/books2/page/10" },
+                    { type: 'note', title: "Toca la nota Sol", key: 'G', contentUrl: "https://app.mozartacademy.mx/grandstaff" }
+                ]
+            },
+             {
+                title: "Lección 7: Grupo 1",
+                unit: 3,
+                tasks: [
+                    { type: 'video', title: "Entendiendo las Negras", videoId: "ec4ZRGMYgrY", contentUrl: "https://drive.google.com/file/d/1s5bZw8XCq5cHPcDgOniZSqwpmc6xcKYG/preview", iconClass: 'ri-play-circle-line' },
+                    { type: 'note', title: "Toca la nota Si", key: 'B', contentUrl: "https://app.mozartacademy.mx/books2/page/10" },
+                    { type: 'note', title: "Toca la nota Sol", key: 'G', contentUrl: "https://app.mozartacademy.mx/grandstaff" }
+                ]
+            },
+             {
+                title: "Lección 8: Más Notación",
+                unit: 3,
+                tasks: [
+                    { type: 'video', title: "Entendiendo las Negras", videoId: "ec4ZRGMYgrY", contentUrl: "https://drive.google.com/file/d/1s5bZw8XCq5cHPcDgOniZSqwpmc6xcKYG/preview", iconClass: 'ri-play-circle-line' },
+                    { type: 'note', title: "Toca la nota Si", key: 'B', contentUrl: "https://app.mozartacademy.mx/books2/page/10" },
+                    { type: 'note', title: "Toca la nota Sol", key: 'G', contentUrl: "https://app.mozartacademy.mx/grandstaff" }
+                ]
+            },
+            {
+                title: "Lección 9: Síncopas",
+                unit: 3,
+                tasks: [
+                    { type: 'video', title: "Entendiendo las Negras", videoId: "ec4ZRGMYgrY", contentUrl: "https://drive.google.com/file/d/1s5bZw8XCq5cHPcDgOniZSqwpmc6xcKYG/preview", iconClass: 'ri-play-circle-line' },
+                    { type: 'note', title: "Toca la nota Si", key: 'B', contentUrl: "https://app.mozartacademy.mx/books2/page/10" },
+                    { type: 'note', title: "Toca la nota Sol", key: 'G', contentUrl: "https://app.mozartacademy.mx/grandstaff" }
+                ]
+            },
+            {
+                title: "Lección 10: Pieza Final",
+                unit: "Final",
+                tasks: [
+                    { type: 'video', title: "Entendiendo las Negras", videoId: "ec4ZRGMYgrY", contentUrl: "https://drive.google.com/file/d/1s5bZw8XCq5cHPcDgOniZSqwpmc6xcKYG/preview", iconClass: 'ri-play-circle-line' },
+                    { type: 'note', title: "Toca la nota Si", key: 'B', contentUrl: "https://app.mozartacademy.mx/books2/page/10" },
+                    { type: 'note', title: "Toca la nota Sol", key: 'G', contentUrl: "https://app.mozartacademy.mx/grandstaff" }
+                ]
+            },
+        ]
+    },
+    { 
+        id: 2, 
+        title: 'Nivel 2', 
+        description: 'Construye sobre lo básico con escalas, acordes simples y lectura de partituras inicial.', 
+        duration: '~4 horas',
+        lessons: [
+            // Aquí irían las lecciones del Nivel 2
+            { title: "Lección 3: Escalas Mayores", tasks: [ /* ... */ ] }
+        ]
+    },
+    { 
+        id: 3, 
+        title: 'Nivel 3', 
+        description: 'Profundiza en acordes complejos, arpegios y piezas musicales más elaboradas.', 
+        duration: '~8 horas',
+        lessons: [
+            // Aquí irían las lecciones del Nivel 3
+            { title: "Lección 4: Acordes y Progresiones", tasks: [ /* ... */ ] }
+        ]
+    },
+     { 
+        id: 4, 
+        title: 'Nivel 4', 
+        description: 'Profundiza en acordes complejos, arpegios y piezas musicales más elaboradas.', 
+        duration: '~8 horas',
+        lessons: [
+            // Aquí irían las lecciones del Nivel 3
+            { title: "Lección 4: Acordes y Progresiones", tasks: [ /* ... */ ] }
+        ]
+    },
+     { 
+        id: 5, 
+        title: 'Nivel 5', 
+        description: 'Profundiza en acordes complejos, arpegios y piezas musicales más elaboradas.', 
+        duration: '~8 horas',
+        lessons: [
+            // Aquí irían las lecciones del Nivel 3
+            { title: "Lección 4: Acordes y Progresiones", tasks: [ /* ... */ ] }
+        ]
+    }
+];
+
+
+$scope.lessons = [];
+    $scope.selectedLevel = null;
+    $scope.sidebarOpen = false;
+
+
+
+    // Variables de estado del curso
+    $scope.currentLevelIndex = 0;
+    $scope.currentLessonIndex = 0;
+    $scope.currentTaskIndex = 0;
+    $scope.viewingLessonIndex = 0;
+    $scope.viewingTaskIndex = 0;
+    $scope.totalTasksCompleted = 0;
+    $scope.totalTasks = $scope.lessons.reduce((acc, lesson) => acc + lesson.tasks.length, 0);
+    $scope.progress = 0;
+    $scope.currentTaskUrl = '';
+
+    $scope.modal = { show: false, content: '' };
+
+    // Variables de grabación
+    let mediaRecorder = null;
+    let audioChunks = [];
+    let isRecording = false;
+
+    const noteMap = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+
+    // =============================================
+    // == LÓGICA DE CAMBIO DE VISTAS Y NIVELES
+    // =============================================
+    $scope.selectLevel = (level) => {
+        $scope.selectedLevel = level;
+    };
+
+    $scope.startApp = () => {
+        if (!$scope.selectedLevel) return;
+        $scope.currentView = 'app';
+        initApp();
+    };
+
+    $scope.showLevelSelector = () => {
+        $scope.currentView = 'levelSelector';
+        // Aquí podrías agregar lógica para guardar el progreso antes de salir.
+    };
+
+    $scope.toggleSidebar = () => {
+        $scope.sidebarOpen = !$scope.sidebarOpen;
+    };
+    
+    function initApp() {
+    $scope.lessons = angular.copy($scope.selectedLevel.lessons);
+    $scope.totalTasks = $scope.lessons.reduce((acc, lesson) => acc + lesson.tasks.length, 0);
+
+    $scope.lessons.forEach(lesson => {
+        lesson.completed = false;
+        lesson.expanded = false;
+        lesson.tasks.forEach(task => task.completed = false);
+    });
+    
+    $scope.currentLessonIndex = 0;
+    $scope.currentTaskIndex = 0;
+    $scope.totalTasksCompleted = 0;
+    
+    setupMIDI();
+    updateProgress();
+    loadCurrentTask();
+}
+
+
+    // =============================================
+    // == LÓGICA DE LECCIONES Y TAREAS
+    // =============================================
+    $scope.toggleLesson = (lesson) => {
+        const lessonIndex = $scope.lessons.indexOf(lesson);
+        const isUnlocked = lessonIndex === 0 || $scope.lessons[lessonIndex - 1].completed;
+        if (isUnlocked) {
+            lesson.expanded = !lesson.expanded;
+        }
+    };
+    
+    $scope.viewTask = (lessonIndex, taskIndex) => {
+        const lesson = $scope.lessons[lessonIndex];
+        const isLessonUnlocked = lessonIndex === 0 || $scope.lessons[lessonIndex - 1].completed;
+        
+        if(isLessonUnlocked) {
+            $scope.viewingLessonIndex = lessonIndex;
+            $scope.viewingTaskIndex = taskIndex;
+            $scope.currentTaskUrl = lesson.tasks[taskIndex].contentUrl;
+            if($scope.sidebarOpen) { // Cierra el sidebar en móvil al seleccionar una tarea
+                 $timeout(() => $scope.sidebarOpen = false, 200);
+            }
+        }
+    };
+    
+    function loadCurrentTask() {
+        if ($scope.currentLessonIndex >= $scope.lessons.length) {
+            alert("¡Curso Completado!");
+            speak("¡Has completado todo el curso!", 'important');
+            showConfetti(200);
+            $scope.showLevelSelector(); // Vuelve al selector de niveles
+            return;
+        }
+        
+        const lesson = $scope.lessons[$scope.currentLessonIndex];
+        const task = lesson.tasks[$scope.currentTaskIndex];
+        
+        lesson.expanded = true; // Expande la lección actual
+        $scope.viewTask($scope.currentLessonIndex, $scope.currentTaskIndex);
+        
+        if (task.type === 'note') speak(`Ahora, ${task.title}`, 'important');
+        else speak(`Siguiente: ${task.title}. Haz clic en el ícono para comenzar.`);
+    }
+    
+    function completeCurrentTask() {
+        const task = $scope.lessons[$scope.currentLessonIndex].tasks[$scope.currentTaskIndex];
+        task.completed = true;
+
+        $scope.totalTasksCompleted++;
+        updateProgress();
+        
+        $scope.currentTaskIndex++;
+        if ($scope.currentTaskIndex >= $scope.lessons[$scope.currentLessonIndex].tasks.length) {
+            completeLesson();
+        } else {
+            $timeout(loadCurrentTask, 1200);
+        }
+    }
+    
+    function completeLesson() {
+        const lesson = $scope.lessons[$scope.currentLessonIndex];
+        speak(`¡Felicidades! Has completado la ${lesson.title}.`, 'important');
+        lesson.completed = true;
+        showConfetti();
+        
+        $scope.currentLessonIndex++;
+        $scope.currentTaskIndex = 0;
+        
+        // Carga la siguiente lección o finaliza el curso
+        $timeout(loadCurrentTask, 1500);
+    }
+    
+    function updateProgress() {
+        $scope.progress = ($scope.totalTasksCompleted / $scope.totalTasks) * 100;
+    }
+
+    // =============================================
+    // == INTERACCIÓN DE TAREAS (MODALES, GRABACIÓN)
+    // =============================================
+    $scope.handleTaskInteraction = ($event, lessonIndex, taskIndex) => {
+        $event.stopPropagation();
+        
+        if (lessonIndex !== $scope.currentLessonIndex || taskIndex !== $scope.currentTaskIndex) {
+            speak("Por favor, completa la tarea activa primero para usar esta función.");
+            return;
+        }
+
+        const task = $scope.lessons[lessonIndex].tasks[taskIndex];
+        switch (task.type) {
+            case 'video': openVideoModal(task); break;
+            case 'quiz': openQuizModal(task); break;
+            case 'record': toggleRecording(); break;
+        }
+    };
+    
+    $scope.getMobileTaskIcon = () => {
+        if ($scope.currentView !== 'app' || $scope.currentLessonIndex >= $scope.lessons.length) return '';
+        const task = $scope.lessons[$scope.currentLessonIndex].tasks[$scope.currentTaskIndex];
+        if (!task.iconClass) return '';
+        
+        // Función para manejar el clic desde el HTML generado dinámicamente
+        window.handleMobileIconClick = () => {
+            $scope.$apply(() => {
+                $scope.handleTaskInteraction({ stopPropagation: () => {} }, $scope.currentLessonIndex, $scope.currentTaskIndex);
+            });
+        };
+        
+        return $sce.trustAsHtml(`<i class="task-interaction-icon ${task.iconClass}" onclick="handleMobileIconClick()"></i>`);
+    };
+
+    function openVideoModal(task) {
+        const content = `
+            <h3>Video Lección</h3>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/${task.videoId}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <button id="completeVideoButton" class="modal-button">Completar Tarea</button>`;
+        $scope.modal.content = $sce.trustAsHtml(content);
+        $scope.modal.show = true;
+        $timeout(() => {
+            document.getElementById('completeVideoButton').onclick = () => {
+                $scope.$apply(() => {
+                    closeModal();
+                    completeCurrentTask();
+                });
+            };
+        });
+    }
+
+    function openQuizModal(task) {
+        const optionsHTML = task.options.map((option, index) => `<button class="quiz-option" data-index="${index}">${option}</button>`).join('');
+        const content = `
+            <h3>Quiz Rápido</h3><p>${task.question}</p>
+            <div class="quiz-options">${optionsHTML}</div>`;
+        $scope.modal.content = $sce.trustAsHtml(content);
+        $scope.modal.show = true;
+
+        $timeout(() => {
+            document.querySelectorAll('.quiz-option').forEach(button => {
+                button.onclick = (e) => {
+                    const selectedIndex = parseInt(e.target.dataset.index);
+                    if (selectedIndex === task.correctAnswer) {
+                        $scope.$apply(() => {
+                            closeModal();
+                            completeCurrentTask();
+                        });
+                    } else {
+                        e.target.style.backgroundColor = 'var(--danger-red)';
+                        e.target.style.color = 'white';
+                        speak("Respuesta incorrecta. Intenta de nuevo.");
+                    }
+                };
+            });
+        });
+    }
+    
+    async function toggleRecording() {
+        const indicator = document.getElementById('recordingIndicator');
+        const task = $scope.lessons[$scope.currentLessonIndex].tasks[$scope.currentTaskIndex];
+
+        if (isRecording) {
+            mediaRecorder.stop();
+            isRecording = false;
+            indicator.style.display = 'none';
+            task.iconClass = 'ri-mic-line';
+            speak("Grabación detenida.");
+            return;
+        }
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            mediaRecorder = new MediaRecorder(stream);
+            audioChunks = [];
+            mediaRecorder.ondataavailable = event => audioChunks.push(event.data);
+            mediaRecorder.onstop = () => {
+                const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                openRecordingReviewModal(audioBlob);
+                stream.getTracks().forEach(track => track.stop());
+            };
+            mediaRecorder.start();
+            isRecording = true;
+            indicator.style.display = 'flex';
+            task.iconClass = 'ri-stop-fill';
+            speak("Grabando.");
+        } catch (err) {
+            speak("Error, no pude acceder a tu micrófono. Por favor, otorga los permisos.");
+        }
+    }
+    
+  // VERSIÓN CORREGIDA Y ROBUSTA
+function openRecordingReviewModal(audioBlob) {
+    const audioUrl = URL.createObjectURL(audioBlob);
+    const content = `
+        <h3>Revisa tu Grabación</h3>
+        <p>Escucha tu melodía. Si te gusta, completa la tarea.</p>
+        <audio id="audio-playback" src="${audioUrl}" controls></audio>
+        <div class="modal-buttons">
+            <button id="deleteRecording" class="modal-button delete">Grabar de Nuevo</button>
+            <button id="completeRecording" class="modal-button">Completar Tarea</button>
+        </div>`;
+    
+    $scope.modal.content = $sce.trustAsHtml(content);
+    $scope.modal.show = true;
+
+    // Apenas se muestre el modal, asignamos el listener al CONTENEDOR.
+    $timeout(() => {
+        const modalContent = document.getElementById('modalContent');
+        
+        if (modalContent) {
+            modalContent.onclick = function(event) {
+                // Verificamos el ID del elemento que recibió el clic
+                const targetId = event.target.id;
+
+                if (targetId === 'deleteRecording') {
+                    $scope.$apply(closeModal);
+                } 
+                
+                else if (targetId === 'completeRecording') {
+                    $scope.$apply(() => {
+                        closeModal();
+                        completeCurrentTask();
+                    });
+                }
+            };
+        }
+    }, 0); // Un timeout de 0 es suficiente para esperar a que el DOM se actualice.
+}
+    function closeModal() {
+        $scope.modal.show = false;
+        $scope.modal.content = '';
+    }
+
+    // =============================================
+    // == MIDI, VOZ Y EFECTOS
+    // =============================================
+    function speak(text, priority = 'normal') {
+        if ('speechSynthesis' in window) {
+            if (priority === 'important') speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'es-MX';
+            utterance.rate = 1.1;
+            speechSynthesis.speak(utterance);
+        }
+    }
+
+    function setupMIDI() {
+        if (navigator.requestMIDIAccess) {
+            navigator.requestMIDIAccess().then(
+                (midiAccess) => {
+                    speak("Bienvenido a tu lección de piano. ¡Empecemos!", 'important');
+                    for (let input of midiAccess.inputs.values()) {
+                        input.onmidimessage = handleMIDIMessage;
+                    }
+                },
+                () => speak("No pude detectar tu teclado MIDI.", 'important')
+            );
+        }
+    }
+    
+    function handleMIDIMessage(message) {
+        const [command, note, velocity] = message.data;
+        if (command === 144 && velocity > 0) {
+            const noteName = noteMap[note % 12];
+            checkKey(noteName);
+        }
+    }
+    
+    function checkKey(playedKey) {
+        if ($scope.currentLessonIndex >= $scope.lessons.length) return;
+        const task = $scope.lessons[$scope.currentLessonIndex].tasks[$scope.currentTaskIndex];
+        if (task.type !== 'note') return;
+
+        if (playedKey === task.key) {
+            speak("¡Correcto!");
+            $scope.$apply(completeCurrentTask);
+        } else {
+            speak("Esa no es la nota, intenta de nuevo.");
+        }
+    }
+    
+    function showConfetti(count = 100) {
+        const colors = ['#6f42c1', '#48aee9', '#28a745', '#ffc107', '#dc3545'];
+        for (let i = 0; i < count; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = `${Math.random() * 100}vw`;
+            confetti.style.top = `${-10 - Math.random() * 10}vh`;
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDelay = `${Math.random() * 0.5}s`;
+            confetti.style.animationDuration = `${3 + Math.random() * 2}s`;
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 5000);
+        }
+    }
+
+
+
+
+
+
+
+
+
+  
+  $scope.metronomeActive = false;
+$scope.metronomeBPM = 60; // Valor inicial igual al audio base (60 BPM)
+$scope.baseBPM = 60; // BPM del audio original
+$scope.metronomeAudio = document.getElementById('metronomeAudio');
+
+// Función para convertir BPM a velocidad de reproducción
+function bpmToPlaybackRate(bpm) {
+  return bpm / $scope.baseBPM;
+}
+
+$scope.toggleMetronome = function() {
+  $scope.metronomeActive = !$scope.metronomeActive;
+  
+  if ($scope.metronomeActive) {
+    // Configurar velocidad inicial
+    $scope.metronomeAudio.playbackRate = bpmToPlaybackRate($scope.metronomeBPM);
+    $scope.metronomeAudio.currentTime = 0;
+    $scope.metronomeAudio.play()
+      .catch(e => console.error("Error al reproducir:", e));
+  } else {
+    $scope.metronomeAudio.pause();
+    $scope.metronomeAudio.currentTime = 0;
+  }
+};
+
+$scope.adjustBPM = function(change, event) {
+  // Actualizar valor BPM
+  $scope.metronomeBPM = Math.max(40, Math.min($scope.metronomeBPM + change, 240));
+  
+  // Ajustar velocidad de reproducción si está activo
+  if ($scope.metronomeActive) {
+    $scope.metronomeAudio.playbackRate = bpmToPlaybackRate($scope.metronomeBPM);
+  }
+  
+  // Lógica para mantener presionado
+  if (event) {
+    const button = event.target;
+    button.addEventListener('mouseup', clearBPMTimers);
+    button.addEventListener('mouseleave', clearBPMTimers);
+    button.addEventListener('touchend', clearBPMTimers);
+    
+    $scope.bpmTimeout = setTimeout(() => {
+      $scope.bpmInterval = setInterval(() => {
+        $scope.adjustBPM(change);
+        $scope.$apply();
+      }, 100);
+    }, 500);
+  } 
+};
+
+function clearBPMTimers() {
+  clearTimeout($scope.bpmTimeout);
+  clearInterval($scope.bpmInterval);
+} 
+
+
+
+
+
+
+  $timeout(function() {
+        // Obtenemos los dos elementos que necesitamos
+        const levelSelector = document.getElementById('levelSelector');
+        const banner = document.querySelector('.banner-header');
+
+        // Nos aseguramos de que ambos existan antes de continuar
+        if (levelSelector && banner) {
+            
+            // Creamos un "escucha" para el evento de scroll en el contenedor de los niveles
+            levelSelector.addEventListener('scroll', function() {
+                // 'scrollTop' nos dice cuántos píxeles hemos bajado
+                let scrollTop = this.scrollTop;
+                let bannerHeight = banner.offsetHeight;
+
+                // 1. Efecto Parallax: Movemos el banner hacia arriba a la mitad de la velocidad del scroll.
+                // Usamos un valor negativo en translateY para que se mueva hacia arriba.
+                banner.style.transform = `translateY(-${scrollTop * 0.5}px)`;
+
+                // 2. Efecto de Desvanecimiento: La opacidad irá de 1 a 0 conforme el scroll
+                // avance la altura total del banner.
+                let opacity = 1 - (scrollTop / bannerHeight);
+                banner.style.opacity = Math.max(0, opacity); // Usamos Math.max para que no sea menor a 0
+            });
+        }
+    });
+
+
+});
+
+
+</script>
+
+</body>
+</html>
