@@ -1,0 +1,2324 @@
+
+<html lang="es" ng-app="libraryApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca de Piano</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/tone@14.7.58"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@magenta/music@1.23.1/es6/core.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/focus-visible@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html-midi-player@1.5.0"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* --- Header --- */
+        .header {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #5668E2, #7343D9);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(86, 104, 226, 0.3);
+        }
+
+        .header-info h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 4px;
+        }
+
+        .header-info p {
+            color: #6e6e73;
+            font-size: 16px;
+        }
+
+        /* --- Search Box --- */
+        .search-box {
+            position: relative;
+            min-width: 280px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 16px 12px 44px;
+            border: 1px solid #d1d5db;
+            border-radius: 12px;
+            background: #f8f9fa;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #5668E2;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(86, 104, 226, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+        }
+
+        /* --- Library Content --- */
+        .library-section {
+            margin-bottom: 40px;
+        }
+
+       
+        
+        .carousel-wrapper {
+            position: relative;
+        }
+
+        .carousel {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 10px 5px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Estilos para la nueva tarjeta de "Agregar Archivo" */
+.add-new-file-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0; /* Fondo más claro o distintivo */
+    border: 2px dashed #ccc; /* Borde punteado */
+    color: #6e6e73;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.add-new-file-card:hover {
+    border-color: #5668E2; /* Color de hover similar al primario */
+    background-color: #e8f0fe; /* Fondo al pasar el ratón */
+    color: #5668E2;
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(86, 104, 226, 0.2);
+}
+
+.add-new-file-card i {
+    font-size: 48px; /* Tamaño grande para el icono de más */
+    margin-bottom: 10px;
+    color: #a0a0a0; /* Color del icono */
+    transition: color 0.2s ease;
+}
+
+.add-new-file-card:hover i {
+    color: #5668E2; /* Color del icono al pasar el ratón */
+}
+
+.add-new-file-card .book-title {
+    font-weight: 600;
+    color: #343a40;
+    text-align: center;
+}
+
+.add-new-file-card .book-level {
+    font-size: 13px;
+    color: #6c757d;
+    text-align: center;
+}
+
+
+        /* --- Book Card --- */
+        .book-card {
+            flex: 0 0 auto;
+            width: 180px;
+            scroll-snap-align: start;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            position: relative;
+        }
+        
+        .book-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .book-cover {
+            width: 100%;
+            height: 240px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+            border: 1px solid #f0f0f0;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .book-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #343a40;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .book-level {
+            font-size: 13px;
+            color: #6c757d;
+        }
+        
+        /* --- Locked State --- */
+        .locked-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 240px;
+            background: rgba(30, 30, 30, 0.5);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            backdrop-filter: blur(2px);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            pointer-events: none; /* Allows clicks to go through if needed, but here it's for visual effect */
+        }
+        
+        .book-card.is-locked .book-cover {
+            filter: grayscale(80%);
+        }
+
+        .book-card.is-locked .locked-overlay {
+             opacity: 1;
+        }
+
+        /* --- Scroll Buttons --- */
+        .scroll-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-70%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #e9ecef;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            color: #343a40;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-wrapper:hover .scroll-btn {
+            opacity: 1;
+        }
+        
+        .scroll-btn:hover {
+            transform: translateY(-70%) scale(1.1);
+        }
+
+        .scroll-btn.prev {
+            left: -20px;
+        }
+        .scroll-btn.next {
+            right: -20px;
+        }
+
+        /* --- Modal Styles --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: #2a2a2e;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            max-width: 800px;
+            width: 90%;
+            display: flex;
+            color: #e0e0e0;
+            overflow: hidden;
+            animation: fadeInScale 0.3s ease-out;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-left {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #1c1c1e;
+        }
+
+        .modal-preview-img {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .modal-right {
+            width: 350px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #8e8e93;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .modal-close:hover {
+            color: #ffffff;
+        }
+
+        .modal-header-info {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .modal-category {
+            font-size: 13px;
+            color: #a0a0a0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .modal-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .modal-author {
+            font-size: 18px;
+            color: #c0c0c0;
+        }
+
+        .modal-progress-section {
+            margin-bottom: 30px;
+        }
+
+        .modal-progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #444448;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .modal-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #5668E2, #7343D9);
+            border-radius: 4px;
+            transition: width 0.5s ease-out;
+        }
+
+        .modal-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #a0a0a0;
+        }
+        
+        .modal-stat-value {
+            font-size: 20px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-top: 4px;
+        }
+
+        .modal-actions {
+            display: flex;
+            flex-direction: row;
+             justify-content: space-around;
+   
+        }
+
+        .modal-button {
+            padding: 15px 25px;
+            border-radius: 12px;
+           
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            text-decoration: none; /* Para el tag <a> */
+        }
+
+        .modal-actions .modal-button{ width: 130px; }
+
+        .modal-button.primary {
+            background: linear-gradient(135deg, #5668E2, #7343D9);
+            color: white;
+            box-shadow: 0 4px 15px rgba(86, 104, 226, 0.4);
+        }
+
+        .modal-button.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(86, 104, 226, 0.5);
+        }
+
+        .modal-button.secondary {
+            background: #4a4a4e;
+            color: #e0e0e0;
+        }
+
+        .modal-button.secondary:hover {
+            background: #5e5e62;
+        }
+        
+        /* --- PDF Viewer Styles --- */
+        .pdf-viewer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #212121;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        .pdf-viewer-header {
+            height: 60px;
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            flex-shrink: 0;
+        }
+        
+        .pdf-viewer-header h3 {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .pdf-viewer-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+         
+        
+        .pdf-viewer-close:hover {
+            color: #d1d1d1;
+        }
+
+        .pdf-viewer-overlay iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .add-file-btn { background-color: #8a2be2; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        .add-file-btn:hover { background-color: #7b24c6; }
+
+.modal-content2 {
+            background: #e0e0e0;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            max-width: 500px;
+            width: 90%;
+            color:#2a2a2e;
+            overflow: hidden;
+            animation: fadeInScale 0.3s ease-out;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .upload-modal-content { padding: 25px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: #555; }
+        .form-group input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        .drop-zone { border: 2px dashed #ccc; border-radius: 10px; padding: 30px; text-align: center; cursor: pointer; background-color: #f9f9f9; }
+        .drop-zone p { margin: 0; color: #888; }
+        .drop-zone:hover { border-color: #8a2be2; background-color: #f5efff; }
+        .modal-actions-upload { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+        .locked-modal-content { background-color: #fff; padding: 30px; border-radius: 10px; text-align: center; max-width: 350px; }
+        .locked-modal-content i { font-size: 40px; color: #ffc107; margin-bottom: 15px; }
+        .locked-modal-content p { font-size: 1.1rem; color: #333; margin: 0; }
+        .book-card { position: relative; }
+        .delete-btn { position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.6); color: white; border: none; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; opacity: 0; transition: opacity 0.2s; }
+        .book-card:hover .delete-btn { opacity: 1; }
+
+     
+
+
+/* --- Nuevos estilos para la sección de progreso --- */
+.progress-display {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.progress-display .modal-progress-bar {
+    flex-grow: 1; /* Hace que la barra ocupe el espacio disponible */
+}
+
+.progress-percentage {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    min-width: 50px; /* Ancho mínimo para alinear */
+    text-align: right;
+}
+
+.exercise-list-header {
+    font-size: 14px;
+    color: #a0a0a0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+
+.exercise-list-container {
+    max-height: 160px; /* Altura máxima antes de mostrar scroll */
+    overflow-y: auto;
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 8px;
+    padding: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Estilo para el scrollbar */
+.exercise-list-container::-webkit-scrollbar {
+    width: 6px;
+}
+.exercise-list-container::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 3px;
+}
+.exercise-list-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.exercise-item {
+    padding: 10px 12px;
+    color: #e0e0e0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    transition: background-color 0.2s ease;
+}
+
+.exercise-item:last-child {
+    border-bottom: none;
+}
+
+.exercise-item.completed {
+    color: #888;
+    text-decoration: line-through;
+}
+
+/* Ícono de check para ejercicios completados */
+.exercise-item.completed::before {
+    content: '\f00c'; /* Código de Font Awesome para check */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    color: #28a745; /* Verde */
+    margin-right: 12px;
+    text-decoration: none; /* Evita que el ícono se tache */
+    display: inline-block;
+}
+
+ .right-controls {
+  display: flex;
+  gap: 8px;
+  margin-left: auto; /* Empuja todo a la derecha */
+  margin-right: 15px;
+}
+
+.metronome-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bpm-control {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: silver;
+  border-radius: 12px;
+  padding: 4px 8px;
+}
+
+.bpm-buttons {
+  display: flex;
+}
+
+.bpm-btn {
+  background: transparent;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.bpm-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.bpm-label {
+  font-family: 'Roboto Mono', monospace;
+  color: black !important;
+  font-size: 14px;
+  min-width: 50px;
+  text-align: center;
+}
+
+/* Estilos para estados activos */
+.record-btn.active {
+  color: #f44336;
+  animation: pulse 1.5s infinite;
+}
+
+.tool-btn {
+    background: silver;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.tool-btn:hover {
+    background: #f0f0f0;
+}
+
+.tool-btn i {
+    font-size: 16px;
+}
+
+.metronome-btn.active {
+  color: #FF9800;
+  animation: pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+  from { opacity: 1; }
+  to { opacity: 0.7; }
+}
+  
+  
+  .record-btn.active {
+  color: #f44336;
+  animation: pulse 1.5s infinite;
+}
+
+
+
+.online-badge-container {
+  position: absolute;
+ margin-top: 70px !important;
+  margin-left: 10px !important;
+}
+
+.online-badge {
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    padding: 8px 16px;
+    border-radius: 50px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e5e7eb;
+  width: 130px;
+}
+
+.status-indicator {
+    position: relative;
+    width: 12px;
+    height: 12px;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    /* Color rojo principal */
+    background-color: #ef4444; 
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.status-pulse {
+    width: 12px;
+    height: 12px;
+    /* Color rojo para la pulsación */
+    background-color: #f87171; 
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.status-ring {
+    width: 12px;
+    height: 12px;
+    /* Color rojo claro para el anillo */
+    background-color: #fca5a5;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.status-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    margin: 0;
+}
+
+@keyframes ping {
+    75%, 100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* === ESTILOS DEL MODAL DE GUARDAR GRABACIÓN === */
+.save-recording-modal {
+    max-width: 500px;
+}
+
+.audio-preview-container {
+    margin: 24px 0;
+}
+
+.audio-preview-container audio {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.save-recording-modal .upload-modal-header {
+    text-align: center;
+    margin-bottom: 24px;
+  margin-top: 7px;
+    border-bottom: 1px solid #f1f3f5;
+    padding-bottom: 16px;
+}
+.save-recording-modal .upload-modal-header h2 {
+    font-size: 1.5rem;
+    color: #212529;
+    margin: 0;
+}
+.save-recording-modal .upload-modal-header p {
+    color: #6c757d;
+    margin-top: 4px;
+    margin-bottom: 0;
+    font-size: 1rem;
+}
+
+/* Previsualización del audio */
+.audio-preview-container {
+    margin: 20px 0;
+}
+.audio-preview-container audio {
+    width: 100%;
+    border-radius: 8px;
+}
+
+
+
+/* Formulario */
+.recording-form {
+    margin-top: 24px;
+  padding: 17px;
+}
+.recording-form .form-group {
+    margin-bottom: 18px;
+}
+.recording-form .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #495057;
+    font-size: 0.9rem;
+}
+.recording-form .form-group input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    background: #f8f9fa;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+.recording-form .form-group input:focus {
+    outline: none;
+    border-color: #5668E2;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(86, 104, 226, 0.15);
+}
+
+/* Caja de metadatos (Fecha, Duración) */
+.recording-metadata {
+    display: flex;
+    justify-content: center; /* Centrado si solo hay un elemento */
+    gap: 24px;
+    padding: 14px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin-top: 10px;
+    border: 1px solid #e9ecef;
+    color: #495057;
+    font-size: 0.9rem;
+}
+.recording-metadata span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.recording-metadata i {
+    color: #868e96;
+}
+
+/* Botones de acción (Eliminar, Guardar) */
+.modal-actions-upload {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid #f1f3f5;
+}
+ 
+      /* --- Estilos para el Modal de Tareas --- */
+.task-modal-content {
+    padding: 0;
+    max-width: 450px;
+}
+
+.task-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.task-modal-header h2 {
+    font-size: 1.2rem;
+    color: #333;
+    margin: 0;
+}
+
+.task-list-container {
+    padding: 10px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.task-item:last-child {
+    border-bottom: none;
+}
+
+.task-info .task-category {
+    font-size: 0.75rem;
+    color: #888;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.task-info .task-title {
+    font-size: 1rem;
+    color: #222;
+    margin: 4px 0 0 0;
+    font-weight: 500;
+}
+
+.task-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.task-btn {
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.task-btn:hover {
+    background-color: #e0e0e0;
+}
+
+
+.task-btn.video { color: #c4302b; }
+.task-btn.midi { color: #5668E2; }
+
+.modal-close2 {
+  
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #8e8e93;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .modal-close2:hover {
+            color: gray;
+        }
+
+
+
+
+/* --- Estilos para el Modal de Video --- */
+.video-modal-content {
+    background: black;
+    padding: 0;
+    width: 90%;
+    max-width: 800px; /* Ancho máximo del video */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+    border: 1px solid #333;
+    border-radius: 12px;
+    overflow: hidden; /* Para que el iframe respete los bordes redondeados */
+}
+
+/* Contenedor responsivo para el video (aspecto 16:9) */
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* Proporción 16:9 (9 / 16 = 0.5625) */
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video-close-btn {
+
+    top: -40px; /* Posiciona el botón fuera del video */
+    right: 0;
+    color: white;
+    font-size: 24px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+  
+    z-index: 10;
+}
+
+.task-status-container {
+    flex-grow: 1; /* Ocupa el espacio central */
+    text-align: right;
+
+}
+.task-status {
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-right: 5px;
+    padding: 4px 8px;
+    border-radius: 12px;
+}
+.task-status.completed {
+    background-color: #e4f8e9;
+    color: #28a745;
+}
+.task-status.sent {
+    background-color: #fff0e1;
+    color: #fd9843;
+}
+.task-status i {
+    margin-right: 4px;
+}
+
+.task-title.completed-task {
+    text-decoration: line-through;
+    color: #999; /* Color más claro para indicar que está finalizado */
+}
+
+/* Añade este estilo a tu CSS existente para los estados */
+
+.task-status.failed {
+    background-color: #fdeeee;
+    color: #e74c3c;
+}
+
+.form-select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    background: #f8f9fa;
+    font-size: 1rem;
+    -webkit-appearance: none; /* Quita el estilo nativo */
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+}
+.form-select:focus {
+    outline: none;
+    border-color: #5668E2;
+    box-shadow: 0 0 0 3px rgba(86, 104, 226, 0.15);
+}
+
+
+
+.midi-modal-container {
+    width: 90%;
+    max-width: 700px;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    transform: translateY(20px);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+.modal-overlay.show .midi-modal-container {
+    transform: translateY(0);
+}
+.midi-modal-header {
+    padding: 20px 20px 15px 20px;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.midi-modal-title {
+    margin: 0;
+    color: #111827;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+.midi-modal-user {
+    margin: 0;
+    color: #4b5563;
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin-top: 4px;
+}
+.midi-modal-close {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.2s;
+    line-height: 1;
+}
+.midi-modal-close:hover {
+    color: #111827;
+}
+.midi-modal-body {
+    padding: 25px;
+}
+.midi-player-wrapper {
+    margin-bottom: 20px;
+}
+.midi-visualizer-wrapper {
+    height: 200px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 15px;
+    position: relative;
+    background-color: #f3f4f6;
+}
+.wave-effect {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, rgba(74, 111, 165, 0.6), transparent);
+    animation: wave 2s linear infinite;
+    opacity: 0.6;
+}
+@keyframes wave {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+ #libraryMidiVisualizer {
+          display: flex;
+  justify-content: center;
+  transform: scale(0.5);
+}
+
+@media (max-width: 600px){
+    #libraryMidiVisualizer {
+  transform: scale(0.4);
+}
+}
+
+@media (max-width: 470px){
+    #libraryMidiVisualizer {
+  transform: scale(0.3);
+}
+}
+
+#libraryMidiVisualizer {
+    width: 100%;
+    height: 100%;
+}
+
+        /* Estilo para el texto que reemplaza al select */
+.form-display-text {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: #f1f3f5; /* Un gris claro para indicar que no es editable */
+    font-size: 1rem;
+    color: #555;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
+}
+
+.progress-display2 {
+  padding: 5px 10px;
+color: white;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: nowrap;
+}
+
+.progress-bar-container {
+  flex: 1;
+  min-width: 0;
+  padding-right: 15px;
+}
+
+.time-displays-container {
+  display: flex;
+  gap: 5px;
+  margin-right: 7px;
+}
+
+.time-display {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 60px;
+}
+
+.time-display .label {
+  font-size: 11px;
+  color: #f5f5f5;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-right: -10px;
+}
+
+.time-display .value {
+  font-weight: bold;
+  font-size: 14px;
+  color: white;
+
+}
+
+
+.progress-bar {
+
+  overflow: hidden;
+  height: 12px;
+  width: 130px;
+  background: #e0e0e0;
+  border-radius: 4px;
+}
+
+
+.progress-fill {
+    height: 12px;
+    background: gray; /* Green for the filled part */
+    border-radius: 2px;
+    transition: width 0.3s ease;
+    display: block;
+}
+
+
+.modal-actions2 {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: auto;
+        }
+
+
+
+
+
+   /* Responsive */
+        @media (max-width: 770px) {
+            .modal-content {
+                flex-direction: column;
+                max-width: 400px;
+                height: 90vh;
+                overflow-y: auto;
+            }
+            .modal-left {
+        padding: 0; /* Para que la imagen ocupe todo el espacio */
+        max-height: 120px; /* Puedes ajustar esta altura */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        flex-shrink: 0; /* Evita que se encoja más de la cuenta */
+    }
+    
+    /* Cambio 2: Aplica object-fit */
+    .modal-preview-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* La propiedad clave */
+        max-height: none; /* Anula el max-height anterior */
+        border-radius: 0; /* Opcional: quita el borde redondeado para que encaje perfecto */
+    }
+            .modal-right {
+                width: 100%;
+                padding: 25px;
+            }
+        
+           .scroll-btn { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            .header { flex-direction: column; align-items: flex-start; }
+            .search-box { min-width: 100%; }
+            .carousel-wrapper { margin-left: 0; margin-right: 0; }
+               .exercise-list-container{max-height: 320px !important;}
+        }
+
+          @media (max-width: 558px) {
+            .add-file-btn{display: none}
+            .bookTitle{display: none}
+            .modal-left{display: none}
+             .task-status {display: none !important;}
+            .exercise-list-container{max-height: 240px !important;}
+          }
+
+          .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.section-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1d1d1f;
+    margin-bottom: 0; /* CAMBIA ESTO A 0 */
+    padding-left: 5px;
+}
+.refresh-btn {
+    background: none;
+    color: #6e6e73; /* Un color más sutil */
+    border: none;
+    border-radius: 50%; /* Lo hacemos circular */
+    width: 40px;
+    height: 40px;
+    font-size: 18px; /* Tamaño del icono */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centra el icono dentro del botón */
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.refresh-btn:hover {
+    background: #f0f0f0; /* Fondo sutil al pasar el ratón */
+    color: #1d1d1f;
+}
+
+.refresh-btn:disabled {
+    color: #adb5bd; /* Color del icono cuando está deshabilitado */
+    cursor: not-allowed;
+    background: none;
+}
+    </style>
+</head>
+<body ng-controller="libraryCtrl">
+
+
+<div class="container" ng-hide="showPdfViewer">
+ </div>
+    
+
+        <div class="library-content">
+            <div class="library-section" ng-repeat="section in library | filter: { books: { title: searchQuery } }">
+               <div class="section-header"> 
+                <h2 class="section-title">{{ section.title }}</h2>
+                 <button class="refresh-btn" ng-if="$first" ng-click="refreshData()" ng-disabled="isRefreshing">
+            <i class="fas" ng-class="{'fa-sync-alt': !isRefreshing, 'fa-spinner fa-spin': isRefreshing}"></i>
+        </button>
+           </div>
+                <div class="carousel-wrapper">
+                    <div class="carousel" id="carousel-{{$index}}">
+                        <div class="book-card" ng-repeat="book in section.books | filter: { title: searchQuery }" 
+                             ng-class="{'is-locked': !isLoaded || book.lvl > lvl || (book.lvl == lvl && book.lsn > lsn)}" 
+                             ng-click="showPreview(book, section.title)">
+                            <img ng-src="{{ book.coverUrl }}" alt="{{ book.title }}" class="book-cover">
+                            <div class="book-title">{{ book.title }}</div>
+                            <div class="book-level">{{ book.author }}</div>
+                            <div class="locked-overlay" ng-if="!isLoaded || book.lvl > lvl || (book.lvl == lvl && book.lsn > lsn)" >
+                                <i class="fas fa-lock"></i>
+                            </div>
+                        </div>
+                        <div class="book-card add-new-file-card" ng-if="section.title === 'Mis Archivos'" ng-click="openUploadModal()">
+                          <i class="fas fa-plus-circle"></i>
+                          <div class="book-title">Nuevo Archivo</div>
+                          <div class="book-level">Sube tu PDF</div>
+                        </div>
+                    </div>
+                    <button class="scroll-btn prev" ng-click="scrollCarousel('carousel-' + $index, -1)"><i class="fas fa-chevron-left"></i></button>
+                    <button class="scroll-btn next" ng-click="scrollCarousel('carousel-' + $index, 1)"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" ng-class="{show: showPreviewModal}" ng-click="closePreviewModal($event)">
+    <div class="modal-content" ng-click="$event.stopPropagation()">
+        
+        <div class="modal-left">
+            <img ng-src="{{ selectedBook.coverUrl }}" alt="{{ selectedBook.title }}" class="modal-preview-img">
+        </div>
+
+        <div class="modal-right">
+            <button class="modal-close" ng-click="closePreviewModal()"><i class="fas fa-times"></i></button>
+            <div class="modal-header-info">
+                <div class="modal-category">{{ selectedCategory }}</div>
+                <h2 class="modal-title">{{ selectedBook.title }}</h2>
+                <p class="modal-author">{{ selectedBook.author }}</p>
+            </div>
+            
+            <div class="modal-progress-section" ng-if="selectedBook.type === 'manual'">
+
+               <div ng-if="lvl > selectedBook.lvl || 
+                             (lvl === selectedBook.lvl && lsn > (getMaxLsnInBook(selectedBook) || 0))"> 
+                    <div class="progress-display">
+                        <div class="modal-progress-bar">
+                            <div class="modal-progress-fill" style="width: 100%;"></div>
+                        </div>
+                        <span class="progress-percentage">100%</span>
+                    </div>
+                    <div class="exercise-list-header">Unidad Completada</div>
+                    <div class="exercise-list-container">
+                        <div class="exercise-item completed" ng-repeat="lesson in selectedBook.lessons track by $index">
+                            {{ lesson.task }}
+                        </div>
+                    </div> 
+               
+               </div>
+
+               <div ng-if="lvl < selectedBook.lvl || (lvl === selectedBook.lvl && lsn <= (getMaxLsnInBook(selectedBook) || 0))"> 
+                  <div class="progress-display">
+                      <div class="modal-progress-bar">
+                          <div class="modal-progress-fill" ng-style="{width: (getCompletedTaskCountForManual(selectedBook) / selectedBook.totalExercises * 100) + '%'}"></div>
+                      </div>
+                      <span class="progress-percentage">{{ (getCompletedTaskCountForManual(selectedBook) / selectedBook.totalExercises * 100) | number:0 }}%</span>
+                  </div>
+                  <div class="exercise-list-header">Lista de Ejercicios ({{getCompletedTaskCountForManual(selectedBook)}}/{{selectedBook.totalExercises}})</div>
+                  <div class="exercise-list-container">
+                      <div class="exercise-item" ng-repeat="lesson in selectedBook.lessons track by $index" ng-class="{'completed': isTaskCompleted(lesson)}">
+                          {{ lesson.task }}
+                      </div>
+                  </div>
+              </div>
+            </div>
+
+            <div  class="modal-actions" ng-if="selectedBook.type == 'manual' ">
+                <button class="modal-button primary" ng-click="openPdfViewer(selectedBook)">Abrir</button>
+                <a ng-href="{{selectedBook.pdf}}" download="{{selectedBook.title}}.pdf" class="modal-button secondary" >Descargar</a>
+            </div>
+
+              <div  class="modal-actions2" ng-if="selectedBook.type != 'manual'">
+                <button class="modal-button primary" ng-click="openPdfViewer(selectedBook)">Abrir</button>
+                <a ng-href="{{selectedBook.pdf}}" download="{{selectedBook.title}}.pdf" class="modal-button secondary" >Descargar</a>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+     <div class="modal-overlay" ng-class="{show: showUploadModal}" ng-click="closeUploadModal($event)">
+        <div class="modal-content2 upload-modal-content" ng-click="$event.stopPropagation()">
+            <button class="modal-close" ng-click="closeUploadModal()"><i class="fas fa-times"></i></button>
+            <h2>Agregar nuevo PDF</h2>
+            <div class="form-group">
+                <label for="title">Título</label>
+                <input type="text" id="title" ng-model="newPdf.title" placeholder="Ej: Sonata Claro de Luna">
+            </div>
+            <div class="form-group">
+                <label for="author">Autor</label>
+                <input type="text" id="author" ng-model="newPdf.author" placeholder="Ej: L.V. Beethoven">
+            </div>
+            <div class="form-group">
+                <label for="grade">Grado / Nivel</label>
+                <input type="text" id="grade" ng-model="newPdf.grade" placeholder="Ej: Grado 3">
+            </div>
+            <div class="form-group">
+                <label>Archivo PDF</label>
+                <div class="drop-zone" ng-click="triggerFileInput()">
+                    <p ng-if="!newPdf.fileName">Haz clic o arrastra un archivo PDF aquí</p>
+                    <p ng-if="newPdf.fileName"><i class="fas fa-check-circle"></i> {{ newPdf.fileName }}</p>
+                </div>
+                <input type="file" id="fileInput" onchange="angular.element(this).scope().onFileSelect(event)" style="display: none;" accept=".pdf">
+            </div>
+            <div class="modal-actions-upload">
+                <button class="modal-button secondary" ng-click="closeUploadModal()">Cancelar</button>
+                <button class="modal-button primary" ng-click="saveNewPdf()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal-overlay" ng-class="{show: showLockedModal}">
+        <div class="locked-modal-content">
+            <i class="fas fa-lock"></i>
+            <p>Este material está bloqueado. <br>¡Sigue avanzando para desbloquearlo!</p>
+        </div>
+    </div>
+    
+   <div class="pdf-viewer-overlay" ng-show="showPdfViewer">  
+        <div class="pdf-viewer-header" >
+            <h3 class="bookTitle">{{ selectedBook.title }}</h3>
+
+<div class="right-controls">
+  <audio id="metronomeAudio" src="https://dashboard.mozartacademy.mx/media/metronom.mp3" loop style="display: none;"></audio>
+  <div class="metronome-control">
+  <!--  <button class="tool-btn record-btn" ng-click="recordWav()" ng-class="{'active': isRecording2}"> -->
+   
+    <button class="tool-btn record-btn" ng-click="openMidiModal(selectedBook)" ng-if="selectedBook.type !== 'manual' && selectedBook.midi"> 
+   <i class="fa-solid fa-music"></i>
+    </button>
+    <button class="tool-btn record-btn" ng-click="recordWav()" ng-class="{'active': isRecording2}"> 
+   <i class="fa-solid fa-microphone"></i>
+    </button>
+    <button class="tool-btn metronome-btn" ng-click="toggleMetronome()" ng-class="{'active': metronomeActive}">
+ <!--    <i class="fa-solid fa-stopwatch"></i>  -->
+       <img src="https://lh3.googleusercontent.com/d/1-xAqP72ng90dUlB4gGT32Tc6vycXZ6ob=s96-c" style="height: 16.5px; width: 15.5px">  
+    </button>
+    <div class="bpm-control">
+      <button class="bpm-btn" ng-mousedown="adjustBPM(-1, $event)" ng-touchstart="adjustBPM(-1, $event)">
+        <i class="fa-solid fa-minus"></i>
+      </button>
+      <span class="bpm-label">{{metronomeBPM}} BPM</span>
+      <button class="bpm-btn" ng-mousedown="adjustBPM(1, $event)" ng-touchstart="adjustBPM(1, $event)">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+            <button class="pdf-viewer-close" ng-click="closePdfViewer()"><i class="fas fa-times"></i></button>
+        </div>
+
+
+
+
+
+
+     <div class="progress-display2" ng-if="selectedBook.type === 'manual'">
+     
+
+  <div class="progress-info" >
+
+    <div class="progress-bar-container" ng-if="lvl > selectedBook.lvl || (lvl === selectedBook.lvl && lsn > (getMaxLsnInBook(selectedBook) || 0))">
+      <div class="progress-label">Progreso: 100%</div>
+   <div class="progress-bar">
+  <div class="progress-fill" ng-style="{'width': 100 + '%', 'background': getManualColor(selectedBook)}"></div>
+</div>
+    </div>
+
+
+     <div class="progress-bar-container" ng-if="lvl < selectedBook.lvl || (lvl === selectedBook.lvl && lsn <= (getMaxLsnInBook(selectedBook) || 0))">
+      <div class="progress-label">Progreso: {{(getCompletedTaskCountForManual(selectedBook) / selectedBook.totalExercises * 100)}} %</div>
+   <div class="progress-bar">
+  <div class="progress-fill" ng-style="{width: (getCompletedTaskCountForManual(selectedBook) / selectedBook.totalExercises * 100) + '%', 'background': getManualColor(selectedBook)}"></div>
+</div>
+    </div>
+
+
+    <div class="time-displays-container">
+        
+     <button class="tool-btn record-btn" style="margin-right: 5px;" ng-click="openTaskModal()" > 
+   <i class="fa-solid fa-clipboard-list"></i>
+    </button>
+
+    <div class="time-display">
+        <span class="value">{{getCompletedTaskCountForManual(selectedBook)}}  /  {{selectedBook.totalExercises}}</span>
+        <span class="label">Ejercicios</span>
+      </div>
+    </div>  
+  </div>
+   </div>
+
+
+
+     <div class="online-badge-container">
+        <div class="online-badge" ng-if="isRecording2">
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <div class="status-pulse"></div>
+                <div class="status-ring"></div>
+            </div>
+            <span class="status-text">Grabando...</span>
+        </div>
+      </div>
+
+
+      <div class="modal-overlay" ng-class="{show: showTaskModal}" >
+    <div class="modal-content2 task-modal-content" ng-click="$event.stopPropagation()">
+        <div class="task-modal-header">
+            <h2>Tareas por entregar de esta unidad</h2>
+            <button class="modal-close2" ng-click="closeTaskModal()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="task-list-container">
+            <div class="task-item" ng-repeat="task in selectedBook.lessons | filter:filterTasksForCurrentManual track by $index">
+              <div class="task-info">
+                  <span class="task-category">Pág. {{task.pag}} - {{task.title}}</span>
+                  <p class="task-title" ng-class="{'completed-task': isTaskCompleted(task)}">{{task.task}}</p>
+              </div>
+              <div class="task-status-container">
+                <span class="task-status completed" ng-if="getTaskOverallStatus(task) === 'completed'">
+                    <i class="fas fa-check-circle"></i> Completado
+                </span>
+                <span class="task-status sent" ng-if="getTaskOverallStatus(task) === 'sent'">
+                    <i class="fas fa-paper-plane"></i> Enviado
+                </span>
+                <span class="task-status failed" ng-if="getTaskOverallStatus(task) === 'fail'">
+                    <i class="fas fa-times-circle"></i> Reintentar
+                </span>
+               </div>
+               <div class="task-actions" ng-if="task.lsn === lsn">
+                    <button class="task-btn video" ng-click="openVideoModal(task.video)" ng-if="task.video">
+                        <i class="fab fa-youtube"></i>
+                    </button>
+                    <button class="task-btn midi" ng-click="openMidiModal(task)" ng-if="task.midi">
+                        <i class="fas fa-music"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal-overlay" ng-class="{show: showVideoModal}" ng-click="closeVideoModal()">
+    <div class="video-modal-content" ng-click="$event.stopPropagation()">
+        <button class="modal-close2 video-close-btn" ng-click="closeVideoModal()"><i class="fas fa-times"></i></button>
+        <div class="video-container">
+            <iframe ng-src="{{currentVideoUrl}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal-overlay" ng-class="{show: isMidiModalVisible}" ng-click="closeMidiModal()">
+    <div class="midi-modal-container" ng-click="$event.stopPropagation()">
+        <div class="midi-modal-header">
+            <div>
+                <h4 class="midi-modal-title">{{ currentMidi.title }}</h4>
+                <p class="midi-modal-user">{{ currentMidi.author }}</p>
+            </div>
+            <button class="midi-modal-close" ng-click="closeMidiModal()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="midi-modal-body">
+            <div class="midi-player-wrapper">
+                <midi-player id="libraryMidiPlayer" sound-font visualizer="#libraryMidiVisualizer"></midi-player>
+            </div>
+            <div class="midi-visualizer-wrapper">
+                <div class="wave-effect"></div>
+                <midi-visualizer id="libraryMidiVisualizer" type="waterfall"></midi-visualizer>
+            </div>
+        </div>
+    </div>
+</div>
+
+          <div class="modal-overlay" ng-class="{show: showSaveRecordingModal}">
+    <div class="modal-content2 save-recording-modal" ng-click="$event.stopPropagation()">
+        <div class="upload-modal-header">
+            <h2>Previsualizar y Guardar Grabación</h2>
+            <p>Escucha tu grabación y asigna a que ejercicio corresponde antes de enviarla a revisión.</p>
+        </div>
+
+        <div class="audio-preview-container">
+            <audio ng-src="{{recording.url}}" controls controlsList="nodownload"></audio>
+        </div>
+
+        <div class="recording-form">
+           <div class="form-group">
+                <label for="rec-exercise">
+                    {{ selectedBook.type === 'manual' ? 'Selecciona el ejercicio a entregar' : 'Ejercicio a entregar' }}
+                </label>
+
+                <select id="rec-exercise" class="form-select"
+                        ng-if="selectedBook.type === 'manual'"
+                        ng-model="recording.selectedTask"
+                        ng-options="lesson as lesson.task + ' (Pág. ' + lesson.pag + ')' for lesson in selectedBook.lessons | filter:uncompletedFilter">
+                    <option value="">-- Elige una tarea pendiente --</option>
+                </select>
+
+                <div class="form-display-text" ng-if="selectedBook.type !== 'manual'">
+                    {{ selectedBook.title }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="rec-author">Notas (Opcional)</label>
+                <input type="text" id="rec-author" ng-model="recording.notes" placeholder="Agrega algún comentario adicional">
+            </div>
+            <div class="recording-metadata">
+                <span><i class="fas fa-calendar-alt"></i> <strong>Fecha:</strong> {{ recording.date | date:'dd/MM/yyyy h:mm a' }}</span>
+              
+            </div>
+        </div>
+
+        <div class="modal-actions-upload">
+            <button class="modal-button secondary danger" ng-click="deleteRecording()">
+                 Eliminar
+            </button>
+            <button class="modal-button primary" ng-click="saveRecording()">
+                 Enviar
+            </button>
+        </div>
+    </div>
+</div>
+
+        <iframe ng-src="{{pdfUrl}}" frameborder="0" allow="fullscreen midi"></iframe>
+    </div>
+
+    <script>
+      const app = angular.module('libraryApp', []);
+
+app.controller('libraryCtrl', ['$http', '$scope', '$sce', '$timeout', function($http, $scope, $sce, $timeout) {
+
+    // --- ESTADO DE LA UI ---
+    $scope.searchQuery = '';
+    $scope.showPreviewModal = false;
+    $scope.selectedBook = null;
+    $scope.selectedCategory = '';
+    $scope.showPdfViewer = false;
+    $scope.pdfUrl = '';
+    $scope.isLoaded = false;
+    $scope.userSubmittedRecordings = [];
+    $scope.showUploadModal = false;
+    $scope.showLockedModal = false;
+    $scope.newPdf = {};
+    $scope.userPDFs = [];
+
+    // --- DATOS DE LA BIBLIOTECA (INICIALES) ---
+    var manualsData = [
+        {'title': 'Nivel Preparatorio','subtitle': 'Unidad 1','background': 'https://lh3.googleusercontent.com/d/1rFNza9NDinXOb0OOG3pTEYx8IYWygNKF', 'pdf': 'https://drive.google.com/file/d/1rFNza9NDinXOb0OOG3pTEYx8IYWygNKF/preview', 'lvl': 0, lsn: 0, 'totalExercises': 8, 'lessons': [
+            { 'lsn': 1, 'id': 1, 'pag': 5, 'title': 'Fundamentos', 'task': 'Postura y posición de manos', 'video': 'https://youtube.com/watch?v=example1', 'midi': null },
+            { 'lsn': 1, 'id': 2, 'pag': 7, 'title': 'Fundamentos', 'task': 'Notas en Clave de Sol (Do-Sol)', 'video': null, 'midi': 'https://site.com/midi1.mid' },
+            { 'lsn': 2, 'id': 1, 'pag': 9, 'title': 'Lectura', 'task': 'Notas en Clave de Fa (Do-Fa)', 'video': null, 'midi': 'https://site.com/midi2.mid' },
+            { 'lsn': 2, 'id': 2, 'pag': 12, 'title': 'Lectura', 'task': 'Ejercicios de 5 dedos', 'video': 'https://youtube.com/watch?v=example4', 'midi': null },
+            { 'lsn': 3, 'id': 1, 'pag': 15, 'title': 'Ritmo', 'task': 'Figuras: redonda y blanca', 'video': null, 'midi': null },
+            { 'lsn': 4, 'id': 1, 'pag': 18, 'title': 'Repertorio', 'task': 'Oda a la Alegría (Simplificada)', 'midi': 'https://site.com/midi3.mid' },
+            { 'lsn': 4, 'id': 2, 'pag': 20, 'title': 'Repertorio', 'task': 'Ligaduras de expresión', 'video': null, 'midi': null },
+            { 'lsn': 4, 'id': 3, 'pag': 22, 'title': 'Teoría', 'task': 'El pentagrama y las claves', 'video': 'https://youtube.com/watch?v=example6', 'midi': null }
+        ] },
+        {'title': 'Nivel Preparatorio','subtitle': 'Unidad 2','background': 'https://lh3.googleusercontent.com/d/15qT2ccd4PkQC82qc-ig831qaqQo5gzbu', 'pdf': 'https://drive.google.com/file/d/15qT2ccd4PkQC82qc-ig831qaqQo5gzbu/preview', 'lvl': 0, lsn: 5, 'totalExercises': 8, 'lessons': [
+            { 'lsn': 5, 'id': 1, 'pag': 5, 'title': 'Fundamentos', 'task': 'Postura y posición de manos', 'video': 'https://youtube.com/watch?v=example1', 'midi': null },
+            { 'lsn': 5, 'id': 2, 'pag': 7, 'title': 'Fundamentos', 'task': 'Notas en Clave de Sol (Do-Sol)', 'video': null, 'midi': 'https://storage.googleapis.com/mozartacademy-files/midi/rach.mid' },
+            { 'lsn': 6, 'id': 1, 'pag': 9, 'title': 'Lectura', 'task': 'Notas en Clave de Fa (Do-Fa)', 'video': null, 'midi': 'https://storage.googleapis.com/mozartacademy-files/midi/rach.mid' },
+            { 'lsn': 6, 'id': 2, 'pag': 12, 'title': 'Lectura', 'task': 'Ejercicios de 5 dedos', 'video': 'https://youtube.com/watch?v=example4', 'midi': null },
+            { 'lsn': 7, 'id': 1, 'pag': 15, 'title': 'Ritmo', 'task': 'Figuras: redonda y blanca', 'video': null, 'midi': null },
+            { 'lsn': 7, 'id': 2, 'pag': 18, 'title': 'Repertorio', 'task': 'Oda a la Alegría (Simplificada)', 'midi': 'https://site.com/midi3.mid' },
+            { 'lsn': 7, 'id': 3, 'pag': 20, 'title': 'Repertorio', 'task': 'Ligaduras de expresión', 'video': null, 'midi': null },
+            { 'lsn': 8, 'id': 1, 'pag': 22, 'title': 'Teoría', 'task': 'El pentagrama y las claves', 'video': 'https://youtube.com/watch?v=example6', 'midi': null }
+        ] },
+        {'title': 'Nivel Preparatorio','subtitle': 'Unidad 3','background': 'https://lh3.googleusercontent.com/d/1VVBfT4V3nfwekluTQcyepmm4-5XIFxis', 'pdf': 'https://drive.google.com/file/d/1VVBfT4V3nfwekluTQcyepmm4-5XIFxis/preview', 'lvl': 0, lsn: 9, 'totalExercises': 8, 'lessons': [
+            "Introducción al Teclado", "Postura y Posición de Manos", "Notas Negras y Blancas",
+            "Ejercicios de 5 Dedos (Do-Sol)", "Figuras Rítmicas Básicas", "Clave de Sol (Notas Do-Mi)",
+            "Clave de Fa (Notas Do-La)", "Pequeña Melodía a Dos Manos"
+        ]},
+        {'title': 'Nivel 1','subtitle': 'Unidad 1','background': 'https://lh3.googleusercontent.com/d/1sHsaDQvii8ApRIkpsN5h0e9yyRYg5tvY', 'pdf': 'https://drive.google.com/file/d/1sHsaDQvii8ApRIkpsN5h0e9yyRYg5tvY/preview', 'lvl': 1, lsn: 0, 'totalExercises': 8, 'lessons': [
+            "Introducción al Teclado", "Postura y Posición de Manos", "Notas Negras y Blancas",
+            "Ejercicios de 5 Dedos (Do-Sol)", "Figuras Rítmicas Básicas", "Clave de Sol (Notas Do-Mi)",
+            "Clave de Fa (Notas Do-La)", "Pequeña Melodía a Dos Manos"
+        ]},
+        {'title': 'Nivel 1','subtitle': 'Unidad 2','background': 'https://lh3.googleusercontent.com/d/12FwPz8DZqkRoeulbvXTzbMtcbQ4nE_xE', 'pdf': 'https://drive.google.com/file/d/12FwPz8DZqkRoeulbvXTzbMtcbQ4nE_xE/preview', 'lvl': 1, lsn: 4, 'totalExercises': 8, 'lessons': [
+            "Introducción al Teclado", "Postura y Posición de Manos", "Notas Negras y Blancas",
+            "Ejercicios de 5 Dedos (Do-Sol)", "Figuras Rítmicas Básicas", "Clave de Sol (Notas Do-Mi)",
+            "Clave de Fa (Notas Do-La)", "Pequeña Melodía a Dos Manos"
+        ]},
+        {'title': 'Nivel 1','subtitle': 'Unidad 3','background': 'https://lh3.googleusercontent.com/d/1tU1TzeczlheibtMLqucEYYpgvzkZ-48Q', 'pdf': 'https://drive.google.com/file/d/1tU1TzeczlheibtMLqucEYYpgvzkZ-48Q/preview', 'lvl': 1, lsn: 7, 'totalExercises': 8, 'lessons': [
+            "Introducción al Teclado", "Postura y Posición de Manos", "Notas Negras y Blancas",
+            "Ejercicios de 5 Dedos (Do-Sol)", "Figuras Rítmicas Básicas", "Clave de Sol (Notas Do-Mi)",
+            "Clave de Fa (Notas Do-La)", "Pequeña Melodía a Dos Manos"
+        ]},
+        {'title': 'Nivel 2','subtitle': 'Unidad 1','background': 'https://lh3.googleusercontent.com/d/1Ms7bmUV955rU5IzdgN4mcLhAe7KJYWWK', 'pdf': 'https://drive.google.com/file/d/1Ms7bmUV955rU5IzdgN4mcLhAe7KJYWWK/preview', 'lvl': 2, lsn: 0, 'totalExercises': 8, 'lessons': [
+            "Introducción al Teclado", "Postura y Posición de Manos", "Notas Negras y Blancas",
+            "Ejercicios de 5 Dedos (Do-Sol)", "Figuras Rítmicas Básicas", "Clave de Sol (Notas Do-Mi)",
+            "Clave de Fa (Notas Do-La)", "Pequeña Melodía a Dos Manos"
+        ]},
+        {'title': 'Nivel 2','subtitle': 'Unidad 2','background': 'https://lh3.googleusercontent.com/d/1AfEgtD_m-bSWmmZJXaxujlfTc6ehSDBJ', 'pdf': 'https://drive.google.com/file/d/1AfEgtD_m-bSWmmZJXaxujlfTc6ehSDBJ/preview', 'lvl': 2, lsn: 4, 'totalExercises': 8, 'lessons': [
+            "Introducción al Teclado", "Postura y Posición de Manos", "Notas Negras y Blancas",
+           "Ejercicios de 5 Dedos (Do-Sol)", "Figuras Rítmicas Básicas", "Clave de Sol (Notas Do-Mi)",
+            "Clave de Fa (Notas Do-La)", "Pequeña Melodía a Dos Manos"
+        ] },
+        {'title': 'Nivel 2','subtitle': 'Unidad 3','background': 'https://lh3.googleusercontent.com/d/1FHx4_pSIiA04oDAFhT4NM15D56unpRpw', 'pdf': 'https://drive.google.com/file/d/1FHx4_pSIiA04oDAFhT4NM15D56unpRpw/preview', 'lvl': 2, lsn: 7, 'totalExercises': 30},
+        {'title': 'Nivel 3','subtitle': 'Unidad 1','background': 'https://lh3.googleusercontent.com/d/1P0azVqQgJKBr6B7rJQlCQIFfAELWUiif', 'pdf': 'https://drive.google.com/file/d/1P0azVqQgJKBr6B7rJQlCQIFfAELWUiif/preview', 'lvl': 3, lsn: 0, 'totalExercises': 38},
+        {'title': 'Nivel 3','subtitle': 'Unidad 2','background': 'https://lh3.googleusercontent.com/d/1i-4cAu9BGFDN7kzoMFQAMKjp2vGzkKCs', 'pdf': 'https://drive.google.com/file/d/1i-4cAu9BGFDN7kzoMFQAMKjp2vGzkKCs/preview', 'lvl': 3, lsn: 4, 'totalExercises': 35},
+        {'title': 'Nivel 3','subtitle': 'Unidad 3','background': 'https://lh3.googleusercontent.com/d/1P0azVqQgJKBr6B7rJQlCQIFfAELWUiif', 'pdf': '', 'lvl': 3, lsn: 7, 'totalExercises': 30},
+    ];
+
+    var piecesData = [
+        { "title": "Ode to Joy - var3", "subtitle": "L.V. Beethoven", "background": "https://lh3.googleusercontent.com/d/1Ad2scs9x1sxc_mx8L35NVUFk_0vj6hej", "pdf": "https://admin.mozartacademy.mx/editNew2?fileId=Ode%20to%20Joy%20-%20Var%203.pdf", "lvl": 0, "lsn": 0, "grade": "Preparatory", "midi": "https://storage.googleapis.com/mozartacademy-files/midi/rach.mid"},
+        { "title": "Trumpet Voluntary", "subtitle": "Jeremiah Clarke", "background": "https://lh3.googleusercontent.com/d/1CR1bbjDnL3wzmeb0AM6hkt6D4G8VunTd", "pdf": "https://drive.google.com/file/d/1CR1bbjDnL3wzmeb0AM6hkt6D4G8VunTd/preview", "lvl": 0, "lsn": 6, "grade": "Preparatory"},
+        { "title": "Old German Dance", "subtitle": "Michael Praetorius", "background": "https://lh3.googleusercontent.com/d/1JWJdVevaq7Oj2k4IxQ-2Zi7MP123vM_4", "pdf": "https://drive.google.com/file/d/1JWJdVevaq7Oj2k4IxQ-2Zi7MP123vM_4/preview", "lvl": 0, "lsn": 7, "grade": "Preparatory"},
+        { "title": "Waltz", "subtitle": "Carl Czerny", "background": "https://lh3.googleusercontent.com/d/18-2Gfm_kZSGnSMe-dadCUnWlypbwxMsh", "pdf": "https://drive.google.com/file/d/18-2Gfm_kZSGnSMe-dadCUnWlypbwxMsh/preview", "lvl": 0, "lsn": 9, "grade": "Preparatory"},
+        { "title": "Sonatina", "subtitle": "C.H. Wilton", "background": "https://lh3.googleusercontent.com/d/12In24V0ux173hjL_Q1zA6zvyUq57J38P", "pdf": "https://drive.google.com/file/d/12In24V0ux173hjL_Q1zA6zvyUq57J38P/preview", "lvl": 0, "lsn": 12, "grade": "Preparatory"},
+        { "title": "March I", "subtitle": "D. Gottlob Türk", "background": "https://lh3.googleusercontent.com/d/1AIV_VAPNh_dFbsJH6VRbyx6GcDQEffSi", "pdf": "https://drive.google.com/file/d/1AIV_VAPNh_dFbsJH6VRbyx6GcDQEffSi/preview", "lvl": 1, "lsn": 2, "grade": "Preparatory"},
+        { "title": "Minuet", "subtitle": "A. Reinagle", "background": "https://lh3.googleusercontent.com/d/1Y2pG3Y3gf8_Y7RGBtBCb3wCHcYDCz2Mf", "pdf": "https://drive.google.com/file/d/1Y2pG3Y3gf8_Y7RGBtBCb3wCHcYDCz2Mf/preview", "lvl": 1, "lsn": 3, "grade": "Preparatory"},
+        { "title": "Sonatina in C", "subtitle": "Cornelius Gurlitt", "background": "https://lh3.googleusercontent.com/d/1zUDSm_eKBu830fBpJg_l3pKHswkmV0RM", "pdf": "https://drive.google.com/file/d/1zUDSm_eKBu830fBpJg_l3pKHswkmV0RM/preview", "lvl": 1, "lsn": 5, "grade": "Grade 1"},
+        { "title": "The Old Windmill", "subtitle": "Dunhill", "background": "https://lh3.googleusercontent.com/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt", "pdf": "https://drive.google.com/file/d/1rUCg7oSJgi4sTyMwlYaxdTdQjiB-peYt/preview", "lvl": 1, "lsn": 6, "grade": "Grade 1"},
+        { "title": "Allemande", "subtitle": "J.H. Schein", "background": "https://lh3.googleusercontent.com/d/1m27dxSoHVEsMSplzIc2QYi_Ettm9LZhn", "pdf": "https://drive.google.com/file/d/1m27dxSoHVEsMSplzIc2QYi_Ettm9LZhn/preview", "lvl": 2, "lsn": 1, "grade": "Grade 1"},
+        { "title": "Aria in F", "subtitle": "J.S. Bach", "background": "https://lh3.googleusercontent.com/d/1gW1tqwKgzmn-UZAmbK4ElCrJ8oRdN3yU", "pdf": "https://drive.google.com/file/d/1gW1tqwKgzmn-UZAmbK4ElCrJ8oRdN3yU/preview", "lvl": 2, "lsn": 3, "grade": "Grade 1"},
+        { "title": "Sonatina in C", "subtitle": "Frank Lynes", "background": "https://lh3.googleusercontent.com/d/13kGxg8iUnBphTYoIotCalNkcJgcW_T12", "pdf": "https://drive.google.com/file/d/13kGxg8iUnBphTYoIotCalNkcJgcW_T12/preview", "lvl": 2, "lsn": 7, "grade": "Grade 2"},
+        { "title": "Gigue in G", "subtitle": "G. P. Telemann", "background": "https://lh3.googleusercontent.com/d/1r1b7hkZU9jOb_Q37DMQmIYbdyqKovNjZ", "pdf": "https://drive.google.com/file/d/1r1b7hkZU9jOb_Q37DMQmIYbdyqKovNjZ/preview", "lvl": 2, "lsn": 9, "grade": "Grade 2"}
+    ];
+
+    // --- TRANSFORMACIÓN DE DATOS ---
+    var manuals = manualsData.map(function(manual) {
+        return {
+            title: manual.title,
+            level: manual.title,
+            author: manual.subtitle,
+            coverUrl: manual.background,
+            pdf: manual.pdf,
+            lvl: manual.lvl,
+            lsn: manual.lsn,
+            lessons: manual.lessons,
+            totalExercises: manual.totalExercises,
+            totalTime: manual.totalTime,
+            type: 'manual'
+        };
+    });
+
+    var pieces = piecesData.map(function(piece) {
+        return {
+            title: piece.title,
+            level: piece.grade,
+            author: piece.subtitle,
+            coverUrl: piece.background,
+            pdf: piece.pdf,
+            lvl: piece.lvl,
+            lsn: piece.lsn,
+            midi: piece.midi,
+            type: 'piece'
+        };
+    });
+
+    // --- ESTRUCTURA INICIAL DE LA BIBLIOTECA ---
+    $scope.library = [
+        { title: 'Fundamentos del Piano', books: manuals },
+        { title: 'Repertorio Formativo', books: pieces },
+        { title: 'Mis Archivos', books: $scope.userPDFs }
+    ];
+
+    // --- NUEVAS VARIABLES PARA EL BOTÓN DE RECARGA ---
+    $scope.isRefreshing = false;
+    let refreshTimeoutPromise;
+
+    // --- FUNCIÓN PARA CARGAR/RECARGAR DATOS DEL USUARIO ---
+    function fetchUserData() {
+        if ($scope.isRefreshing) {
+            console.log("Ya se está recargando la información.");
+            return;
+        }
+
+        $scope.isRefreshing = true;
+        $scope.showLockedModal = false;
+
+        const requestData = {
+            action: "getUserData",
+           token: localStorage.getItem('MStoken')
+          //   token: "U2FsdGVkX1+pTAJ/i/vnElIrTlT7VjKJ6kuzk2FlnAIkGq9xl29aZsKgbGygQIfF"
+        };
+
+        const config = {
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            timeout: 10000 // Timeout para la solicitud HTTP (10 segundos)
+        };
+
+        refreshTimeoutPromise = $timeout(function() {
+            if ($scope.isRefreshing) {
+                console.warn("La solicitud de recarga ha excedido el tiempo límite de 10 segundos.");
+                $scope.isRefreshing = false;
+                alert("La recarga de datos ha tardado demasiado. Por favor, inténtalo de nuevo.");
+            }
+        }, 10000);
+
+        $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData, config)
+            .then(function(response) {
+                $timeout.cancel(refreshTimeoutPromise);
+
+                const repertoire = JSON.parse(response.data.repertoire);
+                const stage = JSON.parse(response.data.stage);
+
+                // Reconstruir $scope.library con los datos actualizados
+                $scope.library = [
+                    { title: 'Fundamentos del Piano', books: manuals },
+                    { title: 'Repertorio Formativo', books: pieces },
+                    { title: 'Mis Archivos', books: $scope.userPDFs }
+                ];
+                $scope.library = $scope.library.concat(repertoire);
+
+                $scope.lvl = stage.lvl;
+                $scope.lsn = stage.lsn;
+                $scope.userSubmittedRecordings = stage.exes || [];
+                $scope.isLoaded = true;
+                console.log("Datos recargados exitosamente.");
+            })
+            .catch(function(error) {
+                $timeout.cancel(refreshTimeoutPromise);
+                console.error('Error al recargar datos del servidor:', error);
+                alert("Error al recargar la información: " + (error.statusText || "Verifica tu conexión a internet."));
+            })
+            .finally(function() {
+                $scope.isRefreshing = false;
+            });
+    }
+
+    // --- LLAMADA INICIAL PARA CARGAR DATOS ---
+    fetchUserData();
+
+    // --- FUNCIÓN ng-click PARA EL BOTÓN DE RECARGA ---
+    $scope.refreshData = function() {
+        fetchUserData();
+    };
+
+
+    // --- RESTO DE FUNCIONES DEL CONTROLADOR ---
+
+    $scope.formatTime = function(seconds) {
+        if (isNaN(seconds) || seconds < 0) return "0:00";
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = Math.floor(seconds % 60);
+        return minutes + ":" + (remainingSeconds < 10 ? '0' : '') + remainingSeconds;
+    };
+
+    $scope.scrollCarousel = function(elementId, direction) {
+        const carousel = document.getElementById(elementId);
+        if (carousel) {
+            const scrollAmount = 200 * direction;
+            carousel.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+    };
+
+    $scope.showTaskModal = false;
+    $scope.openTaskModal = function() { $scope.showTaskModal = true; };
+    $scope.closeTaskModal = function() { $scope.showTaskModal = false; };
+
+    $scope.showVideoModal = false;
+    $scope.currentVideoUrl = '';
+
+    $scope.openVideoModal = function(videoUrl) {
+        if (!videoUrl) return;
+        const embedUrl = videoUrl.replace("watch?v=", "embed/");
+        $scope.currentVideoUrl = $sce.trustAsResourceUrl(embedUrl);
+        $scope.showVideoModal = true;
+    };
+
+    $scope.closeVideoModal = function() {
+        $scope.showVideoModal = false;
+        $scope.currentVideoUrl = '';
+    };
+
+   
+
+    $scope.showPreview = function(book, categoryTitle) {
+        if (book.isUserUploaded) {
+            $scope.selectedBook = book;
+            $scope.selectedCategory = categoryTitle;
+            $scope.showPreviewModal = true;
+            return;
+        }
+        var isLocked = !$scope.isLoaded || book.lvl > $scope.lvl || (book.lvl === $scope.lvl && book.lsn > $scope.lsn);
+        if (isLocked) {
+            $scope.showLockedModal = true;
+            $timeout(function() {
+                $scope.showLockedModal = false;
+            }, 3000);
+            return;
+        }
+        $scope.selectedBook = book;
+        $scope.selectedCategory = categoryTitle;
+        $scope.showPreviewModal = true;
+    };
+
+    $scope.closePreviewModal = function(event) {
+        if (event && event.target !== event.currentTarget) {
+            return;
+        }
+        $scope.showPreviewModal = false;
+    };
+
+    $scope.openPdfViewer = function(book) {
+        if (!book || !book.pdf) {
+            alert('No hay un PDF disponible para este libro.');
+            return;
+        }
+        if (!$scope.metronomeAudio) {
+            $scope.metronomeAudio = document.getElementById('metronomeAudio');
+        }
+        $scope.pdfUrl = $sce.trustAsResourceUrl(book.pdf);
+        $scope.showPreviewModal = false;
+        $scope.showPdfViewer = true;
+    };
+
+    $scope.closePdfViewer = function() {
+        $scope.showPdfViewer = false;
+        $scope.pdfUrl = '';
+    };
+
+    $scope.metronomeActive = false;
+    $scope.metronomeBPM = 60;
+    $scope.baseBPM = 60;
+
+    function bpmToPlaybackRate(bpm) {
+        return bpm / $scope.baseBPM;
+    }
+
+    $scope.toggleMetronome = function() {
+        $scope.metronomeActive = !$scope.metronomeActive;
+        if ($scope.metronomeActive) {
+            $scope.metronomeAudio.playbackRate = bpmToPlaybackRate($scope.metronomeBPM);
+            $scope.metronomeAudio.currentTime = 0;
+            $scope.metronomeAudio.play().catch(e => console.error("Error al reproducir:", e));
+        } else {
+            $scope.metronomeAudio.pause();
+            $scope.metronomeAudio.currentTime = 0;
+        }
+    };
+
+    function clearBPMTimers() {
+        clearTimeout($scope.bpmTimeout);
+        clearInterval($scope.bpmInterval);
+    }
+
+    $scope.adjustBPM = function(change, event) {
+        $scope.metronomeBPM = Math.max(40, Math.min($scope.metronomeBPM + change, 240));
+        if ($scope.metronomeActive) {
+            $scope.metronomeAudio.playbackRate = bpmToPlaybackRate($scope.metronomeBPM);
+        }
+        if (event) {
+            const button = event.target;
+            button.addEventListener('mouseup', clearBPMTimers);
+            button.addEventListener('mouseleave', clearBPMTimers);
+            button.addEventListener('touchend', clearBPMTimers);
+            $scope.bpmTimeout = setTimeout(() => {
+                $scope.bpmInterval = setInterval(() => {
+                    $scope.adjustBPM(change);
+                    $scope.$apply();
+                }, 100);
+            }, 500);
+        }
+    };
+
+    let mediaRecorder;
+    let audioChunks2 = [];
+    let audioContext2;
+    let animationId;
+    $scope.showSaveRecordingModal = false;
+    $scope.recording = {};
+
+    const constraints = {
+        audio: {
+            noiseSuppression: true,
+            autoGainControl: true,
+            echoCancellation: true
+        }
+    };
+
+    async function startRecordingAndOscilloscope() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia(constraints);
+            mediaRecorder = new MediaRecorder(stream);
+            audioChunks2 = [];
+            mediaRecorder.ondataavailable = event => {
+                audioChunks2.push(event.data);
+            };
+            mediaRecorder.onstop = () => {
+                cancelAnimationFrame(animationId);
+                if (audioChunks2.length === 0) return;
+                const audioBlob = new Blob(audioChunks2, { type: 'audio/wav' });
+                const audioUrl = URL.createObjectURL(audioBlob);
+                const tempAudio = document.createElement('audio');
+                tempAudio.src = audioUrl;
+                tempAudio.onloadedmetadata = () => {
+                    $scope.$apply(() => {
+                        const duration = tempAudio.duration;
+                        const minutes = Math.floor(duration / 60);
+                        const seconds = Math.floor(duration % 60);
+                        $scope.recording = {
+                            url: $sce.trustAsResourceUrl(audioUrl),
+                            blob: audioBlob,
+                            name: "Grabación " + new Date().toLocaleTimeString(),
+                            author: "",
+                            date: new Date(),
+                            duration: `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+                        };
+                        $scope.showSaveRecordingModal = true;
+                    });
+                };
+            };
+            audioContext = new(window.AudioContext || window.webkitAudioContext)();
+            analyser = audioContext.createAnalyser();
+            const source = audioContext.createMediaStreamSource(stream);
+            source.connect(analyser);
+            analyser.fftSize = 2048;
+            mediaRecorder.start();
+        } catch (err) {
+            console.error('Error al acceder al micrófono:', err);
+        }
+    }
+
+    $scope.recordWav = function() {
+        if (mediaRecorder && mediaRecorder.state === 'recording') {
+            mediaRecorder.stop();
+            $scope.isRecording2 = false;
+        } else {
+            startRecordingAndOscilloscope();
+            $scope.isRecording2 = true;
+        }
+    };
+
+    $scope.closeSaveModal = function() {
+        if ($scope.recording && $scope.recording.url) {
+            URL.revokeObjectURL($scope.recording.url.toString());
+        }
+        $scope.showSaveRecordingModal = false;
+        $scope.recording = {};
+    };
+
+    $scope.isMidiModalVisible = false;
+    $scope.currentMidi = {};
+    let midiPlayer = null;
+    let midiVisualizer = null;
+
+    $scope.openMidiModal = function(sourceObject) {
+        if (!sourceObject || !sourceObject.midi) return;
+        $scope.currentMidi = {
+            title: sourceObject.task || sourceObject.title,
+            author: sourceObject.author || ''
+        };
+        $scope.isMidiModalVisible = true;
+        $timeout(function() {
+            if (!midiPlayer) {
+                midiPlayer = document.getElementById('libraryMidiPlayer');
+                midiVisualizer = document.getElementById('libraryMidiVisualizer');
+            }
+            midiPlayer.src = sourceObject.midi;
+            midiVisualizer.src = sourceObject.midi;
+        });
+    };
+
+    $scope.closeMidiModal = function() {
+        if ($scope.isMidiModalVisible && midiPlayer) {
+            midiPlayer.stop();
+            midiPlayer.src = "";
+            if (midiVisualizer) {
+                midiVisualizer.src = "";
+            }
+        }
+        $scope.isMidiModalVisible = false;
+        $scope.currentMidi = {};
+    };
+
+    $scope.getCompletedTaskCountForManual = function(manual) {
+        if (!manual || !manual.lessons) return 0;
+        return manual.lessons.filter(lesson => $scope.isTaskCompleted(lesson)).length;
+    };
+
+    $scope.getManualColor = function(manual) {
+        if (manual.lvl == 0) { return '#F44336' }
+        else if (manual.lvl == 1) { return '#9024dc' }
+        else if (manual.lvl == 2) { return '#1894cc' }
+        else if (manual.lvl == 3) { return '#489454' }
+        else if (manual.lvl == 4) { return '#fa9223' }
+        else if (manual.lvl == 5) { return '#485cb4' }
+    };
+
+    $scope.getMaxLsnInBook = function(book) {
+        if (!book || !book.lessons || book.lessons.length === 0) return 0;
+        return Math.max(...book.lessons.map(l => l.lsn));
+    };
+
+    $scope.filterTasksForCurrentManual = function(task) {
+        if ($scope.selectedBook.lvl < $scope.lvl) {
+            return true;
+        }
+        if ($scope.selectedBook.lvl === $scope.lvl) {
+            return task.lsn <= $scope.lsn;
+        }
+        return false;
+    };
+
+    $scope.sentTasks = [];
+
+    $scope.isTaskCompleted = function(task) {
+        if (task.lsn < $scope.lsn) {
+            return true;
+        }
+        if (task.lsn === $scope.lsn) {
+            const userRecording = $scope.userSubmittedRecordings.find(rec =>
+                rec.id === task.id
+            );
+            return userRecording && userRecording.status === 'completed';
+        }
+        return false;
+    };
+
+    $scope.getTaskOverallStatus = function(task) {
+        if ($scope.isTaskCompleted(task)) {
+            return 'completed';
+        }
+        if (task.lsn === $scope.lsn) {
+            const userRecording = $scope.userSubmittedRecordings.find(rec =>
+                rec.id === task.id
+            );
+            if (userRecording) {
+                return userRecording.status;
+            }
+        }
+        return null;
+    };
+
+    $scope.uncompletedFilter = function(lesson) {
+        if (lesson.lsn !== $scope.lsn) {
+            return false;
+        }
+        const overallStatus = $scope.getTaskOverallStatus(lesson);
+        return overallStatus !== 'completed' && overallStatus !== 'sent';
+    };
+
+ $scope.saveRecording = function() {
+    if (!$scope.recording.selectedTask) {
+        alert("Por favor, selecciona el ejercicio que estás entregando.");
+        return;
+    }
+    
+    // Muestra un indicador de carga (opcional, pero recomendado)
+    $scope.isUploading = true; 
+    
+    const submittedTask = $scope.recording.selectedTask;
+    
+    // Usar FileReader para convertir el Blob a Base64
+    const reader = new FileReader();
+    reader.readAsDataURL($scope.recording.blob); 
+    
+    reader.onloadend = function() {
+        const base64AudioData = reader.result; // Aquí está la cadena Base64
+        
+        const requestData = {
+            action: "newAudio",
+             token: localStorage.getItem('MStoken'),
+          //  token: "U2FsdGVkX1+pTAJ/i/vnElIrTlT7VjKJ6kuzk2FlnAIkGq9xl29aZsKgbGygQIfF",
+            audioBase64: base64AudioData, // Enviamos la cadena Base64
+            task: submittedTask, // Enviamos el objeto completo de la tarea
+            notes: $scope.recording.notes || "",
+            date: $scope.recording.date.toISOString()
+        };
+
+        const config = {
+            headers: { "Content-Type": "text/plain;charset=utf-8" }
+        };
+
+        $http.post('https://script.google.com/macros/s/AKfycbxXD35z5FSf_m_dwBt5qcBwWq2L7IDc7KBrYGfix6hUa4kvJ1TFpjU82NltFXezUroGgQ/exec', requestData, config)
+            .then(function(response) {
+                if (response.data.status === "success") {
+                    // Actualiza la UI localmente para que el usuario vea el cambio al instante
+                    const userRecordingEntry = {
+                        lsn: submittedTask.lsn,
+                        id: submittedTask.id,
+                        audio: response.data.audioUrl, // URL devuelta por el servidor
+                        status: 'sent',
+                        notes: requestData.notes,
+                        date: requestData.date,
+                    };
+                    $scope.userSubmittedRecordings.push(userRecordingEntry);
+                    alert("¡Grabación enviada con éxito!");
+                } else {
+                    alert("Hubo un error al enviar tu grabación: " + response.data.message);
+                }
+            })
+            .catch(function(error) {
+                console.error("Error al enviar la grabación:", error);
+                alert("Error de conexión al enviar la grabación. Inténtalo de nuevo.");
+            })
+            .finally(function() {
+                // Oculta el indicador de carga y cierra el modal
+                $scope.isUploading = false; 
+                $scope.closeSaveModal();
+            });
+    };
+};
+
+    $scope.deleteRecording = function() {
+        $scope.closeSaveModal();
+    };
+
+}]);
+    </script>
+</body>
+</html>     
