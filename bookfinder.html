@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="sheetMusicApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Partituras - Modo Aprendizaje</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/tone@14.7.77/build/Tone.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --preview-color: #8b5cf6;
+            --secondary-text: #6b7280;
+            --background-gradient: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            --card-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            --card-hover-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--background-gradient); min-height: 100vh; padding: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        
+        .header { 
+            background: white; 
+            border-radius: 16px; 
+            padding: 24px; 
+            margin-bottom: 24px; 
+            box-shadow: var(--card-shadow); 
+            border: 1px solid #e5e5e7; 
+            display: flex; 
+            flex-direction: column;
+            gap: 20px;
+        }
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .header-left { display: flex; align-items: center; gap: 16px; }
+        .header-icon { width: 56px; height: 56px; background: linear-gradient(135deg, #60a5fa, var(--primary-color)); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
+        .header-info h1 { font-size: 24px; font-weight: 600; color: #1d1d1f; }
+        .header-info p { color: var(--secondary-text); font-size: 16px; }
+        .search-box { flex-grow: 1; min-width: 250px; position: relative; }
+        .search-input { width: 100%; padding: 12px 16px 12px 44px; border: 1px solid #d1d5db; border-radius: 12px; background: white; font-size: 14px; transition: all 0.2s ease; }
+        .search-input:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+        .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #6b7280; }
+
+        .filters-container {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+        }
+        .filter-group { flex-grow: 1; }
+        .filter-label { font-weight: 600; color: #374151; font-size: 14px; display: block; margin-bottom: 8px; }
+        .filter-select { width: 100%; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 8px; background: #f9fafb; font-size: 14px; cursor: pointer; }
+
+        .main-layout { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: flex-start; }
+        
+        .videos-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 24px; 
+            padding: 4px;
+        }
+
+        .video-card { 
+            background: white; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            box-shadow: var(--card-shadow); 
+            transition: all 0.3s ease; 
+            cursor: pointer;
+            border: 1px solid #e5e5e7;
+        }
+        
+        .video-card:hover { 
+            transform: translateY(-4px); 
+            box-shadow: var(--card-hover-shadow); 
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%);
+            overflow: hidden;
+        }
+
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.7) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-card:hover .video-overlay {
+            opacity: 1;
+        }
+
+        .play-button {
+            width: 60px;
+            height: 60px;
+            background: rgba(139, 92, 246, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .video-card:hover .play-button {
+            transform: scale(1.1);
+        }
+
+        .duration-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .difficulty-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(139, 92, 246, 0.9);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .video-info {
+            padding: 16px;
+        }
+
+        .video-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 6px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.4;
+        }
+
+        .video-composer {
+            font-size: 14px;
+            color: var(--secondary-text);
+            margin-bottom: 10px;
+        }
+
+        .video-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            color: #4b5563;
+        }
+
+        .video-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .video-meta .fa-star {
+            color: #f59e0b;
+        }
+
+        .empty-state { text-align: center; padding: 60px 20px; color: #6e6e73; background: white; border-radius: 12px; }
+        
+        .midi-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .midi-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .midi-modal-container {
+            width: 95%;
+            max-width: 1200px;
+            background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1e 100%);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .midi-modal-overlay.active .midi-modal-container {
+            transform: translateY(0) scale(1);
+        }
+
+        .midi-modal-header {
+            padding: 24px 28px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .midi-modal-title {
+            margin: 0;
+            color: #ffffff;
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .midi-modal-user {
+            margin: 0;
+            color: #a78bfa;
+            font-size: 1rem;
+            font-weight: 400;
+            margin-top: 6px;
+        }
+
+        .midi-modal-close {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #ffffff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            line-height: 1;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .midi-modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .midi-modal-body {
+            padding: 0;
+            background: #0f0f1e;
+        }
+
+        .mode-controls {
+            padding: 20px 28px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.08));
+            border-bottom: 1px solid rgba(139, 92, 246, 0.15);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mode-btn {
+            padding: 10px 24px;
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            background: rgba(139, 92, 246, 0.1);
+            color: #a78bfa;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mode-btn:hover {
+            background: rgba(139, 92, 246, 0.2);
+            border-color: rgba(139, 92, 246, 0.5);
+        }
+
+        .mode-btn.active {
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 16px rgba(139, 92, 246, 0.4);
+        }
+
+        .mode-btn i {
+            font-size: 16px;
+        }
+
+        .midi-visualizer-wrapper {
+            height: 500px;
+            position: relative;
+            background: linear-gradient(180deg, #0a0a14 0%, #050510 100%);
+            overflow: hidden;
+        }
+
+        .canvas-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        #waterfallCanvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* Contenedor principal del piano */
+        .piano-keys-visual {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100px; 
+    background: #181818; 
+    border-top: 4px solid #8b5cf6;
+    box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.7);
+    z-index: 10;
+    display: block; 
+    border-radius: 10px 10px 0 0;
+    /* ✅ Cambios clave: */
+    padding: 0; /* Eliminamos el padding */
+    box-sizing: border-box; /* El ancho calculado será el ancho final */
+}
+
+        /* Estilo base para todas las teclas */
+        .piano-key {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            border: 1px solid #333;
+            box-sizing: border-box;
+            transition: all 0.05s ease;
+        }
+
+        /* Estilo para las teclas blancas */
+        .piano-key.white {
+            background: linear-gradient(to bottom, #f9f9f9 0%, #dcdcdc 100%);
+            z-index: 1;
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0px 3px 2px rgba(0,0,0,0.2);
+        }
+
+        /* Estilo para las teclas negras */
+        .piano-key.black {
+            background: linear-gradient(to bottom, #333 0%, #111 100%);
+            height: 60%;
+            z-index: 2;
+            border-radius: 0 0 4px 4px;
+            box-shadow: 0px 2px 3px rgba(0,0,0,0.4);
+        }
+
+        /* Efecto al presionar una tecla */
+        .piano-key.active {
+            border: 2px solid #8b5cf6;
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.9) inset; /* Sombra interior para efecto de "presionado" */
+            transform: translateY(2px); /* Mueve la tecla ligeramente hacia abajo */
+        }
+
+        .grid-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 80px;
+            pointer-events: none;
+            background-image: 
+                linear-gradient(0deg, 
+                    rgba(139, 92, 246, 0.05) 1px, 
+                    transparent 1px);
+            background-size: 100% 40px;
+        }
+
+        .progress-indicator {
+            position: absolute;
+            top: 0;
+            bottom: 80px;
+            left: 50%;
+            width: 3px;
+            background: linear-gradient(180deg,
+                transparent 0%,
+                rgba(139, 92, 246, 0.8) 30%,
+                rgba(139, 92, 246, 1) 50%,
+                rgba(139, 92, 246, 0.8) 70%,
+                transparent 100%);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.8),
+                         0 0 30px rgba(139, 92, 246, 0.4);
+            z-index: 5;
+        }
+
+        .visualizer-stats {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 15;
+            pointer-events: none;
+        }
+
+        .stat-item {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: #a78bfa;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stat-item i {
+            color: #8b5cf6;
+        }
+
+        .stat-item.progress-stat {
+            font-size: 1.1rem;
+            padding: 10px 20px;
+        }
+
+        .midi-notification {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 30px 50px;
+            border-radius: 20px;
+            border: 2px solid rgba(139, 92, 246, 0.5);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-align: center;
+            z-index: 20;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .midi-notification.show {
+            opacity: 1;
+        }
+
+        .midi-notification i {
+            font-size: 2rem;
+            color: #8b5cf6;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 1024px) {
+            .videos-grid { 
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+            }
+        }
+
+        @media (max-width: 768px) {
+            .videos-grid { 
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+                gap: 16px;
+            }
+            .midi-modal-container { width: 98%; }
+            .midi-visualizer-wrapper { height: 400px; }
+            .piano-keys-visual { height: 60px; }
+            .mode-controls { flex-wrap: wrap; }
+        }
+
+        @media (max-width: 600px) {  
+            .videos-grid { 
+                grid-template-columns: 1fr;
+            }
+            .midi-visualizer-wrapper { height: 350px; }
+        }
+
+        @media (max-width: 470px) {
+            .filters-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body ng-controller="sheetMusicCtrl">
+
+    <div class="container">
+        <div class="header">
+            <div class="header-top">
+                <div class="header-left">
+                    <div class="header-icon"><i class="fas fa-music"></i></div>
+                    <div class="header-info">
+                        <h1>Buscador de Partituras</h1>
+                        <p>Encuentra y aprende con tu teclado MIDI</p>
+                    </div>
+                </div>
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Buscar por título o compositor..." ng-model="filters.text">
+                </div>
+            </div>
+            <div class="filters-container">
+                <div class="filter-group">
+                    <label class="filter-label" for="difficulty-select">Dificultad</label>
+                    <select id="difficulty-select" class="filter-select" ng-model="filters.difficulty">
+                        <option value="">Todos los Grados</option>
+                        <option value="Preparatorio">Preparatorio</option>
+                        <option value="Grado 1">Grado 1</option>
+                        <option value="Grado 2">Grado 2</option>
+                        <option value="Grado 3">Grado 3</option>
+                        <option value="Grado 4">Grado 4</option>
+                        <option value="Grado 5">Grado 5</option>
+                        <option value="Grado 6">Grado 6</option>
+                        <option value="Grado 7">Grado 7</option>
+                        <option value="Grado 8">Grado 8</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label" for="style-select">Estilo</label>
+                    <select id="style-select" class="filter-select" ng-model="filters.style">
+                        <option value="">Todos</option>
+                        <option value="Clásico">Clásico</option>
+                        <option value="Barroco">Barroco</option>
+                        <option value="Romántico">Romántico</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-layout">
+            <main class="results-content">
+                <div class="videos-grid">
+                    <div class="video-card" ng-repeat="sheet in sheets | filter:customFilter | orderBy:'title'" ng-click="showPreview(sheet)">
+                        <div class="video-thumbnail">
+                            <img ng-src="{{ sheet.img }}" alt="{{ sheet.title }}">
+                            <div class="video-overlay">
+                                <div class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                            <div class="difficulty-badge">{{ sheet.difficulty }}</div>
+                            <div class="duration-badge">
+                                <i class="fas fa-music"></i> {{ sheet.pages }} pág.
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">{{ sheet.title }}</h3>
+                            <p class="video-composer">{{ sheet.composer }}</p>
+                            <div class="video-meta">
+                                <span><i class="fas fa-star"></i>{{ sheet.rating }}</span>
+                                <span><i class="fas fa-music"></i>{{ sheet.style }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div class="midi-modal-overlay" ng-class="{'active': isPreviewVisible}" ng-click="hidePreview()">
+        <div class="midi-modal-container" ng-click="$event.stopPropagation()">
+            <div class="midi-modal-header">
+                <div>
+                    <h4 class="midi-modal-title">{{ currentSheet.title }}</h4>
+                    <p class="midi-modal-user">{{ currentSheet.composer }}</p>
+                </div>
+                <button class="midi-modal-close" ng-click="hidePreview()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="mode-controls">
+                <button class="mode-btn" ng-class="{'active': !isLearningMode}" ng-click="setPlaybackMode()">
+                    <i class="fas fa-play"></i>
+                    Reproducción Automática
+                </button>
+                <button class="mode-btn" ng-class="{'active': isLearningMode}" ng-click="setLearningMode()">
+                    <i class="fas fa-graduation-cap"></i>
+                    Modo Aprendizaje MIDI
+                </button>
+            </div>
+
+            <div class="midi-modal-body">
+                <div class="midi-visualizer-wrapper">
+                    <div class="visualizer-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-music"></i>
+                            <span ng-if="!isLearningMode">Reproducción</span>
+                            <span ng-if="isLearningMode">Aprendizaje</span>
+                        </div>
+                        <div class="stat-item progress-stat" ng-if="isLearningMode">
+                            <i class="fas fa-trophy"></i>
+                            <span>{{ learningProgress }}%</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-signal"></i>
+                            <span>{{ currentSheet.difficulty }}</span>
+                        </div>
+                    </div>
+                    <div class="grid-lines"></div>
+                     <div class="progress-indicator"></div>
+                    <div class="canvas-container">
+                        <canvas id="waterfallCanvas"></canvas>
+                    </div>
+                    <div class="piano-keys-visual" id="pianoKeysVisual"></div>
+                    
+                    <div class="midi-notification" id="midiNotification">
+                        <i class="fas fa-keyboard"></i>
+                        <div id="notificationText">Conecta tu teclado MIDI</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const app = angular.module('sheetMusicApp', []);
+
+        app.controller('sheetMusicCtrl', function($scope, $timeout) {
+            $scope.sheets = [
+                { id: 1, img:'https://lh3.googleusercontent.com/d/1b8uhUqybBb-2ycfH-vyDtPMXM__h79wh', title: 'Bohemian Rhapsody', composer: 'Queen', pages: 4, rating: 4.7, type: 'midi', url: "https://storage.googleapis.com/mozartacademy-files/midi/Bohemian%20Rhapsody%20-%20Queen.mid", difficulty: 'Grado 5', style: 'Pop' },
+                { id: 2, img:'https://lh3.googleusercontent.com/d/1b8uhUqybBb-2ycfH-vyDtPMXM__h79wh', title: 'Little Playmates', composer: 'Chawtal', pages: 2, rating: 4.9, type: 'midi', url: "https://storage.googleapis.com/mozartacademy-files/midi/Little%20Playmates.mid", difficulty: 'Grado 1', style: 'Clásico' },
+                { id: 3, img:'https://lh3.googleusercontent.com/d/1b8uhUqybBb-2ycfH-vyDtPMXM__h79wh', title: 'Ode to Joy', composer: 'L.V. Beethoven', pages: 5, rating: 4.8, type: 'midi', url: "https://storage.googleapis.com/mozartacademy-files/midi/Ode%20to%20Joy.mid", difficulty: 'Grado 1', style: 'Clásico' },
+                { id: 4, img:'https://lh3.googleusercontent.com/d/1b8uhUqybBb-2ycfH-vyDtPMXM__h79wh', title: 'Old German Dance', composer: 'Michael Praetorius', pages: 7, rating: 4.8, type: 'midi', url: "hhttps://storage.googleapis.com/mozartacademy-files/midi/Old%20German%20Dance.mid", difficulty: 'Grado 1', style: 'Barroco' },
+                { id: 5, img:'https://lh3.googleusercontent.com/d/1b8uhUqybBb-2ycfH-vyDtPMXM__h79wh', title: 'Trumpet Voluntary', composer: 'Jeremiah Clarke', pages: 2, rating: 4.9, type: 'midi', url: "https://storage.googleapis.com/mozartacademy-files/midi/TrumpetV.mid", difficulty: 'Grado 1', style: 'Barroco' },
+                { id: 6, img:'https://lh3.googleusercontent.com/d/1b8uhUqybBb-2ycfH-vyDtPMXM__h79wh', title: 'Jodler', composer: 'Traditional American', pages: 8, rating: 4.7, type: 'midi', url: "https://storage.googleapis.com/mozartacademy-files/midi/jodler.mid", difficulty: 'Grado 1', style: 'Contemporaneo' },
+                     { id: 7, img:'https://lh3.googleusercontent.com/d/1b8uhUqybBb-2ycfH-vyDtPMXM__h79wh', title: 'Bluebossa', composer: 'Kenny Dorham', pages: 8, rating: 4.7, type: 'midi', url: "https://storage.googleapis.com/mozartacademy-files/midi/bluebossa4.mid", difficulty: 'Grado 5', style: 'Jazz' }
+            ];
+
+            $scope.filters = { text: '', difficulty: '', style: '' };
+            $scope.isPreviewVisible = false;
+            $scope.currentSheet = {};
+            $scope.isLearningMode = false;
+            $scope.learningProgress = 0;
+
+            let midiAccess = null;
+            let sampler = null;
+            let parsedNotes = [];
+            let currentNoteIndex = 0;
+            let expectedNotes = new Set();
+            let canvas, ctx;
+            let dpr = 1;
+            let pianoHeight = 100;
+            let animationFrameId;
+            let scrollOffset = 0;
+            let isPlaying = false;
+            let playbackStartTime = 0;
+            let noteHeight = 4;
+            let pixelsPerSecond = 100;
+            const totalKeys = 88;
+            const keyWidth = 12;
+            const whiteKeyWidth = 20; // Ancho que ya usas para las teclas blancas
+            const blackKeyWidth = 13; // Ancho que ya usas para las teclas negras
+            const totalWhiteKeys = 52; 
+            const VISUAL_OFFSET_SECONDS = 0.05;
+
+            $scope.customFilter = function(sheet) {
+                const textSearch = !$scope.filters.text ||
+                    sheet.title.toLowerCase().includes($scope.filters.text.toLowerCase()) ||
+                    sheet.composer.toLowerCase().includes($scope.filters.text.toLowerCase());
+                const difficultyMatch = !$scope.filters.difficulty || sheet.difficulty === $scope.filters.difficulty;
+                const styleMatch = !$scope.filters.style || sheet.style === $scope.filters.style;
+                return textSearch && difficultyMatch && styleMatch;
+            };
+
+            function initSampler() {
+                sampler = new Tone.Sampler({
+                    urls: { 
+                        "C4": "C4.mp3", 
+                        "D#4": "Ds4.mp3", 
+                        "F#4": "Fs4.mp3", 
+                        "A4": "A4.mp3" 
+                    },
+                    release: 1,
+                    baseUrl: "https://tonejs.github.io/audio/salamander/"
+                }).toDestination();
+            }
+
+            function initMidiInput() {
+                if (navigator.requestMIDIAccess) {
+                    navigator.requestMIDIAccess()
+                        .then(onMIDISuccess, onMIDIFailure);
+                } else {
+                    showNotification("Tu navegador no soporta Web MIDI API");
+                }
+            }
+
+            function onMIDISuccess(access) {
+                midiAccess = access;
+                
+                midiAccess.onstatechange = (event) => {
+                    const port = event.port;
+                    const deviceName = port.name || 'Dispositivo MIDI';
+                    
+                    if (port.state === 'connected' && port.type === 'input') {
+                        showNotification(`✅ ${deviceName} conectado!`);
+                        port.onmidimessage = onMIDIMessage;
+                    } else if (port.state === 'disconnected' && port.type === 'input') {
+                        showNotification(`🔌 ${deviceName} desconectado`);
+                    }
+                };
+
+                const inputs = midiAccess.inputs.values();
+                let deviceFound = false;
+                for (const input of inputs) {
+                    input.onmidimessage = onMIDIMessage;
+                    deviceFound = true;
+                }
+
+                if (!deviceFound) {
+                    showNotification("Conecta tu teclado MIDI para comenzar");
+                }
+            }
+
+            function onMIDIFailure() {
+                showNotification("⚠️ No se pudo acceder a MIDI");
+            }
+
+            function onMIDIMessage(event) {
+                if (!$scope.isLearningMode || expectedNotes.size === 0) return;
+
+                const command = event.data[0];
+                const note = event.data[1];
+                const velocity = event.data.length > 2 ? event.data[2] : 0;
+
+                if (command === 144 && velocity > 0) {
+                    const pitchName = midiNoteToPitchName(note);
+                    const midiNumber = note - 21;
+
+                    highlightKey(midiNumber, true);
+
+                    if (expectedNotes.has(pitchName)) {
+                        sampler.triggerAttackRelease(pitchName, '8n');
+                        expectedNotes.delete(pitchName);
+                        
+                        if (expectedNotes.size === 0) {
+                            $timeout(() => {
+                                advanceLearningStep();
+                            }, 200);
+                        }
+                    }
+                } else if (command === 128 || (command === 144 && velocity === 0)) {
+                    const midiNumber = note - 21;
+                    highlightKey(midiNumber, false);
+                }
+            }
+
+            function midiNoteToPitchName(midiNote) {
+                const noteNames = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+                const octave = Math.floor(midiNote / 12) - 1;
+                const noteName = noteNames[midiNote % 12];
+                return noteName + octave;
+            }
+
+            function pitchNameToMidiNumber(pitchName) {
+                const noteMap = {
+                    'C': 0, 'C#': 1, 'D': 2, 'D#': 3, 'E': 4, 'F': 5,
+                    'F#': 6, 'G': 7, 'G#': 8, 'A': 9, 'A#': 10, 'B': 11
+                };
+                
+                const match = pitchName.match(/^([A-G]#?)(\d+)$/);
+                if (!match) return -1;
+                
+                const note = match[1];
+                const octave = parseInt(match[2]);
+                const midiNote = (octave + 1) * 12 + noteMap[note];
+                return midiNote - 21;
+            }
+
+            async function parseMIDI(url) {
+                try {
+                    const response = await fetch(url);
+                    const arrayBuffer = await response.arrayBuffer();
+                    const midiData = new Uint8Array(arrayBuffer);
+                    
+                    parsedNotes = await parseMIDIFile(midiData);
+                    parsedNotes.sort((a, b) => a.startSec - b.startSec);
+                    
+                    return parsedNotes;
+                } catch (error) {
+                    console.error("Error parsing MIDI:", error);
+                    return [];
+                }
+            }
+
+            async function parseMIDIFile(midiData) {
+                const notes = [];
+                let tempo = 500000;
+                let division = 480;
+                let currentTime = 0;
+
+                const view = new DataView(midiData.buffer);
+                let offset = 0;
+
+                function readVarLen() {
+                    let value = 0;
+                    let byte;
+                    do {
+                        byte = midiData[offset++];
+                        value = (value << 7) | (byte & 0x7F);
+                    } while (byte & 0x80);
+                    return value;
+                }
+
+                if (view.getUint32(0) !== 0x4D546864) return notes;
+                offset = 8;
+                const format = view.getUint16(offset);
+                offset += 2;
+                const trackCount = view.getUint16(offset);
+                offset += 2;
+                division = view.getUint16(offset);
+                offset += 2;
+
+                for (let track = 0; track < trackCount; track++) {
+                    if (view.getUint32(offset) !== 0x4D54726B) break;
+                    offset += 4;
+                    const trackLength = view.getUint32(offset);
+                    offset += 4;
+                    const trackEnd = offset + trackLength;
+
+                    currentTime = 0;
+                    let runningStatus = 0;
+                    const activeNotes = new Map();
+
+                    while (offset < trackEnd) {
+                        const delta = readVarLen();
+                        currentTime += delta;
+
+                        let eventType = midiData[offset++];
+                        
+                        if (eventType < 0x80) {
+                            eventType = runningStatus;
+                            offset--;
+                        } else {
+                            runningStatus = eventType;
+                        }
+
+                        const channel = eventType & 0x0F;
+                        const command = eventType & 0xF0;
+
+                        if (command === 0x90 || command === 0x80) {
+                            const note = midiData[offset++];
+                            const velocity = midiData[offset++];
+
+                            if (command === 0x90 && velocity > 0) {
+                                activeNotes.set(note, currentTime);
+                            } else {
+                                if (activeNotes.has(note)) {
+                                    const startTime = activeNotes.get(note);
+                                    const startSec = (startTime * tempo) / (division * 1000000);
+                                    const endSec = (currentTime * tempo) / (division * 1000000);
+                                    
+                                    notes.push({
+                                        pitch: midiNoteToPitchName(note),
+                                        midiNumber: note - 21,
+                                        startSec: startSec,
+                                        durSec: endSec - startSec
+                                    });
+                                    
+                                    activeNotes.delete(note);
+                                }
+                            }
+                        } else if (command === 0xB0 || command === 0xE0) {
+                            offset += 2;
+                        } else if (command === 0xC0 || command === 0xD0) {
+                            offset += 1;
+                        } else if (eventType === 0xFF) {
+                            const metaType = midiData[offset++];
+                            const length = readVarLen();
+                            
+                            if (metaType === 0x51 && length === 3) {
+                                tempo = (midiData[offset] << 16) | (midiData[offset + 1] << 8) | midiData[offset + 2];
+                            }
+                            
+                            offset += length;
+                        } else if (eventType === 0xF0 || eventType === 0xF7) {
+                            const length = readVarLen();
+                            offset += length;
+                        }
+                    }
+                }
+
+                return notes;
+            }
+
+
+function initCanvas() {
+    canvas = document.getElementById('waterfallCanvas');
+    ctx = canvas.getContext('2d');
+    
+    function resizeCanvas() {
+        const container = canvas.parentElement;
+        
+        // Obtenemos y guardamos el dpr del dispositivo
+        dpr = window.devicePixelRatio || 1;
+
+        // Ajustamos el tamaño real del "lienzo" a los píxeles físicos
+        canvas.width = container.clientWidth * dpr;
+        canvas.height = container.clientHeight * dpr;
+        
+        // Nos aseguramos de que el tamaño en CSS siga siendo el correcto
+        canvas.style.width = `${container.clientWidth}px`;
+        canvas.style.height = `${container.clientHeight}px`;
+        const pianoEl = document.getElementById('pianoKeysVisual');
+        if (pianoEl) {
+            pianoHeight = pianoEl.offsetHeight;
+        }
+    }
+    
+    resizeCanvas(); 
+    window.addEventListener('resize', resizeCanvas);
+}
+
+
+  function isBlackKey(midiNote) {
+    const note = midiNote % 12;
+    return note === 1 || note === 3 || note === 6 || note === 8 || note === 10;
+}
+
+
+function getKeyXPosition(midiNote) {
+    const firstMidiNote = 21; // A0, la primera tecla del piano de 88
+    let position = 0;
+    // Contamos las teclas blancas desde el inicio del piano hasta la nota actual
+    for (let i = firstMidiNote; i < midiNote; i++) {
+        if (!isBlackKey(i)) {
+            position++;
+        }
+    }
+
+    if (isBlackKey(midiNote)) {
+        // La tecla negra se posiciona relativa a la tecla blanca anterior, centrada en la división.
+        return (position * whiteKeyWidth) - (blackKeyWidth / 2);
+    } else {
+        // La tecla blanca se posiciona según el número de teclas blancas que la preceden.
+        return position * whiteKeyWidth;
+    }
+}
+
+function drawWaterfall() {
+    if (!canvas || !ctx) return;
+
+    // Usamos clearRect para limpiar el buffer de alta resolución
+    ctx.clearRect(0, 0, canvas.width, canvas.height); 
+    ctx.fillStyle = '#0a0a14';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    const pianoTotalWidth = totalWhiteKeys * whiteKeyWidth;
+    const pianoStartX = (canvas.parentElement.clientWidth - pianoTotalWidth) / 2; // Usamos el ancho del contenedor
+
+    parsedNotes.forEach(note => {
+        const visualTime = $scope.isLearningMode ? scrollOffset : scrollOffset - VISUAL_OFFSET_SECONDS;
+        
+        const cssCanvasHeight = canvas.height / dpr;
+        const noteStartY = cssCanvasHeight - pianoHeight - ((note.startSec - visualTime) * pixelsPerSecond);
+        const noteEndY = noteStartY - (note.durSec * pixelsPerSecond);
+
+        if (noteEndY < cssCanvasHeight && noteStartY > 0) {
+            const keyX = pianoStartX + getKeyXPosition(note.midiNumber + 21);
+            const height = noteStartY - noteEndY;
+            const noteVisualWidth = isBlackKey(note.midiNumber + 21) ? blackKeyWidth : whiteKeyWidth;
+            const isExpected = expectedNotes.has(note.pitch) && Math.abs(note.startSec - scrollOffset) < 0.5;
+
+            if (isExpected) {
+                ctx.shadowBlur = 20 * dpr; // Escalamos el valor de la sombra
+                ctx.shadowColor = 'rgba(139, 92, 246, 0.8)';
+                ctx.fillStyle = 'rgba(139, 92, 246, 0.9)';
+            } else {
+                ctx.shadowBlur = 10 * dpr; // Escalamos el valor de la sombra
+                ctx.shadowColor = 'rgba(99, 102, 241, 0.5)';
+                ctx.fillStyle = 'rgba(99, 102, 241, 0.7)';
+            }
+            
+            ctx.fillRect(
+                keyX * dpr, 
+                noteEndY * dpr, 
+                (noteVisualWidth - 2) * dpr, // Restamos 2px antes de escalar
+                height * dpr
+            );
+            
+            ctx.shadowBlur = 0; // Reseteamos la sombra
+        }
+    });
+}
+
+function animateWaterfall() {
+    if ($scope.isLearningMode) {
+        if (currentNoteIndex > 0) {
+            const currentLearningTime = parsedNotes[currentNoteIndex - 1].startSec;
+            scrollOffset = currentLearningTime - VISUAL_OFFSET_SECONDS;
+        } else {
+            // Al inicio, antes de que se procese la primera nota.
+            scrollOffset = 0 - VISUAL_OFFSET_SECONDS;
+        }
+    } else if (isPlaying) {
+        scrollOffset = Tone.Transport.seconds;
+    }
+
+    drawWaterfall();
+    animationFrameId = requestAnimationFrame(animateWaterfall);
+}
+
+function initPianoKeys() {
+    const pianoContainer = document.getElementById('pianoKeysVisual');
+    if (!pianoContainer) return;
+
+    pianoContainer.innerHTML = ''; 
+
+    const firstMidiNote = 21;
+    const lastMidiNote = 108;
+
+    // Dibuja primero las teclas blancas
+    for (let midiNote = firstMidiNote; midiNote <= lastMidiNote; midiNote++) {
+        if (!isBlackKey(midiNote)) {
+            const key = document.createElement('div');
+            key.classList.add('piano-key', 'white');
+            key.dataset.note = midiNote - firstMidiNote;
+            key.style.width = `${whiteKeyWidth}px`;
+            key.style.left = `${getKeyXPosition(midiNote)}px`; // ✅ Usamos la función central
+            pianoContainer.appendChild(key);
+        }
+    }
+
+    // Dibuja las teclas negras encima
+    for (let midiNote = firstMidiNote; midiNote <= lastMidiNote; midiNote++) {
+        if (isBlackKey(midiNote)) {
+            const key = document.createElement('div');
+            key.classList.add('piano-key', 'black');
+            key.dataset.note = midiNote - firstMidiNote;
+            key.style.width = `${blackKeyWidth}px`;
+            key.style.left = `${getKeyXPosition(midiNote)}px`; // ✅ Usamos la función central
+            pianoContainer.appendChild(key);
+        }
+    }
+
+    // Ajustamos el ancho total del contenedor del piano
+    pianoContainer.style.width = `${totalWhiteKeys * whiteKeyWidth}px`;
+}
+
+
+            function highlightKey(midiNumber, active) {
+                const key = document.querySelector(`.piano-key[data-note="${midiNumber}"]`);
+                if (key) {
+                    if (active) {
+                        key.classList.add('active');
+                    } else {
+                        key.classList.remove('active');
+                    }
+                }
+            }
+
+function advanceLearningStep() {
+    // ✅ PASO DE LIMPIEZA: Apagamos todas las teclas que estaban activas.
+    document.querySelectorAll('.piano-key.active').forEach(key => {
+        key.classList.remove('active');
+    });
+
+    expectedNotes.clear();
+
+    if (currentNoteIndex >= parsedNotes.length) {
+        showNotification("¡Felicidades! Completaste la pieza 🎉");
+        $scope.learningProgress = 100;
+        $scope.$apply();
+        return;
+    }
+
+    const nextNoteTime = parsedNotes[currentNoteIndex].startSec;
+
+    while (currentNoteIndex < parsedNotes.length && 
+           parsedNotes[currentNoteIndex].startSec === nextNoteTime) {
+        const note = parsedNotes[currentNoteIndex];
+        expectedNotes.add(note.pitch);
+        // Ahora, este highlightKey solo coloreará las nuevas notas.
+        highlightKey(note.midiNumber, true); 
+        currentNoteIndex++;
+    }
+
+    $scope.learningProgress = Math.round((currentNoteIndex / parsedNotes.length) * 100);
+    $scope.$apply();
+}
+
+           async function startPlayback() {
+                await Tone.start();
+                isPlaying = true;
+                scrollOffset = 0;
+                Tone.Transport.position = 0; // Asegura que el transporte comience desde el principio
+
+                parsedNotes.forEach(note => {
+                    // 1. Programa el inicio de la nota (sonido y visual)
+                    Tone.Transport.schedule((time) => {
+                        sampler.triggerAttackRelease(note.pitch, note.durSec, time);
+                        highlightKey(note.midiNumber, true);
+                    }, note.startSec);
+
+                    // 2. Programa el fin de la nota (solo visual) con la misma precisión
+                    Tone.Transport.schedule(() => {
+                        highlightKey(note.midiNumber, false);
+                    }, note.startSec + note.durSec);
+                });
+
+                Tone.Transport.start();
+            }
+
+            function stopPlayback() {
+              isPlaying = false;
+              Tone.Transport.stop();
+              Tone.Transport.cancel();
+              // Reinicia la posición del transporte para la próxima reproducción
+              Tone.Transport.position = 0;
+              scrollOffset = 0;
+          }
+
+            $scope.setLearningMode = function() {
+                stopPlayback();
+                $scope.isLearningMode = true;
+                currentNoteIndex = 0;
+                scrollOffset = 0;
+                $scope.learningProgress = 0;
+                
+                if (parsedNotes.length > 0) {
+                    advanceLearningStep();
+                }
+            };
+
+            $scope.setPlaybackMode = function() {
+                stopPlayback();
+                $scope.isLearningMode = false;
+                expectedNotes.clear();
+                currentNoteIndex = 0;
+                
+                document.querySelectorAll('.piano-key').forEach(key => {
+                    key.classList.remove('active');
+                });
+
+                if (parsedNotes.length > 0) {
+                    startPlayback();
+                }
+            };
+
+            $scope.showPreview = async function(sheet) {
+                if (sheet.type !== 'midi') return;
+                $scope.currentSheet = sheet;
+                $scope.isPreviewVisible = true;
+                $scope.isLearningMode = false;
+
+                await $timeout(100);
+
+                initCanvas();
+                initPianoKeys();
+                
+                parsedNotes = await parseMIDI(sheet.url);
+                
+                if (animationFrameId) {
+                    cancelAnimationFrame(animationFrameId);
+                }
+                animateWaterfall();
+            };
+
+            $scope.hidePreview = function() {
+                if ($scope.isPreviewVisible) {
+                    stopPlayback();
+                    if (animationFrameId) {
+                        cancelAnimationFrame(animationFrameId);
+                    }
+                    $scope.isPreviewVisible = false;
+                    $scope.currentSheet = {};
+                    parsedNotes = [];
+                    currentNoteIndex = 0;
+                    expectedNotes.clear();
+                } 
+            };
+
+            function showNotification(message) {
+                const notification = document.getElementById('midiNotification');
+                const textElement = document.getElementById('notificationText');
+                
+                if (notification && textElement) {
+                    textElement.textContent = message;
+                    notification.classList.add('show');
+                    
+                    setTimeout(() => {
+                        notification.classList.remove('show');
+                    }, 3000);
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                initSampler();
+                initMidiInput();
+            });
+
+            $timeout(function() {
+                initSampler();
+                initMidiInput();
+            }, 500);
+        });
+    </script>
+</body>
+</html>
