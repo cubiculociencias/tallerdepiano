@@ -177,6 +177,7 @@ font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
   font-weight: 550 !important; text-shadow: 0 0 6px silver !important;
     background-color: #f0f2f5 !important; 
   color: #1F2937 !important;
+  text-decoration: none !important;
 }
 
 
@@ -461,6 +462,16 @@ font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
     height: 55px;
     margin: 10px 2px 0 10px; /* Ajusta los márgenes */
 }
+
+.profile-user-data .circle2 {
+    flex-shrink: 0; /* Evita que el contenedor de la imagen se reduzca */
+    border-radius: 25% !important;
+    overflow: hidden; 
+    width: 40px;
+    height: 40px;
+    margin: 10px 2px 0 10px; /* Ajusta los márgenes */
+}
+
 .profile-user-data img { margin-right: 10px; max-width: 100%;}
 .profile-user-data .main-data {
     flex-grow: 1; /* Permite que el contenedor de texto use el espacio restante */
@@ -2368,6 +2379,55 @@ width: 200px; /* Ajusta según el tamaño deseado */
     }
 }
 
+
+
+     /* --- 1. Ocultar el nuevo menú horizontal por defecto (móvil) --- */
+.nav-bar-horizontal-menu {
+    display: none;
+}
+
+
+/* --- 2. Estilo elegante para el menú horizontal (desktop) --- */
+@media (min-width: 850px) {
+
+    /* Contenedor del menú horizontal */
+    .nav-bar-horizontal-menu {
+        display: flex;
+        align-items: center; 
+        height: 100%;
+        margin-left: 20px; /* Aumentamos el margen izquierdo */
+    }
+
+    /* Estilo base para CADA botón del menú */
+    .nav-bar-horizontal-menu .button {
+        font-size: 14px;
+        font-weight: 400 !important; 
+        color: #555 !important;   
+        padding-left: 19px !important; 
+        padding-right: 19px !important;
+        
+        /* Reseteo para un look limpio */
+        border: none;
+        border-radius: 0; /* Sin esquinas redondeadas */
+        background: transparent;
+        box-shadow: none;
+        border-bottom: 2px solid transparent; 
+        height: 100%; 
+        display: flex;
+        align-items: center;
+        
+        /* Transición suave para elegancia */
+        transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    /* Efecto HOVER para botones INACTIVOS */
+    .nav-bar-horizontal-menu .button:not(.menuSelectedColor):hover {
+         color: #111; /* Color de texto más oscuro */
+         border-bottom-color: #ccc; /* Borde gris sutil al pasar el mouse */
+    }
+
+}
+
 </style>
 
 <body>
@@ -2390,31 +2450,10 @@ width: 200px; /* Ajusta según el tamaño deseado */
     
  <script id="menu.html" type="text/ng-template">
     <ion-side-menus >
- <ion-side-menu side="left" width='260'  > 
+ <ion-side-menu side="left" width='270'  > 
        
         <ion-content >
 
-   <!--   <div class="profile-user-data clearfix" ng-if="userData.status == 'ACTIVO'">
-    
-          <div class="circle">
-                <img class="profile-pic" src="https://lh3.googleusercontent.com/d/1gA-HKzQXWksHNg8jCbUveFUXoE3jfip_">
-              
-          </div>
-          <div class="main-data" style="margin-top: 12px; " ng-if="!loadingProfile">
-            <h4 class="userLvl">Plan PRO <i class="ri-vip-crown-line" style="color: orange; text-shadow: 0 0 10px orange; margin-right: 4px" ></i></h4>
-
-
-
-
-       
-        <div class="userLvl" ng-if="userData.lvl == 0"> Nivel Preparatorio </div>
-          <div class="userLvl" ng-if="userData.lvl != 0"> Nivel {{userLvl}} </div>
-        <div class="progress">
-          <div class="progress-bar" style="background-color: {{userData.color}};" role="progressbar" aria-valuemin="0" aria-valuemax="100" ng-style="{width: userProgress + '%'}" ng-init="startAnimation()"></div>
-        </div>
-          </div>  
-        </div> -->
-     
 
 
   <div class="profile-user-data clearfix" >
@@ -2442,12 +2481,6 @@ width: 200px; /* Ajusta según el tamaño deseado */
 
      <a href="#/menu/reel" class="item" ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" ng-click="activeMenuClr = 'reel'" menu-toggle="left"><i class="ri-earth-line"></i>&nbsp&nbspMozart Now</a>  
 
-
-<!--
-               <a href="#/menu/recordings" class="item" ng-class="(activeMenuClr=='recordings')?'menuSelectedColor':''" ng-click="activeMenuClr = 'recordings'" menu-toggle="left"><i class="ri-record-circle-line"></i>&nbsp&nbspRecordings</a>
-      <a href="#/menu/courses" class="item" ng-class="(activeMenuClr=='courses')?'menuSelectedColor':''" ng-click="activeMenuClr = 'courses'" menu-toggle="left"><i class="ri-aed-line"></i>&nbsp&nbspPráctica</a>  
-
-     -->
     
           </ul>
 
@@ -2468,262 +2501,6 @@ width: 200px; /* Ajusta según el tamaño deseado */
     
  
 
-
-
-
- <script id="recordings.html" type="text/ng-template">
-    <ion-view >
-      
- 
-   <ion-nav-bar class="bar-light" >      
-        <ion-nav-buttons side="right">
-
-      <button class="button button-clear headIcon chatIco" ng-click="dropdownChat()" style="font-size: 20px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" ng-if="userData.status == 'ACTIVO'">
-    <i class="ri-chat-3-fill"></i>
-            <div style="position: absolute; top: -3px; left: 27px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(chats | filter:{read: false}).length && chatCounter">
-        <div style="font-size: 13px; color: white;"> {{(chats | filter:{read: false}).length}}</div>
-    </div>
-</button>  
-
- <button class="button button-clear headIcon" ng-click="dropdownCalendar()" style="font-size: 20px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" ng-if="userData.status == 'ACTIVO'">
-  <i class="ri-booklet-fill"></i>
-</button>  
-      
-    <button class="button button-clear headIcon" ng-click="dropdownNotif()" style="font-size: 19px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;" ng-if="userData.status == 'ACTIVO'">
-  <i class="ri-notification-3-fill" ></i>
-            <div style="position: absolute; top: -3px; left: 27px; width: 18px; height: 18px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;" ng-if="(alerts | filter:{seen: false}).length && alertCounter">
-        <div style="font-size: 13px; color: white;" > {{(alerts | filter:{seen: false}).length}}</div>
-    </div> 
-</button>
-
- <button  class="upgrade-btn-modern" ng-click="goToPayment()" ng-if="userData.status != 'ACTIVO'">
-            Upgrade
-          </button>
-
-
- <button class="button button-clear" ng-class="{ 'barImage': btnBar}" ng-click="toggleDropdown()" style="font-size: 18px; font-weight: 550; font-family: 'Poppins', sans-serif; margin-right: 10px;">
-    <div style="display: flex; align-items: center;">
-     <!--   <div class="user-info" style="text-align: right; margin-right: 5px; margin-left: -7px" ng-if="userData.status == 'ACTIVO'">
-                    <div style="font-size: 13px; font-weight: 600; color: #333; line-height: 1.2;">{{userData.name}}</div>
-                    <div style="font-size: 11px; color: #777; line-height: 1.1;" ng-if="userLvl == 0">Preparatorio</div>
-                    <div style="font-size: 11px; color: #777; line-height: 1.1;" ng-if="userLvl != 0">Nivel {{userLvl}}</div>
-        </div> -->
- <div style="position: relative;" class="profilImg">
-            <img class="profile-avatar2" src="{{userData.photo}}" width="30" height="30" />
-        </div>
-    </div>
-</button>  
-
-
-    
-  </ion-nav-buttons>
-
-
-        <ion-nav-buttons side="left">
-          <button class="button button-clear" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
-           
-        </ion-nav-buttons>  
-
-       
-        <div class="dropdownContent" ng-show="isDropdownVisible" ng-click="$event.stopPropagation()">
-     <div id="bannerRow">
-      <div class="profile-avatar-container" style="transform: scale(0.9)">
-      <img src="{{userData.photo}}" class="profile-avatar">
-      <div class="profile-level">Nivel {{userLvl}}</div>
-    </div>
-      <p class="profileName">{{userData.name}}</p>
-      <p class="profileEmail">{{userData.mail}}</p>
-    </div>
-    <div class="dropdown-item" ng-click="goToAccount(); toggleDropdown()">
-      <i class="ri-user-3-line"></i> Perfil
-    </div>
-     <div class="dropdown-item" ng-click="goToPayment(); toggleDropdown()">
-      <i class="ri-bank-card-line"></i> Suscripción
-       <div class="pro-badge" ng-if="userData.status == 'ACTIVO'">
-        <i class="ri-vip-crown-fill"></i>
-       <span class="pro-text">        
-      Pro
-      </span>
-     </div>
-
-      <div class="free-badge" ng-if="userData.status != 'ACTIVO'">
-       <span class="free-text">        
-      Free
-      </span>
-      </div>
-
-
-    </div>
-      <div class="dropdown-item" ng-click="goToAgenda(); toggleDropdown()">
-      <i class="ri-calendar-view"></i> Calendario
-    </div>
-      <div class="dropdown-item" ng-click="logout()">
-      <i class="ri-shut-down-line"></i> Cerrar sesión
-    </div>
-  </div>
-
-   <div class="dropdownContent chat-dropdown" ng-show="dropdownChatVisible" ng-click="$event.stopPropagation()">
-  <div class="chat-header">
-      <button class="close-dropdown" ng-click="dropdownChat()">
-      <i class="ri-close-line"></i>
-    </button>
-    <h4>Asistente Inteligente</h4>
-    <p>Chat de Soporte</p>
-  </div>
-  
-  <div class="chat-messages" id="chatMessages1">
-
-    
-    <div class="message" ng-repeat="message in chats" ng-class="{'bot-message': message.sender === 'admin', 'user-message': message.sender === 'client'}">
-      <div class="message-avatar" ng-if="message.sender === 'admin'">
-        <img src="https://lh3.googleusercontent.com/d/1Ictc2BUbVwBHBZE2LMkVYfJOvGfPWycV">
-      </div>
-      <div class="message-content">
-        <p>{{message.content}}</p>
-        <span class="message-time">{{calculateTimeAgo(message.timestamp) }}</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="typing-indicator" ng-if="isTyping">
-  <div class="typing-dot"></div>
-  <div class="typing-dot"></div>
-  <div class="typing-dot"></div>
-  <span>Mozart Academy está escribiendo...</span>
-</div>
-  
-  <div class="chat-input">
-    <input type="text" 
-           ng-model="newMessage" 
-           placeholder="Escribe tu mensaje..." 
-           id="inputMessage1"
-           ng-keyup="$event.keyCode === 13 && sendChat(newMessage)">
-    <button ng-click="sendChat(newMessage)">
-      <i class="ri-send-plane-2-fill"></i>
-    </button>
-  </div>
-</div>
-
-
-<div class="dropdownContent notif-dropdown" ng-show="dropdownNotifVisible" ng-click="$event.stopPropagation()">
-  <div class="notif-header">
-           <button class="close-dropdown" ng-click="dropdownNotif()">
-      <i class="ri-close-line"></i>
-    </button>
-    <h4>Notificaciones</h4>
-  
-  </div>
-  
-  <div class="notif-list" ng-if="alerts.length > 0">
-    <div class="notif-item" ng-repeat="alert in alerts | orderBy:'-date'" >
-      <div class="notif-icon" style="background: {{alert.color}}20; color: {{alert.color}}">
-        <i class="{{alert.icon}}"></i>
-      </div>
-      <div class="notif-content">
-        <div class="notif-title">{{alert.subject}}</div>
-        <div class="notif-desc">{{alert.message || 'Mensaje de notificación'}}</div>
-        <div class="notif-time">
-          <i class="ri-time-line"></i> {{calculateTimeAgo(alert.date)}}
-        </div>
-      </div>
-      <div class="notif-actions">
-        <button class="notif-action-btn" ng-click="deleteNotif(alert)">
-<i class="ri-delete-bin-line"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-  
-  <div class="empty-notifs" ng-if="alerts.length === 0">
-    <i class="ri-notification-off-line"></i>
-    <p>No hay notificaciones</p>
-  </div>
-  
-  <div class="notif-footer" ng-if="alerts.length > 0">
-    <button class="view-all" ng-click="deleteAllNotif()">
-      Eliminar todas las notificaciones
-    </button>
-  </div>
-</div>
-
-
-<div class="dropdownContent notif-dropdown" ng-show="dropdownCalendarVisible" ng-click="$event.stopPropagation()">
-    
-    <div class="notif-header">
-        <button class="close-dropdown" ng-click="dropdownCalendar()">
-            <i class="ri-close-line"></i>
-        </button>
-        <h4>Agenda</h4>
-    </div>
-
-   <div class="notif-list" ng-if="agenda.length > 0">
-    <div class="notif-item" 
-         ng-repeat="item in agenda"
-         ng-class="{
-             'next-class-highlight': item.isNextClass, 
-             'past-item-dimmed': item.isPast,
-             'pay-day-highlight': item.isPayDay
-         }">
-        
-        <div class="schedule-date" ng-class="{
-            'schedule-date-past': item.isPast && !item.isPayDay,
-            'schedule-date-inactive': !item.isNextClass && !item.isPast && !item.isPayDay,
-            'schedule-date-payday': item.isPayDay
-        }">
-            <div ng-if="item.isPayDay" class="payday-icon-wrapper">
-               <i class="ri-refund-line"></i>
-            </div>
-       
-                <div class="schedule-day" ng-if="!item.isPayDay">{{ item.start | date:'EEE' }}</div>
-                <div class="schedule-number" ng-if="!item.isPayDay">{{ item.start | date:'d' }}</div>
-    
-        </div>
-
-        <div class="notif-content">
-            <div ng-if="!item.isPayDay">
-                <div class="notif-title" ng-class="{'text-strikethrough': item.isPast}">
-                    {{ item.start | date:'EEEE, d \'de\' MMMM' }}
-                </div>
-                <div class="notif-desc" ng-if="!item.isPast">
-                    <i class="ri-time-line"></i> {{ item.start | date:'HH:mm':'UTC' }} a {{ item.end | date:'HH:mm':'UTC' }} Hrs
-                </div>
-                <div class="notif-time">
-                    <span ng-if="item.isPast">Finalizada</span>
-                    <span ng-if="item.isNextClass" class="next-class-label">Próxima clase - {{ item.daysLeft }}</span>
-                    <span ng-if="!item.isPast && !item.isNextClass">Pendiente</span>
-                </div>
-            </div>
-            
-            <div ng-if="item.isPayDay" ng-click="goToPayment()">
-                <div class="notif-title">Próximo pago</div>
-                <div class="notif-desc" ng-if="!item.isPast">
-                    {{ item.start | date:'EEEE, d \'de\' MMMM' }}
-                </div>
-                 <div class="notif-desc" ng-if="item.isPast">
-                   Realiza tu pago para seguir disfrutando del curso.
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-    <div class="empty-notifs" ng-if="agenda.length === 0">
-        <i class="ri-calendar-close-line"></i>
-        <p>No hay clases programadas</p>
-    </div>
-</div>
-        
-    </ion-nav-bar>
-
-
-     <ion-content > 
-        <div class="iframe-container"><iframe src="https://www.mozart-app.com/recordings" frameborder="0" allowfullscreen></iframe></div>   
-      </ion-content>
-     
-    </ion-view>
-
-  </script>
 
 
 
@@ -3002,7 +2779,45 @@ width: 200px; /* Ajusta según el tamaño deseado */
 
 
         <ion-nav-buttons side="left">
-          <button class="button button-clear" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
+          <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
+
+         <div class="nav-bar-horizontal-menu">
+
+  <div class="profile-user-data clearfix" style="margin-left: -10px !important;">
+          <div class="circle2">
+              <img class="profile-pic" src="https://lh3.googleusercontent.com/d/1CHGXJ18BuHLclo_XrGyqq-SnV1j6sZXL=s96-c">
+          </div>
+          <div class="main-data" style="margin-top: 35px;" >
+            <h5 class="userLvl" >Mozart <br>Academy</h5>
+          </div>  
+    </div>
+
+  <a href="#/menu/lessons" class="button button-clear" 
+       ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'lessons'">
+        Classroom
+    </a>
+    <a href="#/menu/workspace" class="button button-clear" 
+       ng-class="(activeMenuClr=='workspace')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'workspace'">
+        Workspace
+    </a>
+      <a href="#/menu/library" class="button button-clear" 
+       ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'library'">
+        SightReader
+    </a>
+    <a href="#/menu/finder" class="button button-clear" 
+       ng-class="(activeMenuClr=='finder')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'finder'">
+        PianoHero
+    </a>
+    <a href="#/menu/reel" class="button button-clear" 
+       ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'reel'">
+        Comunidades
+    </a>
+</div>
         
         </ion-nav-buttons>  
 
@@ -3380,7 +3195,45 @@ width: 200px; /* Ajusta según el tamaño deseado */
 
 
         <ion-nav-buttons side="left">
-          <button class="button button-clear" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
+          <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
+
+             <div class="nav-bar-horizontal-menu">
+
+  <div class="profile-user-data clearfix" style="margin-left: -10px !important;">
+          <div class="circle2">
+              <img class="profile-pic" src="https://lh3.googleusercontent.com/d/1CHGXJ18BuHLclo_XrGyqq-SnV1j6sZXL=s96-c">
+          </div>
+          <div class="main-data" style="margin-top: 35px;" >
+            <h5 class="userLvl" >Mozart <br>Academy</h5>
+          </div>  
+    </div>
+
+    <a href="#/menu/lessons" class="button button-clear" 
+       ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'lessons'">
+        Classroom
+    </a>
+    <a href="#/menu/workspace" class="button button-clear" 
+       ng-class="(activeMenuClr=='workspace')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'workspace'">
+        Workspace
+    </a>
+    <a href="#/menu/library" class="button button-clear" 
+       ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'library'">
+        SightReader
+    </a>
+    <a href="#/menu/finder" class="button button-clear" 
+       ng-class="(activeMenuClr=='finder')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'finder'">
+        PianoHero
+    </a>
+    <a href="#/menu/reel" class="button button-clear" 
+       ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'reel'">
+        Comunidades
+    </a>
+</div>
            
         </ion-nav-buttons>  
 
@@ -3645,7 +3498,44 @@ width: 200px; /* Ajusta según el tamaño deseado */
 
 
         <ion-nav-buttons side="left">
-          <button class="button button-clear" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
+          <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
+
+             <div class="nav-bar-horizontal-menu">
+  <div class="profile-user-data clearfix" style="margin-left: -10px !important;">
+          <div class="circle2">
+              <img class="profile-pic" src="https://lh3.googleusercontent.com/d/1CHGXJ18BuHLclo_XrGyqq-SnV1j6sZXL=s96-c">
+          </div>
+          <div class="main-data" style="margin-top: 35px;" >
+            <h5 class="userLvl" >Mozart <br>Academy</h5>
+          </div>  
+    </div>
+
+  <a href="#/menu/lessons" class="button button-clear" 
+       ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'lessons'">
+        Classroom
+    </a>
+    <a href="#/menu/workspace" class="button button-clear" 
+       ng-class="(activeMenuClr=='workspace')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'workspace'">
+        Workspace
+    </a>
+     <a href="#/menu/library" class="button button-clear" 
+       ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'library'">
+        SightReader
+    </a>
+    <a href="#/menu/finder" class="button button-clear" 
+       ng-class="(activeMenuClr=='finder')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'finder'">
+        PianoHero
+    </a>
+    <a href="#/menu/reel" class="button button-clear" 
+       ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'reel'">
+        Comunidades
+    </a>
+</div>
            
         </ion-nav-buttons>  
 
@@ -3948,7 +3838,44 @@ width: 200px; /* Ajusta según el tamaño deseado */
 
 
         <ion-nav-buttons side="left">
-          <button class="button button-clear" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
+          <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
+
+             <div class="nav-bar-horizontal-menu">
+  <div class="profile-user-data clearfix" style="margin-left: -10px !important;">
+          <div class="circle2">
+              <img class="profile-pic" src="https://lh3.googleusercontent.com/d/1CHGXJ18BuHLclo_XrGyqq-SnV1j6sZXL=s96-c">
+          </div>
+          <div class="main-data" style="margin-top: 35px;" >
+            <h5 class="userLvl" >Mozart <br>Academy</h5>
+          </div>  
+    </div>
+
+  <a href="#/menu/lessons" class="button button-clear" 
+       ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'lessons'">
+        Classroom
+    </a>
+    <a href="#/menu/workspace" class="button button-clear" 
+       ng-class="(activeMenuClr=='workspace')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'workspace'">
+        Workspace
+    </a>
+    <a href="#/menu/library" class="button button-clear" 
+       ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'library'">
+        SightReader
+    </a>
+    <a href="#/menu/finder" class="button button-clear" 
+       ng-class="(activeMenuClr=='finder')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'finder'">
+        PianoHero
+    </a>
+    <a href="#/menu/reel" class="button button-clear" 
+       ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'reel'">
+        Comunidades
+    </a>
+</div>
             
         </ion-nav-buttons>  
 
@@ -4210,7 +4137,44 @@ width: 200px; /* Ajusta según el tamaño deseado */
 
 
         <ion-nav-buttons side="left">
-          <button class="button button-clear" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
+          <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
+
+             <div class="nav-bar-horizontal-menu">
+  <div class="profile-user-data clearfix" style="margin-left: -10px !important;">
+          <div class="circle2">
+              <img class="profile-pic" src="https://lh3.googleusercontent.com/d/1CHGXJ18BuHLclo_XrGyqq-SnV1j6sZXL=s96-c">
+          </div>
+          <div class="main-data" style="margin-top: 35px;" >
+            <h5 class="userLvl" >Mozart <br>Academy</h5>
+          </div>  
+    </div>
+
+  <a href="#/menu/lessons" class="button button-clear" 
+       ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'lessons'">
+        Classroom
+    </a>
+    <a href="#/menu/workspace" class="button button-clear" 
+       ng-class="(activeMenuClr=='workspace')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'workspace'">
+        Workspace
+    </a>
+    <a href="#/menu/library" class="button button-clear" 
+       ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'library'">
+        SightReader
+    </a>
+    <a href="#/menu/finder" class="button button-clear" 
+       ng-class="(activeMenuClr=='finder')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'finder'">
+        PianoHero
+    </a>
+    <a href="#/menu/reel" class="button button-clear" 
+       ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" 
+       ng-click="activeMenuClr = 'reel'">
+        Comunidades
+    </a>
+</div>
             
         </ion-nav-buttons>  
 
@@ -4817,15 +4781,6 @@ app
     })   
   
 
-    .state('menu.recordings', {
-      url: "/recordings",
-      views: {
-        'menuContent': {
-          templateUrl: "recordings.html"
-        }
-      }
-    })
-     
   
   .state('menu.statistics', {
       url: "/statistics",
