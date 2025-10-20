@@ -174,7 +174,8 @@ ion-side-menu .list .item:hover {
 
 .menuSelectedColor {    
 font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
-  font-weight: 550 !important; text-shadow: 0 0 6px silver !important;
+  font-weight: 550 !important; 
+  text-shadow: 0 0 6px silver !important;
     background-color: #f0f2f5 !important; 
   color: #1F2937 !important;
   text-decoration: none !important;
@@ -2401,7 +2402,7 @@ width: 200px; /* Ajusta según el tamaño deseado */
     /* Estilo base para CADA botón del menú */
     .nav-bar-horizontal-menu .button {
         font-size: 14px;
-        font-weight: 400 !important; 
+        font-weight: 400; 
         color: #555 !important;   
         padding-left: 19px !important; 
         padding-right: 19px !important;
@@ -2466,23 +2467,40 @@ width: 200px; /* Ajusta según el tamaño deseado */
           </div>  
   </div>
  
- <ul class="list">
-                     
-   
-       
-    <a href="#/menu/lessons" class="item" ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" ng-click="activeMenuClr = 'lessons'" menu-toggle="left"><i class="ri-presentation-line" ></i>&nbsp&nbspLessons</a>   
-     <hr>
- <a href="#/menu/workspace" class="item" ng-class="(activeMenuClr=='workspace')?'menuSelectedColor':''" ng-click="activeMenuClr = 'workspace'" menu-toggle="left"><i class="ri-macbook-line"></i>&nbsp&nbspWorkspace</a>   
-   <a href="#/menu/library" class="item" ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" ng-click="activeMenuClr = 'library'" menu-toggle="left"><i class="ri-book-read-line" ></i>&nbsp&nbspReader</a>    
- 
-          <a href="#/menu/finder" class="item" ng-class="(activeMenuClr=='finder')?'menuSelectedColor':''" ng-click="activeMenuClr = 'finder'" menu-toggle="left"><img src="https://lh3.googleusercontent.com/d/1vMHUODAn781r96RNhefO3HWZrqtMM_0u=s96-c" style="height: 21px; width: 21px; margin-left: 1px; margin-right: 9px">&nbsp&nbspPlayer</a>  
-
-         <hr>
-
-     <a href="#/menu/reel" class="item" ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" ng-click="activeMenuClr = 'reel'" menu-toggle="left"><i class="ri-earth-line"></i>&nbsp&nbspMozart Now</a>  
-
-    
-          </ul>
+<ul class="list">
+    <a ui-sref="menu.lessons" 
+       ui-sref-active="menuSelectedColor" 
+       class="item" 
+       menu-toggle="left">
+        <i class="ri-presentation-line"></i> &nbspClassroom
+    </a>
+    <hr>
+    <a ui-sref="menu.workspace" 
+       ui-sref-active="menuSelectedColor" 
+       class="item" 
+       menu-toggle="left">
+        <i class="ri-macbook-line"></i> &nbspWorkSpace
+    </a>
+    <a ui-sref="menu.library" 
+       ui-sref-active="menuSelectedColor" 
+       class="item" 
+       menu-toggle="left">
+        <i class="ri-book-read-line"></i> &nbspSightReader
+    </a>
+    <a ui-sref="menu.finder" 
+       ui-sref-active="menuSelectedColor" 
+       class="item" 
+       menu-toggle="left">
+        <img src="https://lh3.googleusercontent.com/d/1vMHUODAn781r96RNhefO3HWZrqtMM_0u=s96-c" style="height: 21px; width: 21px; margin-left: 1px; margin-right: 9px"> &nbspPianoHero
+    </a>
+    <hr>
+    <a ui-sref="menu.reel" 
+       ui-sref-active="menuSelectedColor" 
+       class="item" 
+       menu-toggle="left">
+        <i class="ri-earth-line"></i> &nbspComunidades
+    </a>
+</ul>
 
   
         </ion-content>
@@ -2781,9 +2799,9 @@ width: 200px; /* Ajusta según el tamaño deseado */
         <ion-nav-buttons side="left">
           <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
 
-         <div class="nav-bar-horizontal-menu">
 
-  <div class="profile-user-data clearfix" style="margin-left: -10px !important;">
+        <div class="nav-bar-horizontal-menu">
+              <div class="profile-user-data clearfix" style="margin-left: -10px !important;">
           <div class="circle2">
               <img class="profile-pic" src="https://lh3.googleusercontent.com/d/1CHGXJ18BuHLclo_XrGyqq-SnV1j6sZXL=s96-c">
           </div>
@@ -2791,34 +2809,34 @@ width: 200px; /* Ajusta según el tamaño deseado */
             <h5 class="userLvl" >Mozart <br>Academy</h5>
           </div>  
     </div>
-
-  <a href="#/menu/lessons" class="button button-clear" 
-       ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'lessons'">
+    <a ui-sref="menu.lessons" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
         Classroom
     </a>
-    <a href="#/menu/workspace" class="button button-clear" 
-       ng-class="(activeMenuClr=='workspace')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'workspace'">
+    <a ui-sref="menu.workspace" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
         Workspace
     </a>
-      <a href="#/menu/library" class="button button-clear" 
-       ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'library'">
-        SightReader
+    <a ui-sref="menu.library" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
+        Reader
     </a>
-    <a href="#/menu/finder" class="button button-clear" 
-       ng-class="(activeMenuClr=='finder')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'finder'">
-        PianoHero
+    <a ui-sref="menu.finder" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
+        Player
     </a>
-    <a href="#/menu/reel" class="button button-clear" 
-       ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'reel'">
-        Comunidades
+    <a ui-sref="menu.reel" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
+        Mozart Now
     </a>
 </div>
-        
+
+
         </ion-nav-buttons>  
 
        
@@ -3197,9 +3215,8 @@ width: 200px; /* Ajusta según el tamaño deseado */
         <ion-nav-buttons side="left">
           <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
 
-             <div class="nav-bar-horizontal-menu">
-
-  <div class="profile-user-data clearfix" style="margin-left: -10px !important;">
+   <div class="nav-bar-horizontal-menu">
+              <div class="profile-user-data clearfix" style="margin-left: -10px !important;">
           <div class="circle2">
               <img class="profile-pic" src="https://lh3.googleusercontent.com/d/1CHGXJ18BuHLclo_XrGyqq-SnV1j6sZXL=s96-c">
           </div>
@@ -3207,31 +3224,30 @@ width: 200px; /* Ajusta según el tamaño deseado */
             <h5 class="userLvl" >Mozart <br>Academy</h5>
           </div>  
     </div>
-
-    <a href="#/menu/lessons" class="button button-clear" 
-       ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'lessons'">
+    <a ui-sref="menu.lessons" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
         Classroom
     </a>
-    <a href="#/menu/workspace" class="button button-clear" 
-       ng-class="(activeMenuClr=='workspace')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'workspace'">
+    <a ui-sref="menu.workspace" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
         Workspace
     </a>
-    <a href="#/menu/library" class="button button-clear" 
-       ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'library'">
-        SightReader
+    <a ui-sref="menu.library" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
+        Reader
     </a>
-    <a href="#/menu/finder" class="button button-clear" 
-       ng-class="(activeMenuClr=='finder')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'finder'">
-        PianoHero
+    <a ui-sref="menu.finder" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
+        Player
     </a>
-    <a href="#/menu/reel" class="button button-clear" 
-       ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'reel'">
-        Comunidades
+    <a ui-sref="menu.reel" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
+        Mozart Now
     </a>
 </div>
            
@@ -3500,8 +3516,8 @@ width: 200px; /* Ajusta según el tamaño deseado */
         <ion-nav-buttons side="left">
           <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
 
-             <div class="nav-bar-horizontal-menu">
-  <div class="profile-user-data clearfix" style="margin-left: -10px !important;">
+   <div class="nav-bar-horizontal-menu">
+              <div class="profile-user-data clearfix" style="margin-left: -10px !important;">
           <div class="circle2">
               <img class="profile-pic" src="https://lh3.googleusercontent.com/d/1CHGXJ18BuHLclo_XrGyqq-SnV1j6sZXL=s96-c">
           </div>
@@ -3509,31 +3525,30 @@ width: 200px; /* Ajusta según el tamaño deseado */
             <h5 class="userLvl" >Mozart <br>Academy</h5>
           </div>  
     </div>
-
-  <a href="#/menu/lessons" class="button button-clear" 
-       ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'lessons'">
+    <a ui-sref="menu.lessons" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
         Classroom
     </a>
-    <a href="#/menu/workspace" class="button button-clear" 
-       ng-class="(activeMenuClr=='workspace')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'workspace'">
+    <a ui-sref="menu.workspace" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
         Workspace
     </a>
-     <a href="#/menu/library" class="button button-clear" 
-       ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'library'">
-        SightReader
+    <a ui-sref="menu.library" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
+        Reader
     </a>
-    <a href="#/menu/finder" class="button button-clear" 
-       ng-class="(activeMenuClr=='finder')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'finder'">
-        PianoHero
+    <a ui-sref="menu.finder" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
+        Player
     </a>
-    <a href="#/menu/reel" class="button button-clear" 
-       ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'reel'">
-        Comunidades
+    <a ui-sref="menu.reel" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
+        Mozart Now
     </a>
 </div>
            
@@ -3840,8 +3855,8 @@ width: 200px; /* Ajusta según el tamaño deseado */
         <ion-nav-buttons side="left">
           <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
 
-             <div class="nav-bar-horizontal-menu">
-  <div class="profile-user-data clearfix" style="margin-left: -10px !important;">
+   <div class="nav-bar-horizontal-menu">
+              <div class="profile-user-data clearfix" style="margin-left: -10px !important;">
           <div class="circle2">
               <img class="profile-pic" src="https://lh3.googleusercontent.com/d/1CHGXJ18BuHLclo_XrGyqq-SnV1j6sZXL=s96-c">
           </div>
@@ -3849,31 +3864,30 @@ width: 200px; /* Ajusta según el tamaño deseado */
             <h5 class="userLvl" >Mozart <br>Academy</h5>
           </div>  
     </div>
-
-  <a href="#/menu/lessons" class="button button-clear" 
-       ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'lessons'">
+    <a ui-sref="menu.lessons" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
         Classroom
     </a>
-    <a href="#/menu/workspace" class="button button-clear" 
-       ng-class="(activeMenuClr=='workspace')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'workspace'">
+    <a ui-sref="menu.workspace" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
         Workspace
     </a>
-    <a href="#/menu/library" class="button button-clear" 
-       ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'library'">
-        SightReader
+    <a ui-sref="menu.library" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
+        Reader
     </a>
-    <a href="#/menu/finder" class="button button-clear" 
-       ng-class="(activeMenuClr=='finder')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'finder'">
-        PianoHero
+    <a ui-sref="menu.finder" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
+        Player
     </a>
-    <a href="#/menu/reel" class="button button-clear" 
-       ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'reel'">
-        Comunidades
+    <a ui-sref="menu.reel" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
+        Mozart Now
     </a>
 </div>
             
@@ -4139,8 +4153,8 @@ width: 200px; /* Ajusta según el tamaño deseado */
         <ion-nav-buttons side="left">
           <button class="button button-clear menubtn" ng-click="toggleRight()"><i class="button button-icon ion-navicon"></i>menu</button>
 
-             <div class="nav-bar-horizontal-menu">
-  <div class="profile-user-data clearfix" style="margin-left: -10px !important;">
+   <div class="nav-bar-horizontal-menu">
+              <div class="profile-user-data clearfix" style="margin-left: -10px !important;">
           <div class="circle2">
               <img class="profile-pic" src="https://lh3.googleusercontent.com/d/1CHGXJ18BuHLclo_XrGyqq-SnV1j6sZXL=s96-c">
           </div>
@@ -4148,31 +4162,30 @@ width: 200px; /* Ajusta según el tamaño deseado */
             <h5 class="userLvl" >Mozart <br>Academy</h5>
           </div>  
     </div>
-
-  <a href="#/menu/lessons" class="button button-clear" 
-       ng-class="(activeMenuClr=='lessons')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'lessons'">
+    <a ui-sref="menu.lessons" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
         Classroom
     </a>
-    <a href="#/menu/workspace" class="button button-clear" 
-       ng-class="(activeMenuClr=='workspace')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'workspace'">
+    <a ui-sref="menu.workspace" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
         Workspace
     </a>
-    <a href="#/menu/library" class="button button-clear" 
-       ng-class="(activeMenuClr=='library')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'library'">
-        SightReader
+    <a ui-sref="menu.library" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
+        Reader
     </a>
-    <a href="#/menu/finder" class="button button-clear" 
-       ng-class="(activeMenuClr=='finder')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'finder'">
-        PianoHero
+    <a ui-sref="menu.finder" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
+        Player
     </a>
-    <a href="#/menu/reel" class="button button-clear" 
-       ng-class="(activeMenuClr=='reel')?'menuSelectedColor':''" 
-       ng-click="activeMenuClr = 'reel'">
-        Comunidades
+    <a ui-sref="menu.reel" 
+       ui-sref-active="menuSelectedColor" 
+       class="button button-clear">
+        Mozart Now
     </a>
 </div>
             
