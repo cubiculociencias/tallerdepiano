@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="es" ng-app="sheetMusicApp">
 <head>
     <meta charset="UTF-8">
@@ -19,8 +19,7 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--background-gradient); min-height: 100vh; padding: 20px; }
-        .container { max-width: 1400px; margin: 0 auto; }
-        
+
         .header { 
             background: white; 
             border-radius: 16px; 
@@ -63,8 +62,8 @@
         
         .videos-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-            gap: 24px; 
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+            gap: 14px; 
             padding: 4px;
         }
 
@@ -206,56 +205,46 @@
         .empty-state { text-align: center; padding: 60px 20px; color: #6e6e73; background: white; border-radius: 12px; }
         
         .midi-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(8px);
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .midi-modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
+            position: relative;
+            width: 100vw;
+            min-height: 100vh;
+            background: #0f0f1e; 
+            margin: -20px; 
+            padding: 0;
         }
 
         .midi-modal-container {
-            width: 95%;
-            max-width: 1200px;
+            width: 100%;
+            max-width: 100%;
+            height: 100vh;
             background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1e 100%);
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            overflow: hidden;
-            transform: translateY(30px) scale(0.95);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(139, 92, 246, 0.2);
-        }
-
-        .midi-modal-overlay.active .midi-modal-container {
-            transform: translateY(0) scale(1);
+            display: flex;
+            flex-direction: column; 
+            border-radius: 0;
+            box-shadow: none;
+            border: none;
+            transform: none;
+            transition: none;
         }
 
         .midi-modal-header {
-            padding: 24px 28px;
+            padding: 20px 28px;
             background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
             border-bottom: 1px solid rgba(139, 92, 246, 0.2);
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .midi-modal-title-section {
+            flex-grow: 1;
         }
 
         .midi-modal-title {
             margin: 0;
             color: #ffffff;
-            font-size: 1.6rem;
+            font-size: 1.3rem;
             font-weight: 700;
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
@@ -263,25 +252,81 @@
         .midi-modal-user {
             margin: 0;
             color: #a78bfa;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 400;
-            margin-top: 6px;
+            margin-top: 4px;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .play-toggle-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(139, 92, 246, 0.4);
+        }
+
+        .play-toggle-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
+        }
+
+        .mode-toggle-btn {
+            padding: 10px 20px;
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            background: rgba(139, 92, 246, 0.1);
+            color: #a78bfa;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .mode-toggle-btn:hover {
+            background: rgba(139, 92, 246, 0.2);
+            border-color: rgba(139, 92, 246, 0.5);
+        }
+
+        .mode-toggle-btn.active {
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 16px rgba(139, 92, 246, 0.4);
         }
 
         .midi-modal-close {
             background: rgba(255, 255, 255, 0.1);
             border: none;
             color: #ffffff;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             cursor: pointer;
             transition: all 0.2s;
             line-height: 1;
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
 
         .midi-modal-close:hover {
@@ -289,57 +334,64 @@
             transform: rotate(90deg);
         }
 
+        .progress-bar-container {
+            padding: 16px 28px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.08));
+            border-bottom: 1px solid rgba(139, 92, 246, 0.15);
+        }
+
+        .progress-bar-wrapper {
+            position: relative;
+            height: 8px;
+            background: rgba(139, 92, 246, 0.2);
+            border-radius: 10px;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #8b5cf6, #6366f1);
+            border-radius: 10px;
+            transition: width 0.1s linear;
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+        }
+
+        .progress-time {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #a78bfa;
+            font-weight: 600;
+        }
+
         .midi-modal-body {
             padding: 0;
             background: #0f0f1e;
-        }
-
-        .mode-controls {
-            padding: 20px 28px;
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.08));
-            border-bottom: 1px solid rgba(139, 92, 246, 0.15);
+            flex-grow: 1; 
+            height: 0;
             display: flex;
-            gap: 12px;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .mode-btn {
-            padding: 10px 24px;
-            border: 2px solid rgba(139, 92, 246, 0.3);
-            background: rgba(139, 92, 246, 0.1);
-            color: #a78bfa;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .mode-btn:hover {
-            background: rgba(139, 92, 246, 0.2);
-            border-color: rgba(139, 92, 246, 0.5);
-        }
-
-        .mode-btn.active {
-            background: linear-gradient(135deg, #8b5cf6, #6366f1);
-            color: white;
-            border-color: transparent;
-            box-shadow: 0 4px 16px rgba(139, 92, 246, 0.4);
-        }
-
-        .mode-btn i {
-            font-size: 16px;
+            flex-direction: column;
         }
 
         .midi-visualizer-wrapper {
-            height: 500px;
             position: relative;
             background: linear-gradient(180deg, #0a0a14 0%, #050510 100%);
             overflow: hidden;
+            flex-grow: 1;
+            height: auto;
+        }
+
+        .midi-visualizer-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px; /* <-- La altura de tu espacio inferior */
+            background: #181818; /* <-- El mismo color de fondo del piano para que coincida */
+            z-index: 9; /* <-- Esto es clave */
         }
 
         .canvas-container {
@@ -354,25 +406,22 @@
             display: block;
         }
 
-        /* Contenedor principal del piano */
         .piano-keys-visual {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 100px; 
-    background: #181818; 
-    border-top: 4px solid #8b5cf6;
-    box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.7);
-    z-index: 10;
-    display: block; 
-    border-radius: 10px 10px 0 0;
-    /* ✅ Cambios clave: */
-    padding: 0; /* Eliminamos el padding */
-    box-sizing: border-box; /* El ancho calculado será el ancho final */
-}
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 100px; 
+            background: #181818; 
+            border-top: 4px solid #8b5cf6;
+            box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.7);
+            z-index: 10;
+            display: block; 
+            border-radius: 10px 10px 0 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        /* Estilo base para todas las teclas */
         .piano-key {
             position: absolute;
             top: 0;
@@ -382,7 +431,6 @@
             transition: all 0.05s ease;
         }
 
-        /* Estilo para las teclas blancas */
         .piano-key.white {
             background: linear-gradient(to bottom, #f9f9f9 0%, #dcdcdc 100%);
             z-index: 1;
@@ -390,7 +438,6 @@
             box-shadow: 0px 3px 2px rgba(0,0,0,0.2);
         }
 
-        /* Estilo para las teclas negras */
         .piano-key.black {
             background: linear-gradient(to bottom, #333 0%, #111 100%);
             height: 60%;
@@ -399,11 +446,10 @@
             box-shadow: 0px 2px 3px rgba(0,0,0,0.4);
         }
 
-        /* Efecto al presionar una tecla */
         .piano-key.active {
             border: 2px solid #8b5cf6;
-            box-shadow: 0 0 15px rgba(139, 92, 246, 0.9) inset; /* Sombra interior para efecto de "presionado" */
-            transform: translateY(2px); /* Mueve la tecla ligeramente hacia abajo */
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.9) inset;
+            transform: translateY(2px);
         }
 
         .grid-lines {
@@ -411,7 +457,7 @@
             top: 0;
             left: 0;
             right: 0;
-            bottom: 80px;
+            bottom: 160px;
             pointer-events: none;
             background-image: 
                 linear-gradient(0deg, 
@@ -423,7 +469,7 @@
         .progress-indicator {
             position: absolute;
             top: 0;
-            bottom: 80px;
+            bottom: 160px;
             left: 50%;
             width: 3px;
             background: linear-gradient(180deg,
@@ -503,39 +549,94 @@
         }
 
         @media (max-width: 1024px) {
-            .videos-grid { 
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+           
+            .canvas-container{
+                transform: scale(0.8) translateY(72px) !important;
             }
+            .piano-keys-visual{
+                transform: translateX(-50%) scale(0.8) !important;
+            }
+              
+
+             .midi-visualizer-wrapper::after {
+                height: 40px;
+             }
+           
         }
 
         @media (max-width: 768px) {
-            .videos-grid { 
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-                gap: 16px;
-            }
-            .midi-modal-container { width: 98%; }
-            .midi-visualizer-wrapper { height: 400px; }
-            .piano-keys-visual { height: 60px; }
-            .mode-controls { flex-wrap: wrap; }
+          
+            
+            .header-controls { flex-wrap: wrap; }
+            .mode-toggle-btn span { display: none; }
+            .midi-modal-title { font-size: 1.1rem; }
+            .midi-modal-user { font-size: 0.85rem; }
         }
 
         @media (max-width: 600px) {  
-            .videos-grid { 
-                grid-template-columns: 1fr;
+           
+             .canvas-container{
+                transform: scale(0.5) translateY(190px) !important;
             }
-            .midi-visualizer-wrapper { height: 350px; }
+            .piano-keys-visual{
+                transform: translateX(-50%) scale(0.5) !important;
+            }
+            .midi-visualizer-wrapper::after {
+                height: 100px;
+             }
+
         }
 
         @media (max-width: 470px) {
             .filters-container {
                 flex-direction: column;
             }
+             .mode-toggle-btn{
+                display: none;
+             }
+        }
+
+        @media (min-width: 992px) {
+            .desktop-layout-wrapper {
+                display: grid;
+                grid-template-columns: 300px 1fr;
+                gap: 24px;
+                align-items: flex-start;
+            }
+
+            .header {
+                position: sticky;
+                top: 20px;
+                max-height: calc(100vh - 40px);
+                overflow-y: auto;
+                margin-bottom: 0;
+            }
+            
+            .header-top {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px; 
+            }
+
+            .search-box {
+                width: 100%;
+                min-width: auto;
+            }
+
+            .filters-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .main-layout {
+                overflow-x: hidden;
+            }
         }
     </style>
 </head>
 <body ng-controller="sheetMusicCtrl">
 
-    <div class="container">
+    <div class="desktop-layout-wrapper" ng-hide="isPreviewVisible">
         <div class="header">
             <div class="header-top">
                 <div class="header-left">
@@ -608,27 +709,35 @@
         </div>
     </div>
 
-    <div class="midi-modal-overlay" ng-class="{'active': isPreviewVisible}" ng-click="hidePreview()">
-        <div class="midi-modal-container" ng-click="$event.stopPropagation()">
+    <div class="midi-modal-overlay" ng-show="isPreviewVisible">
+        <div class="midi-modal-container">
             <div class="midi-modal-header">
-                <div>
+                <div class="midi-modal-title-section">
                     <h4 class="midi-modal-title">{{ currentSheet.title }}</h4>
                     <p class="midi-modal-user">{{ currentSheet.composer }}</p>
                 </div>
-                <button class="midi-modal-close" ng-click="hidePreview()">
-                    <i class="fas fa-times"></i>
-                </button>
+                <div class="header-controls">
+                    <button class="play-toggle-btn" ng-click="togglePlayback()">
+                        <i class="fas" ng-class="isPlaying ? 'fa-pause' : 'fa-play'"></i>
+                    </button>
+                    <button class="mode-toggle-btn" ng-class="{'active': isLearningMode}" ng-click="toggleLearningMode()">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Aprendizaje</span>
+                    </button>
+                    <button class="midi-modal-close" ng-click="hidePreview()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
             </div>
             
-            <div class="mode-controls">
-                <button class="mode-btn" ng-class="{'active': !isLearningMode}" ng-click="setPlaybackMode()">
-                    <i class="fas fa-play"></i>
-                    Reproducción Automática
-                </button>
-                <button class="mode-btn" ng-class="{'active': isLearningMode}" ng-click="setLearningMode()">
-                    <i class="fas fa-graduation-cap"></i>
-                    Modo Aprendizaje MIDI
-                </button>
+            <div class="progress-bar-container">
+                <div class="progress-bar-wrapper" ng-click="seekToPosition($event)">
+                    <div class="progress-bar-fill" ng-style="{width: progressPercent + '%'}"></div>
+                </div>
+                <div class="progress-time">
+                    <span>{{ currentTime }}</span>
+                    <span>{{ totalTime }}</span>
+                </div>
             </div>
 
             <div class="midi-modal-body">
@@ -649,7 +758,7 @@
                         </div>
                     </div>
                     <div class="grid-lines"></div>
-                     <div class="progress-indicator"></div>
+                    <div class="progress-indicator"></div>
                     <div class="canvas-container">
                         <canvas id="waterfallCanvas"></canvas>
                     </div>
@@ -671,11 +780,12 @@
             $scope.sheets = [
                 { id: 1, img:'https://lh3.googleusercontent.com/d/1b8uhUqybBb-2ycfH-vyDtPMXM__h79wh', title: 'Bohemian Rhapsody', composer: 'Queen', pages: 4, rating: 4.7, type: 'midi', url: "https://storage.googleapis.com/mozartacademy-files/midi/Bohemian%20Rhapsody%20-%20Queen.mid", difficulty: 'Grado 5', style: 'Pop' },
                 { id: 2, img:'https://lh3.googleusercontent.com/d/1b8uhUqybBb-2ycfH-vyDtPMXM__h79wh', title: 'Little Playmates', composer: 'Chawtal', pages: 2, rating: 4.9, type: 'midi', url: "https://storage.googleapis.com/mozartacademy-files/midi/Little%20Playmates.mid", difficulty: 'Grado 1', style: 'Clásico' },
-                { id: 3, img:'https://lh3.googleusercontent.com/d/1b8uhUqybBb-2ycfH-vyDtPMXM__h79wh', title: 'Ode to Joy', composer: 'L.V. Beethoven', pages: 5, rating: 4.8, type: 'midi', url: "https://storage.googleapis.com/mozartacademy-files/midi/Ode%20to%20Joy.mid", difficulty: 'Grado 1', style: 'Clásico' },
-                { id: 4, img:'https://lh3.googleusercontent.com/d/1b8uhUqybBb-2ycfH-vyDtPMXM__h79wh', title: 'Old German Dance', composer: 'Michael Praetorius', pages: 7, rating: 4.8, type: 'midi', url: "hhttps://storage.googleapis.com/mozartacademy-files/midi/Old%20German%20Dance.mid", difficulty: 'Grado 1', style: 'Barroco' },
+              // PARTE 1: Continuación del array de sheets y variables iniciales
+{ id: 3, img:'https://lh3.googleusercontent.com/d/1b8uhUqybBb-2ycfH-vyDtPMXM__h79wh', title: 'Ode to Joy', composer: 'L.V. Beethoven', pages: 5, rating: 4.8, type: 'midi', url: "https://storage.googleapis.com/mozartacademy-files/midi/Ode%20to%20Joy.mid", difficulty: 'Grado 1', style: 'Clásico' },
+                { id: 4, img:'https://lh3.googleusercontent.com/d/1b8uhUqybBb-2ycfH-vyDtPMXM__h79wh', title: 'Old German Dance', composer: 'Michael Praetorius', pages: 7, rating: 4.8, type: 'midi', url: "https://storage.googleapis.com/mozartacademy-files/midi/Old%20German%20Dance.mid", difficulty: 'Grado 1', style: 'Barroco' },
                 { id: 5, img:'https://lh3.googleusercontent.com/d/1b8uhUqybBb-2ycfH-vyDtPMXM__h79wh', title: 'Trumpet Voluntary', composer: 'Jeremiah Clarke', pages: 2, rating: 4.9, type: 'midi', url: "https://storage.googleapis.com/mozartacademy-files/midi/TrumpetV.mid", difficulty: 'Grado 1', style: 'Barroco' },
                 { id: 6, img:'https://lh3.googleusercontent.com/d/1b8uhUqybBb-2ycfH-vyDtPMXM__h79wh', title: 'Jodler', composer: 'Traditional American', pages: 8, rating: 4.7, type: 'midi', url: "https://storage.googleapis.com/mozartacademy-files/midi/jodler.mid", difficulty: 'Grado 1', style: 'Contemporaneo' },
-                     { id: 7, img:'https://lh3.googleusercontent.com/d/1b8uhUqybBb-2ycfH-vyDtPMXM__h79wh', title: 'Bluebossa', composer: 'Kenny Dorham', pages: 8, rating: 4.7, type: 'midi', url: "https://storage.googleapis.com/mozartacademy-files/midi/bluebossa4.mid", difficulty: 'Grado 5', style: 'Jazz' }
+                { id: 7, img:'https://lh3.googleusercontent.com/d/1b8uhUqybBb-2ycfH-vyDtPMXM__h79wh', title: 'Bluebossa', composer: 'Kenny Dorham', pages: 8, rating: 4.7, type: 'midi', url: "https://storage.googleapis.com/mozartacademy-files/midi/bluebossa4.mid", difficulty: 'Grado 5', style: 'Jazz' }
             ];
 
             $scope.filters = { text: '', difficulty: '', style: '' };
@@ -700,10 +810,22 @@
             let pixelsPerSecond = 100;
             const totalKeys = 88;
             const keyWidth = 12;
-            const whiteKeyWidth = 20; // Ancho que ya usas para las teclas blancas
-            const blackKeyWidth = 13; // Ancho que ya usas para las teclas negras
+            const whiteKeyWidth = 20;
+            const blackKeyWidth = 13;
             const totalWhiteKeys = 52; 
             const VISUAL_OFFSET_SECONDS = 0.05;
+            let songDuration = 0;
+
+            $scope.progressPercent = 0;
+            $scope.currentTime = '0:00';
+            $scope.totalTime = '0:00';
+            $scope.isPlaying = false;
+
+            function formatTime(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins}:${secs.toString().padStart(2, '0')}`;
+            }
 
             $scope.customFilter = function(sheet) {
                 const textSearch = !$scope.filters.text ||
@@ -839,6 +961,7 @@
                 let tempo = 500000;
                 let division = 480;
                 let currentTime = 0;
+                let maxTime = 0;
 
                 const view = new DataView(midiData.buffer);
                 let offset = 0;
@@ -901,11 +1024,15 @@
                                     const startSec = (startTime * tempo) / (division * 1000000);
                                     const endSec = (currentTime * tempo) / (division * 1000000);
                                     
+                                    maxTime = Math.max(maxTime, endSec);
+                                    
                                     notes.push({
                                         pitch: midiNoteToPitchName(note),
                                         midiNumber: note - 21,
+                                        originalMidiNote: note,
                                         startSec: startSec,
-                                        durSec: endSec - startSec
+                                        durSec: endSec - startSec,
+                                        track: track
                                     });
                                     
                                     activeNotes.delete(note);
@@ -931,163 +1058,155 @@
                     }
                 }
 
+                songDuration = maxTime;
+                $scope.totalTime = formatTime(songDuration);
+
                 return notes;
             }
 
+            function initCanvas() {
+                canvas = document.getElementById('waterfallCanvas');
+                ctx = canvas.getContext('2d');
+                
+                function resizeCanvas() {
+                    const container = canvas.parentElement;
+                    
+                    dpr = window.devicePixelRatio || 1;
 
-function initCanvas() {
-    canvas = document.getElementById('waterfallCanvas');
-    ctx = canvas.getContext('2d');
-    
-    function resizeCanvas() {
-        const container = canvas.parentElement;
-        
-        // Obtenemos y guardamos el dpr del dispositivo
-        dpr = window.devicePixelRatio || 1;
-
-        // Ajustamos el tamaño real del "lienzo" a los píxeles físicos
-        canvas.width = container.clientWidth * dpr;
-        canvas.height = container.clientHeight * dpr;
-        
-        // Nos aseguramos de que el tamaño en CSS siga siendo el correcto
-        canvas.style.width = `${container.clientWidth}px`;
-        canvas.style.height = `${container.clientHeight}px`;
-        const pianoEl = document.getElementById('pianoKeysVisual');
-        if (pianoEl) {
-            pianoHeight = pianoEl.offsetHeight;
-        }
-    }
-    
-    resizeCanvas(); 
-    window.addEventListener('resize', resizeCanvas);
-}
-
-
-  function isBlackKey(midiNote) {
-    const note = midiNote % 12;
-    return note === 1 || note === 3 || note === 6 || note === 8 || note === 10;
-}
-
-
-function getKeyXPosition(midiNote) {
-    const firstMidiNote = 21; // A0, la primera tecla del piano de 88
-    let position = 0;
-    // Contamos las teclas blancas desde el inicio del piano hasta la nota actual
-    for (let i = firstMidiNote; i < midiNote; i++) {
-        if (!isBlackKey(i)) {
-            position++;
-        }
-    }
-
-    if (isBlackKey(midiNote)) {
-        // La tecla negra se posiciona relativa a la tecla blanca anterior, centrada en la división.
-        return (position * whiteKeyWidth) - (blackKeyWidth / 2);
-    } else {
-        // La tecla blanca se posiciona según el número de teclas blancas que la preceden.
-        return position * whiteKeyWidth;
-    }
-}
-
-function drawWaterfall() {
-    if (!canvas || !ctx) return;
-
-    // Usamos clearRect para limpiar el buffer de alta resolución
-    ctx.clearRect(0, 0, canvas.width, canvas.height); 
-    ctx.fillStyle = '#0a0a14';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    const pianoTotalWidth = totalWhiteKeys * whiteKeyWidth;
-    const pianoStartX = (canvas.parentElement.clientWidth - pianoTotalWidth) / 2; // Usamos el ancho del contenedor
-
-    parsedNotes.forEach(note => {
-        const visualTime = $scope.isLearningMode ? scrollOffset : scrollOffset - VISUAL_OFFSET_SECONDS;
-        
-        const cssCanvasHeight = canvas.height / dpr;
-        const noteStartY = cssCanvasHeight - pianoHeight - ((note.startSec - visualTime) * pixelsPerSecond);
-        const noteEndY = noteStartY - (note.durSec * pixelsPerSecond);
-
-        if (noteEndY < cssCanvasHeight && noteStartY > 0) {
-            const keyX = pianoStartX + getKeyXPosition(note.midiNumber + 21);
-            const height = noteStartY - noteEndY;
-            const noteVisualWidth = isBlackKey(note.midiNumber + 21) ? blackKeyWidth : whiteKeyWidth;
-            const isExpected = expectedNotes.has(note.pitch) && Math.abs(note.startSec - scrollOffset) < 0.5;
-
-            if (isExpected) {
-                ctx.shadowBlur = 20 * dpr; // Escalamos el valor de la sombra
-                ctx.shadowColor = 'rgba(139, 92, 246, 0.8)';
-                ctx.fillStyle = 'rgba(139, 92, 246, 0.9)';
-            } else {
-                ctx.shadowBlur = 10 * dpr; // Escalamos el valor de la sombra
-                ctx.shadowColor = 'rgba(99, 102, 241, 0.5)';
-                ctx.fillStyle = 'rgba(99, 102, 241, 0.7)';
+                    canvas.width = container.clientWidth * dpr;
+                    canvas.height = container.clientHeight * dpr;
+                    
+                    canvas.style.width = `${container.clientWidth}px`;
+                    canvas.style.height = `${container.clientHeight}px`;
+                    const pianoEl = document.getElementById('pianoKeysVisual');
+                    if (pianoEl) {
+                        pianoHeight = pianoEl.offsetHeight;
+                    }
+                }
+                
+                resizeCanvas(); 
+                window.addEventListener('resize', resizeCanvas);
             }
-            
-            ctx.fillRect(
-                keyX * dpr, 
-                noteEndY * dpr, 
-                (noteVisualWidth - 2) * dpr, // Restamos 2px antes de escalar
-                height * dpr
-            );
-            
-            ctx.shadowBlur = 0; // Reseteamos la sombra
-        }
-    });
-}
 
-function animateWaterfall() {
-    if ($scope.isLearningMode) {
-        if (currentNoteIndex > 0) {
-            const currentLearningTime = parsedNotes[currentNoteIndex - 1].startSec;
-            scrollOffset = currentLearningTime - VISUAL_OFFSET_SECONDS;
-        } else {
-            // Al inicio, antes de que se procese la primera nota.
-            scrollOffset = 0 - VISUAL_OFFSET_SECONDS;
-        }
-    } else if (isPlaying) {
-        scrollOffset = Tone.Transport.seconds;
-    }
+            function isBlackKey(midiNote) {
+                const note = midiNote % 12;
+                return note === 1 || note === 3 || note === 6 || note === 8 || note === 10;
+            }
 
-    drawWaterfall();
-    animationFrameId = requestAnimationFrame(animateWaterfall);
-}
+            function getKeyXPosition(midiNote) {
+                const firstMidiNote = 21;
+                let position = 0;
+                for (let i = firstMidiNote; i < midiNote; i++) {
+                    if (!isBlackKey(i)) {
+                        position++;
+                    }
+                }
 
-function initPianoKeys() {
-    const pianoContainer = document.getElementById('pianoKeysVisual');
-    if (!pianoContainer) return;
+                if (isBlackKey(midiNote)) {
+                    return (position * whiteKeyWidth) - (blackKeyWidth / 2);
+                } else {
+                    return position * whiteKeyWidth;
+                }
+            }
 
-    pianoContainer.innerHTML = ''; 
+            function drawWaterfall() {
+                if (!canvas || !ctx) return;
 
-    const firstMidiNote = 21;
-    const lastMidiNote = 108;
+                ctx.clearRect(0, 0, canvas.width, canvas.height); 
+                ctx.fillStyle = '#0a0a14';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Dibuja primero las teclas blancas
-    for (let midiNote = firstMidiNote; midiNote <= lastMidiNote; midiNote++) {
-        if (!isBlackKey(midiNote)) {
-            const key = document.createElement('div');
-            key.classList.add('piano-key', 'white');
-            key.dataset.note = midiNote - firstMidiNote;
-            key.style.width = `${whiteKeyWidth}px`;
-            key.style.left = `${getKeyXPosition(midiNote)}px`; // ✅ Usamos la función central
-            pianoContainer.appendChild(key);
-        }
-    }
+                const pianoTotalWidth = totalWhiteKeys * whiteKeyWidth;
+                const pianoStartX = (canvas.parentElement.clientWidth - pianoTotalWidth) / 2;
 
-    // Dibuja las teclas negras encima
-    for (let midiNote = firstMidiNote; midiNote <= lastMidiNote; midiNote++) {
-        if (isBlackKey(midiNote)) {
-            const key = document.createElement('div');
-            key.classList.add('piano-key', 'black');
-            key.dataset.note = midiNote - firstMidiNote;
-            key.style.width = `${blackKeyWidth}px`;
-            key.style.left = `${getKeyXPosition(midiNote)}px`; // ✅ Usamos la función central
-            pianoContainer.appendChild(key);
-        }
-    }
+                parsedNotes.forEach(note => {
+                    const visualTime = $scope.isLearningMode ? scrollOffset : scrollOffset - VISUAL_OFFSET_SECONDS;
+                    
+                    const cssCanvasHeight = canvas.height / dpr;
+                    const noteStartY = cssCanvasHeight - pianoHeight - 30 - ((note.startSec - visualTime) * pixelsPerSecond);
+                    const noteEndY = noteStartY - (note.durSec * pixelsPerSecond);
 
-    // Ajustamos el ancho total del contenedor del piano
-    pianoContainer.style.width = `${totalWhiteKeys * whiteKeyWidth}px`;
-}
+                    if (noteEndY < cssCanvasHeight && noteStartY > 0) {
+                        const keyX = pianoStartX + getKeyXPosition(note.midiNumber + 21);
+                        const height = noteStartY - noteEndY;
+                        const noteVisualWidth = isBlackKey(note.midiNumber + 21) ? blackKeyWidth : whiteKeyWidth;
+                        const isExpected = expectedNotes.has(note.pitch) && Math.abs(note.startSec - scrollOffset) < 0.5;
 
+                        if (isExpected) {
+                            ctx.shadowBlur = 20 * dpr;
+                            ctx.shadowColor = 'rgba(139, 92, 246, 0.8)';
+                            ctx.fillStyle = 'rgba(139, 92, 246, 0.9)';
+                        } else if (note.track === 0) {
+                            ctx.shadowBlur = 10 * dpr;
+                            ctx.shadowColor = 'rgba(66, 134, 244, 0.5)';
+                            ctx.fillStyle = 'rgba(66, 134, 244, 0.7)';
+                        } else {
+                            ctx.shadowBlur = 10 * dpr;
+                            ctx.shadowColor = 'rgba(255, 159, 64, 0.5)';
+                            ctx.fillStyle = 'rgba(255, 159, 64, 0.7)';
+                        }
+                        
+                        ctx.fillRect(
+                            keyX * dpr, 
+                            noteEndY * dpr, 
+                            (noteVisualWidth - 2) * dpr,
+                            height * dpr
+                        );
+                        
+                        ctx.shadowBlur = 0;
+                    }
+                });
+            }
+
+            function animateWaterfall() {
+                if ($scope.isLearningMode) {
+                    if (currentNoteIndex > 0) {
+                        const currentLearningTime = parsedNotes[currentNoteIndex - 1].startSec;
+                        scrollOffset = currentLearningTime - VISUAL_OFFSET_SECONDS;
+                    } else {
+                        scrollOffset = 0 - VISUAL_OFFSET_SECONDS;
+                    }
+                } else if (isPlaying) {
+                    scrollOffset = Tone.Transport.seconds;
+                }
+
+                drawWaterfall();
+                animationFrameId = requestAnimationFrame(animateWaterfall);
+            }
+
+            function initPianoKeys() {
+                const pianoContainer = document.getElementById('pianoKeysVisual');
+                if (!pianoContainer) return;
+
+                pianoContainer.innerHTML = ''; 
+
+                const firstMidiNote = 21;
+                const lastMidiNote = 108;
+
+                for (let midiNote = firstMidiNote; midiNote <= lastMidiNote; midiNote++) {
+                    if (!isBlackKey(midiNote)) {
+                        const key = document.createElement('div');
+                        key.classList.add('piano-key', 'white');
+                        key.dataset.note = midiNote - firstMidiNote;
+                        key.style.width = `${whiteKeyWidth}px`;
+                        key.style.left = `${getKeyXPosition(midiNote)}px`;
+                        pianoContainer.appendChild(key);
+                    }
+                }
+
+                for (let midiNote = firstMidiNote; midiNote <= lastMidiNote; midiNote++) {
+                    if (isBlackKey(midiNote)) {
+                        const key = document.createElement('div');
+                        key.classList.add('piano-key', 'black');
+                        key.dataset.note = midiNote - firstMidiNote;
+                        key.style.width = `${blackKeyWidth}px`;
+                        key.style.left = `${getKeyXPosition(midiNote)}px`;
+                        pianoContainer.appendChild(key);
+                    }
+                }
+
+                pianoContainer.style.width = `${totalWhiteKeys * whiteKeyWidth}px`;
+            }
 
             function highlightKey(midiNumber, active) {
                 const key = document.querySelector(`.piano-key[data-note="${midiNumber}"]`);
@@ -1100,91 +1219,137 @@ function initPianoKeys() {
                 }
             }
 
-function advanceLearningStep() {
-    // ✅ PASO DE LIMPIEZA: Apagamos todas las teclas que estaban activas.
-    document.querySelectorAll('.piano-key.active').forEach(key => {
-        key.classList.remove('active');
-    });
+            function advanceLearningStep() {
+                document.querySelectorAll('.piano-key.active').forEach(key => {
+                    key.classList.remove('active');
+                });
 
-    expectedNotes.clear();
+                expectedNotes.clear();
 
-    if (currentNoteIndex >= parsedNotes.length) {
-        showNotification("¡Felicidades! Completaste la pieza 🎉");
-        $scope.learningProgress = 100;
-        $scope.$apply();
-        return;
-    }
+                if (currentNoteIndex >= parsedNotes.length) {
+                    showNotification("¡Felicidades! Completaste la pieza 🎉");
+                    $scope.learningProgress = 100;
+                    return;
+                }
 
-    const nextNoteTime = parsedNotes[currentNoteIndex].startSec;
+                const nextNoteTime = parsedNotes[currentNoteIndex].startSec;
 
-    while (currentNoteIndex < parsedNotes.length && 
-           parsedNotes[currentNoteIndex].startSec === nextNoteTime) {
-        const note = parsedNotes[currentNoteIndex];
-        expectedNotes.add(note.pitch);
-        // Ahora, este highlightKey solo coloreará las nuevas notas.
-        highlightKey(note.midiNumber, true); 
-        currentNoteIndex++;
-    }
+                while (currentNoteIndex < parsedNotes.length && 
+                       parsedNotes[currentNoteIndex].startSec === nextNoteTime) {
+                    const note = parsedNotes[currentNoteIndex];
+                    expectedNotes.add(note.pitch);
+                    highlightKey(note.midiNumber, true); 
+                    currentNoteIndex++;
+                }
 
-    $scope.learningProgress = Math.round((currentNoteIndex / parsedNotes.length) * 100);
-    $scope.$apply();
-}
+                $scope.learningProgress = Math.round((currentNoteIndex / parsedNotes.length) * 100);
+            }
 
-           async function startPlayback() {
+            async function startPlayback() {
                 await Tone.start();
                 isPlaying = true;
-                scrollOffset = 0;
-                Tone.Transport.position = 0; // Asegura que el transporte comience desde el principio
+                $scope.isPlaying = true;
+               // scrollOffset = 0;
+                //Tone.Transport.position = 0;
+
+                Tone.Transport.cancel();
 
                 parsedNotes.forEach(note => {
-                    // 1. Programa el inicio de la nota (sonido y visual)
                     Tone.Transport.schedule((time) => {
                         sampler.triggerAttackRelease(note.pitch, note.durSec, time);
                         highlightKey(note.midiNumber, true);
                     }, note.startSec);
 
-                    // 2. Programa el fin de la nota (solo visual) con la misma precisión
                     Tone.Transport.schedule(() => {
                         highlightKey(note.midiNumber, false);
                     }, note.startSec + note.durSec);
                 });
 
                 Tone.Transport.start();
+
+                function updateProgress() {
+                if (!isPlaying) return; // Detener si se pausó
+
+                const currentSeconds = Tone.Transport.seconds;
+                $scope.progressPercent = Math.min((currentSeconds / songDuration) * 100, 100);
+                $scope.currentTime = formatTime(currentSeconds);
+
+                // Llama a esta misma función de nuevo en 100ms
+                progressUpdateLoop = $timeout(updateProgress, 100);
+                }
+                updateProgress();
+
             }
 
             function stopPlayback() {
               isPlaying = false;
-              Tone.Transport.stop();
-              Tone.Transport.cancel();
-              // Reinicia la posición del transporte para la próxima reproducción
-              Tone.Transport.position = 0;
-              scrollOffset = 0;
+              $scope.isPlaying = false;
+              Tone.Transport.pause();
+
+              if (progressUpdateLoop) {
+              $timeout.cancel(progressUpdateLoop);
+              }
+            
           }
 
-            $scope.setLearningMode = function() {
-                stopPlayback();
-                $scope.isLearningMode = true;
-                currentNoteIndex = 0;
-                scrollOffset = 0;
-                $scope.learningProgress = 0;
+            $scope.togglePlayback = function() {
+                if ($scope.isLearningMode) {
+                    return;
+                }
                 
-                if (parsedNotes.length > 0) {
-                    advanceLearningStep();
+                if (isPlaying) {
+                    stopPlayback();
+                } else {
+                    startPlayback();
                 }
             };
 
-            $scope.setPlaybackMode = function() {
-                stopPlayback();
-                $scope.isLearningMode = false;
-                expectedNotes.clear();
-                currentNoteIndex = 0;
-                
-                document.querySelectorAll('.piano-key').forEach(key => {
-                    key.classList.remove('active');
-                });
+            $scope.toggleLearningMode = function() {
+                if ($scope.isLearningMode) {
+                    $scope.isLearningMode = false;
+                    expectedNotes.clear();
+                    currentNoteIndex = 0;
+                    
+                    document.querySelectorAll('.piano-key').forEach(key => {
+                        key.classList.remove('active');
+                    });
+                } else {
+                    stopPlayback();
+                    $scope.isLearningMode = true;
+                    currentNoteIndex = 0;
+                    scrollOffset = 0;
+                    $scope.learningProgress = 0;
+                    
+                    if (parsedNotes.length > 0) {
+                        advanceLearningStep();
+                    }
+                }
+            };
 
-                if (parsedNotes.length > 0) {
-                    startPlayback();
+            $scope.seekToPosition = function(event) {
+                if ($scope.isLearningMode) return;
+                
+                const bar = event.currentTarget;
+                const rect = bar.getBoundingClientRect();
+                const clickX = event.clientX - rect.left;
+                const percent = clickX / rect.width;
+                const newTime = percent * songDuration;
+                
+                const wasPlaying = isPlaying;
+                
+                if (wasPlaying) {
+                    stopPlayback();
+                }
+                
+                scrollOffset = newTime;
+                Tone.Transport.seconds = newTime;
+                $scope.progressPercent = percent * 100;
+                $scope.currentTime = formatTime(newTime);
+                
+                if (wasPlaying) {
+                    $timeout(() => {
+                        startPlayback();
+                    }, 100);
                 }
             };
 
@@ -1193,6 +1358,10 @@ function advanceLearningStep() {
                 $scope.currentSheet = sheet;
                 $scope.isPreviewVisible = true;
                 $scope.isLearningMode = false;
+                $scope.isPlaying = false;
+                $scope.progressPercent = 0;
+                $scope.currentTime = '0:00';
+                $scope.totalTime = '0:00';
 
                 await $timeout(100);
 
@@ -1209,11 +1378,19 @@ function advanceLearningStep() {
 
             $scope.hidePreview = function() {
                 if ($scope.isPreviewVisible) {
+                    $scope.isPreviewVisible = false;
                     stopPlayback();
+                    if (progressUpdateLoop) {
+                      $timeout.cancel(progressUpdateLoop);
+                    }
+                    Tone.Transport.cancel();
+                    Tone.Transport.position = 0;
+                    scrollOffset = 0;
+                    $scope.progressPercent = 0;
+                    $scope.currentTime = '0:00';
                     if (animationFrameId) {
                         cancelAnimationFrame(animationFrameId);
                     }
-                    $scope.isPreviewVisible = false;
                     $scope.currentSheet = {};
                     parsedNotes = [];
                     currentNoteIndex = 0;
